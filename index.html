@@ -3,8 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Timed CBSE practice papers in Mathematics, Science, Computer Science, English and Social Science, marked instantly.">
-<title>My Exam Practice</title>
+<meta name="description" content="Free CBSE practice tests for Classes I–XII, marked instantly with full solutions.">
+<title>A &amp; A Exam Practice</title>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="A &amp; A Exam Practice">
+<meta property="og:title" content="A &amp; A Exam Practice – free CBSE practice tests">
+<meta property="og:description" content="Free CBSE practice tests for Classes I–XII, marked instantly with full solutions.">
+<meta property="og:url" content="https://my-exam.in/">
+<meta property="og:image" content="https://my-exam.in/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
 <style>
@@ -23,6 +33,7 @@
   --bg:#0f1524; --paper:#161e31; --fg:#e6eaf4; --muted:#9aa4ba; --line:#2a3550; --grid:rgba(143,176,255,.05);
   --ink:#8fb0ff; --ink-soft:#1f2b4a; --red:#ff7a70; --red-soft:#3a1f22; --green:#5cd19a; --green-soft:#16312a; --amber:#f2b45a; --amber-soft:#3a2c17; color-scheme:dark }
 *{box-sizing:border-box}
+[hidden]{display:none!important}
 body{background-color:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:16px;line-height:1.55;
   background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:24px 24px}
 .wrap{max-width:1080px;margin:0 auto;padding-inline:16px;padding-block:20px 48px}
@@ -34,6 +45,10 @@ p{margin:0}
 .lede{color:var(--muted);max-width:62ch;margin-top:6px}
 .eyebrow{font-size:.78rem;text-transform:uppercase;letter-spacing:.09em;color:var(--ink);font-weight:700}
 .top{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:flex-end;justify-content:space-between;margin-bottom:20px}
+.logo{display:block;width:min(100%,340px);height:auto;margin-block:4px 6px}
+.logo text{font-family:var(--f-display);font-weight:800}
+.lg-ink{fill:var(--ink)} .lg-red{fill:var(--red)} .lg-muted{fill:var(--muted)} .lg-wood{fill:#f3d9a6} .lg-lead{fill:#1b2236}
+.lg-bar{stroke:var(--bg);stroke-width:8;stroke-linecap:round}
 .grid2{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:20px;align-items:start}
 @media (max-width:860px){.grid2{grid-template-columns:minmax(0,1fr)}}
 .card{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:20px}
@@ -72,8 +87,47 @@ tfoot td{font-weight:700;border-bottom:0}
 .tblwrap{overflow-x:auto}
 .lvl{display:inline-block;width:.62rem;height:.62rem;border-radius:50%;margin-right:7px;vertical-align:baseline}
 .l-E{background:#3d9a6b}.l-M{background:#2f6fd6}.l-C{background:#d08a1d}.l-X{background:#c4302b}
+button.small{padding:6px 12px;font-size:.85rem}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+/* quick start */
+.modes{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.mode{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--line);border-radius:var(--r);padding:10px 12px;cursor:pointer;margin:0;font-weight:400}
+.mode input{margin-top:5px;accent-color:var(--ink)}
+.mode b{display:block;font-family:var(--f-display);font-size:1.05rem}
+.mode small{display:block;color:var(--muted);font-size:.85rem;line-height:1.4}
+.mode:has(input:checked){border-color:var(--ink);background:var(--ink-soft)}
+.presets{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}
+.preset{display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left;padding:14px 16px;border-radius:var(--r);background:var(--ink-soft);color:var(--fg)}
+.preset b{font-family:var(--f-display);font-size:1.2rem;color:var(--ink)}
+.preset span{font-size:.85rem;color:var(--muted);font-weight:400}
+.preset.alt{background:var(--paper);border-style:dashed}
+details.custom{border:1px solid var(--line);border-radius:var(--r);padding:0 14px}
+details.custom>summary{cursor:pointer;font-weight:700;padding:12px 0;color:var(--ink)}
+details.custom[open]{padding-bottom:14px}
+.resume{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;justify-content:space-between;margin-bottom:16px;border:1px solid var(--ink)}
+/* progress history */
+.hist{list-style:none;margin:0;padding:0}
+.hrow{display:grid;grid-template-columns:minmax(0,1fr) 72px 3rem;gap:10px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line)}
+.hrow .hint{display:block;margin:0}
+.hbar{height:8px;background:var(--line);border-radius:99px;overflow:hidden}
+.hbar i{display:block;height:100%}
+.hpct{text-align:right;font-variant-numeric:tabular-nums}
 /* test bar */
-.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:10px 14px;display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;justify-content:space-between;margin-bottom:16px}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:10px 14px;display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
+.barrow{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;justify-content:space-between}
+.nav{display:flex;flex-wrap:wrap;gap:6px;max-height:30vh;overflow:auto;padding:2px}
+.nb{min-width:2.4rem;padding:5px 0;font-size:.85rem;border-color:var(--line);color:var(--fg);font-variant-numeric:tabular-nums}
+.nb.done{background:var(--ink-soft);border-color:var(--ink);color:var(--ink)}
+.nb.right{background:var(--green-soft);border-color:var(--green);color:var(--green)}
+.nb.wrong{background:var(--red-soft);border-color:var(--red);color:var(--red)}
+.nb.flag{box-shadow:inset 0 0 0 2px var(--amber)}
+.toast{background:var(--amber-soft);color:var(--amber);font-weight:700;border-radius:8px;padding:8px 12px}
+.qtools{display:flex;flex-wrap:wrap;gap:8px}
+button.flag{border-color:var(--line);color:var(--muted)}
+button.flag.on{border-color:var(--amber);color:var(--amber);background:var(--amber-soft)}
+.fb{display:flex;flex-direction:column;gap:8px}
+a.btnlink{display:inline-flex;align-items:center;font-weight:700;border-radius:8px;padding:10px 18px;border:1px solid var(--green);color:var(--green);text-decoration:none}
+a.btnlink:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
 .timer{font-family:var(--f-display);font-size:1.6rem;font-weight:800;font-variant-numeric:tabular-nums;color:var(--ink);line-height:1}
 .timer.warn{color:var(--red)}
 .barinfo{display:flex;gap:18px;align-items:center;flex-wrap:wrap;font-size:.9rem;color:var(--muted)}
@@ -109,7 +163,7 @@ sup,sub{font-size:.7em}
 .score{display:flex;flex-wrap:wrap;gap:16px 28px;align-items:center}
 .big{font-family:var(--f-display);font-weight:800;font-size:clamp(2.6rem,7vw,3.6rem);line-height:1;color:var(--red);font-variant-numeric:tabular-nums}
 .big small{font-size:.45em;color:var(--muted)}
-.band{display:inline-block;border-radius:999px;padding:4px 12px;font-weight:700;font-size:.85rem}
+.band{display:inline-block;align-self:flex-start;border-radius:999px;padding:4px 12px;font-weight:700;font-size:.85rem}
 .res .q{grid-template-columns:2.2rem minmax(0,1fr) auto}
 .mark{font-family:var(--f-display);font-weight:800;color:var(--red);font-variant-numeric:tabular-nums;white-space:nowrap}
 .pr{border-radius:8px;padding:8px 10px;font-size:.92rem;display:flex;flex-direction:column;gap:2px}
@@ -126,30 +180,61 @@ sup,sub{font-size:.7em}
   <header class="top">
     <div>
       <p class="eyebrow">Online practice · auto-marked</p>
-      <h1>My Exam Practice</h1>
-      <p class="lede">Choose the subject, class, topics and difficulty mix, generate a timed paper, answer it online and submit to see your marks with an explanation for every question.</p>
+      <h1><svg class="logo" viewBox="0 0 380 160" role="img" aria-label="A &amp; A Exam Practice">
+        <polygon class="lg-ink" points="41.7,52 58.3,52 82,138 18,138"/>
+        <polygon class="lg-wood" points="50,22 58.3,52 41.7,52"/>
+        <polygon class="lg-lead" points="50,22 53.3,34 46.7,34"/>
+        <line class="lg-bar" x1="31" y1="104" x2="69" y2="104"/>
+        <polygon class="lg-red" points="101.7,52 118.3,52 142,138 78,138"/>
+        <polygon class="lg-wood" points="110,22 118.3,52 101.7,52"/>
+        <polygon class="lg-lead" points="110,22 113.3,34 106.7,34"/>
+        <line class="lg-bar" x1="91" y1="104" x2="129" y2="104"/>
+        <text x="176" y="84" font-size="56"><tspan class="lg-ink">A</tspan> <tspan class="lg-muted">&amp;</tspan> <tspan class="lg-red">A</tspan></text>
+        <text class="lg-ink" x="179" y="116" font-size="17" letter-spacing="3.5">EXAM PRACTICE</text>
+      </svg></h1>
+      <p class="lede">Free CBSE practice tests for Classes I–XII, marked instantly with full solutions.</p>
     </div>
   </header>
 
   <!-- SETUP -->
   <section id="setup">
+    <div id="resumeBox" class="msg info resume" role="status" hidden></div>
     <div class="grid2">
       <form id="form" class="card stack" novalidate>
-        <h2>Paper settings</h2>
-        <div class="row">
-          <div><label for="country">Country</label><select id="country"><option value="India">India</option><option disabled>United Kingdom (coming soon)</option><option disabled>United Arab Emirates (coming soon)</option></select></div>
+        <h2>Start practising</h2>
+        <div class="row" hidden>
+          <div><label for="country">Country</label><select id="country"><option value="India">India</option></select></div>
           <div><label for="board">Board / curriculum</label><select id="board"></select></div>
+        </div>
+        <div class="row">
           <div><label for="klass">Class</label><select id="klass"></select></div>
           <div><label for="subject">Subject</label><select id="subject"></select></div>
         </div>
         <fieldset>
-          <legend>Topics</legend>
+          <legend>Chapters</legend>
           <div class="chips" id="topics"></div>
-          <p class="hint" id="topicHint">Select "All" or pick the chapters to include.</p>
+          <p class="hint" id="topicHint">Keep "All" for a mixed paper, or pick the chapters you want to practise.</p>
         </fieldset>
+        <fieldset>
+          <legend>How do you want to practise?</legend>
+          <div class="modes">
+            <label class="mode" for="mode_practice"><input type="radio" name="mode" id="mode_practice" value="practice"><span><b>Practice</b><small>Check each answer as you go and see how to solve it. No timer.</small></span></label>
+            <label class="mode" for="mode_exam"><input type="radio" name="mode" id="mode_exam" value="exam"><span><b>Exam</b><small>Timed paper, marked when you submit, like the real exam.</small></span></label>
+          </div>
+        </fieldset>
+        <div class="presets">
+          <button type="button" class="preset" data-preset="quick"><b>Quick quiz</b><span data-pl="quick">10 questions · 15 min</span></button>
+          <button type="button" class="preset" data-preset="chapter"><b>Chapter test</b><span data-pl="chapter">20 questions · 40 min</span></button>
+          <button type="button" class="preset" data-preset="full"><b>Full mock paper</b><span data-pl="full">30 questions · 60 min</span></button>
+          <button type="button" class="preset alt" id="sampleBtn"><b>CBSE sample paper</b><span>Class VII Maths model paper · 30 questions</span></button>
+        </div>
+        <div id="quickMsg" class="msg err" role="alert" hidden></div>
+        <details id="custom" class="custom">
+          <summary>Customise the paper</summary>
+          <div class="stack">
         <div class="row">
           <div><label for="duration">Duration (minutes)</label><input id="duration" type="number" min="10" max="180" step="5" value="60"></div>
-          <div><label for="nq">Number of questions</label><input id="nq" type="number" min="5" max="60" value="30"></div>
+          <div><label for="nq">Number of questions</label><input id="nq" type="number" min="3" max="60" value="30"></div>
           <div><label for="nmcq">Multiple-choice questions</label><input id="nmcq" type="number" min="0" max="60" value="10"><label class="chip" style="margin-top:8px;display:inline-flex" for="usemcq"><input type="checkbox" id="usemcq" checked> Include MCQ section</label></div>
         </div>
         <fieldset>
@@ -167,12 +252,14 @@ sup,sub{font-size:.7em}
             <div><label for="m_X">Challenging</label><input id="m_X" type="number" min="1" max="12" value="6"></div>
           </div>
         </fieldset>
-        <label class="chip" for="sample" id="sampleWrap"><input type="checkbox" id="sample" checked> Use the CBSE Class VII model paper for these settings</label>
         <div id="formMsg" class="msg err" hidden></div>
-        <div class="btns"><button type="submit" class="primary" id="gen">Generate paper</button><button type="button" id="reset">Reset</button></div>
+        <div class="btns"><button type="submit" class="primary" id="gen">Start custom paper</button><button type="button" id="reset">Reset</button></div>
+          </div>
+        </details>
       </form>
 
-      <aside class="card stack" aria-live="polite">
+      <div class="stack">
+      <aside class="card stack" id="planCard" aria-live="polite" hidden>
         <div><p class="eyebrow">Paper plan</p><h2 id="planTitle">CBSE Class VII Mathematics</h2></div>
         <div class="tblwrap"><table>
           <thead><tr><th>Level</th><th class="n">MCQ</th><th class="n">Written</th><th class="n">Marks each</th><th class="n">Marks</th></tr></thead>
@@ -182,20 +269,26 @@ sup,sub{font-size:.7em}
         <div><p class="lbl">Suggested time per section</p><div class="tblwrap"><table><tbody id="timeBody"></tbody></table></div></div>
         <div id="planNote" class="msg info">Answers are marked automatically. Written answers accept forms like 4 1/5, 21/5, 0.375, −1/6, 2^4 or 3.84 × 10^5; units such as cm, °, % and ₹ are optional.</div>
       </aside>
+      <section class="card stack" id="history" aria-label="Your progress"></section>
+      </div>
     </div>
   </section>
 
   <!-- TEST -->
   <section id="test" hidden>
     <div class="bar" id="bar">
-      <div><div class="timer" id="timer">60:00</div><div class="hint" style="margin:2px 0 0">time left</div></div>
-      <div class="barinfo"><span><b id="answered">0</b> of <b id="partsTotal">0</b> answers filled</span><span class="prog" aria-hidden="true"><i id="progbar"></i></span></div>
-      <div class="btns"><button type="button" class="primary" id="submitBtn">Submit</button><button type="button" class="danger" id="quitBtn">Quit</button></div>
+      <div class="barrow">
+        <div><div class="timer" id="timer">60:00</div><div class="hint" id="timerLbl" style="margin:2px 0 0">time left</div></div>
+        <div class="barinfo"><span><b id="answered">0</b> of <b id="partsTotal">0</b> answers filled</span><span class="prog" aria-hidden="true"><i id="progbar"></i></span><button type="button" class="small" id="navBtn" aria-expanded="false" aria-controls="navWrap">Questions</button></div>
+        <div class="btns"><button type="button" class="primary" id="submitBtn">Submit</button><button type="button" class="danger" id="quitBtn">Quit</button></div>
+      </div>
+      <div id="navWrap" class="stack" style="gap:6px" hidden><div class="nav" id="nav"></div><p class="hint" id="navKey" style="margin:0"></p></div>
+      <p class="toast" id="toast" role="status" hidden></p>
     </div>
     <div id="confirm" class="confirm" hidden>
       <h3 id="confirmTitle">Submit your paper?</h3>
       <p class="hint" id="confirmText" style="margin:6px 0 12px"></p>
-      <div class="btns"><button type="button" class="primary" id="confirmYes">Submit and mark</button><button type="button" id="confirmNo">Keep working</button></div>
+      <div class="btns"><button type="button" class="primary" id="confirmYes">Submit and mark</button><button type="button" id="confirmBlank" hidden>Go to first blank</button><button type="button" id="confirmNo">Keep working</button></div>
     </div>
     <article class="sheet" id="sheet"></article>
   </section>
@@ -203,7 +296,7 @@ sup,sub{font-size:.7em}
   <!-- RESULTS -->
   <section id="results" hidden></section>
 
-  <p class="foot">Questions follow the CBSE / NCERT syllabus: Mathematics for Classes V to XII; Science, Computer Science, English and Social Science for Classes VI to X. Every paper is a fresh selection; the Class VII Mathematics model paper is the fixed CBSE sample.</p>
+  <p class="foot">Questions follow the CBSE / NCERT syllabus: Mathematics for Classes I to XII; Science, Computer Science, English and Social Science for Classes VI to X. Every paper is a fresh selection; the Class VII Mathematics model paper is the fixed CBSE sample.</p>
 </div>
 
 <script>
@@ -307,7 +400,7 @@ function lev(a,b){if(Math.abs(a.length-b.length)>2)return 9;const m=[];for(let i
 // one slip allowed per long word (5+ letters); short words, numbers and word counts must match exactly
 function near(u,n){const a=u.split(' '),b=n.split(' ');if(a.length!==b.length||u===n)return false;let slips=0;
   for(let i=0;i<a.length;i++){if(a[i]===b[i])continue;if(/\d/.test(b[i])||b[i].length<5||lev(a[i],b[i])>1)return false;slips++;}return slips>0&&slips<=2;}
-function answerText(p){if(p.disp)return p.disp;if(p.type==='text')return p.alts[0];if(p.unit)return neg(p.ans)+' '+p.unit;if(p.type==='choice')return '('+'abcd'[p.ans]+') '+p.options[p.ans];if(p.type==='select')return p.ans;return p.fmt(p.ans);}
+function answerText(p){if(p.ansText!=null)return p.ansText;if(p.disp)return p.disp;if(p.type==='text')return p.alts[0];if(p.unit)return neg(p.ans)+' '+p.unit;if(p.type==='choice')return '('+'abcd'[p.ans]+') '+p.options[p.ans];if(p.type==='select')return p.ans;return p.fmt(p.ans);}
 function distractors(p){
   const v=p.ans,out=[],seen=new Set([p.fmt(v)]);
   const add=x=>{if(x==null||!isFinite(x))return;const s=p.fmt(x);if(!seen.has(s)){seen.add(s);out.push(s);}};
@@ -407,6 +500,118 @@ T.push(
 {id:'v_data',cls:'V',topic:'Data Handling',level:'C',mcq:true,mcqPart:0,gen(){const days=['Mon','Tue','Wed','Thu','Fri'],v=days.map(()=>R(12,60)),hi=Math.max(...v),lo=Math.min(...v),tot=v.reduce((a,b)=>a+b);return{text:`Books issued from a school library: ${days.map((d,i)=>d+' '+v[i]).join(', ')}.`,parts:[PT('(a) How many books were issued in all?',tot,FM.int,2,{distract:[tot+10,tot-hi,hi*5]}),PT('(b) How many more books were issued on the busiest day than on the quietest day?',hi-lo,FM.int,1)],sol:`(a) ${v.join(' + ')} = ${tot}. (b) ${hi} − ${lo} = ${hi-lo}.`};}},
 {id:'v_field',cls:'V',topic:'Perimeter and Area',level:'X',mcq:true,mcqPart:1,gen(){const l=2*R(10,30),b=2*R(5,15),rate=R(15,40);return{text:`A rectangular field is ${l} m long and ${b} m wide.`,parts:[PT('(a) Find the perimeter of the field (m).',2*(l+b),FM.unit('m'),2),PT(`(b) Find the cost of fencing it at ₹${rate} per metre.`,2*(l+b)*rate,FM.money,2,{distract:[l*b*rate,(l+b)*rate,2*(l+b)*rate+rate]}),PT('(c) How many square tiles of side 2 m are needed to cover the field?',l*b/4,FM.int,2)],sol:`(a) 2 × (${l} + ${b}) = ${2*(l+b)} m. (b) ${2*(l+b)} × ${rate} = ₹${inr(2*(l+b)*rate)}. (c) Area ${l*b} m² ÷ 4 m² per tile = ${l*b/4} tiles.`};}},
 {id:'v_tank',cls:'V',topic:'Measurement',level:'X',mcq:true,mcqPart:1,gen(){const L=R(3,9),ml=R(1,9)*100,bot=pick([200,250,300,400,500]),tot=L*1000+ml,nb=Math.floor(tot/bot),left=tot-nb*bot;return{text:`A water can holds ${L} L ${ml} mL. The water is poured into bottles of ${bot} mL each.`,parts:[PT('(a) How many millilitres of water are there?',tot,FM.unit('mL'),2),PT('(b) How many bottles can be filled completely?',nb,FM.int,2,{distract:[nb+1,nb-1,Math.round(tot/100)]}),PT('(c) How many millilitres are left over?',left,FM.unit('mL'),2)],sol:`(a) ${L} × 1000 + ${ml} = ${tot} mL. (b) ${tot} ÷ ${bot} = ${nb} remainder ${left}, so ${nb} bottles. (c) ${left} mL.`};}}
+);
+
+/* ---------- Classes I to IV ---------- */
+const KN=['Aarav','Diya','Kabir','Meera','Rohan','Anaya','Ishaan','Sara','Riya','Arjun'];
+const WD=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+const SHAPE2=[['triangle',3],['square',4],['rectangle',4],['pentagon',5],['hexagon',6]];
+const SOLID=[['ball','Sphere'],['dice','Cube'],['ice-cream cone','Cone'],['tin of paint','Cylinder'],['brick','Cuboid'],['birthday cap','Cone'],['orange','Sphere']];
+const clk=(h,m)=>`${h}:${String(m).padStart(2,'0')}`;
+const f24=(h,m)=>String(h).padStart(2,'0')+':'+String(m).padStart(2,'0');
+function pickBig(lo,hi,word){const s=new Set();while(s.size<4)s.add(R(lo,hi));const a=[...s],g=Math.random()<0.5,ans=g?Math.max(...a):Math.min(...a);return CHS(`Which number is the ${g?word[0]:word[1]}?`,String(ans),a.map(String),`Compare the digits from the left. ${ans} is the ${g?word[0]:word[1]}.`);}
+function countShapes(){const SH=[['△','triangles'],['○','circles'],['□','squares'],['☆','stars']],row=Array.from({length:R(8,12)},()=>pick(SH)),k=pick(SH),n=row.filter(x=>x===k).length;if(!n)return countShapes();return N(`How many ${k[1]} are there? &nbsp;${row.map(x=>x[0]).join(' ')}`,n,FM.int,`Count each ${k[0]} one by one: there are ${n}.`,[n+1,n>1?n-1:n+2,row.length-n]);}
+function hoursLater(maxH){const h=R(1,maxH),k=R(1,12-h>4?4:12-h);return N(`It is ${h} o'clock. What time will it be ${k} hour${k>1?'s':''} later? Write just the number.`,h+k,FM.int,`Count on ${k} from ${h}: ${h} + ${k} = ${h+k}, so it will be ${h+k} o'clock.`,[h+k+1,h+k-1,h>k?h-k:h+k+2]);}
+function solidQ(){const [o,s]=pick(SOLID);return CHS(`A ${o} has the shape of a`,s,['Sphere','Cube','Cone','Cylinder','Cuboid'],`A ${o} is shaped like a ${s.toLowerCase()}.`);}
+T.push(
+/* Class I */
+{id:'i_after',cls:'I',topic:'Numbers up to 100',level:'E',mcq:true,gen(){const n=R(10,98);return Math.random()<0.5?N(`What number comes just after ${n}?`,n+1,FM.int,`Count on one: ${n}, ${n+1}.`,[n-1,n+10,n+2]):N(`What number comes just before ${n}?`,n-1,FM.int,`Count back one: ${n}, ${n-1}.`,[n+1,n-10,n-2]);}},
+{id:'i_between',cls:'I',topic:'Numbers up to 100',level:'E',mcq:true,gen(){const n=R(11,98);return N(`Which number comes between ${n-1} and ${n+1}?`,n,FM.int,`${n-1}, ${n}, ${n+1}`,[n+2,n-2,n+10]);}},
+{id:'i_tens',cls:'I',topic:'Numbers up to 100',level:'M',mcq:true,mcqPart:0,gen(){const t=R(1,9),o=R(0,9),n=10*t+o;return{text:`Look at the number ${n}.`,parts:[PT('(a) How many tens?',t,FM.int,1,{distract:[o,n,t+1]}),PT('(b) How many ones?',o,FM.int,1)],sol:`${n} = ${t} tens and ${o} ones.`};}},
+{id:'i_big',cls:'I',topic:'Numbers up to 100',level:'M',mcq:true,mcqOnly:true,gen(){return pickBig(10,99,['biggest','smallest']);}},
+{id:'i_add',cls:'I',topic:'Addition',level:'E',mcq:true,gen(){const a=R(1,9),b=R(1,9);return N(`${a} + ${b} = ?`,a+b,FM.int,`Start at ${a} and count on ${b}: ${a+b}.`,[a+b+1,a+b+2,a+b-1]);}},
+{id:'i_add2',cls:'I',topic:'Addition',level:'M',mcq:true,gen(){const t=R(1,8),o=R(0,5),b=R(1,9-o),a=10*t+o;return N(`${a} + ${b} = ?`,a+b,FM.int,`Add the ones: ${o} + ${b} = ${o+b}. The tens stay ${t}. So the answer is ${a+b}.`,[a+b+10,a+b-1,a+b+1]);}},
+{id:'i_addw',cls:'I',topic:'Addition',level:'C',mcq:true,gen(){const nm=pick(KN),a=R(4,12),b=R(3,9),th=pick(['balloons','marbles','stickers','pencils']);return N(`${nm} has ${a} red ${th} and ${b} blue ${th}. How many ${th} are there in all?`,a+b,FM.int,`${a} + ${b} = ${a+b}`,[a+b+1,a+b+2,a+b-2]);}},
+{id:'i_sub',cls:'I',topic:'Subtraction',level:'E',mcq:true,gen(){const a=R(5,18),b=R(1,Math.min(9,a-1));return N(`${a} − ${b} = ?`,a-b,FM.int,`Count back ${b} from ${a}: ${a-b}.`,[a+b,a-b+1,a-b+2]);}},
+{id:'i_sub2',cls:'I',topic:'Subtraction',level:'M',mcq:true,gen(){const t=R(2,9),o=R(4,9),b=R(1,o),a=10*t+o;return N(`${a} − ${b} = ?`,a-b,FM.int,`Take away the ones: ${o} − ${b} = ${o-b}. The tens stay ${t}. So the answer is ${a-b}.`,[a+b,a-b-10,a-b+1]);}},
+{id:'i_subw',cls:'I',topic:'Subtraction',level:'C',mcq:true,gen(){const nm=pick(KN),a=R(10,20),b=R(3,9);return N(`${nm} had ${a} sweets and gave ${b} to a friend. How many sweets are left?`,a-b,FM.int,`${a} − ${b} = ${a-b}`,[a+b,a-b+1,a-b-1]);}},
+{id:'i_shape',cls:'I',topic:'Shapes',level:'E',mcq:true,gen(){const [s,c]=pick([['triangle',3],['square',4],['rectangle',4],['circle',0]]);return N(`How many corners does a ${s} have?`,c,FM.int,`A ${s} has ${c} corners.`,[c+1,c===0?2:c-1,c+2]);}},
+{id:'i_solid',cls:'I',topic:'Shapes',level:'M',mcq:true,mcqOnly:true,gen(){return solidQ();}},
+{id:'i_count',cls:'I',topic:'Shapes',level:'E',mcq:true,gen(){return countShapes();}},
+{id:'i_later',cls:'I',topic:'Time',level:'M',mcq:true,gen(){return hoursLater(8);}},
+{id:'i_pat',cls:'I',topic:'Patterns',level:'M',mcq:true,gen(){const st=pick([1,2,5,10]),a=st===1?R(1,20):st*R(0,4),s=[0,1,2,3].map(k=>a+k*st);return N(`What comes next? ${s.join(', ')}, ___`,a+4*st,FM.int,`Each number is ${st} more than the one before, so ${s[3]} + ${st} = ${a+4*st}.`,[a+4*st+1,a+5*st,s[3]]);}},
+{id:'i_patx',cls:'I',topic:'Patterns',level:'X',mcq:true,gen(){const st=pick([2,5,10]),a=st*R(1,3),s=[0,1,2,3,4].map(k=>a+k*st),h=R(1,3);return N(`Fill in the missing number: ${s.map((x,i)=>i===h?'___':x).join(', ')}`,s[h],FM.int,`The numbers go up by ${st}. ${s[h-1]} + ${st} = ${s[h]}.`,[s[h]+1,s[h]+st,s[h]-1]);}},
+{id:'i_clock',cls:'I',topic:'Time',level:'E',mcq:true,mcqOnly:true,gen(){const h=R(1,12),hr=x=>((x-1+12)%12+1)+" o'clock";return CHS(`The short hand of a clock points to ${h} and the long hand points to 12. What time is it?`,hr(h),[hr(h+1),hr(h-1),hr(h+6)],`When the long hand is at 12, the time is the hour shown by the short hand: ${h} o'clock.`);}},
+{id:'i_day',cls:'I',topic:'Time',level:'M',mcq:true,mcqOnly:true,gen(){const i=R(0,6),aft=Math.random()<0.5,ans=WD[aft?(i+1)%7:(i+6)%7];return CHS(`Which day comes just ${aft?'after':'before'} ${WD[i]}?`,ans,shuffle(WD.filter(d=>d!==WD[i])),`The days go ${WD.join(', ')}. So the day ${aft?'after':'before'} ${WD[i]} is ${ans}.`);}},
+{id:'i_money',cls:'I',topic:'Money',level:'E',mcq:true,gen(){const a=pick([1,2,5,10]),b=pick([1,2,5,10]);return N(`${pick(KN)} has a ₹${a} coin and a ₹${b} coin. How much money is that?`,a+b,FM.money,`₹${a} + ₹${b} = ₹${a+b}`,[a+b+1,a+b+5,a+b-1]);}},
+{id:'i_change',cls:'I',topic:'Money',level:'M',mcq:true,gen(){const p=pick([10,20]),pr=p===20?R(11,19):R(3,9);return N(`A toy costs ₹${pr}. You pay with a ₹${p} note. How much change do you get?`,p-pr,FM.money,`₹${p} − ₹${pr} = ₹${p-pr}`,[p+pr,p-pr+1,pr]);}},
+{id:'i_moneyx',cls:'I',topic:'Money',level:'X',mcq:true,gen(){const nm=pick(KN),m=pick([20,30,50]),a=R(5,10),b=R(3,8);return N(`${nm} has ₹${m}, and buys a pencil box for ₹${a} and an eraser for ₹${b}. How much money is left?`,m-a-b,FM.money,`Spent: ₹${a} + ₹${b} = ₹${a+b}. Left: ₹${m} − ₹${a+b} = ₹${m-a-b}.`,[a+b,m-a,m-b]);}},
+/* Class II */
+{id:'ii_digit',cls:'II',topic:'Numbers up to 1000',level:'E',mcq:true,gen(){const h=R(1,9),t=R(0,9),o=R(0,9),n=100*h+10*t+o,k=pick([['hundreds',h],['tens',t],['ones',o]]);return N(`In ${n}, which digit is in the ${k[0]} place?`,k[1],FM.int,`${n} = ${h} hundreds, ${t} tens and ${o} ones.`,[h,t,o,n%100]);}},
+{id:'ii_build',cls:'II',topic:'Numbers up to 1000',level:'M',mcq:true,gen(){const h=R(1,9),t=R(0,9),o=R(1,9),n=100*h+10*t+o;return N(`Write the number: ${h} hundreds + ${t} tens + ${o} ones.`,n,FM.int,`${h*100} + ${t*10} + ${o} = ${n}`,[100*h+10*o+t,h+t+o,100*o+10*t+h]);}},
+{id:'ii_big',cls:'II',topic:'Numbers up to 1000',level:'M',mcq:true,mcqOnly:true,gen(){return pickBig(100,999,['greatest','smallest']);}},
+{id:'ii_add',cls:'II',topic:'Addition',level:'E',mcq:true,gen(){const a=R(15,69),b=R(12,29);return N(`Add: ${a} + ${b}`,a+b,FM.int,`${a} + ${b} = ${a+b}`,[a+b+10,a+b-10,a+b+1]);}},
+{id:'ii_add3',cls:'II',topic:'Addition',level:'M',mcq:true,gen(){const a=R(120,699),b=R(25,299);return N(`Add: ${a} + ${b}`,a+b,FM.int,`Add the ones, then the tens, then the hundreds, carrying when needed: ${a} + ${b} = ${a+b}.`,[a+b+100,a+b-10,a+b+1]);}},
+{id:'ii_sub',cls:'II',topic:'Subtraction',level:'E',mcq:true,gen(){const a=R(40,99),b=R(11,a-10);return N(`Subtract: ${a} − ${b}`,a-b,FM.int,`${a} − ${b} = ${a-b}`,[a+b,a-b+10,a-b+1]);}},
+{id:'ii_sub3',cls:'II',topic:'Subtraction',level:'M',mcq:true,gen(){const a=R(300,999),b=R(45,290);return N(`Subtract: ${a} − ${b}`,a-b,FM.int,`Subtract the ones, tens and hundreds, borrowing when needed: ${a} − ${b} = ${a-b}.`,[a-b+100,a-b-10,a+b]);}},
+{id:'ii_subx',cls:'II',topic:'Subtraction',level:'X',mcq:true,mcqPart:1,gen(){const g=R(120,260),b=R(110,250),tr=R(80,180);return{text:`A school has ${g} girls and ${b} boys. ${tr} children go on a school trip.`,parts:[PT('(a) How many children are there in the school?',g+b,FM.int,1),PT('(b) How many children stay at school?',g+b-tr,FM.int,2,{distract:[g+b+tr,g+b-tr+10,g+b-tr+100]})],sol:`(a) ${g} + ${b} = ${g+b}. (b) ${g+b} − ${tr} = ${g+b-tr}.`};}},
+{id:'ii_mul',cls:'II',topic:'Multiplication',level:'E',mcq:true,gen(){const a=R(2,5),b=R(2,10);return N(`${a} × ${b} = ?`,a*b,FM.int,`${b} groups of ${a} make ${a*b}.`,[a+b,a*b+a,a*b-a]);}},
+{id:'ii_mulw',cls:'II',topic:'Multiplication',level:'C',mcq:true,gen(){const [o,p,k]=pick([['cars','wheels',4],['tricycles','wheels',3],['hands','fingers',5],['bicycles','wheels',2]]),n=R(3,9);return N(`There are ${n} ${o}. Each one has ${k} ${p}. How many ${p} are there in all?`,n*k,FM.int,`${n} × ${k} = ${n*k}`,[n+k,n*k+k,n*k-k]);}},
+{id:'ii_pat',cls:'II',topic:'Patterns',level:'M',mcq:true,gen(){const st=pick([3,4,5,10,100]),a=st*R(1,5),s=[0,1,2,3].map(k=>a+k*st);return N(`Skip count. What comes next? ${s.join(', ')}, ___`,a+4*st,FM.int,`The numbers go up by ${st}: ${s[3]} + ${st} = ${a+4*st}.`,[a+4*st+1,a+5*st,s[3]+10]);}},
+{id:'ii_shape',cls:'II',topic:'Shapes',level:'E',mcq:true,gen(){const [s,c]=pick(SHAPE2.slice(0,4));return N(`How many sides does a ${s} have?`,c,FM.int,`A ${s} has ${c} straight sides.`,[c+1,c-1,c+2]);}},
+{id:'ii_solid',cls:'II',topic:'Shapes',level:'M',mcq:true,mcqOnly:true,gen(){return solidQ();}},
+{id:'ii_count',cls:'II',topic:'Shapes',level:'M',mcq:true,gen(){return countShapes();}},
+{id:'ii_later',cls:'II',topic:'Time',level:'M',mcq:true,gen(){return hoursLater(10);}},
+{id:'ii_sleep',cls:'II',topic:'Time',level:'C',mcq:true,gen(){const s=R(8,10),w=R(5,7),nm=pick(KN);return N(`${nm} goes to sleep at ${s} o'clock at night and wakes up at ${w} o'clock in the morning. For how many hours is that?`,12-s+w,FM.unit('hours'),`From ${s} o'clock to 12 o'clock is ${12-s} hours, and from 12 to ${w} o'clock is ${w} hours: ${12-s} + ${w} = ${12-s+w} hours.`,[w+s,s-w,12-s+w+1]);}},
+{id:'ii_unit',cls:'II',topic:'Measurement',level:'E',mcq:true,mcqOnly:true,gen(){const [w,u]=pick([['the length of a pencil','centimetres'],['the weight of a bag of rice','kilograms'],['the water in a bucket','litres'],['the length of a classroom','metres']]);return CHS(`Which unit would you use to measure ${w}?`,u,['centimetres','kilograms','litres','metres','hours'],`We measure ${w} in ${u}.`);}},
+{id:'ii_ribbon',cls:'II',topic:'Measurement',level:'C',mcq:true,gen(){const a=R(40,95),b=R(12,a-10),nm=pick(KN);return N(`${nm} has a ribbon ${a} cm long and cuts off ${b} cm. How long is the ribbon now?`,a-b,FM.unit('cm'),`${a} − ${b} = ${a-b} cm`,[a+b,a-b+10,b]);}},
+{id:'ii_facts',cls:'II',topic:'Time',level:'E',mcq:true,gen(){const [q,a,s]=pick([['How many days are there in a week?',7,'Monday to Sunday is 7 days.'],['How many months are there in a year?',12,'January to December is 12 months.'],['How many hours are there in a day?',24,'A day has 24 hours.'],['How many minutes are there in an hour?',60,'An hour has 60 minutes.']]);return N(q,a,FM.int,s,[a+1,a-2,a*2]);}},
+{id:'ii_after',cls:'II',topic:'Time',level:'M',mcq:true,mcqOnly:true,gen(){const i=R(0,6),k=R(2,4),ans=WD[(i+k)%7];return CHS(`Today is ${WD[i]}. What day will it be after ${k} days?`,ans,shuffle(WD.filter(d=>d!==ans)),`Count on ${k} days from ${WD[i]}: ${[1,2,3,4].slice(0,k).map(j=>WD[(i+j)%7]).join(', ')}.`);}},
+{id:'ii_money',cls:'II',topic:'Money',level:'M',mcq:true,gen(){const a=R(15,60),b=R(10,35),nm=pick(KN);return N(`${nm} buys a book for ₹${a} and a pen for ₹${b}. How much is spent in all?`,a+b,FM.money,`₹${a} + ₹${b} = ₹${a+b}`,[a+b+10,a+b-1,a+b+1]);}},
+{id:'ii_moneyx',cls:'II',topic:'Money',level:'X',mcq:true,mcqPart:1,gen(){const a=R(20,45),b=R(10,30),nm=pick(KN);return{text:`${nm} buys a lunch box for ₹${a} and a water bottle for ₹${b}, and pays with a ₹100 note.`,parts:[PT('(a) How much is the bill (₹)?',a+b,FM.money,1),PT(`(b) How much change does ${nm} get (₹)?`,100-a-b,FM.money,2,{distract:[100-a,100-b,a+b]})],sol:`(a) ₹${a} + ₹${b} = ₹${a+b}. (b) ₹100 − ₹${a+b} = ₹${100-a-b}.`};}},
+/* Class III */
+{id:'iii_pv',cls:'III',topic:'Numbers up to 9999',level:'E',mcq:true,gen(){const ds=shuffle([1,2,3,4,5,6,7,8,9]).slice(0,4),n=+ds.join(''),k=R(1,3),d=ds[3-k],v=d*Math.pow(10,k);return N(`What is the place value of ${d} in ${n}?`,v,FM.int,`${d} is in the ${['ones','tens','hundreds','thousands'][k]} place, so its place value is ${v}.`,[d,v*10,v/10]);}},
+{id:'iii_order',cls:'III',topic:'Numbers up to 9999',level:'M',mcq:true,mcqOnly:true,gen(){return pickBig(1000,9999,['greatest','smallest']);}},
+{id:'iii_form',cls:'III',topic:'Numbers up to 9999',level:'C',mcq:true,gen(){const ds=shuffle([1,2,3,4,5,6,7,8,9]).slice(0,4),big=Math.random()<0.5,s=ds.slice().sort((a,b)=>big?b-a:a-b),v=+s.join('');return N(`Use each of the digits ${ds.join(', ')} once to make the ${big?'greatest':'smallest'} 4-digit number.`,v,FM.int,`Put the digits in ${big?'decreasing':'increasing'} order: ${v}.`,[+s.slice().reverse().join(''),+ds.join(''),v+9]);}},
+{id:'iii_add',cls:'III',topic:'Addition',level:'E',mcq:true,gen(){const a=R(125,599),b=R(118,399);return N(`Add: ${a} + ${b}`,a+b,FM.int,`${a} + ${b} = ${a+b}`,[a+b+100,a+b-10,a+b+1]);}},
+{id:'iii_addw',cls:'III',topic:'Addition',level:'C',mcq:true,gen(){const a=R(1200,3999),b=R(1100,2999);return N(`A library has ${a} English books and ${b} Hindi books. How many books are there altogether?`,a+b,FM.int,`${a} + ${b} = ${a+b}`,[a+b+1000,a+b-100,a+b+10]);}},
+{id:'iii_sub',cls:'III',topic:'Subtraction',level:'E',mcq:true,gen(){const a=R(400,999),b=R(105,a-50);return N(`Subtract: ${a} − ${b}`,a-b,FM.int,`${a} − ${b} = ${a-b}`,[a+b,a-b+100,a-b-10]);}},
+{id:'iii_subw',cls:'III',topic:'Subtraction',level:'C',mcq:true,gen(){const a=R(2500,5000),b=R(800,2400);return N(`A farmer grew ${a} kg of wheat and sold ${b} kg. How many kilograms are left?`,a-b,FM.unit('kg'),`${a} − ${b} = ${a-b} kg`,[a+b,a-b+100,a-b-1000]);}},
+{id:'iii_mul',cls:'III',topic:'Multiplication',level:'E',mcq:true,gen(){const a=R(6,10),b=R(2,10);return N(`${a} × ${b} = ?`,a*b,FM.int,`${a} × ${b} = ${a*b}`,[a*b+a,a*b-b,a+b]);}},
+{id:'iii_mul2',cls:'III',topic:'Multiplication',level:'M',mcq:true,gen(){const a=R(12,99),b=R(2,9),t=Math.floor(a/10)*10;return N(`Multiply: ${a} × ${b}`,a*b,FM.int,`${t} × ${b} = ${t*b} and ${a%10} × ${b} = ${a%10*b}. Together: ${a*b}.`,[a*b+b,a*b-10,a*(b+1)]);}},
+{id:'iii_mulx',cls:'III',topic:'Multiplication',level:'X',mcq:true,mcqPart:1,gen(){const bx=R(4,9),per=pick([25,50,75,120,125]),tot=bx*per,sold=R(Math.floor(tot/4),Math.floor(tot*3/4));return{text:`A shopkeeper has ${bx} boxes with ${per} pencils in each box, and sells ${sold} pencils.`,parts:[PT('(a) How many pencils were there at first?',tot,FM.int,2),PT('(b) How many pencils are left?',tot-sold,FM.int,2,{distract:[tot+sold,sold,tot-sold+per]})],sol:`(a) ${bx} × ${per} = ${tot}. (b) ${tot} − ${sold} = ${tot-sold}.`};}},
+{id:'iii_div',cls:'III',topic:'Division',level:'E',mcq:true,gen(){const b=R(2,10),q=R(2,10);return N(`${b*q} ÷ ${b} = ?`,q,FM.int,`${b} × ${q} = ${b*q}, so ${b*q} ÷ ${b} = ${q}.`,[q+1,q+2,b*q-b]);}},
+{id:'iii_divw',cls:'III',topic:'Division',level:'M',mcq:true,gen(){const k=R(3,9),each=R(4,12),th=pick(['mangoes','bananas','toffees','marbles']);return N(`${k*each} ${th} are shared equally among ${k} children. How many does each child get?`,each,FM.int,`${k*each} ÷ ${k} = ${each}`,[each+1,k*each-k,each*2]);}},
+{id:'iii_divx',cls:'III',topic:'Division',level:'X',mcq:true,mcqPart:0,gen(){const b=pick([4,5,6,8]),q=R(12,24),r=R(1,b-1),n=b*q+r;return{text:`A baker makes ${n} cookies and packs them in boxes of ${b}.`,parts:[PT('(a) How many boxes can be filled completely?',q,FM.int,2,{distract:[q+1,q-1,n-b]}),PT('(b) How many cookies are left over?',r,FM.int,1)],sol:`${b} × ${q} = ${b*q} and ${n} − ${b*q} = ${r}, so ${q} full boxes and ${r} cookies left over.`};}},
+{id:'iii_frac',cls:'III',topic:'Fractions',level:'E',mcq:true,gen(){const d=pick([3,4,5,6,8]),n=R(1,d-1),nm=pick(KN);return N(`A cake is cut into ${d} equal pieces. ${nm} eats ${n} of them. What fraction of the cake was eaten?`,n/d,FM.frac,`${n} out of ${d} equal pieces is ${n}/${d}.`,[(d-n)/d,n/(d+1),d/n]);}},
+{id:'iii_part',cls:'III',topic:'Fractions',level:'M',mcq:true,gen(){const [w,d]=pick([['half',2],['one-third',3],['one-fourth',4]]),n=4*d*R(1,6);return N(`What is ${w} of ${n}?`,n/d,FM.int,`Divide ${n} into ${d} equal parts: ${n} ÷ ${d} = ${n/d}.`,[d===2?n/4:n/2,n-d,n*d]);}},
+{id:'iii_conv',cls:'III',topic:'Measurement',level:'E',mcq:true,gen(){const [b,s,f]=pick([['m','cm',100],['kg','g',1000],['L','mL',1000],['km','m',1000]]),a=R(2,9);return N(`How many ${s} are there in ${a} ${b}?`,a*f,FM.int,`1 ${b} = ${f} ${s}, so ${a} ${b} = ${a*f} ${s}.`,[a*10,a*f/10,a*f*10]);}},
+{id:'iii_rice',cls:'III',topic:'Measurement',level:'C',mcq:true,gen(){const a=R(2,5),ag=pick([200,250,500,750]),b=R(1,a-1),bg=pick([100,150,250,300]),tot=a*1000+ag,used=b*1000+bg;return N(`A bag has ${a} kg ${ag} g of rice. ${b} kg ${bg} g is used. How many grams of rice are left?`,tot-used,FM.unit('g'),`${a} kg ${ag} g = ${tot} g and ${b} kg ${bg} g = ${used} g. ${tot} − ${used} = ${tot-used} g.`,[tot+used,tot-used+1000,(a-b)*1000]);}},
+{id:'iii_clock',cls:'III',topic:'Time',level:'E',mcq:true,mcqOnly:true,gen(){const h=R(1,11),[w,m]=pick([['half past',30],['quarter past',15],['quarter to',45]]),say=m===45?`quarter to ${h+1}`:`${w} ${h}`,ans=clk(h,m);return CHS(`Which time is ${say}?`,ans,[clk(h+1,m),clk(h,m===30?15:30),clk(h,m===45?15:45),clk(h+1,(m+30)%60)],`${say[0].toUpperCase()+say.slice(1)} is ${ans}.`);}},
+{id:'iii_min',cls:'III',topic:'Time',level:'M',mcq:true,gen(){const h=R(2,5);return Math.random()<0.5?N(`How many minutes are there in ${h} hours?`,60*h,FM.int,`1 hour = 60 minutes, so ${h} × 60 = ${60*h}.`,[100*h,60*h+30,24*h]):N(`How many days are there in ${h} weeks?`,7*h,FM.int,`1 week = 7 days, so ${h} × 7 = ${7*h}.`,[7*h+7,5*h,h+7]);}},
+{id:'iii_cal',cls:'III',topic:'Time',level:'C',mcq:true,gen(){const M=[['January',31],['February',28],['March',31],['April',30],['May',31],['June',30],['July',31],['August',31],['September',30],['October',31],['November',30],['December',31]],i=R(2,9),s=M.slice(i,i+3),v=s.reduce((a,x)=>a+x[1],0);return N(`How many days are there in ${s[0][0]}, ${s[1][0]} and ${s[2][0]} together?`,v,FM.int,`${s.map(x=>x[1]).join(' + ')} = ${v}`,[90,v+1,v===93?92:93]);}},
+{id:'iii_paise',cls:'III',topic:'Money',level:'M',mcq:true,gen(){const r=R(2,9),p=pick([25,50,75]);return N(`Change ₹${r} and ${p} paise into paise.`,r*100+p,FM.unit('paise'),`₹1 = 100 paise, so ${r} × 100 + ${p} = ${r*100+p} paise.`,[r*10+p,r+p,r*1000+p]);}},
+{id:'iii_bill',cls:'III',topic:'Money',level:'C',mcq:true,mcqPart:1,gen(){const a=R(45,120),b=R(30,90),c=R(20,60),t=a+b+c;return{text:`A geometry box costs ₹${a}, a story book ₹${b} and a pack of crayons ₹${c}. Arjun buys one of each and pays with a ₹500 note.`,parts:[PT('(a) What is the total bill (₹)?',t,FM.money,1),PT('(b) How much change does Arjun get (₹)?',500-t,FM.money,2,{distract:[500-a-b,t,500-t+10]})],sol:`(a) ₹${a} + ₹${b} + ₹${c} = ₹${t}. (b) ₹500 − ₹${t} = ₹${500-t}.`};}},
+{id:'iii_shape',cls:'III',topic:'Shapes',level:'E',mcq:true,gen(){const [s,c]=pick(SHAPE2);return N(`How many corners does a ${s} have?`,c,FM.int,`A ${s} has ${c} sides and ${c} corners.`,[c+1,c-1,c+2]);}},
+{id:'iii_solid',cls:'III',topic:'Shapes',level:'M',mcq:true,mcqOnly:true,gen(){return solidQ();}},
+{id:'iii_data',cls:'III',topic:'Data Handling',level:'C',mcq:true,mcqPart:0,gen(){const F=['Apple','Mango','Banana','Grapes'],v=F.map(()=>R(4,15)),tot=v.reduce((a,b)=>a+b),hi=v.indexOf(Math.max(...v)),lo=v.indexOf(Math.min(...v));return{text:`Children in a class chose their favourite fruit: ${F.map((f,i)=>f+' '+v[i]).join(', ')}.`,parts:[PT('(a) How many children are there in all?',tot,FM.int,1,{distract:[tot+5,tot-v[0],Math.max(...v)*4]}),PT(`(b) How many more children chose ${F[hi]} than ${F[lo]}?`,v[hi]-v[lo],FM.int,2)],sol:`(a) ${v.join(' + ')} = ${tot}. (b) ${v[hi]} − ${v[lo]} = ${v[hi]-v[lo]}.`};}},
+/* Class IV */
+{id:'iv_pv',cls:'IV',topic:'Large Numbers',level:'E',mcq:true,gen(){const ds=shuffle([1,2,3,4,5,6,7,8,9]).slice(0,5),n=+ds.join(''),k=R(1,4),d=ds[4-k],v=d*Math.pow(10,k);return N(`What is the place value of ${d} in ${n.toLocaleString('en-IN')}?`,v,FM.int,`${d} is in the ${['ones','tens','hundreds','thousands','ten thousands'][k]} place, so its place value is ${v.toLocaleString('en-IN')}.`,[d,v*10,v/10]);}},
+{id:'iv_build',cls:'IV',topic:'Large Numbers',level:'M',mcq:true,gen(){const d=[R(1,9),R(0,9),0,R(1,9),R(0,9)],n=+d.join('');return N(`Write the number: ${d[0]} ten thousands + ${d[1]} thousands + 0 hundreds + ${d[3]} tens + ${d[4]} ones.`,n,FM.int,`${d[0]*10000} + ${d[1]*1000} + 0 + ${d[3]*10} + ${d[4]} = ${n}`,[+[d[0],d[1],d[3],d[4]].join(''),n+100,n*10]);}},
+{id:'iv_round',cls:'IV',topic:'Large Numbers',level:'M',mcq:true,gen(){const n=R(1001,9989),[u,w]=pick([[10,'ten'],[100,'hundred']]),v=Math.round(n/u)*u,dg=u===10?n%10:Math.floor(n%100/10);return N(`Round ${n} to the nearest ${w}.`,v,FM.int,`Look at the ${u===10?'ones':'tens'} digit, ${dg}. It is ${dg>=5?'5 or more, so round up':'less than 5, so round down'}: ${v}.`,[v+u,v-u,n]);}},
+{id:'iv_add',cls:'IV',topic:'Addition and Subtraction',level:'E',mcq:true,gen(){const a=R(1200,6999),b=R(1100,2999);return Math.random()<0.5?N(`Add: ${a} + ${b}`,a+b,FM.int,`${a} + ${b} = ${a+b}`,[a+b+1000,a+b-100,a+b+10]):N(`Subtract: ${a+b} − ${b}`,a,FM.int,`${a+b} − ${b} = ${a}`,[a+1000,a-100,a+10]);}},
+{id:'iv_addm',cls:'IV',topic:'Addition and Subtraction',level:'M',mcq:true,gen(){const a=R(5001,9999),b=R(1234,a-1000);return N(`Subtract: ${a} − ${b}`,a-b,FM.int,`Subtract column by column from the ones, borrowing when needed: ${a-b}.`,[a-b+1000,a-b-10,a+b]);}},
+{id:'iv_addw',cls:'IV',topic:'Addition and Subtraction',level:'C',mcq:true,gen(){const a=R(2500,4800),b=R(1500,3500),c=R(1000,a+b-500);return N(`A cinema sold ${a} tickets on Saturday and ${b} on Sunday. ${c} of these were children's tickets. How many were adult tickets?`,a+b-c,FM.int,`Total: ${a} + ${b} = ${a+b}. Adults: ${a+b} − ${c} = ${a+b-c}.`,[a+b+c,a+b,a+b-c+1000]);}},
+{id:'iv_mul',cls:'IV',topic:'Multiplication',level:'E',mcq:true,gen(){const a=R(112,499),b=R(2,9);return N(`Multiply: ${a} × ${b}`,a*b,FM.int,`${a} × ${b} = ${a*b}`,[a*b+a,a*b-b,a*(b+1)+10]);}},
+{id:'iv_mul2',cls:'IV',topic:'Multiplication',level:'M',mcq:true,gen(){const a=R(12,99),b=R(11,49),t=Math.floor(b/10)*10;return N(`Multiply: ${a} × ${b}`,a*b,FM.int,`${a} × ${t} = ${a*t} and ${a} × ${b%10} = ${a*(b%10)}. Together: ${a*b}.`,[a*b+a,a*b-10*a,a*(b%10)+a*Math.floor(b/10)]);}},
+{id:'iv_mulw',cls:'IV',topic:'Multiplication',level:'C',mcq:true,gen(){const r=R(18,48),n=R(12,35);return N(`One kilogram of sugar costs ₹${r}. What is the cost of ${n} kg of sugar?`,r*n,FM.money,`${n} × ₹${r} = ₹${r*n}`,[r*n+r,r+n,r*n-n]);}},
+{id:'iv_div',cls:'IV',topic:'Division',level:'E',mcq:true,gen(){const b=R(2,9),q=R(21,99);return N(`Divide: ${b*q} ÷ ${b}`,q,FM.int,`${b} × ${q} = ${b*q}, so the answer is ${q}.`,[q+1,q-1,q*10]);}},
+{id:'iv_divr',cls:'IV',topic:'Division',level:'M',mcq:true,mcqPart:0,gen(){const d=R(3,9),q=R(41,199),r=R(1,d-1),n=d*q+r;return{text:`Divide ${n} by ${d}.`,parts:[PT('(a) Quotient',q,FM.int,1,{distract:[q+1,q-1,q*10]}),PT('(b) Remainder',r,FM.int,1)],sol:`${d} × ${q} = ${d*q} and ${n} − ${d*q} = ${r}: quotient ${q}, remainder ${r}.`};}},
+{id:'iv_equiv',cls:'IV',topic:'Fractions',level:'E',mcq:true,gen(){const d=pick([2,3,4,5]),n=R(1,d-1),k=R(2,5);return N(`Fill in the box: ${n}/${d} = ☐/${d*k}`,n*k,FM.int,`The bottom was multiplied by ${k}, so multiply the top by ${k} too: ${n} × ${k} = ${n*k}.`,[n+k,n*k+1,d*k-n]);}},
+{id:'iv_fof',cls:'IV',topic:'Fractions',level:'M',mcq:true,gen(){const d=pick([3,4,5,6,8]),n=R(2,d-1),m=d*R(3,10);return N(`Find ${n}/${d} of ${m}.`,n*m/d,FM.int,`${m} ÷ ${d} = ${m/d}, then ${m/d} × ${n} = ${n*m/d}.`,[m/d,m-n*m/d,n*m]);}},
+{id:'iv_fcmp',cls:'IV',topic:'Fractions',level:'C',mcq:true,mcqOnly:true,gen(){const d=pick([6,7,8,9,10,12]),s=new Set();while(s.size<4)s.add(R(1,d-1));const a=[...s],g=Math.random()<0.5,ans=(g?Math.max(...a):Math.min(...a))+'/'+d;return CHS(`Which fraction is the ${g?'greatest':'smallest'}?`,ans,a.map(x=>x+'/'+d),`All the fractions have the same denominator, ${d}, so compare the numerators: ${ans} is the ${g?'greatest':'smallest'}.`);}},
+{id:'iv_km',cls:'IV',topic:'Measurement',level:'E',mcq:true,gen(){const a=R(2,9),b=R(50,950);return N(`Convert ${a} km ${b} m into metres.`,a*1000+b,FM.unit('m'),`${a} × 1000 + ${b} = ${a*1000+b} m`,[a*100+b,a+b,a*1000+b*10]);}},
+{id:'iv_walk',cls:'IV',topic:'Measurement',level:'C',mcq:true,gen(){const d=R(600,1500),nm=pick(KN);return N(`${nm} walks ${d} m to school and the same distance back home every day. How many metres is that in 6 school days?`,d*12,FM.unit('m'),`One day: ${d} × 2 = ${d*2} m. Six days: ${d*2} × 6 = ${d*12} m.`,[d*6,d*2,d*13]);}},
+{id:'iv_dur',cls:'IV',topic:'Time',level:'M',mcq:true,gen(){const h=R(1,4),m=pick([0,15,30,45]),dur=pick([75,90,105,120,135,150,165]),s=h*60+m,e=s+dur,f=t=>`${Math.floor(t/60)}:${String(t%60).padStart(2,'0')} pm`;return N(`A film starts at ${f(s)} and ends at ${f(e)}. How long is the film in minutes?`,dur,FM.unit('minutes'),`From ${f(s)} to ${f(e)} is ${Math.floor(dur/60)} h ${dur%60} min = ${dur} minutes.`,[dur+60,dur-30,Math.floor(dur/60)*100+dur%60]);}},
+{id:'iv_24',cls:'IV',topic:'Time',level:'C',mcq:true,mcqOnly:true,gen(){const h=R(1,10),m=pick([0,15,30,45]),pmT=Math.random()<0.6,ans=f24(pmT?h+12:h,m);return CHS(`Write ${clk(h,m)} ${pmT?'pm':'am'} in 24-hour time.`,ans,[f24(pmT?h:h+12,m),f24(pmT?h+11:h+1,m),f24(pmT?h+13:h+2,m)],pmT?`For pm times add 12 to the hour: ${h} + 12 = ${h+12}, so ${ans}.`:`Morning times keep the same hour: ${ans}.`);}},
+{id:'iv_money',cls:'IV',topic:'Money',level:'M',mcq:true,gen(){const r=R(12,95),n=R(3,9);return N(`One pen costs ₹${r}. How much do ${n} pens cost?`,r*n,FM.money,`${n} × ₹${r} = ₹${r*n}`,[r*n+r,r+n,r*n-n]);}},
+{id:'iv_moneyx',cls:'IV',topic:'Money',level:'X',mcq:true,mcqPart:2,gen(){const p=R(35,80),n=R(3,6),q=R(120,250),t=p*n+q,paid=Math.ceil((t+1)/500)*500;return{text:`Ishaan buys ${n} notebooks at ₹${p} each and a school bag for ₹${q}, and pays ₹${paid}.`,parts:[PT('(a) Cost of the notebooks (₹)',p*n,FM.money,1),PT('(b) Total bill (₹)',t,FM.money,2),PT('(c) Change received (₹)',paid-t,FM.money,2,{distract:[paid-p*n,paid-q,t]})],sol:`(a) ${n} × ₹${p} = ₹${p*n}. (b) ₹${p*n} + ₹${q} = ₹${t}. (c) ₹${paid} − ₹${t} = ₹${paid-t}.`};}},
+{id:'iv_sym',cls:'IV',topic:'Shapes and Symmetry',level:'E',mcq:true,gen(){const [s,k]=pick([['square',4],['rectangle',2],['equilateral triangle',3],['regular hexagon',6],['regular pentagon',5]]);return N(`How many lines of symmetry does a ${s} have?`,k,FM.int,`A ${s} can be folded into two matching halves along ${k} different lines.`,[k+1,k-1,k*2]);}},
+{id:'iv_letters',cls:'IV',topic:'Shapes and Symmetry',level:'M',mcq:true,mcqOnly:true,gen(){const sym=pick(['A','M','T','U','V','W','H','O','X']),non=shuffle(['F','G','J','L','N','P','R','S','Z']).slice(0,3);return CHS('Which letter has a line of symmetry?',sym,non,`${sym} can be folded into two matching halves. ${non.join(', ')} cannot.`);}},
+{id:'iv_perim',cls:'IV',topic:'Perimeter and Area',level:'M',mcq:true,gen(){if(Math.random()<0.5){const a=R(5,25);return N(`Find the perimeter of a square of side ${a} cm.`,4*a,FM.unit('cm'),`4 × ${a} = ${4*a} cm`,[a*a,2*a,4*a+4]);}const l=R(6,20),b=R(3,l-1);return N(`Find the perimeter of a rectangle ${l} cm long and ${b} cm wide.`,2*(l+b),FM.unit('cm'),`2 × (${l} + ${b}) = ${2*(l+b)} cm`,[l*b,l+b,2*l+b]);}},
+{id:'iv_area',cls:'IV',topic:'Perimeter and Area',level:'C',mcq:true,gen(){const l=R(4,12),b=R(3,9);return N(`A rectangle ${l} cm long and ${b} cm wide is covered with squares of side 1 cm. How many squares are needed?`,l*b,FM.int,`There are ${b} rows of ${l} squares: ${l} × ${b} = ${l*b} squares, so the area is ${l*b} cm².`,[2*(l+b),l+b,l*b+l]);}},
+{id:'iv_garden',cls:'IV',topic:'Perimeter and Area',level:'X',mcq:true,mcqPart:1,gen(){const l=R(12,30),b=R(8,l-2),r=R(8,20);return{text:`A rectangular garden is ${l} m long and ${b} m wide. A wire fence is put all round it.`,parts:[PT('(a) How many metres of wire are needed?',2*(l+b),FM.unit('m'),2),PT(`(b) Wire costs ₹${r} per metre. What is the total cost (₹)?`,2*(l+b)*r,FM.money,2,{distract:[l*b*r,(l+b)*r,2*(l+b)*r+r]}),PT('(c) What is the area of the garden (m²)?',l*b,FM.unit('m²'),2)],sol:`(a) 2 × (${l} + ${b}) = ${2*(l+b)} m. (b) ${2*(l+b)} × ₹${r} = ₹${inr(2*(l+b)*r)}. (c) ${l} × ${b} = ${l*b} m².`};}},
+{id:'iv_data',cls:'IV',topic:'Data Handling',level:'C',mcq:true,mcqPart:0,gen(){const C=['IV A','IV B','IV C'],v=C.map(()=>R(120,380)),tot=v.reduce((a,b)=>a+b),hi=Math.max(...v),lo=Math.min(...v);return{text:`Old newspapers collected for recycling: Class ${C.map((c,i)=>c+' '+v[i]+' kg').join(', Class ')}.`,parts:[PT('(a) How many kilograms were collected in all?',tot,FM.unit('kg'),2,{distract:[tot+100,tot-v[0],hi*3]}),PT('(b) How many more kilograms did the top class collect than the lowest?',hi-lo,FM.unit('kg'),1)],sol:`(a) ${v.join(' + ')} = ${tot} kg. (b) ${hi} − ${lo} = ${hi-lo} kg.`};}}
 );
 
 /* ---------- Class VI ---------- */
@@ -590,8 +795,12 @@ Object.keys(BANKS).forEach(subj=>{const fuzzy=subj!=='English';BANKS[subj].forEa
 /* ---------- settings ---------- */
 const LEVELS=['E','M','C','X'],LNAME={E:'Easy',M:'Medium',C:'Complex',X:'Challenging'};
 const ROMAN=['I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII'];
-const BOARDS={India:['CBSE','ICSE (coming soon)','State boards (coming soon)']};
+const BOARDS={India:['CBSE']};
 const TOPICS={
+  I:['Numbers up to 100','Addition','Subtraction','Shapes','Patterns','Time','Money'],
+  II:['Numbers up to 1000','Addition','Subtraction','Multiplication','Patterns','Shapes','Measurement','Time','Money'],
+  III:['Numbers up to 9999','Addition','Subtraction','Multiplication','Division','Fractions','Measurement','Time','Money','Shapes','Data Handling'],
+  IV:['Large Numbers','Addition and Subtraction','Multiplication','Division','Fractions','Measurement','Time','Money','Shapes and Symmetry','Perimeter and Area','Data Handling'],
   V:['Large Numbers','Multiplication and Division','Factors and Multiples','Fractions','Decimals','Measurement','Perimeter and Area','Shapes and Angles','Time and Money','Data Handling'],
   VI:['Knowing Our Numbers','Playing with Numbers','Basic Geometrical Ideas','Understanding Elementary Shapes','Integers','Fractions','Decimals','Data Handling','Mensuration','Algebra','Ratio and Proportion'],
   VII:['Integers','Fractions and Decimals','Data Handling','Simple Equations','Lines and Angles','Triangles','Comparing Quantities','Rational Numbers','Perimeter and Area','Algebraic Expressions','Exponents and Powers'],
@@ -605,7 +814,9 @@ const TLABEL={'Triangles':'Triangles (incl. Pythagoras)','Comparing Quantities':
 const TOPIC_CACHE={};
 function topicsFor(subj,cls){if(subj==='Mathematics')return TOPICS[cls]||[];const k=subj+'|'+cls;if(!TOPIC_CACHE[k]){const l=[];T.forEach(t=>{if(t.subj===subj&&t.cls===cls&&l.indexOf(t.topic)<0)l.push(t.topic);});TOPIC_CACHE[k]=l;}return TOPIC_CACHE[k];}
 const isMaths=()=>S.subject==='Mathematics';
-const DEF={subject:'Mathematics',klass:'VII',duration:60,nq:30,usemcq:true,nmcq:10,mix:{E:20,M:40,C:30,X:10},marks:{MCQ:1,E:1,M:2,C:3,X:6},topics:'ALL',sample:true};
+const availCount=()=>T.filter(t=>t.subj===S.subject&&t.cls===S.klass&&(S.topics==='ALL'||S.topics.indexOf(t.topic)>=0)).length;
+const DEF={subject:'Mathematics',klass:'VII',duration:60,nq:30,usemcq:true,nmcq:10,mix:{E:20,M:40,C:30,X:10},marks:{MCQ:1,E:1,M:2,C:3,X:6},topics:'ALL',mode:'exam'};
+const PRESETS={quick:{nq:10,duration:15,nmcq:5,mix:{E:30,M:40,C:30,X:0}},chapter:{nq:20,duration:40,nmcq:8,mix:{E:20,M:40,C:30,X:10}},full:{nq:30,duration:60,nmcq:10,mix:{E:20,M:40,C:30,X:10}}};
 let S=JSON.parse(JSON.stringify(DEF));
 try{const saved=JSON.parse(localStorage.getItem('mpp-settings')||'null');if(saved&&saved.mix&&saved.marks)S=Object.assign(S,saved);}catch(e){}
 
@@ -631,30 +842,30 @@ function renderTopics(){
   wrap.querySelectorAll('input[data-topic]').forEach(cb=>cb.addEventListener('change',()=>{const sel=[...wrap.querySelectorAll('input[data-topic]')].filter(x=>x.checked).map(x=>x.dataset.topic);S.topics=sel.length===list.length?'ALL':sel;renderTopics();readForm();}));
 }
 function writeForm(){
-  $('#subject').value=S.subject;fillClasses();$('#klass').value=S.klass;$('#duration').value=S.duration;$('#nq').value=S.nq;$('#nmcq').value=S.nmcq;$('#usemcq').checked=S.usemcq;$('#sample').checked=S.sample;
+  $('#subject').value=S.subject;fillClasses();$('#klass').value=S.klass;$('#duration').value=S.duration;$('#nq').value=S.nq;$('#nmcq').value=S.nmcq;$('#usemcq').checked=S.usemcq;
+  $(S.mode==='practice'?'#mode_practice':'#mode_exam').checked=true;
   LEVELS.forEach(l=>{$('#mx_'+l).value=S.mix[l];$('#mxn_'+l).value=S.mix[l];});
   ['MCQ'].concat(LEVELS).forEach(k=>{$('#m_'+k).value=S.marks[k];});renderTopics();
 }
 function readForm(){
-  S.klass=$('#klass').value;S.duration=+$('#duration').value||0;S.nq=+$('#nq').value||0;S.nmcq=+$('#nmcq').value||0;S.usemcq=$('#usemcq').checked;S.sample=$('#sample').checked;
+  S.klass=$('#klass').value;S.duration=+$('#duration').value||0;S.nq=+$('#nq').value||0;S.nmcq=+$('#nmcq').value||0;S.usemcq=$('#usemcq').checked;S.mode=$('#mode_practice').checked?'practice':'exam';
   LEVELS.forEach(l=>{S.mix[l]=+$('#mxn_'+l).value||0;});['MCQ'].concat(LEVELS).forEach(k=>{S.marks[k]=+$('#m_'+k).value||0;});
   $('#nmcq').disabled=!S.usemcq;
   try{localStorage.setItem('mpp-settings',JSON.stringify(S));}catch(e){}
   renderPlan();
 }
-function isDefault(){return S.subject==='Mathematics'&&S.klass==='VII'&&S.duration===60&&S.nq===30&&S.usemcq&&S.nmcq===10&&S.topics==='ALL'&&LEVELS.every(l=>S.mix[l]===DEF.mix[l])&&['MCQ'].concat(LEVELS).every(k=>S.marks[k]===DEF.marks[k]);}
 function split(n,pct){const raw=LEVELS.map(l=>n*pct[l]/100),base=raw.map(Math.floor);let rem=n-base.reduce((a,b)=>a+b,0);const order=raw.map((r,i)=>[r-Math.floor(r),i]).sort((a,b)=>b[0]-a[0]);for(let k=0;k<order.length&&rem>0;k++,rem--)base[order[k][1]]++;const o={};LEVELS.forEach((l,i)=>o[l]=base[i]);return o;}
 function plan(){const nm=S.usemcq?Math.min(S.nmcq,S.nq):0;return{mcq:split(nm,S.mix),w:split(S.nq-nm,S.mix),nm,nw:S.nq-nm};}
 function validate(){
   const errs=[];const sum=LEVELS.reduce((a,l)=>a+S.mix[l],0);
   if(sum!==100)errs.push(`The difficulty mix adds up to ${sum}%. Adjust it to exactly 100%.`);
-  if(S.nq<5||S.nq>60)errs.push('Choose between 5 and 60 questions.');
+  if(S.nq<3||S.nq>60)errs.push('Choose between 3 and 60 questions.');
   if(S.usemcq&&(S.nmcq<1||S.nmcq>S.nq))errs.push(`The number of MCQs must be between 1 and ${S.nq}.`);
   if(S.duration<10||S.duration>180)errs.push('Choose a duration between 10 and 180 minutes.');
   if(['MCQ'].concat(LEVELS).some(k=>S.marks[k]<1||S.marks[k]>12))errs.push('Marks per question must be between 1 and 12.');
   if(!topicsFor(S.subject,S.klass).length)errs.push(`Class ${S.klass} ${S.subject} questions are not available yet. Choose another class.`);
   else if(S.topics!=='ALL'&&!S.topics.length)errs.push('Select at least one topic.');
-  else if(!isMaths()){const av=T.filter(t=>t.subj===S.subject&&t.cls===S.klass&&(S.topics==='ALL'||S.topics.indexOf(t.topic)>=0)).length;if(S.nq>av)errs.push(`Only ${av} Class ${S.klass} ${S.subject} questions are available for the chosen topics. Choose ${av} or fewer, or add topics.`);}
+  else if(!isMaths()){const av=availCount();if(S.nq>av)errs.push(`Only ${av} Class ${S.klass} ${S.subject} questions are available for the chosen topics. Choose ${av} or fewer, or add topics.`);}
   return{errs,sum};
 }
 function renderPlan(){
@@ -665,7 +876,9 @@ function renderPlan(){
   $('#planNote').textContent=isMaths()?'Answers are marked automatically. Written answers accept forms like 4 1/5, 21/5, 0.375, −1/6, 2^4 or 3.84 × 10^5; units such as cm, °, % and ₹ are optional.':`Answers are marked automatically. Written answers are short – a word, a term, a name or a number; capital letters and punctuation are ignored${S.subject==='English'?', but spelling must be exact':' and small spelling slips are accepted'}. Units are optional for numerical answers.`;
   const secs=sections(p),check=S.duration>=45?3:2,avail=Math.max(0,S.duration-check);
   $('#timeBody').innerHTML=secs.map(s=>`<tr><td>Section ${s.letter}: ${s.name}</td><td class="n">${s.count} Q · ${s.marks} marks</td><td class="n">${Math.round(avail*s.marks/(tm||1))} min</td></tr>`).join('')+`<tr><td>Checking</td><td></td><td class="n">${check} min</td></tr>`;
-  const sw=$('#sampleWrap'),def=isDefault();sw.hidden=!def;
+  $('#sampleBtn').hidden=!(S.subject==='Mathematics'&&S.klass==='VII');
+  Object.keys(PRESETS).forEach(k=>{$(`[data-pl="${k}"]`).textContent=PRESETS[k].nq+' questions'+(S.mode==='exam'?' · '+PRESETS[k].duration+' min':'');});
+  $('#gen').textContent=S.mode==='exam'?'Start custom paper':'Start custom practice';
   const fm=$('#formMsg');if(v.errs.length){fm.innerHTML=v.errs.map(esc).join('<br>');fm.hidden=false;}else fm.hidden=true;
   $('#gen').disabled=v.errs.length>0;
 }
@@ -678,8 +891,8 @@ function pickFrom(kind,level,n,topics,seen,notes){
   if(n<=0)return [];
   const okKind=t=>t.subj===S.subject&&t.cls===S.klass&&(kind==='mcq'?t.mcq:!t.mcqOnly),inTopic=t=>topics==='ALL'||topics.indexOf(t.topic)>=0;
   const base=T.filter(t=>okKind(t)&&t.level===level);
-  let pool=base.filter(inTopic);
-  if(!pool.length){pool=base;notes.add(`Some ${LNAME[level].toLowerCase()} questions come from other Class ${S.klass} topics, because the chosen topics have none at that level.`);}
+  // stay inside the chosen chapters: borrow a nearby difficulty level first, other chapters only as a last resort
+  const pool=base.filter(inTopic);
   const out=[];
   const draw=(pl,want)=>{if(!pl.length)return;const byTopic={};pl.forEach(t=>{(byTopic[t.topic]=byTopic[t.topic]||[]).push(t);});
     const order=shuffle(Object.keys(byTopic));Object.values(byTopic).forEach(shuffle);let k=0,guard=0;
@@ -689,97 +902,217 @@ function pickFrom(kind,level,n,topics,seen,notes){
       out.push(Object.assign(inst,{kind,level,topic:t.topic}));}};
   draw(pool,n);
   if(out.length<n){const near={E:['M','C','X'],M:['E','C','X'],C:['M','X','E'],X:['C','M','E']}[level];
+    const had=out.length;
     for(const l2 of near){if(out.length>=n)break;draw(T.filter(t=>okKind(t)&&t.level===l2&&inTopic(t)),n);}
-    if(out.length<n)draw(T.filter(okKind),n);
-    notes.add(`There are not enough ${LNAME[level].toLowerCase()} questions for these settings, so some come from a nearby difficulty level.`);}
+    if(out.length>had)notes.add(`There are not enough ${LNAME[level].toLowerCase()} questions in the chosen chapters, so some come from a nearby difficulty level.`);
+    if(out.length<n){const k=out.length;draw(T.filter(okKind),n);if(out.length>k)notes.add(`Some questions come from other Class ${S.klass} chapters, because the chosen chapters do not have enough questions.`);}}
   return out;
 }
-function buildPaper(){
+function buildPaper(useSample){
   const p=plan(),notes=new Set();let qs=[];
-  if(S.sample&&isDefault()){qs=SAMPLE.map(q=>JSON.parse(JSON.stringify(q,(k,v)=>k==='fmt'?undefined:v)));qs.forEach((q,i)=>q.parts.forEach((pt,j)=>{pt.fmt=SAMPLE[i].parts[j].fmt;}));qs.forEach(q=>{if(q.kind==='w')q.kind='w';});}
+  if(useSample){qs=SAMPLE.map(q=>JSON.parse(JSON.stringify(q,(k,v)=>k==='fmt'?undefined:v)));qs.forEach((q,i)=>q.parts.forEach((pt,j)=>{pt.fmt=SAMPLE[i].parts[j].fmt;}));qs.forEach(q=>{if(q.kind==='w')q.kind='w';});}
   else{const seen=new Set();LEVELS.forEach(l=>{qs=qs.concat(pickFrom('mcq',l,p.mcq[l],S.topics,seen,notes));});LEVELS.forEach(l=>{qs=qs.concat(pickFrom('w',l,p.w[l],S.topics,seen,notes));});}
   if(qs.length<p.nm+p.nw)notes.add(`This paper has ${qs.length} questions instead of ${p.nm+p.nw}, because the question bank for these settings has no more suitable questions.`);
-  qs.forEach((q,i)=>{q.no=i+1;q.marks=q.kind==='mcq'?S.marks.MCQ:S.marks[q.level];partMarks(q,q.marks);});
-  return{qs,secs:sections(p),notes:[...notes],sample:S.sample&&isDefault(),created:Date.now()};
+  qs.forEach((q,i)=>{q.no=i+1;q.marks=q.kind==='mcq'?S.marks.MCQ:S.marks[q.level];partMarks(q,q.marks);q.parts.forEach(pt=>{pt.ansText=answerText(pt);});});
+  return{qs,secs:sections(p),notes:[...notes],sample:!!useSample,created:Date.now()};
 }
 
 /* ---------- test ---------- */
-let P=null,ANS={},timerId=null,endAt=0,startAt=0;
-function startTest(){
-  P=buildPaper();ANS={};startAt=Date.now();endAt=startAt+S.duration*60000;
-  const total=P.qs.reduce((a,q)=>a+q.marks,0);
-  const secHtml=P.secs.map(s=>{const qs=P.qs.filter(q=>s.kind==='mcq'?q.kind==='mcq':(q.kind!=='mcq'&&q.level===s.level));
-    return `<section class="section"><div class="sechead"><h3>Section ${s.letter} – ${s.name}</h3><small>${qs.length} × ${s.kind==='mcq'?S.marks.MCQ:S.marks[s.level]} = ${qs.reduce((a,q)=>a+q.marks,0)} marks</small></div>${qs.map(qHtml).join('')}</section>`;}).join('');
-  const check=S.duration>=45?3:2,avail=S.duration-check;
-  $('#sheet').innerHTML=`<header class="sheethead"><p class="eyebrow">${esc($('#board').value)} · ${esc($('#country').value)}${P.sample?' · Model paper':''}</p><h2>${esc(S.subject)} – Class ${S.klass}</h2><div class="meta"><span>Time: ${S.duration} minutes</span><span>Maximum marks: ${total}</span></div></header>
-   <ol class="instr"><li>The paper has ${P.qs.length} questions in ${P.secs.length} sections. All questions are compulsory.</li>${P.secs.map(s=>`<li>Section ${s.letter}: ${s.count} ${s.kind==='mcq'?'multiple-choice questions':LNAME[s.level].toLowerCase()+' questions'} of ${s.kind==='mcq'?S.marks.MCQ:S.marks[s.level]} mark${(s.kind==='mcq'?S.marks.MCQ:S.marks[s.level])>1?'s':''} each (about ${Math.round(avail*s.marks/total)} minutes).</li>`).join('')}${isMaths()?'<li>Type each answer in its box. Fractions, mixed numbers (4 1/5), decimals and powers (2^4) are accepted; units are optional. Use π = 22/7.</li>':`<li>Type each answer in its box as a word, short phrase, name or number. Capital letters and punctuation do not matter${S.subject==='English'?'; spelling must be correct':''}. Units are optional.</li>`}</ol>
-   ${P.notes.map(n=>`<p class="msg warn">${esc(n)}</p>`).join('')}${secHtml}`;
-  let parts=0;P.qs.forEach(q=>parts+=q.parts.length);$('#partsTotal').textContent=parts;$('#answered').textContent='0';$('#progbar').style.width='0';
-  $('#sheet').querySelectorAll('[data-k]').forEach(el=>{const ev=el.type==='radio'?'change':'input';el.addEventListener(ev,()=>{if(el.type==='radio'){ANS[el.dataset.k]=el.value;el.closest('.opts').querySelectorAll('.opt').forEach(o=>o.classList.toggle('on',o.contains(el)&&el.checked));}else ANS[el.dataset.k]=el.value;updateCount();});});
+// P holds the paper and its own settings (mode, duration, subject…) so it can be resumed after a reload
+let P=null,ANS={},FLAG={},CHK={},timerId=null,warned={},toastId=null;
+const ACTIVE='aa-active',HIST='aa-history';
+const pm=()=>P&&P.subject==='Mathematics';
+const blankV=v=>v==null||String(v).trim()==='';
+const mmss=ms=>String(Math.floor(ms/60000)).padStart(2,'0')+':'+String(Math.floor(ms%60000/1000)).padStart(2,'0');
+function save(){if(!P)return;try{localStorage.setItem(ACTIVE,JSON.stringify({P,ANS,FLAG,CHK}));}catch(e){}}
+function clearActive(){try{localStorage.removeItem(ACTIVE);}catch(e){}}
+function loadActive(){try{const a=JSON.parse(localStorage.getItem(ACTIVE)||'null');return a&&a.P&&Array.isArray(a.P.qs)?a:null;}catch(e){return null;}}
+function secQs(s){return P.qs.filter(q=>s.kind==='mcq'?q.kind==='mcq':(q.kind!=='mcq'&&q.level===s.level));}
+
+function startTest(useSample){
+  const p=buildPaper(useSample);
+  P=Object.assign(p,{mode:S.mode,duration:S.duration,subject:S.subject,klass:S.klass,board:$('#board').value,country:$('#country').value,label:useSample?'CBSE model paper':'',startAt:Date.now()});
+  P.endAt=P.startAt+P.duration*60000;ANS={};FLAG={};CHK={};begin();
+}
+function startPreset(k){
+  const pr=PRESETS[k];Object.assign(S,{nq:pr.nq,duration:pr.duration,usemcq:true,nmcq:pr.nmcq,mix:Object.assign({},pr.mix)});
+  if(!isMaths()){const av=availCount();if(av<S.nq){S.nq=Math.max(3,av);S.nmcq=Math.min(S.nmcq,Math.max(1,Math.floor(S.nq/2)));}}
+  writeForm();readForm();
+  const v=validate(),qm=$('#quickMsg');
+  if(v.errs.length){qm.innerHTML=v.errs.map(esc).join('<br>');qm.hidden=false;return;}
+  qm.hidden=true;startTest(false);
+}
+function startSample(){
+  Object.assign(S,{subject:'Mathematics',klass:'VII',duration:DEF.duration,nq:DEF.nq,usemcq:true,nmcq:DEF.nmcq,mix:Object.assign({},DEF.mix),marks:Object.assign({},DEF.marks),topics:'ALL'});
+  writeForm();readForm();startTest(true);
+}
+function begin(){
+  warned={};const exam=P.mode==='exam';
+  const total=P.qs.reduce((a,q)=>a+q.marks,0),check=P.duration>=45?3:2,avail=P.duration-check;
+  const secs=P.secs.map(s=>{const qs=secQs(s);return{s,qs,each:qs.length?qs[0].marks:0,marks:qs.reduce((a,q)=>a+q.marks,0)};}).filter(x=>x.qs.length);
+  const secHtml=secs.map(x=>`<section class="section"><div class="sechead"><h3>Section ${x.s.letter} – ${x.s.name}</h3><small>${x.qs.length} × ${x.each} = ${x.marks} marks</small></div>${x.qs.map(qHtml).join('')}</section>`).join('');
+  const how=pm()?'<li>Type each answer in its box. Fractions, mixed numbers (4 1/5), decimals and powers (2^4) are accepted; units are optional. Use π = 22/7.</li>':`<li>Type each answer in its box as a word, short phrase, name or number. Capital letters and punctuation do not matter${P.subject==='English'?'; spelling must be correct':''}. Units are optional.</li>`;
+  $('#sheet').innerHTML=`<header class="sheethead"><p class="eyebrow">${esc(P.board)} · ${esc(P.country)}${P.label?' · '+esc(P.label):''}</p><h2>${esc(P.subject)} – Class ${P.klass}</h2><div class="meta"><span>${exam?`Time: ${P.duration} minutes`:'Practice · no time limit'}</span><span>Maximum marks: ${total}</span></div></header>
+   <ol class="instr"><li>The paper has ${P.qs.length} questions in ${secs.length} section${secs.length>1?'s':''}.${exam?' All questions are compulsory.':''}</li>${secs.map(x=>`<li>Section ${x.s.letter}: ${x.qs.length} ${x.s.kind==='mcq'?'multiple-choice questions':LNAME[x.s.level].toLowerCase()+' questions'} of ${x.each} mark${x.each>1?'s':''} each${exam?` (about ${Math.round(avail*x.marks/(total||1))} minutes)`:''}.</li>`).join('')}${how}${exam?'':'<li>Press <b>Check answer</b> after each question to see if you are right and how to solve it.</li>'}<li>Use <b>Flag for review</b> to mark questions you want to come back to, and <b>Questions</b> at the top to jump between them.</li></ol>
+   ${(P.notes||[]).map(n=>`<p class="msg warn">${esc(n)}</p>`).join('')}${secHtml}`;
+  $('#nav').innerHTML=P.qs.map((q,i)=>`<button type="button" class="nb" data-go="${i}" aria-label="Go to question ${i+1}">${i+1}</button>`).join('');
+  $('#navKey').textContent=exam?'Blue = answered · Amber outline = flagged for review':'Blue = answered · Green / red = checked · Amber outline = flagged';
+  $('#navWrap').hidden=true;$('#navBtn').setAttribute('aria-expanded','false');
+  $('#submitBtn').textContent=exam?'Submit':'Finish';$('#timerLbl').textContent=exam?'time left':'time spent';$('#toast').hidden=true;
+  let parts=0;P.qs.forEach(q=>parts+=q.parts.length);$('#partsTotal').textContent=parts;
+  wire();updateCount();save();
   show('test');$('#confirm').hidden=true;tick();clearInterval(timerId);timerId=setInterval(tick,1000);window.scrollTo(0,0);
 }
 function qHtml(q){
-  const qi=q.no-1;let inner;
+  const qi=P.qs.indexOf(q);let inner;
   if(q.parts[0].type==='choice'){const p=q.parts[0];inner=`<div class="opts" role="radiogroup" aria-label="Question ${q.no} options">${p.options.map((o,j)=>`<label class="opt" for="o${qi}_${j}"><input type="radio" name="r${qi}" id="o${qi}_${j}" value="${j}" data-k="${qi}-0"><b>(${'abcd'[j]})</b> ${o}</label>`).join('')}</div>`;}
   else inner=q.parts.map((p,j)=>{const id=`a${qi}_${j}`,lab=p.q||'Your answer';let field;
     if(p.type==='select')field=`<select id="${id}" data-k="${qi}-${j}"><option value="">Choose…</option>${p.options.map(o=>`<option>${o}</option>`).join('')}</select>`;
-    else field=`<input type="text" id="${id}" data-k="${qi}-${j}" autocomplete="off" inputmode="${p.type==='expr'||p.type==='list'||p.type==='text'||p.sci?'text':'decimal'}" placeholder="${p.type==='expr'?'e.g. 4a^2 + 6ab - 8':p.type==='list'?'e.g. -5/6, -3/4, 2/3':p.sci?'e.g. 3.84 x 10^5':/[√π]/.test(p.disp||'')?'e.g. 3√2 or π/3':'Answer'}">`;
+    // full keyboard on every phone, so students can type −, / and ^ (the iPhone decimal pad has none of them)
+    else field=`<input type="text" id="${id}" data-k="${qi}-${j}" autocomplete="off" autocapitalize="off" spellcheck="false" inputmode="text" placeholder="${p.type==='expr'?'e.g. 4a^2 + 6ab - 8':p.type==='list'?'e.g. -5/6, -3/4, 2/3':p.sci?'e.g. 3.84 x 10^5':/[√π]/.test(p.disp||p.ansText||'')?'e.g. 3√2 or π/3':'Answer'}">`;
     return `<div class="part"><label class="pq" for="${id}" style="font-weight:400;margin:0">${lab}${q.parts.length>1?` <span class="qm">[${p.marks}]</span>`:''}</label>${field}</div>`;}).join('');
-  return `<div class="q" id="q${qi}"><span class="qn">${q.no}</span><div class="qbody"><span class="qtopic"><span class="lvl l-${q.level}"></span>${q.topic}</span><div>${q.text}</div>${inner}</div><span class="qm">[${q.marks}]</span></div>`;
+  const tools=`<div class="qtools">${P.mode==='practice'?`<button type="button" class="small primary" data-check="${qi}">Check answer</button>`:''}<button type="button" class="small flag" data-flag="${qi}" aria-pressed="false">Flag for review</button></div><div class="fb" id="fb${qi}" hidden></div>`;
+  return `<div class="q" id="q${qi}"><span class="qn">${q.no}</span><div class="qbody"><span class="qtopic"><span class="lvl l-${q.level}"></span>${q.topic}</span><div>${q.text}</div>${inner}${tools}</div><span class="qm">[${q.marks}]</span></div>`;
 }
-function updateCount(){let n=0,t=0;P.qs.forEach((q,i)=>q.parts.forEach((p,j)=>{t++;const v=ANS[i+'-'+j];if(v!=null&&String(v).trim()!=='')n++;}));$('#answered').textContent=n;$('#progbar').style.width=(t?n/t*100:0)+'%';return{n,t};}
-function tick(){const left=Math.max(0,endAt-Date.now()),m=Math.floor(left/60000),s=Math.floor(left%60000/1000);const el=$('#timer');el.textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');el.classList.toggle('warn',left<=5*60000);if(left<=0){clearInterval(timerId);finish(true);}}
-function askSubmit(){const c=updateCount();$('#confirmTitle').textContent='Submit your paper?';$('#confirmText').textContent=`You have filled ${c.n} of ${c.t} answers.${c.n<c.t?' Blank answers score zero.':''} You cannot change answers after submitting.`;$('#confirmYes').textContent='Submit and mark';$('#confirmYes').dataset.mode='submit';$('#confirm').hidden=false;$('#confirm').scrollIntoView({block:'nearest'});}
-function askQuit(){$('#confirmTitle').textContent='Quit this paper?';$('#confirmText').textContent='Your answers will be discarded and you will return to the settings.';$('#confirmYes').textContent='Quit without marking';$('#confirmYes').dataset.mode='quit';$('#confirm').hidden=false;}
+function wire(){
+  const sh=$('#sheet');
+  sh.querySelectorAll('[data-k]').forEach(el=>{const k=el.dataset.k,v=ANS[k],ev=el.type==='radio'?'change':'input';
+    if(v!=null){if(el.type==='radio'){if(el.value===String(v)){el.checked=true;el.closest('.opt').classList.add('on');}}else el.value=v;}
+    el.addEventListener(ev,()=>{if(el.type==='radio'){ANS[k]=el.value;el.closest('.opts').querySelectorAll('.opt').forEach(o=>o.classList.toggle('on',o.contains(el)&&el.checked));}else ANS[k]=el.value;updateCount();save();});});
+  sh.querySelectorAll('[data-flag]').forEach(b=>{const i=+b.dataset.flag;setFlag(b,!!FLAG[i]);b.addEventListener('click',()=>{FLAG[i]=!FLAG[i];setFlag(b,FLAG[i]);updateCount();save();});});
+  sh.querySelectorAll('[data-check]').forEach(b=>b.addEventListener('click',()=>checkQ(+b.dataset.check)));
+  Object.keys(CHK).forEach(i=>showFeedback(+i));
+}
+function setFlag(b,on){b.setAttribute('aria-pressed',on?'true':'false');b.textContent=on?'Flagged for review':'Flag for review';b.classList.toggle('on',on);}
+function partsReview(q){return q.parts.map(p=>{let ua=p.user;if(p.type==='choice'&&!blankV(ua))ua='('+'abcd'[+ua]+') '+p.options[+ua];const lab=q.parts.length>1?(p.q?p.q.split(' ')[0]+' ':''):'';
+  return `<div class="pr ${p.ok?'right':'wrong'}"><span><span class="tick">${p.ok?'✓ Correct':'✗ '+(blankV(ua)?'Not answered':'Incorrect')}</span> ${lab}<span class="hint" style="margin:0;display:inline">(${p.ok?p.marks:0} / ${p.marks})</span></span>${p.ok?'':`<span>Your answer: <b>${blankV(ua)?'—':esc(ua)}</b></span>`}<span>Correct answer: <b>${answerText(p)}</b></span></div>`;}).join('');}
+function markQ(i){const q=P.qs[i];q.got=0;q.parts.forEach((p,j)=>{p.user=ANS[i+'-'+j];p.ok=checkPart(p,p.user);if(p.ok)q.got+=p.marks;});q.got=+q.got.toFixed(2);}
+function checkQ(i){
+  const q=P.qs[i],fb=$('#fb'+i);
+  if(q.parts.every((p,j)=>blankV(ANS[i+'-'+j]))){fb.hidden=false;fb.innerHTML='<p class="msg warn">Type an answer first, then check it.</p>';return;}
+  markQ(i);CHK[i]=1;showFeedback(i);updateCount();save();
+}
+function showFeedback(i){
+  const q=P.qs[i],el=$('#q'+i);if(!el)return;
+  el.querySelectorAll('input,select').forEach(x=>{x.disabled=true;});
+  const cb=el.querySelector('[data-check]');if(cb)cb.remove();
+  const fb=$('#fb'+i);fb.hidden=false;fb.innerHTML=partsReview(q)+`<p class="sol"><b>${pm()?'Working':'Explanation'}:</b> ${q.sol}</p>`;
+}
+function updateCount(){
+  let n=0,t=0;const nav=$('#nav').children;
+  P.qs.forEach((q,i)=>{let any=false;q.parts.forEach((p,j)=>{t++;if(!blankV(ANS[i+'-'+j])){n++;any=true;}});
+    if(nav[i])nav[i].className='nb'+(CHK[i]?(q.got===q.marks?' right':' wrong'):any?' done':'')+(FLAG[i]?' flag':'');});
+  $('#answered').textContent=n;$('#progbar').style.width=(t?n/t*100:0)+'%';return{n,t};
+}
+function goQ(i){const el=$('#q'+i);if(!el)return;$('#navWrap').hidden=true;$('#navBtn').setAttribute('aria-expanded','false');
+  window.scrollTo({top:el.getBoundingClientRect().top+window.scrollY-$('#bar').offsetHeight-16});
+  const f=el.querySelector('input:not(:disabled),select:not(:disabled)');if(f)f.focus({preventScroll:true});}
+function firstBlank(){return P.qs.findIndex((q,i)=>!CHK[i]&&q.parts.some((p,j)=>blankV(ANS[i+'-'+j])));}
+function toast(msg){const t=$('#toast');t.textContent=msg;t.hidden=false;clearTimeout(toastId);toastId=setTimeout(()=>{t.hidden=true;},8000);}
+function tick(){
+  const el=$('#timer');
+  if(P.mode==='practice'){el.textContent=mmss(Date.now()-P.startAt);el.classList.remove('warn');return;}
+  const left=Math.max(0,P.endAt-Date.now());el.textContent=mmss(left);el.classList.toggle('warn',left<=5*60000);
+  [10,5,1].forEach(m=>{if(!warned[m]&&left>0&&left<=m*60000&&P.duration>m){warned[m]=1;toast(m===1?'1 minute left. Check your answers and submit.':`${m} minutes left.`);}});
+  if(left<=0){clearInterval(timerId);finish(true);}
+}
+function askSubmit(){
+  const c=updateCount(),fbI=firstBlank();
+  if(P.mode==='practice'){const nc=Object.keys(CHK).length;$('#confirmTitle').textContent='Finish practice?';$('#confirmText').textContent=`You have checked ${nc} of ${P.qs.length} questions. The rest will be marked now${c.n<c.t?' and blank answers score zero':''}.`;$('#confirmYes').textContent='Finish and see my score';}
+  else{$('#confirmTitle').textContent='Submit your paper?';$('#confirmText').textContent=`You have filled ${c.n} of ${c.t} answers.${c.n<c.t?' Blank answers score zero.':''} You cannot change answers after submitting.`;$('#confirmYes').textContent='Submit and mark';}
+  $('#confirmBlank').hidden=fbI<0;$('#confirmYes').dataset.mode='submit';$('#confirm').hidden=false;$('#confirm').scrollIntoView({block:'nearest'});
+}
+function askQuit(){$('#confirmTitle').textContent='Quit this paper?';$('#confirmText').textContent='Your answers will be discarded and you will return to the start page.';$('#confirmYes').textContent='Quit without marking';$('#confirmYes').dataset.mode='quit';$('#confirmBlank').hidden=true;$('#confirm').hidden=false;$('#confirm').scrollIntoView({block:'nearest'});}
 
 /* ---------- results ---------- */
+function bandOf(pct){return pct>=90?['Outstanding','var(--green-soft)','var(--green)']:pct>=75?['Very good','var(--green-soft)','var(--green)']:pct>=50?['Good effort','var(--amber-soft)','var(--amber)']:['Good start','var(--ink-soft)','var(--ink)'];}
+function getHist(){try{const a=JSON.parse(localStorage.getItem(HIST)||'[]');return Array.isArray(a)?a:[];}catch(e){return [];}}
+function addHistory(h){const a=getHist();a.unshift(h);try{localStorage.setItem(HIST,JSON.stringify(a.slice(0,50)));}catch(e){}}
+function renderHistory(){
+  const a=getHist(),el=$('#history');
+  if(!a.length){el.innerHTML='<div><p class="eyebrow">Your progress</p><h2>No papers yet</h2></div><p class="hint" style="margin:0">Your scores appear here after you finish a paper, so you can see how you improve. They are saved on this device only.</p>';return;}
+  const rows=a.slice(0,10).map(h=>`<li class="hrow"><div><b>${esc(h.subj)} · Class ${esc(h.cls)}</b><span class="hint">${new Date(h.d).toLocaleDateString('en-IN',{day:'numeric',month:'short'})} · ${h.mode==='practice'?'Practice':'Exam'} · ${h.nq} Q${h.label?' · '+esc(h.label):''}</span></div><div class="hbar" aria-hidden="true"><i style="width:${h.pct}%;background:${bandOf(h.pct)[2]}"></i></div><b class="hpct">${h.pct}%</b></li>`).join('');
+  el.innerHTML=`<div><p class="eyebrow">Your progress</p><h2>Last ${Math.min(10,a.length)} paper${a.length>1?'s':''}</h2></div><ul class="hist">${rows}</ul><p class="hint" style="margin:0">Saved on this device only.</p><div class="btns"><button type="button" class="small" id="clearHist">Clear history</button></div>`;
+  $('#clearHist').addEventListener('click',e=>{const b=e.currentTarget;if(b.dataset.sure){try{localStorage.removeItem(HIST);}catch(err){}renderHistory();}else{b.dataset.sure='1';b.textContent='Tap again to clear';}});
+}
 function finish(auto){
-  clearInterval(timerId);const used=Math.min(S.duration*60000,Date.now()-startAt);
-  let got=0,tot=0;const byL={},byS={};
-  P.qs.forEach((q,i)=>{q.got=0;q.parts.forEach((p,j)=>{const v=ANS[i+'-'+j];p.user=v;p.ok=checkPart(p,v);if(p.ok)q.got+=p.marks;});q.got=+q.got.toFixed(2);got+=q.got;tot+=q.marks;
+  clearInterval(timerId);$('#confirm').hidden=true;const exam=P.mode==='exam';
+  const used=exam?Math.min(P.duration*60000,Date.now()-P.startAt):Date.now()-P.startAt;
+  let got=0,tot=0;const byL={},byT={};
+  P.qs.forEach((q,i)=>{if(!CHK[i])markQ(i);got+=q.got;tot+=q.marks;
     const L=q.level;byL[L]=byL[L]||{g:0,t:0,n:0,c:0};byL[L].g+=q.got;byL[L].t+=q.marks;byL[L].n++;if(q.got===q.marks)byL[L].c++;
-    const sk=q.kind==='mcq'?'mcq':q.level;byS[sk]=byS[sk]||{g:0,t:0};byS[sk].g+=q.got;byS[sk].t+=q.marks;});
-  const pct=tot?Math.round(got/tot*100):0;const band=pct>=90?['Outstanding','var(--green-soft)','var(--green)']:pct>=75?['Very good','var(--green-soft)','var(--green)']:pct>=50?['Good effort','var(--amber-soft)','var(--amber)']:['Keep practising','var(--red-soft)','var(--red)'];
+    const tp=q.topic;byT[tp]=byT[tp]||{g:0,t:0,n:0,c:0};byT[tp].g+=q.got;byT[tp].t+=q.marks;byT[tp].n++;if(q.got===q.marks)byT[tp].c++;});
+  const pct=tot?Math.round(got/tot*100):0,band=bandOf(pct),g=+got.toFixed(1);
+  addHistory({d:Date.now(),subj:P.subject,cls:P.klass,mode:P.mode,got:g,tot,pct,nq:P.qs.length,label:P.label||''});clearActive();
+  const tps=Object.keys(byT).map(t=>({t,pct:Math.round(byT[t].g/(byT[t].t||1)*100),v:byT[t]})).sort((a,b)=>a.pct-b.pct);
+  const weak=tps.filter(x=>x.pct<75).slice(0,2).map(x=>x.t);
+  const advice=pct>=75?(weak.length?`Well done! To do even better, revise ${weak.join(' and ')}.`:'Well done! Try a harder mix or a full mock paper next.'):(weak.length?`Focus next on ${weak.join(' and ')}. Use the Practise buttons below.`:'Read the working for each question below, then try again.');
   const mm=Math.floor(used/60000),ss=Math.floor(used%60000/1000);
-  const secRows=P.secs.map(s=>{const k=s.kind==='mcq'?'mcq':s.level,v=byS[k]||{g:0,t:0};return `<tr><td>Section ${s.letter} – ${s.name}</td><td class="n">${+v.g.toFixed(1)} / ${v.t}</td></tr>`;}).join('');
-  const lvlRows=LEVELS.filter(l=>byL[l]).map(l=>`<tr><td><span class="lvl l-${l}"></span>${LNAME[l]}</td><td class="n">${byL[l].c} / ${byL[l].n}</td><td class="n">${+byL[l].g.toFixed(1)} / ${byL[l].t}</td><td class="n">${Math.round(byL[l].g/byL[l].t*100)}%</td></tr>`).join('');
-  const review=P.qs.map((q,i)=>{const parts=q.parts.map((p,j)=>{let ua=p.user;if(p.type==='choice'&&ua!=null&&ua!=='')ua='('+'abcd'[+ua]+') '+p.options[+ua];const lab=q.parts.length>1?(p.q?p.q.split(' ')[0]+' ':''):'';
-      return `<div class="pr ${p.ok?'right':'wrong'}"><span><span class="tick">${p.ok?'✓ Correct':'✗ '+(ua==null||String(ua).trim()===''?'Not answered':'Incorrect')}</span> ${lab}<span class="hint" style="margin:0;display:inline">(${p.ok?p.marks:0} / ${p.marks})</span></span>${p.ok?'':`<span>Your answer: <b>${ua==null||String(ua).trim()===''?'—':esc(ua)}</b></span>`}<span>Correct answer: <b>${answerText(p)}</b></span></div>`;}).join('');
-    return `<div class="q" data-ok="${q.got===q.marks?1:0}"><span class="qn">${q.no}</span><div class="qbody"><span class="qtopic"><span class="lvl l-${q.level}"></span>${q.topic} · ${q.kind==='mcq'?'MCQ':LNAME[q.level]}</span><div>${q.text}</div>${q.parts[0].type==='choice'?`<div class="hint" style="margin:0">${q.parts[0].options.map((o,j)=>`(${'abcd'[j]}) ${o}`).join(' &nbsp; ')}</div>`:''}${parts}<p class="sol"><b>${isMaths()?'Working':'Explanation'}:</b> ${q.sol}</p></div><span class="mark">${+q.got.toFixed(1)}/${q.marks}</span></div>`;}).join('');
+  const topicRows=tps.map((x,k)=>`<tr><td>${esc(x.t)}</td><td class="n">${+x.v.g.toFixed(1)} / ${x.v.t}</td><td class="n">${x.pct}%</td><td class="n">${x.pct<75?`<button type="button" class="small" data-practise="${k}">Practise</button>`:'<span class="ok">✓</span>'}</td></tr>`).join('');
+  const lvlRows=LEVELS.filter(l=>byL[l]).map(l=>`<tr><td><span class="lvl l-${l}"></span>${LNAME[l]}</td><td class="n">${byL[l].c} / ${byL[l].n}</td><td class="n">${Math.round(byL[l].g/byL[l].t*100)}%</td></tr>`).join('');
+  const nWrong=P.qs.filter(q=>q.got<q.marks).length;
+  const shareTxt=`I scored ${g}/${tot} (${pct}%) in a Class ${P.klass} ${P.subject} practice paper on A & A Exam Practice. Try it free: https://my-exam.in`;
+  const review=P.qs.map(q=>`<div class="q" data-ok="${q.got===q.marks?1:0}"><span class="qn">${q.no}</span><div class="qbody"><span class="qtopic"><span class="lvl l-${q.level}"></span>${q.topic} · ${q.kind==='mcq'?'MCQ':LNAME[q.level]}</span><div>${q.text}</div>${q.parts[0].type==='choice'?`<div class="hint" style="margin:0">${q.parts[0].options.map((o,j)=>`(${'abcd'[j]}) ${o}`).join(' &nbsp; ')}</div>`:''}${partsReview(q)}<p class="sol"><b>${pm()?'Working':'Explanation'}:</b> ${q.sol}</p></div><span class="mark">${+q.got.toFixed(1)}/${q.marks}</span></div>`).join('');
   $('#results').innerHTML=`
    <div class="card stack" style="margin-bottom:16px">
-     <div class="score"><div class="big">${+got.toFixed(1)}<small> / ${tot}</small></div>
-       <div class="stack" style="gap:6px"><span class="band" style="background:${band[1]};color:${band[2]}">${band[0]} · ${pct}%</span><span class="hint" style="margin:0">${auto?'Time ran out, so the paper was submitted automatically. ':''}Time used: ${mm} min ${ss} s of ${S.duration} min · ${P.qs.length} questions</span></div></div>
-     <div class="grid2" style="gap:16px"><div class="tblwrap"><table><thead><tr><th>Difficulty</th><th class="n">Fully right</th><th class="n">Marks</th><th class="n">Score</th></tr></thead><tbody>${lvlRows}</tbody></table></div>
-       <div class="tblwrap"><table><thead><tr><th>Section</th><th class="n">Marks</th></tr></thead><tbody>${secRows}</tbody></table></div></div>
-     <div class="btns"><button type="button" class="primary" id="againBtn">Try this paper again</button><button type="button" id="newBtn">New paper</button><label class="chip" for="onlyWrong"><input type="checkbox" id="onlyWrong"> Show only questions to review</label></div>
+     <div class="score"><div class="big" style="color:${band[2]}">${g}<small> / ${tot}</small></div>
+       <div class="stack" style="gap:6px"><span class="band" style="background:${band[1]};color:${band[2]}">${band[0]} · ${pct}%</span><span style="font-weight:700">${esc(advice)}</span><span class="hint" style="margin:0">${auto?'Time ran out, so the paper was submitted automatically. ':''}${exam?`Time used: ${mm} min ${ss} s of ${P.duration} min`:`Time spent: ${mm} min ${ss} s`} · ${P.qs.length} questions</span></div></div>
+     <div class="grid2" style="gap:16px"><div class="tblwrap"><table><thead><tr><th>Chapter</th><th class="n">Marks</th><th class="n">Score</th><th class="n"><span class="sr">Action</span></th></tr></thead><tbody>${topicRows}</tbody></table></div>
+       <div class="tblwrap"><table><thead><tr><th>Difficulty</th><th class="n">Fully right</th><th class="n">Score</th></tr></thead><tbody>${lvlRows}</tbody></table></div></div>
+     <div class="btns">${nWrong&&nWrong<P.qs.length?`<button type="button" class="primary" id="retryWrong">Retry the ${nWrong} I got wrong</button>`:''}<button type="button" ${nWrong&&nWrong<P.qs.length?'':'class="primary" '}id="againBtn">Try the whole paper again</button><button type="button" id="newBtn">New paper</button><a class="btnlink" href="https://wa.me/?text=${encodeURIComponent(shareTxt)}" target="_blank" rel="noopener">Share my score on WhatsApp</a></div>
+     <label class="chip" for="onlyWrong" style="align-self:flex-start"><input type="checkbox" id="onlyWrong"> Show only questions to review</label>
    </div>
-   <article class="sheet res"><header class="sheethead"><h2>Marked answer sheet</h2><div class="meta"><span>${esc(S.subject)} – Class ${S.klass}</span><span>${+got.toFixed(1)} / ${tot} marks</span></div></header>${review}</article>`;
-  $('#againBtn').addEventListener('click',()=>{const keep=P;ANS={};startAt=Date.now();endAt=startAt+S.duration*60000;P=keep;rerunSame();});
+   <article class="sheet res"><header class="sheethead"><h2>Marked answer sheet</h2><div class="meta"><span>${esc(P.subject)} – Class ${P.klass}</span><span>${g} / ${tot} marks</span></div></header>${review}</article>`;
+  const rw=$('#retryWrong');if(rw)rw.addEventListener('click',()=>retry(true));
+  $('#againBtn').addEventListener('click',()=>retry(false));
   $('#newBtn').addEventListener('click',()=>{show('setup');window.scrollTo(0,0);});
+  $('#results').querySelectorAll('[data-practise]').forEach(b=>b.addEventListener('click',()=>{const t=tps[+b.dataset.practise].t;
+    Object.assign(S,{subject:P.subject,klass:P.klass,topics:[t],mode:'practice'});writeForm();readForm();show('setup');startPreset('quick');}));
   $('#onlyWrong').addEventListener('change',e=>{$('#results').querySelectorAll('.res .q').forEach(q=>{q.hidden=e.target.checked&&q.dataset.ok==='1';});});
   show('results');window.scrollTo(0,0);
 }
-function rerunSame(){const saved=P;P=null;P=saved;P.qs.forEach(q=>q.parts.forEach(p=>{delete p.user;delete p.ok;}));
-  // rebuild the sheet from the same questions
-  const total=P.qs.reduce((a,q)=>a+q.marks,0);const secHtml=P.secs.map(s=>{const qs=P.qs.filter(q=>s.kind==='mcq'?q.kind==='mcq':(q.kind!=='mcq'&&q.level===s.level));return `<section class="section"><div class="sechead"><h3>Section ${s.letter} – ${s.name}</h3><small>${qs.length} questions · ${qs.reduce((a,q)=>a+q.marks,0)} marks</small></div>${qs.map(qHtml).join('')}</section>`;}).join('');
-  $('#sheet').innerHTML=`<header class="sheethead"><p class="eyebrow">Second attempt</p><h2>${esc(S.subject)} – Class ${S.klass}</h2><div class="meta"><span>Time: ${S.duration} minutes</span><span>Maximum marks: ${total}</span></div></header>${secHtml}`;
-  $('#sheet').querySelectorAll('[data-k]').forEach(el=>{const ev=el.type==='radio'?'change':'input';el.addEventListener(ev,()=>{if(el.type==='radio'){ANS[el.dataset.k]=el.value;el.closest('.opts').querySelectorAll('.opt').forEach(o=>o.classList.toggle('on',o.contains(el)&&el.checked));}else ANS[el.dataset.k]=el.value;updateCount();});});
-  updateCount();show('test');$('#confirm').hidden=true;tick();clearInterval(timerId);timerId=setInterval(tick,1000);window.scrollTo(0,0);}
-function show(id){['setup','test','results'].forEach(x=>{$('#'+x).hidden=x!==id;});}
+function retry(onlyWrong){
+  const src=onlyWrong?P.qs.filter(q=>q.got<q.marks):P.qs;
+  const qs=JSON.parse(JSON.stringify(src));qs.forEach((q,i)=>{q.no=i+1;delete q.got;q.parts.forEach(p=>{delete p.user;delete p.ok;});});
+  const om=P.qs.reduce((a,q)=>a+q.marks,0),tm=qs.reduce((a,q)=>a+q.marks,0);
+  const dur=onlyWrong?Math.max(5,Math.ceil(P.duration*tm/(om||1)/5)*5):P.duration;
+  P=Object.assign({},P,{qs,notes:[],duration:dur,label:onlyWrong?'Retry: questions to review':'Second attempt',startAt:Date.now()});
+  P.secs=P.secs.filter(s=>secQs(s).length).map((s,i)=>Object.assign({},s,{letter:String.fromCharCode(65+i)}));
+  P.endAt=P.startAt+dur*60000;ANS={};FLAG={};CHK={};begin();
+}
+function renderResume(){
+  const a=loadActive(),box=$('#resumeBox');if(!a){box.hidden=true;box.innerHTML='';return;}
+  const p=a.P,ans=a.ANS||{};let n=0,t=0;p.qs.forEach((q,i)=>q.parts.forEach((x,j)=>{t++;if(!blankV(ans[i+'-'+j]))n++;}));
+  const left=p.endAt-Date.now();
+  const tl=p.mode==='practice'?'practice mode':left>0?`${Math.ceil(left/60000)} min left`:'time is up, so it will be marked when you open it';
+  box.innerHTML=`<div><b>You have an unfinished paper.</b> ${esc(p.subject)} · Class ${esc(p.klass)} · ${n} of ${t} answers filled · ${tl}.</div><div class="btns"><button type="button" class="primary" id="resumeBtn">Resume</button><button type="button" id="discardBtn">Discard</button></div>`;
+  box.hidden=false;
+  $('#resumeBtn').addEventListener('click',()=>{P=a.P;ANS=a.ANS||{};FLAG=a.FLAG||{};CHK=a.CHK||{};begin();});
+  $('#discardBtn').addEventListener('click',()=>{clearActive();renderResume();});
+}
+function show(id){['setup','test','results'].forEach(x=>{$('#'+x).hidden=x!==id;});if(id==='setup'){renderResume();renderHistory();}}
 
 /* ---------- wiring ---------- */
-fillSelects();writeForm();readForm();
+fillSelects();writeForm();readForm();show('setup');
 $('#country').addEventListener('change',()=>{fillSelects();writeForm();readForm();});
 $('#klass').addEventListener('change',()=>{S.klass=$('#klass').value;S.topics='ALL';renderTopics();readForm();});
 $('#subject').addEventListener('change',()=>{S.subject=$('#subject').value;S.topics='ALL';fillClasses();renderTopics();readForm();});
-['#duration','#nq','#nmcq','#usemcq','#sample','#m_MCQ','#m_E','#m_M','#m_C','#m_X'].forEach(s=>$(s).addEventListener('input',readForm));
-$('#usemcq').addEventListener('change',readForm);$('#sample').addEventListener('change',readForm);
-$('#form').addEventListener('submit',e=>{e.preventDefault();readForm();if(validate().errs.length)return;startTest();});
-$('#reset').addEventListener('click',()=>{S=JSON.parse(JSON.stringify(DEF));writeForm();readForm();});
+['#duration','#nq','#nmcq','#usemcq','#m_MCQ','#m_E','#m_M','#m_C','#m_X'].forEach(s=>$(s).addEventListener('input',readForm));
+$('#usemcq').addEventListener('change',readForm);
+['#mode_practice','#mode_exam'].forEach(s=>$(s).addEventListener('change',readForm));
+document.querySelectorAll('[data-preset]').forEach(b=>b.addEventListener('click',()=>{readForm();startPreset(b.dataset.preset);}));
+$('#sampleBtn').addEventListener('click',()=>{readForm();startSample();});
+$('#custom').addEventListener('toggle',()=>{$('#planCard').hidden=!$('#custom').open;});
+$('#form').addEventListener('submit',e=>{e.preventDefault();readForm();if(validate().errs.length)return;startTest(false);});
+$('#reset').addEventListener('click',()=>{const m=S.mode;S=JSON.parse(JSON.stringify(DEF));S.mode=m;writeForm();readForm();});
 $('#submitBtn').addEventListener('click',askSubmit);$('#quitBtn').addEventListener('click',askQuit);
+$('#navBtn').addEventListener('click',()=>{const w=$('#navWrap');w.hidden=!w.hidden;$('#navBtn').setAttribute('aria-expanded',String(!w.hidden));});
+$('#nav').addEventListener('click',e=>{const b=e.target.closest('[data-go]');if(b)goQ(+b.dataset.go);});
 $('#confirmNo').addEventListener('click',()=>{$('#confirm').hidden=true;});
-$('#confirmYes').addEventListener('click',e=>{$('#confirm').hidden=true;if(e.target.dataset.mode==='quit'){clearInterval(timerId);show('setup');window.scrollTo(0,0);}else finish(false);});
+$('#confirmBlank').addEventListener('click',()=>{$('#confirm').hidden=true;const i=firstBlank();if(i>=0)goQ(i);});
+$('#confirmYes').addEventListener('click',e=>{$('#confirm').hidden=true;if(e.currentTarget.dataset.mode==='quit'){clearInterval(timerId);clearActive();P=null;show('setup');window.scrollTo(0,0);}else finish(false);});
+// answers are saved as you type; this only warns before leaving mid-paper
+window.addEventListener('beforeunload',e=>{if(!$('#test').hidden){e.preventDefault();e.returnValue='';}});
 })();
 </script>
 

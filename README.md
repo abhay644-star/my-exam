@@ -1,8 +1,8 @@
-# My Exam Practice
+# A & A Exam Practice
 
 Timed CBSE practice papers, generated in the browser and marked instantly.
 
-- Mathematics: Classes V to XII
+- Mathematics: Classes I to XII
 - Science, Computer Science, English and Social Science: Classes VI to X
 
 Live site: https://my-exam.in
