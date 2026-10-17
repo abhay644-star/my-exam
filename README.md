@@ -2,8 +2,10 @@
 
 Timed CBSE practice papers, generated in the browser and marked instantly.
 
-- Mathematics: Classes I to XII
-- Science, Computer Science, English and Social Science: Classes VI to X
+- Mathematics, English, Hindi, Computer Science: Classes I to XII
+- EVS: Classes I to V
+- Science, Social Science: Classes VI to X
+- Physics, Chemistry, Biology, Accountancy, Business Studies, Economics, History, Geography, Political Science: Classes XI and XII
 
 Live site: https://my-exam.in
 
