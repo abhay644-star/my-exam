@@ -247,7 +247,6 @@ sup,sub{font-size:.7em}
           <div class="modes">
             <label class="mode" for="mode_practice"><input type="radio" name="mode" id="mode_practice" value="practice"><span><b>Practice</b><small>Check each answer as you go and see how to solve it. No timer.</small></span></label>
             <label class="mode" for="mode_exam"><input type="radio" name="mode" id="mode_exam" value="exam"><span><b>Exam</b><small>Timed paper, marked when you submit, like the real exam.</small></span></label>
-            <label class="mode" for="mode_print"><input type="radio" name="mode" id="mode_print" value="print"><span><b>Print</b><small>Get a question paper to print or save as PDF, with an answer key if you want one.</small></span></label>
           </div>
         </fieldset>
         <div class="presets">
@@ -330,7 +329,7 @@ sup,sub{font-size:.7em}
       <div><p class="eyebrow">Print or save as PDF</p><h2 id="printTitle">Question paper</h2></div>
       <p class="hint" style="margin:0">Check the paper below, then print it. To keep a copy, choose "Save as PDF" in the print window. The answer key prints on a separate page.</p>
       <label class="chip" for="withKey" id="withKeyWrap" style="align-self:flex-start"><input type="checkbox" id="withKey"> Include answer key with working</label>
-      <div class="btns"><button type="button" class="primary" id="printGo">Print / Save as PDF</button><button type="button" id="printNew">Make another paper</button><button type="button" id="printBack">Change settings</button></div>
+      <div class="btns"><button type="button" class="primary" id="printGo">Print / Save as PDF</button><button type="button" id="printBack">Change settings</button></div>
     </div>
     <article class="sheet paper" id="printPaper"></article>
   </section>
@@ -888,12 +887,12 @@ function renderTopics(){
 }
 function writeForm(){
   $('#subject').value=S.subject;fillClasses();$('#klass').value=S.klass;$('#duration').value=S.duration;$('#nq').value=S.nq;$('#nmcq').value=S.nmcq;$('#usemcq').checked=S.usemcq;
-  $('#mode_'+(['practice','exam','print'].indexOf(S.mode)>=0?S.mode:'exam')).checked=true;
+  if(S.mode!=='practice')S.mode='exam';$('#mode_'+S.mode).checked=true;
   LEVELS.forEach(l=>{$('#mx_'+l).value=S.mix[l];$('#mxn_'+l).value=S.mix[l];});
   ['MCQ'].concat(LEVELS).forEach(k=>{$('#m_'+k).value=S.marks[k];});renderTopics();
 }
 function readForm(){
-  S.klass=$('#klass').value;S.duration=+$('#duration').value||0;S.nq=+$('#nq').value||0;S.nmcq=+$('#nmcq').value||0;S.usemcq=$('#usemcq').checked;S.mode=$('#mode_practice').checked?'practice':$('#mode_print').checked?'print':'exam';
+  S.klass=$('#klass').value;S.duration=+$('#duration').value||0;S.nq=+$('#nq').value||0;S.nmcq=+$('#nmcq').value||0;S.usemcq=$('#usemcq').checked;S.mode=$('#mode_practice').checked?'practice':'exam';
   LEVELS.forEach(l=>{S.mix[l]=+$('#mxn_'+l).value||0;});['MCQ'].concat(LEVELS).forEach(k=>{S.marks[k]=+$('#m_'+k).value||0;});
   $('#nmcq').disabled=!S.usemcq;
   try{localStorage.setItem('mpp-settings',JSON.stringify(S));}catch(e){}
@@ -923,7 +922,7 @@ function renderPlan(){
   $('#timeBody').innerHTML=secs.map(s=>`<tr><td>Section ${s.letter}: ${s.name}</td><td class="n">${s.count} Q · ${s.marks} marks</td><td class="n">${Math.round(avail*s.marks/(tm||1))} min</td></tr>`).join('')+`<tr><td>Checking</td><td></td><td class="n">${check} min</td></tr>`;
   $('#sampleBtn').hidden=!(S.subject==='Mathematics'&&S.klass==='VII');
   Object.keys(PRESETS).forEach(k=>{$(`[data-pl="${k}"]`).textContent=PRESETS[k].nq+' questions'+(S.mode!=='practice'?' · '+PRESETS[k].duration+' min':'');});
-  $('#gen').textContent={exam:'Start custom paper',practice:'Start custom practice',print:'Make paper to print'}[S.mode]||'Start custom paper';
+  $('#gen').textContent=S.mode==='practice'?'Start custom practice':'Start custom paper';
   const fm=$('#formMsg');if(v.errs.length){fm.innerHTML=v.errs.map(esc).join('<br>');fm.hidden=false;}else fm.hidden=true;
   $('#gen').disabled=v.errs.length>0;
 }
@@ -978,7 +977,6 @@ function startTest(useSample){
   const p=buildPaper(useSample);
   P=Object.assign(p,{mode:S.mode,duration:S.duration,subject:S.subject,klass:S.klass,board:$('#board').value,country:$('#country').value,label:useSample?'CBSE model paper':'',topicsLabel:S.topics==='ALL'?'':S.topics.join(', '),startAt:Date.now()});
   P.endAt=P.startAt+P.duration*60000;ANS={};FLAG={};CHK={};
-  if(P.mode==='print'){showPrint();return;}
   begin();
 }
 function startPreset(k){
@@ -1178,8 +1176,7 @@ function showPrint(from){
   printFrom=from||'setup';
   if(printFrom==='test')$('#withKey').checked=false; // no answer key while the paper is still being answered
   $('#withKeyWrap').hidden=printFrom==='test';
-  $('#printNew').hidden=printFrom!=='setup';
-  $('#printBack').textContent={setup:'Change settings',test:'Back to the paper',results:'Back to results'}[printFrom];
+  $('#printBack').textContent=printFrom==='test'?'Back to the paper':'Back to results';
   $('#printPaper').innerHTML=printPaperHtml();
   $('#printPaper').classList.toggle('withkey',$('#withKey').checked);
   $('#printTitle').textContent=`${P.subject} – Class ${P.klass} · ${P.qs.length} questions`;
@@ -1193,11 +1190,10 @@ $('#klass').addEventListener('change',()=>{S.klass=$('#klass').value;S.topics='A
 $('#subject').addEventListener('change',()=>{S.subject=$('#subject').value;S.topics='ALL';renderTopics();readForm();});
 ['#duration','#nq','#nmcq','#usemcq','#m_MCQ','#m_E','#m_M','#m_C','#m_X'].forEach(s=>$(s).addEventListener('input',readForm));
 $('#usemcq').addEventListener('change',readForm);
-['#mode_practice','#mode_exam','#mode_print'].forEach(s=>$(s).addEventListener('change',readForm));
+['#mode_practice','#mode_exam'].forEach(s=>$(s).addEventListener('change',readForm));
 $('#sampleBtn').addEventListener('click',()=>{readForm();startSample();});
 $('#withKey').addEventListener('change',e=>{$('#printPaper').classList.toggle('withkey',e.target.checked);});
 $('#printGo').addEventListener('click',()=>{window.print();});
-$('#printNew').addEventListener('click',()=>{startTest();});
 $('#printBack').addEventListener('click',()=>{show(printFrom);window.scrollTo(0,0);});
 $('#printNowBtn').addEventListener('click',()=>showPrint('test'));
 $('#flagBtn').addEventListener('click',()=>toggleFlagView(!onlyFlag));
