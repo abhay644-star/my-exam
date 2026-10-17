@@ -1,0 +1,743 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Timed CBSE maths practice papers for Classes V to XII, marked instantly.">
+<title>Maths Practice Papers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+/* Layout: exam sheet on graph paper - settings + live paper plan side by side, then a single answer sheet with a sticky timer bar, then a marked script */
+:root{
+  --bg:#edf1f8; --paper:#ffffff; --fg:#1b2236; --muted:#5b6478; --line:#d5dcea; --grid:rgba(36,70,168,.07);
+  --ink:#2446a8; --ink-soft:#e4eafb; --red:#c4302b; --red-soft:#fbe7e5; --green:#1f7a4d; --green-soft:#e2f3ea; --amber:#a35b00; --amber-soft:#fdf0dc;
+  --f-display:"Baloo 2", "Trebuchet MS", system-ui, sans-serif;
+  --f-body:"Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --r:10px;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0f1524; --paper:#161e31; --fg:#e6eaf4; --muted:#9aa4ba; --line:#2a3550; --grid:rgba(143,176,255,.05);
+  --ink:#8fb0ff; --ink-soft:#1f2b4a; --red:#ff7a70; --red-soft:#3a1f22; --green:#5cd19a; --green-soft:#16312a; --amber:#f2b45a; --amber-soft:#3a2c17; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0f1524; --paper:#161e31; --fg:#e6eaf4; --muted:#9aa4ba; --line:#2a3550; --grid:rgba(143,176,255,.05);
+  --ink:#8fb0ff; --ink-soft:#1f2b4a; --red:#ff7a70; --red-soft:#3a1f22; --green:#5cd19a; --green-soft:#16312a; --amber:#f2b45a; --amber-soft:#3a2c17; color-scheme:dark }
+*{box-sizing:border-box}
+body{background-color:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:16px;line-height:1.55;
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:24px 24px}
+.wrap{max-width:1080px;margin:0 auto;padding-inline:16px;padding-block:20px 48px}
+h1,h2,h3{font-family:var(--f-display);line-height:1.15;text-wrap:balance;margin:0}
+h1{font-size:clamp(1.7rem,3.6vw,2.4rem);font-weight:800;letter-spacing:-.01em}
+h2{font-size:1.35rem;font-weight:700}
+h3{font-size:1.1rem;font-weight:700}
+p{margin:0}
+.lede{color:var(--muted);max-width:62ch;margin-top:6px}
+.eyebrow{font-size:.78rem;text-transform:uppercase;letter-spacing:.09em;color:var(--ink);font-weight:700}
+.top{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:flex-end;justify-content:space-between;margin-bottom:20px}
+.grid2{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:20px;align-items:start}
+@media (max-width:860px){.grid2{grid-template-columns:minmax(0,1fr)}}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:20px}
+.stack{display:flex;flex-direction:column;gap:16px}
+.row{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+label,.lbl{display:block;font-weight:700;font-size:.9rem;margin-bottom:5px}
+.hint{font-size:.82rem;color:var(--muted);margin-top:4px}
+select,input[type=number],input[type=text]{width:100%;font:inherit;color:var(--fg);background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:9px 11px}
+select:focus-visible,input:focus-visible,button:focus-visible,.chip:focus-within{outline:3px solid var(--ink);outline-offset:2px}
+fieldset{border:1px solid var(--line);border-radius:var(--r);padding:12px 14px 14px;margin:0;min-width:0}
+legend{font-weight:700;font-size:.9rem;padding:0 6px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);border-radius:999px;padding:5px 12px;font-size:.88rem;cursor:pointer;background:var(--paper)}
+.chip input{accent-color:var(--ink);margin:0}
+.chip.on{background:var(--ink-soft);border-color:var(--ink)}
+.mix{display:grid;grid-template-columns:minmax(0,7.5rem) minmax(0,1fr) 4.2rem;gap:8px 12px;align-items:center}
+.mix input[type=range]{width:100%;accent-color:var(--ink)}
+.mix .pct{font-variant-numeric:tabular-nums;text-align:right;font-weight:700}
+.sumline{display:flex;justify-content:space-between;margin-top:10px;font-weight:700;font-variant-numeric:tabular-nums}
+.ok{color:var(--green)} .bad{color:var(--red)}
+.marks{display:grid;grid-template-columns:repeat(auto-fit,minmax(96px,1fr));gap:10px}
+.btns{display:flex;flex-wrap:wrap;gap:10px}
+button{font:inherit;font-weight:700;border-radius:8px;padding:10px 18px;cursor:pointer;border:1px solid var(--ink);background:var(--paper);color:var(--ink)}
+button.primary{background:var(--ink);color:var(--paper)}
+button.danger{border-color:var(--red);color:var(--red)}
+button:disabled{opacity:.45;cursor:not-allowed}
+.msg{border-radius:8px;padding:10px 12px;font-size:.9rem}
+.msg.warn{background:var(--amber-soft);color:var(--amber)}
+.msg.err{background:var(--red-soft);color:var(--red)}
+.msg.info{background:var(--ink-soft);color:var(--fg)}
+table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums}
+th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line);font-size:.92rem}
+th{font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+td.n,th.n{text-align:right}
+tfoot td{font-weight:700;border-bottom:0}
+.tblwrap{overflow-x:auto}
+.lvl{display:inline-block;width:.62rem;height:.62rem;border-radius:50%;margin-right:7px;vertical-align:baseline}
+.l-E{background:#3d9a6b}.l-M{background:#2f6fd6}.l-C{background:#d08a1d}.l-X{background:#c4302b}
+/* test bar */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:10px 14px;display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;justify-content:space-between;margin-bottom:16px}
+.timer{font-family:var(--f-display);font-size:1.6rem;font-weight:800;font-variant-numeric:tabular-nums;color:var(--ink);line-height:1}
+.timer.warn{color:var(--red)}
+.barinfo{display:flex;gap:18px;align-items:center;flex-wrap:wrap;font-size:.9rem;color:var(--muted)}
+.prog{width:140px;height:8px;background:var(--line);border-radius:99px;overflow:hidden}
+.prog i{display:block;height:100%;background:var(--ink);width:0}
+/* paper */
+.sheet{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:clamp(16px,3vw,32px);max-width:860px;margin:0 auto}
+.sheethead{text-align:center;border-bottom:2px solid var(--fg);padding-bottom:12px;margin-bottom:14px}
+.sheethead .meta{display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;margin-top:10px;font-weight:700;font-variant-numeric:tabular-nums}
+.instr{font-size:.92rem;color:var(--muted);margin:0 0 6px;padding-left:20px}
+.instr li{margin:2px 0}
+.section{margin-top:26px}
+.sechead{display:flex;justify-content:space-between;gap:10px;align-items:baseline;border-bottom:1px dashed var(--line);padding-bottom:6px;margin-bottom:6px}
+.sechead small{color:var(--muted);font-weight:700;font-variant-numeric:tabular-nums}
+.q{display:grid;grid-template-columns:2.2rem minmax(0,1fr) auto;gap:4px 10px;padding:14px 0;border-bottom:1px solid var(--line)}
+.q:last-child{border-bottom:0}
+.qn{font-family:var(--f-display);font-weight:800;font-size:1.1rem;color:var(--ink)}
+.qm{font-size:.8rem;color:var(--muted);font-weight:700;white-space:nowrap;font-variant-numeric:tabular-nums}
+.qbody{min-width:0;display:flex;flex-direction:column;gap:10px}
+.qtopic{font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.07em}
+.part{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,15rem);gap:6px 12px;align-items:center}
+@media (max-width:560px){.part{grid-template-columns:minmax(0,1fr)}}
+.part .pq{min-width:0}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.opt{display:flex;gap:8px;align-items:center;border:1px solid var(--line);border-radius:8px;padding:8px 10px;cursor:pointer}
+.opt input{accent-color:var(--ink)}
+.opt.on{border-color:var(--ink);background:var(--ink-soft)}
+.opt b{font-family:var(--f-display)}
+sup,sub{font-size:.7em}
+.mat{display:inline-grid;grid-template-columns:repeat(var(--c),auto);gap:0 12px;padding:2px 8px;margin:2px 4px;border-left:2px solid currentColor;border-right:2px solid currentColor;border-radius:5px;vertical-align:middle;text-align:center;font-variant-numeric:tabular-nums}
+.mat.det{border-radius:0}
+/* results */
+.score{display:flex;flex-wrap:wrap;gap:16px 28px;align-items:center}
+.big{font-family:var(--f-display);font-weight:800;font-size:clamp(2.6rem,7vw,3.6rem);line-height:1;color:var(--red);font-variant-numeric:tabular-nums}
+.big small{font-size:.45em;color:var(--muted)}
+.band{display:inline-block;border-radius:999px;padding:4px 12px;font-weight:700;font-size:.85rem}
+.res .q{grid-template-columns:2.2rem minmax(0,1fr) auto}
+.mark{font-family:var(--f-display);font-weight:800;color:var(--red);font-variant-numeric:tabular-nums;white-space:nowrap}
+.pr{border-radius:8px;padding:8px 10px;font-size:.92rem;display:flex;flex-direction:column;gap:2px}
+.pr.right{background:var(--green-soft)} .pr.wrong{background:var(--red-soft)}
+.pr .tick{font-weight:800}
+.pr.right .tick{color:var(--green)} .pr.wrong .tick{color:var(--red)}
+.sol{font-size:.9rem;color:var(--muted);border-left:3px solid var(--line);padding-left:10px}
+.confirm{border:2px solid var(--ink);border-radius:var(--r);padding:16px;background:var(--paper);margin-bottom:16px}
+.foot{margin-top:28px;color:var(--muted);font-size:.85rem;text-align:center}
+@media (prefers-reduced-motion:no-preference){.prog i{transition:width .3s}}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div>
+      <p class="eyebrow">Online practice · auto-marked</p>
+      <h1>Maths Practice Papers</h1>
+      <p class="lede">Choose the class, topics and difficulty mix, generate a timed paper, answer it online and submit to see your marks with the working for every question.</p>
+    </div>
+  </header>
+
+  <!-- SETUP -->
+  <section id="setup">
+    <div class="grid2">
+      <form id="form" class="card stack" novalidate>
+        <h2>Paper settings</h2>
+        <div class="row">
+          <div><label for="country">Country</label><select id="country"><option value="India">India</option><option disabled>United Kingdom (coming soon)</option><option disabled>United Arab Emirates (coming soon)</option></select></div>
+          <div><label for="board">Board / curriculum</label><select id="board"></select></div>
+          <div><label for="klass">Class</label><select id="klass"></select></div>
+          <div><label for="subject">Subject</label><select id="subject"><option>Mathematics</option></select></div>
+        </div>
+        <fieldset>
+          <legend>Topics</legend>
+          <div class="chips" id="topics"></div>
+          <p class="hint" id="topicHint">Select "All" or pick the chapters to include.</p>
+        </fieldset>
+        <div class="row">
+          <div><label for="duration">Duration (minutes)</label><input id="duration" type="number" min="10" max="180" step="5" value="60"></div>
+          <div><label for="nq">Number of questions</label><input id="nq" type="number" min="5" max="60" value="30"></div>
+          <div><label for="nmcq">Multiple-choice questions</label><input id="nmcq" type="number" min="0" max="60" value="10"><label class="chip" style="margin-top:8px;display:inline-flex" for="usemcq"><input type="checkbox" id="usemcq" checked> Include MCQ section</label></div>
+        </div>
+        <fieldset>
+          <legend>Difficulty mix</legend>
+          <div class="mix" id="mix"></div>
+          <div class="sumline"><span>Total</span><span id="mixsum">100%</span></div>
+        </fieldset>
+        <fieldset>
+          <legend>Marks per question</legend>
+          <div class="marks">
+            <div><label for="m_MCQ">MCQ</label><input id="m_MCQ" type="number" min="1" max="10" value="1"></div>
+            <div><label for="m_E">Easy</label><input id="m_E" type="number" min="1" max="10" value="1"></div>
+            <div><label for="m_M">Medium</label><input id="m_M" type="number" min="1" max="10" value="2"></div>
+            <div><label for="m_C">Complex</label><input id="m_C" type="number" min="1" max="10" value="3"></div>
+            <div><label for="m_X">Challenging</label><input id="m_X" type="number" min="1" max="12" value="6"></div>
+          </div>
+        </fieldset>
+        <label class="chip" for="sample" id="sampleWrap"><input type="checkbox" id="sample" checked> Use the CBSE Class VII model paper for these settings</label>
+        <div id="formMsg" class="msg err" hidden></div>
+        <div class="btns"><button type="submit" class="primary" id="gen">Generate paper</button><button type="button" id="reset">Reset</button></div>
+      </form>
+
+      <aside class="card stack" aria-live="polite">
+        <div><p class="eyebrow">Paper plan</p><h2 id="planTitle">CBSE Class VII Mathematics</h2></div>
+        <div class="tblwrap"><table>
+          <thead><tr><th>Level</th><th class="n">MCQ</th><th class="n">Written</th><th class="n">Marks each</th><th class="n">Marks</th></tr></thead>
+          <tbody id="planBody"></tbody>
+          <tfoot><tr><td>Total</td><td class="n" id="pfMcq"></td><td class="n" id="pfW"></td><td></td><td class="n" id="pfMarks"></td></tr></tfoot>
+        </table></div>
+        <div><p class="lbl">Suggested time per section</p><div class="tblwrap"><table><tbody id="timeBody"></tbody></table></div></div>
+        <div id="planNote" class="msg info">Answers are marked automatically. Written answers accept forms like 4 1/5, 21/5, 0.375, −1/6, 2^4 or 3.84 × 10^5; units such as cm, °, % and ₹ are optional.</div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- TEST -->
+  <section id="test" hidden>
+    <div class="bar" id="bar">
+      <div><div class="timer" id="timer">60:00</div><div class="hint" style="margin:2px 0 0">time left</div></div>
+      <div class="barinfo"><span><b id="answered">0</b> of <b id="partsTotal">0</b> answers filled</span><span class="prog" aria-hidden="true"><i id="progbar"></i></span></div>
+      <div class="btns"><button type="button" class="primary" id="submitBtn">Submit</button><button type="button" class="danger" id="quitBtn">Quit</button></div>
+    </div>
+    <div id="confirm" class="confirm" hidden>
+      <h3 id="confirmTitle">Submit your paper?</h3>
+      <p class="hint" id="confirmText" style="margin:6px 0 12px"></p>
+      <div class="btns"><button type="button" class="primary" id="confirmYes">Submit and mark</button><button type="button" id="confirmNo">Keep working</button></div>
+    </div>
+    <article class="sheet" id="sheet"></article>
+  </section>
+
+  <!-- RESULTS -->
+  <section id="results" hidden></section>
+
+  <p class="foot">Questions follow the NCERT syllabus for Classes V to XII. Numbers change every time you generate a paper; the model paper is the fixed CBSE sample.</p>
+</div>
+
+<script>
+(function(){
+'use strict';
+/* ---------- helpers ---------- */
+const $=s=>document.querySelector(s);
+const R=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+const shuffle=a=>{for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
+const gcd=(a,b)=>{a=Math.abs(a);b=Math.abs(b);while(b){[a,b]=[b,a%b];}return a||1;};
+function F(n,d){d=d===undefined?1:d;if(d<0){n=-n;d=-d;}const g=gcd(n,d);return{n:n/g,d:d/g};}
+const fv=f=>f.n/f.d;
+const neg=x=>{x=+(+x).toFixed(6);return x<0?'−'+Math.abs(x):''+x;};
+function fstr(f,mixed){if(f.d===1)return neg(f.n);const s=f.n<0?'−':'';const a=Math.abs(f.n);if(mixed&&a>f.d)return s+Math.floor(a/f.d)+' '+(a%f.d)+'/'+f.d;return s+a+'/'+f.d;}
+const pf=f=>f.n<0?'('+fstr(f)+')':fstr(f);
+function fracFromNum(x){for(let d=1;d<=2000;d++){const n=Math.round(x*d);if(Math.abs(n/d-x)<1e-9)return F(n,d);}return F(Math.round(x*1000),1000);}
+const inr=x=>(+(+x).toFixed(2)).toLocaleString('en-IN');
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const FM={
+  int:x=>neg(Math.round(x)), num:x=>neg(x),
+  frac:x=>fstr(fracFromNum(x),false), mixed:x=>fstr(fracFromNum(x),true),
+  money:x=>(x<0?'−':'')+'₹'+inr(Math.abs(x)), deg:x=>neg(x)+'°', pct:x=>neg(x)+'%',
+  unit:u=>x=>neg(+(+x).toFixed(2))+' '+u, d2:x=>neg(+(+x).toFixed(2))
+};
+function polyDisp(terms){let out='';terms.forEach(([c,v])=>{if(!c)return;const a=Math.abs(c);const body=(v&&a===1)?v:(a+v);if(!out)out=(c<0?'−':'')+body;else out+=(c<0?' − ':' + ')+body;});return out||'0';}
+const ord=n=>n+((n%100>=11&&n%100<=13)?'th':(['th','st','nd','rd'][n%10]||'th'));
+const mat=(M,det)=>`<span class="mat${det?' det':''}" style="--c:${M[0].length}">${[].concat(...M).map(x=>`<span>${neg(x)}</span>`).join('')}</span>`;
+const N=(text,ans,fmt,sol,distract,extra)=>({text,parts:[Object.assign({type:'num',ans,fmt,distract},extra||{})],sol});
+const PT=(q,ans,fmt,w,extra)=>Object.assign({q,type:'num',ans,fmt,w:w||1},extra||{});
+const CHS=(text,correct,wrongs,sol)=>{const o=shuffle([correct].concat(wrongs.filter(x=>x!==correct).slice(0,3)));return{text,parts:[{type:'choice',options:o,ans:o.indexOf(correct)}],sol};};
+const SEL=(q,ans,options,w)=>({q,type:'select',ans,options,w:w||1});
+const fact=n=>n<=1?1:n*fact(n-1);
+const nCr=(n,r)=>fact(n)/(fact(r)*fact(n-r));
+
+/* ---------- answer checking ---------- */
+const VF={'½':'1/2','⅓':'1/3','⅔':'2/3','¼':'1/4','¾':'3/4','⅕':'1/5','⅖':'2/5','⅗':'3/5','⅘':'4/5','⅙':'1/6','⅚':'5/6','⅛':'1/8','⅜':'3/8','⅝':'5/8','⅞':'7/8'};
+function parseNum(raw){
+  if(raw==null)return null;let s=String(raw).toLowerCase().trim();if(!s)return null;
+  s=s.replace(/[−–—]/g,'-').replace(/[₹,]/g,'').replace(/\b(rs|inr)\.?/g,'').replace(/sqrt/g,'√').replace(/pi(?![a-z])/g,'π');
+  s=s.replace(/[½⅓⅔¼¾⅕⅖⅗⅘⅙⅚⅛⅜⅝⅞]/g,m=>' '+VF[m]);
+  s=s.replace(/^[a-z]\s*=\s*/,'');
+  s=s.replace(/(sq\.?\s*)?(cm|mm|km|m)\s*(²|³|\^2|\^3|2|3)?(\/s)?\s*$/,'').replace(/\s*(degrees?|deg|°|%)\s*$/,'').replace(/(\d|\)|π)\s*[a-z]+\.?(\/[a-z]+)?$/,'$1');
+  s=s.replace(/\s+/g,' ').trim();let m;
+  if((m=s.match(/^(-?\d*\.?\d+)\s*(?:x|×|\*)\s*10\s*(?:\^|\*\*)\s*(-?\d+)$/)))return parseFloat(m[1])*Math.pow(10,+m[2]);
+  if((m=s.match(/^\(?\s*(-?\d*\.?\d+)\s*\)?\s*\^\s*(\d+)$/)))return Math.pow(parseFloat(m[1]),+m[2]);
+  if((m=s.match(/^(-?)(\d+)\s+(\d+)\s*\/\s*(\d+)$/))){const v=+m[2]+(+m[3])/(+m[4]);return m[1]?-v:v;}
+  if((m=s.match(/^(-?\d*\.?\d+)\s*\/\s*\(?\s*(-?\d*\.?\d+)\s*\)?$/))){const d=parseFloat(m[2]);return d?parseFloat(m[1])/d:null;}
+  if(/^-?\d*\.?\d+$/.test(s))return parseFloat(s);
+  if(/^[0-9.+\-*/^()√π\s]+$/.test(s)){try{const v=compileExpr(s)({});if(isFinite(v))return v;}catch(e){}}
+  return null;
+}
+function numEq(x,v){if(x==null||!isFinite(x))return false;const isInt=Math.abs(v-Math.round(v))<1e-9;const tol=isInt?1e-6*Math.max(1,Math.abs(v)):0.011;return Math.abs(x-v)<=tol;}
+function compileExpr(src){
+  const s=String(src).replace(/[−–—]/g,'-').replace(/²/g,'^2').replace(/³/g,'^3').replace(/[×·]/g,'*').toLowerCase().replace(/sqrt/g,'√').replace(/pi(?![a-z])/g,'π');
+  const toks=[];let i=0;
+  while(i<s.length){const c=s[i];
+    if(/\s/.test(c)){i++;continue;}
+    if(/[0-9.]/.test(c)){let j=i;while(j<s.length&&/[0-9.]/.test(s[j]))j++;toks.push({t:'n',v:parseFloat(s.slice(i,j))});i=j;continue;}
+    if(c==='π'){toks.push({t:'n',v:Math.PI});i++;continue;}
+    if(/[a-z]/.test(c)){toks.push({t:'v',v:c});i++;continue;}
+    if('+-*/^()√'.indexOf(c)>=0){toks.push({t:'o',v:c});i++;continue;}
+    throw new Error('bad');}
+  const out=[];for(const b of toks){const a=out[out.length-1];if(a&&(a.t==='n'||a.t==='v'||(a.t==='o'&&a.v===')'))&&(b.t==='n'||b.t==='v'||(b.t==='o'&&(b.v==='('||b.v==='√'))))out.push({t:'o',v:'*'});out.push(b);}
+  const prec={'+':1,'-':1,'*':2,'/':2,'neg':3,'^':4,'√':5},right={'^':1,'neg':1,'√':1};const rpn=[],st=[];let prev=null;
+  for(const tk of out){
+    if(tk.t!=='o'){rpn.push(tk);prev=tk;continue;}
+    let op=tk.v;
+    if(op==='('){st.push(op);prev=tk;continue;}
+    if(op===')'){while(st.length&&st[st.length-1]!=='(')rpn.push({t:'o',v:st.pop()});if(!st.length)throw new Error('paren');st.pop();prev=tk;continue;}
+    const unaryPos=!prev||(prev.t==='o'&&prev.v!==')');
+    if(op==='-'&&unaryPos)op='neg';else if(op==='+'&&unaryPos){continue;}
+    if(op==='neg'||op==='√'){st.push(op);prev={t:'o',v:op};continue;}
+    while(st.length){const top=st[st.length-1];if(top==='(')break;if(prec[top]>prec[op]||(prec[top]===prec[op]&&!right[op]))rpn.push({t:'o',v:st.pop()});else break;}
+    st.push(op);prev={t:'o',v:op};}
+  while(st.length){const o=st.pop();if(o==='(')throw new Error('paren');rpn.push({t:'o',v:o});}
+  return env=>{const S=[];for(const tk of rpn){if(tk.t==='n')S.push(tk.v);else if(tk.t==='v'){if(!(tk.v in env))return NaN;S.push(env[tk.v]);}else if(tk.v==='neg'||tk.v==='√'){if(!S.length)return NaN;const x=S.pop();S.push(tk.v==='neg'?-x:Math.sqrt(x));}else{const b=S.pop(),a=S.pop();if(a===undefined||b===undefined)return NaN;S.push(tk.v==='+'?a+b:tk.v==='-'?a-b:tk.v==='*'?a*b:tk.v==='/'?a/b:Math.pow(a,b));}}return S.length===1?S[0]:NaN;};
+}
+function exprEq(inp,ans){try{if(!String(inp).trim())return false;const f=compileExpr(inp),g=compileExpr(ans);const vars=new Set((String(inp)+' '+String(ans)).toLowerCase().match(/[a-z]/g)||[]);
+  for(let t=0;t<4;t++){const env={};let k=0;vars.forEach(v=>{env[v]=0.37+t*0.71+(k++)*1.13;});const x=f(env),y=g(env);if(!isFinite(x)||!isFinite(y))return false;if(Math.abs(x-y)>1e-7*Math.max(1,Math.abs(y)))return false;}return true;}catch(e){return false;}}
+function checkPart(p,val){
+  if(val==null||String(val).trim()==='')return false;
+  if(p.type==='choice')return String(val)===String(p.ans);
+  if(p.type==='select')return val===p.ans;
+  if(p.mustParen&&!/\(/.test(String(val)))return false;
+  if(p.surd&&!/√|sqrt/i.test(String(val)))return false;
+  if(p.type==='expr')return exprEq(val,p.ans);
+  if(p.type==='list'){const xs=String(val).split(/[,;<]/).map(parseNum);return xs.length===p.ans.length&&xs.every((x,i)=>numEq(x,p.ans[i]));}
+  if(p.sci&&!/10\s*(\^|\*\*)/.test(String(val)))return false;
+  return numEq(parseNum(val),p.ans);
+}
+function answerText(p){if(p.disp)return p.disp;if(p.type==='choice')return '('+'abcd'[p.ans]+') '+p.options[p.ans];if(p.type==='select')return p.ans;return p.fmt(p.ans);}
+function distractors(p){
+  const v=p.ans,out=[],seen=new Set([p.fmt(v)]);
+  const add=x=>{if(x==null||!isFinite(x))return;const s=p.fmt(x);if(!seen.has(s)){seen.add(s);out.push(s);}};
+  (p.distract||[]).forEach(add);
+  const isInt=Math.abs(v-Math.round(v))<1e-9;const d=isInt?Math.max(1,Math.round(Math.abs(v)*0.1)):(Math.abs(v)*0.25||0.5);
+  [v+d,v-d,-v,v*2,v+2*d,v-2*d,v/2].forEach(x=>{if(out.length<3)add(isInt?Math.round(x):x);});
+  let k=3;while(out.length<3&&k<40){add(isInt?Math.round(v+k*d):v+k*d);k++;}
+  return out.slice(0,3);
+}
+
+/* ---------- question templates (NCERT Class VII) ---------- */
+const T=[
+/* Integers */
+{id:'int_add',topic:'Integers',level:'E',mcq:true,gen(){const a=R(10,30),b=R(3,15),c=R(2,15),v=-a+b+c;return{text:`Evaluate: (−${a}) + ${b} − (−${c}).`,parts:[{type:'num',ans:v,fmt:FM.int,distract:[-a+b-c,a+b+c,-a-b+c]}],sol:`(−${a}) + ${b} + ${c} = ${neg(v)}`};}},
+{id:'int_md',topic:'Integers',level:'M',mcq:true,gen(){const c=R(2,9),q=R(2,9),b=R(2,6),a=c*q,v=q*b;return{text:`Evaluate: [(−${a}) × ${b}] ÷ (−${c}).`,parts:[{type:'num',ans:v,fmt:FM.int,distract:[-v,a*b,v+c]}],sol:`(−${a}) × ${b} = −${a*b}; then −${a*b} ÷ (−${c}) = ${v}.`};}},
+{id:'int_temp',topic:'Integers',level:'C',mcq:true,mcqPart:0,gen(){const s=R(5,14),d=R(2,4),h=R(5,9),t=s-d*h,m=Math.ceil((s+1)/d)+R(1,3),k=d*m-s;return{text:`At 6 pm the temperature in a hill town is ${s} °C. It falls by ${d} °C every hour.`,parts:[{q:`(a) What is the temperature ${h} hours after 6 pm?`,type:'num',ans:t,fmt:FM.deg,w:2,distract:[s+d*h,-t,t-d]},{q:`(b) How many hours after 6 pm does it first reach −${k} °C?`,type:'num',ans:m,fmt:FM.unit('hours'),w:1}],sol:`(a) ${s} − ${d} × ${h} = ${neg(t)} °C. (b) It has to fall ${s} + ${k} = ${s+k} °C, and ${s+k} ÷ ${d} = ${m} hours.`};}},
+/* Fractions and Decimals */
+{id:'fr_dec',topic:'Fractions and Decimals',level:'E',mcq:true,gen(){const [n,d]=pick([[1,4],[3,4],[2,5],[3,5],[4,5],[1,8],[3,8],[5,8],[7,8],[7,20],[9,20],[3,25],[7,25]]),v=n/d;return{text:`Write ${n}/${d} as a decimal.`,parts:[{type:'num',ans:v,fmt:FM.num,distract:[n/10,v*10,+(n/d+0.1).toFixed(3)]}],sol:`${n} ÷ ${d} = ${neg(v)}`};}},
+{id:'fr_mixed',topic:'Fractions and Decimals',level:'M',mcq:true,gen(){const w1=R(1,3),d1=pick([2,3,4,5]),n1=R(1,d1-1),w2=R(1,2),d2=pick([3,4,5,6]),n2=R(1,d2-1);const a=F(w1*d1+n1,d1),b=F(w2*d2+n2,d2),p=F(a.n*b.n,a.d*b.d);return{text:`Find the product: ${w1} ${n1}/${d1} × ${w2} ${n2}/${d2}. Give your answer as a mixed fraction.`,parts:[{type:'num',ans:fv(p),fmt:FM.mixed,distract:[w1*w2+(n1*n2)/(d1*d2),fv(a)+fv(b),fv(p)+1]}],sol:`${fstr(a)} × ${fstr(b)} = ${fstr(p)} = ${fstr(p,true)}`};}},
+{id:'dec_div',topic:'Fractions and Decimals',level:'M',mcq:true,gen(){const b=pick([0.2,0.25,0.4,0.5]),k=R(6,40),a=+(b*k).toFixed(2);return{text:`Find ${a} ÷ ${b}.`,parts:[{type:'num',ans:k,fmt:FM.num,distract:[k/10,k*10,+(a*b).toFixed(3)]}],sol:`${a} ÷ ${b} = ${Math.round(a*100)} ÷ ${Math.round(b*100)} = ${k}`};}},
+{id:'fr_rope',topic:'Fractions and Decimals',level:'C',mcq:true,mcqPart:0,gen(){const [p,q]=pick([[3,4],[2,3],[2,5],[3,8],[3,5]]);let L,n,left;do{L=R(5,14);n=Math.floor(L*q/p);left=F(L*q-n*p,q);}while(left.n===0);return{text:`A ribbon ${L} m long is cut into pieces of ${p}/${q} m each.`,parts:[{q:'(a) How many full pieces are cut?',type:'num',ans:n,fmt:FM.unit('pieces'),w:2},{q:'(b) What length is left over (in metres)?',type:'num',ans:fv(left),fmt:FM.frac,w:1}],sol:`(a) ${L} ÷ ${p}/${q} = ${L} × ${q}/${p} = ${fstr(F(L*q,p),true)}, so ${n} full pieces. (b) ${L} − ${n} × ${p}/${q} = ${fstr(left)} m.`};}},
+/* Data Handling */
+{id:'mode',topic:'Data Handling',level:'E',mcq:true,gen(){const m=R(2,9);const others=shuffle([1,2,3,4,5,6,7,8,9].filter(x=>x!==m)).slice(0,4);const vals=shuffle([m,m,m].concat(others,[others[0]]));return{text:`Find the mode of the data: ${vals.join(', ')}.`,parts:[{type:'num',ans:m,fmt:FM.int,distract:[others[0],Math.max(...vals),others[1]]}],sol:`${m} occurs 3 times, more often than any other value.`};}},
+{id:'mean_rm',topic:'Data Handling',level:'M',mcq:true,gen(){let m1,m2,x;do{m1=R(12,25);m2=R(8,m1-1);x=5*m1-4*m2;}while(x<=0||x>60);return{text:`The mean of 5 numbers is ${m1}. When one number is removed, the mean of the other four is ${m2}. Find the number removed.`,parts:[{type:'num',ans:x,fmt:FM.int,distract:[m1-m2,5*(m1-m2),x+m2]}],sol:`Sum of all 5 = 5 × ${m1} = ${5*m1}; sum of 4 = 4 × ${m2} = ${4*m2}; removed = ${x}.`};}},
+{id:'median',topic:'Data Handling',level:'M',mcq:true,gen(){const vals=shuffle(Array.from({length:30},(_,i)=>i+5)).slice(0,7),s=[...vals].sort((a,b)=>a-b);return{text:`Find the median of: ${vals.join(', ')}.`,parts:[{type:'num',ans:s[3],fmt:FM.int,distract:[vals[3]===s[3]?s[4]:vals[3],Math.round(s.reduce((a,b)=>a+b)/7),s[2]]}],sol:`In order: ${s.join(', ')}. The middle (4th) value is ${s[3]}.`};}},
+{id:'mean_range',topic:'Data Handling',level:'C',mcq:true,mcqPart:0,gen(){let k,M,miss;do{k=Array.from({length:5},()=>R(35,95));M=R(55,80);miss=6*M-k.reduce((a,b)=>a+b);}while(miss<30||miss>100);const all=k.concat([miss]),hi=Math.max(...all),lo=Math.min(...all);return{text:`Five students scored ${k.join(', ')} in a test. A sixth student's score is missing. The mean of all six scores is ${M}.`,parts:[{q:'(a) Find the missing score.',type:'num',ans:miss,fmt:FM.int,w:2},{q:'(b) Find the range of the six scores.',type:'num',ans:hi-lo,fmt:FM.int,w:1}],sol:`(a) Total = 6 × ${M} = ${6*M}; the five known scores add to ${k.reduce((a,b)=>a+b)}; missing = ${miss}. (b) Range = ${hi} − ${lo} = ${hi-lo}.`};}},
+/* Simple Equations */
+{id:'eq1',topic:'Simple Equations',level:'E',mcq:true,gen(){const x=R(8,30),a=R(3,15);return{text:`Solve: x − ${a} = ${neg(x-a)}.`,parts:[{type:'num',ans:x,fmt:FM.int,distract:[x-2*a,a,x-a]}],sol:`x = ${neg(x-a)} + ${a} = ${x}`};}},
+{id:'eq2',topic:'Simple Equations',level:'M',mcq:true,gen(){let x,a,c,b,d;do{x=R(2,15);a=R(3,7);c=R(1,a-1);b=R(1,15);d=(a-c)*x-b;}while(d<=0);const cx=c===1?'x':c+'x',k=a-c;return{text:`Solve: ${a}x − ${b} = ${cx} + ${d}.`,parts:[{type:'num',ans:x,fmt:FM.int,distract:[Math.round((d-b)/k),x+1,b+d]}],sol:`${a}x − ${cx} = ${d} + ${b}, so ${k===1?'':k}x = ${b+d} and x = ${x}.`};}},
+{id:'eq_consec',topic:'Simple Equations',level:'C',mcq:true,mcqPart:0,gen(){const m=R(8,60),S=3*m+3;return{text:`The sum of three consecutive integers is ${S}.`,parts:[{q:'(a) Find the smallest integer.',type:'num',ans:m,fmt:FM.int,w:2,distract:[m+1,S/3,m-1]},{q:'(b) Find the largest integer.',type:'num',ans:m+2,fmt:FM.int,w:1}],sol:`Let them be n, n + 1, n + 2: 3n + 3 = ${S}, so 3n = ${S-3} and n = ${m}. The largest is ${m+2}.`};}},
+{id:'eq_word',topic:'Simple Equations',level:'C',mcq:true,gen(){let k,s,n,t;do{k=R(3,5);s=R(3,12);n=R(5,20);t=(k-1)*n-s;}while(t<=0);return{text:`When ${s} is subtracted from ${k} times a number, the result is ${t} more than the number. Find the number.`,parts:[{type:'num',ans:n,fmt:FM.int,distract:[Math.round((t+s)/k),n+s,t]}],sol:`${k}n − ${s} = n + ${t}, so ${k-1}n = ${t+s} and n = ${n}.`};}},
+{id:'ages',topic:'Simple Equations',level:'X',mcq:true,mcqPart:1,gen(){let x,e;do{x=R(9,16);e=R(2,7);}while((x-e)%2!==0||x<=e);const t=5,old=2*x+e,S=(x+t)+(old+t),y=(x-e)/2;const nm=pick([['Ravi','his sister'],['Anika','her brother'],['Kabir','his cousin'],['Meera','her sister']]);
+  return{text:`${nm[0]}'s age is ${e} years more than twice ${nm[1]}'s age. In ${t} years' time, the sum of their ages will be ${S} years.`,parts:[{q:`(a) Find ${nm[1]}'s present age.`,type:'num',ans:x,fmt:FM.unit('years'),w:2},{q:`(b) Find ${nm[0]}'s present age.`,type:'num',ans:old,fmt:FM.unit('years'),w:2},{q:`(c) How many years ago was ${nm[0]}'s age three times ${nm[1]}'s age?`,type:'num',ans:y,fmt:FM.unit('years'),w:2}],
+  sol:`Let ${nm[1]}'s age be x. (x + ${t}) + (2x + ${e} + ${t}) = ${S}, so 3x + ${e+2*t} = ${S} and x = ${x}. ${nm[0]} = 2 × ${x} + ${e} = ${old}. Then ${old} − y = 3(${x} − y), so 2y = ${3*x-old} and y = ${y}.`};}},
+/* Lines and Angles */
+{id:'compl',topic:'Lines and Angles',level:'E',mcq:true,gen(){if(Math.random()<0.5){const a=R(15,80);return{text:`An angle measures ${a}°. Find its complement.`,parts:[{type:'num',ans:90-a,fmt:FM.deg,distract:[180-a,a,90+a]}],sol:`90° − ${a}° = ${90-a}°`};}const a=R(25,165);return{text:`An angle measures ${a}°. Find its supplement.`,parts:[{type:'num',ans:180-a,fmt:FM.deg,distract:[Math.abs(90-a),360-a,a]}],sol:`180° − ${a}° = ${180-a}°`};}},
+{id:'supp_ratio',topic:'Lines and Angles',level:'M',mcq:true,gen(){const [p,q]=pick([[1,2],[1,3],[2,3],[4,5],[5,7],[1,5],[7,11]]),u=180/(p+q);return{text:`Two supplementary angles are in the ratio ${p} : ${q}. Find the larger angle.`,parts:[{type:'num',ans:q*u,fmt:FM.deg,distract:[p*u,90/(p+q)*q,180-p*u/2]}],sol:`${p}x + ${q}x = 180°, so x = ${u}°; the larger angle is ${q} × ${u}° = ${q*u}°.`};}},
+{id:'comp_ratio',topic:'Lines and Angles',level:'C',mcq:true,mcqPart:2,gen(){const [p,q]=pick([[1,2],[2,3],[1,4],[4,5],[1,5],[7,8],[2,7],[1,8]]),u=90/(p+q);return{text:`Two complementary angles are in the ratio ${p} : ${q}.`,parts:[{q:'(a) Find the smaller angle.',type:'num',ans:p*u,fmt:FM.deg,w:1},{q:'(b) Find the larger angle.',type:'num',ans:q*u,fmt:FM.deg,w:1},{q:'(c) Find the supplement of the larger angle.',type:'num',ans:180-q*u,fmt:FM.deg,w:1,distract:[90-q*u,180-p*u,q*u]}],sol:`${p}x + ${q}x = 90°, so x = ${u}°. The angles are ${p*u}° and ${q*u}°; the supplement of ${q*u}° is ${180-q*u}°.`};}},
+/* Triangles */
+{id:'tri3',topic:'Triangles',level:'E',mcq:true,gen(){let a,b,c;do{a=R(30,80);b=R(30,90);c=180-a-b;}while(c<10);return{text:`Two angles of a triangle are ${a}° and ${b}°. Find the third angle.`,parts:[{type:'num',ans:c,fmt:FM.deg,distract:[360-a-b,a+b,c+10]}],sol:`180° − (${a}° + ${b}°) = ${c}°`};}},
+{id:'tri_type',topic:'Triangles',level:'M',mcq:false,gen(){const a=R(30,70),b=R(30,70),c=180-a-b,t=c<90?'Acute-angled':c===90?'Right-angled':'Obtuse-angled';return{text:`Two angles of a triangle are ${a}° and ${b}°.`,parts:[{q:'(a) Find the third angle.',type:'num',ans:c,fmt:FM.deg,w:1},{q:'(b) What type of triangle is it by its angles?',type:'select',ans:t,options:['Acute-angled','Right-angled','Obtuse-angled'],w:1}],sol:`Third angle = 180° − ${a+b}° = ${c}°, so the triangle is ${t.toLowerCase()}.`};}},
+{id:'ext',topic:'Triangles',level:'M',mcq:true,gen(){const E=R(100,150),i=R(30,E-25);return{text:`An exterior angle of a triangle is ${E}° and one of its interior opposite angles is ${i}°. Find the other interior opposite angle.`,parts:[{type:'num',ans:E-i,fmt:FM.deg,distract:[180-E,180-i,E+i-90]}],sol:`An exterior angle equals the sum of the two interior opposite angles: ${E}° − ${i}° = ${E-i}°.`};}},
+{id:'pyth',topic:'Triangles',level:'C',mcq:true,mcqPart:0,gen(){const t=pick([[3,4,5],[5,12,13],[8,15,17],[7,24,25],[20,21,29]]),k=t[2]>20?1:pick([1,2,3]);const [a,b,c]=t.map(x=>x*k),giveA=Math.random()<0.5,known=giveA?a:b,other=giveA?b:a;return{text:`In a right-angled triangle, the hypotenuse is ${c} cm and one of the other sides is ${known} cm.`,parts:[{q:'(a) Find the third side.',type:'num',ans:other,fmt:FM.unit('cm'),w:2,distract:[c-known,c+known,Math.round(Math.sqrt(c*c+known*known))]},{q:'(b) Find the perimeter of the triangle.',type:'num',ans:a+b+c,fmt:FM.unit('cm'),w:1}],sol:`(a) √(${c}² − ${known}²) = √(${c*c} − ${known*known}) = √${other*other} = ${other} cm. (b) ${a} + ${b} + ${c} = ${a+b+c} cm.`};}},
+{id:'tri_ineq',topic:'Triangles',level:'C',mcq:true,mcqOnly:true,gen(){const bad=pick([[2,3,6],[3,4,8],[1,2,4],[4,5,10],[2,6,9]]),goods=shuffle([[3,4,5],[5,6,7],[4,4,7],[6,8,10],[7,9,12],[5,5,8]]).slice(0,3),opts=shuffle([bad].concat(goods));return{text:'Which set of lengths <strong>cannot</strong> be the sides of a triangle?',parts:[{type:'choice',options:opts.map(o=>o.join(', ')),ans:opts.indexOf(bad)}],sol:`${bad[0]} + ${bad[1]} = ${bad[0]+bad[1]}, which is not more than ${bad[2]}, so these lengths cannot form a triangle.`};}},
+{id:'ladder',topic:'Triangles',level:'X',mcq:true,mcqPart:0,gen(){const [foot,h,len]=pick([[6,8,10],[5,12,13],[9,12,15],[8,15,17],[12,16,20],[7,24,25]]);return{text:`A ladder ${len} m long leans against a vertical wall. Its foot is ${foot} m from the base of the wall on level ground.`,parts:[{q:'(a) How high up the wall does the ladder reach (m)?',type:'num',ans:h,fmt:FM.unit('m'),w:2,distract:[len-foot,len+foot,Math.round(Math.sqrt(len*len+foot*foot))]},{q:'(b) Find the area of the triangle formed by the ladder, the wall and the ground (m²).',type:'num',ans:foot*h/2,fmt:FM.unit('m²'),w:2},{q:'(c) Find the perimeter of that triangle (m).',type:'num',ans:foot+h+len,fmt:FM.unit('m'),w:2}],sol:`(a) √(${len}² − ${foot}²) = √${h*h} = ${h} m. (b) ½ × ${foot} × ${h} = ${foot*h/2} m². (c) ${foot} + ${h} + ${len} = ${foot+h+len} m.`};}},
+/* Comparing Quantities */
+{id:'pct_conv',topic:'Comparing Quantities',level:'E',mcq:true,gen(){if(Math.random()<0.5){const p=R(5,95);return{text:`Convert ${p/100} into a percentage.`,parts:[{type:'num',ans:p,fmt:FM.pct,distract:[p/10,p*10,100-p]}],sol:`${p/100} × 100 = ${p}%`};}const d=pick([20,25,50]),n=R(1,d-1),p=n*100/d;return{text:`Convert ${n}/${d} into a percentage.`,parts:[{type:'num',ans:p,fmt:FM.pct,distract:[n,100-p,p*2]}],sol:`${n}/${d} × 100 = ${p}%`};}},
+{id:'pct_of',topic:'Comparing Quantities',level:'M',mcq:true,gen(){const p=pick([5,10,12,15,20,25,30,40,45,60]);let y;do{y=R(4,60)*20;}while((p*y)%100!==0);return{text:`Find ${p}% of ${y}.`,parts:[{type:'num',ans:p*y/100,fmt:FM.num,distract:[p*y/10,y-p*y/100,p*y/1000]}],sol:`${p}/100 × ${y} = ${p*y/100}`};}},
+{id:'profit',topic:'Comparing Quantities',level:'C',mcq:true,mcqPart:0,gen(){let cp,pr,l;do{cp=R(8,30)*100;pr=pick([5,8,10,12,15,20,25]);l=pick([4,5,6,8,10]);}while((cp*pr)%100||(cp*l)%100);const sp=cp*(100+pr)/100,sp2=cp*(100-l)/100,item=pick(['fan','bicycle','mixer','table','school bag']);return{text:`A shopkeeper buys a ${item} for ₹${inr(cp)} and sells it at a profit of ${pr}%.`,parts:[{q:'(a) Find the selling price (₹).',type:'num',ans:sp,fmt:FM.money,w:1,distract:[cp*pr/100,cp-cp*pr/100,sp+100]},{q:`(b) If he had sold it for ₹${inr(sp2)} instead, what would his loss percent be?`,type:'num',ans:l,fmt:FM.pct,w:2}],sol:`(a) SP = ₹${inr(cp)} + ${pr}% of ₹${inr(cp)} = ₹${inr(sp)}. (b) Loss = ₹${inr(cp)} − ₹${inr(sp2)} = ₹${inr(cp-sp2)}; loss % = ${cp-sp2} ÷ ${cp} × 100 = ${l}%.`};}},
+{id:'si',topic:'Comparing Quantities',level:'C',mcq:true,mcqPart:0,gen(){let P,Rt,Tm,I;do{P=R(4,30)*1000;Rt=pick([4,5,6,7.5,8,9,10,12]);Tm=pick([1.5,2,2.5,3,4]);I=P*Rt*Tm/100;}while(I!==Math.round(I));return{text:`Find the simple interest on ₹${inr(P)} at ${Rt}% per annum for ${Tm} years. Also find the amount.`,parts:[{q:'(a) Simple interest (₹)',type:'num',ans:I,fmt:FM.money,w:2,distract:[P+I,P*Rt/100,I*2]},{q:'(b) Amount (₹)',type:'num',ans:P+I,fmt:FM.money,w:1}],sol:`SI = ${P} × ${Rt} × ${Tm} ÷ 100 = ₹${inr(I)}; amount = ₹${inr(P)} + ₹${inr(I)} = ₹${inr(P+I)}.`};}},
+{id:'si_x',topic:'Comparing Quantities',level:'X',mcq:true,mcqPart:2,gen(){let P,Rt,Tm,I,P2,R2,T2,guard=0;for(;;){P=R(5,25)*1000;Rt=pick([5,6,8,10,12]);Tm=pick([2,3,4]);I=P*Rt*Tm/100;R2=pick([4,5,6,8,10]);T2=R(2,6);P2=I*100/(R2*T2);if((P2===Math.round(P2)&&P2%100===0&&P2!==P)||++guard>500)break;}
+  return{text:`Meera deposits ₹${inr(P)} in a bank at ${Rt}% simple interest per annum for ${Tm} years.`,parts:[{q:'(a) Find the interest she earns (₹).',type:'num',ans:I,fmt:FM.money,w:2},{q:'(b) Find the amount she receives at the end (₹).',type:'num',ans:P+I,fmt:FM.money,w:1},{q:`(c) Her brother wants to earn the same interest in ${T2} years at ${R2}% per annum. How much must he deposit (₹)?`,type:'num',ans:P2,fmt:FM.money,w:3,distract:[P,I*R2*T2/100,P2*2]}],
+  sol:`(a) ${P} × ${Rt} × ${Tm} ÷ 100 = ₹${inr(I)}. (b) ₹${inr(P)} + ₹${inr(I)} = ₹${inr(P+I)}. (c) Principal = ${I} × 100 ÷ (${R2} × ${T2}) = ₹${inr(P2)}.`};}},
+/* Rational Numbers */
+{id:'rat_add',topic:'Rational Numbers',level:'M',mcq:true,gen(){let q1,q2,p1,p2,s;do{q1=pick([3,4,5,6,8]);q2=pick([2,3,4,6,9]);p1=R(1,q1-1)*(Math.random()<0.5?-1:1);p2=R(1,q2-1)*(Math.random()<0.5?-1:1);s=F(p1*q2+p2*q1,q1*q2);}while(s.n===0);const a=F(p1,q1),b=F(p2,q2);
+  return{text:`Find: ${fstr(a)} + ${pf(b)}.`,parts:[{type:'num',ans:fv(s),fmt:FM.frac,distract:[(a.n+b.n)/(a.d+b.d),fv(a)-fv(b),-fv(s)]}],sol:`Using the common denominator ${a.d*b.d}: (${neg(a.n*b.d)} + ${pf(F(b.n*a.d,1))}) / ${a.d*b.d} = ${fstr(s)}.`};}},
+{id:'rat_order',topic:'Rational Numbers',level:'C',mcq:false,gen(){let set;do{set=Array.from({length:4},()=>{const d=pick([2,3,4,5,6,8]);return F(R(1,d-1)*(Math.random()<0.65?-1:1),d);});}while(new Set(set.map(fv)).size<4);
+  const shown=set.map(f=>(f.n<0&&Math.random()<0.35)?`${Math.abs(f.n)}/(−${f.d})`:fstr(f));const s=[...set].sort((a,b)=>fv(a)-fv(b));const sum=F(s[0].n*s[3].d+s[3].n*s[0].d,s[0].d*s[3].d);
+  return{text:`Consider the rational numbers ${shown.join(',&nbsp; ')}.`,parts:[{q:'(a) Write them in ascending order, separated by commas.',type:'list',ans:s.map(fv),disp:s.map(f=>fstr(f)).join(', '),w:2},{q:'(b) Find the sum of the greatest and the smallest.',type:'num',ans:fv(sum),fmt:FM.frac,w:1}],sol:`Ascending: ${s.map(f=>fstr(f)).join(' < ')}. Sum = ${fstr(s[3])} + ${pf(s[0])} = ${fstr(sum)}.`};}},
+/* Perimeter and Area */
+{id:'rect_e',topic:'Perimeter and Area',level:'E',mcq:true,gen(){const l=R(6,25),b=R(3,l-1);return{text:`Find the area of a rectangle ${l} cm long and ${b} cm wide.`,parts:[{type:'num',ans:l*b,fmt:FM.unit('cm²'),distract:[2*(l+b),l+b,l*b*2]}],sol:`${l} × ${b} = ${l*b} cm²`};}},
+{id:'rect_m',topic:'Perimeter and Area',level:'M',mcq:false,gen(){const l=R(9,30)+0.5,b=R(4,12);return{text:`A rectangle is ${l} cm long and ${b} cm wide.`,parts:[{q:'(a) Find its area.',type:'num',ans:l*b,fmt:FM.unit('cm²'),w:1},{q:'(b) Find its perimeter.',type:'num',ans:2*(l+b),fmt:FM.unit('cm'),w:1}],sol:`Area = ${l} × ${b} = ${l*b} cm²; perimeter = 2(${l} + ${b}) = ${2*(l+b)} cm.`};}},
+{id:'tri_h',topic:'Perimeter and Area',level:'M',mcq:true,gen(){const b=pick([6,8,10,12,14,16,20]),h=R(4,15),A=b*h/2;return{text:`A triangle has an area of ${A} cm² and a base of ${b} cm. Find its height.`,parts:[{type:'num',ans:h,fmt:FM.unit('cm'),distract:[A/b,2*h,A-b]}],sol:`½ × ${b} × h = ${A}, so h = ${2*A} ÷ ${b} = ${h} cm.`};}},
+{id:'circle',topic:'Perimeter and Area',level:'C',mcq:true,mcqPart:1,gen(){const r=pick([7,14,21,28,35]),C=2*22*r/7,A=22*r*r/7;return{text:`The circumference of a circle is ${C} cm. (Use π = 22/7.)`,parts:[{q:'(a) Find its radius.',type:'num',ans:r,fmt:FM.unit('cm'),w:1},{q:'(b) Find its area.',type:'num',ans:A,fmt:FM.unit('cm²'),w:2,distract:[C*r,22*2*r*2*r/7,A/2]}],sol:`2 × 22/7 × r = ${C}, so r = ${C} × 7 ÷ 44 = ${r} cm; area = 22/7 × ${r} × ${r} = ${A} cm².`};}},
+{id:'garden',topic:'Perimeter and Area',level:'X',mcq:true,mcqPart:0,gen(){let L,W,w,r;do{L=pick([30,36,40,44,50]);W=pick([20,24,25,28,30]);w=pick([1,1.5,2,2.5]);r=pick([7,14]);}while(r===14&&W<30);const rate=pick([25,30,40,45,50]);const outer=(L+2*w)*(W+2*w),path=outer-L*W,cost=path*rate,pond=22*r*r/7,grass=L*W-pond;
+  return{text:`A rectangular garden measures ${L} m by ${W} m. A path ${w} m wide runs all round it on the outside. (Use π = 22/7.)`,parts:[{q:'(a) Find the area of the path (m²).',type:'num',ans:path,fmt:FM.unit('m²'),w:2,distract:[2*(L+W)*w,outer,path-4*w*w]},{q:`(b) Find the cost of paving the path at ₹${rate} per m².`,type:'num',ans:cost,fmt:FM.money,w:1},{q:`(c) A circular pond of radius ${r} m is dug inside the garden. Find the area of the garden left for grass (m²).`,type:'num',ans:grass,fmt:FM.unit('m²'),w:3}],
+  sol:`(a) Outer rectangle ${L+2*w} × ${W+2*w} = ${outer} m²; path = ${outer} − ${L*W} = ${path} m². (b) ${path} × ${rate} = ₹${inr(cost)}. (c) Pond = 22/7 × ${r} × ${r} = ${pond} m²; grass = ${L*W} − ${pond} = ${grass} m².`};}},
+/* Algebraic Expressions */
+{id:'alg_sub',topic:'Algebraic Expressions',level:'M',mcq:false,gen(){const a1=R(2,6),b1=R(1,5),c1=R(1,9),a2=R(5,10),b2=R(1,6),c2=R(1,9);const t=[[a2-a1,'a²'],[b2+b1,'ab'],[-c2-c1,'']];const d=polyDisp(t);return{text:`Subtract ${a1}a² − ${b1}ab + ${c1} from ${a2}a² + ${b2}ab − ${c2}.`,parts:[{type:'expr',ans:d,disp:d,w:1}],sol:`(${a2}a² + ${b2}ab − ${c2}) − (${a1}a² − ${b1}ab + ${c1}) = ${d}`};}},
+{id:'alg_val',topic:'Algebraic Expressions',level:'M',mcq:true,gen(){let a,b;do{a=R(-4,4);b=R(-3,5);}while(!a||!b||a===b);const v=a*a*b-a*b*b;return{text:`If a = ${neg(a)} and b = ${neg(b)}, find the value of a²b − ab².`,parts:[{type:'num',ans:v,fmt:FM.int,distract:[-v,a*a*b+a*b*b,a*b*(a+b)]}],sol:`a²b = ${a*a} × ${pf(F(b))} = ${neg(a*a*b)}; ab² = ${pf(F(a))} × ${b*b} = ${neg(a*b*b)}; so a²b − ab² = ${neg(a*a*b)} − ${pf(F(a*b*b))} = ${neg(v)}.`};}},
+{id:'alg_perim',topic:'Algebraic Expressions',level:'C',mcq:false,gen(){const p=R(2,4),q=R(1,6),r=R(2,5),s=R(1,3),t=R(1,3),u=R(2,8),x=R(2,6),A=p+r+t,B=q-s+u;const d=polyDisp([[A,'x'],[B,'']]);return{text:`The sides of a triangle are (${p}x + ${q}) cm, (${r}x − ${s}) cm and (${t===1?'':t}x + ${u}) cm.`,parts:[{q:'(a) Write an expression for its perimeter.',type:'expr',ans:d,disp:d+' cm',w:2},{q:`(b) Find the perimeter when x = ${x} (cm).`,type:'num',ans:A*x+B,fmt:FM.unit('cm'),w:1}],sol:`Perimeter = ${d}; when x = ${x}: ${A} × ${x} ${B<0?'−':'+'} ${Math.abs(B)} = ${A*x+B} cm.`};}},
+/* Exponents and Powers */
+{id:'pow_e',topic:'Exponents and Powers',level:'E',mcq:true,gen(){const b=pick([2,3,4,5,-2,-3]),e=b<0?3:R(2,4),v=Math.pow(b,e),bs=b<0?`(${neg(b)})`:''+b;return{text:`Find the value of ${bs}<sup>${e}</sup>.`,parts:[{type:'num',ans:v,fmt:FM.int,distract:[b*e,-v,Math.pow(b,e-1)]}],sol:`${Array(e).fill(bs).join(' × ')} = ${neg(v)}`};}},
+{id:'pow_law',topic:'Exponents and Powers',level:'M',mcq:true,gen(){let b,m,n,k,e,v;do{b=pick([2,3,5]);m=R(3,7);n=R(2,5);k=R(2,m+n-1);e=m+n-k;v=Math.pow(b,e);}while(v>3125);return{text:`Simplify (${b}<sup>${m}</sup> × ${b}<sup>${n}</sup>) ÷ ${b}<sup>${k}</sup> and give its value.`,parts:[{type:'num',ans:v,fmt:FM.int,distract:[b*e,Math.pow(b,e+1),Math.pow(b,Math.max(1,e-1))]}],sol:`${b}<sup>${m} + ${n} − ${k}</sup> = ${b}<sup>${e}</sup> = ${v}`};}},
+{id:'std_form',topic:'Exponents and Powers',level:'C',mcq:false,gen(){const m=R(101,999)/100,e=R(4,7),big=Math.round(m*Math.pow(10,e)),a=R(2,3),b=R(2,3),p=R(2,4),q=R(3,5);return{text:'Write each answer in standard form, for example 3.84 × 10^5.',parts:[{q:`(a) Write ${big.toLocaleString('en-IN')} in standard form.`,type:'num',ans:big,fmt:FM.int,sci:true,disp:`${m} × 10<sup>${e}</sup>`,w:2},{q:`(b) Find (${a} × 10<sup>${p}</sup>) × (${b} × 10<sup>${q}</sup>).`,type:'num',ans:a*b*Math.pow(10,p+q),fmt:FM.int,sci:true,disp:`${a*b} × 10<sup>${p+q}</sup>`,w:1}],sol:`(a) ${big.toLocaleString('en-IN')} = ${m} × 10<sup>${e}</sup>. (b) ${a} × ${b} = ${a*b} and 10<sup>${p}</sup> × 10<sup>${q}</sup> = 10<sup>${p+q}</sup>, giving ${a*b} × 10<sup>${p+q}</sup>.`};}}
+];
+T.forEach(t=>{if(!t.cls)t.cls='VII';});
+
+/* ---------- Class V ---------- */
+T.push(
+{id:'v_place',cls:'V',topic:'Large Numbers',level:'E',mcq:true,gen(){const ds=shuffle([1,2,3,4,5,6,7,8,9]).slice(0,6),num=+ds.join(''),k=R(1,4),d=ds[5-k],v=d*Math.pow(10,k);return N(`What is the place value of ${d} in ${num.toLocaleString('en-IN')}?`,v,FM.int,`${d} is in the ${['ones','tens','hundreds','thousands','ten thousands'][k]} place, so its place value is ${v.toLocaleString('en-IN')}.`,[d,d*Math.pow(10,k+1),d*Math.pow(10,k-1)]);}},
+{id:'v_add',cls:'V',topic:'Large Numbers',level:'E',mcq:true,gen(){const a=R(10000,89999),b=R(1000,9999);return Math.random()<0.5?N(`Add: ${a} + ${b}.`,a+b,FM.int,`${a} + ${b} = ${a+b}`,[a+b+1000,a+b-10,a+b+100]):N(`Subtract: ${a} − ${b}.`,a-b,FM.int,`${a} − ${b} = ${a-b}`,[a-b+1000,a+b,a-b-100]);}},
+{id:'v_fracof',cls:'V',topic:'Fractions',level:'E',mcq:true,gen(){const d=pick([2,3,4,5,6,8]),n=R(1,d-1),m=d*R(3,12);return N(`Find ${n}/${d} of ${m}.`,n*m/d,FM.int,`${m} ÷ ${d} = ${m/d}, and ${m/d} × ${n} = ${n*m/d}.`,[m/d,m-n*m/d,n*m]);}},
+{id:'v_conv',cls:'V',topic:'Measurement',level:'E',mcq:true,gen(){const [big,small,f]=pick([['kg','g',1000],['km','m',1000],['L','mL',1000],['m','cm',100]]),a=R(2,9),b=f===100?R(5,95):R(50,950);return N(`Convert ${a} ${big} ${b} ${small} into ${small}.`,a*f+b,FM.int,`${a} × ${f} + ${b} = ${a*f+b} ${small}`,[a*100+b,a+b,a*f*10+b]);}},
+{id:'v_angle',cls:'V',topic:'Shapes and Angles',level:'E',mcq:true,mcqOnly:true,gen(){const a=pick([R(20,85),90,R(95,175),180]),t=a<90?'Acute angle':a===90?'Right angle':a<180?'Obtuse angle':'Straight angle';return CHS(`An angle of ${a}° is a`,t,['Acute angle','Right angle','Obtuse angle','Straight angle'],`${a}° is ${a<90?'less than 90°':a===90?'exactly 90°':a<180?'between 90° and 180°':'exactly 180°'}.`);}},
+{id:'v_angle_w',cls:'V',topic:'Shapes and Angles',level:'E',mcq:false,gen(){const a=R(20,75);return N(`A right angle is split into two angles. One of them is ${a}°. Find the other.`,90-a,FM.deg,`90° − ${a}° = ${90-a}°`);}},
+{id:'v_mul',cls:'V',topic:'Multiplication and Division',level:'M',mcq:true,gen(){const a=R(120,989),b=R(12,89);return N(`Multiply: ${a} × ${b}.`,a*b,FM.int,`${a} × ${b} = ${a*b}`,[a*b+a,a*b-b,a*(b+1)+10]);}},
+{id:'v_div',cls:'V',topic:'Multiplication and Division',level:'M',mcq:true,mcqPart:0,gen(){const d=R(3,9),q=R(120,990),r=R(1,d-1),n=d*q+r;return{text:`Divide ${n} by ${d}.`,parts:[PT('(a) Quotient',q,FM.int,1,{distract:[q+1,q-1,q*10]}),PT('(b) Remainder',r,FM.int,1)],sol:`${d} × ${q} = ${d*q} and ${n} − ${d*q} = ${r}: quotient ${q}, remainder ${r}.`};}},
+{id:'v_lcm',cls:'V',topic:'Factors and Multiples',level:'M',mcq:true,gen(){const [a,b]=pick([[4,6],[6,8],[3,5],[4,10],[6,9],[8,12],[5,6],[9,12]]),l=a*b/gcd(a,b);return N(`What is the smallest common multiple of ${a} and ${b}?`,l,FM.int,`Multiples of ${a}: ${[1,2,3,4,5,6].map(k=>a*k).join(', ')} … The first one that is also a multiple of ${b} is ${l}.`,[a*b===l?l*2:a*b,gcd(a,b),l+a]);}},
+{id:'v_factors',cls:'V',topic:'Factors and Multiples',level:'M',mcq:true,gen(){const n=pick([12,18,20,24,28,30,36,40,45,48]),f=[];for(let i=1;i<=n;i++)if(n%i===0)f.push(i);return N(`How many factors does ${n} have?`,f.length,FM.int,`Factors of ${n}: ${f.join(', ')}, which is ${f.length} factors.`,[f.length-1,f.length+2,Math.floor(n/2)]);}},
+{id:'v_dec',cls:'V',topic:'Decimals',level:'M',mcq:true,gen(){const a=R(100,999)/100,b=R(10,99)/10;if(Math.random()<0.6){const v=+(a+b).toFixed(2);return N(`Add: ${a} + ${b}.`,v,FM.num,`Line up the decimal points: ${a} + ${b} = ${v}`,[+(a+b/10).toFixed(2),+(v+1).toFixed(2),+(v-0.1).toFixed(2)]);}const hi=Math.max(a,b),lo=Math.min(a,b),v=+(hi-lo).toFixed(2);return N(`Subtract: ${hi} − ${lo}.`,v,FM.num,`${hi} − ${lo} = ${v}`,[+(hi+lo).toFixed(2),+(v+0.1).toFixed(2),+(v+1).toFixed(2)]);}},
+{id:'v_perim',cls:'V',topic:'Perimeter and Area',level:'M',mcq:true,gen(){const l=R(8,40),b=R(3,l-1);return N(`Find the perimeter of a rectangular garden ${l} m long and ${b} m wide.`,2*(l+b),FM.unit('m'),`2 × (${l} + ${b}) = ${2*(l+b)} m`,[l*b,l+b,2*l+b]);}},
+{id:'v_time',cls:'V',topic:'Time and Money',level:'M',mcq:true,gen(){const h1=R(7,11),m1=pick([5,10,15,20,25,35,40,45,50]),dur=R(55,170),t1=h1*60+m1,t2=t1+dur;const fm=t=>{const h=Math.floor(t/60),m=t%60;return `${h>12?h-12:h}:${String(m).padStart(2,'0')} ${h>=12?'pm':'am'}`;};return N(`A train leaves at ${fm(t1)} and arrives at ${fm(t2)}. How many minutes does the journey take?`,dur,FM.unit('minutes'),`From ${fm(t1)} to ${fm(t2)} is ${Math.floor(dur/60)} h ${dur%60} min = ${dur} minutes.`,[dur-40,dur+40,Math.floor(dur/60)*100+dur%60]);}},
+{id:'v_money',cls:'V',topic:'Time and Money',level:'C',mcq:true,mcqPart:1,gen(){const p=R(12,25),np=R(3,8),nb=R(35,60),nn=R(2,4),tot=p*np+nb*nn,paid=Math.ceil((tot+1)/100)*100;return{text:`Riya buys ${np} pens at ₹${p} each and ${nn} notebooks at ₹${nb} each. She pays with ₹${paid}.`,parts:[PT('(a) Find the total cost (₹).',tot,FM.money,2),PT('(b) How much change does she get (₹)?',paid-tot,FM.money,1,{distract:[paid-p*np,tot,paid-tot+10]})],sol:`(a) ${np} × ${p} + ${nn} × ${nb} = ${p*np} + ${nb*nn} = ₹${tot}. (b) ₹${paid} − ₹${tot} = ₹${paid-tot}.`};}},
+{id:'v_lshape',cls:'V',topic:'Perimeter and Area',level:'C',mcq:true,gen(){const a=R(10,20),b=R(8,15),c=R(3,a-4),d=R(2,b-3),A=a*b-c*d;return N(`A rectangular floor is ${a} m by ${b} m. A rectangular corner of ${c} m by ${d} m is cut out for a staircase. Find the area of the floor that is left.`,A,FM.unit('m²'),`${a} × ${b} − ${c} × ${d} = ${a*b} − ${c*d} = ${A} m²`,[a*b,a*b+c*d,2*(a+b)]);}},
+{id:'v_fracword',cls:'V',topic:'Fractions',level:'C',mcq:true,mcqPart:1,gen(){const d=pick([4,5,8]),n=R(1,d-1),total=d*R(4,7),g=n*total/d;return{text:`A class has ${total} students and ${n}/${d} of them are girls.`,parts:[PT('(a) How many girls are there?',g,FM.int,2),PT('(b) How many boys are there?',total-g,FM.int,1,{distract:[g,total-n,total/d]})],sol:`(a) ${n}/${d} × ${total} = ${g}. (b) ${total} − ${g} = ${total-g}.`};}},
+{id:'v_data',cls:'V',topic:'Data Handling',level:'C',mcq:true,mcqPart:0,gen(){const days=['Mon','Tue','Wed','Thu','Fri'],v=days.map(()=>R(12,60)),hi=Math.max(...v),lo=Math.min(...v),tot=v.reduce((a,b)=>a+b);return{text:`Books issued from a school library: ${days.map((d,i)=>d+' '+v[i]).join(', ')}.`,parts:[PT('(a) How many books were issued in all?',tot,FM.int,2,{distract:[tot+10,tot-hi,hi*5]}),PT('(b) How many more books were issued on the busiest day than on the quietest day?',hi-lo,FM.int,1)],sol:`(a) ${v.join(' + ')} = ${tot}. (b) ${hi} − ${lo} = ${hi-lo}.`};}},
+{id:'v_field',cls:'V',topic:'Perimeter and Area',level:'X',mcq:true,mcqPart:1,gen(){const l=2*R(10,30),b=2*R(5,15),rate=R(15,40);return{text:`A rectangular field is ${l} m long and ${b} m wide.`,parts:[PT('(a) Find the perimeter of the field (m).',2*(l+b),FM.unit('m'),2),PT(`(b) Find the cost of fencing it at ₹${rate} per metre.`,2*(l+b)*rate,FM.money,2,{distract:[l*b*rate,(l+b)*rate,2*(l+b)*rate+rate]}),PT('(c) How many square tiles of side 2 m are needed to cover the field?',l*b/4,FM.int,2)],sol:`(a) 2 × (${l} + ${b}) = ${2*(l+b)} m. (b) ${2*(l+b)} × ${rate} = ₹${inr(2*(l+b)*rate)}. (c) Area ${l*b} m² ÷ 4 m² per tile = ${l*b/4} tiles.`};}},
+{id:'v_tank',cls:'V',topic:'Measurement',level:'X',mcq:true,mcqPart:1,gen(){const L=R(3,9),ml=R(1,9)*100,bot=pick([200,250,300,400,500]),tot=L*1000+ml,nb=Math.floor(tot/bot),left=tot-nb*bot;return{text:`A water can holds ${L} L ${ml} mL. The water is poured into bottles of ${bot} mL each.`,parts:[PT('(a) How many millilitres of water are there?',tot,FM.unit('mL'),2),PT('(b) How many bottles can be filled completely?',nb,FM.int,2,{distract:[nb+1,nb-1,Math.round(tot/100)]}),PT('(c) How many millilitres are left over?',left,FM.unit('mL'),2)],sol:`(a) ${L} × 1000 + ${ml} = ${tot} mL. (b) ${tot} ÷ ${bot} = ${nb} remainder ${left}, so ${nb} bottles. (c) ${left} mL.`};}}
+);
+
+/* ---------- Class VI ---------- */
+T.push(
+{id:'vi_round',cls:'VI',topic:'Knowing Our Numbers',level:'E',mcq:true,gen(){const n=R(10000,99999),[u,name]=pick([[100,'hundred'],[1000,'thousand'],[10,'ten']]),v=Math.round(n/u)*u,other=Math.floor(n/u)*u===v?v+u:Math.floor(n/u)*u;return N(`Round ${n} to the nearest ${name}.`,v,FM.int,`Look at the digit to the right of the ${name}s place: ${n} rounds to ${v}.`,[other,v*10,n-n%10===v?v+2*u:n-n%10]);}},
+{id:'vi_int',cls:'VI',topic:'Integers',level:'E',mcq:true,gen(){const a=R(5,40),b=R(5,40);return Math.random()<0.5?N(`Find (−${a}) + ${b}.`,b-a,FM.int,`(−${a}) + ${b} = ${neg(b-a)}`,[a+b,-(a+b),a-b]):N(`Find ${a} − (−${b}).`,a+b,FM.int,`${a} − (−${b}) = ${a} + ${b} = ${a+b}`,[a-b,-(a+b),b-a]);}},
+{id:'vi_simpl',cls:'VI',topic:'Fractions',level:'E',mcq:true,gen(){const n=R(1,7),d=R(n+1,9),k=R(2,8),f=F(n,d);return N(`Write ${n*k}/${d*k} in its simplest form.`,fv(f),FM.frac,`Divide the numerator and denominator by ${gcd(n*k,d*k)}: ${fstr(f)}.`,[(n+1)/d,n/(d+1),d/n]);}},
+{id:'vi_clock',cls:'VI',topic:'Understanding Elementary Shapes',level:'E',mcq:true,gen(){const m=pick([5,10,15,20,25,35,40,45,50]);return N(`Through how many degrees does the minute hand of a clock turn in ${m} minutes?`,6*m,FM.deg,`The minute hand turns 360° in 60 minutes, which is 6° a minute: 6 × ${m} = ${6*m}°.`,[m,360-6*m,3*m]);}},
+{id:'vi_hcf',cls:'VI',topic:'Playing with Numbers',level:'M',mcq:true,gen(){let a,b,h;do{h=R(2,12);a=h*R(2,9);b=h*R(2,9);}while(a===b||gcd(a,b)!==h);return N(`Find the HCF of ${a} and ${b}.`,h,FM.int,`${a} = ${h} × ${a/h} and ${b} = ${h} × ${b/h}; the highest common factor is ${h}.`,[a*b/h,h*2,Math.min(a,b)]);}},
+{id:'vi_lcm',cls:'VI',topic:'Playing with Numbers',level:'M',mcq:true,gen(){let a,b;do{a=R(4,18);b=R(4,18);}while(a===b);const l=a*b/gcd(a,b);return N(`Find the LCM of ${a} and ${b}.`,l,FM.int,`LCM = ${a} × ${b} ÷ HCF (${gcd(a,b)}) = ${l}`,[a*b===l?l+a:a*b,gcd(a,b),l*2]);}},
+{id:'vi_dec',cls:'VI',topic:'Decimals',level:'M',mcq:true,gen(){const a=R(1000,9999)/100,b=R(100,999)/100,v=+(a-b).toFixed(2);return N(`Find ${a} − ${b}.`,v,FM.num,`${a} − ${b} = ${v}`,[+(a+b).toFixed(2),+(v+1).toFixed(2),+(v-0.1).toFixed(2)]);}},
+{id:'vi_square',cls:'VI',topic:'Mensuration',level:'M',mcq:true,gen(){const s=R(6,40);return N(`The perimeter of a square is ${4*s} cm. Find the length of its side.`,s,FM.unit('cm'),`${4*s} ÷ 4 = ${s} cm`,[2*s,s*s,s+4]);}},
+{id:'vi_alg',cls:'VI',topic:'Algebra',level:'M',mcq:true,gen(){const a=R(2,6),b=R(1,5),n=R(6,25);return N(`A pattern uses ${a}n + ${b} matchsticks to make n shapes. How many matchsticks are needed for ${n} shapes?`,a*n+b,FM.int,`${a} × ${n} + ${b} = ${a*n+b}`,[a*n,(a+b)*n,a*(n+b)]);}},
+{id:'vi_unitary',cls:'VI',topic:'Ratio and Proportion',level:'M',mcq:true,gen(){const u=R(8,45),a=R(3,9),b=R(10,20),item=pick(['pens','notebooks','mangoes','pencils']);return N(`If ${a} ${item} cost ₹${a*u}, what do ${b} ${item} cost?`,b*u,FM.money,`One costs ₹${a*u} ÷ ${a} = ₹${u}; ${b} cost ${b} × ₹${u} = ₹${b*u}.`,[a*u+b,b*a*u,(b-a)*u]);}},
+{id:'vi_share',cls:'VI',topic:'Ratio and Proportion',level:'C',mcq:true,mcqPart:0,gen(){const [p,q]=pick([[2,3],[3,5],[1,4],[4,5],[3,7],[5,7]]),k=R(10,90)*10,tot=(p+q)*k;return{text:`₹${inr(tot)} is shared between Asha and Ben in the ratio ${p} : ${q}.`,parts:[PT("(a) Find Asha's share (₹).",p*k,FM.money,2,{distract:[q*k,tot/2,Math.round(p*tot/q)]}),PT("(b) Find Ben's share (₹).",q*k,FM.money,1)],sol:`There are ${p+q} parts; one part = ₹${inr(tot)} ÷ ${p+q} = ₹${inr(k)}. Asha gets ${p} × ₹${inr(k)} = ₹${inr(p*k)}; Ben gets ${q} × ₹${inr(k)} = ₹${inr(q*k)}.`};}},
+{id:'vi_rect',cls:'VI',topic:'Mensuration',level:'C',mcq:true,mcqPart:0,gen(){const l=R(8,30),b=R(3,l-1);return{text:`The area of a rectangle is ${l*b} cm² and its length is ${l} cm.`,parts:[PT('(a) Find its breadth.',b,FM.unit('cm'),2,{distract:[l*b-l,2*b,l-b]}),PT('(b) Find its perimeter.',2*(l+b),FM.unit('cm'),1)],sol:`(a) ${l*b} ÷ ${l} = ${b} cm. (b) 2 × (${l} + ${b}) = ${2*(l+b)} cm.`};}},
+{id:'vi_mean',cls:'VI',topic:'Data Handling',level:'C',mcq:true,mcqPart:1,gen(){let v,tot;do{v=Array.from({length:5},()=>R(3,20));tot=v.reduce((a,b)=>a+b);}while(tot%5);const names=['Anu','Bilal','Chitra','Dev','Esha'];return{text:`Books read in a month: ${names.map((n,i)=>n+' '+v[i]).join(', ')}.`,parts:[PT('(a) Find the total number of books read.',tot,FM.int,1),PT('(b) Find the average (mean) number of books read per person.',tot/5,FM.int,2,{distract:[Math.round(tot/4),Math.max(...v),tot]})],sol:`(a) ${v.join(' + ')} = ${tot}. (b) ${tot} ÷ 5 = ${tot/5}.`};}},
+{id:'vi_hcfw',cls:'VI',topic:'Playing with Numbers',level:'C',mcq:true,mcqPart:0,gen(){let a,b,h;do{h=R(3,15);a=h*R(3,9);b=h*R(3,9);}while(a===b||gcd(a,b)!==h);return{text:`Two ropes are ${a} m and ${b} m long. They are cut into pieces of equal length, as long as possible, with nothing left over.`,parts:[PT('(a) What is the length of each piece (m)?',h,FM.unit('m'),2,{distract:[a*b/h,Math.min(a,b),h/2]}),PT('(b) How many pieces are there in all?',(a+b)/h,FM.int,1)],sol:`(a) HCF of ${a} and ${b} = ${h} m. (b) ${a} ÷ ${h} + ${b} ÷ ${h} = ${a/h} + ${b/h} = ${(a+b)/h}.`};}},
+{id:'vi_linear',cls:'VI',topic:'Basic Geometrical Ideas',level:'C',mcq:true,gen(){let x,a,b,c,d;do{x=R(10,40);a=R(1,3);b=R(5,30);c=R(1,3);d=180-a*x-b-c*x;}while(d<=0||d>60);const e1=(a===1?'':a)+'x + '+b,e2=(c===1?'':c)+'x + '+d;return N(`Two angles on a straight line measure (${e1})° and (${e2})°. Find x.`,x,FM.int,`The angles add up to 180°: ${a+c}x + ${b+d} = 180, so x = ${x}.`,[x+5,180-b-d,Math.round((180-b-d)/a)]);}},
+{id:'vi_bells',cls:'VI',topic:'Playing with Numbers',level:'X',mcq:true,mcqPart:0,gen(){const [a,b,c]=pick([[6,8,12],[10,15,20],[4,6,9],[12,15,20],[5,6,10],[8,12,18]]),l=[a,b,c].reduce((x,y)=>x*y/gcd(x,y)),win=pick([180,240,300]);return{text:`Three bells ring every ${a}, ${b} and ${c} minutes. They ring together at 8:00 am.`,parts:[PT('(a) After how many minutes will they next ring together?',l,FM.unit('minutes'),2,{distract:[a*b*c,a+b+c,l/2]}),PT(`(b) How many more times will they ring together in the next ${win/60} hours?`,Math.floor(win/l),FM.int,2),PT('(c) How many minutes after 8:00 am do they ring together for the third time after 8:00 am?',3*l,FM.unit('minutes'),2)],sol:`(a) LCM(${a}, ${b}, ${c}) = ${l} minutes. (b) ${win} ÷ ${l} = ${Math.floor(win/l)} times. (c) 3 × ${l} = ${3*l} minutes.`};}},
+{id:'vi_fence',cls:'VI',topic:'Mensuration',level:'X',mcq:true,mcqPart:1,gen(){const l=R(20,60),b=R(10,l-5),rounds=pick([2,3,4]),rate=R(5,15),p=2*(l+b);return{text:`A rectangular plot is ${l} m long and ${b} m wide. It is to be fenced with ${rounds} rounds of wire.`,parts:[PT('(a) Find the perimeter of the plot (m).',p,FM.unit('m'),2),PT('(b) How much wire is needed (m)?',p*rounds,FM.unit('m'),2,{distract:[p,l*b*rounds,(l+b)*rounds]}),PT(`(c) Find the cost of the wire at ₹${rate} per metre.`,p*rounds*rate,FM.money,2)],sol:`(a) 2 × (${l} + ${b}) = ${p} m. (b) ${rounds} × ${p} = ${p*rounds} m. (c) ${p*rounds} × ₹${rate} = ₹${inr(p*rounds*rate)}.`};}}
+);
+
+/* ---------- Class VIII ---------- */
+T.push(
+{id:'viii_sqrt',cls:'VIII',topic:'Squares and Square Roots',level:'E',mcq:true,gen(){const r=R(12,45);return N(`Find √${r*r}.`,r,FM.int,`${r} × ${r} = ${r*r}, so √${r*r} = ${r}.`,[r+1,r-1,Math.round(r*r/2)]);}},
+{id:'viii_cube',cls:'VIII',topic:'Cubes and Cube Roots',level:'E',mcq:true,gen(){const r=R(4,15);return N(`Find the cube root of ${r**3}.`,r,FM.int,`${r} × ${r} × ${r} = ${r**3}.`,[r+1,r*r,Math.round(Math.sqrt(r**3))]);}},
+{id:'viii_negexp',cls:'VIII',topic:'Exponents and Powers',level:'E',mcq:true,gen(){const b=pick([2,3,4,5,10]),e=R(2,3);return N(`Find the value of ${b}<sup>−${e}</sup>.`,1/b**e,FM.frac,`${b}<sup>−${e}</sup> = 1 / ${b}<sup>${e}</sup> = 1/${b**e}`,[-(b**e),-b*e,1/(b*e)]);}},
+{id:'viii_ext',cls:'VIII',topic:'Understanding Quadrilaterals',level:'E',mcq:true,gen(){const n=pick([5,6,8,9,10,12,15,18,20]);return N(`Find each exterior angle of a regular polygon with ${n} sides.`,360/n,FM.deg,`The exterior angles add up to 360°: 360° ÷ ${n} = ${360/n}°.`,[180-360/n,180/n,(n-2)*180/n]);}},
+{id:'viii_int',cls:'VIII',topic:'Understanding Quadrilaterals',level:'M',mcq:true,gen(){const n=pick([5,6,8,9,10,12,15,18]);return N(`Find each interior angle of a regular polygon with ${n} sides.`,180-360/n,FM.deg,`Exterior angle = 360° ÷ ${n} = ${360/n}°, so the interior angle = 180° − ${360/n}° = ${180-360/n}°.`,[360/n,(n-2)*180,180-180/n]);}},
+{id:'viii_lin',cls:'VIII',topic:'Linear Equations in One Variable',level:'M',mcq:true,gen(){let x,a,b,c;do{x=R(2,15);a=R(2,7);b=R(1,12);c=pick([2,3,4,5]);}while((a*x+b)%c);const d=(a*x+b)/c;return N(`Solve: (${a}x + ${b}) / ${c} = ${d}.`,x,FM.int,`${a}x + ${b} = ${c*d}, so ${a}x = ${c*d-b} and x = ${x}.`,[Math.round((d-b)/a),x+1,Math.round((c*d+b)/a)]);}},
+{id:'viii_disc',cls:'VIII',topic:'Comparing Quantities',level:'M',mcq:true,gen(){let mp,d;do{mp=R(4,60)*50;d=pick([5,10,12,15,20,25,30]);}while((mp*d)%100);return N(`A jacket is marked ₹${inr(mp)} and sold at a discount of ${d}%. Find the selling price.`,mp*(100-d)/100,FM.money,`Discount = ${d}% of ₹${inr(mp)} = ₹${inr(mp*d/100)}; SP = ₹${inr(mp)} − ₹${inr(mp*d/100)} = ₹${inr(mp*(100-d)/100)}.`,[mp*d/100,mp*(100+d)/100,mp-d]);}},
+{id:'viii_prob',cls:'VIII',topic:'Data Handling',level:'M',mcq:true,gen(){const r=R(2,9),b=R(2,9),g=R(1,6),t=r+b+g,c=pick([['red',r],['blue',b],['green',g]]);return N(`A bag has ${r} red, ${b} blue and ${g} green balls. One ball is picked at random. What is the probability that it is ${c[0]}?`,c[1]/t,FM.frac,`${c[1]} ${c[0]} balls out of ${t}: probability = ${fstr(F(c[1],t))}.`,[c[1]/(t-c[1]),1/t,(t-c[1])/t]);}},
+{id:'viii_ident',cls:'VIII',topic:'Algebraic Expressions and Identities',level:'M',mcq:true,gen(){const a=pick([50,100,200]),b=R(1,9);return Math.random()<0.5?N(`Using an identity, find ${a+b} × ${a-b}.`,(a+b)*(a-b),FM.int,`(a + b)(a − b) = a² − b²: ${a*a} − ${b*b} = ${(a+b)*(a-b)}.`,[a*a+b*b,a*a-b,(a+b)*(a-b)+100]):N(`Using an identity, find ${a+b}².`,(a+b)**2,FM.int,`(a + b)² = a² + 2ab + b²: ${a*a} + ${2*a*b} + ${b*b} = ${(a+b)**2}.`,[a*a+b*b,(a+b)**2-b*b,a*a+2*a*b]);}},
+{id:'viii_prop',cls:'VIII',topic:'Direct and Inverse Proportions',level:'M',mcq:true,gen(){if(Math.random()<0.5){const w=pick([6,8,10,12,15,20]),dd=pick([10,12,15,18,24,30]),opts=[4,5,6,8,9,10,12,15,16,18,20,24,30].filter(x=>x!==w&&(w*dd)%x===0),w2=pick(opts);return N(`${w} workers can build a wall in ${dd} days. How many days would ${w2} workers take?`,w*dd/w2,FM.unit('days'),`Inverse proportion: ${w} × ${dd} = ${w2} × d, so d = ${w*dd/w2}.`,[Math.round(dd*w2/w),dd+w-w2,w2]);}const kg=R(3,8),u=R(30,90),k2=R(9,15);return N(`${kg} kg of rice costs ₹${kg*u}. What do ${k2} kg cost?`,k2*u,FM.money,`Direct proportion: ₹${u} per kg × ${k2} = ₹${k2*u}.`,[kg*u+k2,kg*u*k2,(k2-kg)*u]);}},
+{id:'viii_ci',cls:'VIII',topic:'Comparing Quantities',level:'C',mcq:true,mcqPart:1,gen(){const [r,mult]=pick([[10,100],[20,100],[5,400],[4,625],[8,625]]),P=mult*R(10,60),A=Math.round(P*(1+r/100)**2);return{text:`Find the amount and the compound interest on ₹${inr(P)} for 2 years at ${r}% per annum, compounded annually.`,parts:[PT('(a) Amount (₹)',A,FM.money,2),PT('(b) Compound interest (₹)',A-P,FM.money,1,{distract:[P*r*2/100,A,A-P+P*r/100]})],sol:`A = ₹${inr(P)} × (1 + ${r}/100)² = ₹${inr(A)}; CI = ₹${inr(A)} − ₹${inr(P)} = ₹${inr(A-P)}.`};}},
+{id:'viii_cuboid',cls:'VIII',topic:'Mensuration',level:'C',mcq:true,mcqPart:1,gen(){const l=R(5,20),b=R(3,12),h=R(2,10),S=2*(l*b+b*h+h*l);return{text:`A cuboid measures ${l} cm × ${b} cm × ${h} cm.`,parts:[PT('(a) Find its total surface area (cm²).',S,FM.unit('cm²'),2),PT('(b) Find its volume (cm³).',l*b*h,FM.unit('cm³'),1,{distract:[S,S/2,l*b*h*2]})],sol:`(a) 2(${l*b} + ${b*h} + ${h*l}) = ${S} cm². (b) ${l} × ${b} × ${h} = ${l*b*h} cm³.`};}},
+{id:'viii_cyl',cls:'VIII',topic:'Mensuration',level:'C',mcq:true,mcqPart:0,gen(){const r=pick([7,14,21]),h=R(5,20);return{text:`A cylinder has radius ${r} cm and height ${h} cm. (Use π = 22/7.)`,parts:[PT('(a) Find its curved surface area (cm²).',44*r*h/7,FM.unit('cm²'),2,{distract:[22*r*h/7,44*r*(r+h)/7,22*r*r*h/7]}),PT('(b) Find its volume (cm³).',22*r*r*h/7,FM.unit('cm³'),1)],sol:`(a) 2 × 22/7 × ${r} × ${h} = ${44*r*h/7} cm². (b) 22/7 × ${r}² × ${h} = ${22*r*r*h/7} cm³.`};}},
+{id:'viii_factor',cls:'VIII',topic:'Factorisation',level:'C',mcq:false,gen(){let p,q;do{p=R(-8,9);q=R(-8,9);}while(!p||!q||p===-q);const b=p+q,c=p*q,term=k=>k<0?`(x − ${-k})`:`(x + ${k})`,expr=`x² ${b<0?'−':'+'} ${Math.abs(b)===1?'':Math.abs(b)}x ${c<0?'−':'+'} ${Math.abs(c)}`,x=R(2,6);return{text:`Factorise ${expr}.`,parts:[{q:'(a) Write the expression as a product of two factors.',type:'expr',ans:`(x+${p})(x+${q})`.replace(/\+-/g,'-'),disp:term(p)+term(q),mustParen:true,w:2},PT(`(b) Find the value of the expression when x = ${x}.`,x*x+b*x+c,FM.int,1)],sol:`Find two numbers with product ${c} and sum ${b}: ${neg(p)} and ${neg(q)}. So ${expr} = ${term(p)}${term(q)}. When x = ${x}, the value is ${x*x+b*x+c}.`};}},
+{id:'viii_ages',cls:'VIII',topic:'Linear Equations in One Variable',level:'C',mcq:true,mcqPart:0,gen(){const [p,q]=pick([[2,3],[3,5],[4,5],[5,7],[3,4]]),k=R(3,8),t=R(3,8),S=(p+q)*k+2*t;return{text:`The present ages of Asha and Raj are in the ratio ${p} : ${q}. After ${t} years, the sum of their ages will be ${S} years.`,parts:[PT("(a) Find Asha's present age.",p*k,FM.unit('years'),2,{distract:[q*k,p*k+t,Math.round(S/2)]}),PT("(b) Find Raj's present age.",q*k,FM.unit('years'),1)],sol:`Let the ages be ${p}x and ${q}x: ${p}x + ${q}x + ${2*t} = ${S}, so ${p+q}x = ${S-2*t} and x = ${k}. Asha is ${p*k} and Raj is ${q*k}.`};}},
+{id:'viii_tank',cls:'VIII',topic:'Mensuration',level:'X',mcq:true,mcqPart:0,gen(){const r=pick([0.7,1.4,2.1]),h=pick([1,1.5,2,2.5,3]),L=Math.round(22*r*r*h/7*1000),rate=[50,70,100].filter(x=>L%x===0)[0]||70,csa=+(44*r*h/7).toFixed(2);return{text:`A cylindrical water tank has radius ${r} m and height ${h} m. (Use π = 22/7; 1 m³ = 1000 L.)`,parts:[PT('(a) Find its capacity in litres.',L,FM.unit('L'),2,{distract:[L/10,L*2,Math.round(csa*1000)]}),PT(`(b) Water flows in at ${rate} L per minute. How many minutes does it take to fill the empty tank?`,L/rate,FM.unit('minutes'),2),PT('(c) Find the curved surface area of the tank (m²).',csa,FM.unit('m²'),2)],sol:`(a) 22/7 × ${r}² × ${h} = ${L/1000} m³ = ${L} L. (b) ${L} ÷ ${rate} = ${+(L/rate).toFixed(2)} minutes. (c) 2 × 22/7 × ${r} × ${h} = ${csa} m².`};}},
+{id:'viii_sici',cls:'VIII',topic:'Comparing Quantities',level:'X',mcq:true,mcqPart:2,gen(){const r=pick([10,20]),P=100*R(20,120),si=P*r*2/100,ci=Math.round(P*(1+r/100)**2-P);return{text:`Ravi borrows ₹${inr(P)} for 2 years at ${r}% per annum.`,parts:[PT('(a) Find the simple interest (₹).',si,FM.money,2),PT('(b) Find the compound interest, compounded annually (₹).',ci,FM.money,2),PT('(c) How much more is the compound interest than the simple interest (₹)?',ci-si,FM.money,2,{distract:[si,ci,P*r/100]})],sol:`(a) ${P} × ${r} × 2 ÷ 100 = ₹${inr(si)}. (b) ₹${inr(P)} × (1 + ${r}/100)² − ₹${inr(P)} = ₹${inr(ci)}. (c) ₹${inr(ci)} − ₹${inr(si)} = ₹${inr(ci-si)}.`};}}
+);
+
+/* ---------- Class IX ---------- */
+const QUADS=['Quadrant I','Quadrant II','Quadrant III','Quadrant IV'];
+const quadOf=(x,y)=>x>0?(y>0?QUADS[0]:QUADS[3]):(y>0?QUADS[1]:QUADS[2]);
+T.push(
+{id:'ix_exp',cls:'IX',topic:'Number Systems',level:'E',mcq:true,gen(){const [b,n,d,v]=pick([[8,2,3,4],[27,2,3,9],[16,3,4,8],[32,2,5,4],[125,1,3,5],[81,3,4,27],[64,5,6,32],[9,3,2,27]]),root=Math.round(Math.pow(b,1/d));return N(`Find the value of ${b}<sup>${n}/${d}</sup>.`,v,FM.int,`${b}<sup>1/${d}</sup> = ${root}, and ${root}<sup>${n}</sup> = ${v}.`,[Math.round(b*n/d),v*2,root]);}},
+{id:'ix_quad',cls:'IX',topic:'Coordinate Geometry',level:'E',mcq:true,mcqOnly:true,gen(){const x=R(1,9)*pick([1,-1]),y=R(1,9)*pick([1,-1]),q=quadOf(x,y);return CHS(`The point (${neg(x)}, ${neg(y)}) lies in`,q,QUADS,`x is ${x>0?'positive':'negative'} and y is ${y>0?'positive':'negative'}, so the point is in ${q}.`);}},
+{id:'ix_quad_w',cls:'IX',topic:'Coordinate Geometry',level:'E',mcq:false,gen(){const x=R(1,9)*pick([1,-1]),y=R(1,9)*pick([1,-1]),q=quadOf(x,y);return{text:`Consider the point P(${neg(x)}, ${neg(y)}).`,parts:[SEL('(a) In which quadrant does P lie?',q,QUADS),PT('(b) How far is P from the x-axis?',Math.abs(y),FM.int,1)],sol:`The signs give ${q}. The distance from the x-axis is |y| = ${Math.abs(y)}.`};}},
+{id:'ix_pval',cls:'IX',topic:'Polynomials',level:'E',mcq:true,gen(){const a=R(1,3),b=R(-6,6),c=R(-9,9),x=R(-3,4),v=a*x*x+b*x+c;return N(`If p(x) = ${polyDisp([[a,'x²'],[b,'x'],[c,'']])}, find p(${neg(x)}).`,v,FM.int,`Substitute x = ${neg(x)}: p(${neg(x)}) = ${neg(v)}.`,[a*x*x-b*x+c,a*x+b*x+c,v+1]);}},
+{id:'ix_lines',cls:'IX',topic:'Lines and Angles',level:'E',mcq:true,gen(){const a=R(25,155);if(a===90)return this.gen();return Math.random()<0.5?N(`Two straight lines intersect. One of the angles formed is ${a}°. Find the angle adjacent to it.`,180-a,FM.deg,`Adjacent angles form a linear pair: 180° − ${a}° = ${180-a}°.`,[a,Math.abs(90-a),360-a]):N(`Two straight lines intersect. One of the angles formed is ${a}°. Find the angle vertically opposite to it.`,a,FM.deg,`Vertically opposite angles are equal: ${a}°.`,[180-a,90,360-a]);}},
+{id:'ix_rem',cls:'IX',topic:'Polynomials',level:'M',mcq:true,gen(){const a=R(-4,4),b=R(-6,6),c=R(-9,9),k=R(-3,3)||2,v=k**3+a*k*k+b*k+c,rest=polyDisp([[a,'x²'],[b,'x'],[c,'']]);return N(`Find the remainder when x³ ${rest==='0'?'':(rest[0]==='−'?'− '+rest.slice(1):'+ '+rest)} is divided by (x ${k<0?'+':'−'} ${Math.abs(k)}).`,v,FM.int,`By the remainder theorem, the remainder is p(${neg(k)}) = ${neg(v)}.`,[-v,(-k)**3+a*k*k-b*k+c,v+k]);}},
+{id:'ix_rat',cls:'IX',topic:'Number Systems',level:'M',mcq:false,gen(){const [a,b]=pick([[5,3],[7,5],[6,2],[3,2],[7,3],[11,7]]),v=(Math.sqrt(a)+Math.sqrt(b))/(a-b);return{text:`Rationalise the denominator of 1/(√${a} − √${b}).`,parts:[{type:'num',ans:v,fmt:FM.d2,disp:(a-b===1?`√${a} + √${b}`:`(√${a} + √${b})/${a-b}`),surd:true,w:1}],sol:`Multiply the numerator and denominator by (√${a} + √${b}): the denominator becomes ${a} − ${b} = ${a-b}, giving ${a-b===1?`√${a} + √${b}`:`(√${a} + √${b})/${a-b}`}.`};}},
+{id:'ix_lin2',cls:'IX',topic:'Linear Equations in Two Variables',level:'M',mcq:true,gen(){let x,y,a,k;do{x=R(-3,5);y=R(1,5);a=R(1,6);k=R(-5,6);}while(!k);const c=a*x+k*y;return N(`Find k if x = ${neg(x)}, y = ${y} is a solution of ${a===1?'':a}x + ky = ${neg(c)}.`,k,FM.int,`${a}(${neg(x)}) + k(${y}) = ${neg(c)}, so ${y}k = ${neg(c-a*x)} and k = ${neg(k)}.`,[-k,k+1,c-a*x]);}},
+{id:'ix_circ',cls:'IX',topic:'Circles',level:'M',mcq:true,gen(){const a=R(20,80);return Math.random()<0.5?N(`An arc of a circle subtends an angle of ${2*a}° at the centre. Find the angle it subtends at any point on the remaining part of the circle.`,a,FM.deg,`The angle at the circle is half the angle at the centre: ${a}°.`,[2*a,180-2*a,4*a]):N(`An arc subtends an angle of ${a}° at a point on the remaining part of a circle. Find the angle it subtends at the centre.`,2*a,FM.deg,`The angle at the centre is double: ${2*a}°.`,[a,180-a,a/2]);}},
+{id:'ix_para',cls:'IX',topic:'Quadrilaterals',level:'M',mcq:true,gen(){const a=R(40,140);if(a===90)return this.gen();return N(`One angle of a parallelogram is ${a}°. Find the angle adjacent to it.`,180-a,FM.deg,`Adjacent angles of a parallelogram add up to 180°: 180° − ${a}° = ${180-a}°.`,[a,360-a,Math.round(90-a/2)]);}},
+{id:'ix_heron',cls:'IX',topic:"Heron's Formula",level:'C',mcq:true,mcqPart:1,gen(){const [a,b,c,A]=pick([[13,14,15,84],[5,12,13,30],[9,10,17,36],[7,15,20,42],[10,13,13,60],[8,15,17,60],[6,25,29,60],[12,17,25,90]]),s=(a+b+c)/2;return{text:`The sides of a triangle are ${a} cm, ${b} cm and ${c} cm.`,parts:[PT('(a) Find its semi-perimeter s (cm).',s,FM.unit('cm'),1),PT("(b) Find its area using Heron's formula (cm²).",A,FM.unit('cm²'),2,{distract:[a*b/2,s*s,A*2]})],sol:`(a) s = (${a} + ${b} + ${c}) ÷ 2 = ${s} cm. (b) √(${s} × ${s-a} × ${s-b} × ${s-c}) = √${s*(s-a)*(s-b)*(s-c)} = ${A} cm².`};}},
+{id:'ix_sphere',cls:'IX',topic:'Surface Areas and Volumes',level:'C',mcq:true,mcqPart:0,gen(){const r=pick([7,14,21,3.5,10.5]),SA=88*r*r/7,V=88*r**3/21;return{text:`A sphere has radius ${r} cm. (Use π = 22/7.)`,parts:[PT('(a) Find its surface area (cm²).',SA,FM.d2,1,{distract:[SA/2,SA/4,SA*2]}),PT('(b) Find its volume (cm³), to 2 decimal places if needed.',V,FM.d2,2)],sol:`(a) 4 × 22/7 × ${r}² = ${+SA.toFixed(2)} cm². (b) 4/3 × 22/7 × ${r}³ = ${+V.toFixed(2)} cm³.`};}},
+{id:'ix_cone',cls:'IX',topic:'Surface Areas and Volumes',level:'C',mcq:true,mcqPart:1,gen(){const [r,h,l]=pick([[7,24,25],[14,48,50],[21,20,29],[3.5,12,12.5]]);return{text:`A right circular cone has radius ${r} cm and height ${h} cm. (Use π = 22/7.)`,parts:[PT('(a) Find its slant height (cm).',l,FM.unit('cm'),1),PT('(b) Find its curved surface area (cm²).',22*r*l/7,FM.d2,2,{distract:[22*r*h/7,22*r*(r+l)/7,44*r*l/7]})],sol:`(a) l = √(${r}² + ${h}²) = ${l} cm. (b) 22/7 × ${r} × ${l} = ${+(22*r*l/7).toFixed(2)} cm².`};}},
+{id:'ix_stats',cls:'IX',topic:'Statistics',level:'C',mcq:true,mcqPart:0,gen(){let v;do{v=Array.from({length:7},()=>R(10,60));}while(v.reduce((a,b)=>a+b)%7);const s=[...v].sort((a,b)=>a-b),tot=v.reduce((a,b)=>a+b),m=tot/7;return{text:`The marks of 7 students are ${v.join(', ')}.`,parts:[PT('(a) Find the mean.',m,FM.int,2,{distract:[s[3]===m?m+3:s[3],m+5,Math.round((s[0]+s[6])/2)]}),PT('(b) Find the median.',s[3],FM.int,1)],sol:`(a) ${tot} ÷ 7 = ${m}. (b) In order: ${s.join(', ')}; the median is ${s[3]}.`};}},
+{id:'ix_factor',cls:'IX',topic:'Polynomials',level:'X',mcq:true,mcqPart:0,gen(){let a,b,c,num;do{a=R(1,3)*pick([1,-1]);b=R(-5,5);c=R(-8,8);num=-(a**3+b*a+c);}while(num%(a*a));const k=num/(a*a),p=x=>x**3+k*x*x+b*x+c;return{text:`(x ${a<0?'+':'−'} ${Math.abs(a)}) is a factor of p(x) = x³ + kx² ${b<0?'−':'+'} ${Math.abs(b)}x ${c<0?'−':'+'} ${Math.abs(c)}.`,parts:[PT('(a) Find k.',k,FM.int,2,{distract:[-k,k+1,num]}),PT('(b) Find p(1).',p(1),FM.int,2),PT('(c) Find p(−1).',p(-1),FM.int,2)],sol:`(a) By the factor theorem p(${neg(a)}) = 0, which gives ${a*a}k = ${neg(num)} and k = ${neg(k)}. (b) p(1) = 1 + ${pf(F(k))} + ${pf(F(b))} + ${pf(F(c))} = ${neg(p(1))}. (c) p(−1) = ${neg(p(-1))}.`};}},
+{id:'ix_tent',cls:'IX',topic:'Surface Areas and Volumes',level:'X',mcq:true,mcqPart:1,gen(){const [r,h,l]=pick([[7,24,25],[14,48,50],[21,20,29],[3.5,12,12.5]]),rate=pick([10,20,25,50]),csa=22*r*l/7;return{text:`A conical tent has base radius ${r} m and height ${h} m. (Use π = 22/7.)`,parts:[PT('(a) Find its slant height (m).',l,FM.unit('m'),2),PT('(b) Find the area of canvas needed (m²).',csa,FM.d2,2,{distract:[22*r*h/7,22*r*(r+l)/7,csa*2]}),PT(`(c) Find the cost of the canvas at ₹${rate} per m².`,csa*rate,FM.money,2)],sol:`(a) √(${r}² + ${h}²) = ${l} m. (b) 22/7 × ${r} × ${l} = ${+csa.toFixed(2)} m². (c) ${+csa.toFixed(2)} × ₹${rate} = ₹${inr(csa*rate)}.`};}}
+);
+
+/* ---------- Class X ---------- */
+const TRIGV={'sin 30°':['1/2',0.5],'cos 60°':['1/2',0.5],'sin 60°':['√3/2',Math.sqrt(3)/2],'cos 30°':['√3/2',Math.sqrt(3)/2],'tan 45°':['1',1],'tan 60°':['√3',Math.sqrt(3)],'tan 30°':['1/√3',1/Math.sqrt(3)],'sin 45°':['1/√2',Math.SQRT1_2],'cos 45°':['1/√2',Math.SQRT1_2],'sin 90°':['1',1],'cos 90°':['0',0]};
+T.push(
+{id:'x_hcf',cls:'X',topic:'Real Numbers',level:'E',mcq:true,gen(){let a,b,h;do{h=R(4,30);a=h*R(2,9);b=h*R(2,9);}while(a===b||gcd(a,b)!==h);return Math.random()<0.5?N(`Find the HCF of ${a} and ${b}.`,h,FM.int,`${a} = ${h} × ${a/h} and ${b} = ${h} × ${b/h}, with ${a/h} and ${b/h} co-prime, so the HCF is ${h}.`,[a*b/h,h*2,Math.min(a,b)]):N(`The HCF of ${a} and ${b} is ${h}. Find their LCM.`,a*b/h,FM.int,`LCM = ${a} × ${b} ÷ ${h} = ${a*b/h}`,[a*b,a*b/(2*h),a+b]);}},
+{id:'x_trig',cls:'X',topic:'Introduction to Trigonometry',level:'E',mcq:true,gen(){const k=pick(Object.keys(TRIGV)),[d,v]=TRIGV[k],all=['1/2','√3/2','1','√3','1/√3','1/√2','0','2'].filter(x=>x!==d);return N(`Find the value of ${k}.`,v,FM.d2,`${k} = ${d}`,[],{disp:d,mcqOpts:shuffle(all).slice(0,3)});}},
+{id:'x_die',cls:'X',topic:'Probability',level:'E',mcq:true,gen(){const ev=pick([['an even number',3],['a number greater than 4',2],['a prime number',3],['a multiple of 3',2],['a number less than 3',2],['the number 6',1]]);return N(`A fair die is thrown once. What is the probability of getting ${ev[0]}?`,ev[1]/6,FM.frac,`${ev[1]} favourable outcome${ev[1]>1?'s':''} out of 6: ${fstr(F(ev[1],6))}.`,[ev[1]/12,1-ev[1]/6,ev[1]/5]);}},
+{id:'x_apn',cls:'X',topic:'Arithmetic Progressions',level:'E',mcq:true,gen(){const a=R(-10,20),d=R(-5,8)||3,n=R(8,30),t=x=>a+(x-1)*d;return N(`Find the ${ord(n)} term of the AP ${neg(t(1))}, ${neg(t(2))}, ${neg(t(3))}, …`,t(n),FM.int,`aₙ = a + (n − 1)d = ${neg(a)} + ${n-1} × ${pf(F(d))} = ${neg(t(n))}`,[a+n*d,a+(n-2)*d,n*d]);}},
+{id:'x_aps',cls:'X',topic:'Arithmetic Progressions',level:'M',mcq:true,gen(){const a=R(1,15),d=R(1,7),n=R(10,30),S=n*(2*a+(n-1)*d)/2;return N(`Find the sum of the first ${n} terms of the AP ${a}, ${a+d}, ${a+2*d}, …`,S,FM.int,`Sₙ = n/2 [2a + (n − 1)d] = ${n}/2 × [${2*a} + ${(n-1)*d}] = ${S}`,[n*(a+(n-1)*d),S+d*n,n*(2*a+n*d)/2]);}},
+{id:'x_qroots',cls:'X',topic:'Quadratic Equations',level:'M',mcq:true,mcqPart:0,gen(){let p,q;do{p=R(-9,12);q=R(-9,12);}while(p===q||!p||!q||p===-q);const hi=Math.max(p,q),lo=Math.min(p,q),b=-(p+q),c=p*q;return{text:`Solve the quadratic equation x² ${b<0?'−':'+'} ${Math.abs(b)===1?'':Math.abs(b)}x ${c<0?'−':'+'} ${Math.abs(c)} = 0.`,parts:[PT('(a) The larger root',hi,FM.int,1,{distract:[-hi,-lo,hi+lo]}),PT('(b) The smaller root',lo,FM.int,1)],sol:`(x ${p<0?'+':'−'} ${Math.abs(p)})(x ${q<0?'+':'−'} ${Math.abs(q)}) = 0, so x = ${neg(p)} or x = ${neg(q)}.`};}},
+{id:'x_dist',cls:'X',topic:'Coordinate Geometry',level:'M',mcq:true,gen(){const [a,b,c]=pick([[3,4,5],[6,8,10],[5,12,13],[8,15,17],[9,12,15]]),x1=R(-5,5),y1=R(-5,5),x2=x1+pick([1,-1])*a,y2=y1+pick([1,-1])*b;return N(`Find the distance between the points (${neg(x1)}, ${neg(y1)}) and (${neg(x2)}, ${neg(y2)}).`,c,FM.int,`√[(${a})² + (${b})²] = √${c*c} = ${c}`,[a+b,c*c,c+1]);}},
+{id:'x_section',cls:'X',topic:'Coordinate Geometry',level:'M',mcq:false,gen(){let m,n,kx,ky;do{m=R(1,3);n=R(1,3);kx=R(-3,3);ky=R(-3,3);}while(!kx&&!ky);const x1=R(-6,6),y1=R(-6,6),x2=x1+(m+n)*kx,y2=y1+(m+n)*ky,px=x1+m*kx,py=y1+m*ky;return{text:`Find the point that divides the line segment joining A(${neg(x1)}, ${neg(y1)}) and B(${neg(x2)}, ${neg(y2)}) internally in the ratio ${m} : ${n}.`,parts:[PT('(a) x-coordinate',px,FM.int,1),PT('(b) y-coordinate',py,FM.int,1)],sol:`x = (${m} × ${pf(F(x2))} + ${n} × ${pf(F(x1))}) / ${m+n} = ${neg(px)} and y = (${m} × ${pf(F(y2))} + ${n} × ${pf(F(y1))}) / ${m+n} = ${neg(py)}.`};}},
+{id:'x_zero',cls:'X',topic:'Polynomials',level:'M',mcq:true,gen(){const a=pick([1,2,3,4,5]),b=R(-9,9)||4,c=R(-9,9)||-3,ask=Math.random()<0.5;return N(`For p(x) = ${polyDisp([[a,'x²'],[b,'x'],[c,'']])}, find the ${ask?'sum':'product'} of its zeroes.`,ask?-b/a:c/a,FM.frac,`For ax² + bx + c, the ${ask?'sum of the zeroes is −b/a':'product of the zeroes is c/a'} = ${fstr(ask?F(-b,a):F(c,a))}.`,ask?[b/a,c/a,-b]:[-c/a,b/a,c]);}},
+{id:'x_tang',cls:'X',topic:'Circles',level:'M',mcq:true,gen(){const [r,t,d]=pick([[5,12,13],[3,4,5],[8,15,17],[7,24,25],[6,8,10],[9,12,15]]);return N(`A point A is ${d} cm from the centre of a circle of radius ${r} cm. Find the length of the tangent from A to the circle.`,t,FM.unit('cm'),`The radius is perpendicular to the tangent: √(${d}² − ${r}²) = √${t*t} = ${t} cm.`,[d-r,d+r,Math.round(Math.sqrt(d*d+r*r))]);}},
+{id:'x_pair',cls:'X',topic:'Pair of Linear Equations',level:'C',mcq:true,mcqPart:0,gen(){let x,y,a,b,c,d;do{x=R(-5,9);y=R(-5,9);a=R(1,5);b=R(-4,5);c=R(1,4);d=R(-4,5);}while(a*d-b*c===0||!b||!d||x===y);const e=a*x+b*y,f=c*x+d*y,L=(p,q,r)=>`${p===1?'':p}x ${q<0?'−':'+'} ${Math.abs(q)===1?'':Math.abs(q)}y = ${neg(r)}`;return{text:`Solve the pair of equations ${L(a,b,e)} and ${L(c,d,f)}.`,parts:[PT('(a) x',x,FM.int,2,{distract:[y,-x,x+1]}),PT('(b) y',y,FM.int,1)],sol:`Eliminating one variable gives x = ${neg(x)} and y = ${neg(y)}. Check: ${a}(${neg(x)}) + ${pf(F(b))}(${neg(y)}) = ${neg(e)}.`};}},
+{id:'x_height',cls:'X',topic:'Applications of Trigonometry',level:'C',mcq:true,mcqPart:0,gen(){const d=R(5,40)*2,ang=pick([30,45,60]),h=ang===45?d:ang===60?d*Math.sqrt(3):d/Math.sqrt(3);const disp=ang===45?`${d} m`:ang===60?`${d}√3 m`:`${d}/√3 m`;const wrong=ang===45?[`${d}√3 m`,`${d/2} m`,`${2*d} m`]:ang===60?[`${d} m`,`${d}/√3 m`,`${2*d} m`]:[`${d}√3 m`,`${d} m`,`${d/2} m`];const ls=Math.sqrt(d*d+h*h),lsd=ang===45?`${d}√2 m`:ang===60?`${2*d} m`:`${2*d}/√3 m`;return{text:`From a point on the ground ${d} m from the foot of a tower, the angle of elevation of the top of the tower is ${ang}°.`,parts:[PT('(a) Find the height of the tower (m). You may leave √3 in your answer.',h,FM.d2,2,{disp,mcqOpts:wrong}),PT('(b) Find the length of the line of sight from the point to the top of the tower (m).',ls,FM.d2,1,{disp:lsd})],sol:`(a) tan ${ang}° = h / ${d}, so h = ${disp}. (b) The line of sight is the hypotenuse: √(${d}² + h²) = ${lsd}.`};}},
+{id:'x_sector',cls:'X',topic:'Areas Related to Circles',level:'C',mcq:true,mcqPart:0,gen(){const r=pick([7,14,21]),th=pick([30,45,60,90,120,150]),A=th/360*22/7*r*r,Lr=th/360*44/7*r;return{text:`A sector of a circle of radius ${r} cm has a central angle of ${th}°. (Use π = 22/7.)`,parts:[PT('(a) Find the area of the sector (cm²).',A,FM.d2,2,{distract:[Lr,22/7*r*r,A*2]}),PT('(b) Find the length of its arc (cm).',Lr,FM.d2,1)],sol:`(a) ${th}/360 × 22/7 × ${r}² = ${+A.toFixed(2)} cm². (b) ${th}/360 × 2 × 22/7 × ${r} = ${+Lr.toFixed(2)} cm.`};}},
+{id:'x_toy',cls:'X',topic:'Surface Areas and Volumes',level:'C',mcq:true,gen(){const r=pick([3.5,7,10.5]),h=pick([6,9,12,15,18,24]),hv=2/3*22/7*r**3,cv=1/3*22/7*r*r*h,V=hv+cv;return N(`A toy is a cone of radius ${r} cm and height ${h} cm mounted on a hemisphere of the same radius. Find its volume in cm³. (Use π = 22/7.)`,V,FM.d2,`Hemisphere (2/3)πr³ = ${+hv.toFixed(2)}; cone (1/3)πr²h = ${+cv.toFixed(2)}; total = ${+V.toFixed(2)} cm³.`,[hv,cv,V*2]);}},
+{id:'x_gmean',cls:'X',topic:'Statistics',level:'C',mcq:true,gen(){const f=Array.from({length:5},()=>R(2,12)),mids=[5,15,25,35,45],sf=f.reduce((a,b)=>a+b),sfx=f.reduce((a,b,i)=>a+b*mids[i],0),m=sfx/sf;return N(`Find the mean of the grouped data (to 2 decimal places): classes 0–10, 10–20, 20–30, 30–40, 40–50 with frequencies ${f.join(', ')}.`,m,FM.d2,`Class marks 5, 15, 25, 35, 45; Σfx = ${sfx} and Σf = ${sf}; mean = ${sfx} ÷ ${sf} = ${+m.toFixed(2)}.`,[25,sfx/5,m+5]);}},
+{id:'x_apword',cls:'X',topic:'Arithmetic Progressions',level:'X',mcq:true,mcqPart:0,gen(){const a=R(5,20)*50,d=R(1,6)*50,n=R(8,15),m=R(16,24),S=m*(2*a+(m-1)*d)/2;return{text:`Priya saves ₹${inr(a)} in the first month and ₹${inr(d)} more every month after that.`,parts:[PT(`(a) How much does she save in the ${ord(n)} month (₹)?`,a+(n-1)*d,FM.money,2,{distract:[a+n*d,a*n,a+(n-2)*d]}),PT(`(b) How much does she save in total in the first ${n} months (₹)?`,n*(2*a+(n-1)*d)/2,FM.money,2),PT(`(c) In how many months will her total savings be ₹${inr(S)}?`,m,FM.unit('months'),2)],sol:`(a) a + (n − 1)d = ${a} + ${n-1} × ${d} = ₹${inr(a+(n-1)*d)}. (b) ${n}/2 × [${2*a} + ${(n-1)*d}] = ₹${inr(n*(2*a+(n-1)*d)/2)}. (c) Solving n/2 [${2*a} + (n − 1) × ${d}] = ${S} gives n = ${m}.`};}},
+{id:'x_qword',cls:'X',topic:'Quadratic Equations',level:'X',mcq:true,mcqPart:0,gen(){const n=R(8,30);return{text:`The product of two consecutive positive integers is ${n*(n+1)}.`,parts:[PT('(a) Find the smaller integer.',n,FM.int,2,{distract:[n+1,n-1,n+2]}),PT('(b) Find the larger integer.',n+1,FM.int,2),PT('(c) Find the sum of their squares.',n*n+(n+1)**2,FM.int,2)],sol:`x(x + 1) = ${n*(n+1)} gives x² + x − ${n*(n+1)} = 0, i.e. (x − ${n})(x + ${n+1}) = 0, so x = ${n}. Sum of squares = ${n*n} + ${(n+1)**2} = ${n*n+(n+1)**2}.`};}},
+{id:'x_tower2',cls:'X',topic:'Applications of Trigonometry',level:'X',mcq:false,gen(){const d=R(5,40)*2;return{text:`From a point P on level ground, the angle of elevation of the top of a tower is 30°. After walking ${d} m towards the tower, the angle of elevation becomes 60°.`,parts:[PT('(a) Find the height of the tower (m). You may leave √3 in your answer.',d*Math.sqrt(3)/2,FM.d2,2,{disp:`${d/2}√3 m`}),PT('(b) How far is the second point from the foot of the tower (m)?',d/2,FM.unit('m'),2),PT('(c) How far was P from the foot of the tower (m)?',3*d/2,FM.unit('m'),2)],sol:`Let the height be h and the second distance x. tan 60° = h/x gives h = x√3; tan 30° = h/(x + ${d}) gives 3x = x + ${d}, so x = ${d/2}. Then h = ${d/2}√3 m and P is ${3*d/2} m from the tower.`};}}
+);
+
+/* ---------- Class XI ---------- */
+const piStr=f=>(f.n<0?'−':'')+(Math.abs(f.n)===1?'':Math.abs(f.n))+'π'+(f.d===1?'':'/'+f.d);
+T.push(
+{id:'xi_sets',cls:'XI',topic:'Sets',level:'E',mcq:true,gen(){const ab=R(3,15),a=ab+R(5,25),b=ab+R(5,25);return N(`n(A) = ${a}, n(B) = ${b} and n(A ∩ B) = ${ab}. Find n(A ∪ B).`,a+b-ab,FM.int,`n(A ∪ B) = n(A) + n(B) − n(A ∩ B) = ${a} + ${b} − ${ab} = ${a+b-ab}`,[a+b,a+b+ab,a+b-2*ab]);}},
+{id:'xi_rad',cls:'XI',topic:'Trigonometric Functions',level:'E',mcq:true,gen(){const deg=pick([30,45,60,120,135,150,210,240,270,300,315]),f=F(deg,180),disp=piStr(f),wrong=[...new Set([piStr(F(deg,90)),piStr(F(deg,360)),piStr(F(180,deg)),'π','2π'])].filter(x=>x!==disp);return N(`Convert ${deg}° into radians.`,deg*Math.PI/180,FM.d2,`${deg} × π/180 = ${disp}`,[],{disp,mcqOpts:wrong.slice(0,3)});}},
+{id:'xi_pc',cls:'XI',topic:'Permutations and Combinations',level:'E',mcq:true,gen(){const n=R(5,10),r=R(2,4),P=fact(n)/fact(n-r),C=nCr(n,r);return Math.random()<0.5?N(`Find <sup>${n}</sup>P<sub>${r}</sub>.`,P,FM.int,`${n}! / ${n-r}! = ${P}`,[C,P/2,n*r]):N(`Find <sup>${n}</sup>C<sub>${r}</sub>.`,C,FM.int,`${n}! / (${r}! × ${n-r}!) = ${C}`,[P,n*r,nCr(n,r-1)===C?C+n:nCr(n,r-1)]);}},
+{id:'xi_ipow',cls:'XI',topic:'Complex Numbers',level:'E',mcq:true,mcqOnly:true,gen(){const n=R(10,99),v=['1','i','−1','−i'][n%4];return CHS(`The value of i<sup>${n}</sup> is`,v,['1','i','−1','−i'],`${n} = 4 × ${Math.floor(n/4)} + ${n%4}, so i<sup>${n}</sup> = i<sup>${n%4}</sup> = ${v}.`);}},
+{id:'xi_ipow_w',cls:'XI',topic:'Complex Numbers',level:'E',mcq:false,gen(){const n=R(10,99),v=['1','i','−1','−i'][n%4];return{text:`Simplify i<sup>${n}</sup>.`,parts:[SEL('Value',v,['1','i','−1','−i'])],sol:`${n} leaves remainder ${n%4} when divided by 4, so i<sup>${n}</sup> = ${v}.`};}},
+{id:'xi_mod',cls:'XI',topic:'Complex Numbers',level:'M',mcq:true,gen(){const [a,b,c]=pick([[3,4,5],[5,12,13],[8,15,17],[6,8,10],[7,24,25]]),sa=pick([1,-1]),sb=pick([1,-1]);return N(`Find the modulus of z = ${neg(sa*a)} ${sb<0?'−':'+'} ${b}i.`,c,FM.int,`|z| = √(${a}² + ${b}²) = ${c}`,[a+b,c*c,Math.abs(a-b)]);}},
+{id:'xi_gp',cls:'XI',topic:'Sequences and Series',level:'M',mcq:true,gen(){const a=R(1,5),r=pick([2,3,-2]),n=R(5,8),t=k=>a*r**(k-1);return N(`Find the ${ord(n)} term of the GP ${t(1)}, ${neg(t(2))}, ${neg(t(3))}, …`,t(n),FM.int,`aₙ = arⁿ⁻¹ = ${a} × ${pf(F(r))}<sup>${n-1}</sup> = ${neg(t(n))}`,[a*r**n,a*r*(n-1),-t(n)]);}},
+{id:'xi_binom',cls:'XI',topic:'Binomial Theorem',level:'M',mcq:true,gen(){const n=R(5,9),k=R(2,4),b=pick([1,2,3]),v=nCr(n,k)*b**k;return N(`Find the coefficient of x<sup>${k}</sup> in the expansion of (1 + ${b===1?'':b}x)<sup>${n}</sup>.`,v,FM.int,`The term is <sup>${n}</sup>C<sub>${k}</sub>(${b===1?'':b}x)<sup>${k}</sup>, so the coefficient is ${nCr(n,k)} × ${b**k} = ${v}.`,[nCr(n,k)===v?v+n:nCr(n,k),nCr(n,k+1)*b**k,v*2]);}},
+{id:'xi_slope',cls:'XI',topic:'Straight Lines',level:'M',mcq:true,gen(){let x1,y1,x2,y2;do{x1=R(-6,6);y1=R(-6,6);x2=R(-6,6);y2=R(-6,6);}while(x1===x2||y1===y2);const m=F(y2-y1,x2-x1);return N(`Find the slope of the line through (${neg(x1)}, ${neg(y1)}) and (${neg(x2)}, ${neg(y2)}).`,fv(m),FM.frac,`m = (${neg(y2)} − ${pf(F(y1))}) / (${neg(x2)} − ${pf(F(x1))}) = ${fstr(m)}`,[1/fv(m),-fv(m),fv(m)+1]);}},
+{id:'xi_lim',cls:'XI',topic:'Limits and Derivatives',level:'M',mcq:true,gen(){const a=R(1,5),n=R(2,5),v=n*a**(n-1);return N(`Evaluate lim<sub>x→${a}</sub> (x<sup>${n}</sup> − ${a**n}) / (x − ${a}).`,v,FM.int,`lim (xⁿ − aⁿ)/(x − a) = n·aⁿ⁻¹ = ${n} × ${a}<sup>${n-1}</sup> = ${v}`,[a**n===v?v+a:a**n,n*a**n,(n-1)*a**(n-1)===v?v+1:(n-1)*a**(n-1)]);}},
+{id:'xi_deriv',cls:'XI',topic:'Limits and Derivatives',level:'M',mcq:true,gen(){const a=R(1,4),b=R(-5,5),c=R(-6,6),k=R(-3,3),v=3*a*k*k+2*b*k+c;return N(`If f(x) = ${polyDisp([[a,'x³'],[b,'x²'],[c,'x']])}, find f′(${neg(k)}).`,v,FM.int,`f′(x) = ${polyDisp([[3*a,'x²'],[2*b,'x'],[c,'']])}, so f′(${neg(k)}) = ${neg(v)}.`,[a*k**3+b*k*k+c*k,v+c,3*a*k+2*b+c]);}},
+{id:'xi_circle',cls:'XI',topic:'Conic Sections',level:'C',mcq:true,mcqPart:2,gen(){const h=R(-6,6)||2,k=R(-6,6)||-3,r=R(2,9),D=-2*h,E=-2*k,c=h*h+k*k-r*r;return{text:`Find the centre and radius of the circle x² + y² ${D<0?'−':'+'} ${Math.abs(D)}x ${E<0?'−':'+'} ${Math.abs(E)}y ${c<0?'−':'+'} ${Math.abs(c)} = 0.`,parts:[PT('(a) x-coordinate of the centre',h,FM.int,1),PT('(b) y-coordinate of the centre',k,FM.int,1),PT('(c) Radius',r,FM.int,1,{distract:[r*r,Math.abs(c)||r+2,r+1]})],sol:`Centre (−g, −f) = (${neg(h)}, ${neg(k)}); radius = √(g² + f² − c) = √(${h*h} + ${k*k} − ${pf(F(c))}) = ${r}.`};}},
+{id:'xi_word',cls:'XI',topic:'Permutations and Combinations',level:'C',mcq:true,mcqPart:0,gen(){const w=pick(['APPLE','BANANA','LETTER','SCHOOL','ASSESS','COFFEE','GARDEN','PENCIL','MANGO','COMMITTEE']);const cnt=s=>{const m={};for(const ch of s)m[ch]=(m[ch]||0)+1;return fact(s.length)/Object.values(m).reduce((a,c)=>a*fact(c),1);};const vow=[...new Set(w.split('').filter(c=>'AEIOU'.includes(c)))],total=cnt(w),startV=vow.reduce((acc,v)=>acc+cnt(w.replace(v,'')),0);return{text:`Consider the letters of the word ${w}.`,parts:[PT('(a) How many different arrangements of all the letters are there?',total,FM.int,2,{distract:[fact(w.length)===total?total*2:fact(w.length),total/2,total+w.length]}),PT('(b) How many of these arrangements begin with a vowel?',startV,FM.int,1)],sol:`(a) ${w.length}! divided by the factorials of the repeated letters = ${total}. (b) Put each different vowel first in turn and arrange the remaining letters: ${startV}.`};}},
+{id:'xi_var',cls:'XI',topic:'Statistics',level:'C',mcq:true,mcqPart:0,gen(){let v,m;do{v=Array.from({length:5},()=>R(2,20));m=v.reduce((a,b)=>a+b)/5;}while(m!==Math.round(m));const ss=v.reduce((a,x)=>a+(x-m)**2,0),varr=ss/5;return{text:`Find the mean and the variance of: ${v.join(', ')}.`,parts:[PT('(a) Mean',m,FM.int,1,{distract:[m+1,Math.max(...v)-Math.min(...v),m-1]}),PT('(b) Variance (to 2 decimal places if needed)',varr,FM.d2,2)],sol:`Mean = ${v.reduce((a,b)=>a+b)} ÷ 5 = ${m}; variance = Σ(x − ${m})² ÷ 5 = ${ss} ÷ 5 = ${+varr.toFixed(2)}.`};}},
+{id:'xi_cards',cls:'XI',topic:'Probability',level:'C',mcq:true,gen(){const ev=pick([['a king or a heart',16],['a red card or a queen',28],['a face card',12],['an ace or a spade',16],['a black card that is not a king',24],['neither a heart nor a king',36]]);return N(`One card is drawn from a well-shuffled pack of 52 cards. Find the probability that it is ${ev[0]}.`,ev[1]/52,FM.frac,`There are ${ev[1]} favourable cards, so the probability is ${ev[1]}/52 = ${fstr(F(ev[1],52))}.`,[(ev[1]+1)/52,ev[1]/26,1-ev[1]/52]);}},
+{id:'xi_ineq',cls:'XI',topic:'Linear Inequalities',level:'C',mcq:true,gen(){const a=R(3,7),c=R(1,a-1),x0=R(-5,12),b=R(-10,10),d=(a-c)*x0+b;return N(`Find the greatest integer x that satisfies ${a}x ${b<0?'−':'+'} ${Math.abs(b)} < ${c===1?'':c}x ${d<0?'−':'+'} ${Math.abs(d)}.`,x0-1,FM.int,`${a-c}x < ${neg(d-b)}, so x < ${neg(x0)}. The greatest integer is ${neg(x0-1)}.`,[x0,x0+1,x0-2]);}},
+{id:'xi_gpx',cls:'XI',topic:'Sequences and Series',level:'X',mcq:true,mcqPart:2,gen(){let a,r;do{a=pick([8,12,16,24,27,32,48,54,64,81]);r=pick([F(1,2),F(1,3),F(2,3),F(1,4)]);}while((a*Math.pow(r.n,3))%Math.pow(r.d,3));const rv=fv(r),t4=a*rv**3,S3=a*(1+rv+rv*rv),Sinf=a/(1-rv);return{text:`A geometric progression has first term ${a} and common ratio ${fstr(r)}.`,parts:[PT('(a) Find its 4th term.',t4,FM.frac,2),PT('(b) Find the sum of its first 3 terms.',S3,FM.frac,2),PT('(c) Find the sum to infinity.',Sinf,FM.frac,2,{distract:[a/rv,a*(1+rv),Sinf*2]})],sol:`(a) ar³ = ${a} × (${fstr(r)})³ = ${fstr(fracFromNum(t4))}. (b) ${a} + ${fstr(fracFromNum(a*rv))} + ${fstr(fracFromNum(a*rv*rv))} = ${fstr(fracFromNum(S3))}. (c) a / (1 − r) = ${a} ÷ ${fstr(F(r.d-r.n,r.d))} = ${fstr(fracFromNum(Sinf))}.`};}},
+{id:'xi_line',cls:'XI',topic:'Straight Lines',level:'X',mcq:true,mcqPart:0,gen(){let m,c;do{m=R(-4,4);c=R(-8,8);}while(!m||!c||c%m);const x1=R(-3,3),x2=x1+R(1,4),y=x=>m*x+c;return{text:`A straight line passes through (${neg(x1)}, ${neg(y(x1))}) and (${neg(x2)}, ${neg(y(x2))}).`,parts:[PT('(a) Find its slope.',m,FM.int,2,{distract:[-m,c,m+1]}),PT('(b) Find its y-intercept.',c,FM.int,2),PT('(c) Find its x-intercept.',-c/m,FM.int,2)],sol:`(a) m = (${neg(y(x2))} − ${pf(F(y(x1)))}) / (${neg(x2)} − ${pf(F(x1))}) = ${neg(m)}. (b) y = ${neg(m)}x + c through (${neg(x1)}, ${neg(y(x1))}) gives c = ${neg(c)}. (c) Putting y = 0 gives x = ${neg(-c/m)}.`};}}
+);
+
+/* ---------- Class XII ---------- */
+const vstr=u=>`${neg(u[0])}î ${u[1]<0?'−':'+'} ${Math.abs(u[1])}ĵ ${u[2]<0?'−':'+'} ${Math.abs(u[2])}k̂`;
+T.push(
+{id:'xii_det2',cls:'XII',topic:'Determinants',level:'E',mcq:true,gen(){const a=R(-5,9),b=R(-5,9),c=R(-5,9),d=R(-5,9),v=a*d-b*c;return N(`Evaluate the determinant ${mat([[a,b],[c,d]],true)}.`,v,FM.int,`ad − bc = ${neg(a*d)} − ${pf(F(b*c))} = ${neg(v)}`,[a*d+b*c,a*b-c*d,-v]);}},
+{id:'xii_invtrig',cls:'XII',topic:'Inverse Trigonometric Functions',level:'E',mcq:true,gen(){const L=[['sin⁻¹(1/2)','π/6',Math.PI/6],['cos⁻¹(1/2)','π/3',Math.PI/3],['tan⁻¹(1)','π/4',Math.PI/4],['sin⁻¹(−1/2)','−π/6',-Math.PI/6],['cos⁻¹(−1/2)','2π/3',2*Math.PI/3],['tan⁻¹(√3)','π/3',Math.PI/3],['cos⁻¹(0)','π/2',Math.PI/2],['sin⁻¹(√3/2)','π/3',Math.PI/3]],[e,d,v]=pick(L),opts=['π/6','π/3','π/4','π/2','2π/3','−π/6','5π/6','−π/3'].filter(x=>x!==d);return N(`Find the principal value of ${e}.`,v,FM.d2,`${e} = ${d}`,[],{disp:d,mcqOpts:shuffle(opts).slice(0,3)});}},
+{id:'xii_dot',cls:'XII',topic:'Vector Algebra',level:'E',mcq:true,gen(){const a=[R(-4,5),R(-4,5),R(-4,5)],b=[R(-4,5),R(-4,5),R(-4,5)],v=a[0]*b[0]+a[1]*b[1]+a[2]*b[2];return N(`Find a · b for a = ${vstr(a)} and b = ${vstr(b)}.`,v,FM.int,`a · b = ${neg(a[0]*b[0])} + ${pf(F(a[1]*b[1]))} + ${pf(F(a[2]*b[2]))} = ${neg(v)}`,[a[0]*b[0],v+a[2],-v]);}},
+{id:'xii_order',cls:'XII',topic:'Matrices',level:'E',mcq:true,gen(){const m=R(2,4),n=R(2,4),p=R(2,5);return N(`A is a ${m} × ${n} matrix and B is a ${n} × ${p} matrix. How many elements does AB have?`,m*p,FM.int,`AB has order ${m} × ${p}, so it has ${m*p} elements.`,[m*n===m*p?m*p+1:m*n,n*p===m*p?m*p+2:n*p,m*n*p]);}},
+{id:'xii_det3',cls:'XII',topic:'Determinants',level:'M',mcq:true,gen(){const M=[0,1,2].map(()=>[R(-3,4),R(-3,4),R(-3,4)]),d=M[0][0]*(M[1][1]*M[2][2]-M[1][2]*M[2][1])-M[0][1]*(M[1][0]*M[2][2]-M[1][2]*M[2][0])+M[0][2]*(M[1][0]*M[2][1]-M[1][1]*M[2][0]);return N(`Evaluate the determinant ${mat(M,true)}.`,d,FM.int,`Expanding along the first row: ${neg(M[0][0])}(${neg(M[1][1]*M[2][2]-M[1][2]*M[2][1])}) − ${pf(F(M[0][1]))}(${neg(M[1][0]*M[2][2]-M[1][2]*M[2][0])}) + ${pf(F(M[0][2]))}(${neg(M[1][0]*M[2][1]-M[1][1]*M[2][0])}) = ${neg(d)}`,[-d,d+M[0][0],M[0][0]*M[1][1]*M[2][2]]);}},
+{id:'xii_deriv',cls:'XII',topic:'Continuity and Differentiability',level:'M',mcq:true,gen(){const a=R(1,4),b=R(-5,5)||2,n=R(2,4),k=R(-2,2),inner=a*k+b,v=n*a*inner**(n-1),bx=`${a===1?'':a}x ${b<0?'−':'+'} ${Math.abs(b)}`;return N(`If y = (${bx})<sup>${n}</sup>, find dy/dx at x = ${neg(k)}.`,v,FM.int,`dy/dx = ${n}(${bx})<sup>${n-1}</sup> × ${a}; at x = ${neg(k)}: ${n} × ${pf(F(inner))}<sup>${n-1}</sup> × ${a} = ${neg(v)}`,[n*inner**(n-1)===v?v+1:n*inner**(n-1),inner**n,v+n]);}},
+{id:'xii_int',cls:'XII',topic:'Integrals',level:'M',mcq:true,gen(){const p=R(1,6),q=R(-4,6)||1,a=R(0,2),b=a+R(1,3),v=p*(b*b-a*a)/2+q*(b-a);return N(`Evaluate ∫<sub>${a}</sub><sup>${b}</sup> (${p===1?'':p}x ${q<0?'−':'+'} ${Math.abs(q)}) dx.`,v,FM.frac,`[${fstr(F(p,2))}x² ${q<0?'−':'+'} ${Math.abs(q)}x] from ${a} to ${b} = ${fstr(fracFromNum(v))}`,[p*(b-a)+q,p*b*b/2+q*b,v*2]);}},
+{id:'xii_mag',cls:'XII',topic:'Vector Algebra',level:'M',mcq:true,gen(){const [a,b,c,m]=pick([[2,3,6,7],[1,2,2,3],[4,4,7,9],[2,6,9,11],[1,4,8,9],[6,2,3,7]]),u=[a*pick([1,-1]),b*pick([1,-1]),c*pick([1,-1])];return N(`Find the magnitude of the vector ${vstr(u)}.`,m,FM.int,`√(${a*a} + ${b*b} + ${c*c}) = √${m*m} = ${m}`,[a+b+c,m*m,m+1]);}},
+{id:'xii_cond',cls:'XII',topic:'Probability',level:'M',mcq:true,gen(){const d=pick([10,12,20]);let ab,b,a;do{ab=R(1,4);b=R(ab+1,8);a=R(ab,9);}while(b>=d||a>=d);return N(`P(A) = ${fstr(F(a,d))}, P(B) = ${fstr(F(b,d))} and P(A ∩ B) = ${fstr(F(ab,d))}. Find P(A | B).`,ab/b,FM.frac,`P(A | B) = P(A ∩ B) ÷ P(B) = ${ab}/${b} = ${fstr(F(ab,b))}`,[ab/a,ab/d,b/d]);}},
+{id:'xii_max',cls:'XII',topic:'Application of Derivatives',level:'C',mcq:true,mcqPart:1,gen(){const h=R(-4,6)||1,k=R(-5,20),a=R(1,3),b=2*a*h,c=k-a*h*h;return{text:`f(x) = ${polyDisp([[-a,'x²'],[b,'x'],[c,'']])}.`,parts:[PT('(a) Find the value of x at which f is maximum.',h,FM.int,1),PT('(b) Find the maximum value of f.',k,FM.int,2,{distract:[c,k+a,-k]})],sol:`f′(x) = ${polyDisp([[-2*a,'x'],[b,'']])} = 0 gives x = ${neg(h)}; f″(x) = ${-2*a} < 0, so the maximum value is f(${neg(h)}) = ${neg(k)}.`};}},
+{id:'xii_area',cls:'XII',topic:'Application of Integrals',level:'C',mcq:true,mcqPart:0,gen(){const a=R(1,6),b=R(1,4),bx=b===1?'':b;return{text:`Consider the curve y = ${bx}x².`,parts:[PT(`(a) Find the area bounded by the curve, the x-axis and the line x = ${a}.`,b*a**3/3,FM.frac,2,{distract:[b*a*a/2,b*a**3,b*a*a]}),PT(`(b) Find the area enclosed between the curve and the line y = ${b*a}x.`,b*a**3/6,FM.frac,1)],sol:`(a) ∫<sub>0</sub><sup>${a}</sup> ${bx}x² dx = ${b} × ${a}³ / 3 = ${fstr(fracFromNum(b*a**3/3))}. (b) The curves meet at x = 0 and x = ${a}: ∫<sub>0</sub><sup>${a}</sup> (${b*a}x − ${bx}x²) dx = ${fstr(fracFromNum(b*a**3/6))}.`};}},
+{id:'xii_mmul',cls:'XII',topic:'Matrices',level:'C',mcq:true,mcqPart:0,gen(){const A=[[R(-3,4),R(-3,4)],[R(-3,4),R(-3,4)]],B=[[R(-3,4),R(-3,4)],[R(-3,4),R(-3,4)]],C=[[A[0][0]*B[0][0]+A[0][1]*B[1][0],A[0][0]*B[0][1]+A[0][1]*B[1][1]],[A[1][0]*B[0][0]+A[1][1]*B[1][0],A[1][0]*B[0][1]+A[1][1]*B[1][1]]];return{text:`A = ${mat(A)} and B = ${mat(B)}. Let C = AB.`,parts:[PT('(a) Find the element c₁₁.',C[0][0],FM.int,1,{distract:[A[0][0]*B[0][0],A[0][0]*B[0][0]+A[0][1]*B[0][1],C[0][0]+1]}),PT('(b) Find the element c₁₂.',C[0][1],FM.int,1),PT('(c) Find the element c₂₂.',C[1][1],FM.int,1)],sol:`Multiply rows of A by columns of B: C = ${mat(C)}.`};}},
+{id:'xii_3d',cls:'XII',topic:'Three Dimensional Geometry',level:'C',mcq:true,mcqPart:0,gen(){const [a,b,c,m]=pick([[2,3,6,7],[1,2,2,3],[4,4,7,9],[2,6,9,11]]),P=[R(-4,4),R(-4,4),R(-4,4)],Q=[P[0]+a*pick([1,-1]),P[1]+b*pick([1,-1]),P[2]+c*pick([1,-1])],pt=u=>`(${u.map(neg).join(', ')})`;return{text:`P = ${pt(P)} and Q = ${pt(Q)}.`,parts:[PT('(a) Find the distance PQ.',m,FM.int,2,{distract:[a+b+c,m*m,m+1]}),PT('(b) Find the z-coordinate of the mid-point of PQ.',(P[2]+Q[2])/2,FM.num,1)],sol:`(a) √(${a}² + ${b}² + ${c}²) = ${m}. (b) (${neg(P[2])} + ${pf(F(Q[2]))}) ÷ 2 = ${neg((P[2]+Q[2])/2)}.`};}},
+{id:'xii_lpp',cls:'XII',topic:'Linear Programming',level:'C',mcq:true,mcqPart:0,gen(){let p,q,corners,vals,mx;do{p=R(2,8);q=R(2,8);corners=[[0,0],[R(4,10),0],[R(2,6),R(3,8)],[0,R(4,10)]];vals=corners.map(([x,y])=>p*x+q*y);mx=Math.max(...vals);}while(vals.filter(v=>v===mx).length>1);const i=vals.indexOf(mx),others=vals.filter(v=>v!==mx&&v>0);return{text:`The corner points of the feasible region of an LPP are ${corners.map(c=>'('+c.join(', ')+')').join(', ')}. The objective function is Z = ${p}x + ${q}y.`,parts:[PT('(a) Find the maximum value of Z.',mx,FM.int,2,{distract:others.concat([mx+p])}),PT('(b) Find the x-coordinate of the corner point where Z is maximum.',corners[i][0],FM.int,1)],sol:`Z at the corners: ${corners.map((c,j)=>'('+c.join(', ')+') → '+vals[j]).join('; ')}. The maximum is ${mx} at (${corners[i].join(', ')}).`};}},
+{id:'xii_bayes',cls:'XII',topic:'Probability',level:'X',mcq:true,mcqPart:1,gen(){const r1=R(2,6),b1=R(2,6),r2=R(2,6),b2=R(2,6),p1=r1/(r1+b1),p2=r2/(r2+b2),pr=(p1+p2)/2,post=(p1/2)/pr;return{text:`Bag I has ${r1} red and ${b1} black balls; bag II has ${r2} red and ${b2} black balls. A bag is chosen at random and one ball is drawn from it.`,parts:[PT('(a) Find the probability that the ball is red.',pr,FM.frac,2),PT('(b) The ball is red. Find the probability that it came from bag I.',post,FM.frac,3,{distract:[p1,1-post,p1/2]}),PT('(c) Find the probability that the ball is black.',1-pr,FM.frac,1)],sol:`(a) ½ × ${fstr(F(r1,r1+b1))} + ½ × ${fstr(F(r2,r2+b2))} = ${fstr(fracFromNum(pr))}. (b) By Bayes' theorem: (½ × ${fstr(F(r1,r1+b1))}) ÷ ${fstr(fracFromNum(pr))} = ${fstr(fracFromNum(post))}. (c) 1 − ${fstr(fracFromNum(pr))} = ${fstr(fracFromNum(1-pr))}.`};}},
+{id:'xii_rate',cls:'XII',topic:'Application of Derivatives',level:'X',mcq:true,mcqPart:0,gen(){const k=R(2,6),r=R(4,15);return{text:`The radius of a circular ink blot increases at ${k} cm/s.`,parts:[PT(`(a) How fast is the area increasing when the radius is ${r} cm (cm²/s)? You may leave π in your answer.`,2*Math.PI*r*k,FM.d2,2,{disp:`${2*r*k}π cm²/s`,mcqOpts:[`${r*k}π cm²/s`,`${r*r*k}π cm²/s`,`${(2*r+1)*k}π cm²/s`]}),PT('(b) How fast is the circumference increasing (cm/s)? You may leave π in your answer.',2*Math.PI*k,FM.d2,2,{disp:`${2*k}π cm/s`}),PT(`(c) What is the area when the radius is ${r} cm (cm²)? You may leave π in your answer.`,Math.PI*r*r,FM.d2,2,{disp:`${r*r}π cm²`})],sol:`(a) dA/dt = 2πr × dr/dt = 2π × ${r} × ${k} = ${2*r*k}π cm²/s. (b) dC/dt = 2π × dr/dt = ${2*k}π cm/s. (c) A = π × ${r}² = ${r*r}π cm².`};}},
+{id:'xii_extrema',cls:'XII',topic:'Application of Derivatives',level:'X',mcq:true,mcqPart:1,gen(){let p,q;do{p=R(-3,3);q=R(-2,5);}while(q<=p||(p+q)%2);const c=R(-5,8),B=-3*(p+q)/2,C=3*p*q,f=x=>x**3+B*x*x+C*x+c;return{text:`Consider f(x) = ${polyDisp([[1,'x³'],[B,'x²'],[C,'x'],[c,'']])}.`,parts:[PT('(a) At what value of x does f have a local maximum?',p,FM.int,2),PT('(b) Find the local maximum value.',f(p),FM.int,2,{distract:[f(q),f(0)===f(p)?f(p)+2:f(0),f(p)+1]}),PT('(c) Find the local minimum value.',f(q),FM.int,2)],sol:`f′(x) = 3x² ${2*B<0?'−':'+'} ${Math.abs(2*B)}x ${C<0?'−':'+'} ${Math.abs(C)} = 3(x ${p<0?'+':'−'} ${Math.abs(p)})(x ${q<0?'+':'−'} ${Math.abs(q)}). f′ changes from + to − at x = ${neg(p)} (local maximum ${neg(f(p))}) and from − to + at x = ${neg(q)} (local minimum ${neg(f(q))}).`};}}
+);
+
+/* ---------- CBSE model paper (fixed) ---------- */
+const ch=(o,a)=>[{type:'choice',options:o,ans:a}];
+const SAMPLE=[
+ {kind:'mcq',level:'E',topic:'Integers',text:'Which of these is the smallest?',parts:ch(['−5','−2','0','3'],0),sol:'−5 is furthest to the left on the number line.'},
+ {kind:'mcq',level:'E',topic:'Fractions and Decimals',text:'0.6 as a fraction in its lowest terms is',parts:ch(['6/100','3/5','6/5','2/3'],1),sol:'6/10 = 3/5'},
+ {kind:'mcq',level:'M',topic:'Exponents and Powers',text:'The value of (−3)<sup>3</sup> is',parts:ch(['9','−9','27','−27'],3),sol:'(−3) × (−3) × (−3) = −27'},
+ {kind:'mcq',level:'M',topic:'Simple Equations',text:'If 5x = 35, then x + 3 is',parts:ch(['7','10','38','32'],1),sol:'x = 7, so x + 3 = 10.'},
+ {kind:'mcq',level:'M',topic:'Data Handling',text:'The median of 3, 9, 5, 11, 7 is',parts:ch(['5','7','9','11'],1),sol:'In order: 3, 5, 7, 9, 11. The middle value is 7.'},
+ {kind:'mcq',level:'M',topic:'Comparing Quantities',text:'20% of 450 is',parts:ch(['90','45','9','900'],0),sol:'20/100 × 450 = 90'},
+ {kind:'mcq',level:'C',topic:'Triangles',text:'Which set of lengths <strong>cannot</strong> be the sides of a triangle?',parts:ch(['3, 4, 5','5, 6, 7','2, 3, 6','4, 4, 7'],2),sol:'2 + 3 = 5, which is less than 6.'},
+ {kind:'mcq',level:'C',topic:'Triangles',text:'An exterior angle of a triangle is 110° and one of the interior opposite angles is 45°. The other interior opposite angle is',parts:ch(['55°','65°','70°','25°'],1),sol:'110° − 45° = 65°'},
+ {kind:'mcq',level:'C',topic:'Perimeter and Area',text:'A triangle has an area of 36 cm² and a base of 12 cm. Its height is',parts:ch(['3 cm','6 cm','12 cm','18 cm'],1),sol:'½ × 12 × h = 36, so h = 6 cm.'},
+ {kind:'mcq',level:'X',topic:'Algebraic Expressions',text:'If a = −2 and b = 3, the value of a²b − ab² is',parts:ch(['−30','6','30','−6'],2),sol:'(4)(3) − (−2)(9) = 12 + 18 = 30'},
+ {kind:'w',level:'E',topic:'Integers',text:'Evaluate: (−15) + 8 − (−7).',parts:[{type:'num',ans:0,fmt:FM.int}],sol:'(−15) + 8 + 7 = 0'},
+ {kind:'w',level:'E',topic:'Fractions and Decimals',text:'Write 3/8 as a decimal.',parts:[{type:'num',ans:0.375,fmt:FM.num}],sol:'3 ÷ 8 = 0.375'},
+ {kind:'w',level:'E',topic:'Data Handling',text:'Find the mode of the data: 4, 7, 2, 7, 9, 4, 7, 3.',parts:[{type:'num',ans:7,fmt:FM.int}],sol:'7 occurs 3 times.'},
+ {kind:'w',level:'E',topic:'Lines and Angles',text:'An angle measures 65°. Find its complement.',parts:[{type:'num',ans:25,fmt:FM.deg}],sol:'90° − 65° = 25°'},
+ {kind:'w',level:'M',topic:'Simple Equations',text:'Solve: 3x − 7 = 2x + 5.',parts:[{type:'num',ans:12,fmt:FM.int}],sol:'3x − 2x = 5 + 7, so x = 12.'},
+ {kind:'w',level:'M',topic:'Fractions and Decimals',text:'Find the product: 2⅓ × 1⅘. Give your answer as a mixed fraction.',parts:[{type:'num',ans:21/5,fmt:FM.mixed}],sol:'7/3 × 9/5 = 63/15 = 21/5 = 4 1/5'},
+ {kind:'w',level:'M',topic:'Data Handling',text:'The mean of 5 numbers is 18. When one number is removed, the mean of the rest is 16. Find the number removed.',parts:[{type:'num',ans:26,fmt:FM.int}],sol:'5 × 18 = 90; 4 × 16 = 64; 90 − 64 = 26'},
+ {kind:'w',level:'M',topic:'Exponents and Powers',text:'Simplify (2<sup>5</sup> × 2<sup>3</sup>) ÷ 2<sup>4</sup> and give its value.',parts:[{type:'num',ans:16,fmt:FM.int,disp:'2<sup>4</sup> = 16'}],sol:'2<sup>8</sup> ÷ 2<sup>4</sup> = 2<sup>4</sup> = 16'},
+ {kind:'w',level:'M',topic:'Triangles',text:'Two angles of a triangle are 48° and 67°.',parts:[{q:'(a) Find the third angle.',type:'num',ans:65,fmt:FM.deg,w:1},{q:'(b) What type of triangle is it by its angles?',type:'select',ans:'Acute-angled',options:['Acute-angled','Right-angled','Obtuse-angled'],w:1}],sol:'180° − 115° = 65°; all angles are less than 90°, so it is acute-angled.'},
+ {kind:'w',level:'M',topic:'Comparing Quantities',text:'Convert into percentages.',parts:[{q:'(a) 0.35',type:'num',ans:35,fmt:FM.pct,w:1},{q:'(b) 3/20',type:'num',ans:15,fmt:FM.pct,w:1}],sol:'0.35 × 100 = 35%; 3/20 × 100 = 15%'},
+ {kind:'w',level:'M',topic:'Perimeter and Area',text:'A rectangle is 12.5 cm long and 8 cm wide.',parts:[{q:'(a) Find its area.',type:'num',ans:100,fmt:FM.unit('cm²'),w:1},{q:'(b) Find its perimeter.',type:'num',ans:41,fmt:FM.unit('cm'),w:1}],sol:'Area = 12.5 × 8 = 100 cm²; perimeter = 2(12.5 + 8) = 41 cm.'},
+ {kind:'w',level:'M',topic:'Algebraic Expressions',text:'Subtract 3a² − 4ab + 5 from 7a² + 2ab − 3.',parts:[{type:'expr',ans:'4a² + 6ab − 8',disp:'4a² + 6ab − 8'}],sol:'(7a² + 2ab − 3) − (3a² − 4ab + 5) = 4a² + 6ab − 8'},
+ {kind:'w',level:'C',topic:'Comparing Quantities',text:'A shopkeeper buys a fan for ₹1,600 and sells it at a profit of 15%.',parts:[{q:'(a) Find the selling price (₹).',type:'num',ans:1840,fmt:FM.money,w:1},{q:'(b) If he had sold it for ₹1,520 instead, what would his loss percent be?',type:'num',ans:5,fmt:FM.pct,w:2}],sol:'SP = 1,600 + 240 = ₹1,840. Loss = ₹80; 80 ÷ 1,600 × 100 = 5%.'},
+ {kind:'w',level:'C',topic:'Comparing Quantities',text:'Find the simple interest on ₹12,000 at 8% per annum for 2½ years. Also find the amount.',parts:[{q:'(a) Simple interest (₹)',type:'num',ans:2400,fmt:FM.money,w:2},{q:'(b) Amount (₹)',type:'num',ans:14400,fmt:FM.money,w:1}],sol:'SI = 12,000 × 8 × 2.5 ÷ 100 = ₹2,400; amount = ₹14,400.'},
+ {kind:'w',level:'C',topic:'Triangles',text:'In a right-angled triangle, the hypotenuse is 26 cm and one of the other sides is 10 cm.',parts:[{q:'(a) Find the third side.',type:'num',ans:24,fmt:FM.unit('cm'),w:2},{q:'(b) Find the perimeter of the triangle.',type:'num',ans:60,fmt:FM.unit('cm'),w:1}],sol:'√(676 − 100) = √576 = 24 cm; perimeter = 26 + 10 + 24 = 60 cm.'},
+ {kind:'w',level:'C',topic:'Lines and Angles',text:'Two complementary angles are in the ratio 2 : 3.',parts:[{q:'(a) Find the smaller angle.',type:'num',ans:36,fmt:FM.deg,w:1},{q:'(b) Find the larger angle.',type:'num',ans:54,fmt:FM.deg,w:1},{q:'(c) Find the supplement of the larger angle.',type:'num',ans:126,fmt:FM.deg,w:1}],sol:'2x + 3x = 90°, so x = 18°: the angles are 36° and 54°; 180° − 54° = 126°.'},
+ {kind:'w',level:'C',topic:'Perimeter and Area',text:'The circumference of a circle is 88 cm. (Use π = 22/7.)',parts:[{q:'(a) Find its radius.',type:'num',ans:14,fmt:FM.unit('cm'),w:1},{q:'(b) Find its area.',type:'num',ans:616,fmt:FM.unit('cm²'),w:2}],sol:'2 × 22/7 × r = 88, so r = 14 cm; area = 22/7 × 14 × 14 = 616 cm².'},
+ {kind:'w',level:'C',topic:'Rational Numbers',text:'Consider the rational numbers −3/4,&nbsp; 5/(−6),&nbsp; 2/3,&nbsp; −1/2.',parts:[{q:'(a) Write them in ascending order, separated by commas.',type:'list',ans:[-5/6,-3/4,-1/2,2/3],disp:'−5/6, −3/4, −1/2, 2/3',w:2},{q:'(b) Find the sum of the greatest and the smallest.',type:'num',ans:-1/6,fmt:FM.frac,w:1}],sol:'−5/6 < −3/4 < −1/2 < 2/3; 2/3 + (−5/6) = 4/6 − 5/6 = −1/6.'},
+ {kind:'w',level:'X',topic:'Perimeter and Area',text:'A rectangular garden measures 40 m by 25 m. A path 2.5 m wide runs all round it on the outside. (Use π = 22/7.)',parts:[{q:'(a) Find the area of the path (m²).',type:'num',ans:350,fmt:FM.unit('m²'),w:2},{q:'(b) Find the cost of paving the path at ₹45 per m².',type:'num',ans:15750,fmt:FM.money,w:1},{q:'(c) A circular pond of radius 7 m is dug inside the garden. Find the area of the garden left for grass (m²).',type:'num',ans:846,fmt:FM.unit('m²'),w:3}],sol:'Outer 45 × 30 = 1,350 m²; path = 1,350 − 1,000 = 350 m²; cost = 350 × 45 = ₹15,750; pond = 154 m², grass = 1,000 − 154 = 846 m².'},
+ {kind:'w',level:'X',topic:'Simple Equations',text:"Ravi's age is 4 years more than twice his sister's age. In 5 years' time, the sum of their ages will be 50 years.",parts:[{q:"(a) Find his sister's present age.",type:'num',ans:12,fmt:FM.unit('years'),w:2},{q:"(b) Find Ravi's present age.",type:'num',ans:28,fmt:FM.unit('years'),w:2},{q:"(c) How many years ago was Ravi's age three times his sister's age?",type:'num',ans:4,fmt:FM.unit('years'),w:2}],sol:'(x + 5) + (2x + 9) = 50, so 3x = 36 and x = 12; Ravi = 28; 28 − y = 3(12 − y), so y = 4.'}
+];
+
+/* ---------- settings ---------- */
+const LEVELS=['E','M','C','X'],LNAME={E:'Easy',M:'Medium',C:'Complex',X:'Challenging'};
+const ROMAN=['I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII'];
+const BOARDS={India:['CBSE','ICSE (coming soon)','State boards (coming soon)']};
+const TOPICS={
+  V:['Large Numbers','Multiplication and Division','Factors and Multiples','Fractions','Decimals','Measurement','Perimeter and Area','Shapes and Angles','Time and Money','Data Handling'],
+  VI:['Knowing Our Numbers','Playing with Numbers','Basic Geometrical Ideas','Understanding Elementary Shapes','Integers','Fractions','Decimals','Data Handling','Mensuration','Algebra','Ratio and Proportion'],
+  VII:['Integers','Fractions and Decimals','Data Handling','Simple Equations','Lines and Angles','Triangles','Comparing Quantities','Rational Numbers','Perimeter and Area','Algebraic Expressions','Exponents and Powers'],
+  VIII:['Linear Equations in One Variable','Understanding Quadrilaterals','Data Handling','Squares and Square Roots','Cubes and Cube Roots','Comparing Quantities','Algebraic Expressions and Identities','Mensuration','Exponents and Powers','Direct and Inverse Proportions','Factorisation'],
+  IX:['Number Systems','Polynomials','Coordinate Geometry','Linear Equations in Two Variables','Lines and Angles','Quadrilaterals','Circles',"Heron's Formula",'Surface Areas and Volumes','Statistics'],
+  X:['Real Numbers','Polynomials','Pair of Linear Equations','Quadratic Equations','Arithmetic Progressions','Coordinate Geometry','Introduction to Trigonometry','Applications of Trigonometry','Circles','Areas Related to Circles','Surface Areas and Volumes','Statistics','Probability'],
+  XI:['Sets','Trigonometric Functions','Complex Numbers','Linear Inequalities','Permutations and Combinations','Binomial Theorem','Sequences and Series','Straight Lines','Conic Sections','Limits and Derivatives','Statistics','Probability'],
+  XII:['Inverse Trigonometric Functions','Matrices','Determinants','Continuity and Differentiability','Application of Derivatives','Integrals','Application of Integrals','Vector Algebra','Three Dimensional Geometry','Linear Programming','Probability']
+};
+const TLABEL={'Triangles':'Triangles (incl. Pythagoras)','Comparing Quantities':'Comparing Quantities (%, profit and loss, SI)'};
+const DEF={klass:'VII',duration:60,nq:30,usemcq:true,nmcq:10,mix:{E:20,M:40,C:30,X:10},marks:{MCQ:1,E:1,M:2,C:3,X:6},topics:'ALL',sample:true};
+let S=JSON.parse(JSON.stringify(DEF));
+try{const saved=JSON.parse(localStorage.getItem('mpp-settings')||'null');if(saved&&saved.mix&&saved.marks)S=Object.assign(S,saved);}catch(e){}
+
+function fillSelects(){
+  const b=$('#board');b.innerHTML='';(BOARDS[$('#country').value]||['CBSE']).forEach((x,i)=>{const o=document.createElement('option');o.textContent=x;o.disabled=i>0;b.appendChild(o);});
+  const k=$('#klass');k.innerHTML='';ROMAN.forEach(r=>{const o=document.createElement('option');o.value=r;o.textContent='Class '+r+(TOPICS[r]?'':' (coming soon)');k.appendChild(o);});k.value=S.klass;
+  const mix=$('#mix');mix.innerHTML='';LEVELS.forEach(l=>{mix.insertAdjacentHTML('beforeend',`<label for="mx_${l}" style="margin:0"><span class="lvl l-${l}"></span>${LNAME[l]}</label><input type="range" id="mx_${l}" min="0" max="100" step="5" value="${S.mix[l]}" aria-label="${LNAME[l]} percentage"><input type="number" id="mxn_${l}" min="0" max="100" step="5" value="${S.mix[l]}" class="pct" aria-label="${LNAME[l]} percent value">`);});
+  LEVELS.forEach(l=>{const r=$('#mx_'+l),n=$('#mxn_'+l);r.addEventListener('input',()=>{n.value=r.value;readForm();});n.addEventListener('input',()=>{r.value=n.value;readForm();});});
+}
+function renderTopics(){
+  const wrap=$('#topics');wrap.innerHTML='';const list=TOPICS[S.klass]||[];
+  if(!list.length){wrap.innerHTML='<span class="hint">The question bank for this class is being prepared. Classes V to XII are available now.</span>';return;}
+  const all=S.topics==='ALL';
+  wrap.insertAdjacentHTML('beforeend',`<label class="chip ${all?'on':''}" for="tp_all"><input type="checkbox" id="tp_all" ${all?'checked':''}> All</label>`);
+  list.forEach((t,i)=>{const on=all||(Array.isArray(S.topics)&&S.topics.indexOf(t)>=0);wrap.insertAdjacentHTML('beforeend',`<label class="chip ${on?'on':''}" for="tp_${i}"><input type="checkbox" id="tp_${i}" data-topic="${t}" ${on?'checked':''}> ${TLABEL[t]||t}</label>`);});
+  $('#tp_all').addEventListener('change',e=>{S.topics=e.target.checked?'ALL':[];renderTopics();readForm();});
+  wrap.querySelectorAll('input[data-topic]').forEach(cb=>cb.addEventListener('change',()=>{const sel=[...wrap.querySelectorAll('input[data-topic]')].filter(x=>x.checked).map(x=>x.dataset.topic);S.topics=sel.length===list.length?'ALL':sel;renderTopics();readForm();}));
+}
+function writeForm(){
+  $('#klass').value=S.klass;$('#duration').value=S.duration;$('#nq').value=S.nq;$('#nmcq').value=S.nmcq;$('#usemcq').checked=S.usemcq;$('#sample').checked=S.sample;
+  LEVELS.forEach(l=>{$('#mx_'+l).value=S.mix[l];$('#mxn_'+l).value=S.mix[l];});
+  ['MCQ'].concat(LEVELS).forEach(k=>{$('#m_'+k).value=S.marks[k];});renderTopics();
+}
+function readForm(){
+  S.klass=$('#klass').value;S.duration=+$('#duration').value||0;S.nq=+$('#nq').value||0;S.nmcq=+$('#nmcq').value||0;S.usemcq=$('#usemcq').checked;S.sample=$('#sample').checked;
+  LEVELS.forEach(l=>{S.mix[l]=+$('#mxn_'+l).value||0;});['MCQ'].concat(LEVELS).forEach(k=>{S.marks[k]=+$('#m_'+k).value||0;});
+  $('#nmcq').disabled=!S.usemcq;
+  try{localStorage.setItem('mpp-settings',JSON.stringify(S));}catch(e){}
+  renderPlan();
+}
+function isDefault(){return S.klass==='VII'&&S.duration===60&&S.nq===30&&S.usemcq&&S.nmcq===10&&S.topics==='ALL'&&LEVELS.every(l=>S.mix[l]===DEF.mix[l])&&['MCQ'].concat(LEVELS).every(k=>S.marks[k]===DEF.marks[k]);}
+function split(n,pct){const raw=LEVELS.map(l=>n*pct[l]/100),base=raw.map(Math.floor);let rem=n-base.reduce((a,b)=>a+b,0);const order=raw.map((r,i)=>[r-Math.floor(r),i]).sort((a,b)=>b[0]-a[0]);for(let k=0;k<order.length&&rem>0;k++,rem--)base[order[k][1]]++;const o={};LEVELS.forEach((l,i)=>o[l]=base[i]);return o;}
+function plan(){const nm=S.usemcq?Math.min(S.nmcq,S.nq):0;return{mcq:split(nm,S.mix),w:split(S.nq-nm,S.mix),nm,nw:S.nq-nm};}
+function validate(){
+  const errs=[];const sum=LEVELS.reduce((a,l)=>a+S.mix[l],0);
+  if(sum!==100)errs.push(`The difficulty mix adds up to ${sum}%. Adjust it to exactly 100%.`);
+  if(S.nq<5||S.nq>60)errs.push('Choose between 5 and 60 questions.');
+  if(S.usemcq&&(S.nmcq<1||S.nmcq>S.nq))errs.push(`The number of MCQs must be between 1 and ${S.nq}.`);
+  if(S.duration<10||S.duration>180)errs.push('Choose a duration between 10 and 180 minutes.');
+  if(['MCQ'].concat(LEVELS).some(k=>S.marks[k]<1||S.marks[k]>12))errs.push('Marks per question must be between 1 and 12.');
+  if(!TOPICS[S.klass])errs.push(`Class ${S.klass} questions are not available yet. Choose a class from V to XII.`);
+  else if(S.topics!=='ALL'&&!S.topics.length)errs.push('Select at least one topic.');
+  return{errs,sum};
+}
+function renderPlan(){
+  const p=plan(),v=validate();$('#mixsum').textContent=v.sum+'%';$('#mixsum').className=v.sum===100?'ok':'bad';
+  let tm=0,tq=0,tw=0;const rows=LEVELS.map(l=>{const mk=p.mcq[l]*S.marks.MCQ+p.w[l]*S.marks[l];tm+=mk;tq+=p.mcq[l];tw+=p.w[l];return `<tr><td><span class="lvl l-${l}"></span>${LNAME[l]} <span class="hint">(${S.mix[l]}%)</span></td><td class="n">${p.mcq[l]}</td><td class="n">${p.w[l]}</td><td class="n">${S.marks[l]}</td><td class="n">${mk}</td></tr>`;});
+  $('#planBody').innerHTML=rows.join('');$('#pfMcq').textContent=tq;$('#pfW').textContent=tw;$('#pfMarks').textContent=tm;
+  $('#planTitle').textContent=`CBSE Class ${S.klass} Mathematics · ${S.nq} questions · ${tm} marks`;
+  const secs=sections(p),check=S.duration>=45?3:2,avail=Math.max(0,S.duration-check);
+  $('#timeBody').innerHTML=secs.map(s=>`<tr><td>Section ${s.letter}: ${s.name}</td><td class="n">${s.count} Q · ${s.marks} marks</td><td class="n">${Math.round(avail*s.marks/(tm||1))} min</td></tr>`).join('')+`<tr><td>Checking</td><td></td><td class="n">${check} min</td></tr>`;
+  const sw=$('#sampleWrap'),def=isDefault();sw.hidden=!def;
+  const fm=$('#formMsg');if(v.errs.length){fm.innerHTML=v.errs.map(esc).join('<br>');fm.hidden=false;}else fm.hidden=true;
+  $('#gen').disabled=v.errs.length>0;
+}
+function sections(p){const out=[];let c=65;if(p.nm>0)out.push({letter:String.fromCharCode(c++),name:'Multiple choice',kind:'mcq',count:p.nm,marks:p.nm*S.marks.MCQ});LEVELS.forEach(l=>{if(p.w[l]>0)out.push({letter:String.fromCharCode(c++),name:LNAME[l],kind:'w',level:l,count:p.w[l],marks:p.w[l]*S.marks[l]});});return out;}
+
+/* ---------- paper building ---------- */
+function partMarks(q,total){const ws=q.parts.map(p=>p.w||1),sum=ws.reduce((a,b)=>a+b,0);let acc=0;q.parts.forEach((p,i)=>{if(i===q.parts.length-1)p.marks=+(total-acc).toFixed(2);else{p.marks=Math.round(total*ws[i]/sum*2)/2;acc+=p.marks;}});}
+function makeMCQ(t){const inst=t.gen();if(inst.parts[0].type==='choice')return inst;const p=inst.parts[t.mcqPart||0];if(!p||p.type!=='num'||(p.disp&&!p.mcqOpts))return null;const stem=inst.text+(p.q?' '+p.q.replace(/^\([a-z]\)\s*/,'').replace(/ You may leave [√π3]+ in your answer\./,''):'');const correct=p.mcqOpts?p.disp:p.fmt(p.ans);const wrong=p.mcqOpts?[...new Set(p.mcqOpts.filter(x=>x!==correct))].slice(0,3):distractors(p);if(wrong.length<3)return null;const opts=shuffle([correct].concat(wrong));return{text:stem,parts:[{type:'choice',options:opts,ans:opts.indexOf(correct)}],sol:inst.sol};}
+function pickFrom(kind,level,n,topics,seen,notes){
+  const base=T.filter(t=>t.cls===S.klass&&t.level===level&&(kind==='mcq'?t.mcq:!t.mcqOnly));
+  let pool=base.filter(t=>topics==='ALL'||topics.indexOf(t.topic)>=0);
+  if(!pool.length){pool=base;if(n>0)notes.add(`Some ${LNAME[level].toLowerCase()} questions come from other Class ${S.klass} topics, because the chosen topics have none at that level.`);}
+  if(!pool.length||n<=0)return [];
+  const byTopic={};pool.forEach(t=>{(byTopic[t.topic]=byTopic[t.topic]||[]).push(t);});
+  const order=shuffle(Object.keys(byTopic));Object.values(byTopic).forEach(shuffle);
+  const out=[];let k=0,guard=0;
+  while(out.length<n&&guard<n*60){guard++;const tp=order[k%order.length];k++;const list=byTopic[tp];const t=list[Math.floor(k/order.length)%list.length];
+    const inst=kind==='mcq'?makeMCQ(t):t.gen();if(!inst)continue;const key=inst.text+'|'+(inst.parts[0].options||[]).join();if(seen.has(key))continue;seen.add(key);
+    out.push(Object.assign(inst,{kind,level,topic:t.topic}));}
+  return out;
+}
+function buildPaper(){
+  const p=plan(),notes=new Set();let qs=[];
+  if(S.sample&&isDefault()){qs=SAMPLE.map(q=>JSON.parse(JSON.stringify(q,(k,v)=>k==='fmt'?undefined:v)));qs.forEach((q,i)=>q.parts.forEach((pt,j)=>{pt.fmt=SAMPLE[i].parts[j].fmt;}));qs.forEach(q=>{if(q.kind==='w')q.kind='w';});}
+  else{const seen=new Set();LEVELS.forEach(l=>{qs=qs.concat(pickFrom('mcq',l,p.mcq[l],S.topics,seen,notes));});LEVELS.forEach(l=>{qs=qs.concat(pickFrom('w',l,p.w[l],S.topics,seen,notes));});}
+  qs.forEach((q,i)=>{q.no=i+1;q.marks=q.kind==='mcq'?S.marks.MCQ:S.marks[q.level];partMarks(q,q.marks);});
+  return{qs,secs:sections(p),notes:[...notes],sample:S.sample&&isDefault(),created:Date.now()};
+}
+
+/* ---------- test ---------- */
+let P=null,ANS={},timerId=null,endAt=0,startAt=0;
+function startTest(){
+  P=buildPaper();ANS={};startAt=Date.now();endAt=startAt+S.duration*60000;
+  const total=P.qs.reduce((a,q)=>a+q.marks,0);
+  const secHtml=P.secs.map(s=>{const qs=P.qs.filter(q=>s.kind==='mcq'?q.kind==='mcq':(q.kind!=='mcq'&&q.level===s.level));
+    return `<section class="section"><div class="sechead"><h3>Section ${s.letter} – ${s.name}</h3><small>${qs.length} × ${s.kind==='mcq'?S.marks.MCQ:S.marks[s.level]} = ${qs.reduce((a,q)=>a+q.marks,0)} marks</small></div>${qs.map(qHtml).join('')}</section>`;}).join('');
+  const check=S.duration>=45?3:2,avail=S.duration-check;
+  $('#sheet').innerHTML=`<header class="sheethead"><p class="eyebrow">${esc($('#board').value)} · ${esc($('#country').value)}${P.sample?' · Model paper':''}</p><h2>Mathematics – Class ${S.klass}</h2><div class="meta"><span>Time: ${S.duration} minutes</span><span>Maximum marks: ${total}</span></div></header>
+   <ol class="instr"><li>The paper has ${P.qs.length} questions in ${P.secs.length} sections. All questions are compulsory.</li>${P.secs.map(s=>`<li>Section ${s.letter}: ${s.count} ${s.kind==='mcq'?'multiple-choice questions':LNAME[s.level].toLowerCase()+' questions'} of ${s.kind==='mcq'?S.marks.MCQ:S.marks[s.level]} mark${(s.kind==='mcq'?S.marks.MCQ:S.marks[s.level])>1?'s':''} each (about ${Math.round(avail*s.marks/total)} minutes).</li>`).join('')}<li>Type each answer in its box. Fractions, mixed numbers (4 1/5), decimals and powers (2^4) are accepted; units are optional. Use π = 22/7.</li></ol>
+   ${P.notes.map(n=>`<p class="msg warn">${esc(n)}</p>`).join('')}${secHtml}`;
+  let parts=0;P.qs.forEach(q=>parts+=q.parts.length);$('#partsTotal').textContent=parts;$('#answered').textContent='0';$('#progbar').style.width='0';
+  $('#sheet').querySelectorAll('[data-k]').forEach(el=>{const ev=el.type==='radio'?'change':'input';el.addEventListener(ev,()=>{if(el.type==='radio'){ANS[el.dataset.k]=el.value;el.closest('.opts').querySelectorAll('.opt').forEach(o=>o.classList.toggle('on',o.contains(el)&&el.checked));}else ANS[el.dataset.k]=el.value;updateCount();});});
+  show('test');$('#confirm').hidden=true;tick();clearInterval(timerId);timerId=setInterval(tick,1000);window.scrollTo(0,0);
+}
+function qHtml(q){
+  const qi=q.no-1;let inner;
+  if(q.parts[0].type==='choice'){const p=q.parts[0];inner=`<div class="opts" role="radiogroup" aria-label="Question ${q.no} options">${p.options.map((o,j)=>`<label class="opt" for="o${qi}_${j}"><input type="radio" name="r${qi}" id="o${qi}_${j}" value="${j}" data-k="${qi}-0"><b>(${'abcd'[j]})</b> ${o}</label>`).join('')}</div>`;}
+  else inner=q.parts.map((p,j)=>{const id=`a${qi}_${j}`,lab=p.q||'Your answer';let field;
+    if(p.type==='select')field=`<select id="${id}" data-k="${qi}-${j}"><option value="">Choose…</option>${p.options.map(o=>`<option>${o}</option>`).join('')}</select>`;
+    else field=`<input type="text" id="${id}" data-k="${qi}-${j}" autocomplete="off" inputmode="${p.type==='expr'||p.type==='list'||p.sci?'text':'decimal'}" placeholder="${p.type==='expr'?'e.g. 4a^2 + 6ab - 8':p.type==='list'?'e.g. -5/6, -3/4, 2/3':p.sci?'e.g. 3.84 x 10^5':/[√π]/.test(p.disp||'')?'e.g. 3√2 or π/3':'Answer'}">`;
+    return `<div class="part"><label class="pq" for="${id}" style="font-weight:400;margin:0">${lab}${q.parts.length>1?` <span class="qm">[${p.marks}]</span>`:''}</label>${field}</div>`;}).join('');
+  return `<div class="q" id="q${qi}"><span class="qn">${q.no}</span><div class="qbody"><span class="qtopic"><span class="lvl l-${q.level}"></span>${q.topic}</span><div>${q.text}</div>${inner}</div><span class="qm">[${q.marks}]</span></div>`;
+}
+function updateCount(){let n=0,t=0;P.qs.forEach((q,i)=>q.parts.forEach((p,j)=>{t++;const v=ANS[i+'-'+j];if(v!=null&&String(v).trim()!=='')n++;}));$('#answered').textContent=n;$('#progbar').style.width=(t?n/t*100:0)+'%';return{n,t};}
+function tick(){const left=Math.max(0,endAt-Date.now()),m=Math.floor(left/60000),s=Math.floor(left%60000/1000);const el=$('#timer');el.textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');el.classList.toggle('warn',left<=5*60000);if(left<=0){clearInterval(timerId);finish(true);}}
+function askSubmit(){const c=updateCount();$('#confirmTitle').textContent='Submit your paper?';$('#confirmText').textContent=`You have filled ${c.n} of ${c.t} answers.${c.n<c.t?' Blank answers score zero.':''} You cannot change answers after submitting.`;$('#confirmYes').textContent='Submit and mark';$('#confirmYes').dataset.mode='submit';$('#confirm').hidden=false;$('#confirm').scrollIntoView({block:'nearest'});}
+function askQuit(){$('#confirmTitle').textContent='Quit this paper?';$('#confirmText').textContent='Your answers will be discarded and you will return to the settings.';$('#confirmYes').textContent='Quit without marking';$('#confirmYes').dataset.mode='quit';$('#confirm').hidden=false;}
+
+/* ---------- results ---------- */
+function finish(auto){
+  clearInterval(timerId);const used=Math.min(S.duration*60000,Date.now()-startAt);
+  let got=0,tot=0;const byL={},byS={};
+  P.qs.forEach((q,i)=>{q.got=0;q.parts.forEach((p,j)=>{const v=ANS[i+'-'+j];p.user=v;p.ok=checkPart(p,v);if(p.ok)q.got+=p.marks;});q.got=+q.got.toFixed(2);got+=q.got;tot+=q.marks;
+    const L=q.level;byL[L]=byL[L]||{g:0,t:0,n:0,c:0};byL[L].g+=q.got;byL[L].t+=q.marks;byL[L].n++;if(q.got===q.marks)byL[L].c++;
+    const sk=q.kind==='mcq'?'mcq':q.level;byS[sk]=byS[sk]||{g:0,t:0};byS[sk].g+=q.got;byS[sk].t+=q.marks;});
+  const pct=tot?Math.round(got/tot*100):0;const band=pct>=90?['Outstanding','var(--green-soft)','var(--green)']:pct>=75?['Very good','var(--green-soft)','var(--green)']:pct>=50?['Good effort','var(--amber-soft)','var(--amber)']:['Keep practising','var(--red-soft)','var(--red)'];
+  const mm=Math.floor(used/60000),ss=Math.floor(used%60000/1000);
+  const secRows=P.secs.map(s=>{const k=s.kind==='mcq'?'mcq':s.level,v=byS[k]||{g:0,t:0};return `<tr><td>Section ${s.letter} – ${s.name}</td><td class="n">${+v.g.toFixed(1)} / ${v.t}</td></tr>`;}).join('');
+  const lvlRows=LEVELS.filter(l=>byL[l]).map(l=>`<tr><td><span class="lvl l-${l}"></span>${LNAME[l]}</td><td class="n">${byL[l].c} / ${byL[l].n}</td><td class="n">${+byL[l].g.toFixed(1)} / ${byL[l].t}</td><td class="n">${Math.round(byL[l].g/byL[l].t*100)}%</td></tr>`).join('');
+  const review=P.qs.map((q,i)=>{const parts=q.parts.map((p,j)=>{let ua=p.user;if(p.type==='choice'&&ua!=null&&ua!=='')ua='('+'abcd'[+ua]+') '+p.options[+ua];const lab=q.parts.length>1?(p.q?p.q.split(' ')[0]+' ':''):'';
+      return `<div class="pr ${p.ok?'right':'wrong'}"><span><span class="tick">${p.ok?'✓ Correct':'✗ '+(ua==null||String(ua).trim()===''?'Not answered':'Incorrect')}</span> ${lab}<span class="hint" style="margin:0;display:inline">(${p.ok?p.marks:0} / ${p.marks})</span></span>${p.ok?'':`<span>Your answer: <b>${ua==null||String(ua).trim()===''?'—':esc(ua)}</b></span>`}<span>Correct answer: <b>${answerText(p)}</b></span></div>`;}).join('');
+    return `<div class="q" data-ok="${q.got===q.marks?1:0}"><span class="qn">${q.no}</span><div class="qbody"><span class="qtopic"><span class="lvl l-${q.level}"></span>${q.topic} · ${q.kind==='mcq'?'MCQ':LNAME[q.level]}</span><div>${q.text}</div>${q.parts[0].type==='choice'?`<div class="hint" style="margin:0">${q.parts[0].options.map((o,j)=>`(${'abcd'[j]}) ${o}`).join(' &nbsp; ')}</div>`:''}${parts}<p class="sol"><b>Working:</b> ${q.sol}</p></div><span class="mark">${+q.got.toFixed(1)}/${q.marks}</span></div>`;}).join('');
+  $('#results').innerHTML=`
+   <div class="card stack" style="margin-bottom:16px">
+     <div class="score"><div class="big">${+got.toFixed(1)}<small> / ${tot}</small></div>
+       <div class="stack" style="gap:6px"><span class="band" style="background:${band[1]};color:${band[2]}">${band[0]} · ${pct}%</span><span class="hint" style="margin:0">${auto?'Time ran out, so the paper was submitted automatically. ':''}Time used: ${mm} min ${ss} s of ${S.duration} min · ${P.qs.length} questions</span></div></div>
+     <div class="grid2" style="gap:16px"><div class="tblwrap"><table><thead><tr><th>Difficulty</th><th class="n">Fully right</th><th class="n">Marks</th><th class="n">Score</th></tr></thead><tbody>${lvlRows}</tbody></table></div>
+       <div class="tblwrap"><table><thead><tr><th>Section</th><th class="n">Marks</th></tr></thead><tbody>${secRows}</tbody></table></div></div>
+     <div class="btns"><button type="button" class="primary" id="againBtn">Try this paper again</button><button type="button" id="newBtn">New paper</button><label class="chip" for="onlyWrong"><input type="checkbox" id="onlyWrong"> Show only questions to review</label></div>
+   </div>
+   <article class="sheet res"><header class="sheethead"><h2>Marked answer sheet</h2><div class="meta"><span>Mathematics – Class ${S.klass}</span><span>${+got.toFixed(1)} / ${tot} marks</span></div></header>${review}</article>`;
+  $('#againBtn').addEventListener('click',()=>{const keep=P;ANS={};startAt=Date.now();endAt=startAt+S.duration*60000;P=keep;rerunSame();});
+  $('#newBtn').addEventListener('click',()=>{show('setup');window.scrollTo(0,0);});
+  $('#onlyWrong').addEventListener('change',e=>{$('#results').querySelectorAll('.res .q').forEach(q=>{q.hidden=e.target.checked&&q.dataset.ok==='1';});});
+  show('results');window.scrollTo(0,0);
+}
+function rerunSame(){const saved=P;P=null;P=saved;P.qs.forEach(q=>q.parts.forEach(p=>{delete p.user;delete p.ok;}));
+  // rebuild the sheet from the same questions
+  const total=P.qs.reduce((a,q)=>a+q.marks,0);const secHtml=P.secs.map(s=>{const qs=P.qs.filter(q=>s.kind==='mcq'?q.kind==='mcq':(q.kind!=='mcq'&&q.level===s.level));return `<section class="section"><div class="sechead"><h3>Section ${s.letter} – ${s.name}</h3><small>${qs.length} questions · ${qs.reduce((a,q)=>a+q.marks,0)} marks</small></div>${qs.map(qHtml).join('')}</section>`;}).join('');
+  $('#sheet').innerHTML=`<header class="sheethead"><p class="eyebrow">Second attempt</p><h2>Mathematics – Class ${S.klass}</h2><div class="meta"><span>Time: ${S.duration} minutes</span><span>Maximum marks: ${total}</span></div></header>${secHtml}`;
+  $('#sheet').querySelectorAll('[data-k]').forEach(el=>{const ev=el.type==='radio'?'change':'input';el.addEventListener(ev,()=>{if(el.type==='radio'){ANS[el.dataset.k]=el.value;el.closest('.opts').querySelectorAll('.opt').forEach(o=>o.classList.toggle('on',o.contains(el)&&el.checked));}else ANS[el.dataset.k]=el.value;updateCount();});});
+  updateCount();show('test');$('#confirm').hidden=true;tick();clearInterval(timerId);timerId=setInterval(tick,1000);window.scrollTo(0,0);}
+function show(id){['setup','test','results'].forEach(x=>{$('#'+x).hidden=x!==id;});}
+
+/* ---------- wiring ---------- */
+fillSelects();writeForm();readForm();
+$('#country').addEventListener('change',()=>{fillSelects();writeForm();readForm();});
+$('#klass').addEventListener('change',()=>{S.klass=$('#klass').value;S.topics='ALL';renderTopics();readForm();});
+['#duration','#nq','#nmcq','#usemcq','#sample','#m_MCQ','#m_E','#m_M','#m_C','#m_X'].forEach(s=>$(s).addEventListener('input',readForm));
+$('#usemcq').addEventListener('change',readForm);$('#sample').addEventListener('change',readForm);
+$('#form').addEventListener('submit',e=>{e.preventDefault();readForm();if(validate().errs.length)return;startTest();});
+$('#reset').addEventListener('click',()=>{S=JSON.parse(JSON.stringify(DEF));writeForm();readForm();});
+$('#submitBtn').addEventListener('click',askSubmit);$('#quitBtn').addEventListener('click',askQuit);
+$('#confirmNo').addEventListener('click',()=>{$('#confirm').hidden=true;});
+$('#confirmYes').addEventListener('click',e=>{$('#confirm').hidden=true;if(e.target.dataset.mode==='quit'){clearInterval(timerId);show('setup');window.scrollTo(0,0);}else finish(false);});
+})();
+</script>
+
+</html>
