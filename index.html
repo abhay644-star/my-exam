@@ -109,6 +109,17 @@ a.track .go{margin-top:auto;font-weight:700;color:var(--ink)}
 .examcard .body{font-size:.8rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;font-weight:700}
 .examcard .pat{font-size:.88rem;color:var(--muted);font-variant-numeric:tabular-nums}
 .examcard button{margin-top:auto;align-self:flex-start}
+/* exam papers: figures, maths and matching tables */
+.qfig{display:block;max-width:100%;height:auto;margin:8px 0;background:#fff;border-radius:6px;padding:4px}
+.ofig{display:inline-block;max-width:100%;max-height:150px;height:auto;vertical-align:middle;background:#fff;border-radius:4px;padding:2px}
+.opt{flex-wrap:wrap}
+table.mt{width:auto;margin:6px 0}
+table.mt th,table.mt td{border:1px solid var(--line);padding:4px 10px;text-transform:none;letter-spacing:0;font-size:.92rem;color:var(--fg);vertical-align:top}
+.katex-display{overflow-x:auto;overflow-y:hidden;padding:2px 0}
+.dm{margin:6px 0;line-height:2}
+.soon.ready{color:var(--green);background:var(--green-soft)}
+a.btnlink-ink{display:inline-flex;align-self:flex-start;margin-top:auto;font-weight:700;font-size:.85rem;border-radius:8px;padding:6px 12px;border:1px solid var(--ink);color:var(--ink);text-decoration:none}
+a.btnlink-ink:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
 .soon{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--amber);background:var(--amber-soft);padding:3px 8px;border-radius:999px;white-space:nowrap}
 /* contact pop-up */
 textarea{resize:vertical;min-height:7rem}
@@ -293,6 +304,17 @@ sup,sub{font-size:.7em}
       <div><h2>Entrance &amp; competitive exams</h2><p class="lede">Mock tests in the real exam pattern are being built. Tap <b>I want this exam</b> on the ones you need, and we will build the most requested first.</p></div>
       <div id="examList" class="stack"></div>
       <p class="hint" style="margin:0">Patterns are based on the latest official notices; always check the exam's official website. Your exam is not listed? <button type="button" class="linkbtn" id="otherExam">Tell us about it</button>.</p>
+    </div>
+  </section>
+
+  <!-- JEE MAIN PAST PAPERS -->
+  <section id="jeeView" hidden>
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="#home">Home</a> › <a href="#exams">Entrance &amp; competitive exams</a> › JEE Main</nav>
+    <div class="stack">
+      <div><h2>JEE Main: previous year papers</h2><p class="lede">Official question papers with the final answer keys from the National Testing Agency (NTA). Take a paper as a timed 3-hour exam, or practise question by question with worked solutions.</p></div>
+      <div id="jeeList" class="examgrid"></div>
+      <div id="jeeMsg" class="msg" role="status" hidden></div>
+      <p class="hint" style="margin:0">Questions and answer keys: NTA. Worked solutions: All in All Exam Practice. More papers are being added. Found a mistake? <button type="button" class="linkbtn" id="jeeReport">Tell us</button>.</p>
     </div>
   </section>
 
@@ -1057,12 +1079,15 @@ const mmss=ms=>String(Math.floor(ms/60000)).padStart(2,'0')+':'+String(Math.floo
 function save(){if(!P)return;try{localStorage.setItem(ACTIVE,JSON.stringify({P,ANS,FLAG,CHK}));}catch(e){}}
 function clearActive(){try{localStorage.removeItem(ACTIVE);}catch(e){}}
 function loadActive(){try{const a=JSON.parse(localStorage.getItem(ACTIVE)||'null');return a&&a.P&&Array.isArray(a.P.qs)?a:null;}catch(e){return null;}}
-function secQs(s){return P.qs.filter(q=>s.kind==='mcq'?q.kind==='mcq':(q.kind!=='mcq'&&q.level===s.level));}
+function secQs(s){if(s.key)return P.qs.filter(q=>q.sec===s.key);return P.qs.filter(q=>s.kind==='mcq'?q.kind==='mcq':(q.kind!=='mcq'&&q.level===s.level));}
+// school papers are named "Subject – Class X"; exam papers (JEE etc.) carry their own title
+const paperName=(p=P)=>p.exam?p.exam.title:`${p.subject} – Class ${p.klass}`;
+const secTitle=s=>(s.letter?`Section ${s.letter} – `:'')+s.name;
 
 // anonymous usage counts in GoatCounter (aaexampractice.goatcounter.com): class, subject, mode and score band only, never names or answers
 const slug=s=>String(s).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
 function track(path,title){try{if(window.goatcounter&&window.goatcounter.count)window.goatcounter.count({path:path,title:title||path,event:true});}catch(e){}}
-const paperTag=()=>`class-${slug(P.klass)}/${slug(P.subject)}`;
+const paperTag=()=>P.exam?`${slug(P.subject)}/${slug(P.exam.id)}`:`class-${slug(P.klass)}/${slug(P.subject)}`;
 function startTest(useSample){
   const p=buildPaper(useSample);
   P=Object.assign(p,{mode:S.mode,duration:S.duration,subject:S.subject,klass:S.klass,board:$('#board').value,country:$('#country').value,label:useSample?'CBSE model paper':'',topicsLabel:S.topics==='ALL'?'':S.topics.join(', '),startAt:Date.now()});
@@ -1086,11 +1111,12 @@ function begin(){
   warned={};onlyFlag=false;const exam=P.mode==='exam';
   const total=P.qs.reduce((a,q)=>a+q.marks,0),check=P.duration>=45?3:2,avail=P.duration-check;
   const secs=P.secs.map(s=>{const qs=secQs(s);return{s,qs,each:qs.length?qs[0].marks:0,marks:qs.reduce((a,q)=>a+q.marks,0)};}).filter(x=>x.qs.length);
-  const secHtml=secs.map(x=>`<section class="section"><div class="sechead"><h3>Section ${x.s.letter} – ${x.s.name}</h3><small>${x.qs.length} × ${x.each} = ${x.marks} marks</small></div>${x.qs.map(qHtml).join('')}</section>`).join('');
+  const secHtml=secs.map(x=>`<section class="section"><div class="sechead"><h3>${secTitle(x.s)}</h3><small>${x.qs.length} × ${x.each} = ${x.marks} marks</small></div>${x.qs.map(qHtml).join('')}</section>`).join('');
   const how=pm()?'<li>Type each answer in its box. Fractions, mixed numbers (4 1/5), decimals and powers (2^4) are accepted; units are optional. Use π = 22/7.</li>':`<li>Type each answer in its box as a word, short phrase, name or number. Capital letters and punctuation do not matter${P.subject==='English'?'; spelling must be correct':''}. Units are optional.</li>${P.subject==='Hindi'?'<li>उत्तर हिंदी (देवनागरी) में लिखें। Type answers in Hindi; on a phone, switch to the Hindi keyboard.</li>':''}`;
-  $('#sheet').innerHTML=`<header class="sheethead"><p class="eyebrow">${esc(P.board)} · ${esc(P.country)}${P.label?' · '+esc(P.label):''}</p><h2>${esc(P.subject)} – Class ${P.klass}</h2><div class="meta"><span>${exam?`Time: ${P.duration} minutes`:'Practice · no time limit'}</span><span>Maximum marks: ${total}</span></div></header>
-   <ol class="instr"><li>The paper has ${P.qs.length} questions in ${secs.length} section${secs.length>1?'s':''}.${exam?' All questions are compulsory.':''}</li>${secs.map(x=>`<li>Section ${x.s.letter}: ${x.qs.length} ${x.s.kind==='mcq'?'multiple-choice':LNAME[x.s.level].toLowerCase()} question${x.qs.length>1?'s':''} of ${x.each} mark${x.each>1?'s':''} each${exam?` (about ${Math.round(avail*x.marks/(total||1))} minutes)`:''}.</li>`).join('')}${how}${exam?'':'<li>Press <b>Check answer</b> after each question to see if you are right and how to solve it.</li>'}<li>Use <b>Flag for review</b> to mark questions you want to come back to, and <b>Questions</b> at the top to jump between them.</li></ol>
+  $('#sheet').innerHTML=`<header class="sheethead"><p class="eyebrow">${esc(P.board)} · ${esc(P.country)}${P.label?' · '+esc(P.label):''}</p><h2>${esc(paperName())}</h2><div class="meta"><span>${exam?`Time: ${P.duration} minutes`:'Practice · no time limit'}</span><span>Maximum marks: ${total}</span></div></header>
+   ${P.exam?`<ol class="instr">${examInstr(exam)}${exam?'':'<li>Press <b>Check answer</b> after each question to see if you are right and how to solve it.</li>'}<li>Use <b>Flag for review</b> to mark questions you want to come back to, and <b>Questions</b> at the top to jump between them.</li></ol>`:''}<ol class="instr" ${P.exam?'hidden':''}><li>The paper has ${P.qs.length} questions in ${secs.length} section${secs.length>1?'s':''}.${exam?' All questions are compulsory.':''}</li>${secs.map(x=>`<li>Section ${x.s.letter}: ${x.qs.length} ${x.s.kind==='mcq'?'multiple-choice':(LNAME[x.s.level]||'written').toLowerCase()} question${x.qs.length>1?'s':''} of ${x.each} mark${x.each>1?'s':''} each${exam?` (about ${Math.round(avail*x.marks/(total||1))} minutes)`:''}.</li>`).join('')}${how}${exam?'':'<li>Press <b>Check answer</b> after each question to see if you are right and how to solve it.</li>'}<li>Use <b>Flag for review</b> to mark questions you want to come back to, and <b>Questions</b> at the top to jump between them.</li></ol>
    ${(P.notes||[]).map(n=>`<p class="msg warn">${esc(n)}</p>`).join('')}${secHtml}`;
+  if(P.exam)ensureMath().then(()=>renderMath($('#sheet')));
   $('#nav').innerHTML=P.qs.map((q,i)=>`<button type="button" class="nb" data-go="${i}" aria-label="Go to question ${i+1}">${i+1}</button>`).join('');
   $('#navKey').textContent=exam?'Blue = answered · Amber outline = flagged for review':'Blue = answered · Green / red = checked · Amber outline = flagged';
   $('#navWrap').hidden=true;$('#navBtn').setAttribute('aria-expanded','false');
@@ -1121,14 +1147,19 @@ function wire(){
 }
 function setFlag(b,on){b.setAttribute('aria-pressed',on?'true':'false');b.textContent=on?'Flagged for review':'Flag for review';b.classList.toggle('on',on);}
 function partsReview(q){return q.parts.map(p=>{let ua=p.user;if(p.type==='choice'&&!blankV(ua))ua='('+'abcd'[+ua]+') '+p.options[+ua];const lab=q.parts.length>1?(p.q?p.q.split(' ')[0]+' ':''):'';
-  return `<div class="pr ${p.ok?'right':'wrong'}"><span><span class="tick">${p.ok?'✓ Correct':'✗ '+(blankV(ua)?'Not answered':'Incorrect')}</span> ${lab}<span class="hint" style="margin:0;display:inline">(${p.ok?p.marks:0} / ${p.marks})</span></span>${p.ok?'':`<span>Your answer: <b>${blankV(ua)?'—':esc(ua)}</b></span>`}<span>Correct answer: <b>${answerText(p)}</b></span></div>`;}).join('');}
-function markQ(i){const q=P.qs[i];q.got=0;q.parts.forEach((p,j)=>{p.user=ANS[i+'-'+j];p.ok=checkPart(p,p.user);if(p.ok)q.got+=p.marks;});q.got=+q.got.toFixed(2);}
+  return `<div class="pr ${p.ok?'right':'wrong'}"><span><span class="tick">${p.ok?'✓ Correct':'✗ '+(blankV(ua)?'Not answered':'Incorrect')}</span> ${lab}<span class="hint" style="margin:0;display:inline">(${p.ok?p.marks:(q.neg&&!blankV(p.user)&&!q.dropped?'−'+q.neg:0)} / ${p.marks})</span></span>${p.ok?'':`<span>Your answer: <b>${blankV(ua)?'—':esc(ua)}</b></span>`}<span>Correct answer: <b>${answerText(p)}</b></span></div>`;}).join('');}
+function markQ(i){const q=P.qs[i];q.got=0;q.parts.forEach((p,j)=>{p.user=ANS[i+'-'+j];p.ok=checkPart(p,p.user);if(p.ok)q.got+=p.marks;});
+  // exam papers: a wrong attempt costs q.neg marks; a question dropped by the exam body gives full marks to everyone
+  if(q.dropped){q.parts.forEach(p=>{p.ok=true;});q.got=q.marks;}
+  else if(q.neg&&q.got===0&&q.parts.some((p,j)=>!blankV(ANS[i+'-'+j])))q.got=-q.neg;
+  q.got=+q.got.toFixed(2);}
 function checkQ(i){
   const q=P.qs[i],fb=$('#fb'+i);
   if(q.parts.every((p,j)=>blankV(ANS[i+'-'+j]))){fb.hidden=false;fb.innerHTML='<p class="msg warn">Type an answer first, then check it.</p>';return;}
   markQ(i);CHK[i]=1;showFeedback(i);updateCount();save();
 }
-function showFeedback(i){
+function showFeedback(i){showFeedback0(i);if(P.exam)renderMath($('#fb'+i));}
+function showFeedback0(i){
   const q=P.qs[i],el=$('#q'+i);if(!el)return;
   el.querySelectorAll('input,select').forEach(x=>{x.disabled=true;});
   const cb=el.querySelector('[data-check]');if(cb)cb.remove();
@@ -1191,33 +1222,34 @@ function finish(auto){
   let got=0,tot=0;const byL={},byT={};
   P.qs.forEach((q,i)=>{if(!CHK[i])markQ(i);got+=q.got;tot+=q.marks;
     const L=q.level;byL[L]=byL[L]||{g:0,t:0,n:0,c:0};byL[L].g+=q.got;byL[L].t+=q.marks;byL[L].n++;if(q.got===q.marks)byL[L].c++;
-    const tp=q.topic;byT[tp]=byT[tp]||{g:0,t:0,n:0,c:0};byT[tp].g+=q.got;byT[tp].t+=q.marks;byT[tp].n++;if(q.got===q.marks)byT[tp].c++;});
+    const tp=q.topic;byT[tp]=byT[tp]||{g:0,t:0,n:0,c:0,w:0,b:0};byT[tp].g+=q.got;byT[tp].t+=q.marks;byT[tp].n++;if(q.got===q.marks)byT[tp].c++;else if(q.got<0)byT[tp].w++;else if(q.parts.every(p=>blankV(p.user)))byT[tp].b++;});
   const pct=tot?Math.round(got/tot*100):0,band=bandOf(pct),g=+got.toFixed(1);
-  addHistory({d:Date.now(),subj:P.subject,cls:P.klass,mode:P.mode,got:g,tot,pct,nq:P.qs.length,label:P.label||''});clearActive();
-  track(`finish/${P.mode}/${paperTag()}/${slug(band[0])}`,`Finished ${P.mode}: Class ${P.klass} ${P.subject} – ${band[0]}`);
+  addHistory({d:Date.now(),subj:P.subject,cls:P.exam?P.exam.short:P.klass,exam:!!P.exam,mode:P.mode,got:g,tot,pct,nq:P.qs.length,label:P.label||''});clearActive();
+  track(`finish/${P.mode}/${paperTag()}/${slug(band[0])}`,`Finished ${P.mode}: ${paperName()} – ${band[0]}`);
   const tps=Object.keys(byT).map(t=>({t,pct:Math.round(byT[t].g/(byT[t].t||1)*100),v:byT[t]})).sort((a,b)=>a.pct-b.pct);
   const weak=tps.filter(x=>x.pct<75).slice(0,2).map(x=>x.t);
-  const advice=pct>=75?(weak.length?`Well done! To do even better, revise ${weak.join(' and ')}.`:'Well done! Try a harder mix or a full mock paper next.'):(weak.length?`Focus next on ${weak.join(' and ')}. Use the Practise buttons below.`:'Read the working for each question below, then try again.');
+  const advice=pct>=75?(weak.length?`Well done! To do even better, revise ${weak.join(' and ')}.`:'Well done! Try a harder mix or a full mock paper next.'):(weak.length?`Focus next on ${weak.join(' and ')}.${P.exam?'':' Use the Practise buttons below.'}`:'Read the working for each question below, then try again.');
   const mm=Math.floor(used/60000),ss=Math.floor(used%60000/1000);
-  const topicRows=tps.map((x,k)=>`<tr><td>${esc(x.t)}</td><td class="n">${+x.v.g.toFixed(1)} / ${x.v.t}</td><td class="n">${x.pct}%</td><td class="n">${x.pct<75?`<button type="button" class="small" data-practise="${k}">Practise</button>`:'<span class="ok">✓</span>'}</td></tr>`).join('');
+  const topicRows=P.exam?Object.keys(byT).map(t=>`<tr><td>${esc(t)}</td><td class="n">${byT[t].c}</td><td class="n">${byT[t].w}</td><td class="n">${byT[t].b}</td><td class="n">${+byT[t].g.toFixed(1)} / ${byT[t].t}</td></tr>`).join(''):tps.map((x,k)=>`<tr><td>${esc(x.t)}</td><td class="n">${+x.v.g.toFixed(1)} / ${x.v.t}</td><td class="n">${x.pct}%</td><td class="n">${x.pct<75?`<button type="button" class="small" data-practise="${k}">Practise</button>`:'<span class="ok">✓</span>'}</td></tr>`).join('');
   const lvlRows=LEVELS.filter(l=>byL[l]).map(l=>`<tr><td><span class="lvl l-${l}"></span>${LNAME[l]}</td><td class="n">${byL[l].c} / ${byL[l].n}</td><td class="n">${Math.round(byL[l].g/byL[l].t*100)}%</td></tr>`).join('');
   const nWrong=P.qs.filter(q=>q.got<q.marks).length;
-  const shareTxt=`I scored ${g}/${tot} (${pct}%) in a Class ${P.klass} ${P.subject} practice paper on All in All Exam Practice. Try it free: https://my-exam.in`;
+  const shareTxt=`I scored ${g}/${tot} (${pct}%) in ${P.exam?P.exam.title:`a Class ${P.klass} ${P.subject} practice paper`} on All in All Exam Practice. Try it free: https://my-exam.in`;
   const nf=nFlag();
-  const review=P.qs.map((q,i)=>`<div class="q" data-ok="${q.got===q.marks?1:0}" data-flagged="${FLAG[i]?1:0}"><span class="qn">${q.no}</span><div class="qbody"><span class="qtopic"><span class="lvl l-${q.level}"></span>${q.topic} · ${q.kind==='mcq'?'MCQ':LNAME[q.level]}${FLAG[i]?' · <span class="flagtag">Flagged</span>':''}</span><div>${q.text}</div>${q.parts[0].type==='choice'?`<div class="hint" style="margin:0">${q.parts[0].options.map((o,j)=>`(${'abcd'[j]}) ${o}`).join(' &nbsp; ')}</div>`:''}${partsReview(q)}<p class="sol"><b>${pm()?'Working':'Explanation'}:</b> ${q.sol}</p><button type="button" class="small report" data-report="${i}">Report a problem with this question</button></div><span class="mark">${+q.got.toFixed(1)}/${q.marks}</span></div>`).join('');
+  const review=P.qs.map((q,i)=>`<div class="q" data-ok="${q.got===q.marks?1:0}" data-flagged="${FLAG[i]?1:0}"><span class="qn">${q.no}</span><div class="qbody"><span class="qtopic"><span class="lvl l-${q.level}"></span>${q.topic} · ${q.kind==='mcq'?'MCQ':(q.sec?'Numerical':LNAME[q.level])}${FLAG[i]?' · <span class="flagtag">Flagged</span>':''}</span><div>${q.text}</div>${q.parts[0].type==='choice'?`<div class="hint" style="margin:0">${q.parts[0].options.map((o,j)=>`(${'abcd'[j]}) ${o}`).join(' &nbsp; ')}</div>`:''}${partsReview(q)}<p class="sol"><b>${pm()?'Working':'Explanation'}:</b> ${q.sol}</p><button type="button" class="small report" data-report="${i}">Report a problem with this question</button></div><span class="mark">${+q.got.toFixed(1)}/${q.marks}</span></div>`).join('');
   $('#results').innerHTML=`
    <div class="card stack" style="margin-bottom:16px">
      <div class="score"><div class="big" style="color:${band[2]}">${g}<small> / ${tot}</small></div>
        <div class="stack" style="gap:6px"><span class="band" style="background:${band[1]};color:${band[2]}">${band[0]} · ${pct}%</span><span style="font-weight:700">${esc(advice)}</span><span class="hint" style="margin:0">${auto?'Time ran out, so the paper was submitted automatically. ':''}${exam?`Time used: ${mm} min ${ss} s of ${P.duration} min`:`Time spent: ${mm} min ${ss} s`} · ${P.qs.length} questions</span></div></div>
-     <div class="grid2" style="gap:16px"><div class="tblwrap"><table><thead><tr><th>Chapter</th><th class="n">Marks</th><th class="n">Score</th><th class="n"><span class="sr">Action</span></th></tr></thead><tbody>${topicRows}</tbody></table></div>
-       <div class="tblwrap"><table><thead><tr><th>Difficulty</th><th class="n">Fully right</th><th class="n">Score</th></tr></thead><tbody>${lvlRows}</tbody></table></div></div>
+     ${P.exam?`<div class="tblwrap"><table><thead><tr><th>Subject</th><th class="n">Correct</th><th class="n">Wrong</th><th class="n">Not answered</th><th class="n">Marks</th></tr></thead><tbody>${topicRows}</tbody></table></div>`:`<div class="grid2" style="gap:16px"><div class="tblwrap"><table><thead><tr><th>Chapter</th><th class="n">Marks</th><th class="n">Score</th><th class="n"><span class="sr">Action</span></th></tr></thead><tbody>${topicRows}</tbody></table></div>
+       <div class="tblwrap"><table><thead><tr><th>Difficulty</th><th class="n">Fully right</th><th class="n">Score</th></tr></thead><tbody>${lvlRows}</tbody></table></div></div>`}
      <div class="btns">${nWrong&&nWrong<P.qs.length?`<button type="button" class="primary" id="retryWrong">Retry the ${nWrong} I got wrong</button>`:''}<button type="button" ${nWrong&&nWrong<P.qs.length?'':'class="primary" '}id="againBtn">Try the whole paper again</button><button type="button" id="newBtn">New paper</button><button type="button" id="printResBtn">Print this paper</button><a class="btnlink" href="https://wa.me/?text=${encodeURIComponent(shareTxt)}" target="_blank" rel="noopener">Share my score on WhatsApp</a></div>
      <div class="chips"><label class="chip" for="onlyWrong"><input type="checkbox" id="onlyWrong"> Show only questions I got wrong</label>${nf?`<label class="chip" for="onlyFlagged"><input type="checkbox" id="onlyFlagged"> Show only flagged questions (${nf})</label>`:''}</div>
    </div>
-   <article class="sheet res"><header class="sheethead"><h2>Marked answer sheet</h2><div class="meta"><span>${esc(P.subject)} – Class ${P.klass}</span><span>${g} / ${tot} marks</span></div></header>${review}</article>`;
+   <article class="sheet res"><header class="sheethead"><h2>Marked answer sheet</h2><div class="meta"><span>${esc(paperName())}</span><span>${g} / ${tot} marks</span></div></header>${review}</article>`;
+  if(P.exam)ensureMath().then(()=>renderMath($('#results')));
   const rw=$('#retryWrong');if(rw)rw.addEventListener('click',()=>retry(true));
   $('#againBtn').addEventListener('click',()=>retry(false));
-  $('#newBtn').addEventListener('click',goSchool);
+  $('#newBtn').addEventListener('click',()=>{if(!P.exam)return goSchool();const h='#'+P.exam.list;if(location.hash===h)route();else location.hash=h;});
   $('#results').querySelectorAll('[data-practise]').forEach(b=>b.addEventListener('click',()=>{const t=tps[+b.dataset.practise].t;
     Object.assign(S,{subject:P.subject,klass:P.klass,topics:[t],mode:'practice'});writeForm();readForm();show('setup');startPreset('quick');}));
   const filt=()=>{const w=$('#onlyWrong').checked,f=!!($('#onlyFlagged')&&$('#onlyFlagged').checked);$('#results').querySelectorAll('.res .q').forEach(q=>{q.hidden=(w&&q.dataset.ok==='1')||(f&&q.dataset.flagged!=='1');});};
@@ -1231,9 +1263,9 @@ function retry(onlyWrong){
   const om=P.qs.reduce((a,q)=>a+q.marks,0),tm=qs.reduce((a,q)=>a+q.marks,0);
   const dur=onlyWrong?Math.max(5,Math.ceil(P.duration*tm/(om||1)/5)*5):P.duration;
   P=Object.assign({},P,{qs,notes:[],duration:dur,label:onlyWrong?'Retry: questions to review':'Second attempt',startAt:Date.now()});
-  P.secs=P.secs.filter(s=>secQs(s).length).map((s,i)=>Object.assign({},s,{letter:String.fromCharCode(65+i)}));
+  P.secs=P.secs.filter(s=>secQs(s).length).map((s,i)=>Object.assign({},s,{letter:s.key?'':String.fromCharCode(65+i)}));
   P.endAt=P.startAt+dur*60000;ANS={};FLAG={};CHK={};
-  track(`retry/${onlyWrong?'wrong-only':'whole-paper'}/${paperTag()}`,`Retry (${onlyWrong?'wrong only':'whole paper'}): Class ${P.klass} ${P.subject}`);
+  track(`retry/${onlyWrong?'wrong-only':'whole-paper'}/${paperTag()}`,`Retry (${onlyWrong?'wrong only':'whole paper'}): ${paperName()}`);
   begin();
 }
 function renderResume(){
@@ -1241,32 +1273,80 @@ function renderResume(){
   const p=a.P,ans=a.ANS||{};let n=0,t=0;p.qs.forEach((q,i)=>q.parts.forEach((x,j)=>{t++;if(!blankV(ans[i+'-'+j]))n++;}));
   const left=p.endAt-Date.now();
   const tl=p.mode==='practice'?'practice mode':left>0?`${Math.ceil(left/60000)} min left`:'time is up, so it will be marked when you open it';
-  box.innerHTML=`<div><b>You have an unfinished paper.</b> ${esc(p.subject)} · Class ${esc(p.klass)} · ${n} of ${t} answers filled · ${tl}.</div><div class="btns"><button type="button" class="primary" id="resumeBtn">Resume</button><button type="button" id="discardBtn">Discard</button></div>`;
+  box.innerHTML=`<div><b>You have an unfinished paper.</b> ${esc(paperName(p))} · ${n} of ${t} answers filled · ${tl}.</div><div class="btns"><button type="button" class="primary" id="resumeBtn">Resume</button><button type="button" id="discardBtn">Discard</button></div>`;
   box.hidden=false;
   $('#resumeBtn').addEventListener('click',()=>{P=a.P;ANS=a.ANS||{};FLAG=a.FLAG||{};CHK=a.CHK||{};begin();});
   $('#discardBtn').addEventListener('click',()=>{clearActive();renderResume();});
 }
 function show(id){
-  const SEC={home:'homeView',exams:'examsView'}; // section ids differ from #home/#exams so the browser does not jump down to them
-  ['home','exams','setup','test','results','printView'].forEach(x=>{$('#'+(SEC[x]||x)).hidden=x!==id;});
+  const SEC={home:'homeView',exams:'examsView',jee:'jeeView'}; // section ids differ from #home/#exams so the browser does not jump down to them
+  ['home','exams','jee','setup','test','results','printView'].forEach(x=>{$('#'+(SEC[x]||x)).hidden=x!==id;});
   document.body.classList.toggle('printmode',id==='printView');
   if(id==='home'||id==='setup')renderResume();else $('#resumeBox').hidden=true;
   if(id==='setup')renderHistory();
   if(id==='exams')renderExams();
+  if(id==='jee')renderJee();
   // the top menu marks the area you are in; test, results and print belong to School
-  const area=id==='home'||id==='exams'?id:'setup';
+  const area=id==='home'||id==='exams'?id:(id==='jee'||(P&&P.exam&&['test','results','printView'].indexOf(id)>=0))?'exams':'setup';
   document.querySelectorAll('.topnav a').forEach(a=>{if(a.dataset.nav===area)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
 }
 
 /* ---------- navigation: #home, #school and #exams are screens of this one page ---------- */
-const ROUTES={'':'home','#':'home','#home':'home','#school':'setup','#exams':'exams'};
+const ROUTES={'':'home','#':'home','#home':'home','#school':'setup','#exams':'exams','#jee-main':'jee'};
 function route(){const id=ROUTES[location.hash]||'home';show(id);window.scrollTo(0,0);if(id!=='setup')track('view/'+id,'Opened '+id);}
 function goSchool(){if(location.hash!=='#school')location.hash='#school';else{show('setup');window.scrollTo(0,0);}}
+
+/* ---------- JEE Main: official previous-year papers (questions + final keys from NTA, solutions our own) ---------- */
+const JEE_PAPERS=[
+  {id:'2026-04-02-s1',name:'JEE Main 2026',date:'2 April 2026',shift:'Shift 1',path:'jee/2026-04-02-s1/'}
+];
+// maths notation (KaTeX) loads only when an exam paper needs it
+let mathReady=null;
+function ensureMath(){
+  if(window.renderMathInElement)return Promise.resolve();
+  if(mathReady)return mathReady;
+  const base='https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/';
+  const css=document.createElement('link');css.rel='stylesheet';css.href=base+'katex.min.css';document.head.appendChild(css);
+  const load=src=>new Promise((res,rej)=>{const s=document.createElement('script');s.src=src;s.onload=res;s.onerror=rej;document.head.appendChild(s);});
+  mathReady=load(base+'katex.min.js').then(()=>load(base+'contrib/auto-render.min.js')).catch(()=>{mathReady=null;});
+  return mathReady;
+}
+function renderMath(el){if(!el||!window.renderMathInElement)return;try{renderMathInElement(el,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],throwOnError:false});}catch(e){}}
+function examInstr(){const e=P.exam;return `<li>Official ${esc(e.name)} question paper (${esc(e.date)}, ${esc(e.shift)}) with the final answer key published by the National Testing Agency (NTA).</li><li>${P.qs.length} questions: ${esc(e.subjects)}. Each subject has Section A (multiple choice) and Section B (numerical answer).</li><li>Marking: <b>+4</b> for a correct answer, <b>−1</b> for a wrong answer and <b>0</b> if not answered, in both sections.</li><li>Section B: type a whole number; round off to the nearest integer if needed.</li>`;}
+function renderJee(){
+  $('#jeeList').innerHTML=JEE_PAPERS.map(x=>`<article class="examcard"><div class="head"><div><h4>${esc(x.date)}</h4><p class="body">${esc(x.shift)} · official NTA paper</p></div><span class="soon ready">Final key</span></div><p class="pat">75 questions · 3 hours · 300 marks · +4 / −1</p><div class="btns"><button type="button" class="primary small" data-jee="${x.id}" data-mode="exam">Start 3-hour exam</button><button type="button" class="small" data-jee="${x.id}" data-mode="practice">Practise with solutions</button></div></article>`).join('');
+}
+async function startJee(id,mode){
+  const meta=JEE_PAPERS.find(x=>x.id===id),msg=$('#jeeMsg');if(!meta)return;
+  msg.className='msg info';msg.textContent='Loading the paper…';msg.hidden=false;
+  try{
+    const res=await Promise.all([fetch(meta.path+'paper.json').then(r=>{if(!r.ok)throw new Error('http '+r.status);return r.json();}),ensureMath()]);
+    const data=res[0],fig=meta.path+'fig/';
+    const qs=data.questions.map(x=>{
+      // a one-line $$…$$ formula cannot wrap and gets cut off on narrow screens and paper; set it as a wrapping inline formula instead
+      const wrapMath=s=>String(s).replace(/\$\$([\s\S]+?)\$\$/g,(m,b)=>/\\begin\{/.test(b)?m:`<div class="dm">$\\displaystyle ${b}$</div>`);
+      const text=wrapMath(x.text)+(x.fig?`<img class="qfig" src="${fig+x.fig}" alt="Figure for question ${x.no}" loading="lazy">`:'');
+      const parts=x.type==='mcq'
+        ?[{type:'choice',ans:x.answer,options:x.options.map((o,j)=>x.optionFigs&&x.optionFigs[j]?`<img class="ofig" src="${fig+x.optionFigs[j]}" alt="Option ${'abcd'[j]}" loading="lazy">`:o)}]
+        :[{type:'num',ans:+x.answer,ansText:String(x.answer)}];
+      const q={no:x.no,qid:x.qid,kind:x.type==='mcq'?'mcq':'w',level:'M',topic:x.subject,sec:x.subject+'-'+x.section,text,parts,sol:x.sol||'',marks:4,neg:1,dropped:!!x.dropped};
+      partMarks(q,4);return q;});
+    const subs=[...new Set(data.questions.map(x=>x.subject))],secs=[];
+    subs.forEach(s=>['A','B'].forEach(sec=>{if(qs.some(q=>q.sec===s+'-'+sec))secs.push({key:s+'-'+sec,letter:'',name:`${s} · Section ${sec} (${sec==='A'?'multiple choice':'numerical'})`,kind:sec==='A'?'mcq':'w'});}));
+    P={qs,secs,notes:[],created:Date.now(),mode,duration:180,subject:'JEE Main',klass:'',board:'NTA',country:'India',label:'Official paper',topicsLabel:'',startAt:Date.now(),
+       exam:{id,list:'jee-main',name:meta.name,date:meta.date,shift:meta.shift,title:`${meta.name} · ${meta.date} · ${meta.shift}`,short:`${meta.date} · ${meta.shift}`,subjects:subs.join(', ').replace(/, ([^,]*)$/,' and $1')}};
+    P.endAt=P.startAt+P.duration*60000;ANS={};FLAG={};CHK={};
+    msg.hidden=true;track(`start/${mode}/${paperTag()}`,`Started ${mode}: ${paperName()}`);
+    begin();
+  }catch(e){msg.className='msg err';msg.textContent='The paper could not be loaded. Check your internet connection and try again.';}
+}
+$('#jeeList').addEventListener('click',e=>{const b=e.target.closest('[data-jee]');if(b)startJee(b.dataset.jee,b.dataset.mode);});
+$('#jeeReport').addEventListener('click',()=>openContact('About the JEE Main papers: '));
 
 /* ---------- entrance & competitive exams (coming soon) ---------- */
 const EXAMS=[
   {group:'Engineering and medical',items:[
-    {id:'jee-main',name:'JEE Main',body:'NTA',pat:'75 questions · 3 hours · +4 / −1'},
+    {id:'jee-main',name:'JEE Main',body:'NTA',pat:'75 questions · 3 hours · +4 / −1',ready:true},
     {id:'jee-advanced',name:'JEE Advanced',body:'IITs',pat:'2 papers · 3 hours each · mixed marking'},
     {id:'neet',name:'NEET (UG)',body:'NTA',pat:'180 questions · 3 hours · +4 / −1'}]},
   {group:'University admission',items:[
@@ -1285,7 +1365,7 @@ const WANT='aa-want';
 const getWant=()=>{try{return JSON.parse(localStorage.getItem(WANT)||'[]');}catch(e){return [];}};
 function renderExams(){
   const want=getWant();
-  $('#examList').innerHTML=EXAMS.map(g=>`<section class="examgrp"><h3>${esc(g.group)}</h3><div class="examgrid">${g.items.map(x=>`<article class="examcard"><div class="head"><div><h4>${esc(x.name)}</h4><p class="body">${esc(x.body)}</p></div><span class="soon">Coming soon</span></div><p class="pat">${esc(x.pat)}</p>${want.indexOf(x.id)>=0?'<button type="button" class="small" disabled>Thanks, noted</button>':`<button type="button" class="small" data-want="${x.id}">I want this exam</button>`}</article>`).join('')}</div></section>`).join('');
+  $('#examList').innerHTML=EXAMS.map(g=>`<section class="examgrp"><h3>${esc(g.group)}</h3><div class="examgrid">${g.items.map(x=>`<article class="examcard"><div class="head"><div><h4>${esc(x.name)}</h4><p class="body">${esc(x.body)}</p></div>${x.ready?'<span class="soon ready">Past papers</span>':'<span class="soon">Coming soon</span>'}</div><p class="pat">${esc(x.pat)}</p>${x.ready?`<a class="btnlink-ink" href="#${x.id}">Open past papers →</a>`:want.indexOf(x.id)>=0?'<button type="button" class="small" disabled>Thanks, noted</button>':`<button type="button" class="small" data-want="${x.id}">I want this exam</button>`}</article>`).join('')}</div></section>`).join('');
 }
 $('#examList').addEventListener('click',e=>{const b=e.target.closest('[data-want]');if(!b)return;const id=b.dataset.want,x=EXAMS.flatMap(g=>g.items).find(i=>i.id===id);
   track('want/'+id,'Wants exam: '+(x?x.name:id));const w=getWant();if(w.indexOf(id)<0){w.push(id);try{localStorage.setItem(WANT,JSON.stringify(w));}catch(err){}}
@@ -1300,24 +1380,25 @@ function printPaperHtml(){
     if(q.parts[0].type==='choice')inner=`<ol class="popts">${q.parts[0].options.map((o,j)=>`<li>(${'abcd'[j]}) ${o}</li>`).join('')}</ol>`;
     else inner=q.parts.map(p=>`<div class="ppart">${p.q?p.q+(q.parts.length>1?` <span class="qm">[${p.marks}]</span>`:''):''}${p.type==='select'?`<div class="hint" style="margin:2px 0 0">(${p.options.map(esc).join(' / ')})</div>`:''}${'<div class="aline"></div>'.repeat(q.parts.length>1?1:lines(q))}</div>`).join('');
     return `<div class="pq"><span class="pn">${q.no}.</span><div class="qbody"><div>${q.text}</div>${inner}</div><span class="qm">[${q.marks}]</span></div>`;};
-  const key=`<section class="pkey"><h2>Answer key</h2><p class="hint" style="margin:4px 0 0">${esc(P.subject)} – Class ${esc(P.klass)} · ${total} marks</p><ol>${P.qs.map(q=>`<li value="${q.no}"><b>${q.parts.map(p=>(q.parts.length>1&&p.q?p.q.split(' ')[0]+' ':'')+answerText(p)).join('; ')}</b><div class="sol">${q.sol}</div></li>`).join('')}</ol></section>`;
-  return `<header class="phead"><p class="brand">All in All Exam Practice · my-exam.in</p><h2>${esc(P.subject)} – Class ${esc(P.klass)}</h2>${P.topicsLabel?`<p class="hint" style="margin:2px 0 0">Chapters: ${esc(P.topicsLabel)}</p>`:''}<div class="meta"><span>Time: ${P.duration} minutes</span><span>Maximum marks: ${total}</span></div></header>
+  const key=`<section class="pkey"><h2>Answer key</h2><p class="hint" style="margin:4px 0 0">${esc(paperName())} · ${total} marks</p><ol>${P.qs.map(q=>`<li value="${q.no}"><b>${q.parts.map(p=>(q.parts.length>1&&p.q?p.q.split(' ')[0]+' ':'')+answerText(p)).join('; ')}</b><div class="sol">${q.sol}</div></li>`).join('')}</ol></section>`;
+  return `<header class="phead"><p class="brand">All in All Exam Practice · my-exam.in</p><h2>${esc(paperName())}</h2>${P.topicsLabel?`<p class="hint" style="margin:2px 0 0">Chapters: ${esc(P.topicsLabel)}</p>`:''}<div class="meta"><span>Time: ${P.duration} minutes</span><span>Maximum marks: ${total}</span></div></header>
    <div class="who"><span>Name:</span><span>Roll no.:</span><span>Date:</span></div>
-   <ol class="instr"><li>This paper has ${P.qs.length} questions in ${secs.length} section${secs.length>1?'s':''}. All questions are compulsory.</li>${secs.map(x=>`<li>Section ${x.s.letter}: ${x.qs.length} ${x.s.kind==='mcq'?'multiple-choice':LNAME[x.s.level].toLowerCase()} question${x.qs.length>1?'s':''} of ${x.each} mark${x.each>1?'s':''} each.</li>`).join('')}<li>${secs.some(x=>x.s.kind==='mcq')?'For multiple-choice questions, circle the correct option. ':''}Write the other answers in the space given.${maths?' Use π = 22/7 where needed.':''}${P.subject==='Hindi'?' उत्तर हिंदी में लिखें।':''}</li></ol>
-   ${secs.map(x=>`<section class="section"><div class="sechead"><h3>Section ${x.s.letter} – ${x.s.name}</h3><small>${x.qs.length} × ${x.each} = ${x.marks} marks</small></div>${x.qs.map(qP).join('')}</section>`).join('')}
+   ${P.exam?`<ol class="instr">${examInstr(true)}<li>For multiple-choice questions, circle the correct option. Write numerical answers in the space given.</li></ol>`:''}<ol class="instr" ${P.exam?'hidden':''}><li>This paper has ${P.qs.length} questions in ${secs.length} section${secs.length>1?'s':''}. All questions are compulsory.</li>${secs.map(x=>`<li>Section ${x.s.letter}: ${x.qs.length} ${x.s.kind==='mcq'?'multiple-choice':(LNAME[x.s.level]||'written').toLowerCase()} question${x.qs.length>1?'s':''} of ${x.each} mark${x.each>1?'s':''} each.</li>`).join('')}<li>${secs.some(x=>x.s.kind==='mcq')?'For multiple-choice questions, circle the correct option. ':''}Write the other answers in the space given.${maths?' Use π = 22/7 where needed.':''}${P.subject==='Hindi'?' उत्तर हिंदी में लिखें।':''}</li></ol>
+   ${secs.map(x=>`<section class="section"><div class="sechead"><h3>${secTitle(x.s)}</h3><small>${x.qs.length} × ${x.each} = ${x.marks} marks</small></div>${x.qs.map(qP).join('')}</section>`).join('')}
    ${key}`;
 }
 // the print view can be opened from the start page (Print mode), during a paper, or from the results
 let printFrom='setup';
 function showPrint(from){
   printFrom=from||'setup';
-  track(`print/${printFrom}/${paperTag()}`,`Print view (${printFrom}): Class ${P.klass} ${P.subject}`);
+  track(`print/${printFrom}/${paperTag()}`,`Print view (${printFrom}): ${paperName()}`);
   if(printFrom==='test')$('#withKey').checked=false; // no answer key while the paper is still being answered
   $('#withKeyWrap').hidden=printFrom==='test';
   $('#printBack').textContent=printFrom==='test'?'Back to the paper':'Back to results';
   $('#printPaper').innerHTML=printPaperHtml();
+  if(P.exam)ensureMath().then(()=>renderMath($('#printPaper')));
   $('#printPaper').classList.toggle('withkey',$('#withKey').checked);
-  $('#printTitle').textContent=`${P.subject} – Class ${P.klass} · ${P.qs.length} questions`;
+  $('#printTitle').textContent=`${paperName()} · ${P.qs.length} questions`;
   show('printView');window.scrollTo(0,0);
 }
 
@@ -1379,7 +1460,7 @@ $('#contactOpen').addEventListener('click',()=>openContact(''));
 $('#contactClose').addEventListener('click',closeContact);$('#cCancel').addEventListener('click',closeContact);
 $('#contactForm').addEventListener('submit',sendContact);
 $('#results').addEventListener('click',e=>{const b=e.target.closest('[data-report]');if(!b||!P)return;const q=P.qs[+b.dataset.report];
-  openContact(`Problem with a question\nClass ${P.klass} ${P.subject} · Question ${q.no} (${q.topic})\nQuestion: ${plain(q.text)}\nAnswer shown: ${q.parts.map(p=>plain(answerText(p))).join('; ')}\n\nWhat is wrong: `);});
+  openContact(`Problem with a question\n${paperName()} · Question ${q.no} (${q.topic})${q.qid?' · NTA question ID '+q.qid:''}\nQuestion: ${plain(q.text)}\nAnswer shown: ${q.parts.map(p=>plain(answerText(p))).join('; ')}\n\nWhat is wrong: `);});
 $('#navBtn').addEventListener('click',()=>{const w=$('#navWrap');w.hidden=!w.hidden;$('#navBtn').setAttribute('aria-expanded',String(!w.hidden));});
 $('#nav').addEventListener('click',e=>{const b=e.target.closest('[data-go]');if(b)goQ(+b.dataset.go);});
 $('#confirmNo').addEventListener('click',()=>{$('#confirm').hidden=true;});
