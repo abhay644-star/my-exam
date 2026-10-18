@@ -80,6 +80,36 @@ button:disabled{opacity:.45;cursor:not-allowed}
 .msg.err{background:var(--red-soft);color:var(--red)}
 .msg.info{background:var(--ink-soft);color:var(--fg)}
 .msg.ok{background:var(--green-soft);color:var(--green)}
+/* home, menu and exams list */
+.logolink{display:inline-block;border-radius:8px}
+.logolink:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.topnav{display:flex;flex-wrap:wrap;gap:6px}
+.topnav a{font-weight:700;color:var(--ink);text-decoration:none;padding:6px 14px;border-radius:999px;border:1px solid transparent}
+.topnav a:hover{border-color:var(--line)}
+.topnav a[aria-current="page"]{background:var(--ink-soft);border-color:var(--ink)}
+.topnav a:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.crumbs{font-size:.85rem;color:var(--muted);margin-bottom:12px}
+.crumbs a{color:var(--ink);font-weight:700;text-decoration:none}
+.tracks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+@media (max-width:760px){.tracks{grid-template-columns:minmax(0,1fr)}}
+a.track{display:flex;flex-direction:column;gap:10px;padding:24px;border-radius:var(--r);border:1px solid var(--line);background:var(--paper);color:var(--fg);text-decoration:none;min-width:0}
+a.track.school{border-top:6px solid var(--ink)}
+a.track.exams{border-top:6px solid var(--red)}
+a.track:hover,a.track:focus-visible{border-color:var(--ink);box-shadow:0 0 0 1px var(--ink);outline:none}
+a.track h3{font-size:clamp(1.3rem,2.6vw,1.6rem)}
+a.track p{color:var(--muted)}
+a.track .eyebrow{color:var(--ink)}
+a.track.exams .eyebrow,a.track.exams .go{color:var(--red)}
+a.track .go{margin-top:auto;font-weight:700;color:var(--ink)}
+.examgrp h3{margin-bottom:10px}
+.examgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
+.examcard{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:16px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.examcard .head{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.examcard h4{margin:0;font-family:var(--f-display);font-size:1.15rem}
+.examcard .body{font-size:.8rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;font-weight:700}
+.examcard .pat{font-size:.88rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.examcard button{margin-top:auto;align-self:flex-start}
+.soon{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--amber);background:var(--amber-soft);padding:3px 8px;border-radius:999px;white-space:nowrap}
 /* contact pop-up */
 textarea{resize:vertical;min-height:7rem}
 dialog#contactDlg{width:min(560px,calc(100% - 32px));max-height:calc(100% - 32px);overflow:auto;border:1px solid var(--line);border-radius:var(--r);padding:20px;background:var(--paper);color:var(--fg)}
@@ -215,7 +245,7 @@ sup,sub{font-size:.7em}
   <header class="top">
     <div>
       <p class="eyebrow">Online practice · auto-marked</p>
-      <h1><svg class="logo" viewBox="0 0 430 160" role="img" aria-label="ALL &amp; ALL Exam Practice">
+      <h1><a href="#home" class="logolink"><svg class="logo" viewBox="0 0 430 160" role="img" aria-label="ALL &amp; ALL Exam Practice – home">
         <polygon class="lg-ink" points="41.7,52 58.3,52 82,138 18,138"/>
         <polygon class="lg-wood" points="50,22 58.3,52 41.7,52"/>
         <polygon class="lg-lead" points="50,22 53.3,34 46.7,34"/>
@@ -226,14 +256,49 @@ sup,sub{font-size:.7em}
         <line class="lg-bar" x1="91" y1="104" x2="129" y2="104"/>
         <text x="176" y="84" font-size="56"><tspan class="lg-ink">ALL</tspan> <tspan class="lg-muted">&amp;</tspan> <tspan class="lg-red">ALL</tspan></text>
         <text class="lg-ink" x="179" y="116" font-size="17" letter-spacing="3.5">EXAM PRACTICE</text>
-      </svg></h1>
-      <p class="lede">Free CBSE practice tests for Classes I–XII, marked instantly with full solutions.</p>
+      </svg></a></h1>
+      <p class="lede">Free practice tests for school and entrance exams, marked instantly with full solutions.</p>
     </div>
+    <nav class="topnav" aria-label="Main">
+      <a href="#home" data-nav="home">Home</a><a href="#school" data-nav="setup">School</a><a href="#exams" data-nav="exams">Exams</a>
+    </nav>
   </header>
 
+  <div id="resumeBox" class="msg info resume" role="status" hidden></div>
+
+  <!-- HOME -->
+  <section id="homeView" hidden>
+    <h2 class="sr">What are you preparing for?</h2>
+    <div class="tracks">
+      <a class="track school" href="#school">
+        <p class="eyebrow">School exams</p>
+        <h3>CBSE Class I–XII</h3>
+        <p>Every subject from Maths, English and Hindi to Physics, Accountancy and History. Chapter tests, full papers and instant marking.</p>
+        <span class="go">Start practising →</span>
+      </a>
+      <a class="track exams" href="#exams">
+        <p class="eyebrow">Entrance &amp; competitive exams</p>
+        <h3>JEE · NEET · CUET · CAT · SSC · Bank · UPSC</h3>
+        <p>Mock tests in the real exam pattern, with negative marking and sections. Coming soon: tell us which exam you need first.</p>
+        <span class="go">See the exams →</span>
+      </a>
+    </div>
+    <p class="hint" style="margin-top:14px">Free, with no sign-up. Your scores stay on your own device.</p>
+  </section>
+
+  <!-- EXAMS -->
+  <section id="examsView" hidden>
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="#home">Home</a> › Entrance &amp; competitive exams</nav>
+    <div class="stack">
+      <div><h2>Entrance &amp; competitive exams</h2><p class="lede">Mock tests in the real exam pattern are being built. Tap <b>I want this exam</b> on the ones you need, and we will build the most requested first.</p></div>
+      <div id="examList" class="stack"></div>
+      <p class="hint" style="margin:0">Patterns are based on the latest official notices; always check the exam's official website. Your exam is not listed? <button type="button" class="linkbtn" id="otherExam">Tell us about it</button>.</p>
+    </div>
+  </section>
+
   <!-- SETUP -->
-  <section id="setup">
-    <div id="resumeBox" class="msg info resume" role="status" hidden></div>
+  <section id="setup" hidden>
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="#home">Home</a> › School exams (CBSE)</nav>
     <div class="grid2">
       <form id="form" class="card stack" novalidate>
         <h2>Start practising</h2>
@@ -1154,7 +1219,7 @@ function finish(auto){
    <article class="sheet res"><header class="sheethead"><h2>Marked answer sheet</h2><div class="meta"><span>${esc(P.subject)} – Class ${P.klass}</span><span>${g} / ${tot} marks</span></div></header>${review}</article>`;
   const rw=$('#retryWrong');if(rw)rw.addEventListener('click',()=>retry(true));
   $('#againBtn').addEventListener('click',()=>retry(false));
-  $('#newBtn').addEventListener('click',()=>{show('setup');window.scrollTo(0,0);});
+  $('#newBtn').addEventListener('click',goSchool);
   $('#results').querySelectorAll('[data-practise]').forEach(b=>b.addEventListener('click',()=>{const t=tps[+b.dataset.practise].t;
     Object.assign(S,{subject:P.subject,klass:P.klass,topics:[t],mode:'practice'});writeForm();readForm();show('setup');startPreset('quick');}));
   const filt=()=>{const w=$('#onlyWrong').checked,f=!!($('#onlyFlagged')&&$('#onlyFlagged').checked);$('#results').querySelectorAll('.res .q').forEach(q=>{q.hidden=(w&&q.dataset.ok==='1')||(f&&q.dataset.flagged!=='1');});};
@@ -1183,7 +1248,50 @@ function renderResume(){
   $('#resumeBtn').addEventListener('click',()=>{P=a.P;ANS=a.ANS||{};FLAG=a.FLAG||{};CHK=a.CHK||{};begin();});
   $('#discardBtn').addEventListener('click',()=>{clearActive();renderResume();});
 }
-function show(id){['setup','test','results','printView'].forEach(x=>{$('#'+x).hidden=x!==id;});document.body.classList.toggle('printmode',id==='printView');if(id==='setup'){renderResume();renderHistory();}}
+function show(id){
+  const SEC={home:'homeView',exams:'examsView'}; // section ids differ from #home/#exams so the browser does not jump down to them
+  ['home','exams','setup','test','results','printView'].forEach(x=>{$('#'+(SEC[x]||x)).hidden=x!==id;});
+  document.body.classList.toggle('printmode',id==='printView');
+  if(id==='home'||id==='setup')renderResume();else $('#resumeBox').hidden=true;
+  if(id==='setup')renderHistory();
+  if(id==='exams')renderExams();
+  // the top menu marks the area you are in; test, results and print belong to School
+  const area=id==='home'||id==='exams'?id:'setup';
+  document.querySelectorAll('.topnav a').forEach(a=>{if(a.dataset.nav===area)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
+}
+
+/* ---------- navigation: #home, #school and #exams are screens of this one page ---------- */
+const ROUTES={'':'home','#':'home','#home':'home','#school':'setup','#exams':'exams'};
+function route(){const id=ROUTES[location.hash]||'home';show(id);window.scrollTo(0,0);if(id!=='setup')track('view/'+id,'Opened '+id);}
+function goSchool(){if(location.hash!=='#school')location.hash='#school';else{show('setup');window.scrollTo(0,0);}}
+
+/* ---------- entrance & competitive exams (coming soon) ---------- */
+const EXAMS=[
+  {group:'Engineering and medical',items:[
+    {id:'jee-main',name:'JEE Main',body:'NTA',pat:'75 questions · 3 hours · +4 / −1'},
+    {id:'jee-advanced',name:'JEE Advanced',body:'IITs',pat:'2 papers · 3 hours each · mixed marking'},
+    {id:'neet',name:'NEET (UG)',body:'NTA',pat:'180 questions · 3 hours · +4 / −1'}]},
+  {group:'University admission',items:[
+    {id:'cuet',name:'CUET (UG)',body:'NTA',pat:'50 questions per subject · 1 hour · +5 / −1'}]},
+  {group:'Management (MBA)',items:[
+    {id:'cat',name:'CAT',body:'IIMs',pat:'3 sections · 2 hours · +3 / −1'},
+    {id:'xat',name:'XAT',body:'XLRI',pat:'Decision making, verbal, quant · about 3 hours'},
+    {id:'cmat',name:'CMAT',body:'NTA',pat:'100 questions · 3 hours · +4 / −1'}]},
+  {group:'Government jobs',items:[
+    {id:'ssc-cgl',name:'SSC CGL',body:'SSC',pat:'Tier 1: 100 questions · 1 hour · +2 / −0.5'},
+    {id:'bank-po',name:'Bank PO',body:'IBPS · SBI',pat:'Prelims: 100 questions · 1 hour · −0.25'}]},
+  {group:'Civil services',items:[
+    {id:'upsc-prelims',name:'UPSC Prelims',body:'UPSC',pat:'GS paper: 100 questions · 2 hours · +2 / −0.66'}]}
+];
+const WANT='aa-want';
+const getWant=()=>{try{return JSON.parse(localStorage.getItem(WANT)||'[]');}catch(e){return [];}};
+function renderExams(){
+  const want=getWant();
+  $('#examList').innerHTML=EXAMS.map(g=>`<section class="examgrp"><h3>${esc(g.group)}</h3><div class="examgrid">${g.items.map(x=>`<article class="examcard"><div class="head"><div><h4>${esc(x.name)}</h4><p class="body">${esc(x.body)}</p></div><span class="soon">Coming soon</span></div><p class="pat">${esc(x.pat)}</p>${want.indexOf(x.id)>=0?'<button type="button" class="small" disabled>Thanks, noted</button>':`<button type="button" class="small" data-want="${x.id}">I want this exam</button>`}</article>`).join('')}</div></section>`).join('');
+}
+$('#examList').addEventListener('click',e=>{const b=e.target.closest('[data-want]');if(!b)return;const id=b.dataset.want,x=EXAMS.flatMap(g=>g.items).find(i=>i.id===id);
+  track('want/'+id,'Wants exam: '+(x?x.name:id));const w=getWant();if(w.indexOf(id)<0){w.push(id);try{localStorage.setItem(WANT,JSON.stringify(w));}catch(err){}}
+  b.textContent='Thanks, noted';b.disabled=true;b.removeAttribute('data-want');});
 
 /* ---------- printable paper ---------- */
 function printPaperHtml(){
@@ -1216,7 +1324,11 @@ function showPrint(from){
 }
 
 /* ---------- wiring ---------- */
-fillSelects();writeForm();readForm();show('setup');
+fillSelects();writeForm();readForm();route();
+window.addEventListener('hashchange',route);
+// a link to the screen's own address (e.g. "School" while viewing results) does not change the hash, so route it directly
+document.addEventListener('click',e=>{const a=e.target.closest('a[href^="#"]');if(a&&a.getAttribute('href')===(location.hash||'#home')){e.preventDefault();route();}});
+$('#otherExam').addEventListener('click',()=>openContact('I would like practice tests for this exam: '));
 $('#country').addEventListener('change',()=>{fillSelects();writeForm();readForm();});
 $('#klass').addEventListener('change',()=>{S.klass=$('#klass').value;S.topics='ALL';fillClasses();renderTopics();readForm();});
 $('#subject').addEventListener('change',()=>{S.subject=$('#subject').value;S.topics='ALL';renderTopics();readForm();});
@@ -1275,7 +1387,7 @@ $('#navBtn').addEventListener('click',()=>{const w=$('#navWrap');w.hidden=!w.hid
 $('#nav').addEventListener('click',e=>{const b=e.target.closest('[data-go]');if(b)goQ(+b.dataset.go);});
 $('#confirmNo').addEventListener('click',()=>{$('#confirm').hidden=true;});
 $('#confirmBlank').addEventListener('click',()=>{$('#confirm').hidden=true;const i=firstBlank();if(i>=0)goQ(i);});
-$('#confirmYes').addEventListener('click',e=>{$('#confirm').hidden=true;if(e.currentTarget.dataset.mode==='quit'){clearInterval(timerId);clearActive();P=null;show('setup');window.scrollTo(0,0);}else finish(false);});
+$('#confirmYes').addEventListener('click',e=>{$('#confirm').hidden=true;if(e.currentTarget.dataset.mode==='quit'){clearInterval(timerId);clearActive();P=null;goSchool();}else finish(false);});
 $('#results').addEventListener('click',e=>{if(e.target.closest('a.btnlink'))track('share/whatsapp','Shared score on WhatsApp');});
 // answers are saved as you type; this only warns before leaving mid-paper
 window.addEventListener('beforeunload',e=>{if(!$('#test').hidden){e.preventDefault();e.returnValue='';}});
