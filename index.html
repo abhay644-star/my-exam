@@ -1325,11 +1325,13 @@ async function startJee(id,mode){
     const qs=data.questions.map(x=>{
       // a one-line $$…$$ formula cannot wrap and gets cut off on narrow screens and paper; set it as a wrapping inline formula instead
       const wrapMath=s=>String(s).replace(/\$\$([\s\S]+?)\$\$/g,(m,b)=>/\\begin\{/.test(b)?m:`<div class="dm">$\\displaystyle ${b}$</div>`);
-      const text=wrapMath(x.text)+(x.fig?`<img class="qfig" src="${fig+x.fig}" alt="Figure for question ${x.no}" loading="lazy">`:'');
+      // a "less than" sign in maths such as $a<b$ would be read as an HTML tag (<b> = bold) and break the page; only line breaks and tables are real tags here
+      const safe=s=>String(s==null?'':s).replace(/<(?!\/?(br|table|tr|td|th)\b)/g,'&lt;');
+      const text=wrapMath(safe(x.text))+(x.fig?`<img class="qfig" src="${fig+x.fig}" alt="Figure for question ${x.no}" loading="lazy">`:'');
       const parts=x.type==='mcq'
-        ?[{type:'choice',ans:x.answer,options:x.options.map((o,j)=>x.optionFigs&&x.optionFigs[j]?`<img class="ofig" src="${fig+x.optionFigs[j]}" alt="Option ${'abcd'[j]}" loading="lazy">`:o)}]
+        ?[{type:'choice',ans:x.answer,options:x.options.map((o,j)=>x.optionFigs&&x.optionFigs[j]?`<img class="ofig" src="${fig+x.optionFigs[j]}" alt="Option ${'abcd'[j]}" loading="lazy">`:safe(o))}]
         :[{type:'num',ans:+x.answer,ansText:String(x.answer)}];
-      const q={no:x.no,qid:x.qid,kind:x.type==='mcq'?'mcq':'w',level:'M',topic:x.subject,sec:x.subject+'-'+x.section,text,parts,sol:x.sol||'',marks:4,neg:1,dropped:!!x.dropped};
+      const q={no:x.no,qid:x.qid,kind:x.type==='mcq'?'mcq':'w',level:'M',topic:x.subject,sec:x.subject+'-'+x.section,text,parts,sol:safe(x.sol),marks:4,neg:1,dropped:!!x.dropped};
       partMarks(q,4);return q;});
     const subs=[...new Set(data.questions.map(x=>x.subject))],secs=[];
     subs.forEach(s=>['A','B'].forEach(sec=>{if(qs.some(q=>q.sec===s+'-'+sec))secs.push({key:s+'-'+sec,letter:'',name:`${s} · Section ${sec} (${sec==='A'?'multiple choice':'numerical'})`,kind:sec==='A'?'mcq':'w'});}));
