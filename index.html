@@ -56,7 +56,7 @@ p{margin:0}
 .row{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
 label,.lbl{display:block;font-weight:700;font-size:.9rem;margin-bottom:5px}
 .hint{font-size:.82rem;color:var(--muted);margin-top:4px}
-select,input[type=number],input[type=text]{width:100%;font:inherit;color:var(--fg);background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:9px 11px}
+select,input[type=number],input[type=text],input[type=email],textarea{width:100%;font:inherit;color:var(--fg);background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:9px 11px}
 select:focus-visible,input:focus-visible,button:focus-visible,.chip:focus-within{outline:3px solid var(--ink);outline-offset:2px}
 fieldset{border:1px solid var(--line);border-radius:var(--r);padding:12px 14px 14px;margin:0;min-width:0}
 legend{font-weight:700;font-size:.9rem;padding:0 6px}
@@ -79,6 +79,14 @@ button:disabled{opacity:.45;cursor:not-allowed}
 .msg.warn{background:var(--amber-soft);color:var(--amber)}
 .msg.err{background:var(--red-soft);color:var(--red)}
 .msg.info{background:var(--ink-soft);color:var(--fg)}
+.msg.ok{background:var(--green-soft);color:var(--green)}
+/* contact pop-up */
+textarea{resize:vertical;min-height:7rem}
+dialog#contactDlg{width:min(560px,calc(100% - 32px));max-height:calc(100% - 32px);overflow:auto;border:1px solid var(--line);border-radius:var(--r);padding:20px;background:var(--paper);color:var(--fg)}
+dialog#contactDlg::backdrop{background:rgba(15,21,36,.55)}
+.dlghead{display:flex;justify-content:space-between;align-items:center;gap:10px}
+button.linkbtn{border:0;background:none;padding:0;color:var(--ink);font-weight:700;text-decoration:underline;font-size:inherit}
+.res .qbody .report{align-self:flex-start;font-size:.8rem}
 table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums}
 th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line);font-size:.92rem}
 th{font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
@@ -335,7 +343,22 @@ sup,sub{font-size:.7em}
   </section>
 
   <p class="foot">Questions follow the CBSE / NCERT syllabus for Classes I to XII: Mathematics, English, Hindi and Computer Science for every class; EVS for Classes I to V; Science and Social Science for Classes VI to X; Physics, Chemistry, Biology, Accountancy, Business Studies, Economics, History, Geography and Political Science for Classes XI and XII. Every paper is a fresh selection; the Class VII Mathematics model paper is the fixed CBSE sample.</p>
-  <p class="foot contact">Found a mistake or have an idea? Email us at <a href="mailto:aa.exampractice@gmail.com">aa.exampractice@gmail.com</a></p>
+  <p class="foot contact">Found a mistake or have an idea? <button type="button" class="linkbtn" id="contactOpen">Send us a message</button> or email <a href="mailto:aa.exampractice@gmail.com">aa.exampractice@gmail.com</a></p>
+
+  <dialog id="contactDlg" aria-labelledby="contactTitle">
+    <form id="contactForm" class="stack" novalidate>
+      <div class="dlghead"><h2 id="contactTitle">Send us a message</h2><button type="button" class="small" id="contactClose" aria-label="Close">✕</button></div>
+      <p class="hint" style="margin:0">Found a mistake, have an idea or a question? Write to us here.</p>
+      <div class="row">
+        <div><label for="cEmail">Your email (optional)</label><input type="email" id="cEmail" autocomplete="email" placeholder="name@example.com"><p class="hint">Only if you would like a reply.</p></div>
+        <div><label for="cCheck">What is 4 + 5?</label><input type="text" id="cCheck" inputmode="numeric" autocomplete="off"><p class="hint">Just to check you are a person.</p></div>
+      </div>
+      <div><label for="cMsg">Your message</label><textarea id="cMsg" rows="6"></textarea></div>
+      <input type="text" id="cHoney" class="sr" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <div id="cStatus" class="msg" role="status" hidden></div>
+      <div class="btns"><button type="submit" class="primary" id="cSend">Send</button><button type="button" id="cCancel">Cancel</button></div>
+    </form>
+  </dialog>
 </div>
 
 <script>
@@ -1118,7 +1141,7 @@ function finish(auto){
   const nWrong=P.qs.filter(q=>q.got<q.marks).length;
   const shareTxt=`I scored ${g}/${tot} (${pct}%) in a Class ${P.klass} ${P.subject} practice paper on A & A Exam Practice. Try it free: https://my-exam.in`;
   const nf=nFlag();
-  const review=P.qs.map((q,i)=>`<div class="q" data-ok="${q.got===q.marks?1:0}" data-flagged="${FLAG[i]?1:0}"><span class="qn">${q.no}</span><div class="qbody"><span class="qtopic"><span class="lvl l-${q.level}"></span>${q.topic} · ${q.kind==='mcq'?'MCQ':LNAME[q.level]}${FLAG[i]?' · <span class="flagtag">Flagged</span>':''}</span><div>${q.text}</div>${q.parts[0].type==='choice'?`<div class="hint" style="margin:0">${q.parts[0].options.map((o,j)=>`(${'abcd'[j]}) ${o}`).join(' &nbsp; ')}</div>`:''}${partsReview(q)}<p class="sol"><b>${pm()?'Working':'Explanation'}:</b> ${q.sol}</p></div><span class="mark">${+q.got.toFixed(1)}/${q.marks}</span></div>`).join('');
+  const review=P.qs.map((q,i)=>`<div class="q" data-ok="${q.got===q.marks?1:0}" data-flagged="${FLAG[i]?1:0}"><span class="qn">${q.no}</span><div class="qbody"><span class="qtopic"><span class="lvl l-${q.level}"></span>${q.topic} · ${q.kind==='mcq'?'MCQ':LNAME[q.level]}${FLAG[i]?' · <span class="flagtag">Flagged</span>':''}</span><div>${q.text}</div>${q.parts[0].type==='choice'?`<div class="hint" style="margin:0">${q.parts[0].options.map((o,j)=>`(${'abcd'[j]}) ${o}`).join(' &nbsp; ')}</div>`:''}${partsReview(q)}<p class="sol"><b>${pm()?'Working':'Explanation'}:</b> ${q.sol}</p><button type="button" class="small report" data-report="${i}">Report a problem with this question</button></div><span class="mark">${+q.got.toFixed(1)}/${q.marks}</span></div>`).join('');
   $('#results').innerHTML=`
    <div class="card stack" style="margin-bottom:16px">
      <div class="score"><div class="big" style="color:${band[2]}">${g}<small> / ${tot}</small></div>
@@ -1212,6 +1235,42 @@ $('#custom').addEventListener('toggle',()=>{$('#planCard').hidden=!$('#custom').
 $('#form').addEventListener('submit',e=>{e.preventDefault();readForm();if(validate().errs.length)return;startTest();});
 $('#reset').addEventListener('click',()=>{const m=S.mode;S=JSON.parse(JSON.stringify(DEF));S.mode=m;writeForm();readForm();});
 $('#submitBtn').addEventListener('click',askSubmit);$('#quitBtn').addEventListener('click',askQuit);
+
+/* ---------- contact pop-up (sent by email through formsubmit.co; the site has no server of its own) ---------- */
+const CONTACT_URL='https://formsubmit.co/ajax/aa.exampractice@gmail.com';
+const plain=html=>{const d=document.createElement('div');d.innerHTML=html;return d.textContent.replace(/\s+/g,' ').trim();};
+function openContact(prefill){
+  const d=$('#contactDlg');$('#cStatus').hidden=true;$('#cSend').disabled=false;
+  if(prefill)$('#cMsg').value=prefill;
+  if(typeof d.showModal==='function'){if(!d.open)d.showModal();}else d.setAttribute('open','');
+  setTimeout(()=>{const el=prefill?$('#cMsg'):$('#cEmail');el.focus();if(prefill)el.setSelectionRange(el.value.length,el.value.length);},30);
+  track('contact/open','Opened contact form');
+}
+function closeContact(){const d=$('#contactDlg');if(typeof d.close==='function'&&d.open)d.close();else d.removeAttribute('open');}
+async function sendContact(e){
+  e.preventDefault();
+  const st=$('#cStatus'),msg=$('#cMsg').value.trim(),em=$('#cEmail').value.trim();
+  const say=(cls,txt)=>{st.className='msg '+cls;st.textContent=txt;st.hidden=false;};
+  if($('#cHoney').value)return; // filled only by spam bots
+  if(!msg){say('err','Please write your message first.');$('#cMsg').focus();return;}
+  if(em&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){say('err','That email address does not look right. Check it, or leave the box empty.');$('#cEmail').focus();return;}
+  if($('#cCheck').value.trim()!=='9'){say('err','Please type the answer to 4 + 5 in the box.');$('#cCheck').focus();return;}
+  $('#cSend').disabled=true;say('info','Sending…');
+  const body={_subject:'Message from my-exam.in',_template:'table',_captcha:'false',message:msg,page:location.href};if(em)body.email=em;
+  try{
+    const r=await fetch(CONTACT_URL,{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(body)});
+    const j=await r.json().catch(()=>({}));
+    if(!r.ok||String(j.success)!=='true')throw new Error(j.message||'not sent');
+    say('ok','Thank you! Your message has been sent.');$('#cMsg').value='';$('#cCheck').value='';track('contact/sent','Sent contact message');
+    setTimeout(closeContact,2500);
+  }catch(err){say('err','Sorry, the message could not be sent. Please email us at aa.exampractice@gmail.com instead.');}
+  finally{$('#cSend').disabled=false;}
+}
+$('#contactOpen').addEventListener('click',()=>openContact(''));
+$('#contactClose').addEventListener('click',closeContact);$('#cCancel').addEventListener('click',closeContact);
+$('#contactForm').addEventListener('submit',sendContact);
+$('#results').addEventListener('click',e=>{const b=e.target.closest('[data-report]');if(!b||!P)return;const q=P.qs[+b.dataset.report];
+  openContact(`Problem with a question\nClass ${P.klass} ${P.subject} · Question ${q.no} (${q.topic})\nQuestion: ${plain(q.text)}\nAnswer shown: ${q.parts.map(p=>plain(answerText(p))).join('; ')}\n\nWhat is wrong: `);});
 $('#navBtn').addEventListener('click',()=>{const w=$('#navWrap');w.hidden=!w.hidden;$('#navBtn').setAttribute('aria-expanded',String(!w.hidden));});
 $('#nav').addEventListener('click',e=>{const b=e.target.closest('[data-go]');if(b)goQ(+b.dataset.go);});
 $('#confirmNo').addEventListener('click',()=>{$('#confirm').hidden=true;});
