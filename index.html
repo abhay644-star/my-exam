@@ -973,10 +973,15 @@ function clearActive(){try{localStorage.removeItem(ACTIVE);}catch(e){}}
 function loadActive(){try{const a=JSON.parse(localStorage.getItem(ACTIVE)||'null');return a&&a.P&&Array.isArray(a.P.qs)?a:null;}catch(e){return null;}}
 function secQs(s){return P.qs.filter(q=>s.kind==='mcq'?q.kind==='mcq':(q.kind!=='mcq'&&q.level===s.level));}
 
+// anonymous usage counts in GoatCounter (aaexampractice.goatcounter.com): class, subject, mode and score band only, never names or answers
+const slug=s=>String(s).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+function track(path,title){try{if(window.goatcounter&&window.goatcounter.count)window.goatcounter.count({path:path,title:title||path,event:true});}catch(e){}}
+const paperTag=()=>`class-${slug(P.klass)}/${slug(P.subject)}`;
 function startTest(useSample){
   const p=buildPaper(useSample);
   P=Object.assign(p,{mode:S.mode,duration:S.duration,subject:S.subject,klass:S.klass,board:$('#board').value,country:$('#country').value,label:useSample?'CBSE model paper':'',topicsLabel:S.topics==='ALL'?'':S.topics.join(', '),startAt:Date.now()});
   P.endAt=P.startAt+P.duration*60000;ANS={};FLAG={};CHK={};
+  track(useSample?'start/sample-paper':`start/${P.mode}/${paperTag()}`,useSample?'Started: CBSE sample paper':`Started ${P.mode}: Class ${P.klass} ${P.subject}`);
   begin();
 }
 function startPreset(k){
@@ -1103,6 +1108,7 @@ function finish(auto){
     const tp=q.topic;byT[tp]=byT[tp]||{g:0,t:0,n:0,c:0};byT[tp].g+=q.got;byT[tp].t+=q.marks;byT[tp].n++;if(q.got===q.marks)byT[tp].c++;});
   const pct=tot?Math.round(got/tot*100):0,band=bandOf(pct),g=+got.toFixed(1);
   addHistory({d:Date.now(),subj:P.subject,cls:P.klass,mode:P.mode,got:g,tot,pct,nq:P.qs.length,label:P.label||''});clearActive();
+  track(`finish/${P.mode}/${paperTag()}/${slug(band[0])}`,`Finished ${P.mode}: Class ${P.klass} ${P.subject} – ${band[0]}`);
   const tps=Object.keys(byT).map(t=>({t,pct:Math.round(byT[t].g/(byT[t].t||1)*100),v:byT[t]})).sort((a,b)=>a.pct-b.pct);
   const weak=tps.filter(x=>x.pct<75).slice(0,2).map(x=>x.t);
   const advice=pct>=75?(weak.length?`Well done! To do even better, revise ${weak.join(' and ')}.`:'Well done! Try a harder mix or a full mock paper next.'):(weak.length?`Focus next on ${weak.join(' and ')}. Use the Practise buttons below.`:'Read the working for each question below, then try again.');
@@ -1140,7 +1146,9 @@ function retry(onlyWrong){
   const dur=onlyWrong?Math.max(5,Math.ceil(P.duration*tm/(om||1)/5)*5):P.duration;
   P=Object.assign({},P,{qs,notes:[],duration:dur,label:onlyWrong?'Retry: questions to review':'Second attempt',startAt:Date.now()});
   P.secs=P.secs.filter(s=>secQs(s).length).map((s,i)=>Object.assign({},s,{letter:String.fromCharCode(65+i)}));
-  P.endAt=P.startAt+dur*60000;ANS={};FLAG={};CHK={};begin();
+  P.endAt=P.startAt+dur*60000;ANS={};FLAG={};CHK={};
+  track(`retry/${onlyWrong?'wrong-only':'whole-paper'}/${paperTag()}`,`Retry (${onlyWrong?'wrong only':'whole paper'}): Class ${P.klass} ${P.subject}`);
+  begin();
 }
 function renderResume(){
   const a=loadActive(),box=$('#resumeBox');if(!a){box.hidden=true;box.innerHTML='';return;}
@@ -1174,6 +1182,7 @@ function printPaperHtml(){
 let printFrom='setup';
 function showPrint(from){
   printFrom=from||'setup';
+  track(`print/${printFrom}/${paperTag()}`,`Print view (${printFrom}): Class ${P.klass} ${P.subject}`);
   if(printFrom==='test')$('#withKey').checked=false; // no answer key while the paper is still being answered
   $('#withKeyWrap').hidden=printFrom==='test';
   $('#printBack').textContent=printFrom==='test'?'Back to the paper':'Back to results';
@@ -1208,9 +1217,11 @@ $('#nav').addEventListener('click',e=>{const b=e.target.closest('[data-go]');if(
 $('#confirmNo').addEventListener('click',()=>{$('#confirm').hidden=true;});
 $('#confirmBlank').addEventListener('click',()=>{$('#confirm').hidden=true;const i=firstBlank();if(i>=0)goQ(i);});
 $('#confirmYes').addEventListener('click',e=>{$('#confirm').hidden=true;if(e.currentTarget.dataset.mode==='quit'){clearInterval(timerId);clearActive();P=null;show('setup');window.scrollTo(0,0);}else finish(false);});
+$('#results').addEventListener('click',e=>{if(e.target.closest('a.btnlink'))track('share/whatsapp','Shared score on WhatsApp');});
 // answers are saved as you type; this only warns before leaving mid-paper
 window.addEventListener('beforeunload',e=>{if(!$('#test').hidden){e.preventDefault();e.returnValue='';}});
 })();
 </script>
+<script data-goatcounter="https://aaexampractice.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 
 </html>
