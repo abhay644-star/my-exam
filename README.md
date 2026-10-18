@@ -1,4 +1,4 @@
-# A & A Exam Practice
+# All in All Exam Practice
 
 Timed CBSE practice papers, generated in the browser and marked instantly.
 

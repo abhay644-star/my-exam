@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Free CBSE practice tests for Classes I–XII, marked instantly with full solutions.">
-<title>A &amp; A Exam Practice</title>
+<title>All in All Exam Practice</title>
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="A &amp; A Exam Practice">
-<meta property="og:title" content="A &amp; A Exam Practice – free CBSE practice tests">
+<meta property="og:site_name" content="All in All Exam Practice">
+<meta property="og:title" content="All in All Exam Practice – free school and entrance exam practice tests">
 <meta property="og:description" content="Free CBSE practice tests for Classes I–XII, marked instantly with full solutions.">
 <meta property="og:url" content="https://my-exam.in/">
 <meta property="og:image" content="https://my-exam.in/og-image.png">
@@ -245,7 +245,7 @@ sup,sub{font-size:.7em}
   <header class="top">
     <div>
       <p class="eyebrow">Online practice · auto-marked</p>
-      <h1><a href="#home" class="logolink"><svg class="logo" viewBox="0 0 430 160" role="img" aria-label="All &amp; All Exam Practice – home">
+      <h1><a href="#home" class="logolink"><svg class="logo" viewBox="0 0 430 160" role="img" aria-label="All in All Exam Practice – home">
         <polygon class="lg-ink" points="41.7,52 58.3,52 82,138 18,138"/>
         <polygon class="lg-wood" points="50,22 58.3,52 41.7,52"/>
         <polygon class="lg-lead" points="50,22 53.3,34 46.7,34"/>
@@ -254,7 +254,7 @@ sup,sub{font-size:.7em}
         <polygon class="lg-wood" points="110,22 118.3,52 101.7,52"/>
         <polygon class="lg-lead" points="110,22 113.3,34 106.7,34"/>
         <line class="lg-bar" x1="91" y1="104" x2="129" y2="104"/>
-        <text x="176" y="84" font-size="56"><tspan class="lg-ink">All</tspan> <tspan class="lg-muted">&amp;</tspan> <tspan class="lg-red">All</tspan></text>
+        <text x="176" y="84" font-size="56"><tspan class="lg-ink">All</tspan> <tspan class="lg-muted">in</tspan> <tspan class="lg-red">All</tspan></text>
         <text class="lg-ink" x="179" y="116" font-size="17" letter-spacing="3.5">EXAM PRACTICE</text>
       </svg></a></h1>
       <p class="lede">Free practice tests for school and entrance exams, marked instantly with full solutions.</p>
@@ -1202,7 +1202,7 @@ function finish(auto){
   const topicRows=tps.map((x,k)=>`<tr><td>${esc(x.t)}</td><td class="n">${+x.v.g.toFixed(1)} / ${x.v.t}</td><td class="n">${x.pct}%</td><td class="n">${x.pct<75?`<button type="button" class="small" data-practise="${k}">Practise</button>`:'<span class="ok">✓</span>'}</td></tr>`).join('');
   const lvlRows=LEVELS.filter(l=>byL[l]).map(l=>`<tr><td><span class="lvl l-${l}"></span>${LNAME[l]}</td><td class="n">${byL[l].c} / ${byL[l].n}</td><td class="n">${Math.round(byL[l].g/byL[l].t*100)}%</td></tr>`).join('');
   const nWrong=P.qs.filter(q=>q.got<q.marks).length;
-  const shareTxt=`I scored ${g}/${tot} (${pct}%) in a Class ${P.klass} ${P.subject} practice paper on A & A Exam Practice. Try it free: https://my-exam.in`;
+  const shareTxt=`I scored ${g}/${tot} (${pct}%) in a Class ${P.klass} ${P.subject} practice paper on All in All Exam Practice. Try it free: https://my-exam.in`;
   const nf=nFlag();
   const review=P.qs.map((q,i)=>`<div class="q" data-ok="${q.got===q.marks?1:0}" data-flagged="${FLAG[i]?1:0}"><span class="qn">${q.no}</span><div class="qbody"><span class="qtopic"><span class="lvl l-${q.level}"></span>${q.topic} · ${q.kind==='mcq'?'MCQ':LNAME[q.level]}${FLAG[i]?' · <span class="flagtag">Flagged</span>':''}</span><div>${q.text}</div>${q.parts[0].type==='choice'?`<div class="hint" style="margin:0">${q.parts[0].options.map((o,j)=>`(${'abcd'[j]}) ${o}`).join(' &nbsp; ')}</div>`:''}${partsReview(q)}<p class="sol"><b>${pm()?'Working':'Explanation'}:</b> ${q.sol}</p><button type="button" class="small report" data-report="${i}">Report a problem with this question</button></div><span class="mark">${+q.got.toFixed(1)}/${q.marks}</span></div>`).join('');
   $('#results').innerHTML=`
@@ -1301,7 +1301,7 @@ function printPaperHtml(){
     else inner=q.parts.map(p=>`<div class="ppart">${p.q?p.q+(q.parts.length>1?` <span class="qm">[${p.marks}]</span>`:''):''}${p.type==='select'?`<div class="hint" style="margin:2px 0 0">(${p.options.map(esc).join(' / ')})</div>`:''}${'<div class="aline"></div>'.repeat(q.parts.length>1?1:lines(q))}</div>`).join('');
     return `<div class="pq"><span class="pn">${q.no}.</span><div class="qbody"><div>${q.text}</div>${inner}</div><span class="qm">[${q.marks}]</span></div>`;};
   const key=`<section class="pkey"><h2>Answer key</h2><p class="hint" style="margin:4px 0 0">${esc(P.subject)} – Class ${esc(P.klass)} · ${total} marks</p><ol>${P.qs.map(q=>`<li value="${q.no}"><b>${q.parts.map(p=>(q.parts.length>1&&p.q?p.q.split(' ')[0]+' ':'')+answerText(p)).join('; ')}</b><div class="sol">${q.sol}</div></li>`).join('')}</ol></section>`;
-  return `<header class="phead"><p class="brand">A &amp; A Exam Practice · my-exam.in</p><h2>${esc(P.subject)} – Class ${esc(P.klass)}</h2>${P.topicsLabel?`<p class="hint" style="margin:2px 0 0">Chapters: ${esc(P.topicsLabel)}</p>`:''}<div class="meta"><span>Time: ${P.duration} minutes</span><span>Maximum marks: ${total}</span></div></header>
+  return `<header class="phead"><p class="brand">All in All Exam Practice · my-exam.in</p><h2>${esc(P.subject)} – Class ${esc(P.klass)}</h2>${P.topicsLabel?`<p class="hint" style="margin:2px 0 0">Chapters: ${esc(P.topicsLabel)}</p>`:''}<div class="meta"><span>Time: ${P.duration} minutes</span><span>Maximum marks: ${total}</span></div></header>
    <div class="who"><span>Name:</span><span>Roll no.:</span><span>Date:</span></div>
    <ol class="instr"><li>This paper has ${P.qs.length} questions in ${secs.length} section${secs.length>1?'s':''}. All questions are compulsory.</li>${secs.map(x=>`<li>Section ${x.s.letter}: ${x.qs.length} ${x.s.kind==='mcq'?'multiple-choice':LNAME[x.s.level].toLowerCase()} question${x.qs.length>1?'s':''} of ${x.each} mark${x.each>1?'s':''} each.</li>`).join('')}<li>${secs.some(x=>x.s.kind==='mcq')?'For multiple-choice questions, circle the correct option. ':''}Write the other answers in the space given.${maths?' Use π = 22/7 where needed.':''}${P.subject==='Hindi'?' उत्तर हिंदी में लिखें।':''}</li></ol>
    ${secs.map(x=>`<section class="section"><div class="sechead"><h3>Section ${x.s.letter} – ${x.s.name}</h3><small>${x.qs.length} × ${x.each} = ${x.marks} marks</small></div>${x.qs.map(qP).join('')}</section>`).join('')}
