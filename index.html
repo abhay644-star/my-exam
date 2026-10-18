@@ -326,7 +326,6 @@ sup,sub{font-size:.7em}
           <button type="button" class="preset" data-preset="quick"><b>Quick quiz</b><span data-pl="quick">10 questions · 15 min</span></button>
           <button type="button" class="preset" data-preset="chapter"><b>Chapter test</b><span data-pl="chapter">20 questions · 40 min</span></button>
           <button type="button" class="preset" data-preset="full"><b>Full mock paper</b><span data-pl="full">30 questions · 60 min</span></button>
-          <button type="button" class="preset alt" id="sampleBtn"><b>CBSE sample paper</b><span>Class VII Maths model paper · 30 questions</span></button>
         </div>
         <div id="quickMsg" class="msg err" role="alert" hidden></div>
         <details id="custom" class="custom">
@@ -1008,7 +1007,6 @@ function renderPlan(){
   $('#planNote').textContent=isMaths()?'Answers are marked automatically. Written answers accept forms like 4 1/5, 21/5, 0.375, −1/6, 2^4 or 3.84 × 10^5; units such as cm, °, % and ₹ are optional.':`Answers are marked automatically. Written answers are short – a word, a term, a name or a number; capital letters and punctuation are ignored${S.subject==='English'?', but spelling must be exact':' and small spelling slips are accepted'}. Units are optional for numerical answers.${S.subject==='Hindi'?' Type Hindi answers in Devanagari (हिंदी); on a phone, add the Hindi keyboard first.':''}`;
   const secs=sections(p),check=S.duration>=45?3:2,avail=Math.max(0,S.duration-check);
   $('#timeBody').innerHTML=secs.map(s=>`<tr><td>Section ${s.letter}: ${s.name}</td><td class="n">${s.count} Q · ${s.marks} marks</td><td class="n">${Math.round(avail*s.marks/(tm||1))} min</td></tr>`).join('')+`<tr><td>Checking</td><td></td><td class="n">${check} min</td></tr>`;
-  $('#sampleBtn').hidden=!(S.subject==='Mathematics'&&S.klass==='VII');
   Object.keys(PRESETS).forEach(k=>{$(`[data-pl="${k}"]`).textContent=PRESETS[k].nq+' questions'+(S.mode!=='practice'?' · '+PRESETS[k].duration+' min':'');});
   $('#gen').textContent=S.mode==='practice'?'Start custom practice':'Start custom paper';
   const fm=$('#formMsg');if(v.errs.length){fm.innerHTML=v.errs.map(esc).join('<br>');fm.hidden=false;}else fm.hidden=true;
@@ -1335,7 +1333,6 @@ $('#subject').addEventListener('change',()=>{S.subject=$('#subject').value;S.top
 ['#duration','#nq','#nmcq','#usemcq','#m_MCQ','#m_E','#m_M','#m_C','#m_X'].forEach(s=>$(s).addEventListener('input',readForm));
 $('#usemcq').addEventListener('change',readForm);
 ['#mode_practice','#mode_exam'].forEach(s=>$(s).addEventListener('change',readForm));
-$('#sampleBtn').addEventListener('click',()=>{readForm();startSample();});
 $('#withKey').addEventListener('change',e=>{$('#printPaper').classList.toggle('withkey',e.target.checked);});
 $('#printGo').addEventListener('click',()=>{window.print();});
 $('#printBack').addEventListener('click',()=>{show(printFrom);window.scrollTo(0,0);});
