@@ -114,6 +114,7 @@ a.track .go{margin-top:auto;font-weight:700;color:var(--ink)}
 .examcard .body{font-size:.8rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;font-weight:700}
 .examcard .pat{font-size:.88rem;color:var(--muted);font-variant-numeric:tabular-nums}
 .examcard button{margin-top:auto;align-self:flex-start}
+.examcard.later{background:transparent;border-style:dashed;align-self:start}
 /* exam papers: figures, maths and matching tables */
 .qfig{display:block;max-width:100%;height:auto;margin:8px 0;background:#fff;border-radius:6px;padding:4px}
 .ofig{display:inline-block;max-width:100%;max-height:150px;height:auto;vertical-align:middle;background:#fff;border-radius:4px;padding:2px}
@@ -1346,19 +1347,34 @@ const EXAM_PAGES={
     lede:'Official question papers with the final answer keys from the National Testing Agency (NTA). Take a paper as a timed 3-hour exam, or practise question by question with worked solutions.',
     source:'Questions and answer keys: NTA.',patTitle:'JEE Main Paper 1 (B.E. / B.Tech)',
     patNote:'Each subject has Section A (20 multiple-choice questions) and Section B (5 numerical questions), all compulsory. Correct answer <b>+4</b>, wrong answer <b>−1</b>, not answered <b>0</b>, in both sections.',
-    papers:[{id:'2026-04-02-s1',name:'JEE Main 2026',date:'2 April 2026',shift:'Shift 1',head:'2 April 2026',sub:'Shift 1 · official NTA paper',pat:'75 questions · 3 hours · 300 marks · +4 / −1',path:'jee/2026-04-02-s1/'}]},
+    papers:[{id:'2026-04-02-s1',name:'JEE Main 2026',date:'2 April 2026',shift:'Shift 1',head:'2 April 2026',sub:'Shift 1 · official NTA paper',pat:'75 questions · 3 hours · 300 marks · +4 / −1',path:'jee/2026-04-02-s1/'}],
+    later:[{head:'2025',sub:'January and April sessions',pat:'75 questions per shift · 3 hours · 300 marks'},
+      {head:'2024',sub:'January and April sessions',pat:'90 questions, 75 to answer · 3 hours · 300 marks'},
+      {head:'2023',sub:'January and April sessions',pat:'90 questions, 75 to answer · 3 hours · 300 marks'},
+      {head:'2022',sub:'June and July sessions',pat:'90 questions, 75 to answer · 3 hours · 300 marks'},
+      {head:'2021',sub:'February, March, July and August sessions',pat:'90 questions, 75 to answer · 3 hours · 300 marks'}]},
   'neet':{crumb:'NEET (UG)',title:'NEET (UG): previous year papers',
     lede:'The latest NEET (UG) paper with the final answer key published by the National Testing Agency (NTA). Take it as a timed exam, or practise question by question with explanations.',
     source:'Questions: NEET (UG) 2026 re-examination, Test Booklet Code 50. Answers: NTA final answer key.',patTitle:'NEET (UG) 2026',
     patNote:'180 compulsory multiple-choice questions, each with four options and one correct answer. Correct answer <b>+4</b>, wrong answer <b>−1</b>, not answered <b>0</b>. The 2026 exam held on 3 May was cancelled by NTA and re-held on 21 June 2026; this is the re-examination paper.',
-    papers:[{id:'2026-reexam-50',name:'NEET (UG) 2026',date:'21 June 2026 (re-exam)',shift:'Code 50',head:'21 June 2026',sub:'Re-examination · booklet code 50',pat:'180 questions · 3 h 15 min · 720 marks · +4 / −1',path:'neet/2026-reexam-50/'}]},
+    papers:[{id:'2026-reexam-50',name:'NEET (UG) 2026',date:'21 June 2026 (re-exam)',shift:'Code 50',head:'21 June 2026',sub:'Re-examination · booklet code 50',pat:'180 questions · 3 h 15 min · 720 marks · +4 / −1',path:'neet/2026-reexam-50/'}],
+    later:[{head:'2025',sub:'4 May 2025',pat:'180 questions · 3 hours · 720 marks · +4 / −1'},
+      {head:'2024',sub:'5 May 2024',pat:'200 questions, 180 to answer · 3 h 20 min · 720 marks'},
+      {head:'2023',sub:'7 May 2023',pat:'200 questions, 180 to answer · 3 h 20 min · 720 marks'},
+      {head:'2022',sub:'17 July 2022',pat:'200 questions, 180 to answer · 3 h 20 min · 720 marks'},
+      {head:'2021',sub:'12 September 2021',pat:'200 questions, 180 to answer · 3 hours · 720 marks'}]},
   'jee-advanced':{crumb:'JEE Advanced',title:'JEE Advanced: previous year papers',
     lede:'Official question papers with the final answer keys published by the organising IIT. Both papers are compulsory and last 3 hours each. Take a paper as a timed exam, or practise question by question with worked solutions.',
     source:'Questions and answer keys: JEE (Advanced) 2026, organising IIT.',patTitle:'JEE Advanced 2026',
     patNote:'Each subject has four sections. Single correct: <b>+3 / −1</b>. One or more correct: <b>+4</b> if all correct options are chosen, <b>+3 / +2 / +1</b> if only some correct options and no wrong option are chosen, <b>−1</b> otherwise. Numerical: <b>+4</b> (Paper 2 paired questions <b>+2</b>), no negative marks. List matching (Paper 1): <b>+4 / −1</b>. The pattern changes every year.',
     papers:[
       {id:'2026-p1',name:'JEE Advanced 2026',date:'Paper 1',shift:'',head:'Paper 1',sub:'2026 · official paper',pat:'48 questions · 3 hours · 180 marks',path:'jee-adv/2026-p1/'},
-      {id:'2026-p2',name:'JEE Advanced 2026',date:'Paper 2',shift:'',head:'Paper 2',sub:'2026 · official paper',pat:'54 questions · 3 hours · 180 marks',path:'jee-adv/2026-p2/'}]}
+      {id:'2026-p2',name:'JEE Advanced 2026',date:'Paper 2',shift:'',head:'Paper 2',sub:'2026 · official paper',pat:'54 questions · 3 hours · 180 marks',path:'jee-adv/2026-p2/'}],
+    later:[{head:'2025',sub:'Paper 1 and Paper 2',pat:'18 May 2025 · 3 hours each'},
+      {head:'2024',sub:'Paper 1 and Paper 2',pat:'26 May 2024 · 3 hours each'},
+      {head:'2023',sub:'Paper 1 and Paper 2',pat:'4 June 2023 · 3 hours each'},
+      {head:'2022',sub:'Paper 1 and Paper 2',pat:'28 August 2022 · 3 hours each'},
+      {head:'2021',sub:'Paper 1 and Paper 2',pat:'3 October 2021 · 3 hours each'}]}
 };
 const JEE_PAPERS=EXAM_PAGES['jee-main'].papers;
 const examPageId=()=>{const h=location.hash.slice(1);return EXAM_PAGES[h]?h:'jee-main';};
@@ -1383,7 +1399,8 @@ function renderJee(){
   const pid=examPageId(),pg=EXAM_PAGES[pid],ex=EXAMS.flatMap(g=>g.items).find(i=>i.id===pid);
   $('#examCrumb').textContent=pg.crumb;$('#examTitle').textContent=pg.title;$('#examLede').textContent=pg.lede;$('#examSource').textContent=pg.source;$('#jeeMsg').hidden=true;
   $('#jeePattern').innerHTML=`<div><p class="eyebrow">Exam pattern</p><h3>${esc(pg.patTitle)}: ${esc(ex.pat)}</h3></div><div class="tblwrap">${examTable(ex)}</div><p class="hint" style="margin:0">${pg.patNote}</p>`;
-  $('#jeeList').innerHTML=pg.papers.map(x=>`<article class="examcard"><div class="head"><div><h4>${esc(x.head)}</h4><p class="body">${esc(x.sub)}</p></div><span class="soon ready">Final key</span></div><p class="pat">${esc(x.pat)}</p><div class="btns"><button type="button" class="primary small" data-jee="${x.id}" data-mode="exam">Start 3-hour exam</button><button type="button" class="small" data-jee="${x.id}" data-mode="practice">Practise with solutions</button></div></article>`).join('');
+  $('#jeeList').innerHTML=pg.papers.map(x=>`<article class="examcard"><div class="head"><div><h4>${esc(x.head)}</h4><p class="body">${esc(x.sub)}</p></div><span class="soon ready">Final key</span></div><p class="pat">${esc(x.pat)}</p><div class="btns"><button type="button" class="primary small" data-jee="${x.id}" data-mode="exam">Start 3-hour exam</button><button type="button" class="small" data-jee="${x.id}" data-mode="practice">Practise with solutions</button></div></article>`).join('')
+    +(pg.later||[]).map(x=>`<article class="examcard later"><div class="head"><div><h4>${esc(x.head)}</h4><p class="body">${esc(x.sub)}</p></div><span class="soon">Coming soon</span></div><p class="pat">${esc(x.pat)}</p></article>`).join('');
 }
 async function startJee(id,mode){
   let meta=null,list='jee-main';Object.keys(EXAM_PAGES).forEach(k=>{const m=EXAM_PAGES[k].papers.find(x=>x.id===id);if(m){meta=m;list=k;}});
