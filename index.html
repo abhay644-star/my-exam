@@ -114,7 +114,6 @@ a.track .go{margin-top:auto;font-weight:700;color:var(--ink)}
 .examcard .body{font-size:.8rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;font-weight:700}
 .examcard .pat{font-size:.88rem;color:var(--muted);font-variant-numeric:tabular-nums}
 .examcard button{margin-top:auto;align-self:flex-start}
-.examcard.later{background:transparent;border-style:dashed;align-self:start}
 /* exam papers: figures, maths and matching tables */
 .qfig{display:block;max-width:100%;height:auto;margin:8px 0;background:#fff;border-radius:6px;padding:4px}
 .ofig{display:inline-block;max-width:100%;max-height:150px;height:auto;vertical-align:middle;background:#fff;border-radius:4px;padding:2px}
@@ -1395,12 +1394,13 @@ function renderMath(el){if(!el||!window.renderMathInElement)return;try{renderMat
 // measured again once the maths fonts have loaded, because they change the width
 function fitMath(el){el.querySelectorAll('.dm,.katex-display').forEach(d=>{d.style.fontSize='';if(d.clientWidth&&d.scrollWidth>d.clientWidth+1)d.style.fontSize=Math.max(60,Math.floor(d.clientWidth/d.scrollWidth*100))+'%';});}
 function examInstr(){const e=P.exam;if(e.instr)return e.instr.map(s=>`<li>${s}</li>`).join('');return `<li>Official ${esc(e.name)} question paper (${esc(e.date)}, ${esc(e.shift)}) with the final answer key published by the National Testing Agency (NTA).</li><li>${P.qs.length} questions: ${esc(e.subjects)}. Each subject has Section A (multiple choice) and Section B (numerical answer).</li><li>Marking: <b>+4</b> for a correct answer, <b>−1</b> for a wrong answer and <b>0</b> if not answered, in both sections.</li><li>Section B: type a whole number; round off to the nearest integer if needed.</li>`;}
+function wantPapers(){try{return JSON.parse(localStorage.getItem('aa-want-papers'))||[];}catch(e){return [];}}
 function renderJee(){
   const pid=examPageId(),pg=EXAM_PAGES[pid],ex=EXAMS.flatMap(g=>g.items).find(i=>i.id===pid);
   $('#examCrumb').textContent=pg.crumb;$('#examTitle').textContent=pg.title;$('#examLede').textContent=pg.lede;$('#examSource').textContent=pg.source;$('#jeeMsg').hidden=true;
   $('#jeePattern').innerHTML=`<div><p class="eyebrow">Exam pattern</p><h3>${esc(pg.patTitle)}: ${esc(ex.pat)}</h3></div><div class="tblwrap">${examTable(ex)}</div><p class="hint" style="margin:0">${pg.patNote}</p>`;
-  $('#jeeList').innerHTML=pg.papers.map(x=>`<article class="examcard"><div class="head"><div><h4>${esc(x.head)}</h4><p class="body">${esc(x.sub)}</p></div><span class="soon ready">Final key</span></div><p class="pat">${esc(x.pat)}</p><div class="btns"><button type="button" class="primary small" data-jee="${x.id}" data-mode="exam">Start 3-hour exam</button><button type="button" class="small" data-jee="${x.id}" data-mode="practice">Practise with solutions</button></div></article>`).join('')
-    +(pg.later||[]).map(x=>`<article class="examcard later"><div class="head"><div><h4>${esc(x.head)}</h4><p class="body">${esc(x.sub)}</p></div><span class="soon">Coming soon</span></div><p class="pat">${esc(x.pat)}</p></article>`).join('');
+  $('#jeeList').innerHTML=pg.papers.map(x=>`<article class="examcard"><div class="head"><h4>${esc(x.head)}</h4><span class="soon ready">Final key</span></div><p class="body">${esc(x.sub)}</p><p class="pat">${esc(x.pat)}</p><div class="btns"><button type="button" class="primary small" data-jee="${x.id}" data-mode="exam">Start 3-hour exam</button><button type="button" class="small" data-jee="${x.id}" data-mode="practice">Practise with solutions</button></div></article>`).join('')
+    +(pg.later||[]).map(x=>`<article class="examcard later"><div class="head"><h4>${esc(x.head)}</h4><span class="soon">Coming soon</span></div><p class="body">${esc(x.sub)}</p><p class="pat">${esc(x.pat)}</p>${wantPapers().indexOf(pid+'/'+x.head)<0?`<button type="button" class="small" data-wantpaper="${pid}/${esc(x.head)}">I want this paper</button>`:'<button type="button" class="small" disabled>Thanks, noted</button>'}</article>`).join('');
 }
 async function startJee(id,mode){
   let meta=null,list='jee-main';Object.keys(EXAM_PAGES).forEach(k=>{const m=EXAM_PAGES[k].papers.find(x=>x.id===id);if(m){meta=m;list=k;}});
@@ -1437,6 +1437,10 @@ async function startJee(id,mode){
   }catch(e){msg.className='msg err';msg.textContent='The paper could not be loaded. Check your internet connection and try again.';}
 }
 $('#jeeList').addEventListener('click',e=>{const b=e.target.closest('[data-jee]');if(b)startJee(b.dataset.jee,b.dataset.mode);});
+// "I want this paper" on a coming-soon year: counted in GoatCounter so the most requested years are added first
+$('#jeeList').addEventListener('click',e=>{const b=e.target.closest('[data-wantpaper]');if(!b)return;const id=b.dataset.wantpaper;
+  track('want-paper/'+id,'Wants paper: '+EXAM_PAGES[id.split('/')[0]].crumb+' '+id.split('/')[1]);const w=wantPapers();if(w.indexOf(id)<0){w.push(id);try{localStorage.setItem('aa-want-papers',JSON.stringify(w));}catch(err){}}
+  b.textContent='Thanks, noted';b.disabled=true;b.removeAttribute('data-wantpaper');});
 $('#jeeReport').addEventListener('click',()=>openContact('About the JEE Main papers: '));
 
 /* ---------- entrance & competitive exams (coming soon) ---------- */
