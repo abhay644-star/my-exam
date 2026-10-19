@@ -119,6 +119,7 @@ table.mt th,table.mt td{border:1px solid var(--line);padding:4px 10px;text-trans
 .katex-display{overflow-x:auto;overflow-y:hidden;padding:2px 0}
 .dm{margin:6px 0;line-height:2}
 .soon.ready{color:var(--green);background:var(--green-soft)}
+table.brk{margin:2px 0 6px}table.brk th,table.brk td{padding:4px 6px;font-size:.82rem}table.brk th{font-size:.68rem}table.brk tfoot td{font-weight:700}
 a.btnlink-ink{display:inline-flex;align-self:flex-start;margin-top:auto;font-weight:700;font-size:.85rem;border-radius:8px;padding:6px 12px;border:1px solid var(--ink);color:var(--ink);text-decoration:none}
 a.btnlink-ink:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
 .soon{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--amber);background:var(--amber-soft);padding:3px 8px;border-radius:999px;white-space:nowrap}
@@ -1349,9 +1350,11 @@ $('#jeeReport').addEventListener('click',()=>openContact('About the JEE Main pap
 /* ---------- entrance & competitive exams (coming soon) ---------- */
 const EXAMS=[
   {group:'Engineering and medical',items:[
-    {id:'jee-main',name:'JEE Main',body:'NTA',pat:'75 questions · 3 hours · +4 / −1',ready:true},
+    {id:'jee-main',name:'JEE Main',body:'NTA',pat:'75 questions · 3 hours · +4 / −1',ready:true,
+      rows:[['Physics',25,100],['Chemistry',25,100],['Mathematics',25,100]]},
     {id:'jee-advanced',name:'JEE Advanced',body:'IITs',pat:'2 papers · 3 hours each · mixed marking'},
-    {id:'neet',name:'NEET (UG)',body:'NTA',pat:'180 questions · 3 hours · +4 / −1'}]},
+    {id:'neet',name:'NEET (UG)',body:'NTA',pat:'180 questions · 3 hours · +4 / −1',
+      rows:[['Physics',45,180],['Chemistry',45,180],['Biology',90,360,'Botany 45 + Zoology 45']]}]},
   {group:'University admission',items:[
     {id:'cuet',name:'CUET (UG)',body:'NTA',pat:'50 questions per subject · 1 hour · +5 / −1'}]},
   {group:'Management (MBA)',items:[
@@ -1368,7 +1371,7 @@ const WANT='aa-want';
 const getWant=()=>{try{return JSON.parse(localStorage.getItem(WANT)||'[]');}catch(e){return [];}};
 function renderExams(){
   const want=getWant();
-  $('#examList').innerHTML=EXAMS.map(g=>`<section class="examgrp"><h3>${esc(g.group)}</h3><div class="examgrid">${g.items.map(x=>`<article class="examcard"><div class="head"><div><h4>${esc(x.name)}</h4><p class="body">${esc(x.body)}</p></div>${x.ready?'<span class="soon ready">Past papers</span>':'<span class="soon">Coming soon</span>'}</div><p class="pat">${esc(x.pat)}</p>${x.ready?`<a class="btnlink-ink" href="#${x.id}">Open past papers →</a>`:want.indexOf(x.id)>=0?'<button type="button" class="small" disabled>Thanks, noted</button>':`<button type="button" class="small" data-want="${x.id}">I want this exam</button>`}</article>`).join('')}</div></section>`).join('');
+  $('#examList').innerHTML=EXAMS.map(g=>`<section class="examgrp"><h3>${esc(g.group)}</h3><div class="examgrid">${g.items.map(x=>`<article class="examcard"><div class="head"><div><h4>${esc(x.name)}</h4><p class="body">${esc(x.body)}</p></div>${x.ready?'<span class="soon ready">Past papers</span>':'<span class="soon">Coming soon</span>'}</div><p class="pat">${esc(x.pat)}</p>${x.rows?`<table class="brk"><thead><tr><th>Subject</th><th class="n">Questions</th><th class="n">Marks</th></tr></thead><tbody>${x.rows.map(r=>`<tr><td>${esc(r[0])}${r[3]?`<br><small class="hint" style="margin:0">${esc(r[3])}</small>`:''}</td><td class="n">${r[1]}</td><td class="n">${r[2]}</td></tr>`).join('')}</tbody><tfoot><tr><td>Total</td><td class="n">${x.rows.reduce((a,r)=>a+r[1],0)}</td><td class="n">${x.rows.reduce((a,r)=>a+r[2],0)}</td></tr></tfoot></table>`:''}${x.ready?`<a class="btnlink-ink" href="#${x.id}">Open past papers →</a>`:want.indexOf(x.id)>=0?'<button type="button" class="small" disabled>Thanks, noted</button>':`<button type="button" class="small" data-want="${x.id}">I want this exam</button>`}</article>`).join('')}</div></section>`).join('');
 }
 $('#examList').addEventListener('click',e=>{const b=e.target.closest('[data-want]');if(!b)return;const id=b.dataset.want,x=EXAMS.flatMap(g=>g.items).find(i=>i.id===id);
   track('want/'+id,'Wants exam: '+(x?x.name:id));const w=getWant();if(w.indexOf(id)<0){w.push(id);try{localStorage.setItem(WANT,JSON.stringify(w));}catch(err){}}
