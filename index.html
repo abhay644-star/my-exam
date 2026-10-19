@@ -117,7 +117,9 @@ a.track .go{margin-top:auto;font-weight:700;color:var(--ink)}
 table.mt{width:auto;margin:6px 0}
 table.mt th,table.mt td{border:1px solid var(--line);padding:4px 10px;text-transform:none;letter-spacing:0;font-size:.92rem;color:var(--fg);vertical-align:top}
 .katex-display{overflow-x:auto;overflow-y:hidden;padding:2px 0}
-.dm{margin:6px 0;line-height:2}
+.dm{margin:6px 0;line-height:2;overflow-x:auto;overflow-y:hidden;max-width:100%}
+.opt .ot{font-weight:400;min-width:0;flex:1}
+.opts.long{grid-template-columns:minmax(0,1fr)}
 .soon.ready{color:var(--green);background:var(--green-soft)}
 table.brk{margin:2px 0 6px}table.brk th,table.brk td{padding:4px 6px;font-size:.82rem}table.brk th{font-size:.68rem}table.brk tfoot td{font-weight:700}
 table.brk th.n,table.brk td.n{white-space:nowrap;width:1%;padding-left:10px}
@@ -245,6 +247,8 @@ sup,sub{font-size:.7em}
 .res .q{grid-template-columns:2.2rem minmax(0,1fr) auto}
 .mark{font-family:var(--f-display);font-weight:800;color:var(--red);font-variant-numeric:tabular-nums;white-space:nowrap}
 .pr{border-radius:8px;padding:8px 10px;font-size:.92rem;display:flex;flex-direction:column;gap:2px}
+.pr.part{background:var(--amber-soft)}
+.pr.part .tick{color:var(--amber)}
 .pr.right{background:var(--green-soft)} .pr.wrong{background:var(--red-soft)}
 .pr .tick{font-weight:800}
 .pr.right .tick{color:var(--green)} .pr.wrong .tick{color:var(--red)}
@@ -294,7 +298,7 @@ sup,sub{font-size:.7em}
       <a class="track exams" href="#exams">
         <p class="eyebrow">Competitive exams</p>
         <h3>JEE · NEET · CUET · CAT · SSC · Bank · UPSC</h3>
-        <p>JEE Main previous year papers are ready now, with negative marking and sections. More exams are coming: tell us which one you need first.</p>
+        <p>JEE Main and JEE Advanced previous year papers are ready now, with the official marking. More exams are coming: tell us which one you need first.</p>
         <span class="go">See the exams →</span>
       </a>
     </div>
@@ -305,7 +309,7 @@ sup,sub{font-size:.7em}
   <section id="examsView" hidden>
     <nav class="crumbs" aria-label="Breadcrumb"><a href="#home">Home</a> › Competitive exams</nav>
     <div class="stack">
-      <div><h2>Competitive exams</h2><p class="lede">JEE Main previous year papers are ready. Mock tests for the other exams are being built: tap <b>I want this exam</b> on the ones you need, and we will build the most requested first.</p></div>
+      <div><h2>Competitive exams</h2><p class="lede">JEE Main and JEE Advanced previous year papers are ready. Mock tests for the other exams are being built: tap <b>I want this exam</b> on the ones you need, and we will build the most requested first.</p></div>
       <div id="examList" class="stack"></div>
       <p class="hint" style="margin:0">Patterns are based on the latest official notices; always check the exam's official website. Your exam is not listed? <button type="button" class="linkbtn" id="otherExam">Tell us about it</button>.</p>
     </div>
@@ -313,14 +317,14 @@ sup,sub{font-size:.7em}
 
   <!-- JEE MAIN PAST PAPERS -->
   <section id="jeeView" hidden>
-    <nav class="crumbs" aria-label="Breadcrumb"><a href="#home">Home</a> › <a href="#exams">Competitive exams</a> › JEE Main</nav>
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="#home">Home</a> › <a href="#exams">Competitive exams</a> › <span id="examCrumb">JEE Main</span></nav>
     <div class="stack">
-      <div><h2>JEE Main: previous year papers</h2><p class="lede">Official question papers with the final answer keys from the National Testing Agency (NTA). Take a paper as a timed 3-hour exam, or practise question by question with worked solutions.</p></div>
+      <div><h2 id="examTitle">JEE Main: previous year papers</h2><p class="lede" id="examLede">Official question papers with the final answer keys from the National Testing Agency (NTA). Take a paper as a timed 3-hour exam, or practise question by question with worked solutions.</p></div>
       <div id="jeePattern" class="card stack"></div>
       <h3>Previous year papers</h3>
       <div id="jeeList" class="examgrid"></div>
       <div id="jeeMsg" class="msg" role="status" hidden></div>
-      <p class="hint" style="margin:0">Questions and answer keys: NTA. Worked solutions: All in All Exam Practice. More papers are being added. Found a mistake? <button type="button" class="linkbtn" id="jeeReport">Tell us</button>.</p>
+      <p class="hint" style="margin:0"><span id="examSource">Questions and answer keys: NTA.</span> Worked solutions: All in All Exam Practice. More papers are being added. Found a mistake? <button type="button" class="linkbtn" id="jeeReport">Tell us</button>.</p>
     </div>
   </section>
 
@@ -533,7 +537,13 @@ function exprEq(inp,ans){try{if(!String(inp).trim())return false;const f=compile
   for(let t=0;t<4;t++){const env={};let k=0;vars.forEach(v=>{env[v]=0.37+t*0.71+(k++)*1.13;});const x=f(env),y=g(env);if(!isFinite(x)||!isFinite(y))return false;if(Math.abs(x-y)>1e-7*Math.max(1,Math.abs(y)))return false;}return true;}catch(e){return false;}}
 function checkPart(p,val){
   if(val==null||String(val).trim()==='')return false;
-  if(p.type==='choice')return String(val)===String(p.ans);
+  // p.accept: the final key accepts more than one option (e.g. "A or B")
+  if(p.type==='choice')return String(val)===String(p.ans)||(!!p.accept&&p.accept.map(String).indexOf(String(val))>=0);
+  // one-or-more-correct: the chosen set must equal the correct set (partial marks are worked out in markQ)
+  // p.alts: other answer sets the final key also accepts (e.g. "BD or D")
+  if(p.type==='multi'){const c=String(val).split(',').filter(x=>x!=='').map(Number).sort();return [p.ans].concat(p.alts||[]).some(s=>{const a=s.slice().sort();return c.length===a.length&&c.every((x,i)=>x===a[i]);});}
+  // numerical answer given as a range by the exam body (e.g. 0.72 to 0.76)
+  if(p.type==='num'&&p.lo!=null){const x=parseNum(val);return x!=null&&isFinite(x)&&x>=p.lo-1e-9&&x<=p.hi+1e-9;}
   if(p.type==='select')return val===p.ans;
   if(p.type==='text'){const u=normUser(val);if(p.alts.some(a=>normAns(a)===u))return true;if(!p.fuzzy)return false;
     if((p.wrong||[]).some(w=>{const n=normAns(w);return n===u||near(u,n);}))return false;
@@ -1131,33 +1141,47 @@ function begin(){
   wire();updateCount();save();
   show('test');$('#confirm').hidden=true;tick();clearInterval(timerId);timerId=setInterval(tick,1000);window.scrollTo(0,0);
 }
+// options with long wording get a full row each, so mixed text and maths reads naturally
+const longOpts=os=>os.some(o=>String(o).replace(/<[^>]+>/g,'').replace(/\$[^$]*\$/g,'xxxxxx').length>32);
 function qHtml(q){
   const qi=P.qs.indexOf(q);let inner;
-  if(q.parts[0].type==='choice'){const p=q.parts[0];inner=`<div class="opts" role="radiogroup" aria-label="Question ${q.no} options">${p.options.map((o,j)=>`<label class="opt" for="o${qi}_${j}"><input type="radio" name="r${qi}" id="o${qi}_${j}" value="${j}" data-k="${qi}-0"><b>(${'abcd'[j]})</b> ${o}</label>`).join('')}</div>`;}
+  if(q.parts[0].type==='choice'){const p=q.parts[0];inner=`<div class="opts${longOpts(p.options)?' long':''}" role="radiogroup" aria-label="Question ${q.no} options">${p.options.map((o,j)=>`<label class="opt" for="o${qi}_${j}"><input type="radio" name="r${qi}" id="o${qi}_${j}" value="${j}" data-k="${qi}-0"><b>(${'abcd'[j]})</b> <span class="ot">${o}</span></label>`).join('')}</div>`;}
+  else if(q.parts[0].type==='multi'){const p=q.parts[0];inner=`<p class="hint" style="margin:0">Choose all the correct options.</p><div class="opts${longOpts(p.options)?' long':''}" role="group" aria-label="Question ${q.no} options">${p.options.map((o,j)=>`<label class="opt" for="o${qi}_${j}"><input type="checkbox" id="o${qi}_${j}" value="${j}" data-k="${qi}-0"><b>(${'abcd'[j]})</b> <span class="ot">${o}</span></label>`).join('')}</div>`;}
   else inner=q.parts.map((p,j)=>{const id=`a${qi}_${j}`,lab=p.q||'Your answer';let field;
     if(p.type==='select')field=`<select id="${id}" data-k="${qi}-${j}"><option value="">Choose…</option>${p.options.map(o=>`<option>${o}</option>`).join('')}</select>`;
     // full keyboard on every phone, so students can type −, / and ^ (the iPhone decimal pad has none of them)
     else field=`<input type="text" id="${id}" data-k="${qi}-${j}" autocomplete="off" autocapitalize="off" spellcheck="false" inputmode="text" placeholder="${p.type==='expr'?'e.g. 4a^2 + 6ab - 8':p.type==='list'?'e.g. -5/6, -3/4, 2/3':p.sci?'e.g. 3.84 x 10^5':/[√π]/.test(p.disp||p.ansText||'')?'e.g. 3√2 or π/3':'Answer'}">`;
     return `<div class="part"><label class="pq" for="${id}" style="font-weight:400;margin:0">${lab}${q.parts.length>1?` <span class="qm">[${p.marks}]</span>`:''}</label>${field}</div>`;}).join('');
   const tools=`<div class="qtools">${P.mode==='practice'?`<button type="button" class="small primary" data-check="${qi}">Check answer</button>`:''}<button type="button" class="small flag" data-flag="${qi}" aria-pressed="false">Flag for review</button></div><div class="fb" id="fb${qi}" hidden></div>`;
-  return `<div class="q" id="q${qi}"><span class="qn">${q.no}</span><div class="qbody"><span class="qtopic"><span class="lvl l-${q.level}"></span>${q.topic}</span><div>${q.text}</div>${inner}${tools}</div><span class="qm">[${q.marks}]</span></div>`;
+  return `<div class="q" id="q${qi}"><span class="qn">${q.no}</span><div class="qbody"><span class="qtopic"><span class="lvl l-${q.level}"></span>${q.topic}${q.tag?' · '+q.tag:''}</span><div>${q.text}</div>${inner}${tools}</div><span class="qm">[${q.marks}]</span></div>`;
 }
 function wire(){
   const sh=$('#sheet');
-  sh.querySelectorAll('[data-k]').forEach(el=>{const k=el.dataset.k,v=ANS[k],ev=el.type==='radio'?'change':'input';
-    if(v!=null){if(el.type==='radio'){if(el.value===String(v)){el.checked=true;el.closest('.opt').classList.add('on');}}else el.value=v;}
-    el.addEventListener(ev,()=>{if(el.type==='radio'){ANS[k]=el.value;el.closest('.opts').querySelectorAll('.opt').forEach(o=>o.classList.toggle('on',o.contains(el)&&el.checked));}else ANS[k]=el.value;updateCount();save();});});
+  sh.querySelectorAll('[data-k]').forEach(el=>{const k=el.dataset.k,v=ANS[k],ev=(el.type==='radio'||el.type==='checkbox')?'change':'input';
+    if(v!=null){if(el.type==='radio'){if(el.value===String(v)){el.checked=true;el.closest('.opt').classList.add('on');}}
+      else if(el.type==='checkbox'){if(String(v).split(',').indexOf(el.value)>=0){el.checked=true;el.closest('.opt').classList.add('on');}}
+      else el.value=v;}
+    el.addEventListener(ev,()=>{if(el.type==='radio'){ANS[k]=el.value;el.closest('.opts').querySelectorAll('.opt').forEach(o=>o.classList.toggle('on',o.contains(el)&&el.checked));}
+      else if(el.type==='checkbox'){const box=el.closest('.opts');ANS[k]=[...box.querySelectorAll('input:checked')].map(x=>x.value).join(',');el.closest('.opt').classList.toggle('on',el.checked);}
+      else ANS[k]=el.value;updateCount();save();});});
   sh.querySelectorAll('[data-flag]').forEach(b=>{const i=+b.dataset.flag;setFlag(b,!!FLAG[i]);b.addEventListener('click',()=>{FLAG[i]=!FLAG[i];setFlag(b,FLAG[i]);updateCount();save();});});
   sh.querySelectorAll('[data-check]').forEach(b=>b.addEventListener('click',()=>checkQ(+b.dataset.check)));
   Object.keys(CHK).forEach(i=>showFeedback(+i));
 }
 function setFlag(b,on){b.setAttribute('aria-pressed',on?'true':'false');b.textContent=on?'Flagged for review':'Flag for review';b.classList.toggle('on',on);}
-function partsReview(q){return q.parts.map(p=>{let ua=p.user;if(p.type==='choice'&&!blankV(ua))ua='('+'abcd'[+ua]+') '+p.options[+ua];const lab=q.parts.length>1?(p.q?p.q.split(' ')[0]+' ':''):'';
-  return `<div class="pr ${p.ok?'right':'wrong'}"><span><span class="tick">${p.ok?'✓ Correct':'✗ '+(blankV(ua)?'Not answered':'Incorrect')}</span> ${lab}<span class="hint" style="margin:0;display:inline">(${p.ok?p.marks:(q.neg&&!blankV(p.user)&&!q.dropped?'−'+q.neg:0)} / ${p.marks})</span></span>${p.ok?'':`<span>Your answer: <b>${blankV(ua)?'—':esc(ua)}</b></span>`}<span>Correct answer: <b>${answerText(p)}</b></span></div>`;}).join('');}
+function partsReview(q){return q.parts.map(p=>{let ua=p.user;if(p.type==='choice'&&!blankV(ua))ua='('+'abcd'[+ua]+') '+p.options[+ua];
+  if(p.type==='multi'&&!blankV(ua))ua=String(ua).split(',').filter(x=>x!=='').map(x=>'('+'abcd'[+x]+')').join(', ');
+  const lab=q.parts.length>1?(p.q?p.q.split(' ')[0]+' ':''):'';
+  // single-part questions show the question's own score (it can be partial or negative); multi-part ones show each part
+  const sc=q.parts.length===1&&q.got!=null?q.got:(p.ok?p.marks:0),scTxt=sc<0?'−'+(-sc):String(sc),partial=!p.ok&&sc>0;
+  return `<div class="pr ${p.ok?'right':partial?'part':'wrong'}"><span><span class="tick">${p.ok?'✓ Correct':partial?'◐ Partly correct':'✗ '+(blankV(ua)?'Not answered':'Incorrect')}</span> ${lab}<span class="hint" style="margin:0;display:inline">(${scTxt} / ${p.marks})</span></span>${p.ok?'':`<span>Your answer: <b>${blankV(ua)?'—':esc(ua)}</b></span>`}<span>Correct answer: <b>${answerText(p)}</b></span></div>`;}).join('');}
 function markQ(i){const q=P.qs[i];q.got=0;q.parts.forEach((p,j)=>{p.user=ANS[i+'-'+j];p.ok=checkPart(p,p.user);if(p.ok)q.got+=p.marks;});
   // exam papers: a wrong attempt costs q.neg marks; a question dropped by the exam body gives full marks to everyone
+  const p0=q.parts[0],answered=q.parts.some((p,j)=>!blankV(ANS[i+'-'+j]));
   if(q.dropped){q.parts.forEach(p=>{p.ok=true;});q.got=q.marks;}
-  else if(q.neg&&q.got===0&&q.parts.some((p,j)=>!blankV(ANS[i+'-'+j])))q.got=-q.neg;
+  // JEE Advanced one-or-more-correct: choosing only some of the correct options (and no wrong one) earns 1 mark per option chosen (+3/+2/+1); any wrong option costs q.neg
+  else if(p0.type==='multi'&&answered&&!p0.ok){const C=String(p0.user).split(',').filter(x=>x!=='').map(Number);q.got=C.every(c=>p0.ans.indexOf(c)>=0)?C.length:-q.neg;}
+  else if(q.neg&&q.got===0&&answered)q.got=-q.neg;
   q.got=+q.got.toFixed(2);}
 function checkQ(i){
   const q=P.qs[i],fb=$('#fb'+i);
@@ -1228,7 +1252,7 @@ function finish(auto){
   let got=0,tot=0;const byL={},byT={};
   P.qs.forEach((q,i)=>{if(!CHK[i])markQ(i);got+=q.got;tot+=q.marks;
     const L=q.level;byL[L]=byL[L]||{g:0,t:0,n:0,c:0};byL[L].g+=q.got;byL[L].t+=q.marks;byL[L].n++;if(q.got===q.marks)byL[L].c++;
-    const tp=q.topic;byT[tp]=byT[tp]||{g:0,t:0,n:0,c:0,w:0,b:0};byT[tp].g+=q.got;byT[tp].t+=q.marks;byT[tp].n++;if(q.got===q.marks)byT[tp].c++;else if(q.got<0)byT[tp].w++;else if(q.parts.every(p=>blankV(p.user)))byT[tp].b++;});
+    const tp=q.topic;byT[tp]=byT[tp]||{g:0,t:0,n:0,c:0,w:0,b:0};byT[tp].g+=q.got;byT[tp].t+=q.marks;byT[tp].n++;if(q.got===q.marks)byT[tp].c++;else if(q.got<0)byT[tp].w++;else if(q.got>0)byT[tp].p=(byT[tp].p||0)+1;else if(q.parts.every(p=>blankV(p.user)))byT[tp].b++;});
   const pct=tot?Math.round(got/tot*100):0,band=bandOf(pct),g=+got.toFixed(1);
   addHistory({d:Date.now(),subj:P.subject,cls:P.exam?P.exam.short:P.klass,exam:!!P.exam,mode:P.mode,got:g,tot,pct,nq:P.qs.length,label:P.label||''});clearActive();
   track(`finish/${P.mode}/${paperTag()}/${slug(band[0])}`,`Finished ${P.mode}: ${paperName()} – ${band[0]}`);
@@ -1236,12 +1260,12 @@ function finish(auto){
   const weak=tps.filter(x=>x.pct<75).slice(0,2).map(x=>x.t);
   const advice=pct>=75?(weak.length?`Well done! To do even better, revise ${weak.join(' and ')}.`:'Well done! Try a harder mix or a full mock paper next.'):(weak.length?`Focus next on ${weak.join(' and ')}.${P.exam?'':' Use the Practise buttons below.'}`:'Read the working for each question below, then try again.');
   const mm=Math.floor(used/60000),ss=Math.floor(used%60000/1000);
-  const topicRows=P.exam?Object.keys(byT).map(t=>`<tr><td>${esc(t)}</td><td class="n">${byT[t].c}</td><td class="n">${byT[t].w}</td><td class="n">${byT[t].b}</td><td class="n">${+byT[t].g.toFixed(1)} / ${byT[t].t}</td></tr>`).join(''):tps.map((x,k)=>`<tr><td>${esc(x.t)}</td><td class="n">${+x.v.g.toFixed(1)} / ${x.v.t}</td><td class="n">${x.pct}%</td><td class="n">${x.pct<75?`<button type="button" class="small" data-practise="${k}">Practise</button>`:'<span class="ok">✓</span>'}</td></tr>`).join('');
+  const topicRows=P.exam?Object.keys(byT).map(t=>`<tr><td>${esc(t)}</td><td class="n">${byT[t].c}${byT[t].p?` <span class="hint" style="display:inline;margin:0">+${byT[t].p} partly</span>`:''}</td><td class="n">${byT[t].w}</td><td class="n">${byT[t].b}</td><td class="n">${+byT[t].g.toFixed(1)} / ${byT[t].t}</td></tr>`).join(''):tps.map((x,k)=>`<tr><td>${esc(x.t)}</td><td class="n">${+x.v.g.toFixed(1)} / ${x.v.t}</td><td class="n">${x.pct}%</td><td class="n">${x.pct<75?`<button type="button" class="small" data-practise="${k}">Practise</button>`:'<span class="ok">✓</span>'}</td></tr>`).join('');
   const lvlRows=LEVELS.filter(l=>byL[l]).map(l=>`<tr><td><span class="lvl l-${l}"></span>${LNAME[l]}</td><td class="n">${byL[l].c} / ${byL[l].n}</td><td class="n">${Math.round(byL[l].g/byL[l].t*100)}%</td></tr>`).join('');
   const nWrong=P.qs.filter(q=>q.got<q.marks).length;
   const shareTxt=`I scored ${g}/${tot} (${pct}%) in ${P.exam?P.exam.title:`a Class ${P.klass} ${P.subject} practice paper`} on All in All Exam Practice. Try it free: https://my-exam.in`;
   const nf=nFlag();
-  const review=P.qs.map((q,i)=>`<div class="q" data-ok="${q.got===q.marks?1:0}" data-flagged="${FLAG[i]?1:0}"><span class="qn">${q.no}</span><div class="qbody"><span class="qtopic"><span class="lvl l-${q.level}"></span>${q.topic} · ${q.kind==='mcq'?'MCQ':(q.sec?'Numerical':LNAME[q.level])}${FLAG[i]?' · <span class="flagtag">Flagged</span>':''}</span><div>${q.text}</div>${q.parts[0].type==='choice'?`<div class="hint" style="margin:0">${q.parts[0].options.map((o,j)=>`(${'abcd'[j]}) ${o}`).join(' &nbsp; ')}</div>`:''}${partsReview(q)}<p class="sol"><b>${pm()?'Working':'Explanation'}:</b> ${q.sol}</p><button type="button" class="small report" data-report="${i}">Report a problem with this question</button></div><span class="mark">${+q.got.toFixed(1)}/${q.marks}</span></div>`).join('');
+  const review=P.qs.map((q,i)=>`<div class="q" data-ok="${q.got===q.marks?1:0}" data-flagged="${FLAG[i]?1:0}"><span class="qn">${q.no}</span><div class="qbody"><span class="qtopic"><span class="lvl l-${q.level}"></span>${q.topic} · ${q.kind==='mcq'?'MCQ':(q.sec?'Numerical':LNAME[q.level])}${FLAG[i]?' · <span class="flagtag">Flagged</span>':''}</span><div>${q.text}</div>${(q.parts[0].type==='choice'||q.parts[0].type==='multi')?`<div class="hint" style="margin:0">${q.parts[0].options.map((o,j)=>`(${'abcd'[j]}) ${o}`).join(' &nbsp; ')}</div>`:''}${partsReview(q)}<p class="sol"><b>${pm()?'Working':'Explanation'}:</b> ${q.sol}</p><button type="button" class="small report" data-report="${i}">Report a problem with this question</button></div><span class="mark">${+q.got.toFixed(1)}/${q.marks}</span></div>`).join('');
   $('#results').innerHTML=`
    <div class="card stack" style="margin-bottom:16px">
      <div class="score"><div class="big" style="color:${band[2]}">${g}<small> / ${tot}</small></div>
@@ -1298,14 +1322,28 @@ function show(id){
 }
 
 /* ---------- navigation: #home, #school and #exams are screens of this one page ---------- */
-const ROUTES={'':'home','#':'home','#home':'home','#school':'setup','#exams':'exams','#jee-main':'jee'};
+const ROUTES={'':'home','#':'home','#home':'home','#school':'setup','#exams':'exams','#jee-main':'jee','#jee-advanced':'jee'};
 function route(){const id=ROUTES[location.hash]||'home';show(id);window.scrollTo(0,0);if(id!=='setup')track('view/'+id,'Opened '+id);}
 function goSchool(){if(location.hash!=='#school')location.hash='#school';else{show('setup');window.scrollTo(0,0);}}
 
 /* ---------- JEE Main: official previous-year papers (questions + final keys from NTA, solutions our own) ---------- */
-const JEE_PAPERS=[
-  {id:'2026-04-02-s1',name:'JEE Main 2026',date:'2 April 2026',shift:'Shift 1',path:'jee/2026-04-02-s1/'}
-];
+// each exam page lists its official papers; paper.json holds the questions, final-key answers and our worked solutions
+const EXAM_PAGES={
+  'jee-main':{crumb:'JEE Main',title:'JEE Main: previous year papers',
+    lede:'Official question papers with the final answer keys from the National Testing Agency (NTA). Take a paper as a timed 3-hour exam, or practise question by question with worked solutions.',
+    source:'Questions and answer keys: NTA.',patTitle:'JEE Main Paper 1 (B.E. / B.Tech)',
+    patNote:'Each subject has Section A (20 multiple-choice questions) and Section B (5 numerical questions), all compulsory. Correct answer <b>+4</b>, wrong answer <b>−1</b>, not answered <b>0</b>, in both sections.',
+    papers:[{id:'2026-04-02-s1',name:'JEE Main 2026',date:'2 April 2026',shift:'Shift 1',head:'2 April 2026',sub:'Shift 1 · official NTA paper',pat:'75 questions · 3 hours · 300 marks · +4 / −1',path:'jee/2026-04-02-s1/'}]},
+  'jee-advanced':{crumb:'JEE Advanced',title:'JEE Advanced: previous year papers',
+    lede:'Official question papers with the final answer keys published by the organising IIT. Both papers are compulsory and last 3 hours each. Take a paper as a timed exam, or practise question by question with worked solutions.',
+    source:'Questions and answer keys: JEE (Advanced) 2026, organising IIT.',patTitle:'JEE Advanced 2026',
+    patNote:'Each subject has four sections. Single correct: <b>+3 / −1</b>. One or more correct: <b>+4</b> if all correct options are chosen, <b>+3 / +2 / +1</b> if only some correct options and no wrong option are chosen, <b>−1</b> otherwise. Numerical: <b>+4</b> (Paper 2 paired questions <b>+2</b>), no negative marks. List matching (Paper 1): <b>+4 / −1</b>. The pattern changes every year.',
+    papers:[
+      {id:'2026-p1',name:'JEE Advanced 2026',date:'Paper 1',shift:'',head:'Paper 1',sub:'2026 · official paper',pat:'48 questions · 3 hours · 180 marks',path:'jee-adv/2026-p1/'},
+      {id:'2026-p2',name:'JEE Advanced 2026',date:'Paper 2',shift:'',head:'Paper 2',sub:'2026 · official paper',pat:'54 questions · 3 hours · 180 marks',path:'jee-adv/2026-p2/'}]}
+};
+const JEE_PAPERS=EXAM_PAGES['jee-main'].papers;
+const examPageId=()=>{const h=location.hash.slice(1);return EXAM_PAGES[h]?h:'jee-main';};
 // maths notation (KaTeX) loads only when an exam paper needs it
 let mathReady=null;
 function ensureMath(){
@@ -1317,34 +1355,47 @@ function ensureMath(){
   mathReady=load(base+'katex.min.js').then(()=>load(base+'contrib/auto-render.min.js')).catch(()=>{mathReady=null;});
   return mathReady;
 }
-function renderMath(el){if(!el||!window.renderMathInElement)return;try{renderMathInElement(el,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],throwOnError:false});}catch(e){}}
-function examInstr(){const e=P.exam;return `<li>Official ${esc(e.name)} question paper (${esc(e.date)}, ${esc(e.shift)}) with the final answer key published by the National Testing Agency (NTA).</li><li>${P.qs.length} questions: ${esc(e.subjects)}. Each subject has Section A (multiple choice) and Section B (numerical answer).</li><li>Marking: <b>+4</b> for a correct answer, <b>−1</b> for a wrong answer and <b>0</b> if not answered, in both sections.</li><li>Section B: type a whole number; round off to the nearest integer if needed.</li>`;}
+function renderMath(el){if(!el||!window.renderMathInElement)return;try{renderMathInElement(el,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],throwOnError:false});}catch(e){}
+  fitMath(el);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>fitMath(el));setTimeout(()=>fitMath(el),1200);}
+// a formula too wide for the screen (e.g. a long product that cannot wrap) is shrunk to fit, down to 60%; beyond that it scrolls sideways.
+// measured again once the maths fonts have loaded, because they change the width
+function fitMath(el){el.querySelectorAll('.dm,.katex-display').forEach(d=>{d.style.fontSize='';if(d.clientWidth&&d.scrollWidth>d.clientWidth+1)d.style.fontSize=Math.max(60,Math.floor(d.clientWidth/d.scrollWidth*100))+'%';});}
+function examInstr(){const e=P.exam;if(e.instr)return e.instr.map(s=>`<li>${s}</li>`).join('');return `<li>Official ${esc(e.name)} question paper (${esc(e.date)}, ${esc(e.shift)}) with the final answer key published by the National Testing Agency (NTA).</li><li>${P.qs.length} questions: ${esc(e.subjects)}. Each subject has Section A (multiple choice) and Section B (numerical answer).</li><li>Marking: <b>+4</b> for a correct answer, <b>−1</b> for a wrong answer and <b>0</b> if not answered, in both sections.</li><li>Section B: type a whole number; round off to the nearest integer if needed.</li>`;}
 function renderJee(){
-  const ex=EXAMS.flatMap(g=>g.items).find(i=>i.id==='jee-main');
-  $('#jeePattern').innerHTML=`<div><p class="eyebrow">Exam pattern</p><h3>JEE Main Paper 1 (B.E. / B.Tech): ${esc(ex.pat)}</h3></div><div class="tblwrap">${examTable(ex)}</div><p class="hint" style="margin:0">Each subject has Section A (20 multiple-choice questions) and Section B (5 numerical questions), all compulsory. Correct answer <b>+4</b>, wrong answer <b>−1</b>, not answered <b>0</b>, in both sections.</p>`;
-  $('#jeeList').innerHTML=JEE_PAPERS.map(x=>`<article class="examcard"><div class="head"><div><h4>${esc(x.date)}</h4><p class="body">${esc(x.shift)} · official NTA paper</p></div><span class="soon ready">Final key</span></div><p class="pat">75 questions · 3 hours · 300 marks · +4 / −1</p><div class="btns"><button type="button" class="primary small" data-jee="${x.id}" data-mode="exam">Start 3-hour exam</button><button type="button" class="small" data-jee="${x.id}" data-mode="practice">Practise with solutions</button></div></article>`).join('');
+  const pid=examPageId(),pg=EXAM_PAGES[pid],ex=EXAMS.flatMap(g=>g.items).find(i=>i.id===pid);
+  $('#examCrumb').textContent=pg.crumb;$('#examTitle').textContent=pg.title;$('#examLede').textContent=pg.lede;$('#examSource').textContent=pg.source;$('#jeeMsg').hidden=true;
+  $('#jeePattern').innerHTML=`<div><p class="eyebrow">Exam pattern</p><h3>${esc(pg.patTitle)}: ${esc(ex.pat)}</h3></div><div class="tblwrap">${examTable(ex)}</div><p class="hint" style="margin:0">${pg.patNote}</p>`;
+  $('#jeeList').innerHTML=pg.papers.map(x=>`<article class="examcard"><div class="head"><div><h4>${esc(x.head)}</h4><p class="body">${esc(x.sub)}</p></div><span class="soon ready">Final key</span></div><p class="pat">${esc(x.pat)}</p><div class="btns"><button type="button" class="primary small" data-jee="${x.id}" data-mode="exam">Start 3-hour exam</button><button type="button" class="small" data-jee="${x.id}" data-mode="practice">Practise with solutions</button></div></article>`).join('');
 }
 async function startJee(id,mode){
-  const meta=JEE_PAPERS.find(x=>x.id===id),msg=$('#jeeMsg');if(!meta)return;
+  let meta=null,list='jee-main';Object.keys(EXAM_PAGES).forEach(k=>{const m=EXAM_PAGES[k].papers.find(x=>x.id===id);if(m){meta=m;list=k;}});
+  const msg=$('#jeeMsg');if(!meta)return;
   msg.className='msg info';msg.textContent='Loading the paper…';msg.hidden=false;
   try{
     const res=await Promise.all([fetch(meta.path+'paper.json').then(r=>{if(!r.ok)throw new Error('http '+r.status);return r.json();}),ensureMath()]);
     const data=res[0],fig=meta.path+'fig/';
-    const qs=data.questions.map(x=>{
+    const qs=data.questions.map((x,idx)=>{
       // a one-line $$…$$ formula cannot wrap and gets cut off on narrow screens and paper; set it as a wrapping inline formula instead
       const wrapMath=s=>String(s).replace(/\$\$([\s\S]+?)\$\$/g,(m,b)=>/\\begin\{/.test(b)?m:`<div class="dm">$\\displaystyle ${b}$</div>`);
       // a "less than" sign in maths such as $a<b$ would be read as an HTML tag (<b> = bold) and break the page; only line breaks and tables are real tags here
       const safe=s=>String(s==null?'':s).replace(/<(?!\/?(br|table|tr|td|th)\b)/g,'&lt;');
       const text=wrapMath(safe(x.text))+(x.fig?`<img class="qfig" src="${fig+x.fig}" alt="Figure for question ${x.no}" loading="lazy">`:'');
-      const parts=x.type==='mcq'
-        ?[{type:'choice',ans:x.answer,options:x.options.map((o,j)=>x.optionFigs&&x.optionFigs[j]?`<img class="ofig" src="${fig+x.optionFigs[j]}" alt="Option ${'abcd'[j]}" loading="lazy">`:safe(o))}]
-        :[{type:'num',ans:+x.answer,ansText:String(x.answer)}];
-      const q={no:x.no,qid:x.qid,kind:x.type==='mcq'?'mcq':'w',level:'M',topic:x.subject,sec:x.subject+'-'+x.section,text,parts,sol:safe(x.sol),marks:4,neg:1,dropped:!!x.dropped};
-      partMarks(q,4);return q;});
+      // question types: mcq/single/match = one correct option; multi = one or more correct; num = a number (exact, or a range lo–hi)
+      const opts=()=>x.options.map((o,j)=>x.optionFigs&&x.optionFigs[j]?`<img class="ofig" src="${fig+x.optionFigs[j]}" alt="Option ${'abcd'[j]}" loading="lazy">`:safe(o));
+      let parts;
+      if(x.type==='multi'){const o=opts(),letters=a=>a.map(j=>`(${'abcd'[j]})`).join(', ');parts=[{type:'multi',ans:x.answer.slice(),alts:x.alts||null,options:o,ansText:x.answer.map(j=>`(${'abcd'[j]}) ${o[j]}`).join('<br>')+(x.alts?`<br>The final key also accepts: ${x.alts.map(letters).join(' or ')}`:'')}];}
+      else if(x.type==='num'){const a=x.answer;parts=a&&typeof a==='object'?[{type:'num',ans:+a.lo,lo:+a.lo,hi:+a.hi,ansText:+a.lo===+a.hi?String(a.lo):`${a.lo} to ${a.hi}`}]:[{type:'num',ans:+a,ansText:String(a)}];}
+      else{const o=opts();parts=[{type:'choice',ans:x.answer,accept:x.accept||null,options:o,ansText:x.accept?x.accept.map(j=>`(${'abcd'[j]}) ${o[j]}`).join(' or ')+' (the final key accepts either)':undefined}];}
+      const full=x.full||4,choiceLike=x.type!=='num';
+      const q={no:data.renumber?idx+1:x.no,tag:data.renumber?`Q.${x.no}${x.stem?' · '+safe(x.stem):''}`:'',qid:x.qid,kind:choiceLike?'mcq':'w',level:'M',topic:x.subject,sec:x.subject+'-'+x.section,text,parts,sol:safe(x.sol),marks:full,neg:x.neg!=null?x.neg:1,dropped:!!x.dropped};
+      partMarks(q,full);return q;});
     const subs=[...new Set(data.questions.map(x=>x.subject))],secs=[];
-    subs.forEach(s=>['A','B'].forEach(sec=>{if(qs.some(q=>q.sec===s+'-'+sec))secs.push({key:s+'-'+sec,letter:'',name:`${s} · Section ${sec} (${sec==='A'?'multiple choice':'numerical'})`,kind:sec==='A'?'mcq':'w'});}));
-    P={qs,secs,notes:[],created:Date.now(),mode,duration:180,subject:'JEE Main',klass:'',board:'NTA',country:'India',label:'Official paper',topicsLabel:'',startAt:Date.now(),
-       exam:{id,list:'jee-main',name:meta.name,date:meta.date,shift:meta.shift,title:`${meta.name} · ${meta.date} · ${meta.shift}`,short:`${meta.date} · ${meta.shift}`,subjects:subs.join(', ').replace(/, ([^,]*)$/,' and $1')}};
+    const secOrder=[...new Set(data.questions.map(x=>String(x.section)))];
+    const secName=(sec)=>data.secNames?data.secNames[sec]:(sec==='A'?'multiple choice':'numerical');
+    subs.forEach(s=>secOrder.forEach(sec=>{if(qs.some(q=>q.sec===s+'-'+sec))secs.push({key:s+'-'+sec,letter:'',name:`${s} · Section ${sec} (${secName(sec)})`,kind:qs.find(q=>q.sec===s+'-'+sec).kind});}));
+    const title=[meta.name,meta.date,meta.shift].filter(Boolean).join(' · ');
+    P={qs,secs,notes:[],created:Date.now(),mode,duration:data.duration||180,subject:data.exam||'JEE Main',klass:'',board:data.board||'NTA',country:'India',label:'Official paper',topicsLabel:'',startAt:Date.now(),
+       exam:{id,list,name:meta.name,date:meta.date,shift:meta.shift,title,short:[meta.date,meta.shift].filter(Boolean).join(' · '),instr:data.instr||null,subjects:subs.join(', ').replace(/, ([^,]*)$/,' and $1')}};
     P.endAt=P.startAt+P.duration*60000;ANS={};FLAG={};CHK={};
     msg.hidden=true;track(`start/${mode}/${paperTag()}`,`Started ${mode}: ${paperName()}`);
     begin();
@@ -1358,9 +1409,8 @@ const EXAMS=[
   {group:'Engineering and medical',items:[
     {id:'jee-main',name:'JEE Main',body:'NTA',pat:'75 questions · 3 hours · +4 / −1',ready:true,
       rows:[['Physics',25,100,'20 multiple choice + 5 numerical'],['Chemistry',25,100,'20 multiple choice + 5 numerical'],['Mathematics',25,100,'20 multiple choice + 5 numerical']]},
-    {id:'jee-advanced',name:'JEE Advanced',body:'IITs',pat:'2 papers · 3 hours each · mixed marking',
-      rows:[['Paper 1','varies',180,'Physics, Chemistry, Mathematics'],['Paper 2','varies',180,'Physics, Chemistry, Mathematics']],
-      foot:['Total','varies',360]},
+    {id:'jee-advanced',name:'JEE Advanced',body:'IITs',pat:'2 papers · 3 hours each · mixed marking',ready:true,cols:['Paper','Questions','Marks'],
+      rows:[['Paper 1',48,180,'Mathematics, Physics, Chemistry: 16 each'],['Paper 2',54,180,'Mathematics, Physics, Chemistry: 18 each']]},
     {id:'neet',name:'NEET (UG)',body:'NTA',pat:'180 questions · 3 hours · +4 / −1',
       rows:[['Physics',45,180],['Chemistry',45,180],['Biology',90,360,'Botany 45 + Zoology 45']]}]},
   {group:'University admission',items:[
@@ -1408,7 +1458,7 @@ function printPaperHtml(){
   const secs=P.secs.map(s=>{const qs=secQs(s);return{s,qs,each:qs.length?qs[0].marks:0,marks:qs.reduce((a,q)=>a+q.marks,0)};}).filter(x=>x.qs.length);
   const lines=q=>({E:1,M:2,C:3,X:2}[q.level]||2);
   const qP=q=>{let inner;
-    if(q.parts[0].type==='choice')inner=`<ol class="popts">${q.parts[0].options.map((o,j)=>`<li>(${'abcd'[j]}) ${o}</li>`).join('')}</ol>`;
+    if(q.parts[0].type==='choice'||q.parts[0].type==='multi')inner=`<ol class="popts">${q.parts[0].options.map((o,j)=>`<li>(${'abcd'[j]}) ${o}</li>`).join('')}</ol>`;
     else inner=q.parts.map(p=>`<div class="ppart">${p.q?p.q+(q.parts.length>1?` <span class="qm">[${p.marks}]</span>`:''):''}${p.type==='select'?`<div class="hint" style="margin:2px 0 0">(${p.options.map(esc).join(' / ')})</div>`:''}${'<div class="aline"></div>'.repeat(q.parts.length>1?1:lines(q))}</div>`).join('');
     return `<div class="pq"><span class="pn">${q.no}.</span><div class="qbody"><div>${q.text}</div>${inner}</div><span class="qm">[${q.marks}]</span></div>`;};
   const key=`<section class="pkey"><h2>Answer key</h2><p class="hint" style="margin:4px 0 0">${esc(paperName())} · ${total} marks</p><ol>${P.qs.map(q=>`<li value="${q.no}"><b>${q.parts.map(p=>(q.parts.length>1&&p.q?p.q.split(' ')[0]+' ':'')+answerText(p)).join('; ')}</b><div class="sol">${q.sol}</div></li>`).join('')}</ol></section>`;
