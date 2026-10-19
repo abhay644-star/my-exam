@@ -120,6 +120,8 @@ table.mt th,table.mt td{border:1px solid var(--line);padding:4px 10px;text-trans
 .dm{margin:6px 0;line-height:2}
 .soon.ready{color:var(--green);background:var(--green-soft)}
 table.brk{margin:2px 0 6px}table.brk th,table.brk td{padding:4px 6px;font-size:.82rem}table.brk th{font-size:.68rem}table.brk tfoot td{font-weight:700}
+table.brk th.n,table.brk td.n{white-space:nowrap;width:1%;padding-left:10px}
+#jeePattern table.brk{max-width:560px}#jeePattern table.brk th,#jeePattern table.brk td{font-size:.95rem;padding:8px 10px}#jeePattern table.brk th{font-size:.75rem}
 a.btnlink-ink{display:inline-flex;align-self:flex-start;margin-top:auto;font-weight:700;font-size:.85rem;border-radius:8px;padding:6px 12px;border:1px solid var(--ink);color:var(--ink);text-decoration:none}
 a.btnlink-ink:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
 .soon{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--amber);background:var(--amber-soft);padding:3px 8px;border-radius:999px;white-space:nowrap}
@@ -314,6 +316,8 @@ sup,sub{font-size:.7em}
     <nav class="crumbs" aria-label="Breadcrumb"><a href="#home">Home</a> › <a href="#exams">Competitive exams</a> › JEE Main</nav>
     <div class="stack">
       <div><h2>JEE Main: previous year papers</h2><p class="lede">Official question papers with the final answer keys from the National Testing Agency (NTA). Take a paper as a timed 3-hour exam, or practise question by question with worked solutions.</p></div>
+      <div id="jeePattern" class="card stack"></div>
+      <h3>Previous year papers</h3>
       <div id="jeeList" class="examgrid"></div>
       <div id="jeeMsg" class="msg" role="status" hidden></div>
       <p class="hint" style="margin:0">Questions and answer keys: NTA. Worked solutions: All in All Exam Practice. More papers are being added. Found a mistake? <button type="button" class="linkbtn" id="jeeReport">Tell us</button>.</p>
@@ -1316,6 +1320,8 @@ function ensureMath(){
 function renderMath(el){if(!el||!window.renderMathInElement)return;try{renderMathInElement(el,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],throwOnError:false});}catch(e){}}
 function examInstr(){const e=P.exam;return `<li>Official ${esc(e.name)} question paper (${esc(e.date)}, ${esc(e.shift)}) with the final answer key published by the National Testing Agency (NTA).</li><li>${P.qs.length} questions: ${esc(e.subjects)}. Each subject has Section A (multiple choice) and Section B (numerical answer).</li><li>Marking: <b>+4</b> for a correct answer, <b>−1</b> for a wrong answer and <b>0</b> if not answered, in both sections.</li><li>Section B: type a whole number; round off to the nearest integer if needed.</li>`;}
 function renderJee(){
+  const ex=EXAMS.flatMap(g=>g.items).find(i=>i.id==='jee-main');
+  $('#jeePattern').innerHTML=`<div><p class="eyebrow">Exam pattern</p><h3>JEE Main Paper 1 (B.E. / B.Tech): ${esc(ex.pat)}</h3></div><div class="tblwrap">${examTable(ex)}</div><p class="hint" style="margin:0">Each subject has Section A (20 multiple-choice questions) and Section B (5 numerical questions), all compulsory. Correct answer <b>+4</b>, wrong answer <b>−1</b>, not answered <b>0</b>, in both sections.</p>`;
   $('#jeeList').innerHTML=JEE_PAPERS.map(x=>`<article class="examcard"><div class="head"><div><h4>${esc(x.date)}</h4><p class="body">${esc(x.shift)} · official NTA paper</p></div><span class="soon ready">Final key</span></div><p class="pat">75 questions · 3 hours · 300 marks · +4 / −1</p><div class="btns"><button type="button" class="primary small" data-jee="${x.id}" data-mode="exam">Start 3-hour exam</button><button type="button" class="small" data-jee="${x.id}" data-mode="practice">Practise with solutions</button></div></article>`).join('');
 }
 async function startJee(id,mode){
@@ -1351,27 +1357,46 @@ $('#jeeReport').addEventListener('click',()=>openContact('About the JEE Main pap
 const EXAMS=[
   {group:'Engineering and medical',items:[
     {id:'jee-main',name:'JEE Main',body:'NTA',pat:'75 questions · 3 hours · +4 / −1',ready:true,
-      rows:[['Physics',25,100],['Chemistry',25,100],['Mathematics',25,100]]},
-    {id:'jee-advanced',name:'JEE Advanced',body:'IITs',pat:'2 papers · 3 hours each · mixed marking'},
+      rows:[['Physics',25,100,'20 multiple choice + 5 numerical'],['Chemistry',25,100,'20 multiple choice + 5 numerical'],['Mathematics',25,100,'20 multiple choice + 5 numerical']]},
+    {id:'jee-advanced',name:'JEE Advanced',body:'IITs',pat:'2 papers · 3 hours each · mixed marking',
+      rows:[['Paper 1','varies',180,'Physics, Chemistry, Mathematics'],['Paper 2','varies',180,'Physics, Chemistry, Mathematics']],
+      foot:['Total','varies',360]},
     {id:'neet',name:'NEET (UG)',body:'NTA',pat:'180 questions · 3 hours · +4 / −1',
       rows:[['Physics',45,180],['Chemistry',45,180],['Biology',90,360,'Botany 45 + Zoology 45']]}]},
   {group:'University admission',items:[
-    {id:'cuet',name:'CUET (UG)',body:'NTA',pat:'50 questions per subject · 1 hour · +5 / −1'}]},
+    {id:'cuet',name:'CUET (UG)',body:'NTA',pat:'50 questions per subject · 1 hour · +5 / −1',
+      cols:['Section','Questions','Marks'],
+      rows:[['Languages',50,250,'13 languages · per test'],['Domain subjects',50,250,'23 subjects · per test'],['General Test',50,250]],
+      foot:['Choose up to 5 tests','50 each','250 each']}]},
   {group:'Management (MBA)',items:[
-    {id:'cat',name:'CAT',body:'IIMs',pat:'3 sections · 2 hours · +3 / −1'},
-    {id:'xat',name:'XAT',body:'XLRI',pat:'Decision making, verbal, quant · about 3 hours'},
-    {id:'cmat',name:'CMAT',body:'NTA',pat:'100 questions · 3 hours · +4 / −1'}]},
+    {id:'cat',name:'CAT',body:'IIMs',pat:'3 sections · 2 hours · +3 / −1',cols:['Section','Questions','Marks'],
+      rows:[['VARC',24,72,'Verbal ability & reading comprehension'],['DILR',22,66,'Data interpretation & logical reasoning'],['QA',22,66,'Quantitative aptitude']]},
+    {id:'xat',name:'XAT',body:'XLRI',pat:'95 questions · 3 hours · +1 / −0.25',cols:['Section','Questions','Marks'],
+      rows:[['Decision Making',21,21],['Verbal & Logical Ability',26,26],['Quant & Data Interpretation',28,28],['General Knowledge',20,20,'no negative marking']]},
+    {id:'cmat',name:'CMAT',body:'NTA',pat:'100 questions · 3 hours · +4 / −1',cols:['Section','Questions','Marks'],
+      rows:[['Quantitative Techniques & DI',20,80],['Logical Reasoning',20,80],['Language Comprehension',20,80],['General Awareness',20,80],['Innovation & Entrepreneurship',20,80]]}]},
   {group:'Government jobs',items:[
-    {id:'ssc-cgl',name:'SSC CGL',body:'SSC',pat:'Tier 1: 100 questions · 1 hour · +2 / −0.5'},
-    {id:'bank-po',name:'Bank PO',body:'IBPS · SBI',pat:'Prelims: 100 questions · 1 hour · −0.25'}]},
+    {id:'ssc-cgl',name:'SSC CGL',body:'SSC',pat:'Tier 1: 100 questions · 1 hour · +2 / −0.5',cols:['Section','Questions','Marks'],
+      rows:[['General Intelligence & Reasoning',25,50],['General Awareness',25,50],['Quantitative Aptitude',25,50],['English Comprehension',25,50]]},
+    {id:'bank-po',name:'Bank PO',body:'IBPS · SBI',pat:'Prelims: 100 questions · 1 hour · −0.25',cols:['IBPS PO prelims','Questions','Time'],
+      rows:[['English Language',30,'20 min'],['Quantitative Aptitude',35,'20 min'],['Reasoning Ability',35,'20 min']],
+      foot:['Total',100,'60 min']}]},
   {group:'Civil services',items:[
-    {id:'upsc-prelims',name:'UPSC Prelims',body:'UPSC',pat:'GS paper: 100 questions · 2 hours · +2 / −0.66'}]}
+    {id:'upsc-prelims',name:'UPSC Prelims',body:'UPSC',pat:'2 papers · 2 hours each · −⅓ per wrong answer',cols:['Paper','Questions','Marks'],
+      rows:[['GS Paper I',100,200,'counts for merit'],['GS Paper II (CSAT)',80,200,'qualifying: 33% needed']]}]}
 ];
+// pattern table on each exam card: rows are [name, questions, marks or time, optional note]; the total row is summed unless the exam gives its own
+function examTable(x){
+  const cols=x.cols||['Subject','Questions','Marks'];
+  const sum=k=>x.rows.every(r=>typeof r[k]==='number')?x.rows.reduce((a,r)=>a+r[k],0):'';
+  const foot=x.foot||['Total',sum(1),sum(2)];
+  return `<table class="brk"><thead><tr><th>${esc(cols[0])}</th><th class="n">${esc(cols[1])}</th><th class="n">${esc(cols[2])}</th></tr></thead><tbody>${x.rows.map(r=>`<tr><td>${esc(r[0])}${r[3]?`<br><small class="hint" style="margin:0">${esc(r[3])}</small>`:''}</td><td class="n">${esc(r[1])}</td><td class="n">${esc(r[2])}</td></tr>`).join('')}</tbody><tfoot><tr><td>${esc(foot[0])}</td><td class="n">${esc(foot[1])}</td><td class="n">${esc(foot[2])}</td></tr></tfoot></table>`;
+}
 const WANT='aa-want';
 const getWant=()=>{try{return JSON.parse(localStorage.getItem(WANT)||'[]');}catch(e){return [];}};
 function renderExams(){
   const want=getWant();
-  $('#examList').innerHTML=EXAMS.map(g=>`<section class="examgrp"><h3>${esc(g.group)}</h3><div class="examgrid">${g.items.map(x=>`<article class="examcard"><div class="head"><div><h4>${esc(x.name)}</h4><p class="body">${esc(x.body)}</p></div>${x.ready?'<span class="soon ready">Past papers</span>':'<span class="soon">Coming soon</span>'}</div><p class="pat">${esc(x.pat)}</p>${x.rows?`<table class="brk"><thead><tr><th>Subject</th><th class="n">Questions</th><th class="n">Marks</th></tr></thead><tbody>${x.rows.map(r=>`<tr><td>${esc(r[0])}${r[3]?`<br><small class="hint" style="margin:0">${esc(r[3])}</small>`:''}</td><td class="n">${r[1]}</td><td class="n">${r[2]}</td></tr>`).join('')}</tbody><tfoot><tr><td>Total</td><td class="n">${x.rows.reduce((a,r)=>a+r[1],0)}</td><td class="n">${x.rows.reduce((a,r)=>a+r[2],0)}</td></tr></tfoot></table>`:''}${x.ready?`<a class="btnlink-ink" href="#${x.id}">Open past papers →</a>`:want.indexOf(x.id)>=0?'<button type="button" class="small" disabled>Thanks, noted</button>':`<button type="button" class="small" data-want="${x.id}">I want this exam</button>`}</article>`).join('')}</div></section>`).join('');
+  $('#examList').innerHTML=EXAMS.map(g=>`<section class="examgrp"><h3>${esc(g.group)}</h3><div class="examgrid">${g.items.map(x=>`<article class="examcard"><div class="head"><div><h4>${esc(x.name)}</h4><p class="body">${esc(x.body)}</p></div>${x.ready?'<span class="soon ready">Past papers</span>':'<span class="soon">Coming soon</span>'}</div><p class="pat">${esc(x.pat)}</p>${x.ready?`<a class="btnlink-ink" href="#${x.id}">Open past papers →</a>`:want.indexOf(x.id)>=0?'<button type="button" class="small" disabled>Thanks, noted</button>':`<button type="button" class="small" data-want="${x.id}">I want this exam</button>`}</article>`).join('')}</div></section>`).join('');
 }
 $('#examList').addEventListener('click',e=>{const b=e.target.closest('[data-want]');if(!b)return;const id=b.dataset.want,x=EXAMS.flatMap(g=>g.items).find(i=>i.id===id);
   track('want/'+id,'Wants exam: '+(x?x.name:id));const w=getWant();if(w.indexOf(id)<0){w.push(id);try{localStorage.setItem(WANT,JSON.stringify(w));}catch(err){}}
