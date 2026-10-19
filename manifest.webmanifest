@@ -1,0 +1,23 @@
+{
+  "name": "All in All Exam Practice",
+  "short_name": "Exam Practice",
+  "description": "Free practice tests for school and competitive exams, marked instantly with full solutions.",
+  "id": "/",
+  "start_url": "/?source=app",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#edf1f8",
+  "theme_color": "#2446a8",
+  "lang": "en-IN",
+  "categories": ["education"],
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "School (Classes I–XII)", "url": "/#school", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Competitive exams", "url": "/#exams", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] }
+  ]
+}
