@@ -88,6 +88,7 @@ button:disabled{opacity:.45;cursor:not-allowed}
 .topnav a:hover{border-color:var(--line)}
 .topnav a[aria-current="page"]{background:var(--ink-soft);border-color:var(--ink)}
 .topnav a:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+@media (max-width:480px){.topnav{gap:2px}.topnav a{padding:6px 9px;font-size:.92rem}}
 .crumbs{font-size:.85rem;color:var(--muted);margin-bottom:12px}
 .crumbs a{color:var(--ink);font-weight:700;text-decoration:none}
 .tracks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
@@ -268,10 +269,10 @@ sup,sub{font-size:.7em}
         <text x="176" y="84" font-size="56"><tspan class="lg-ink">All</tspan> <tspan class="lg-muted">in</tspan> <tspan class="lg-red">All</tspan></text>
         <text class="lg-ink" x="179" y="116" font-size="17" letter-spacing="3.5">EXAM PRACTICE</text>
       </svg></a></h1>
-      <p class="lede">Free practice tests for school and entrance exams, marked instantly with full solutions.</p>
+      <p class="lede">Free practice tests for school and competitive exams, marked instantly with full solutions.</p>
     </div>
     <nav class="topnav" aria-label="Main">
-      <a href="#home" data-nav="home">Home</a><a href="#school" data-nav="setup">School</a><a href="#exams" data-nav="exams">Exams</a>
+      <a href="#home" data-nav="home">Home</a><a href="#school" data-nav="setup">School</a><a href="#exams" data-nav="exams">Competitive Exams</a>
     </nav>
   </header>
 
@@ -288,9 +289,9 @@ sup,sub{font-size:.7em}
         <span class="go">Start practising →</span>
       </a>
       <a class="track exams" href="#exams">
-        <p class="eyebrow">Entrance &amp; competitive exams</p>
+        <p class="eyebrow">Competitive exams</p>
         <h3>JEE · NEET · CUET · CAT · SSC · Bank · UPSC</h3>
-        <p>Mock tests in the real exam pattern, with negative marking and sections. Coming soon: tell us which exam you need first.</p>
+        <p>JEE Main previous year papers are ready now, with negative marking and sections. More exams are coming: tell us which one you need first.</p>
         <span class="go">See the exams →</span>
       </a>
     </div>
@@ -299,9 +300,9 @@ sup,sub{font-size:.7em}
 
   <!-- EXAMS -->
   <section id="examsView" hidden>
-    <nav class="crumbs" aria-label="Breadcrumb"><a href="#home">Home</a> › Entrance &amp; competitive exams</nav>
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="#home">Home</a> › Competitive exams</nav>
     <div class="stack">
-      <div><h2>Entrance &amp; competitive exams</h2><p class="lede">Mock tests in the real exam pattern are being built. Tap <b>I want this exam</b> on the ones you need, and we will build the most requested first.</p></div>
+      <div><h2>Competitive exams</h2><p class="lede">JEE Main previous year papers are ready. Mock tests for the other exams are being built: tap <b>I want this exam</b> on the ones you need, and we will build the most requested first.</p></div>
       <div id="examList" class="stack"></div>
       <p class="hint" style="margin:0">Patterns are based on the latest official notices; always check the exam's official website. Your exam is not listed? <button type="button" class="linkbtn" id="otherExam">Tell us about it</button>.</p>
     </div>
@@ -309,7 +310,7 @@ sup,sub{font-size:.7em}
 
   <!-- JEE MAIN PAST PAPERS -->
   <section id="jeeView" hidden>
-    <nav class="crumbs" aria-label="Breadcrumb"><a href="#home">Home</a> › <a href="#exams">Entrance &amp; competitive exams</a> › JEE Main</nav>
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="#home">Home</a> › <a href="#exams">Competitive exams</a> › JEE Main</nav>
     <div class="stack">
       <div><h2>JEE Main: previous year papers</h2><p class="lede">Official question papers with the final answer keys from the National Testing Agency (NTA). Take a paper as a timed 3-hour exam, or practise question by question with worked solutions.</p></div>
       <div id="jeeList" class="examgrid"></div>
