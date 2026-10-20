@@ -60,6 +60,12 @@ p{margin:0}
 .row{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
 label,.lbl{display:block;font-weight:700;font-size:.9rem;margin-bottom:5px}
 .hint{font-size:.82rem;color:var(--muted);margin-top:4px}
+.whyhead{margin:28px 0 10px}
+.whys{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(max(240px,calc((100% - 20px) / 3)),1fr));gap:10px}
+.whys li{background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--ink);border-radius:var(--r);padding:12px 14px;display:flex;flex-direction:column;gap:2px}
+.whys li:nth-child(even){border-left-color:var(--red)}
+.whys b{font-family:var(--f-display);font-size:1.02rem}
+.whys span{font-size:.88rem;color:var(--muted)}
 select,input[type=number],input[type=text],input[type=email],textarea{width:100%;font:inherit;color:var(--fg);background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:9px 11px}
 select:focus-visible,input:focus-visible,button:focus-visible,.chip:focus-within{outline:3px solid var(--ink);outline-offset:2px}
 fieldset{border:1px solid var(--line);border-radius:var(--r);padding:12px 14px 14px;margin:0;min-width:0}
@@ -308,7 +314,15 @@ sup,sub{font-size:.7em}
         <span class="go">See the exams →</span>
       </a>
     </div>
-    <p class="hint" style="margin-top:14px">Free, with no sign-up. Your scores stay on your own device.</p>
+    <h3 class="whyhead">Why practise here</h3>
+    <ul class="whys">
+      <li><b>A fresh paper every time</b><span>A new mix of questions on every attempt.</span></li>
+      <li><b>Make your own paper</b><span>Choose the chapters, number of questions, time, difficulty and marks.</span></li>
+      <li><b>Practice or exam mode</b><span>Check each answer as you go, or sit a timed paper like the real exam.</span></li>
+      <li><b>Instant results</b><span>Your score, the correct answers and worked solutions as soon as you finish.</span></li>
+      <li><b>Real entrance papers</b><span>JEE Main, JEE Advanced and NEET (UG) with the official keys and marking.</span></li>
+      <li><b>Free, works offline</b><span>No sign-up, scores stay on your device, and it installs like an app.</span></li>
+    </ul>
   </section>
 
   <!-- EXAMS -->
