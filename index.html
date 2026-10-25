@@ -94,6 +94,8 @@ button:disabled{opacity:.45;cursor:not-allowed}
 .invite{display:flex;gap:12px;align-items:center;justify-content:space-between;margin-bottom:14px}
 .examcard.hl{outline:3px solid var(--red);outline-offset:2px}
 button.share{border-color:var(--green);color:var(--green)}
+.sharepanel{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:12px;border:1px solid var(--line);border-radius:var(--r);background:var(--bg)}
+.sharepanel .btnlink,.sharepanel button{margin:0}
 .mistakes{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;justify-content:space-between;background:var(--amber-soft);border-radius:var(--r);padding:12px 14px}
 .mistakes .btns{margin:0}
 /* home, menu and exams list */
@@ -1368,8 +1370,7 @@ async function shareScore(txt,g,tot,pct,band){
   try{if(navigator.canShare){const blob=await new Promise(r=>scoreCard(g,tot,pct,band).toBlob(r,'image/png'));const file=new File([blob],'my-score.png',{type:'image/png'});
       if(blob&&navigator.canShare({files:[file]})){await navigator.share({files:[file],text:txt});track('share/score-card','Shared score card');return;}}
     if(navigator.share){await navigator.share({text:txt});track('share/text','Shared score');return;}}
-  catch(e){if(e&&e.name==='AbortError')return;}
-  track('share/whatsapp','Shared score on WhatsApp');window.open('https://wa.me/?text='+encodeURIComponent(txt),'_blank','noopener');}
+  catch(e){}}
 function finish(auto){
   clearInterval(timerId);$('#confirm').hidden=true;const exam=P.mode==='exam';
   const used=exam?Math.min(P.duration*60000,Date.now()-P.startAt):Date.now()-P.startAt;
@@ -1405,7 +1406,8 @@ function finish(auto){
        <div class="stack" style="gap:6px"><span class="band" style="background:${band[1]};color:${band[2]}">${band[0]} · ${pct}%</span><span style="font-weight:700">${esc(advice)}</span><span class="hint" style="margin:0">${auto?'Time ran out, so the paper was submitted automatically. ':''}${exam?`Time used: ${mm} min ${ss} s of ${P.duration} min`:`Time spent: ${mm} min ${ss} s`} · ${P.qs.length} questions${att.length?` · Accuracy ${acc}% (${nRight} of ${att.length} answered fully right)`:''}</span></div></div>
      ${P.exam?`<div class="tblwrap"><table><thead><tr><th>Subject</th><th class="n">Correct</th><th class="n">Wrong</th><th class="n">Not answered</th><th class="n">Marks</th></tr></thead><tbody>${topicRows}</tbody></table></div>${chRows?`<div><h3 style="margin:6px 0 4px">Chapters to revise</h3><p class="hint" style="margin:0 0 6px">Where you lost the most marks, including questions left blank. Practise opens a short NCERT chapter test.</p><div class="tblwrap"><table><thead><tr><th>Chapter</th><th class="n">Fully right</th><th class="n">Marks lost</th><th class="n"><span class="sr">Action</span></th></tr></thead><tbody>${chRows}</tbody></table></div></div>`:''}`:`<div class="grid2" style="gap:16px"><div class="tblwrap"><table><thead><tr><th>Chapter</th><th class="n">Marks</th><th class="n">Score</th><th class="n"><span class="sr">Action</span></th></tr></thead><tbody>${topicRows}</tbody></table></div>
        <div class="tblwrap"><table><thead><tr><th>Difficulty</th><th class="n">Fully right</th><th class="n">Score</th></tr></thead><tbody>${lvlRows}</tbody></table></div></div>`}
-     <div class="btns">${nWrong&&nWrong<P.qs.length?`<button type="button" class="primary" id="retryWrong">Retry the ${nWrong} I got wrong</button>`:''}<button type="button" ${nWrong&&nWrong<P.qs.length?'':'class="primary" '}id="againBtn">Try the whole paper again</button><button type="button" id="newBtn">New paper</button>${mk.total?`<button type="button" id="mistakesBtn">Practise my mistakes (${Math.min(20,mk.total)})</button>`:''}<button type="button" id="printResBtn">Print this paper</button><button type="button" class="share" id="shareBtn">Share my score</button></div>${mkLine}
+     <div class="btns">${nWrong&&nWrong<P.qs.length?`<button type="button" class="primary" id="retryWrong">Retry the ${nWrong} I got wrong</button>`:''}<button type="button" ${nWrong&&nWrong<P.qs.length?'':'class="primary" '}id="againBtn">Try the whole paper again</button><button type="button" id="newBtn">New paper</button>${mk.total?`<button type="button" id="mistakesBtn">Practise my mistakes (${Math.min(20,mk.total)})</button>`:''}<button type="button" id="printResBtn">Print this paper</button><button type="button" class="share" id="shareBtn" aria-expanded="false" aria-controls="sharePanel">Share my score</button></div>
+     <div id="sharePanel" class="sharepanel" hidden><a class="btnlink" href="https://wa.me/?text=${encodeURIComponent(shareTxt)}" target="_blank" rel="noopener">WhatsApp</a><button type="button" id="shCopy">Copy message</button><button type="button" id="shSave">Save score card</button>${navigator.share?'<button type="button" id="shMore">More apps…</button>':''}<span id="shMsg" class="hint" role="status" style="margin:0"></span></div>${mkLine}
      <div class="chips"><label class="chip" for="onlyWrong"><input type="checkbox" id="onlyWrong"> Show only questions I got wrong</label>${nf?`<label class="chip" for="onlyFlagged"><input type="checkbox" id="onlyFlagged"> Show only flagged questions (${nf})</label>`:''}</div>
    </div>
    <article class="sheet res"><header class="sheethead"><h2>Marked answer sheet</h2><div class="meta"><span>${esc(paperName())}</span><span>${g} / ${tot} marks</span></div></header>${review}</article>`;
@@ -1423,7 +1425,15 @@ function finish(auto){
   $('#onlyWrong').addEventListener('change',filt);if($('#onlyFlagged'))$('#onlyFlagged').addEventListener('change',filt);
   $('#printResBtn').addEventListener('click',()=>showPrint('results'));
   const mb=$('#mistakesBtn');if(mb)mb.addEventListener('click',startMistakes);
-  $('#shareBtn').addEventListener('click',()=>shareScore(shareTxt,g,tot,pct,band));
+  // share menu in the page: WhatsApp (app or WhatsApp Web), copy the message, save the score card, or the device's own share panel
+  $('#shareBtn').addEventListener('click',e=>{const sp=$('#sharePanel');sp.hidden=!sp.hidden;e.currentTarget.setAttribute('aria-expanded',String(!sp.hidden));});
+  const shMsg=s=>{$('#shMsg').textContent=s;};
+  // the clipboard API can wait for a permission that never comes, so fall back to the older copy command after 1.5 s
+  $('#shCopy').addEventListener('click',async()=>{try{if(!navigator.clipboard)throw 0;await Promise.race([navigator.clipboard.writeText(shareTxt),new Promise((_,no)=>setTimeout(no,1500))]);}catch(err){const ta=document.createElement('textarea');ta.value=shareTxt;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');}catch(e2){}ta.remove();}
+    shMsg('Copied. Paste it into any chat or email.');track('share/copy','Copied score message');});
+  $('#shSave').addEventListener('click',()=>{scoreCard(g,tot,pct,band).toBlob(b=>{if(!b)return;const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='my-score.png';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),4000);
+    shMsg('Score card saved as my-score.png. Attach it to your message.');track('share/save-card','Saved score card');},'image/png');});
+  if($('#shMore'))$('#shMore').addEventListener('click',()=>shareScore(shareTxt,g,tot,pct,band));
   show('results');window.scrollTo(0,0);
 }
 function retry(onlyWrong){

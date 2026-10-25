@@ -1,5 +1,6 @@
 // Service worker for my-exam.in: lets the site open offline and be installed as an app.
-// - The page (index.html): network first, so new uploads show at once; the saved copy is used when offline.
+// - The page (index.html): network first and never from the browser's short-term cache, so a new upload shows on the
+//   next reload; the saved copy is used when offline.
 // - Exam papers, figures, icons, KaTeX and fonts: served from the saved copy, refreshed in the background.
 // - Analytics (GoatCounter) and the contact form are never cached.
 // Change VERSION to clear old saved copies (for example after removing files).
@@ -27,8 +28,8 @@ self.addEventListener('fetch', e => {
   if (!same && !CDN.test(req.url)) return;          // GoatCounter, FormSubmit, WhatsApp: straight to the network
 
   const home = same && (url.pathname === '/' || url.pathname === '/index.html');
-  if (req.mode === 'navigate' && home) {            // the page itself: network first
-    e.respondWith(fetch(req).then(res => {
+  if (req.mode === 'navigate' && home) {            // the page itself: network first, always asking the server for a newer copy
+    e.respondWith(fetch(new Request(req.url, { cache: 'no-cache', credentials: 'same-origin' })).then(res => {
       if (res.ok) { const copy = res.clone(); caches.open(CACHE).then(c => c.put('index.html', copy)); }
       return res;
     }).catch(() => caches.match('index.html')));
@@ -36,9 +37,10 @@ self.addEventListener('fetch', e => {
   }
   if (req.mode === 'navigate') return;              // other pages (exam landing pages, privacy): straight to the network
 
-  // everything else: saved copy at once, refreshed in the background
+  // everything else: saved copy at once, refreshed in the background (our own files skip the browser's 10-minute cache,
+  // so a corrected paper.json is picked up on the next visit)
   e.respondWith(caches.open(CACHE).then(c => c.match(req).then(hit => {
-    const fresh = fetch(req).then(res => {
+    const fresh = fetch(same ? new Request(req, { cache: 'no-cache' }) : req).then(res => {
       if (res.ok || res.type === 'opaque') c.put(req, res.clone());
       return res;
     }).catch(() => hit);
