@@ -96,6 +96,7 @@ button:disabled{opacity:.45;cursor:not-allowed}
 button.share{border-color:var(--green);color:var(--green)}
 .sharepanel{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:12px;border:1px solid var(--line);border-radius:var(--r);background:var(--bg)}
 .sharepanel .btnlink,.sharepanel button{margin:0}
+.sharepanel .btnlink.mail{border-color:var(--ink);color:var(--ink)}
 .mistakes{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;justify-content:space-between;background:var(--amber-soft);border-radius:var(--r);padding:12px 14px}
 .mistakes .btns{margin:0}
 /* home, menu and exams list */
@@ -1364,10 +1365,12 @@ function scoreCard(g,tot,pct,band){const c=document.createElement('canvas');c.wi
   font(400,36,B);x.fillStyle='#1b2236';const words=paperName().split(' ');let line='',y=740,lines=0;
   words.forEach(w=>{const tr=line?line+' '+w:w;if(x.measureText(tr).width>820&&line){if(lines<2){x.fillText(line,130,y);y+=48;lines++;}line=w;}else line=tr;});if(lines<2)x.fillText(line,130,y);
   font(800,64);x.fillStyle='#c4302b';x.fillText('Can you beat my score?',130,890);
-  font(700,36,B);x.fillStyle='#5b6478';x.fillText('Free practice tests at ',130,960);const fw=x.measureText('Free practice tests at ').width;x.fillStyle='#2446a8';x.fillText('my-exam.in',130+fw,960);
+  // the image may travel without the message, so it carries a short address too (exam papers: their own page, e.g. my-exam.in/neet/)
+  const lead=P.exam?'Take the same paper at ':'Free practice tests at ',addr=P.exam?'my-exam.in/'+P.exam.list+'/':'my-exam.in';
+  let fs=36;font(700,fs,B);while(x.measureText(lead+addr).width>820&&fs>24){fs-=2;font(700,fs,B);}x.fillStyle='#5b6478';x.fillText(lead,130,960);const fw=x.measureText(lead).width;x.fillStyle='#2446a8';x.fillText(addr,130+fw,960);
   return c;}
-async function shareScore(txt,g,tot,pct,band){
-  try{if(navigator.canShare){const blob=await new Promise(r=>scoreCard(g,tot,pct,band).toBlob(r,'image/png'));const file=new File([blob],'my-score.png',{type:'image/png'});
+async function shareScore(txt,g,tot,pct,band,image){
+  try{if(image&&navigator.canShare){const blob=await new Promise(r=>scoreCard(g,tot,pct,band).toBlob(r,'image/png'));const file=new File([blob],'my-score.png',{type:'image/png'});
       if(blob&&navigator.canShare({files:[file]})){await navigator.share({files:[file],text:txt});track('share/score-card','Shared score card');return;}}
     if(navigator.share){await navigator.share({text:txt});track('share/text','Shared score');return;}}
   catch(e){}}
@@ -1407,7 +1410,7 @@ function finish(auto){
      ${P.exam?`<div class="tblwrap"><table><thead><tr><th>Subject</th><th class="n">Correct</th><th class="n">Wrong</th><th class="n">Not answered</th><th class="n">Marks</th></tr></thead><tbody>${topicRows}</tbody></table></div>${chRows?`<div><h3 style="margin:6px 0 4px">Chapters to revise</h3><p class="hint" style="margin:0 0 6px">Where you lost the most marks, including questions left blank. Practise opens a short NCERT chapter test.</p><div class="tblwrap"><table><thead><tr><th>Chapter</th><th class="n">Fully right</th><th class="n">Marks lost</th><th class="n"><span class="sr">Action</span></th></tr></thead><tbody>${chRows}</tbody></table></div></div>`:''}`:`<div class="grid2" style="gap:16px"><div class="tblwrap"><table><thead><tr><th>Chapter</th><th class="n">Marks</th><th class="n">Score</th><th class="n"><span class="sr">Action</span></th></tr></thead><tbody>${topicRows}</tbody></table></div>
        <div class="tblwrap"><table><thead><tr><th>Difficulty</th><th class="n">Fully right</th><th class="n">Score</th></tr></thead><tbody>${lvlRows}</tbody></table></div></div>`}
      <div class="btns">${nWrong&&nWrong<P.qs.length?`<button type="button" class="primary" id="retryWrong">Retry the ${nWrong} I got wrong</button>`:''}<button type="button" ${nWrong&&nWrong<P.qs.length?'':'class="primary" '}id="againBtn">Try the whole paper again</button><button type="button" id="newBtn">New paper</button>${mk.total?`<button type="button" id="mistakesBtn">Practise my mistakes (${Math.min(20,mk.total)})</button>`:''}<button type="button" id="printResBtn">Print this paper</button><button type="button" class="share" id="shareBtn" aria-expanded="false" aria-controls="sharePanel">Share my score</button></div>
-     <div id="sharePanel" class="sharepanel" hidden><a class="btnlink" href="https://wa.me/?text=${encodeURIComponent(shareTxt)}" target="_blank" rel="noopener">WhatsApp</a><button type="button" id="shCopy">Copy message</button><button type="button" id="shSave">Save score card</button>${navigator.share?'<button type="button" id="shMore">More apps…</button>':''}<span id="shMsg" class="hint" role="status" style="margin:0"></span></div>${mkLine}
+     <div id="sharePanel" class="sharepanel" hidden><a class="btnlink" href="https://wa.me/?text=${encodeURIComponent(shareTxt)}" target="_blank" rel="noopener">WhatsApp</a><a class="btnlink mail" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;su=${encodeURIComponent('My score: '+g+' / '+tot+' – can you beat it?')}&amp;body=${encodeURIComponent(shareTxt)}" target="_blank" rel="noopener">Gmail</a><a class="btnlink mail" href="mailto:?subject=${encodeURIComponent('My score: '+g+' / '+tot+' – can you beat it?')}&amp;body=${encodeURIComponent(shareTxt)}">Email</a><button type="button" id="shCopy">Copy message</button><button type="button" id="shSave">Save score card</button>${navigator.canShare?'<button type="button" id="shImg">Share score card</button>':''}${navigator.share?'<button type="button" id="shMore">More apps…</button>':''}<span id="shMsg" class="hint" role="status" style="margin:0"></span></div>${mkLine}
      <div class="chips"><label class="chip" for="onlyWrong"><input type="checkbox" id="onlyWrong"> Show only questions I got wrong</label>${nf?`<label class="chip" for="onlyFlagged"><input type="checkbox" id="onlyFlagged"> Show only flagged questions (${nf})</label>`:''}</div>
    </div>
    <article class="sheet res"><header class="sheethead"><h2>Marked answer sheet</h2><div class="meta"><span>${esc(paperName())}</span><span>${g} / ${tot} marks</span></div></header>${review}</article>`;
@@ -1433,7 +1436,9 @@ function finish(auto){
     shMsg('Copied. Paste it into any chat or email.');track('share/copy','Copied score message');});
   $('#shSave').addEventListener('click',()=>{scoreCard(g,tot,pct,band).toBlob(b=>{if(!b)return;const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='my-score.png';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),4000);
     shMsg('Score card saved as my-score.png. Attach it to your message.');track('share/save-card','Saved score card');},'image/png');});
-  if($('#shMore'))$('#shMore').addEventListener('click',()=>shareScore(shareTxt,g,tot,pct,band));
+  // many apps keep only the image when sent an image + text, so "More apps…" sends the message with the link, and "Share score card" the image
+  if($('#shMore'))$('#shMore').addEventListener('click',()=>shareScore(shareTxt,g,tot,pct,band,false));
+  if($('#shImg'))$('#shImg').addEventListener('click',()=>shareScore(shareTxt,g,tot,pct,band,true));
   show('results');window.scrollTo(0,0);
 }
 function retry(onlyWrong){
@@ -1739,7 +1744,7 @@ $('#nav').addEventListener('click',e=>{const b=e.target.closest('[data-go]');if(
 $('#confirmNo').addEventListener('click',()=>{$('#confirm').hidden=true;});
 $('#confirmBlank').addEventListener('click',()=>{$('#confirm').hidden=true;const i=firstBlank();if(i>=0)goQ(i);});
 $('#confirmYes').addEventListener('click',e=>{$('#confirm').hidden=true;if(e.currentTarget.dataset.mode==='quit'){clearInterval(timerId);clearActive();P=null;goSchool();}else finish(false);});
-$('#results').addEventListener('click',e=>{if(e.target.closest('a.btnlink'))track('share/whatsapp','Shared score on WhatsApp');});
+$('#results').addEventListener('click',e=>{const l=e.target.closest('a.btnlink');if(l)track(/mail\.google/.test(l.href)?'share/gmail':/^mailto:/.test(l.href)?'share/email':'share/whatsapp','Shared score: '+l.textContent);});
 // answers are saved as you type; this only warns before leaving mid-paper
 window.addEventListener('beforeunload',e=>{if(!$('#test').hidden){e.preventDefault();e.returnValue='';}});
 // installable app: the service worker keeps a copy for offline use; the browser's install prompt is offered from the footer
