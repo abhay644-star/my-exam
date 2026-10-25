@@ -97,6 +97,7 @@ button.share{border-color:var(--green);color:var(--green)}
 .sharepanel{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:12px;border:1px solid var(--line);border-radius:var(--r);background:var(--bg)}
 .sharepanel .btnlink,.sharepanel button{margin:0}
 .sharepanel .btnlink.mail{border-color:var(--ink);color:var(--ink)}
+#shMsg.tip{flex-basis:100%;font-size:.9rem;font-weight:700;color:var(--fg);background:var(--amber-soft);border-radius:8px;padding:8px 10px}
 .mistakes{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;justify-content:space-between;background:var(--amber-soft);border-radius:var(--r);padding:12px 14px}
 .mistakes .btns{margin:0}
 /* home, menu and exams list */
@@ -1446,7 +1447,8 @@ function finish(auto){
   if($('#shMore'))$('#shMore').addEventListener('click',()=>shareScore(shareTxt,null));
   // card + message together; the message is also copied, because some apps (WhatsApp on many phones, Instagram) drop the caption
   if($('#shImg'))$('#shImg').addEventListener('click',()=>{const ta=document.createElement('textarea');ta.value=shareTxt;ta.setAttribute('readonly','');ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');}catch(e){}ta.remove();
-    shMsg('The message with the link is also copied: if it does not appear under the picture, long-press the caption box and paste.');shareScore(shareTxt,getCard());});
+    const touch=matchMedia('(pointer:coarse)').matches;
+    shMsg(touch?'The message with the link is also copied. If it is not under the picture, long-press the caption box and tap Paste.':'The message with the link is copied. Some apps (like WhatsApp on Windows) send only the picture: click the message box there, press Ctrl+V and send.');$('#shMsg').classList.add('tip');shareScore(shareTxt,getCard());});
   show('results');window.scrollTo(0,0);
 }
 function retry(onlyWrong){
