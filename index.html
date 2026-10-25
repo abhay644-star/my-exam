@@ -1340,6 +1340,10 @@ function renderHistory(){
   wireMistakes();$('#clearHist').addEventListener('click',e=>{const b=e.currentTarget;if(b.dataset.sure){try{localStorage.removeItem(HIST);}catch(err){}renderHistory();}else{b.dataset.sure='1';b.textContent='Tap again to clear';}});
 }
 // share links open the same exam paper, or the same class / subject / chapters for a fresh school paper, with the friend's score
+// WhatsApp: on Android open the regular WhatsApp app even when WhatsApp Business is the phone's default for wa.me links,
+// falling back to wa.me if it is not installed; elsewhere wa.me (the app, or WhatsApp Web on a computer)
+function waLink(txt){const e=encodeURIComponent(txt),web='https://wa.me/?text='+e;
+  return /Android/i.test(navigator.userAgent)?`intent://send?text=${e}#Intent;scheme=whatsapp;package=com.whatsapp;S.browser_fallback_url=${encodeURIComponent(web)};end`:web;}
 function shareLink(g,tot){const u=new URL('https://my-exam.in/');
   if(P.exam)u.searchParams.set('go',P.exam.list+'/'+P.exam.id);
   else if(!P.mistakes){u.searchParams.set('go','school');u.searchParams.set('c',P.klass);u.searchParams.set('sub',P.subject);(P.topicsList||[]).forEach(x=>u.searchParams.append('t',x));}
@@ -1369,8 +1373,8 @@ function scoreCard(g,tot,pct,band){const c=document.createElement('canvas');c.wi
   const lead=P.exam?'Take the same paper at ':'Free practice tests at ',addr=P.exam?'my-exam.in/'+P.exam.list+'/':'my-exam.in';
   let fs=36;font(700,fs,B);while(x.measureText(lead+addr).width>820&&fs>24){fs-=2;font(700,fs,B);}x.fillStyle='#5b6478';x.fillText(lead,130,960);const fw=x.measureText(lead).width;x.fillStyle='#2446a8';x.fillText(addr,130+fw,960);
   return c;}
-async function shareScore(txt,g,tot,pct,band,image){
-  try{if(image&&navigator.canShare){const blob=await new Promise(r=>scoreCard(g,tot,pct,band).toBlob(r,'image/png'));const file=new File([blob],'my-score.png',{type:'image/png'});
+async function shareScore(txt,card){
+  try{if(card&&navigator.canShare){const blob=await card;const file=new File([blob],'my-score.png',{type:'image/png'});
       if(blob&&navigator.canShare({files:[file]})){await navigator.share({files:[file],text:txt});track('share/score-card','Shared score card');return;}}
     if(navigator.share){await navigator.share({text:txt});track('share/text','Shared score');return;}}
   catch(e){}}
@@ -1410,7 +1414,7 @@ function finish(auto){
      ${P.exam?`<div class="tblwrap"><table><thead><tr><th>Subject</th><th class="n">Correct</th><th class="n">Wrong</th><th class="n">Not answered</th><th class="n">Marks</th></tr></thead><tbody>${topicRows}</tbody></table></div>${chRows?`<div><h3 style="margin:6px 0 4px">Chapters to revise</h3><p class="hint" style="margin:0 0 6px">Where you lost the most marks, including questions left blank. Practise opens a short NCERT chapter test.</p><div class="tblwrap"><table><thead><tr><th>Chapter</th><th class="n">Fully right</th><th class="n">Marks lost</th><th class="n"><span class="sr">Action</span></th></tr></thead><tbody>${chRows}</tbody></table></div></div>`:''}`:`<div class="grid2" style="gap:16px"><div class="tblwrap"><table><thead><tr><th>Chapter</th><th class="n">Marks</th><th class="n">Score</th><th class="n"><span class="sr">Action</span></th></tr></thead><tbody>${topicRows}</tbody></table></div>
        <div class="tblwrap"><table><thead><tr><th>Difficulty</th><th class="n">Fully right</th><th class="n">Score</th></tr></thead><tbody>${lvlRows}</tbody></table></div></div>`}
      <div class="btns">${nWrong&&nWrong<P.qs.length?`<button type="button" class="primary" id="retryWrong">Retry the ${nWrong} I got wrong</button>`:''}<button type="button" ${nWrong&&nWrong<P.qs.length?'':'class="primary" '}id="againBtn">Try the whole paper again</button><button type="button" id="newBtn">New paper</button>${mk.total?`<button type="button" id="mistakesBtn">Practise my mistakes (${Math.min(20,mk.total)})</button>`:''}<button type="button" id="printResBtn">Print this paper</button><button type="button" class="share" id="shareBtn" aria-expanded="false" aria-controls="sharePanel">Share my score</button></div>
-     <div id="sharePanel" class="sharepanel" hidden><a class="btnlink" href="https://wa.me/?text=${encodeURIComponent(shareTxt)}" target="_blank" rel="noopener">WhatsApp</a><a class="btnlink mail" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;su=${encodeURIComponent('My score: '+g+' / '+tot+' – can you beat it?')}&amp;body=${encodeURIComponent(shareTxt)}" target="_blank" rel="noopener">Gmail</a><a class="btnlink mail" href="mailto:?subject=${encodeURIComponent('My score: '+g+' / '+tot+' – can you beat it?')}&amp;body=${encodeURIComponent(shareTxt)}">Email</a><button type="button" id="shCopy">Copy message</button><button type="button" id="shSave">Save score card</button>${navigator.canShare?'<button type="button" id="shImg">Share score card</button>':''}${navigator.share?'<button type="button" id="shMore">More apps…</button>':''}<span id="shMsg" class="hint" role="status" style="margin:0"></span></div>${mkLine}
+     <div id="sharePanel" class="sharepanel" hidden><a class="btnlink" href="${waLink(shareTxt)}"${/Android/i.test(navigator.userAgent)?'':' target="_blank" rel="noopener"'}>WhatsApp</a><a class="btnlink mail" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;su=${encodeURIComponent('My score: '+g+' / '+tot+' – can you beat it?')}&amp;body=${encodeURIComponent(shareTxt)}" target="_blank" rel="noopener">Gmail</a><a class="btnlink mail" href="mailto:?subject=${encodeURIComponent('My score: '+g+' / '+tot+' – can you beat it?')}&amp;body=${encodeURIComponent(shareTxt)}">Email</a><button type="button" id="shCopy">Copy message</button><button type="button" id="shSave">Save score card</button>${navigator.canShare?'<button type="button" class="primary" id="shImg">Share card + link</button>':''}${navigator.share?'<button type="button" id="shMore">More apps…</button>':''}<span id="shMsg" class="hint" role="status" style="margin:0"></span></div>${mkLine}
      <div class="chips"><label class="chip" for="onlyWrong"><input type="checkbox" id="onlyWrong"> Show only questions I got wrong</label>${nf?`<label class="chip" for="onlyFlagged"><input type="checkbox" id="onlyFlagged"> Show only flagged questions (${nf})</label>`:''}</div>
    </div>
    <article class="sheet res"><header class="sheethead"><h2>Marked answer sheet</h2><div class="meta"><span>${esc(paperName())}</span><span>${g} / ${tot} marks</span></div></header>${review}</article>`;
@@ -1429,16 +1433,20 @@ function finish(auto){
   $('#printResBtn').addEventListener('click',()=>showPrint('results'));
   const mb=$('#mistakesBtn');if(mb)mb.addEventListener('click',startMistakes);
   // share menu in the page: WhatsApp (app or WhatsApp Web), copy the message, save the score card, or the device's own share panel
-  $('#shareBtn').addEventListener('click',e=>{const sp=$('#sharePanel');sp.hidden=!sp.hidden;e.currentTarget.setAttribute('aria-expanded',String(!sp.hidden));});
+  // the card is drawn as soon as the menu opens: phones only allow sharing for a few seconds after the tap
+  let cardBlob=null;const getCard=()=>cardBlob||(cardBlob=new Promise(r=>scoreCard(g,tot,pct,band).toBlob(r,'image/png')));
+  $('#shareBtn').addEventListener('click',e=>{const sp=$('#sharePanel');sp.hidden=!sp.hidden;e.currentTarget.setAttribute('aria-expanded',String(!sp.hidden));if(!sp.hidden)getCard();});
   const shMsg=s=>{$('#shMsg').textContent=s;};
   // the clipboard API can wait for a permission that never comes, so fall back to the older copy command after 1.5 s
   $('#shCopy').addEventListener('click',async()=>{try{if(!navigator.clipboard)throw 0;await Promise.race([navigator.clipboard.writeText(shareTxt),new Promise((_,no)=>setTimeout(no,1500))]);}catch(err){const ta=document.createElement('textarea');ta.value=shareTxt;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');}catch(e2){}ta.remove();}
     shMsg('Copied. Paste it into any chat or email.');track('share/copy','Copied score message');});
-  $('#shSave').addEventListener('click',()=>{scoreCard(g,tot,pct,band).toBlob(b=>{if(!b)return;const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='my-score.png';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),4000);
-    shMsg('Score card saved as my-score.png. Attach it to your message.');track('share/save-card','Saved score card');},'image/png');});
+  $('#shSave').addEventListener('click',()=>{getCard().then(b=>{if(!b)return;const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='my-score.png';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),4000);
+    shMsg('Score card saved as my-score.png. Attach it to your message.');track('share/save-card','Saved score card');});});
   // many apps keep only the image when sent an image + text, so "More apps…" sends the message with the link, and "Share score card" the image
-  if($('#shMore'))$('#shMore').addEventListener('click',()=>shareScore(shareTxt,g,tot,pct,band,false));
-  if($('#shImg'))$('#shImg').addEventListener('click',()=>shareScore(shareTxt,g,tot,pct,band,true));
+  if($('#shMore'))$('#shMore').addEventListener('click',()=>shareScore(shareTxt,null));
+  // card + message together; the message is also copied, because some apps (WhatsApp on many phones, Instagram) drop the caption
+  if($('#shImg'))$('#shImg').addEventListener('click',()=>{const ta=document.createElement('textarea');ta.value=shareTxt;ta.setAttribute('readonly','');ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');}catch(e){}ta.remove();
+    shMsg('The message with the link is also copied: if it does not appear under the picture, long-press the caption box and paste.');shareScore(shareTxt,getCard());});
   show('results');window.scrollTo(0,0);
 }
 function retry(onlyWrong){
