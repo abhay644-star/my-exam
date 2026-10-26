@@ -1165,8 +1165,13 @@ const secTitle=s=>(s.letter?`Section ${s.letter} – `:'')+s.name;
 const slug=s=>String(s).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
 function track(path,title){try{if(window.goatcounter&&window.goatcounter.count)window.goatcounter.count({path:path,title:title||path,event:true});}catch(e){}}
 const paperTag=()=>P.mistakes?'mistakes':P.exam?`${slug(P.subject)}/${slug(P.exam.id)}`:`class-${slug(P.klass)}/${slug(P.subject)}`;
-function startTest(useSample){
-  const p=buildPaper(useSample);
+// every school paper is built from a "paper code" (seed): the same code + settings give exactly the same questions,
+// so a shared link can give a friend the same paper. All random choices while building use this seeded generator.
+function seeded(a){return()=>{a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+function startTest(useSample,seed){
+  const sd=seed!=null?seed>>>0:Math.floor(Math.random()*4294967296),R0=Math.random;let p;
+  Math.random=seeded(sd);try{p=buildPaper(useSample);}finally{Math.random=R0;}
+  p.seed=sd;p.cfg={nq:S.nq,nmcq:S.nmcq,usemcq:!!S.usemcq,mix:Object.assign({},S.mix),marks:Object.assign({},S.marks),duration:S.duration};
   P=Object.assign(p,{mode:S.mode,duration:S.duration,subject:S.subject,klass:S.klass,board:$('#board').value,country:$('#country').value,label:useSample?'CBSE model paper':'',topicsLabel:S.topics==='ALL'?'':S.topics.join(', '),topicsList:S.topics==='ALL'?null:S.topics.slice(),startAt:Date.now()});
   P.endAt=P.startAt+P.duration*60000;ANS={};FLAG={};CHK={};
   track(useSample?'start/sample-paper':`start/${P.mode}/${paperTag()}`,useSample?'Started: CBSE sample paper':`Started ${P.mode}: Class ${P.klass} ${P.subject}`);
@@ -1347,7 +1352,11 @@ function waLink(txt){const e=encodeURIComponent(txt),web='https://wa.me/?text='+
   return /Android/i.test(navigator.userAgent)?`intent://send?text=${e}#Intent;scheme=whatsapp;package=com.whatsapp;S.browser_fallback_url=${encodeURIComponent(web)};end`:web;}
 function shareLink(g,tot){const u=new URL('https://my-exam.in/');
   if(P.exam)u.searchParams.set('go',P.exam.list+'/'+P.exam.id);
-  else if(!P.mistakes){u.searchParams.set('go','school');u.searchParams.set('c',P.klass);u.searchParams.set('sub',P.subject);(P.topicsList||[]).forEach(x=>u.searchParams.append('t',x));}
+  else if(!P.mistakes){u.searchParams.set('go','school');u.searchParams.set('c',P.klass);u.searchParams.set('sub',P.subject);(P.topicsList||[]).forEach(x=>u.searchParams.append('t',x));
+    // the paper code goes on fresh papers only (not the sample, a retry or a revision paper)
+    if(P.seed!=null&&P.cfg&&!P.label){const c=P.cfg,L=['E','M','C','X'];
+      u.searchParams.set('p',[P.seed,c.nq,c.nmcq,c.usemcq?1:0,c.duration,P.mode==='exam'?'e':'p'].join('.'));
+      u.searchParams.set('x',L.map(l=>c.mix[l]).join('.'));u.searchParams.set('k',['MCQ'].concat(L).map(l=>c.marks[l]).join('.'));}}
   u.searchParams.set('s',`${+g}/${tot}`);return u.toString();}
 // a square score card (PNG) for WhatsApp / Instagram; colours are fixed light ones so it looks the same in dark mode
 function scoreCard(g,tot,pct,band){const c=document.createElement('canvas');c.width=c.height=1080;const x=c.getContext('2d');
@@ -1403,7 +1412,7 @@ function finish(auto){
   const topicRows=P.exam?Object.keys(byT).map(t=>`<tr><td>${esc(t)}</td><td class="n">${byT[t].c}${byT[t].p?` <span class="hint" style="display:inline;margin:0">+${byT[t].p} partly</span>`:''}</td><td class="n">${byT[t].w}</td><td class="n">${byT[t].b}</td><td class="n">${+byT[t].g.toFixed(1)} / ${byT[t].t}</td></tr>`).join(''):tps.map((x,k)=>`<tr><td>${esc(x.t)}</td><td class="n">${+x.v.g.toFixed(1)} / ${x.v.t}</td><td class="n">${x.pct}%</td><td class="n">${x.pct<75?`<button type="button" class="small" data-practise="${k}">Practise</button>`:'<span class="ok">✓</span>'}</td></tr>`).join('');
   const lvlRows=LEVELS.filter(l=>byL[l]).map(l=>`<tr><td><span class="lvl l-${l}"></span>${LNAME[l]}</td><td class="n">${byL[l].c} / ${byL[l].n}</td><td class="n">${Math.round(byL[l].g/byL[l].t*100)}%</td></tr>`).join('');
   const nWrong=P.qs.filter(q=>q.got<q.marks).length;
-  const shareTxt=`I scored ${g}/${tot} (${pct}%) in ${P.mistakes?'a revision paper':P.exam?P.exam.title:`a Class ${P.klass} ${P.subject} ${P.topicsList&&P.topicsList.length===1?`test on ${P.topicsList[0]}`:'practice paper'}`} on All in All Exam Practice. Can you beat my score? ${P.exam?'Take the same paper':'Try one'} free: ${shareLink(g,tot)}`;
+  const shareTxt=`I scored ${g}/${tot} (${pct}%) in ${P.mistakes?'a revision paper':P.exam?P.exam.title:`a Class ${P.klass} ${P.subject} ${P.topicsList&&P.topicsList.length===1?`test on ${P.topicsList[0]}`:'practice paper'}`} on All in All Exam Practice. Can you beat my score? ${P.exam||(!P.mistakes&&P.seed!=null&&!P.label)?'Take the same paper':'Try one'} free: ${shareLink(g,tot)}`;
   const mkLine=P.mistakes?`<p class="msg ok" style="margin:0">${mk.removed?`${mk.removed} answered right and removed from My mistakes. `:''}${mk.total?`${mk.total} question${mk.total>1?'s':''} left to revise.`:'Your My mistakes list is now empty. Well done!'}</p>`
     :mk.added?`<p class="msg info" style="margin:0">${mk.added} question${mk.added>1?'s':''} you got wrong ${mk.added>1?'were':'was'} saved to <b>My mistakes</b> on this device, to revise later.</p>`:'';
   const nf=nFlag();
@@ -1678,18 +1687,27 @@ function showPrint(from){
 
 /* ---------- wiring ---------- */
 // a shared score link (?go=…&s=276/720): open the same exam paper, or the same class / subject / chapters, and show the friend's score
+let invitePaper=null;
 function openInvite(){const q=new URLSearchParams(location.search),go=q.get('go');if(!go)return;
   const sc=(q.get('s')||'').match(/^(\d+(?:\.\d+)?)\/(\d+)$/),beat=sc?`A friend scored <b>${esc(sc[1])} / ${esc(sc[2])}</b>. Can you beat it?`:'A friend shared this paper with you.';let html='';
   if(go==='school'){const c=q.get('c'),sub=q.get('sub');
     if(ROMAN.indexOf(c)>=0&&subjectsFor(c).indexOf(sub)>=0){const ts=q.getAll('t').filter(x=>topicsFor(sub,c).indexOf(x)>=0);
-      Object.assign(S,{klass:c,subject:sub,topics:ts.length?ts:'ALL'});writeForm();readForm();
-      html=`${beat} Pick <b>Quick quiz</b>, <b>Chapter test</b> or <b>Full mock paper</b> for a fresh Class ${esc(c)} ${esc(sub)} paper${ts.length?` on ${esc(ts.join(', '))}`:''}.`;
+      Object.assign(S,{klass:c,subject:sub,topics:ts.length?ts:'ALL'});
+      // a paper code (p) rebuilds exactly the same questions; without one the friend picks a fresh paper on the same chapters
+      const pc=(q.get('p')||'').split('.'),mx=(q.get('x')||'').split('.').map(Number),mk=(q.get('k')||'').split('.').map(Number),num=v=>/^\d+$/.test(v);
+      if(pc.length===6&&pc.slice(0,5).every(num)&&mx.length===4&&mk.length===5&&mx.concat(mk).every(v=>isFinite(v)&&v>=0)){
+        Object.assign(S,{nq:+pc[1],nmcq:+pc[2],usemcq:pc[3]==='1',duration:+pc[4],mode:pc[5]==='e'?'exam':'practice',mix:{E:mx[0],M:mx[1],C:mx[2],X:mx[3]},marks:{MCQ:mk[0],E:mk[1],M:mk[2],C:mk[3],X:mk[4]}});
+        invitePaper=+pc[0];}
+      writeForm();readForm();
+      html=invitePaper!=null?`${beat} <button type="button" class="primary small" id="inviteStart">Take the same paper</button> <span class="hint" style="display:inline;margin:0">Same ${+pc[1]} questions, ${pc[5]==='e'?`${+pc[4]}-minute exam`:'practice mode'}.</span>`
+        :`${beat} Pick <b>Quick quiz</b>, <b>Chapter test</b> or <b>Full mock paper</b> for a fresh Class ${esc(c)} ${esc(sub)} paper${ts.length?` on ${esc(ts.join(', '))}`:''}.`;
       history.replaceState(null,'',location.pathname+'#school');}}
   else{const [list,id]=go.split('/'),pg=EXAM_PAGES[list],pp=pg&&pg.papers.find(x=>x.id===id);
     if(pp){html=`${beat} The paper, <b>${esc(pp.name)} · ${esc(pp.head)}</b>, is marked below.`;inviteHl=id;history.replaceState(null,'',location.pathname+'#'+list);}}
   if(!html){history.replaceState(null,'',location.pathname+location.hash);return;}
   const b=$('#invite');b.innerHTML=`<span>${html}</span><button type="button" class="small" id="inviteClose" aria-label="Close">✕</button>`;b.hidden=false;
-  $('#inviteClose').addEventListener('click',()=>{b.hidden=true;});// counted as soon as GoatCounter has loaded (its script loads after this one); gives up after 30 s
+  $('#inviteClose').addEventListener('click',()=>{b.hidden=true;});
+  if($('#inviteStart'))$('#inviteStart').addEventListener('click',()=>{const sd=invitePaper;invitePaper=null;track('start/shared-paper','Started a shared school paper');startTest(false,sd);});// counted as soon as GoatCounter has loaded (its script loads after this one); gives up after 30 s
   let tries=0;const send=()=>{if(window.goatcounter&&window.goatcounter.count)track('invite/'+slug(go),'Opened a shared score link');else if(++tries<60)setTimeout(send,500);};send();}
 fillSelects();writeForm();readForm();openInvite();route();
 window.addEventListener('hashchange',route);
