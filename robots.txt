@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /tests/
+Disallow: /tools/
 
 Sitemap: https://my-exam.in/sitemap.xml
