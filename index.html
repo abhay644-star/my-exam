@@ -1088,6 +1088,7 @@ function validate(){
   const errs=[];const sum=LEVELS.reduce((a,l)=>a+S.mix[l],0);
   if(sum!==100)errs.push(`The difficulty mix adds up to ${sum}%. Adjust it to exactly 100%.`);
   const minQ=S.topics==='ALL'?3:1;
+  if(!Number.isInteger(S.nq)||S.nq<minQ||S.nq>60)errs.push(`Choose between ${minQ} and 60 questions.`);
   if(S.usemcq&&(S.nmcq<1||S.nmcq>S.nq))errs.push(`The number of MCQs must be between 1 and ${S.nq}.`);
   if(S.duration<10||S.duration>180)errs.push('Choose a duration between 10 and 180 minutes.');
   if(['MCQ'].concat(LEVELS).some(k=>S.marks[k]<1||S.marks[k]>12))errs.push('Marks per question must be between 1 and 12.');
@@ -1696,8 +1697,10 @@ function openInvite(){const q=new URLSearchParams(location.search),go=q.get('go'
       // a paper code (p) rebuilds exactly the same questions; without one the friend picks a fresh paper on the same chapters
       const pc=(q.get('p')||'').split('.'),mx=(q.get('x')||'').split('.').map(Number),mk=(q.get('k')||'').split('.').map(Number),num=v=>/^\d+$/.test(v);
       if(pc.length===6&&pc.slice(0,5).every(num)&&mx.length===4&&mk.length===5&&mx.concat(mk).every(v=>isFinite(v)&&v>=0)){
+        const keep=JSON.parse(JSON.stringify(S));
         Object.assign(S,{nq:+pc[1],nmcq:+pc[2],usemcq:pc[3]==='1',duration:+pc[4],mode:pc[5]==='e'?'exam':'practice',mix:{E:mx[0],M:mx[1],C:mx[2],X:mx[3]},marks:{MCQ:mk[0],E:mk[1],M:mk[2],C:mk[3],X:mk[4]}});
-        invitePaper=+pc[0];}
+        // a paper code with settings the form would not accept (edited or broken link) is ignored: the friend gets a fresh paper instead
+        if(validate().errs.length)S=keep;else invitePaper=+pc[0];}
       writeForm();readForm();
       html=invitePaper!=null?`${beat} <button type="button" class="primary small" id="inviteStart">Take the same paper</button> <span class="hint" style="display:inline;margin:0">Same ${+pc[1]} questions, ${pc[5]==='e'?`${+pc[4]}-minute exam`:'practice mode'}.</span>`
         :`${beat} Pick <b>Quick quiz</b>, <b>Chapter test</b> or <b>Full mock paper</b> for a fresh Class ${esc(c)} ${esc(sub)} paper${ts.length?` on ${esc(ts.join(', '))}`:''}.`;
@@ -1707,7 +1710,7 @@ function openInvite(){const q=new URLSearchParams(location.search),go=q.get('go'
   if(!html){history.replaceState(null,'',location.pathname+location.hash);return;}
   const b=$('#invite');b.innerHTML=`<span>${html}</span><button type="button" class="small" id="inviteClose" aria-label="Close">✕</button>`;b.hidden=false;
   $('#inviteClose').addEventListener('click',()=>{b.hidden=true;});
-  if($('#inviteStart'))$('#inviteStart').addEventListener('click',()=>{const sd=invitePaper;invitePaper=null;track('start/shared-paper','Started a shared school paper');startTest(false,sd);});// counted as soon as GoatCounter has loaded (its script loads after this one); gives up after 30 s
+  if($('#inviteStart'))$('#inviteStart').addEventListener('click',()=>{const v=validate(),qm=$('#quickMsg');if(v.errs.length){qm.innerHTML=v.errs.map(esc).join('<br>');qm.hidden=false;return;}const sd=invitePaper;invitePaper=null;track('start/shared-paper','Started a shared school paper');startTest(false,sd);});// counted as soon as GoatCounter has loaded (its script loads after this one); gives up after 30 s
   let tries=0;const send=()=>{if(window.goatcounter&&window.goatcounter.count)track('invite/'+slug(go),'Opened a shared score link');else if(++tries<60)setTimeout(send,500);};send();}
 fillSelects();writeForm();readForm();openInvite();route();
 window.addEventListener('hashchange',route);
