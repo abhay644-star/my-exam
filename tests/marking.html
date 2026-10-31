@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en-IN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Marking tests | All in All Exam Practice</title>
+<style>
+  body{font:15px/1.5 system-ui,sans-serif;max-width:900px;margin:24px auto;padding:0 16px;color:#1b2236;background:#fff}
+  #summary{font-weight:700;padding:10px 12px;border-radius:8px;background:#e4eafb}
+  #summary.pass{background:#e2f3ea;color:#1f7a4d} #summary.fail{background:#fbe7e5;color:#c4302b}
+  li.fail{color:#c4302b} li.pass{color:#5b6478} li small{display:block;color:#5b6478}
+</style>
+</head>
+<body>
+<h1>Marking tests</h1>
+<p>Checks the answer checking and marking rules, the official exam papers and the school question banks. Run it from a local web server (see <code>tests/run-tests.ps1</code>); failures are listed first.</p>
+<p id="summary">Running…</p>
+<ol id="list"></ol>
+<iframe id="app" src="../index.html?test" title="Site under test" hidden></iframe>
+<script src="marking.js"></script>
+</body>
+</html>
