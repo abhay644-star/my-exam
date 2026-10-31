@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en-IN">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<title>Render check | All in All Exam Practice</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<p>Renders every question, option, answer and solution of every official paper with KaTeX, as the app does, and reports
+maths that fails to render and images that fail to load. Run from a local web server.</p>
+<pre id="out">Running…</pre>
+<div id="box"></div>
+<iframe id="app" src="../index.html?test" hidden></iframe>
+<script>
+(async function () {
+  const out = document.getElementById('out'), box = document.getElementById('box');
+  let A = null;
+  for (let i = 0; i < 100 && !A; i++) { await new Promise(r => setTimeout(r, 100)); A = document.getElementById('app').contentWindow.__aaTest; }
+  const papers = Object.values(A.EXAM_PAGES).flatMap(p => p.papers), lines = [];
+  for (const p of papers) {
+    const data = await (await fetch('../' + p.path + 'paper.json')).json();
+    const qs = A.examQs(data, '../' + p.path + 'fig/');
+    const div = document.createElement('div');
+    div.innerHTML = qs.map(q => `<div class="q" data-no="${q.no}">${q.text}${(q.parts[0].options || []).map(o => `<div>${o}</div>`).join('')}<div>${q.parts.map(A.answerText).join(' ')}</div><div>${q.sol}</div></div>`).join('');
+    box.appendChild(div);
+    renderMathInElement(div, { delimiters: [{ left: '$$', right: '$$', display: true }, { left: '$', right: '$', display: false }], throwOnError: false });
+    const imgs = [...div.querySelectorAll('img')];
+    await Promise.all(imgs.map(i => i.complete ? 0 : new Promise(r => { i.onload = i.onerror = r; })));
+    const badMath = [...div.querySelectorAll('.katex-error')].map(e => e.closest('.q').dataset.no + ': ' + (e.getAttribute('title') || '').slice(0, 90));
+    const leftover = [...div.querySelectorAll('.q')].filter(q => /\$/.test(q.textContent.replace(/\\\$/g, ''))).map(q => q.dataset.no);
+    const badImg = imgs.filter(i => !i.naturalWidth).map(i => i.getAttribute('src'));
+    lines.push(`${p.path}: ${qs.length} questions, ${imgs.length} images; maths errors ${badMath.length}, unrendered $ in ${leftover.length}, broken images ${badImg.length}`);
+    badMath.slice(0, 8).forEach(x => lines.push('   maths  Q' + x));
+    leftover.slice(0, 8).forEach(x => lines.push('   stray $ in Q' + x));
+    badImg.forEach(x => lines.push('   image  ' + x));
+  }
+  out.textContent = lines.join('\n');
+  out.dataset.done = '1';
+})();
+</script>
+</body>
+</html>

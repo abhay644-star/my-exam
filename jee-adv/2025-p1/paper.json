@@ -1,0 +1,1053 @@
+{
+ "id": "2025-p1",
+ "exam": "JEE Advanced",
+ "board": "IIT",
+ "title": "JEE Advanced 2025 · Paper 1",
+ "duration": 180,
+ "renumber": true,
+ "secNames": {
+  "1": "single correct",
+  "2": "one or more correct",
+  "3": "numerical",
+  "4": "matching lists"
+ },
+ "instr": [
+  "Official JEE (Advanced) 2025 Paper 1 with the final answer key published by the organising IIT (IIT Kanpur).",
+  "48 questions: Mathematics, Physics and Chemistry, 16 in each subject, in four sections. Total 180 marks.",
+  "Section 1 – single correct option: <b>+3</b> if correct, <b>−1</b> if wrong, 0 if not answered.",
+  "Section 2 – one or more correct options: <b>+4</b> if you choose all the correct options; <b>+3 / +2 / +1</b> if you choose only some of the correct options and no wrong one; <b>−2</b> in all other cases.",
+  "Section 3 – numerical answer: <b>+4</b> if correct, no negative marks. Give the value to two decimal places.",
+  "Section 4 – List-I / List-II matching (one correct option): <b>+4</b> if correct, <b>−1</b> if wrong."
+ ],
+ "source": "JEE (Advanced) 2025 question paper and final answer key, organising IIT (IIT Kanpur). Worked solutions: All in All Exam Practice.",
+ "questions": [
+  {
+   "no": 1,
+   "section": 1,
+   "type": "single",
+   "text": "Let $\\mathbb{R}$ denote the set of all real numbers. Let $a_i, b_i \\in \\mathbb{R}$ for $i \\in \\{1, 2, 3\\}$.<br>Define the functions $f : \\mathbb{R} \\to \\mathbb{R}$, $g : \\mathbb{R} \\to \\mathbb{R}$, and $h : \\mathbb{R} \\to \\mathbb{R}$ by $$f(x) = a_1 + 10x + a_2x^2 + a_3x^3 + x^4,$$ $$g(x) = b_1 + 3x + b_2x^2 + b_3x^3 + x^4,$$ $$h(x) = f(x+1) - g(x+2).$$If $f(x) \\neq g(x)$ for every $x \\in \\mathbb{R}$, then the coefficient of $x^3$ in $h(x)$ is",
+   "options": [
+    "$8$",
+    "$2$",
+    "$-4$",
+    "$-6$"
+   ],
+   "answer": 2,
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$f(x) - g(x) = (a_3-b_3)x^3 + (a_2-b_2)x^2 + 7x + (a_1-b_1)$.<br>A real cubic always has a real root, so $f - g$ can never be zero only if it is not a cubic: $a_3 = b_3$.<br>Coefficient of $x^3$ in $f(x+1)$: from $(x+1)^4$ it is $4$, from $a_3(x+1)^3$ it is $a_3$.<br>Coefficient of $x^3$ in $g(x+2)$: from $(x+2)^4$ it is $4\\cdot 2 = 8$, from $b_3(x+2)^3$ it is $b_3$.<br>Coefficient in $h$: $4 + a_3 - 8 - b_3 = -4$ → (C).",
+   "subject": "Mathematics",
+   "chapter": "Relations and Functions",
+   "chCls": "XI"
+  },
+  {
+   "no": 2,
+   "section": 1,
+   "type": "single",
+   "text": "Three students $S_1, S_2$, and $S_3$ are given a problem to solve. Consider the following events:<br>$U$: At least one of $S_1, S_2$, and $S_3$ can solve the problem,<br>$V$: $S_1$ can solve the problem, given that neither $S_2$ nor $S_3$ can solve the problem,<br>$W$: $S_2$ can solve the problem and $S_3$ cannot solve the problem,<br>$T$: $S_3$ can solve the problem.<br><br>For any event $E$, let $P(E)$ denote the probability of $E$. If $$P(U) = \\dfrac{1}{2}, \\quad P(V) = \\dfrac{1}{10}, \\quad \\text{and} \\quad P(W) = \\dfrac{1}{12},$$then $P(T)$ is equal to",
+   "options": [
+    "$\\dfrac{13}{36}$",
+    "$\\dfrac{1}{3}$",
+    "$\\dfrac{19}{60}$",
+    "$\\dfrac{1}{4}$"
+   ],
+   "answer": 0,
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Let $p_1, p_2, p_3$ be the (independent) probabilities that $S_1, S_2, S_3$ solve the problem.<br>$P(V) = p_1 = \\dfrac{1}{10}$ (by independence).<br>$P(U) = 1 - (1-p_1)(1-p_2)(1-p_3) = \\dfrac12 \\Rightarrow (1-p_2)(1-p_3) = \\dfrac{1/2}{9/10} = \\dfrac59$.<br>$P(W) = p_2(1-p_3) = \\dfrac{1}{12}$.<br>Adding: $(1-p_3) = \\dfrac59 + \\dfrac1{12} = \\dfrac{23}{36}$, so $P(T) = p_3 = \\dfrac{13}{36}$ → (A).",
+   "subject": "Mathematics",
+   "chapter": "Probability",
+   "chCls": "XII"
+  },
+  {
+   "no": 3,
+   "section": 1,
+   "type": "single",
+   "text": "Let $\\mathbb{R}$ denote the set of all real numbers. Define the function $f : \\mathbb{R} \\to \\mathbb{R}$ by $$f(x) = \\begin{cases} 2 - 2x^2 - x^2\\sin\\dfrac{1}{x} & \\text{if } x \\neq 0, \\\\ 2 & \\text{if } x = 0. \\end{cases}$$Then which one of the following statements is TRUE?",
+   "options": [
+    "The function $f$ is NOT differentiable at $x = 0$",
+    "There is a positive real number $\\delta$, such that $f$ is a decreasing function on the interval $(0, \\delta)$",
+    "For any positive real number $\\delta$, the function $f$ is NOT an increasing function on the interval $(-\\delta, 0)$",
+    "$x = 0$ is a point of local minima of $f$"
+   ],
+   "answer": 2,
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$f'(0) = \\lim_{x\\to0}\\dfrac{-2x^2 - x^2\\sin(1/x)}{x} = 0$, so $f$ is differentiable at $0$: (A) is false.<br>For $x \\neq 0$: $f'(x) = -4x - 2x\\sin\\dfrac1x + \\cos\\dfrac1x$.<br>As $x \\to 0$ the first two terms tend to $0$ while $\\cos(1/x)$ keeps taking the values $+1$ and $-1$, so $f'$ takes both signs in every interval $(0,\\delta)$ and $(-\\delta,0)$.<br>Hence $f$ is neither increasing nor decreasing on any such interval: (B) is false and (C) is true.<br>$f(x) - f(0) = -x^2\\left(2 + \\sin\\dfrac1x\\right) \\lt 0$ for $x \\neq 0$, so $x=0$ is a local maximum, not a minimum: (D) is false.<br>Answer (C).",
+   "subject": "Mathematics",
+   "chapter": "Application of Derivatives",
+   "chCls": "XII"
+  },
+  {
+   "no": 4,
+   "section": 1,
+   "type": "single",
+   "text": "Consider the matrix $$P = \\begin{pmatrix} 2 & 0 & 0 \\\\ 0 & 2 & 0 \\\\ 0 & 0 & 3 \\end{pmatrix}.$$Let the transpose of a matrix $X$ be denoted by $X^T$. Then the number of $3 \\times 3$ invertible matrices $Q$ with integer entries, such that $$Q^{-1} = Q^T \\quad \\text{and} \\quad PQ = QP,$$is",
+   "options": [
+    "$32$",
+    "$8$",
+    "$16$",
+    "$24$"
+   ],
+   "answer": 2,
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$Q^TQ = I$ with integer entries: each column is an integer unit vector, so $Q$ is a signed permutation matrix.<br>$PQ = QP$ means $q_{ij}(p_i - p_j) = 0$, so $q_{13} = q_{23} = q_{31} = q_{32} = 0$: $Q$ is block diagonal, a $2\\times2$ block and a $1\\times1$ block.<br>The $2\\times2$ block is a signed $2\\times2$ permutation matrix: $2 \\times 2^2 = 8$ choices. The $1\\times1$ block is $\\pm1$: $2$ choices.<br>Number of $Q$ $= 8 \\times 2 = 16$ → (C).",
+   "subject": "Mathematics",
+   "chapter": "Matrices",
+   "chCls": "XII"
+  },
+  {
+   "no": 5,
+   "section": 2,
+   "type": "multi",
+   "text": "Let $L_1$ be the line of intersection of the planes given by the equations $$2x + 3y + z = 4 \\quad \\text{and} \\quad x + 2y + z = 5.$$Let $L_2$ be the line passing through the point $P(2, -1, 3)$ and parallel to $L_1$. Let $M$ denote the plane given by the equation $$2x + y - 2z = 6.$$Suppose that the line $L_2$ meets the plane $M$ at the point $Q$. Let $R$ be the foot of the perpendicular drawn from $P$ to the plane $M$.<br><br>Then which of the following statements is (are) TRUE?",
+   "options": [
+    "The length of the line segment $PQ$ is $9\\sqrt{3}$",
+    "The length of the line segment $QR$ is $15$",
+    "The area of $\\Delta PQR$ is $\\dfrac{3}{2}\\sqrt{234}$",
+    "The acute angle between the line segments $PQ$ and $PR$ is $\\cos^{-1}\\left(\\dfrac{1}{2\\sqrt{3}}\\right)$"
+   ],
+   "answer": [
+    0,
+    2
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Direction of $L_1$: $(2,3,1)\\times(1,2,1) = (1,-1,1)$.<br>$L_2$: $(2+t,\\,-1-t,\\,3+t)$. In $M$: $2(2+t) + (-1-t) - 2(3+t) = 6 \\Rightarrow -3 - t = 6 \\Rightarrow t = -9$, so $Q = (-7, 8, -6)$.<br>$PQ = 9\\sqrt3$: (A) true.<br>For $P$: $2(2) - 1 - 6 - 6 = -9$, so $R = P + \\dfrac{9}{9}(2,1,-2) = (4,0,1)$ and $PR = 3$.<br>$\\angle PRQ = 90^\\circ$, so $QR = \\sqrt{243 - 9} = \\sqrt{234} \\neq 15$: (B) false.<br>Area $= \\dfrac12 \\cdot PR \\cdot QR = \\dfrac32\\sqrt{234}$: (C) true.<br>$\\cos\\angle QPR = \\dfrac{PR}{PQ} = \\dfrac{3}{9\\sqrt3} = \\dfrac{1}{3\\sqrt3} \\neq \\dfrac{1}{2\\sqrt3}$: (D) false.<br>Answer: (A), (C).",
+   "subject": "Mathematics",
+   "chapter": "Three Dimensional Geometry",
+   "chCls": "XII"
+  },
+  {
+   "no": 6,
+   "section": 2,
+   "type": "multi",
+   "text": "Let $\\mathbb{N}$ denote the set of all natural numbers, and $\\mathbb{Z}$ denote the set of all integers. Consider the functions $f : \\mathbb{N} \\to \\mathbb{Z}$ and $g : \\mathbb{Z} \\to \\mathbb{N}$ defined by $$f(n) = \\begin{cases} (n+1)/2 & \\text{if } n \\text{ is odd}, \\\\ (4-n)/2 & \\text{if } n \\text{ is even}, \\end{cases}$$and $$g(n) = \\begin{cases} 3 + 2n & \\text{if } n \\ge 0, \\\\ -2n & \\text{if } n \\lt 0. \\end{cases}$$Define $(g\\circ f)(n) = g(f(n))$ for all $n \\in \\mathbb{N}$, and $(f\\circ g)(n) = f(g(n))$ for all $n \\in \\mathbb{Z}$.<br><br>Then which of the following statements is (are) TRUE?",
+   "options": [
+    "$g\\circ f$ is NOT one-one and $g\\circ f$ is NOT onto",
+    "$f\\circ g$ is NOT one-one but $f\\circ g$ is onto",
+    "$g$ is one-one and $g$ is onto",
+    "$f$ is NOT one-one but $f$ is onto"
+   ],
+   "answer": [
+    0,
+    3
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$f$: odd $n = 1, 3, 5, \\ldots$ give $1, 2, 3, \\ldots$; even $n = 2, 4, 6, \\ldots$ give $1, 0, -1, \\ldots$<br>So $f(1) = f(2) = 1$ (not one-one) and every integer is attained (onto): (D) true.<br>$g$: $n \\ge 0$ gives $3, 5, 7, \\ldots$; $n \\lt 0$ gives $2, 4, 6, \\ldots$. So $g$ is one-one, but $1$ is never attained: not onto; (C) false.<br>$g\\circ f$: not one-one since $f$ is not; its range is $g(\\mathbb{Z}) = \\mathbb{N}\\setminus\\{1\\}$, so not onto: (A) true.<br>$f\\circ g$: $g$ is one-one with range $\\{2,3,4,\\ldots\\}$; on this set odd values map to $2,3,\\ldots$ and even values to $1,0,-1,\\ldots$, all distinct, so $f\\circ g$ is one-one: (B) false.<br>Answer: (A), (D).",
+   "subject": "Mathematics",
+   "chapter": "Relations and Functions",
+   "chCls": "XII"
+  },
+  {
+   "no": 7,
+   "section": 2,
+   "type": "multi",
+   "text": "Let $\\mathbb{R}$ denote the set of all real numbers. Let $z_1 = 1 + 2i$ and $z_2 = 3i$ be two complex numbers, where $i = \\sqrt{-1}$. Let $$S = \\{(x, y) \\in \\mathbb{R}\\times\\mathbb{R} : |x + iy - z_1| = 2|x + iy - z_2|\\}.$$Then which of the following statements is (are) TRUE?",
+   "options": [
+    "$S$ is a circle with centre $\\left(-\\dfrac{1}{3}, \\dfrac{10}{3}\\right)$",
+    "$S$ is a circle with centre $\\left(\\dfrac{1}{3}, \\dfrac{8}{3}\\right)$",
+    "$S$ is a circle with radius $\\dfrac{\\sqrt{2}}{3}$",
+    "$S$ is a circle with radius $\\dfrac{2\\sqrt{2}}{3}$"
+   ],
+   "answer": [
+    0,
+    3
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$(x-1)^2 + (y-2)^2 = 4\\left[x^2 + (y-3)^2\\right]$.<br>$x^2 - 2x + y^2 - 4y + 5 = 4x^2 + 4y^2 - 24y + 36 \\Rightarrow 3x^2 + 3y^2 + 2x - 20y + 31 = 0$.<br>$x^2 + y^2 + \\dfrac23x - \\dfrac{20}{3}y + \\dfrac{31}{3} = 0$: centre $\\left(-\\dfrac13, \\dfrac{10}{3}\\right)$.<br>$r^2 = \\dfrac19 + \\dfrac{100}{9} - \\dfrac{93}{9} = \\dfrac89$, so $r = \\dfrac{2\\sqrt2}{3}$.<br>Answer: (A), (D).",
+   "subject": "Mathematics",
+   "chapter": "Complex Numbers",
+   "chCls": "XI"
+  },
+  {
+   "no": 8,
+   "section": 3,
+   "type": "num",
+   "text": "Let the set of all relations $R$ on the set $\\{a, b, c, d, e, f\\}$, such that $R$ is reflexive and symmetric, and $R$ contains exactly $10$ elements, be denoted by $\\mathcal{S}$.<br><br>Then the number of elements in $\\mathcal{S}$ is ______.",
+   "options": null,
+   "answer": {
+    "lo": 105,
+    "hi": 105
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Reflexive: all $6$ pairs $(x,x)$ are in $R$, leaving $4$ more ordered pairs.<br>Symmetric: off-diagonal pairs come in pairs $(x,y),(y,x)$, so $R$ contains exactly $2$ unordered pairs $\\{x,y\\}$.<br>There are $\\binom62 = 15$ unordered pairs, so the count is $\\binom{15}{2} = 105$.",
+   "subject": "Mathematics",
+   "chapter": "Relations and Functions",
+   "chCls": "XII"
+  },
+  {
+   "no": 9,
+   "section": 3,
+   "type": "num",
+   "text": "For any two points $M$ and $N$ in the $XY$-plane, let $\\overrightarrow{MN}$ denote the vector from $M$ to $N$, and $\\vec{0}$ denote the zero vector. Let $P, Q$ and $R$ be three distinct points in the $XY$-plane. Let $S$ be a point inside the triangle $\\Delta PQR$ such that $$\\overrightarrow{SP} + 5\\,\\overrightarrow{SQ} + 6\\,\\overrightarrow{SR} = \\vec{0}.$$Let $E$ and $F$ be the mid-points of the sides $PR$ and $QR$, respectively. Then the value of $$\\dfrac{\\text{length of the line segment } EF}{\\text{length of the line segment } ES}$$is ______.",
+   "options": null,
+   "answer": {
+    "lo": 1.15,
+    "hi": 1.25
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "With position vectors: $(\\vec p - \\vec s) + 5(\\vec q - \\vec s) + 6(\\vec r - \\vec s) = \\vec0 \\Rightarrow \\vec s = \\dfrac{\\vec p + 5\\vec q + 6\\vec r}{12}$.<br>$\\vec e = \\dfrac{\\vec p + \\vec r}{2}$, $\\vec f = \\dfrac{\\vec q + \\vec r}{2}$.<br>$\\overrightarrow{EF} = \\dfrac{\\vec q - \\vec p}{2}$, so $EF = \\dfrac12 PQ$.<br>$\\overrightarrow{ES} = \\dfrac{\\vec p + 5\\vec q + 6\\vec r - 6\\vec p - 6\\vec r}{12} = \\dfrac{5(\\vec q - \\vec p)}{12}$, so $ES = \\dfrac{5}{12}PQ$.<br>Ratio $= \\dfrac{1/2}{5/12} = \\dfrac65 = 1.2$.",
+   "subject": "Mathematics",
+   "chapter": "Vector Algebra",
+   "chCls": "XII"
+  },
+  {
+   "no": 10,
+   "section": 3,
+   "type": "num",
+   "text": "Let $S$ be the set of all seven-digit numbers that can be formed using the digits $0$, $1$ and $2$. For example, $2210222$ is in $S$, but $0210222$ is NOT in $S$.<br>Then the number of elements $x$ in $S$ such that at least one of the digits $0$ and $1$ appears exactly twice in $x$, is equal to ______.",
+   "options": null,
+   "answer": {
+    "lo": 762,
+    "hi": 762
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "The first digit is $1$ or $2$.<br>$A$: $0$ appears exactly twice. The two $0$s go in the last $6$ places: $\\binom62 = 15$; the other $5$ places are $1$ or $2$: $2^5$. $|A| = 480$.<br>$B$: $1$ appears exactly twice. First digit $1$: $6 \\times 2^5 = 192$; first digit $2$: $\\binom62 \\times 2^4 = 240$. $|B| = 432$.<br>$A\\cap B$: two $0$s, two $1$s, three $2$s: $\\dfrac{7!}{2!\\,2!\\,3!} = 210$, minus those starting with $0$: $\\dfrac{6!}{1!\\,2!\\,3!} = 60$. $|A\\cap B| = 150$.<br>$|A\\cup B| = 480 + 432 - 150 = 762$.",
+   "subject": "Mathematics",
+   "chapter": "Permutations and Combinations",
+   "chCls": "XI"
+  },
+  {
+   "no": 11,
+   "section": 3,
+   "type": "num",
+   "text": "Let $\\alpha$ and $\\beta$ be the real numbers such that $$\\lim_{x\\to0}\\dfrac{1}{x^3}\\left(\\dfrac{\\alpha}{2}\\int_0^x \\dfrac{1}{1-t^2}\\,dt + \\beta x\\cos x\\right) = 2.$$Then the value of $\\alpha + \\beta$ is ______.",
+   "options": null,
+   "answer": {
+    "lo": 2.35,
+    "hi": 2.45
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$\\displaystyle\\int_0^x \\dfrac{dt}{1-t^2} = \\int_0^x (1 + t^2 + \\ldots)\\,dt = x + \\dfrac{x^3}{3} + \\ldots$ and $\\beta x\\cos x = \\beta x - \\dfrac{\\beta x^3}{2} + \\ldots$<br>Bracket $= \\left(\\dfrac\\alpha2 + \\beta\\right)x + \\left(\\dfrac\\alpha6 - \\dfrac\\beta2\\right)x^3 + \\ldots$<br>For a finite limit: $\\dfrac\\alpha2 + \\beta = 0$; then $\\dfrac\\alpha6 - \\dfrac\\beta2 = 2$.<br>$\\beta = -\\dfrac\\alpha2 \\Rightarrow \\dfrac\\alpha6 + \\dfrac\\alpha4 = 2 \\Rightarrow \\alpha = \\dfrac{24}{5}$, $\\beta = -\\dfrac{12}{5}$.<br>$\\alpha + \\beta = \\dfrac{12}{5} = 2.4$.",
+   "subject": "Mathematics",
+   "chapter": "Limits and Derivatives",
+   "chCls": "XI"
+  },
+  {
+   "no": 12,
+   "section": 3,
+   "type": "num",
+   "text": "Let $\\mathbb{R}$ denote the set of all real numbers. Let $f : \\mathbb{R} \\to \\mathbb{R}$ be a function such that $f(x) \\gt 0$ for all $x \\in \\mathbb{R}$, and $f(x + y) = f(x)f(y)$ for all $x, y \\in \\mathbb{R}$.<br><br>Let the real numbers $a_1, a_2, \\ldots, a_{50}$ be in an arithmetic progression. If $f(a_{31}) = 64f(a_{25})$, and $$\\sum_{i=1}^{50} f(a_i) = 3(2^{25} + 1),$$then the value of $$\\sum_{i=6}^{30} f(a_i)$$is ______.",
+   "options": null,
+   "answer": {
+    "lo": 96,
+    "hi": 96
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Let $d$ be the common difference. $f(a_{31}) = f(a_{25})f(6d)$, so $f(6d) = 64 = f(d)^6$ and $f(d) = 2$ (as $f \\gt 0$).<br>So $f(a_i) = A\\cdot2^{i-1}$ with $A = f(a_1)$: a GP with ratio $2$.<br>$\\sum_{i=1}^{50} f(a_i) = A(2^{50} - 1) = A(2^{25}-1)(2^{25}+1) = 3(2^{25}+1) \\Rightarrow A = \\dfrac{3}{2^{25}-1}$.<br>$\\sum_{i=6}^{30} f(a_i) = A(2^5 + 2^6 + \\ldots + 2^{29}) = A\\cdot2^5(2^{25} - 1) = 3 \\times 32 = 96$.",
+   "subject": "Mathematics",
+   "chapter": "Sequences and Series",
+   "chCls": "XI"
+  },
+  {
+   "no": 13,
+   "section": 3,
+   "type": "num",
+   "text": "For all $x \\gt 0$, let $y_1(x)$, $y_2(x)$, and $y_3(x)$ be the functions satisfying $$\\dfrac{dy_1}{dx} - (\\sin x)^2y_1 = 0, \\quad y_1(1) = 5,$$ $$\\dfrac{dy_2}{dx} - (\\cos x)^2y_2 = 0, \\quad y_2(1) = \\dfrac13,$$ $$\\dfrac{dy_3}{dx} - \\left(\\dfrac{2 - x^3}{x^3}\\right)y_3 = 0, \\quad y_3(1) = \\dfrac{3}{5e},$$respectively. Then $$\\lim_{x\\to0^+}\\dfrac{y_1(x)y_2(x)y_3(x) + 2x}{e^{3x}\\sin x}$$is equal to ______.",
+   "options": null,
+   "answer": {
+    "lo": 2,
+    "hi": 2
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$(y_1y_2)' = (\\sin^2x + \\cos^2x)\\,y_1y_2 = y_1y_2$, so $y_1y_2 = y_1(1)y_2(1)e^{x-1} = \\dfrac53e^{x-1}$.<br>$\\dfrac{y_3'}{y_3} = \\dfrac{2}{x^3} - 1 \\Rightarrow \\ln y_3 = -\\dfrac{1}{x^2} - x + c$; $y_3(1) = \\dfrac{3}{5e}$ gives $y_3 = \\dfrac35e^{1 - x - 1/x^2}$.<br>$y_1y_2y_3 = e^{x-1}\\cdot e^{1-x-1/x^2} = e^{-1/x^2}$.<br>As $x\\to0^+$: $\\dfrac{e^{-1/x^2}}{\\sin x} \\to 0$ and $\\dfrac{2x}{e^{3x}\\sin x} \\to 2$.<br>Limit $= 2$.",
+   "subject": "Mathematics",
+   "chapter": "Differential Equations",
+   "chCls": "XII"
+  },
+  {
+   "no": 14,
+   "section": 4,
+   "type": "match",
+   "text": "Consider the following frequency distribution: $$\\begin{array}{|c|c|c|c|c|c|c|c|}\\hline \\text{Value} & 4 & 5 & 8 & 9 & 6 & 12 & 11 \\\\ \\hline \\text{Frequency} & 5 & f_1 & f_2 & 2 & 1 & 1 & 3 \\\\ \\hline\\end{array}$$Suppose that the sum of the frequencies is $19$ and the median of this frequency distribution is $6$.<br><br>For the given frequency distribution, let $\\alpha$ denote the mean deviation about the mean, $\\beta$ denote the mean deviation about the median, and $\\sigma^2$ denote the variance.<br><br>Match each entry in List-I to the correct entry in List-II and choose the correct option.<br><table class=\"mt\"><tr><th>List-I</th><th>List-II</th></tr><tr><td>(P) $7f_1 + 9f_2$ is equal to</td><td>(1) $146$</td></tr><tr><td>(Q) $19\\alpha$ is equal to</td><td>(2) $47$</td></tr><tr><td>(R) $19\\beta$ is equal to</td><td>(3) $48$</td></tr><tr><td>(S) $19\\sigma^2$ is equal to</td><td>(4) $145$</td></tr><tr><td></td><td>(5) $55$</td></tr></table>",
+   "options": [
+    "(P) $\\rightarrow$ (5) (Q) $\\rightarrow$ (3) (R) $\\rightarrow$ (2) (S) $\\rightarrow$ (4)",
+    "(P) $\\rightarrow$ (5) (Q) $\\rightarrow$ (2) (R) $\\rightarrow$ (3) (S) $\\rightarrow$ (1)",
+    "(P) $\\rightarrow$ (5) (Q) $\\rightarrow$ (3) (R) $\\rightarrow$ (2) (S) $\\rightarrow$ (1)",
+    "(P) $\\rightarrow$ (3) (Q) $\\rightarrow$ (2) (R) $\\rightarrow$ (5) (S) $\\rightarrow$ (4)"
+   ],
+   "answer": 2,
+   "full": 4,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$12 + f_1 + f_2 = 19 \\Rightarrow f_1 + f_2 = 7$.<br>In order: $4\\,(5)$, $5\\,(f_1)$, $6\\,(1)$, $8\\,(f_2)$, … The median is the $10$th value, so $5 + f_1 \\lt 10 \\le 6 + f_1 \\Rightarrow f_1 = 4$, $f_2 = 3$.<br>(P) $7(4) + 9(3) = 55$ → (5).<br>Mean $= \\dfrac{20 + 20 + 24 + 18 + 6 + 12 + 33}{19} = \\dfrac{133}{19} = 7$.<br>(Q) $\\sum f|x - 7| = 15 + 8 + 3 + 4 + 1 + 5 + 12 = 48$ → (3).<br>(R) $\\sum f|x - 6| = 10 + 4 + 6 + 6 + 0 + 6 + 15 = 47$ → (2).<br>(S) $\\sum fx^2 = 80 + 100 + 192 + 162 + 36 + 144 + 363 = 1077$; $19\\sigma^2 = 1077 - 19(49) = 146$ → (1).<br>Match: P→5, Q→3, R→2, S→1 → (C).",
+   "subject": "Mathematics",
+   "chapter": "Statistics",
+   "chCls": "XI"
+  },
+  {
+   "no": 15,
+   "section": 4,
+   "type": "match",
+   "text": "Let $\\mathbb{R}$ denote the set of all real numbers. For a real number $x$, let $[x]$ denote the greatest integer less than or equal to $x$. Let $n$ denote a natural number.<br><br>Match each entry in List-I to the correct entry in List-II and choose the correct option.<br><table class=\"mt\"><tr><th>List-I</th><th>List-II</th></tr><tr><td>(P) The minimum value of $n$ for which the function $f(x) = \\left[\\dfrac{10x^3 - 45x^2 + 60x + 35}{n}\\right]$ is continuous on the interval $[1, 2]$, is</td><td>(1) $8$</td></tr><tr><td>(Q) The minimum value of $n$ for which $g(x) = (2n^2 - 13n - 15)(x^3 + 3x)$, $x \\in \\mathbb{R}$, is an increasing function on $\\mathbb{R}$, is</td><td>(2) $9$</td></tr><tr><td>(R) The smallest natural number $n$ which is greater than $5$, such that $x = 3$ is a point of local minima of $h(x) = (x^2 - 9)^n(x^2 + 2x + 3)$, is</td><td>(3) $5$</td></tr><tr><td>(S) Number of $x_0 \\in \\mathbb{R}$ such that $l(x) = \\displaystyle\\sum_{k=0}^{4}\\left(\\sin|x - k| + \\cos\\left|x - k + \\dfrac12\\right|\\right)$, $x \\in \\mathbb{R}$, is NOT differentiable at $x_0$, is</td><td>(4) $6$</td></tr><tr><td></td><td>(5) $10$</td></tr></table>",
+   "options": [
+    "(P) $\\rightarrow$ (1) (Q) $\\rightarrow$ (3) (R) $\\rightarrow$ (2) (S) $\\rightarrow$ (5)",
+    "(P) $\\rightarrow$ (2) (Q) $\\rightarrow$ (1) (R) $\\rightarrow$ (4) (S) $\\rightarrow$ (3)",
+    "(P) $\\rightarrow$ (5) (Q) $\\rightarrow$ (1) (R) $\\rightarrow$ (4) (S) $\\rightarrow$ (3)",
+    "(P) $\\rightarrow$ (2) (Q) $\\rightarrow$ (3) (R) $\\rightarrow$ (1) (S) $\\rightarrow$ (5)"
+   ],
+   "answer": 1,
+   "full": 4,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "(P) $p(x) = 10x^3 - 45x^2 + 60x + 35$, $p'(x) = 30(x-1)(x-2) \\le 0$ on $[1,2]$, so $p$ falls from $p(1) = 60$ to $p(2) = 55$.<br>$[p/n]$ is continuous iff no integer lies in $\\left(\\dfrac{55}{n}, \\dfrac{60}{n}\\right]$. $n = 1,\\ldots,8$ fail (e.g. $n = 8$: $7 \\in (6.875, 7.5]$); $n = 9$: $(6.11, 6.67]$ has no integer. So $n = 9$ → (2).<br>(Q) $x^3 + 3x$ is increasing, so need $2n^2 - 13n - 15 = (2n - 15)(n + 1) \\gt 0 \\Rightarrow n \\gt 7.5$: $n = 8$ → (1).<br>(R) Near $x = 3$: $h(x) = (x-3)^n\\cdot(x+3)^n(x^2+2x+3)$ with the second factor positive, so $x = 3$ is a local minimum iff $n$ is even: $n = 6$ → (4).<br>(S) $\\cos|x - k + \\frac12| = \\cos(x - k + \\frac12)$ is smooth; $\\sin|x - k|$ has a corner at $x = k$ (slopes $-1$ and $+1$). So $x_0 = 0, 1, 2, 3, 4$: $5$ points → (3).<br>Match: P→2, Q→1, R→4, S→3 → (B).",
+   "subject": "Mathematics",
+   "chapter": "Application of Derivatives",
+   "chCls": "XII"
+  },
+  {
+   "no": 16,
+   "section": 4,
+   "type": "match",
+   "text": "Let $\\vec{w} = \\hat{i} + \\hat{j} - 2\\hat{k}$, and $\\vec{u}$ and $\\vec{v}$ be two vectors, such that $\\vec{u}\\times\\vec{v} = \\vec{w}$ and $\\vec{v}\\times\\vec{w} = \\vec{u}$. Let $\\alpha, \\beta, \\gamma$, and $t$ be real numbers such that $$\\vec{u} = \\alpha\\hat{i} + \\beta\\hat{j} + \\gamma\\hat{k}, \\quad -t\\alpha + \\beta + \\gamma = 0, \\quad \\alpha - t\\beta + \\gamma = 0, \\quad \\text{and} \\quad \\alpha + \\beta - t\\gamma = 0.$$Match each entry in List-I to the correct entry in List-II and choose the correct option.<br><table class=\"mt\"><tr><th>List-I</th><th>List-II</th></tr><tr><td>(P) $|\\vec{v}|^2$ is equal to</td><td>(1) $0$</td></tr><tr><td>(Q) If $\\alpha = \\sqrt{3}$, then $\\gamma^2$ is equal to</td><td>(2) $1$</td></tr><tr><td>(R) If $\\alpha = \\sqrt{3}$, then $(\\beta + \\gamma)^2$ is equal to</td><td>(3) $2$</td></tr><tr><td>(S) If $\\alpha = \\sqrt{2}$, then $t + 3$ is equal to</td><td>(4) $3$</td></tr><tr><td></td><td>(5) $5$</td></tr></table>",
+   "options": [
+    "(P) $\\rightarrow$ (2) (Q) $\\rightarrow$ (1) (R) $\\rightarrow$ (4) (S) $\\rightarrow$ (5)",
+    "(P) $\\rightarrow$ (2) (Q) $\\rightarrow$ (4) (R) $\\rightarrow$ (3) (S) $\\rightarrow$ (5)",
+    "(P) $\\rightarrow$ (2) (Q) $\\rightarrow$ (1) (R) $\\rightarrow$ (4) (S) $\\rightarrow$ (3)",
+    "(P) $\\rightarrow$ (5) (Q) $\\rightarrow$ (4) (R) $\\rightarrow$ (1) (S) $\\rightarrow$ (3)"
+   ],
+   "answer": 0,
+   "full": 4,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$\\vec w = \\vec u\\times\\vec v$ is perpendicular to $\\vec u, \\vec v$, and $\\vec u = \\vec v\\times\\vec w$ is perpendicular to $\\vec v$; so $\\vec u, \\vec v, \\vec w$ are mutually perpendicular.<br>Then $|\\vec w| = |\\vec u||\\vec v|$ and $|\\vec u| = |\\vec v||\\vec w|$, giving $|\\vec v|^2 = 1$ → (P)→(2), and $|\\vec u| = |\\vec w| = \\sqrt6$.<br>Also $\\vec u\\cdot\\vec w = 0$: $\\alpha + \\beta - 2\\gamma = 0$.<br>The homogeneous system has a non-zero solution, so its determinant $(2 - t)(t + 1)^2 = 0$: $t = 2$ or $t = -1$.<br>$t = 2$: $\\alpha = \\beta = \\gamma$, and $3\\alpha^2 = 6 \\Rightarrow \\alpha = \\pm\\sqrt2$.<br>$t = -1$: $\\alpha + \\beta + \\gamma = 0$ with $\\alpha + \\beta = 2\\gamma$ gives $\\gamma = 0$, $\\beta = -\\alpha$, and $2\\alpha^2 = 6 \\Rightarrow \\alpha = \\pm\\sqrt3$.<br>(Q) $\\alpha = \\sqrt3$: $\\gamma^2 = 0$ → (1). (R) $(\\beta + \\gamma)^2 = 3$ → (4). (S) $\\alpha = \\sqrt2$: $t = 2$, $t + 3 = 5$ → (5).<br>Match: P→2, Q→1, R→4, S→5 → (A).",
+   "subject": "Mathematics",
+   "chapter": "Vector Algebra",
+   "chCls": "XII"
+  },
+  {
+   "no": 1,
+   "section": 1,
+   "type": "single",
+   "text": "The center of a disk of radius $r$ and mass $m$ is attached to a spring of spring constant $k$, inside a ring of radius $R \\gt r$ as shown in the figure. The other end of the spring is attached on the periphery of the ring. Both the ring and the disk are in the same vertical plane. The disk can only roll along the inside periphery of the ring, without slipping. The spring can only be stretched or compressed along the periphery of the ring, following the Hooke’s law. In equilibrium, the disk is at the bottom of the ring. Assuming small displacement of the disc, the time period of oscillation of center of mass of the disk is written as $T = \\dfrac{2\\pi}{\\omega}$. The correct expression for $\\omega$ is ($g$ is the acceleration due to gravity):",
+   "options": [
+    "$\\sqrt{\\dfrac{2}{3}\\left(\\dfrac{g}{R-r} + \\dfrac{k}{m}\\right)}$",
+    "$\\sqrt{\\dfrac{2g}{3(R-r)} + \\dfrac{k}{m}}$",
+    "$\\sqrt{\\dfrac{1}{6}\\left(\\dfrac{g}{R-r} + \\dfrac{k}{m}\\right)}$",
+    "$\\sqrt{\\dfrac{1}{4}\\left(\\dfrac{g}{R-r} + \\dfrac{k}{m}\\right)}$"
+   ],
+   "answer": 0,
+   "full": 3,
+   "neg": 1,
+   "fig": "phy-q1.png",
+   "optionFigs": null,
+   "sol": "Let the centre of the disk move a small arc length $s = (R-r)\\phi$ from the bottom; the spring changes length by $s$.<br>Rolling without slipping: KE $= \\dfrac12mv^2 + \\dfrac12\\cdot\\dfrac12mr^2\\cdot\\dfrac{v^2}{r^2} = \\dfrac34mv^2$, with $v = \\dot s$.<br>PE $= mg(R-r)(1 - \\cos\\phi) + \\dfrac12ks^2 \\approx \\dfrac12\\left(\\dfrac{mg}{R-r} + k\\right)s^2$.<br>$\\omega^2 = \\dfrac{\\frac{mg}{R-r} + k}{\\frac32m} = \\dfrac23\\left(\\dfrac{g}{R-r} + \\dfrac km\\right)$ → (A).",
+   "subject": "Physics",
+   "chapter": "Oscillations",
+   "chCls": "XI"
+  },
+  {
+   "no": 2,
+   "section": 1,
+   "type": "single",
+   "text": "In a scattering experiment, a particle of mass $2m$ collides with another particle of mass $m$, which is initially at rest. Assuming the collision to be perfectly elastic, the maximum angular deviation $\\theta$ of the heavier particle, as shown in the figure, in radians is:",
+   "options": [
+    "$\\pi$",
+    "$\\tan^{-1}\\left(\\dfrac{1}{2}\\right)$",
+    "$\\dfrac{\\pi}{3}$",
+    "$\\dfrac{\\pi}{6}$"
+   ],
+   "answer": 3,
+   "full": 3,
+   "neg": 1,
+   "fig": "phy-q2.png",
+   "optionFigs": null,
+   "sol": "In the centre-of-mass frame the speed of $2m$ is $u' = u - \\dfrac{2u}{3} = \\dfrac u3$ and the CM moves at $V = \\dfrac{2u}{3}$. In an elastic collision $u'$ keeps its magnitude and only turns.<br>Lab velocity of $2m$ = $\\vec V + \\vec u'$ with $|\\vec u'| \\lt |\\vec V|$; its angle is largest when $\\vec u' \\perp$ the lab velocity: $\\sin\\theta_{\\max} = \\dfrac{u'}{V} = \\dfrac{m_2}{m_1} = \\dfrac12$.<br>$\\theta_{\\max} = \\dfrac\\pi6$ → (D).",
+   "subject": "Physics",
+   "chapter": "Work, Energy and Power",
+   "chCls": "XI"
+  },
+  {
+   "no": 3,
+   "section": 1,
+   "type": "single",
+   "text": "A conducting square loop initially lies in the $XZ$ plane with its lower edge hinged along the $X$-axis. Only in the region $y \\ge 0$, there is a time dependent magnetic field pointing along the $Z$-direction, $\\vec{B}(t) = B_0(\\cos\\omega t)\\hat{k}$, where $B_0$ is a constant. The magnetic field is zero everywhere else. At time $t = 0$, the loop starts rotating with constant angular speed $\\omega$ about the $X$ axis in the clockwise direction as viewed from the $+X$ axis (as shown in the figure). Ignoring self-inductance of the loop and gravity, which of the following plots correctly represents the induced e.m.f. ($V$) in the loop as a function of time:",
+   "options": [
+    "",
+    "",
+    "",
+    ""
+   ],
+   "answer": 0,
+   "full": 3,
+   "neg": 1,
+   "fig": "phy-q3.png",
+   "optionFigs": [
+    "phy-q3a.png",
+    "phy-q3b.png",
+    "phy-q3c.png",
+    "phy-q3d.png"
+   ],
+   "sol": "Let the side be $a$. After time $t$ the loop makes angle $\\omega t$ with the $Z$ axis and lies over $y \\ge 0$ for $0 \\le \\omega t \\le \\pi$; its area projected on the $XY$ plane is $a^2\\sin\\omega t$.<br>Flux for $0 \\le t \\le \\pi/\\omega$: $\\Phi = B_0\\cos\\omega t\\cdot a^2\\sin\\omega t = \\dfrac{B_0a^2}{2}\\sin2\\omega t$.<br>emf $= -\\dfrac{d\\Phi}{dt} = -B_0a^2\\omega\\cos2\\omega t$: starts at its negative extreme, reaches the positive maximum at $t = \\dfrac{\\pi}{2\\omega}$, and is back at the negative extreme at $t = \\dfrac\\pi\\omega$.<br>For $\\dfrac\\pi\\omega \\lt t \\lt \\dfrac{2\\pi}\\omega$ the loop is in $y \\lt 0$ where $B = 0$: emf $= 0$ (sudden jump to zero). The pattern then repeats.<br>This is plot (A).",
+   "subject": "Physics",
+   "chapter": "Electromagnetic Induction",
+   "chCls": "XII"
+  },
+  {
+   "no": 4,
+   "section": 1,
+   "type": "single",
+   "text": "Figure 1 shows the configuration of main scale and Vernier scale before measurement. Fig. 2 shows the configuration corresponding to the measurement of diameter $D$ of a tube. The measured value of $D$ is:",
+   "options": [
+    "0.12 cm",
+    "0.11 cm",
+    "0.13 cm",
+    "0.14 cm"
+   ],
+   "answer": 2,
+   "full": 3,
+   "neg": 1,
+   "fig": "phy-q4.png",
+   "optionFigs": null,
+   "sol": "Main scale: $1$ cm has $10$ divisions, so $1$ MSD $= 1$ mm.<br>Fig. 1: the zeros coincide (no zero error) and $10$ Vernier divisions span $7$ MSD, so $1$ VSD $= 0.7$ mm.<br>Fig. 2: the Vernier zero lies just past the $1$ mm mark and the $1$st Vernier mark coincides with the $2$ mm main-scale mark.<br>Position of the Vernier zero $= 2 - 1\\times0.7 = 1.3$ mm.<br>$D = 0.13$ cm → (C).",
+   "subject": "Physics",
+   "chapter": "Units and Measurements",
+   "chCls": "XI"
+  },
+  {
+   "no": 5,
+   "section": 2,
+   "type": "multi",
+   "text": "A conducting square loop of side $L$, mass $M$ and resistance $R$ is moving in the $XY$ plane with its edges parallel to the $X$ and $Y$ axes. The region $y \\ge 0$ has a uniform magnetic field, $\\vec{B} = B_0\\hat{k}$. The magnetic field is zero everywhere else. At time $t = 0$, the loop starts to enter the magnetic field with an initial velocity $v_0\\hat{j}$ m/s, as shown in the figure. Considering the quantity $K = \\dfrac{B_0^2L^2}{RM}$ in appropriate units, ignoring self-inductance of the loop and gravity, which of the following statements is/are correct:",
+   "options": [
+    "If $v_0 = 1.5KL$, the loop will stop before it enters completely inside the region of magnetic field.",
+    "When the complete loop is inside the region of magnetic field, the net force acting on the loop is zero.",
+    "If $v_0 = \\dfrac{KL}{10}$, the loop comes to rest at $t = \\left(\\dfrac{1}{K}\\right)\\ln\\left(\\dfrac{5}{2}\\right)$.",
+    "If $v_0 = 3KL$, the complete loop enters inside the region of magnetic field at time $t = \\left(\\dfrac{1}{K}\\right)\\ln\\left(\\dfrac{3}{2}\\right)$."
+   ],
+   "answer": [
+    1,
+    3
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": "phy-q5.png",
+   "optionFigs": null,
+   "sol": "While entering: emf $= B_0Lv$, current $= \\dfrac{B_0Lv}{R}$, force $= -\\dfrac{B_0^2L^2v}{R}$, so $\\dfrac{dv}{dt} = -Kv$.<br>Hence $v = v_0e^{-Kt}$ and, with $\\dfrac{dv}{dx} = -K$, $v = v_0 - Kx$.<br>(A) The loop would stop only after $x = \\dfrac{v_0}{K} = 1.5L \\gt L$, so it enters fully: false.<br>(B) Fully inside, the flux is constant, no current, no force: true.<br>(C) $v = v_0e^{-Kt}$ never becomes zero in finite time: false.<br>(D) $x = \\dfrac{v_0}{K}(1 - e^{-Kt}) = 3L(1 - e^{-Kt}) = L \\Rightarrow e^{-Kt} = \\dfrac23 \\Rightarrow t = \\dfrac1K\\ln\\dfrac32$: true.<br>Answer: (B), (D).",
+   "subject": "Physics",
+   "chapter": "Electromagnetic Induction",
+   "chCls": "XII"
+  },
+  {
+   "no": 6,
+   "section": 2,
+   "type": "multi",
+   "text": "Length, breadth and thickness of a strip having a uniform cross section are measured to be $10.5$ cm, $0.05$ mm, and $6.0\\ \\mu$m, respectively. Which of the following option(s) give(s) the volume of the strip in cm$^3$ with correct significant figures:",
+   "options": [
+    "$3.2\\times10^{-5}$",
+    "$32.0\\times10^{-6}$",
+    "$3.0\\times10^{-5}$",
+    "$3\\times10^{-5}$"
+   ],
+   "answer": [
+    3
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$V = 10.5 \\times 0.005 \\times 6.0\\times10^{-4}$ cm$^3 = 3.15\\times10^{-5}$ cm$^3$.<br>The breadth $0.05$ mm has only one significant figure, so the product is quoted to one significant figure.<br>$V = 3\\times10^{-5}$ cm$^3$ → only (D).",
+   "subject": "Physics",
+   "chapter": "Units and Measurements",
+   "chCls": "XI"
+  },
+  {
+   "no": 7,
+   "section": 2,
+   "type": "multi",
+   "text": "Consider a system of three connected strings, $S_1$, $S_2$ and $S_3$ with uniform linear mass densities $\\mu$ kg/m, $4\\mu$ kg/m and $16\\mu$ kg/m, respectively, as shown in the figure. $S_1$ and $S_2$ are connected at the point $P$, whereas $S_2$ and $S_3$ are connected at the point $Q$, and the other end of $S_3$ is connected to a wall. A wave generator O is connected to the free end of $S_1$. The wave from the generator is represented by $y = y_0\\cos(\\omega t - kx)$ cm, where $y_0$, $\\omega$ and $k$ are constants of appropriate dimensions. Which of the following statements is/are correct:",
+   "options": [
+    "When the wave reflects from $P$ for the first time, the reflected wave is represented by $y = \\alpha_1y_0\\cos(\\omega t + kx + \\pi)$ cm, where $\\alpha_1$ is a positive constant.",
+    "When the wave transmits through $P$ for the first time, the transmitted wave is represented by $y = \\alpha_2y_0\\cos(\\omega t - kx)$ cm, where $\\alpha_2$ is a positive constant.",
+    "When the wave reflects from $Q$ for the first time, the reflected wave is represented by $y = \\alpha_3y_0\\cos(\\omega t - kx + \\pi)$ cm, where $\\alpha_3$ is a positive constant.",
+    "When the wave transmits through $Q$ for the first time, the transmitted wave is represented by $y = \\alpha_4y_0\\cos(\\omega t - 4kx)$ cm, where $\\alpha_4$ is a positive constant."
+   ],
+   "answer": [
+    0,
+    3
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": "phy-q7.png",
+   "optionFigs": null,
+   "sol": "The tension $T$ is the same throughout; $v = \\sqrt{T/\\mu}$ and $k = \\omega/v \\propto \\sqrt\\mu$. So $k_1 = k$, $k_2 = 2k$, $k_3 = 4k$.<br>(A) At $P$ the wave goes into a denser string, so the reflected wave (in $S_1$, moving along $-x$) is inverted: $\\alpha_1y_0\\cos(\\omega t + kx + \\pi)$: true.<br>(B) The transmitted wave in $S_2$ has wave number $2k$, not $k$: false.<br>(C) The wave reflected at $Q$ travels along $-x$ in $S_2$ (wave number $2k$), so it cannot be $\\cos(\\omega t - kx + \\pi)$: false.<br>(D) The transmitted wave in $S_3$ travels along $+x$ with wave number $4k$ and is not inverted: $\\alpha_4y_0\\cos(\\omega t - 4kx)$: true.<br>Answer: (A), (D).",
+   "subject": "Physics",
+   "chapter": "Waves",
+   "chCls": "XI"
+  },
+  {
+   "no": 8,
+   "section": 3,
+   "type": "num",
+   "text": "A person sitting inside an elevator performs a weighing experiment with an object of mass $50$ kg. Suppose that the variation of the height $y$ (in m) of the elevator, from the ground, with time $t$ (in s) is given by $y = 8\\left[1 + \\sin\\left(\\dfrac{2\\pi t}{T}\\right)\\right]$, where $T = 40\\pi$ s. Taking acceleration due to gravity, $g = 10$ m/s$^2$, the maximum variation of the object’s weight (in N) as observed in the experiment is ______",
+   "options": null,
+   "answer": {
+    "lo": 2,
+    "hi": 2
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$\\dfrac{2\\pi}{T} = \\dfrac{2\\pi}{40\\pi} = \\dfrac{1}{20}$ s$^{-1}$, so $a = \\ddot y = -8\\left(\\dfrac{1}{20}\\right)^2\\sin\\dfrac{2\\pi t}{T}$, with $|a|_{\\max} = \\dfrac{8}{400} = 0.02$ m/s$^2$.<br>Observed weight $= m(g + a)$ ranges from $m(g - 0.02)$ to $m(g + 0.02)$.<br>Maximum variation $= 50 \\times 2 \\times 0.02 = 2$ N.",
+   "subject": "Physics",
+   "chapter": "Laws of Motion",
+   "chCls": "XI"
+  },
+  {
+   "no": 9,
+   "section": 3,
+   "type": "num",
+   "text": "A cube of unit volume contains $35\\times10^7$ photons of frequency $10^{15}$ Hz. If the energy of all the photons is viewed as the average energy being contained in the electromagnetic waves within the same volume, then the amplitude of the magnetic field is $\\alpha\\times10^{-9}$ T. Taking permeability of free space $\\mu_0 = 4\\pi\\times10^{-7}$ Tm/A, Planck’s constant $h = 6\\times10^{-34}$ Js and $\\pi = \\dfrac{22}{7}$, the value of $\\alpha$ is ______",
+   "options": null,
+   "answer": {
+    "lo": 21,
+    "hi": 25
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Energy density $u = Nh\\nu = 35\\times10^7 \\times 6\\times10^{-34} \\times 10^{15} = 2.1\\times10^{-10}$ J m$^{-3}$.<br>Average energy density of an EM wave: $u = \\dfrac{B_0^2}{2\\mu_0}$.<br>$B_0^2 = 2\\mu_0u = 2 \\times 4 \\times \\dfrac{22}{7} \\times 10^{-7} \\times 2.1\\times10^{-10} = 5.28\\times10^{-16}$ T$^2$.<br>$B_0 = 2.30\\times10^{-8}$ T $= 23\\times10^{-9}$ T, so $\\alpha \\approx 23$.",
+   "subject": "Physics",
+   "chapter": "Electromagnetic Waves",
+   "chCls": "XII"
+  },
+  {
+   "no": 10,
+   "section": 3,
+   "type": "num",
+   "text": "Two identical plates P and Q, radiating as perfect black bodies, are kept in vacuum at constant absolute temperatures $T_P$ and $T_Q$, respectively, with $T_Q \\lt T_P$, as shown in Fig. 1. The radiated power transferred per unit area from P to Q is $W_0$. Subsequently, two more plates, identical to P and Q, are introduced between P and Q, as shown in Fig. 2. Assume that heat transfer takes place only between adjacent plates. If the power transferred per unit area in the direction from P to Q (Fig. 2) in the steady state is $W_S$, then the ratio $\\dfrac{W_0}{W_S}$ is ______",
+   "options": null,
+   "answer": {
+    "lo": 3,
+    "hi": 3
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": "phy-q10.png",
+   "optionFigs": null,
+   "sol": "Fig. 1: $W_0 = \\sigma(T_P^4 - T_Q^4)$.<br>Fig. 2: with plates at $T_1, T_2$ in between, in the steady state the same flux crosses each of the three gaps: $W_S = \\sigma(T_P^4 - T_1^4) = \\sigma(T_1^4 - T_2^4) = \\sigma(T_2^4 - T_Q^4)$.<br>Adding: $3W_S = \\sigma(T_P^4 - T_Q^4) = W_0$.<br>$\\dfrac{W_0}{W_S} = 3$.",
+   "subject": "Physics",
+   "chapter": "Thermal Properties of Matter",
+   "chCls": "XI"
+  },
+  {
+   "no": 11,
+   "section": 3,
+   "type": "num",
+   "text": "A solid glass sphere of refractive index $n = \\sqrt{3}$ and radius $R$ contains a spherical air cavity of radius $\\dfrac{R}{2}$, as shown in the figure. A very thin glass layer is present at the point O so that the air cavity (refractive index $n = 1$) remains inside the glass sphere. An unpolarized, unidirectional and monochromatic light source $S$ emits a light ray from a point inside the glass sphere towards the periphery of the glass sphere. If the light is reflected from the point O and is fully polarized, then the angle of incidence at the inner surface of the glass sphere is $\\theta$. The value of $\\sin\\theta$ is ______",
+   "options": null,
+   "answer": {
+    "lo": 0.5,
+    "hi": 0.5
+   },
+   "note": "Official final key: 0.5 or 0.75 (either value is awarded marks).",
+   "accept": [
+    {
+     "lo": 0.75,
+     "hi": 0.75
+    }
+   ],
+   "full": 4,
+   "neg": 0,
+   "fig": "phy-q11.png",
+   "optionFigs": null,
+   "sol": "The ray reflects at the outer surface (angle $\\theta$) and then travels towards O. Reflected light is fully polarized when it meets O at Brewster's angle.<br>Taking the cavity into account: just before O the ray is in the air of the cavity, so at O (air → glass) $\\tan\\theta_B = \\sqrt3$, $\\theta_B = 60^\\circ$.<br>Put O at the origin, normal along $+y$; cavity centre $(0, R/2)$, sphere centre $(0, R)$. The chord of the cavity ending at O at $60^\\circ$ starts at $B = \\left(\\dfrac{\\sqrt3R}{4}, \\dfrac R4\\right)$, where the ray also meets the cavity at $60^\\circ$.<br>At B (glass → air): $\\sqrt3\\sin\\beta = \\sin60^\\circ \\Rightarrow \\beta = 30^\\circ$; working out the direction, the ray in the glass was travelling horizontally, along $y = \\dfrac R4$.<br>This line is at distance $R - \\dfrac R4 = \\dfrac{3R}{4}$ from the sphere centre, so at the outer surface $\\sin\\theta = \\dfrac34 = 0.75$.<br>If the cavity is ignored and Brewster's angle is taken for glass → air at O ($\\tan\\theta_B = 1/\\sqrt3$, $\\theta_B = 30^\\circ$), the chord in the sphere gives $\\theta = 30^\\circ$, $\\sin\\theta = 0.5$.<br>The official final key accepts both: $0.5$ or $0.75$.",
+   "subject": "Physics",
+   "chapter": "Wave Optics",
+   "chCls": "XII"
+  },
+  {
+   "no": 12,
+   "section": 3,
+   "type": "num",
+   "text": "A single slit diffraction experiment is performed to determine the slit width using the equation, $\\dfrac{bd}{D} = m\\lambda$, where $b$ is the slit width, $D$ the shortest distance between the slit and the screen, $d$ the distance between the $m^{\\text{th}}$ diffraction maximum and the central maximum, and $\\lambda$ is the wavelength. $D$ and $d$ are measured with scales of least count of $1$ cm and $1$ mm, respectively. The values of $\\lambda$ and $m$ are known precisely to be $600$ nm and $3$, respectively. The absolute error (in $\\mu$m) in the value of $b$ estimated using the diffraction maximum that occurs for $m = 3$ with $d = 5$ mm and $D = 1$ m is ______",
+   "options": null,
+   "answer": {
+    "lo": 75,
+    "hi": 79
+   },
+   "note": "Official final key: [75 to 79] or [94 to 95] (either range is awarded marks).",
+   "accept": [
+    {
+     "lo": 94,
+     "hi": 95
+    }
+   ],
+   "full": 4,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$b = \\dfrac{m\\lambda D}{d} = \\dfrac{3 \\times 600\\times10^{-9} \\times 1}{5\\times10^{-3}} = 3.6\\times10^{-4}$ m $= 360\\ \\mu$m.<br>$\\dfrac{\\Delta b}{b} = \\dfrac{\\Delta D}{D} + \\dfrac{\\Delta d}{d} = \\dfrac{0.01}{1} + \\dfrac{1}{5} = 0.21$.<br>$\\Delta b = 0.21 \\times 360 = 75.6\\ \\mu$m.<br>(Taking instead the extreme value $b_{\\max} = \\dfrac{3 \\times 600\\times10^{-9} \\times 1.01}{4\\times10^{-3}} = 454.5\\ \\mu$m gives $\\Delta b \\approx 94.5\\ \\mu$m; the official final key accepts both ranges.)",
+   "subject": "Physics",
+   "chapter": "Units and Measurements",
+   "chCls": "XI"
+  },
+  {
+   "no": 13,
+   "section": 3,
+   "type": "num",
+   "text": "Consider an electron in the $n = 3$ orbit of a hydrogen-like atom with atomic number $Z$. At absolute temperature $T$, a neutron having thermal energy $k_BT$ has the same de Broglie wavelength as that of this electron. If this temperature is given by $T = \\dfrac{Z^2h^2}{\\alpha\\pi^2a_0^2m_Nk_B}$, (where $h$ is the Planck’s constant, $k_B$ is the Boltzmann constant, $m_N$ is the mass of the neutron and $a_0$ is the first Bohr radius of hydrogen atom) then the value of $\\alpha$ is ______",
+   "options": null,
+   "answer": {
+    "lo": 72,
+    "hi": 72
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Bohr orbit: $r_3 = \\dfrac{9a_0}{Z}$ and $2\\pi r_n = n\\lambda_e$, so $\\lambda_e = \\dfrac{2\\pi}{3}\\cdot\\dfrac{9a_0}{Z} = \\dfrac{6\\pi a_0}{Z}$.<br>Neutron with kinetic energy $k_BT$: $\\lambda = \\dfrac{h}{\\sqrt{2m_Nk_BT}}$.<br>Equal: $\\dfrac{h^2}{2m_Nk_BT} = \\dfrac{36\\pi^2a_0^2}{Z^2} \\Rightarrow T = \\dfrac{Z^2h^2}{72\\pi^2a_0^2m_Nk_B}$.<br>$\\alpha = 72$.",
+   "subject": "Physics",
+   "chapter": "Atoms",
+   "chCls": "XII"
+  },
+  {
+   "no": 14,
+   "section": 4,
+   "type": "match",
+   "text": "List-I shows four configurations, each consisting of a pair of ideal electric dipoles. Each dipole has a dipole moment of magnitude $p$, oriented as marked by arrows in the figures. In all the configurations the dipoles are fixed such that they are at a distance $2r$ apart along the $x$ direction. The midpoint of the line joining the two dipoles is $X$. The possible resultant electric fields $\\vec{E}$ at $X$ are given in List-II.<br>Choose the option that describes the correct match between the entries in List-I to those in List-II.<br><table class=\"mt\"><tr><th>List-I</th><th>List-II</th></tr><tr><td>(P) Configuration (P) in the figure</td><td>(1) $\\vec{E} = 0$</td></tr><tr><td>(Q) Configuration (Q) in the figure</td><td>(2) $\\vec{E} = -\\dfrac{p}{2\\pi\\epsilon_0r^3}\\hat{j}$</td></tr><tr><td>(R) Configuration (R) in the figure</td><td>(3) $\\vec{E} = -\\dfrac{p}{4\\pi\\epsilon_0r^3}(\\hat{i} - \\hat{j})$</td></tr><tr><td>(S) Configuration (S) in the figure</td><td>(4) $\\vec{E} = \\dfrac{p}{4\\pi\\epsilon_0r^3}(2\\hat{i} - \\hat{j})$</td></tr><tr><td></td><td>(5) $\\vec{E} = \\dfrac{p}{\\pi\\epsilon_0r^3}\\hat{i}$</td></tr></table>",
+   "options": [
+    "P→3, Q→1, R→2, S→4",
+    "P→4, Q→5, R→3, S→1",
+    "P→2, Q→1, R→4, S→5",
+    "P→2, Q→1, R→3, S→5"
+   ],
+   "answer": 2,
+   "full": 4,
+   "neg": 1,
+   "fig": "phy-q14.png",
+   "optionFigs": null,
+   "sol": "At distance $r$: on the axis of a dipole $\\vec E = \\dfrac{2\\vec p}{4\\pi\\epsilon_0r^3}$; on its equatorial line $\\vec E = -\\dfrac{\\vec p}{4\\pi\\epsilon_0r^3}$. Let $E_0 = \\dfrac{p}{4\\pi\\epsilon_0r^3}$.<br>(P) both along $+\\hat j$, X on both equatorial lines: $\\vec E = -2E_0\\hat j = -\\dfrac{p}{2\\pi\\epsilon_0r^3}\\hat j$ → (2).<br>(Q) $+\\hat j$ and $-\\hat j$: the fields cancel, $\\vec E = 0$ → (1).<br>(R) left dipole along $+\\hat j$ (equatorial): $-E_0\\hat j$; right dipole along $+\\hat i$ (X on its axis): $+2E_0\\hat i$. $\\vec E = E_0(2\\hat i - \\hat j)$ → (4).<br>(S) both along $+\\hat i$, X on both axes: $\\vec E = 4E_0\\hat i = \\dfrac{p}{\\pi\\epsilon_0r^3}\\hat i$ → (5).<br>Match: P→2, Q→1, R→4, S→5 → (C).",
+   "subject": "Physics",
+   "chapter": "Electric Charges and Fields",
+   "chCls": "XII"
+  },
+  {
+   "no": 15,
+   "section": 4,
+   "type": "match",
+   "text": "A circuit with an electrical load having impedance $Z$ is connected with an AC source as shown in the diagram. The source voltage varies in time as $V(t) = 300\\sin(400t)$ V, where $t$ is time in s. List-I shows various options for the load. The possible currents $i(t)$ in the circuit as a function of time are given in List-II.<br>Choose the option that describes the correct match between the entries in List-I to those in List-II.<br><table class=\"mt\"><tr><th>List-I</th><th>List-II</th></tr><tr><td>(P) Load (P) in the figure: $30\\ \\Omega$</td><td>(1) Graph (1) in the figure</td></tr><tr><td>(Q) Load (Q) in the figure: $30\\ \\Omega$, $100$ mH</td><td>(2) Graph (2) in the figure</td></tr><tr><td>(R) Load (R) in the figure: $50\\ \\mu$F, $30\\ \\Omega$, $25$ mH</td><td>(3) Graph (3) in the figure</td></tr><tr><td>(S) Load (S) in the figure: $50\\ \\mu$F, $60\\ \\Omega$, $125$ mH</td><td>(4) Graph (4) in the figure</td></tr><tr><td></td><td>(5) Graph (5) in the figure</td></tr></table>",
+   "options": [
+    "P→3, Q→5, R→2, S→1",
+    "P→1, Q→5, R→2, S→3",
+    "P→3, Q→4, R→2, S→1",
+    "P→1, Q→4, R→2, S→5"
+   ],
+   "answer": 0,
+   "full": 4,
+   "neg": 1,
+   "fig": "phy-q15.png",
+   "optionFigs": null,
+   "sol": "$\\omega = 400$ rad/s. $X_L = 400L$, $X_C = \\dfrac{1}{400C}$; for $50\\ \\mu$F, $X_C = 50\\ \\Omega$.<br>(P) $R = 30\\ \\Omega$: $i = 10\\sin400t$ (in phase, amplitude 10) → (3).<br>(Q) $X_L = 40\\ \\Omega$, $Z = 50\\ \\Omega$: $i_0 = 6$ A, lagging by $\\tan^{-1}\\dfrac43 = 53^\\circ$: $i = 6\\sin(400t - 53^\\circ)$, negative at $t = 0$ → (5).<br>(R) $X_L = 10$, $X_C = 50$: $X = -40\\ \\Omega$, $Z = 50\\ \\Omega$: $i_0 = 6$ A, leading by $53^\\circ$: $i = 6\\sin(400t + 53^\\circ)$, positive at $t = 0$ with the peak before $400t = \\pi/2$ → (2).<br>(S) $X_L = 50 = X_C$: resonance, $Z = 60\\ \\Omega$, $i = 5\\sin400t$ → (1).<br>Match: P→3, Q→5, R→2, S→1 → (A).",
+   "subject": "Physics",
+   "chapter": "Alternating Current",
+   "chCls": "XII"
+  },
+  {
+   "no": 16,
+   "section": 4,
+   "type": "match",
+   "text": "List-I shows various functional dependencies of energy ($E$) on the atomic number ($Z$). Energies associated with certain phenomena are given in List-II.<br>Choose the option that describes the correct match between the entries in List-I to those in List-II.<br><table class=\"mt\"><tr><th>List-I</th><th>List-II</th></tr><tr><td>(P) $E \\propto Z^2$</td><td>(1) energy of characteristic x-rays</td></tr><tr><td>(Q) $E \\propto (Z-1)^2$</td><td>(2) electrostatic part of the nuclear binding energy for stable nuclei with mass numbers in the range 30 to 170</td></tr><tr><td>(R) $E \\propto Z(Z-1)$</td><td>(3) energy of continuous x-rays</td></tr><tr><td>(S) $E$ is practically independent of $Z$</td><td>(4) average nuclear binding energy per nucleon for stable nuclei with mass number in the range 30 to 170</td></tr><tr><td></td><td>(5) energy of radiation due to electronic transitions from hydrogen-like atoms</td></tr></table>",
+   "options": [
+    "P→4, Q→3, R→1, S→2",
+    "P→5, Q→2, R→1, S→4",
+    "P→5, Q→1, R→2, S→4",
+    "P→3, Q→2, R→1, S→5"
+   ],
+   "answer": 2,
+   "full": 4,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "(P) Hydrogen-like atoms: $E_n \\propto Z^2$, so photon energies $\\propto Z^2$ → (5).<br>(Q) Moseley's law for characteristic x-rays: $E \\propto (Z-1)^2$ → (1).<br>(R) Coulomb (electrostatic) energy of $Z$ protons counts $\\dfrac{Z(Z-1)}{2}$ pairs: $\\propto Z(Z-1)$ → (2).<br>(S) Binding energy per nucleon is nearly constant ($\\approx 8$ MeV) for $A = 30$–$170$ → (4).<br>(Continuous x-ray energy depends on the accelerating voltage, not on $Z$ in these forms.)<br>Match: P→5, Q→1, R→2, S→4 → (C).",
+   "subject": "Physics",
+   "chapter": "Nuclei",
+   "chCls": "XII"
+  },
+  {
+   "no": 1,
+   "section": 1,
+   "type": "single",
+   "text": "The heating of $\\mathrm{NH_4NO_2}$ at $60-70\\ {}^\\circ$C and $\\mathrm{NH_4NO_3}$ at $200-250\\ {}^\\circ$C is associated with the formation of nitrogen containing compounds X and Y, respectively. X and Y, respectively, are",
+   "options": [
+    "$\\mathrm{N_2}$ and $\\mathrm{N_2O}$",
+    "$\\mathrm{NH_3}$ and $\\mathrm{NO_2}$",
+    "$\\mathrm{NO}$ and $\\mathrm{N_2O}$",
+    "$\\mathrm{N_2}$ and $\\mathrm{NH_3}$"
+   ],
+   "answer": 0,
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$\\mathrm{NH_4NO_2} \\xrightarrow{\\Delta} \\mathrm{N_2} + 2\\mathrm{H_2O}$, so X $= \\mathrm{N_2}$.<br>$\\mathrm{NH_4NO_3} \\xrightarrow{200-250\\,{}^\\circ\\mathrm{C}} \\mathrm{N_2O} + 2\\mathrm{H_2O}$, so Y $= \\mathrm{N_2O}$.<br>Answer (A).",
+   "subject": "Chemistry",
+   "chapter": "Redox Reactions",
+   "chCls": "XI"
+  },
+  {
+   "no": 2,
+   "section": 1,
+   "type": "single",
+   "text": "The correct order of the wavelength maxima of the absorption band in the ultraviolet-visible region for the given complexes is",
+   "options": [
+    "$[\\mathrm{Co(CN)_6}]^{3-} \\lt [\\mathrm{Co(NH_3)_6}]^{3+} \\lt [\\mathrm{Co(NH_3)_5(H_2O)}]^{3+} \\lt [\\mathrm{Co(NH_3)_5(Cl)}]^{2+}$",
+    "$[\\mathrm{Co(NH_3)_5(Cl)}]^{2+} \\lt [\\mathrm{Co(NH_3)_5(H_2O)}]^{3+} \\lt [\\mathrm{Co(NH_3)_6}]^{3+} \\lt [\\mathrm{Co(CN)_6}]^{3-}$",
+    "$[\\mathrm{Co(CN)_6}]^{3-} \\lt [\\mathrm{Co(NH_3)_5(Cl)}]^{2+} \\lt [\\mathrm{Co(NH_3)_5(H_2O)}]^{3+} \\lt [\\mathrm{Co(NH_3)_6}]^{3+}$",
+    "$[\\mathrm{Co(NH_3)_6}]^{3+} \\lt [\\mathrm{Co(CN)_6}]^{3-} \\lt [\\mathrm{Co(NH_3)_5(Cl)}]^{2+} \\lt [\\mathrm{Co(NH_3)_5(H_2O)}]^{3+}$"
+   ],
+   "answer": 0,
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "All are Co(III) complexes; $\\lambda_{\\max} \\propto \\dfrac{1}{\\Delta_o}$.<br>Spectrochemical series: $\\mathrm{CN^-} \\gt \\mathrm{NH_3} \\gt \\mathrm{H_2O} \\gt \\mathrm{Cl^-}$, so $\\Delta_o$: $[\\mathrm{Co(CN)_6}]^{3-} \\gt [\\mathrm{Co(NH_3)_6}]^{3+} \\gt [\\mathrm{Co(NH_3)_5(H_2O)}]^{3+} \\gt [\\mathrm{Co(NH_3)_5Cl}]^{2+}$.<br>$\\lambda_{\\max}$ follows the reverse order → (A).",
+   "subject": "Chemistry",
+   "chapter": "Coordination Compounds",
+   "chCls": "XII"
+  },
+  {
+   "no": 3,
+   "section": 1,
+   "type": "single",
+   "text": "One of the products formed from the reaction of permanganate ion with iodide ion in neutral aqueous medium is",
+   "options": [
+    "$\\mathrm{I_2}$",
+    "$\\mathrm{IO_3^-}$",
+    "$\\mathrm{IO_4^-}$",
+    "$\\mathrm{IO_2^-}$"
+   ],
+   "answer": 1,
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "In neutral (or faintly alkaline) solution permanganate is reduced to $\\mathrm{MnO_2}$ and iodide is oxidised to iodate:<br>$2\\mathrm{MnO_4^-} + \\mathrm{I^-} + \\mathrm{H_2O} \\rightarrow 2\\mathrm{MnO_2} + \\mathrm{IO_3^-} + 2\\mathrm{OH^-}$.<br>Answer (B).",
+   "subject": "Chemistry",
+   "chapter": "The d- and f-Block Elements",
+   "chCls": "XII"
+  },
+  {
+   "no": 4,
+   "section": 1,
+   "type": "single",
+   "text": "Consider the depicted hydrogen ($\\mathbf{H}$) in the hydrocarbons given below. The most acidic hydrogen ($\\mathbf{H}$) is",
+   "options": [
+    "",
+    "",
+    "",
+    ""
+   ],
+   "answer": 1,
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": [
+    "che-q4a.png",
+    "che-q4b.png",
+    "che-q4c.png",
+    "che-q4d.png"
+   ],
+   "sol": "Acidity is decided by the stability of the carbanion left after removing the marked H.<br>(B): the marked H is on the $\\mathrm{CH_2}$ next to the exocyclic C=C of a fulvene. The anion is allylic, and its resonance form puts the negative charge on the ring carbon, giving a ring with two C=C bonds and a lone pair: the aromatic cyclopentadienyl anion ($6\\pi$ electrons). It is also a primary carbanion.<br>(A), (C): removing the tertiary H gives a tertiary carbanion; the fulvene's exocyclic $=\\mathrm{CH_2}$ stays outside the ring, so no resonance form gives an aromatic cyclopentadienyl anion.<br>(D): the ring contains an $sp^3$ $\\mathrm{CH_2}$, so the anion cannot become an aromatic cyclopentadienyl anion either.<br>Most acidic: (B).",
+   "subject": "Chemistry",
+   "chapter": "Organic Chemistry – Some Basic Principles and Techniques",
+   "chCls": "XI"
+  },
+  {
+   "no": 5,
+   "section": 2,
+   "type": "multi",
+   "text": "Regarding the molecular orbital (MO) energy levels for homonuclear diatomic molecules, the INCORRECT statement(s) is(are)",
+   "options": [
+    "Bond order of $\\mathrm{Ne_2}$ is zero.",
+    "The highest occupied molecular orbital (HOMO) of $\\mathrm{F_2}$ is $\\sigma$-type.",
+    "Bond energy of $\\mathrm{O_2^+}$ is smaller than the bond energy of $\\mathrm{O_2}$.",
+    "Bond length of $\\mathrm{Li_2}$ is larger than the bond length of $\\mathrm{B_2}$."
+   ],
+   "answer": [
+    1,
+    2
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "(A) $\\mathrm{Ne_2}$: $10$ bonding and $10$ antibonding electrons, bond order $0$: correct statement.<br>(B) $\\mathrm{F_2}$: the HOMO is $\\pi^*2p$ (the $\\pi^*$ pair is filled last), not $\\sigma$-type: incorrect.<br>(C) Bond order of $\\mathrm{O_2^+}$ is $2.5$, of $\\mathrm{O_2}$ is $2$, so $\\mathrm{O_2^+}$ has the larger bond energy: incorrect.<br>(D) $\\mathrm{Li_2}$ (bond order 1, large 2s orbitals, about 267 pm) is longer than $\\mathrm{B_2}$ (bond order 1, about 159 pm): correct statement.<br>Incorrect statements: (B), (C).",
+   "subject": "Chemistry",
+   "chapter": "Chemical Bonding and Molecular Structure",
+   "chCls": "XI"
+  },
+  {
+   "no": 6,
+   "section": 2,
+   "type": "multi",
+   "text": "The pair(s) of diamagnetic ions is(are)",
+   "options": [
+    "$\\mathrm{La^{3+}}$, $\\mathrm{Ce^{4+}}$",
+    "$\\mathrm{Yb^{2+}}$, $\\mathrm{Lu^{3+}}$",
+    "$\\mathrm{La^{2+}}$, $\\mathrm{Ce^{3+}}$",
+    "$\\mathrm{Yb^{3+}}$, $\\mathrm{Lu^{2+}}$"
+   ],
+   "answer": [
+    0,
+    1
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "(A) $\\mathrm{La^{3+}}$ [Xe] and $\\mathrm{Ce^{4+}}$ [Xe] ($4f^0$): both diamagnetic.<br>(B) $\\mathrm{Yb^{2+}}$ [Xe]$4f^{14}$ and $\\mathrm{Lu^{3+}}$ [Xe]$4f^{14}$: both diamagnetic.<br>(C) $\\mathrm{La^{2+}}$ ($5d^1$) and $\\mathrm{Ce^{3+}}$ ($4f^1$): paramagnetic.<br>(D) $\\mathrm{Yb^{3+}}$ ($4f^{13}$) and $\\mathrm{Lu^{2+}}$ ($4f^{14}5d^1$): paramagnetic.<br>Answer: (A), (B).",
+   "subject": "Chemistry",
+   "chapter": "The d- and f-Block Elements",
+   "chCls": "XII"
+  },
+  {
+   "no": 7,
+   "section": 2,
+   "type": "multi",
+   "text": "For the reaction sequence given below, the correct statement(s) is(are)<br>(In the options, X is any atom other than carbon and hydrogen, and it is different in $\\mathbf{P}$, $\\mathbf{Q}$ and $\\mathbf{R}$)",
+   "options": [
+    "C$-$X bond length in $\\mathbf{P}$, $\\mathbf{Q}$ and $\\mathbf{R}$ follows the order $\\mathbf{Q}$ $\\gt$ $\\mathbf{R}$ $\\gt$ $\\mathbf{P}$.",
+    "C$-$X bond enthalpy in $\\mathbf{P}$, $\\mathbf{Q}$ and $\\mathbf{R}$ follows the order $\\mathbf{R}$ $\\gt$ $\\mathbf{P}$ $\\gt$ $\\mathbf{Q}$.",
+    "Relative reactivity toward $\\mathrm{S_N2}$ reaction in $\\mathbf{P}$, $\\mathbf{Q}$ and $\\mathbf{R}$ follows the order $\\mathbf{P}$ $\\gt$ $\\mathbf{R}$ $\\gt$ $\\mathbf{Q}$.",
+    "p$K_\\mathrm{a}$ value of the conjugate acids of the leaving groups in $\\mathbf{P}$, $\\mathbf{Q}$ and $\\mathbf{R}$ follows the order $\\mathbf{R}$ $\\gt$ $\\mathbf{Q}$ $\\gt$ $\\mathbf{P}$."
+   ],
+   "answer": [
+    1
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": "che-q7.png",
+   "optionFigs": null,
+   "sol": "Cyclohexene + HBr → bromocyclohexane ($\\mathbf{P}$, X = Br).<br>Finkelstein (NaI/acetone) → iodocyclohexane ($\\mathbf{Q}$, X = I); Swarts (e.g. AgF) → fluorocyclohexane ($\\mathbf{R}$, X = F).<br>(A) Bond length C–I $\\gt$ C–Br $\\gt$ C–F: Q $\\gt$ P $\\gt$ R, not Q $\\gt$ R $\\gt$ P: false.<br>(B) Bond enthalpy C–F $\\gt$ C–Br $\\gt$ C–I: R $\\gt$ P $\\gt$ Q: true.<br>(C) $\\mathrm{S_N2}$ reactivity follows leaving-group ability $\\mathrm{I^-} \\gt \\mathrm{Br^-} \\gt \\mathrm{F^-}$: Q $\\gt$ P $\\gt$ R: false.<br>(D) p$K_\\mathrm{a}$: HF ($\\approx 3$) $\\gt$ HBr ($\\approx -9$) $\\gt$ HI ($\\approx -10$): R $\\gt$ P $\\gt$ Q, not R $\\gt$ Q $\\gt$ P: false.<br>Answer: (B).",
+   "subject": "Chemistry",
+   "chapter": "Haloalkanes and Haloarenes",
+   "chCls": "XII"
+  },
+  {
+   "no": 8,
+   "section": 3,
+   "type": "num",
+   "text": "In an electrochemical cell, dichromate ions in aqueous acidic medium are reduced to $\\mathrm{Cr^{3+}}$. The current (in amperes) that flows through the cell for $48.25$ minutes to produce $1$ mole of $\\mathrm{Cr^{3+}}$ is ______.<br>Use: $1$ Faraday $= 96500$ C mol$^{-1}$",
+   "options": null,
+   "answer": {
+    "lo": 100,
+    "hi": 100
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$\\mathrm{Cr_2O_7^{2-}} + 14\\mathrm{H^+} + 6e^- \\rightarrow 2\\mathrm{Cr^{3+}} + 7\\mathrm{H_2O}$: $3$ mol electrons per mol $\\mathrm{Cr^{3+}}$.<br>Charge $= 3 \\times 96500 = 289500$ C; time $= 48.25 \\times 60 = 2895$ s.<br>$I = \\dfrac{289500}{2895} = 100$ A.",
+   "subject": "Chemistry",
+   "chapter": "Electrochemistry",
+   "chCls": "XII"
+  },
+  {
+   "no": 9,
+   "section": 3,
+   "type": "num",
+   "text": "At $25\\ {}^\\circ$C, the concentration of $\\mathrm{H^+}$ ions in $1.00\\times10^{-3}$ M aqueous solution of a weak monobasic acid having acid dissociation constant ($K_a$) of $4.00\\times10^{-11}$ is $\\boldsymbol{X}\\times10^{-7}$ M. The value of $\\boldsymbol{X}$ is ______.<br>Use: Ionic product of water ($K_w$) $= 1.00\\times10^{-14}$ at $25\\ {}^\\circ$C",
+   "options": null,
+   "answer": {
+    "lo": 2.2,
+    "hi": 2.3
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "The acid is so weak that water's own ionisation matters. With $[\\mathrm{HA}] \\approx C$: $[\\mathrm{H^+}] = [\\mathrm{A^-}] + [\\mathrm{OH^-}] = \\dfrac{K_aC}{[\\mathrm{H^+}]} + \\dfrac{K_w}{[\\mathrm{H^+}]}$.<br>$[\\mathrm{H^+}]^2 = K_aC + K_w = 4.00\\times10^{-14} + 1.00\\times10^{-14} = 5.00\\times10^{-14}$.<br>$[\\mathrm{H^+}] = 2.24\\times10^{-7}$ M, so $X = 2.24$.",
+   "subject": "Chemistry",
+   "chapter": "Equilibrium",
+   "chCls": "XI"
+  },
+  {
+   "no": 10,
+   "section": 3,
+   "type": "num",
+   "text": "Molar volume ($V_\\mathrm{m}$) of a van der Waals gas can be calculated by expressing the van der Waals equation as a cubic equation with $V_\\mathrm{m}$ as the variable. The ratio (in mol dm$^{-3}$) of the coefficient of $V_\\mathrm{m}^2$ to the coefficient of $V_\\mathrm{m}$ for a gas having van der Waals constants $a = 6.0$ dm$^6$ atm mol$^{-2}$ and $b = 0.060$ dm$^3$ mol$^{-1}$ at $300$ K and $300$ atm is ______.<br>Use: Universal gas constant ($R$) $= 0.082$ dm$^3$ atm mol$^{-1}$ K$^{-1}$",
+   "options": null,
+   "answer": {
+    "lo": -7.2,
+    "hi": -7
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$\\left(P + \\dfrac{a}{V_\\mathrm{m}^2}\\right)(V_\\mathrm{m} - b) = RT$; multiplying by $V_\\mathrm{m}^2$: $PV_\\mathrm{m}^3 - (Pb + RT)V_\\mathrm{m}^2 + aV_\\mathrm{m} - ab = 0$.<br>Ratio $= \\dfrac{-(Pb + RT)}{a}$.<br>$Pb = 300 \\times 0.060 = 18$; $RT = 0.082 \\times 300 = 24.6$.<br>Ratio $= -\\dfrac{42.6}{6.0} = -7.1$ mol dm$^{-3}$.",
+   "subject": "Chemistry",
+   "chapter": "Thermodynamics",
+   "chCls": "XI"
+  },
+  {
+   "no": 11,
+   "section": 3,
+   "type": "num",
+   "text": "Considering ideal gas behavior, the expansion work done (in kJ) when $144$ g of water is electrolyzed completely under constant pressure at $300$ K is ______.<br>Use: Universal gas constant ($R$) $= 8.3$ J K$^{-1}$ mol$^{-1}$; Atomic mass (in amu): H $= 1$, O $= 16$",
+   "options": null,
+   "answer": {
+    "lo": -29.95,
+    "hi": -29.8
+   },
+   "note": "Official final key: [-29.95 to -29.8] or [29.8 to 29.95] (either range is awarded marks).",
+   "accept": [
+    {
+     "lo": 29.8,
+     "hi": 29.95
+    }
+   ],
+   "full": 4,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$144$ g water $= 8$ mol. $2\\mathrm{H_2O(l)} \\rightarrow 2\\mathrm{H_2(g)} + \\mathrm{O_2(g)}$ gives $8$ mol $\\mathrm{H_2}$ + $4$ mol $\\mathrm{O_2}$ = $12$ mol gas (liquid volume negligible).<br>$w = -P\\Delta V = -\\Delta n_gRT = -12 \\times 8.3 \\times 300 = -29880$ J.<br>$w = -29.88$ kJ (work done on the system by the IUPAC sign convention; the magnitude of work done by the gas is $29.88$ kJ).<br>The official final key accepts $-29.88$ or $+29.88$ (within the given ranges).",
+   "subject": "Chemistry",
+   "chapter": "Thermodynamics",
+   "chCls": "XI"
+  },
+  {
+   "no": 12,
+   "section": 3,
+   "type": "num",
+   "text": "The monomer (X) involved in the synthesis of Nylon 6,6 gives positive carbylamine test. If $10$ moles of X are analyzed using Dumas method, the amount (in grams) of nitrogen gas evolved is ______.<br>Use: Atomic mass of N (in amu) $= 14$",
+   "options": null,
+   "answer": {
+    "lo": 280,
+    "hi": 280
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Nylon 6,6 is made from adipic acid and hexamethylenediamine; the one giving the carbylamine test (primary amine) is X $= \\mathrm{H_2N(CH_2)_6NH_2}$.<br>Each molecule has $2$ N atoms, so $1$ mol X gives $1$ mol $\\mathrm{N_2}$ in the Dumas method.<br>$10$ mol X → $10$ mol $\\mathrm{N_2}$ $= 10 \\times 28 = 280$ g.",
+   "subject": "Chemistry",
+   "chapter": "Organic Chemistry – Some Basic Principles and Techniques",
+   "chCls": "XI"
+  },
+  {
+   "no": 13,
+   "section": 3,
+   "type": "num",
+   "text": "The reaction sequence given below is carried out with $16$ moles of $\\mathbf{X}$. The yield of the major product in each step is given below the product in parentheses. The amount (in grams) of $\\mathbf{S}$ produced is ______.<br>Use: Atomic mass (in amu): H $= 1$, C $= 12$, O $= 16$, Br $= 80$",
+   "options": null,
+   "answer": {
+    "lo": 175,
+    "hi": 175
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": "che-q13.png",
+   "optionFigs": null,
+   "sol": "X is the ethylene acetal of 2-bromobenzaldehyde. Na, dry ether (Wurtz–Fittig coupling) joins two aryl groups; $\\mathrm{H_3O^+}$ frees the aldehydes: $\\mathbf{P}$ = biphenyl-2,2′-dicarbaldehyde, $\\mathrm{C_{14}H_{10}O_2}$ = $210$ g mol$^{-1}$ (matches). $16$ mol X → $8$ mol P.<br>NaOH, $\\Delta$: intramolecular Cannizzaro → after acidification $\\mathbf{Q}$ = 2′-(hydroxymethyl)biphenyl-2-carboxylic acid: $4$ mol (50%).<br>NaOH/CaO, $\\Delta$: decarboxylation → $\\mathbf{R}$ = (biphenyl-2-yl)methanol, $\\mathrm{C_{13}H_{12}O}$: $2$ mol (50%).<br>$\\mathrm{PBr_3}$ → $\\mathbf{T}$ = 2-(bromomethyl)biphenyl: $1$ mol (50%).<br>$\\mathbf{T}$ + $\\mathbf{R}$/NaH (Williamson) → $\\mathbf{S}$ = bis(biphenyl-2-ylmethyl) ether, $\\mathrm{C_{26}H_{22}O}$ = $312 + 22 + 16 = 350$ g mol$^{-1}$: $0.5$ mol (50%).<br>Mass of S $= 0.5 \\times 350 = 175$ g.",
+   "subject": "Chemistry",
+   "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+   "chCls": "XII"
+  },
+  {
+   "no": 14,
+   "section": 4,
+   "type": "match",
+   "text": "The correct match of the group reagents in List-I for precipitating the metal ion given in List-II from solutions, is<br><table class=\"mt\"><tr><th>List-I</th><th>List-II</th></tr><tr><td>(P) Passing $\\mathrm{H_2S}$ in the presence of $\\mathrm{NH_4OH}$</td><td>(1) $\\mathrm{Cu^{2+}}$</td></tr><tr><td>(Q) $\\mathrm{(NH_4)_2CO_3}$ in the presence of $\\mathrm{NH_4OH}$</td><td>(2) $\\mathrm{Al^{3+}}$</td></tr><tr><td>(R) $\\mathrm{NH_4OH}$ in the presence of $\\mathrm{NH_4Cl}$</td><td>(3) $\\mathrm{Mn^{2+}}$</td></tr><tr><td>(S) Passing $\\mathrm{H_2S}$ in the presence of dilute HCl</td><td>(4) $\\mathrm{Ba^{2+}}$</td></tr><tr><td></td><td>(5) $\\mathrm{Mg^{2+}}$</td></tr></table>",
+   "options": [
+    "P $\\rightarrow$ 3; Q $\\rightarrow$ 4; R $\\rightarrow$ 2; S $\\rightarrow$ 1",
+    "P $\\rightarrow$ 4; Q $\\rightarrow$ 2; R $\\rightarrow$ 3; S $\\rightarrow$ 1",
+    "P $\\rightarrow$ 3; Q $\\rightarrow$ 4; R $\\rightarrow$ 1; S $\\rightarrow$ 5",
+    "P $\\rightarrow$ 5; Q $\\rightarrow$ 3; R $\\rightarrow$ 2; S $\\rightarrow$ 4"
+   ],
+   "answer": 0,
+   "full": 4,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "(P) $\\mathrm{H_2S}$ in ammoniacal medium is the group IV reagent: MnS precipitates → (3).<br>(Q) $\\mathrm{(NH_4)_2CO_3}$ with $\\mathrm{NH_4OH}$ is the group V reagent: $\\mathrm{BaCO_3}$ → (4).<br>(R) $\\mathrm{NH_4OH}$/$\\mathrm{NH_4Cl}$ is the group III reagent: $\\mathrm{Al(OH)_3}$ → (2).<br>(S) $\\mathrm{H_2S}$ in dilute HCl is the group II reagent: CuS → (1).<br>($\\mathrm{Mg^{2+}}$ is group VI and is not precipitated by any of these.)<br>Match: P→3, Q→4, R→2, S→1 → (A).",
+   "subject": "Chemistry",
+   "chapter": "Equilibrium",
+   "chCls": "XI"
+  },
+  {
+   "no": 15,
+   "section": 4,
+   "type": "match",
+   "text": "The major products obtained from the reactions in List-II are the reactants for the named reactions mentioned in List-I. Match each entry in List-I with the appropriate entry in List-II and choose the correct option.<br><table class=\"mt\"><tr><th>List-I</th><th>List-II</th></tr><tr><td>(P) Stephen reaction</td><td>(1) Toluene $\\xrightarrow{\\text{(i) } \\mathrm{CrO_2Cl_2/CS_2};\\ \\text{(ii) } \\mathrm{H_3O^+}}$</td></tr><tr><td>(Q) Sandmeyer reaction</td><td>(2) Benzoic acid $\\xrightarrow{\\text{(i) } \\mathrm{PCl_5};\\ \\text{(ii) } \\mathrm{NH_3};\\ \\text{(iii) } \\mathrm{P_4O_{10}},\\ \\Delta}$</td></tr><tr><td>(R) Hoffmann bromamide degradation reaction</td><td>(3) Nitrobenzene $\\xrightarrow{\\text{(i) Fe, HCl};\\ \\text{(ii) HCl, } \\mathrm{NaNO_2}\\text{ (273-278 K), } \\mathrm{H_2O}}$</td></tr><tr><td>(S) Cannizzaro reaction</td><td>(4) Toluene $\\xrightarrow{\\text{(i) } \\mathrm{Cl_2}/h\\nu,\\ \\mathrm{H_2O};\\ \\text{(ii) Tollen's reagent};\\ \\text{(iii) } \\mathrm{SO_2Cl_2};\\ \\text{(iv) } \\mathrm{NH_3}}$</td></tr><tr><td></td><td>(5) Aniline $\\xrightarrow{\\text{(i) } \\mathrm{(CH_3CO)_2O}\\text{, Pyridine};\\ \\text{(ii) } \\mathrm{HNO_3, H_2SO_4}\\text{, 288 K};\\ \\text{(iii) aq. NaOH}}$</td></tr></table>",
+   "options": [
+    "P $\\rightarrow$ 2; Q $\\rightarrow$ 4; R $\\rightarrow$ 1; S $\\rightarrow$ 3",
+    "P $\\rightarrow$ 2; Q $\\rightarrow$ 3; R $\\rightarrow$ 4; S $\\rightarrow$ 1",
+    "P $\\rightarrow$ 5; Q $\\rightarrow$ 3; R $\\rightarrow$ 4; S $\\rightarrow$ 2",
+    "P $\\rightarrow$ 5; Q $\\rightarrow$ 4; R $\\rightarrow$ 2; S $\\rightarrow$ 1"
+   ],
+   "answer": 1,
+   "full": 4,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "(1) Étard reaction: toluene → benzaldehyde, which has no α-H: reactant for the Cannizzaro reaction → S.<br>(2) Benzoic acid → benzoyl chloride → benzamide → (dehydration) benzonitrile: reactant for the Stephen reaction → P.<br>(3) Nitrobenzene → aniline → benzenediazonium chloride: reactant for the Sandmeyer reaction → Q.<br>(4) Toluene → benzal chloride → (hydrolysis) benzaldehyde → benzoic acid → benzoyl chloride → benzamide: reactant for the Hoffmann bromamide degradation → R.<br>(5) gives p-nitroaniline, which fits none of these.<br>Match: P→2, Q→3, R→4, S→1 → (B).",
+   "subject": "Chemistry",
+   "chapter": "Amines",
+   "chCls": "XII"
+  },
+  {
+   "no": 16,
+   "section": 4,
+   "type": "match",
+   "text": "Match the compounds in List-I with the appropriate observations in List-II and choose the correct option.<br><table class=\"mt\"><tr><th>List-I</th><th>List-II</th></tr><tr><td>(P) Compound (P) in the figure</td><td>(1) Reaction with phenyl diazonium salt gives yellow dye.</td></tr><tr><td>(Q) Compound (Q) in the figure</td><td>(2) Reaction with ninhydrin gives purple color and it also reacts with $\\mathrm{FeCl_3}$ to give violet color.</td></tr><tr><td>(R) Compound (R) in the figure</td><td>(3) Reaction with glucose will give corresponding hydrazone.</td></tr><tr><td>(S) Compound (S) in the figure</td><td>(4) Lassiagne extract of the compound treated with dilute HCl followed by addition of aqueous $\\mathrm{FeCl_3}$ gives blood red color.</td></tr><tr><td></td><td>(5) After complete hydrolysis, it will give ninhydrin test and it DOES NOT give positive phthalein dye test.</td></tr></table>",
+   "options": [
+    "P $\\rightarrow$ 1; Q $\\rightarrow$ 5; R $\\rightarrow$ 4; S $\\rightarrow$ 2",
+    "P $\\rightarrow$ 2; Q $\\rightarrow$ 5; R $\\rightarrow$ 1; S $\\rightarrow$ 3",
+    "P $\\rightarrow$ 5; Q $\\rightarrow$ 2; R $\\rightarrow$ 1; S $\\rightarrow$ 4",
+    "P $\\rightarrow$ 2; Q $\\rightarrow$ 1; R $\\rightarrow$ 5; S $\\rightarrow$ 3"
+   ],
+   "answer": 1,
+   "full": 4,
+   "neg": 1,
+   "fig": "che-q16.png",
+   "optionFigs": null,
+   "sol": "(P) has a free α-$\\mathrm{NH_2}$ (ninhydrin: purple) and a phenolic OH ($\\mathrm{FeCl_3}$: violet) → (2).<br>(Q) has no free $\\mathrm{NH_2}$ (N-acetyl, peptide); complete hydrolysis frees amino acids (ninhydrin positive), and it has no phenol, so no phthalein dye test → (5).<br>(R) anilinium chloride gives aniline, which couples with benzenediazonium salt to give a yellow dye (diazoamino/aminoazobenzene) → (1).<br>(S) an arylhydrazine: condenses with the aldehyde group of glucose to give the hydrazone → (3).<br>(None contains both N and S, so (4) fits none.)<br>Match: P→2, Q→5, R→1, S→3 → (B).",
+   "subject": "Chemistry",
+   "chapter": "Amines",
+   "chCls": "XII"
+  }
+ ]
+}

@@ -1,0 +1,1781 @@
+{
+ "id": "2026-04-05-s2",
+ "exam": "JEE Main",
+ "title": "JEE Main 2026 · 5 April 2026 · Shift 2",
+ "source": "Question paper \"B Tech 5th Apr 2026 Shift 2\" and JEE (Main) 2026 Session 2 Final Answer Key, National Testing Agency (NTA). Worked solutions: All in All Exam Practice.",
+ "duration": 180,
+ "total": 300,
+ "marking": "+4 correct, -1 wrong, 0 unanswered (Sections A and B)",
+ "questions": [
+  {
+   "no": 1,
+   "qid": "691121451",
+   "section": "A",
+   "type": "mcq",
+   "text": "Let $\\alpha, \\beta$ be the roots of the equation $x^2-x+p=0$ and $\\gamma, \\delta$ be the roots the equation $x^2-4x+q=0$; $p, q \\in \\mathbb{Z}$. If $\\alpha, \\beta, \\gamma, \\delta$ are in G.P., then $|p+q|$ equals :",
+   "options": [
+    "$16$",
+    "$32$",
+    "$34$",
+    "$38$"
+   ],
+   "optionIds": [
+    "6911211531",
+    "6911211532",
+    "6911211533",
+    "6911211534"
+   ],
+   "answer": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Let the G.P. be $\\alpha, \\alpha r, \\alpha r^2, \\alpha r^3$.<br>$\\alpha+\\beta=\\alpha(1+r)=1$ and $\\gamma+\\delta=\\alpha r^2(1+r)=4$, so $r^2=4$, $r=\\pm2$.<br>$r=2$: $\\alpha=\\dfrac13$, $p=\\alpha\\beta=\\dfrac29\\notin\\mathbb{Z}$, rejected.<br>$r=-2$: $\\alpha=-1$, terms $-1, 2, -4, 8$; $p=-2$, $q=(-4)(8)=-32$.<br>$|p+q|=34$.",
+   "subject": "Mathematics",
+   "chapter": "Sequences and Series",
+   "chCls": "XI"
+  },
+  {
+   "no": 2,
+   "qid": "691121452",
+   "section": "A",
+   "type": "mcq",
+   "text": "Let $z_1, z_2 \\in \\mathbb{C}$ be the distinct solutions of the equation $z^2+4z-(1+12i)=0$.<br>Then $|z_1|^2+|z_2|^2$ is equal to :",
+   "options": [
+    "$18$",
+    "$22$",
+    "$29$",
+    "$34$"
+   ],
+   "optionIds": [
+    "6911211535",
+    "6911211536",
+    "6911211537",
+    "6911211538"
+   ],
+   "answer": 3,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$z=-2\\pm\\sqrt{4+1+12i}=-2\\pm\\sqrt{5+12i}$.<br>$(3+2i)^2=5+12i$, so $z=-2\\pm(3+2i)$: $z_1=1+2i$, $z_2=-5-2i$.<br>$|z_1|^2+|z_2|^2=5+29=34$.",
+   "subject": "Mathematics",
+   "chapter": "Complex Numbers",
+   "chCls": "XI"
+  },
+  {
+   "no": 3,
+   "qid": "691121453",
+   "section": "A",
+   "type": "mcq",
+   "text": "If $f:\\mathbb{N}\\to\\mathbb{Z}$ is defined by $$f(n)=\\begin{vmatrix} n & -1 & -5 \\\\ -2n^2 & 3(2k+1) & 2k+1 \\\\ -3n^3 & 3k(2k+1) & 3k(k+2)+1 \\end{vmatrix},\\ k\\in\\mathbb{N},$$ and $\\displaystyle\\sum_{n=1}^{k} f(n)=98$, then $k$ is equal to :",
+   "options": [
+    "$3$",
+    "$4$",
+    "$5$",
+    "$6$"
+   ],
+   "optionIds": [
+    "6911211539",
+    "6911211540",
+    "6911211541",
+    "6911211542"
+   ],
+   "answer": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Only the first column depends on $n$, so $\\sum_{n=1}^k f(n)$ is the determinant with first column $\\left(\\sum n,\\ -2\\sum n^2,\\ -3\\sum n^3\\right)=\\left(\\dfrac{k(k+1)}{2},\\ -\\dfrac{k(k+1)(2k+1)}{3},\\ -\\dfrac{3k^2(k+1)^2}{4}\\right)$.<br>For $k=3$ the first column is $(6, -28, -108)$ and the determinant is $\\begin{vmatrix} 6 & -1 & -5 \\\\ -28 & 21 & 7 \\\\ -108 & 63 & 46 \\end{vmatrix}$.<br>$=6(966-441)+1(-1288+756)-5(-1764+2268)=3150-532-2520=98$.<br>Hence $k=3$.",
+   "subject": "Mathematics",
+   "chapter": "Determinants",
+   "chCls": "XII"
+  },
+  {
+   "no": 4,
+   "qid": "691121454",
+   "section": "A",
+   "type": "mcq",
+   "text": "Let M be a $3\\times3$ matrix such that $$M\\begin{pmatrix}1\\\\0\\\\0\\end{pmatrix}=\\begin{pmatrix}1\\\\2\\\\3\\end{pmatrix},\\ M\\begin{pmatrix}0\\\\1\\\\0\\end{pmatrix}=\\begin{pmatrix}0\\\\1\\\\2\\end{pmatrix} \\text{ and } M\\begin{pmatrix}0\\\\0\\\\1\\end{pmatrix}=\\begin{pmatrix}-1\\\\1\\\\1\\end{pmatrix}.$$ If $M\\begin{pmatrix}x\\\\y\\\\z\\end{pmatrix}=\\begin{pmatrix}1\\\\7\\\\11\\end{pmatrix}$, then $x+y+z$ equals :",
+   "options": [
+    "$4$",
+    "$5$",
+    "$7$",
+    "$11$"
+   ],
+   "optionIds": [
+    "6911211543",
+    "6911211544",
+    "6911211545",
+    "6911211546"
+   ],
+   "answer": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "The given products are the columns of $M$: $M=\\begin{pmatrix}1&0&-1\\\\2&1&1\\\\3&2&1\\end{pmatrix}$.<br>So $x-z=1$, $2x+y+z=7$, $3x+2y+z=11$.<br>Subtracting the last two: $x+y=4$. With $x=1+z$: $y=3-z$ and $2(1+z)+(3-z)+z=7 \\Rightarrow z=1$.<br>$x=2$, $y=2$, $z=1$, so $x+y+z=5$.",
+   "subject": "Mathematics",
+   "chapter": "Matrices",
+   "chCls": "XII"
+  },
+  {
+   "no": 5,
+   "qid": "691121455",
+   "section": "A",
+   "type": "mcq",
+   "text": "If the sum of the first 10 terms of the series $$\\dfrac{1}{1+1^4\\times4}+\\dfrac{2}{1+2^4\\times4}+\\dfrac{3}{1+3^4\\times4}+\\dfrac{4}{1+4^4\\times4}+\\ldots$$ is $\\dfrac{m}{n}$, $\\gcd(m,n)=1$, then $m+n$ is equal to :",
+   "options": [
+    "$256$",
+    "$264$",
+    "$276$",
+    "$284$"
+   ],
+   "optionIds": [
+    "6911211547",
+    "6911211548",
+    "6911211549",
+    "6911211550"
+   ],
+   "answer": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$1+4n^4=(2n^2+2n+1)(2n^2-2n+1)$, and the difference of these factors is $4n$.<br>So $T_n=\\dfrac{n}{1+4n^4}=\\dfrac14\\left[\\dfrac{1}{2n^2-2n+1}-\\dfrac{1}{2n^2+2n+1}\\right]$.<br>Since $2(n+1)^2-2(n+1)+1=2n^2+2n+1$, the sum telescopes: $S_{10}=\\dfrac14\\left[1-\\dfrac{1}{221}\\right]=\\dfrac{55}{221}$.<br>$\\gcd(55,221)=1$, so $m+n=276$.",
+   "subject": "Mathematics",
+   "chapter": "Sequences and Series",
+   "chCls": "XI"
+  },
+  {
+   "no": 6,
+   "qid": "691121456",
+   "section": "A",
+   "type": "mcq",
+   "text": "Let $A_1, A_2, A_3, \\ldots, A_{39}$ be 39 arithmetic means between the numbers 59 and 159. Then the mean of $A_{25}, A_{28}, A_{31}$ and $A_{36}$ is equal to :",
+   "options": [
+    "$129$",
+    "$136$",
+    "$131.50$",
+    "$134$"
+   ],
+   "optionIds": [
+    "6911211551",
+    "6911211552",
+    "6911211553",
+    "6911211554"
+   ],
+   "answer": 3,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "There are 41 terms in all, so $d=\\dfrac{159-59}{40}=2.5$ and $A_k=59+2.5k$.<br>Mean of the four $=59+2.5\\times\\dfrac{25+28+31+36}{4}=59+2.5\\times30=134$.",
+   "subject": "Mathematics",
+   "chapter": "Sequences and Series",
+   "chCls": "XI"
+  },
+  {
+   "no": 7,
+   "qid": "691121457",
+   "section": "A",
+   "type": "mcq",
+   "text": "The coefficient of $x^2$ in the expansion of $\\left(2x^2+\\dfrac1x\\right)^{10}$, $x\\neq0$, is :",
+   "options": [
+    "$3240$",
+    "$3360$",
+    "$3480$",
+    "$3600$"
+   ],
+   "optionIds": [
+    "6911211555",
+    "6911211556",
+    "6911211557",
+    "6911211558"
+   ],
+   "answer": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$T_{r+1}=\\binom{10}{r}(2x^2)^{10-r}x^{-r}=\\binom{10}{r}2^{10-r}x^{20-3r}$.<br>$20-3r=2 \\Rightarrow r=6$.<br>Coefficient $=\\binom{10}{6}2^4=210\\times16=3360$.",
+   "subject": "Mathematics",
+   "chapter": "Binomial Theorem",
+   "chCls": "XI"
+  },
+  {
+   "no": 8,
+   "qid": "691121458",
+   "section": "A",
+   "type": "mcq",
+   "text": "The probabilities that players A and B of a team are selected for the captaincy for a tournament are 0.6 and 0.4, respectively. If A is selected the captain, the probability that the team wins the tournament is 0.8 and if B is selected the captain, the probability that the team wins the tournament is 0.7. Then the probability, that the team wins the tournament, is :",
+   "options": [
+    "$0.74$",
+    "$0.76$",
+    "$0.72$",
+    "$0.78$"
+   ],
+   "optionIds": [
+    "6911211559",
+    "6911211560",
+    "6911211561",
+    "6911211562"
+   ],
+   "answer": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "By the theorem of total probability: $P(W)=0.6\\times0.8+0.4\\times0.7=0.48+0.28=0.76$.",
+   "subject": "Mathematics",
+   "chapter": "Probability",
+   "chCls": "XII"
+  },
+  {
+   "no": 9,
+   "qid": "691121459",
+   "section": "A",
+   "type": "mcq",
+   "text": "A box contains 5 blue, 6 yellow and 4 red balls. The number of ways, of drawing 8 balls containing at least two balls of each colour, is :",
+   "options": [
+    "$4100$",
+    "$4140$",
+    "$4230$",
+    "$4290$"
+   ],
+   "optionIds": [
+    "6911211563",
+    "6911211564",
+    "6911211565",
+    "6911211566"
+   ],
+   "answer": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "(blue, yellow, red) with each $\\ge2$ and total 8: $(4,2,2),(2,4,2),(2,2,4),(3,3,2),(3,2,3),(2,3,3)$.<br>$(4,2,2)$: $5\\cdot15\\cdot6=450$; $(2,4,2)$: $10\\cdot15\\cdot6=900$; $(2,2,4)$: $10\\cdot15\\cdot1=150$.<br>$(3,3,2)$: $10\\cdot20\\cdot6=1200$; $(3,2,3)$: $10\\cdot15\\cdot4=600$; $(2,3,3)$: $10\\cdot20\\cdot4=800$.<br>Total $=4100$.",
+   "subject": "Mathematics",
+   "chapter": "Permutations and Combinations",
+   "chCls": "XI"
+  },
+  {
+   "no": 10,
+   "qid": "691121460",
+   "section": "A",
+   "type": "mcq",
+   "text": "A variable X takes values $0, 0, 2, 6, 12, 20, \\ldots, n(n-1)$ with frequencies ${}^nC_0, {}^nC_1, {}^nC_2, {}^nC_3, {}^nC_4, {}^nC_5, \\ldots, {}^nC_n$, respectively. If the mean of this data is 60, then its median is :",
+   "options": [
+    "$56$",
+    "$42$",
+    "$72$",
+    "$90$"
+   ],
+   "optionIds": [
+    "6911211567",
+    "6911211568",
+    "6911211569",
+    "6911211570"
+   ],
+   "answer": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "The value $r(r-1)$ has frequency ${}^nC_r$. $\\sum r(r-1){}^nC_r=n(n-1)2^{n-2}$ and $\\sum{}^nC_r=2^n$.<br>Mean $=\\dfrac{n(n-1)}{4}=60 \\Rightarrow n(n-1)=240 \\Rightarrow n=16$.<br>Values increase with $r$ and the frequencies ${}^{16}C_r$ are symmetric about $r=8$, so the middle observations (the $2^{15}$-th and next) both fall at $r=8$.<br>Median $=8\\times7=56$.",
+   "subject": "Mathematics",
+   "chapter": "Statistics",
+   "chCls": "XI"
+  },
+  {
+   "no": 11,
+   "qid": "691121461",
+   "section": "A",
+   "type": "mcq",
+   "text": "Let the point P be the vertex of the parabola $y=x^2-6x+12$. If a line passing through the point P intersects the circle $x^2+y^2-2x-4y+3=0$ at the points R and S, then the maximum value of $(PR+PS)^2$ is :",
+   "options": [
+    "$10$",
+    "$20$",
+    "$25$",
+    "$5$"
+   ],
+   "optionIds": [
+    "6911211571",
+    "6911211572",
+    "6911211573",
+    "6911211574"
+   ],
+   "answer": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$y=(x-3)^2+3$, so $P=(3,3)$. Circle: centre $C=(1,2)$, radius $\\sqrt2$; $CP=\\sqrt5>\\sqrt2$, so P is outside.<br>For a line through P at angle $\\theta$ to PC, R and S are symmetric about the foot of the perpendicular from C, so $PR+PS=2\\,CP\\cos\\theta$.<br>Maximum when the line passes through C: $PR+PS=2\\sqrt5$.<br>$(PR+PS)^2=20$.",
+   "subject": "Mathematics",
+   "chapter": "Conic Sections",
+   "chCls": "XI"
+  },
+  {
+   "no": 12,
+   "qid": "691121462",
+   "section": "A",
+   "type": "mcq",
+   "text": "Let the directrix of the parabola $P: y^2=8x$, cut $x$-axis at the point A. Let $B(\\alpha,\\beta)$, $\\alpha>1$, be a point on P such that the slope of AB is $3/5$. If BC is a focal chord of P, then six times the area of $\\Delta ABC$ is :",
+   "options": [
+    "$80$",
+    "$160$",
+    "$174$",
+    "$192$"
+   ],
+   "optionIds": [
+    "6911211575",
+    "6911211576",
+    "6911211577",
+    "6911211578"
+   ],
+   "answer": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$a=2$: directrix $x=-2$, so $A=(-2,0)$. Let $B=(2t^2,4t)$.<br>Slope $\\dfrac{4t}{2t^2+2}=\\dfrac35 \\Rightarrow 3t^2-10t+3=0 \\Rightarrow t=3$ or $\\dfrac13$; $\\alpha=2t^2>1$ gives $t=3$, $B=(18,12)$.<br>Focal chord: C has parameter $-\\dfrac1t=-\\dfrac13$, $C=\\left(\\dfrac29,-\\dfrac43\\right)$.<br>$\\vec{AB}=(20,12)$, $\\vec{AC}=\\left(\\dfrac{20}{9},-\\dfrac43\\right)$; area $=\\dfrac12\\left|20\\left(-\\dfrac43\\right)-12\\cdot\\dfrac{20}{9}\\right|=\\dfrac12\\cdot\\dfrac{160}{3}=\\dfrac{80}{3}$.<br>Six times the area $=160$.",
+   "subject": "Mathematics",
+   "chapter": "Conic Sections",
+   "chCls": "XI"
+  },
+  {
+   "no": 13,
+   "qid": "691121463",
+   "section": "A",
+   "type": "mcq",
+   "text": "Let the eccentricity e of a hyperbola satisfy the equation $6e^2-11e+3=0$. If the foci of the hyperbola are $(3,5)$ and $(3,-4)$, then the length of its latus rectum is :",
+   "options": [
+    "$\\dfrac{11}{3}$",
+    "$\\dfrac{17}{3}$",
+    "$\\dfrac{15}{2}$",
+    "$\\dfrac{17}{2}$"
+   ],
+   "optionIds": [
+    "6911211579",
+    "6911211580",
+    "6911211581",
+    "6911211582"
+   ],
+   "answer": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$6e^2-11e+3=0 \\Rightarrow e=\\dfrac32$ or $\\dfrac13$; for a hyperbola $e=\\dfrac32$.<br>Distance between foci $2ae=9 \\Rightarrow a=3$.<br>$b^2=a^2(e^2-1)=9\\cdot\\dfrac54=\\dfrac{45}{4}$.<br>Latus rectum $=\\dfrac{2b^2}{a}=\\dfrac{45/2}{3}=\\dfrac{15}{2}$.",
+   "subject": "Mathematics",
+   "chapter": "Conic Sections",
+   "chCls": "XI"
+  },
+  {
+   "no": 14,
+   "qid": "691121464",
+   "section": "A",
+   "type": "mcq",
+   "text": "Let a triangle PQR be such that P and Q lie on the line $\\dfrac{x+3}{8}=\\dfrac{y-4}{2}=\\dfrac{z+1}{2}$ and are at a distance of 6 units from $R(1,2,3)$. If $(\\alpha,\\beta,\\gamma)$ is the centroid of $\\Delta PQR$, then $\\alpha+\\beta+\\gamma$ is equal to :",
+   "options": [
+    "$4$",
+    "$5$",
+    "$6$",
+    "$8$"
+   ],
+   "optionIds": [
+    "6911211583",
+    "6911211584",
+    "6911211585",
+    "6911211586"
+   ],
+   "answer": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Since $RP=RQ$, the midpoint of PQ is the foot M of the perpendicular from R to the line.<br>Point on line: $(-3+8t, 4+2t, -1+2t)$; $(4-8t, -2-2t, 4-2t)\\cdot(8,2,2)=36-72t=0 \\Rightarrow t=\\dfrac12$, $M=(1,5,0)$ (and $RM=\\sqrt{18}&lt;6$).<br>Centroid $=\\dfrac{P+Q+R}{3}=\\dfrac{2M+R}{3}=\\dfrac{(3,12,3)}{3}=(1,4,1)$.<br>$\\alpha+\\beta+\\gamma=6$.",
+   "subject": "Mathematics",
+   "chapter": "Three Dimensional Geometry",
+   "chCls": "XII"
+  },
+  {
+   "no": 15,
+   "qid": "691121465",
+   "section": "A",
+   "type": "mcq",
+   "text": "If the distance of the point $(a,2,5)$ from the image of the point $(1,2,7)$ in the line $\\dfrac{x}{1}=\\dfrac{y-1}{1}=\\dfrac{z-2}{2}$ is 4, then the sum of all possible values of $a$ is equal to :",
+   "options": [
+    "$11$",
+    "$9$",
+    "$6$",
+    "$4$"
+   ],
+   "optionIds": [
+    "6911211587",
+    "6911211588",
+    "6911211589",
+    "6911211590"
+   ],
+   "answer": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Point on line: $(t, 1+t, 2+2t)$. Foot: $(t-1, t-1, 2t-5)\\cdot(1,1,2)=6t-12=0 \\Rightarrow t=2$, foot $(2,3,6)$.<br>Image of $(1,2,7)$: $2(2,3,6)-(1,2,7)=(3,4,5)$.<br>$(a-3)^2+(2-4)^2+0=16 \\Rightarrow (a-3)^2=12 \\Rightarrow a=3\\pm2\\sqrt3$.<br>Sum of values $=6$.",
+   "subject": "Mathematics",
+   "chapter": "Three Dimensional Geometry",
+   "chCls": "XII"
+  },
+  {
+   "no": 16,
+   "qid": "691121466",
+   "section": "A",
+   "type": "mcq",
+   "text": "Let O be the origin, $\\vec{OP}=\\vec{a}$ and $\\vec{OQ}=\\vec{b}$. If R is the point on $\\vec{OP}$ such that $\\vec{OP}=5\\vec{OR}$, and M is the point such that $\\vec{OQ}=5\\vec{RM}$, then $\\vec{PM}$ is equal to :",
+   "options": [
+    "$\\dfrac15\\left(\\vec{a}-4\\vec{b}\\right)$",
+    "$\\dfrac15\\left(\\vec{b}-4\\vec{a}\\right)$",
+    "$\\dfrac15\\left(-\\vec{a}+4\\vec{b}\\right)$",
+    "$\\dfrac15\\left(-\\vec{b}+4\\vec{a}\\right)$"
+   ],
+   "optionIds": [
+    "6911211591",
+    "6911211592",
+    "6911211593",
+    "6911211594"
+   ],
+   "answer": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$\\vec{OR}=\\dfrac{\\vec a}{5}$ and $\\vec{RM}=\\dfrac{\\vec b}{5}$, so $\\vec{OM}=\\dfrac{\\vec a+\\vec b}{5}$.<br>$\\vec{PM}=\\vec{OM}-\\vec{OP}=\\dfrac{\\vec a+\\vec b}{5}-\\vec a=\\dfrac15\\left(\\vec b-4\\vec a\\right)$.",
+   "subject": "Mathematics",
+   "chapter": "Vector Algebra",
+   "chCls": "XII"
+  },
+  {
+   "no": 17,
+   "qid": "691121467",
+   "section": "A",
+   "type": "mcq",
+   "text": "Let $f(x)=\\displaystyle\\lim_{y\\to0}\\dfrac{(1-\\cos(xy))\\tan(xy)}{y^3}$. Then the number of solutions of the equation $f(x)=\\sin x$, $x\\in\\mathbb{R}$ is :",
+   "options": [
+    "$0$",
+    "$2$",
+    "$3$",
+    "$1$"
+   ],
+   "optionIds": [
+    "6911211595",
+    "6911211596",
+    "6911211597",
+    "6911211598"
+   ],
+   "answer": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "With $u=xy$: $(1-\\cos u)\\tan u\\approx\\dfrac{u^2}{2}\\cdot u=\\dfrac{x^3y^3}{2}$, so $f(x)=\\dfrac{x^3}{2}$.<br>Solve $\\dfrac{x^3}{2}=\\sin x$. $x=0$ is a root. For small $x>0$, $\\dfrac{x^3}{2}&lt;\\sin x$; at $x=1.5$, $\\dfrac{x^3}{2}\\approx1.69>\\sin x$; for $x>\\sqrt[3]{2}$, $\\dfrac{x^3}{2}>1\\ge\\sin x$. So exactly one positive root.<br>Both sides are odd, giving one negative root too.<br>Number of solutions $=3$.",
+   "subject": "Mathematics",
+   "chapter": "Limits and Derivatives",
+   "chCls": "XI"
+  },
+  {
+   "no": 18,
+   "qid": "691121468",
+   "section": "A",
+   "type": "mcq",
+   "text": "Let $(2^{1-a}+2^{1+a})$, $f(a)$, $(3^a+3^{-a})$ be in A.P. and $\\alpha$ be the minimum value of $f(a)$. Then the value of the integral $\\displaystyle\\int_{\\log_e(\\alpha-1)}^{\\log_e(\\alpha)}\\dfrac{dx}{(e^{2x}-e^{-2x})}$ is :",
+   "options": [
+    "$\\dfrac12\\log_e\\left(\\dfrac43\\right)$",
+    "$\\dfrac14\\log_e\\left(\\dfrac43\\right)$",
+    "$\\dfrac12\\log_e\\left(\\dfrac85\\right)$",
+    "$\\dfrac14\\log_e\\left(\\dfrac85\\right)$"
+   ],
+   "optionIds": [
+    "6911211599",
+    "6911211600",
+    "6911211601",
+    "6911211602"
+   ],
+   "answer": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$f(a)=\\dfrac{2(2^a+2^{-a})+(3^a+3^{-a})}{2}\\ge\\dfrac{4+2}{2}=3$ (equality at $a=0$), so $\\alpha=3$.<br>$I=\\displaystyle\\int_{\\ln2}^{\\ln3}\\dfrac{e^{2x}\\,dx}{e^{4x}-1}$. Put $u=e^{2x}$, $du=2u\\,dx$: $I=\\dfrac12\\displaystyle\\int_4^9\\dfrac{du}{u^2-1}=\\dfrac14\\left[\\ln\\dfrac{u-1}{u+1}\\right]_4^9$.<br>$=\\dfrac14\\left(\\ln\\dfrac45-\\ln\\dfrac35\\right)=\\dfrac14\\log_e\\left(\\dfrac43\\right)$.",
+   "subject": "Mathematics",
+   "chapter": "Integrals",
+   "chCls": "XII"
+  },
+  {
+   "no": 19,
+   "qid": "691121469",
+   "section": "A",
+   "type": "mcq",
+   "text": "Let $f:[1,\\infty)\\to\\mathbb{R}$ be a differentiable function defined as $f(x)=\\displaystyle\\int_1^x f(t)\\,dt+(1-x)(\\log_e x-1)+e$. Then the value of $f(f(1))$ is :",
+   "options": [
+    "$(1+e^e)$",
+    "$(1+e)$",
+    "$(1+e+e^e)$",
+    "$1+2e$"
+   ],
+   "optionIds": [
+    "6911211603",
+    "6911211604",
+    "6911211605",
+    "6911211606"
+   ],
+   "answer": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$f(1)=0+0+e=e$.<br>Differentiating: $f'(x)=f(x)-(\\ln x-1)+\\dfrac{1-x}{x}=f(x)-\\ln x+\\dfrac1x$.<br>So $f'-f=\\dfrac1x-\\ln x$; $\\ln x$ is a particular solution (since $(\\ln x)'-\\ln x=\\dfrac1x-\\ln x$), hence $f(x)=\\ln x+Ce^x$.<br>$f(1)=Ce=e \\Rightarrow C=1$, so $f(x)=\\ln x+e^x$.<br>$f(f(1))=f(e)=1+e^e$.",
+   "subject": "Mathematics",
+   "chapter": "Differential Equations",
+   "chCls": "XII"
+  },
+  {
+   "no": 20,
+   "qid": "691121470",
+   "section": "A",
+   "type": "mcq",
+   "text": "Let $f(x)$ and $g(x)$ be twice differentiable functions satisfying $f''(x)=g''(x)$ for all $x\\in\\mathbb{R}$, $f'(1)=2g'(1)=4$ and $g(2)=3f(2)=9$. Then $f(25)-g(25)$ is equal to :",
+   "options": [
+    "$20$",
+    "$40$",
+    "$-20$",
+    "$-40$"
+   ],
+   "optionIds": [
+    "6911211607",
+    "6911211608",
+    "6911211609",
+    "6911211610"
+   ],
+   "answer": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$f''=g''$, so $f'-g'$ is constant $=f'(1)-g'(1)=4-2=2$.<br>Then $f-g=2x+c$; at $x=2$: $3-9=4+c \\Rightarrow c=-10$.<br>$f(25)-g(25)=50-10=40$.",
+   "subject": "Mathematics",
+   "chapter": "Differential Equations",
+   "chCls": "XII"
+  },
+  {
+   "no": 21,
+   "qid": "691121471",
+   "section": "B",
+   "type": "num",
+   "text": "Let $A=\\{1,4,7\\}$ and $B=\\{2,3,8\\}$. Then the number of elements, in the relation $R=\\{((a_1,b_1),(a_2,b_2))\\in((A\\times B)\\times(A\\times B)) : a_1+b_2 \\text{ divides } a_2+b_1\\}$ is __________.",
+   "answer": 18,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "As $(a_1,b_2)$ runs over $A\\times B$, $s=a_1+b_2$ takes the values $3,4,9,6,7,12,9,10,15$; independently $t=a_2+b_1$ takes the same 9 values.<br>Count pairs with $s\\mid t$: $s=3$: 6 values of $t$ ($3,9,6,12,9,15$); $s=4$: 2 ($4,12$); $s=9$ (twice): $2\\times2=4$; $s=6$: 2 ($6,12$); $s=7,12,10,15$: 1 each.<br>Total $=6+2+4+2+4=18$.",
+   "subject": "Mathematics",
+   "chapter": "Relations and Functions",
+   "chCls": "XI"
+  },
+  {
+   "no": 22,
+   "qid": "691121472",
+   "section": "B",
+   "type": "num",
+   "text": "From the point $(-1,-1)$, two rays are sent making angles of $45^\\circ$ with the line $x+y=0$. These rays get reflected from the mirror $x+2y=1$. If the equations of the reflected rays are $ax+by=9$ and $cx+dy=7$, $a,b,c,d\\in\\mathbb{Z}$, then the value of $ad+bc$ is __________.",
+   "answer": 7,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Lines through $(-1,-1)$ at $45^\\circ$ to $x+y=0$ are $y=-1$ and $x=-1$. They meet the mirror at $(3,-1)$ and $(-1,1)$.<br>Each reflected ray passes through the image of $(-1,-1)$ in $x+2y-1=0$: $(-1,-1)-\\dfrac{2(-4)}{5}(1,2)=\\left(\\dfrac35,\\dfrac{11}{5}\\right)$.<br>Through $(3,-1)$: slope $-\\dfrac43$, line $4x+3y=9$, so $a=4$, $b=3$.<br>Through $(-1,1)$: slope $\\dfrac34$, line $-3x+4y=7$, so $c=-3$, $d=4$.<br>$ad+bc=16-9=7$.",
+   "subject": "Mathematics",
+   "chapter": "Straight Lines",
+   "chCls": "XI"
+  },
+  {
+   "no": 23,
+   "qid": "691121473",
+   "section": "B",
+   "type": "num",
+   "text": "If $S=\\left\\{\\theta\\in[-\\pi,\\pi] : \\cos\\theta\\cos\\dfrac{5\\theta}{2}=\\cos7\\theta\\cos\\dfrac{7\\theta}{2}\\right\\}$, then $n(S)$ is equal to __________.",
+   "answer": 19,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Multiply by 2: $\\cos\\dfrac{7\\theta}{2}+\\cos\\dfrac{3\\theta}{2}=\\cos\\dfrac{21\\theta}{2}+\\cos\\dfrac{7\\theta}{2}$, so $\\cos\\dfrac{21\\theta}{2}=\\cos\\dfrac{3\\theta}{2}$.<br>$\\dfrac{21\\theta}{2}=2n\\pi\\pm\\dfrac{3\\theta}{2} \\Rightarrow \\theta=\\dfrac{2n\\pi}{9}$ or $\\theta=\\dfrac{n\\pi}{6}$.<br>In $[-\\pi,\\pi]$: $\\dfrac{2n\\pi}{9}$, $n=-4,\\ldots,4$: 9 values; $\\dfrac{n\\pi}{6}$, $n=-6,\\ldots,6$: 13 values.<br>Common: $0,\\pm\\dfrac{2\\pi}{3}$ (3 values).<br>$n(S)=9+13-3=19$.",
+   "subject": "Mathematics",
+   "chapter": "Trigonometric Functions",
+   "chCls": "XI"
+  },
+  {
+   "no": 24,
+   "qid": "691121474",
+   "section": "B",
+   "type": "num",
+   "text": "Let $f:\\mathbb{R}\\to\\mathbb{R}$ be a function such that $f(x)+3f\\left(\\dfrac\\pi2-x\\right)=\\sin x$, $x\\in\\mathbb{R}$. Let the maximum value of $f$ on $\\mathbb{R}$ be $\\alpha$. If the area of the region bounded by the curves $g(x)=x^2$ and $h(x)=\\beta x^3$, $\\beta>0$, is $\\alpha^2$, then $30\\beta^3$ is equal to __________.",
+   "answer": 16,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Replacing $x$ by $\\dfrac\\pi2-x$: $f\\left(\\dfrac\\pi2-x\\right)+3f(x)=\\cos x$.<br>Solving the two equations: $f(x)=\\dfrac{3\\cos x-\\sin x}{8}$, so $\\alpha=\\dfrac{\\sqrt{10}}{8}$ and $\\alpha^2=\\dfrac{5}{32}$.<br>Curves meet at $x=0$ and $x=\\dfrac1\\beta$: area $=\\displaystyle\\int_0^{1/\\beta}(x^2-\\beta x^3)\\,dx=\\dfrac{1}{3\\beta^3}-\\dfrac{1}{4\\beta^3}=\\dfrac{1}{12\\beta^3}$.<br>$\\dfrac{1}{12\\beta^3}=\\dfrac{5}{32} \\Rightarrow \\beta^3=\\dfrac{8}{15}$.<br>$30\\beta^3=16$.",
+   "subject": "Mathematics",
+   "chapter": "Application of Integrals",
+   "chCls": "XII"
+  },
+  {
+   "no": 25,
+   "qid": "691121475",
+   "section": "B",
+   "type": "num",
+   "text": "Let $y=y(x)$ be the solution of the differential equation $$(\\tan x)^{1/2}\\,dy=\\left(\\sec^3x-(\\tan x)^{3/2}\\,y\\right)dx,\\quad 0&lt;x&lt;\\dfrac\\pi2,\\quad y\\left(\\dfrac\\pi4\\right)=\\dfrac{6\\sqrt2}{5}.$$ If $y\\left(\\dfrac\\pi3\\right)=\\dfrac45\\alpha$, then $\\alpha^4$ equals __________.",
+   "answer": 48,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Dividing by $\\sqrt{\\tan x}$: $\\dfrac{dy}{dx}+y\\tan x=\\dfrac{\\sec^3x}{\\sqrt{\\tan x}}$. Integrating factor $\\sec x$.<br>$y\\sec x=\\displaystyle\\int\\dfrac{\\sec^4x}{\\sqrt{\\tan x}}dx=\\displaystyle\\int\\dfrac{1+t^2}{\\sqrt t}dt=2\\sqrt t+\\dfrac25t^{5/2}+C$, with $t=\\tan x$.<br>At $x=\\dfrac\\pi4$: $\\dfrac{6\\sqrt2}{5}\\cdot\\sqrt2=\\dfrac{12}{5}=2+\\dfrac25+C \\Rightarrow C=0$.<br>At $x=\\dfrac\\pi3$ ($t=\\sqrt3$, $\\sec x=2$): $2y=3^{1/4}\\left(2+\\dfrac65\\right)=\\dfrac{16}{5}3^{1/4}$, so $y=\\dfrac85 3^{1/4}=\\dfrac45\\alpha$.<br>$\\alpha=2\\cdot3^{1/4}$, $\\alpha^4=48$.",
+   "subject": "Mathematics",
+   "chapter": "Differential Equations",
+   "chCls": "XII"
+  },
+  {
+   "no": 26,
+   "qid": "691121476",
+   "section": "A",
+   "type": "mcq",
+   "text": "Match List - I with List - II.<br><table class=\"mt\"><tr><th>List - I</th><th>List - II</th></tr><tr><td>A. Meter (L)</td><td>I. $\\sqrt{\\dfrac{hc}{G}}$</td></tr><tr><td>B. Second (S)</td><td>II. $\\sqrt{\\dfrac{Gh}{c^5}}$</td></tr><tr><td>C. Kilogram (M)</td><td>III. $\\sqrt{\\dfrac{K^2L^2c^3}{Gh}}$</td></tr><tr><td>D. Kelvin (K)</td><td>IV. $\\sqrt{\\dfrac{Gh}{c^3}}$</td></tr></table>where h (Planck's constant), G (gravitational constant) and c (speed of light in vacuum) as fundamental units.<br>Choose the correct answer from the options given below :",
+   "options": [
+    "A-II, B-IV, C-I, D-III",
+    "A-IV, B-II, C-I, D-III",
+    "A-IV, B-I, C-II, D-III",
+    "A-III, B-I, C-II, D-IV"
+   ],
+   "optionIds": [
+    "6911211616",
+    "6911211617",
+    "6911211618",
+    "6911211619"
+   ],
+   "answer": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Dimensions: $[h]=ML^2T^{-1}$, $[G]=M^{-1}L^3T^{-2}$, $[c]=LT^{-1}$.<br>$\\dfrac{Gh}{c^3}$ has dimensions $L^2$, so length $\\propto\\sqrt{\\dfrac{Gh}{c^3}}$ (A-IV).<br>Time $=\\dfrac{\\text{length}}{c}\\propto\\sqrt{\\dfrac{Gh}{c^5}}$ (B-II).<br>$\\dfrac{hc}{G}$ has dimensions $M^2$, so mass $\\propto\\sqrt{\\dfrac{hc}{G}}$ (C-I).<br>The remaining expression III goes with Kelvin (D-III).<br>A-IV, B-II, C-I, D-III.",
+   "subject": "Physics",
+   "chapter": "Units and Measurements",
+   "chCls": "XI"
+  },
+  {
+   "no": 27,
+   "qid": "691121477",
+   "section": "A",
+   "type": "mcq",
+   "text": "In an experiment to determine the resistance of a given wire using Ohm's law, the voltmeter and ammeter readings are noted as 10 V and 5 A, respectively. The least counts of voltmeter and ammeter are 500 mV and 200 mA, respectively. The estimated error in the resistance measurement is __________ $\\Omega$",
+   "options": [
+    "$0.25$",
+    "$2$",
+    "$2.5$",
+    "$0.18$"
+   ],
+   "optionIds": [
+    "6911211620",
+    "6911211621",
+    "6911211622",
+    "6911211623"
+   ],
+   "answer": 3,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$R=\\dfrac{V}{I}=\\dfrac{10}{5}=2\\ \\Omega$.<br>$\\dfrac{\\Delta R}{R}=\\dfrac{\\Delta V}{V}+\\dfrac{\\Delta I}{I}=\\dfrac{0.5}{10}+\\dfrac{0.2}{5}=0.05+0.04=0.09$.<br>$\\Delta R=0.09\\times2=0.18\\ \\Omega$.",
+   "subject": "Physics",
+   "chapter": "Units and Measurements",
+   "chCls": "XI"
+  },
+  {
+   "no": 28,
+   "qid": "691121478",
+   "section": "A",
+   "type": "mcq",
+   "text": "A mass of 1 kg is kept on a inclined plane with $30^\\circ$ inclination with respect to horizontal plane and it is at rest initially. Then the whole assembly is moved up with constant velocity of 4 m/s. The work done by the frictional force in time 2 s is __________ J. (Take $g=10\\ \\mathrm{m/s^2}$)",
+   "options": [
+    "$20$",
+    "$25$",
+    "$30$",
+    "$10$"
+   ],
+   "optionIds": [
+    "6911211624",
+    "6911211625",
+    "6911211626",
+    "6911211627"
+   ],
+   "answer": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "The block stays at rest relative to the incline, and the assembly moves with constant velocity, so static friction balances the component of gravity along the incline: $f=mg\\sin30^\\circ=5$ N, directed up the incline.<br>In 2 s the block moves $4\\times2=8$ m vertically upward.<br>Angle between the friction (along the incline, up) and the vertical displacement is $60^\\circ$.<br>$W_f=5\\times8\\times\\cos60^\\circ=20$ J.",
+   "subject": "Physics",
+   "chapter": "Work, Energy and Power",
+   "chCls": "XI"
+  },
+  {
+   "no": 29,
+   "qid": "691121479",
+   "section": "A",
+   "type": "mcq",
+   "text": "The velocity $(v)$ versus time $(t)$ plot of a particle is shown in the figure, for a time interval of 40 s. The total distance travelled by the particle and the average velocity during this period are, respectively __________.",
+   "options": [
+    "25 m and zero",
+    "50 m and zero",
+    "100 m and zero",
+    "100 m and 2.5 m/s"
+   ],
+   "optionIds": [
+    "6911211628",
+    "6911211629",
+    "6911211630",
+    "6911211631"
+   ],
+   "answer": 2,
+   "fig": "q29.png",
+   "optionFigs": null,
+   "sol": "Distance = total area between the graph and the time axis.<br>0 to 20 s: triangle of base 20 s and height 5 m/s, area $=50$ m (positive).<br>20 to 40 s: triangle of base 20 s and height 5 m/s below the axis, area $=50$ m (negative velocity).<br>Distance $=50+50=100$ m; displacement $=50-50=0$, so average velocity is zero.",
+   "subject": "Physics",
+   "chapter": "Motion in a Straight Line",
+   "chCls": "XI"
+  },
+  {
+   "no": 30,
+   "qid": "691121480",
+   "section": "A",
+   "type": "mcq",
+   "text": "A wheel initially at rest is subjected to a uniform angular acceleration about its axis. In the first 2 s it rotates through an angle $\\theta_1$ and in the next 2 s it rotates through an angle $\\theta_2$. The ratio $\\dfrac{\\theta_2}{\\theta_1}$ is __________.",
+   "options": [
+    "$6$",
+    "$3$",
+    "$4$",
+    "$\\dfrac13$"
+   ],
+   "optionIds": [
+    "6911211632",
+    "6911211633",
+    "6911211634",
+    "6911211635"
+   ],
+   "answer": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "From rest, $\\theta=\\dfrac12\\alpha t^2$.<br>$\\theta_1=\\dfrac12\\alpha(2)^2=2\\alpha$; $\\theta_1+\\theta_2=\\dfrac12\\alpha(4)^2=8\\alpha \\Rightarrow \\theta_2=6\\alpha$.<br>$\\dfrac{\\theta_2}{\\theta_1}=3$.",
+   "subject": "Physics",
+   "chapter": "System of Particles and Rotational Motion",
+   "chCls": "XI"
+  },
+  {
+   "no": 31,
+   "qid": "691121481",
+   "section": "A",
+   "type": "mcq",
+   "text": "An object of uniform density rolls up the curved path with the initial velocity $v_o$ as shown in the figure. If the maximum height attained by an object is $\\dfrac{7v_o^2}{10\\,g}$ ($g$ = acceleration due to gravity), the object is a __________.",
+   "options": [
+    "solid cylinder",
+    "ring",
+    "disc",
+    "solid sphere"
+   ],
+   "optionIds": [
+    "6911211636",
+    "6911211637",
+    "6911211638",
+    "6911211639"
+   ],
+   "answer": 3,
+   "fig": "q31.png",
+   "optionFigs": null,
+   "sol": "Rolling without slipping: total KE $=\\dfrac12mv_o^2\\left(1+\\dfrac{k^2}{R^2}\\right)$, all converted to $mgh$.<br>$h=\\dfrac{v_o^2}{2g}\\left(1+\\dfrac{k^2}{R^2}\\right)=\\dfrac{7v_o^2}{10g} \\Rightarrow 1+\\dfrac{k^2}{R^2}=\\dfrac75 \\Rightarrow \\dfrac{k^2}{R^2}=\\dfrac25$.<br>$k^2=\\dfrac25R^2$ is a solid sphere.",
+   "subject": "Physics",
+   "chapter": "System of Particles and Rotational Motion",
+   "chCls": "XI"
+  },
+  {
+   "no": 32,
+   "qid": "691121482",
+   "section": "A",
+   "type": "mcq",
+   "text": "A body of mass $m$ is taken from the surface of earth to a height equal to twice the radius of earth $(R_e)$. The increase in potential energy will be __________.<br>($g$ is acceleration due to gravity at the surface of earth)",
+   "options": [
+    "$\\dfrac12mgR_e$",
+    "$\\dfrac34mgR_e$",
+    "$\\dfrac14mgR_e$",
+    "$\\dfrac23mgR_e$"
+   ],
+   "optionIds": [
+    "6911211640",
+    "6911211641",
+    "6911211642",
+    "6911211643"
+   ],
+   "answer": 3,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$\\Delta U=GMm\\left(\\dfrac{1}{R_e}-\\dfrac{1}{3R_e}\\right)=\\dfrac23\\dfrac{GMm}{R_e}$.<br>With $GM=gR_e^2$: $\\Delta U=\\dfrac23mgR_e$.",
+   "subject": "Physics",
+   "chapter": "Gravitation",
+   "chCls": "XI"
+  },
+  {
+   "no": 33,
+   "qid": "691121483",
+   "section": "A",
+   "type": "mcq",
+   "text": "Eight mercury drops, each of radius $r$, coalesce to form a bigger drop. The surface energy released in this process is __________. (S is the surface tension of mercury).",
+   "options": [
+    "$8\\pi r^2S$",
+    "$16\\pi r^2S$",
+    "$64\\pi r^2S$",
+    "$4\\pi r^2S$"
+   ],
+   "optionIds": [
+    "6911211644",
+    "6911211645",
+    "6911211646",
+    "6911211647"
+   ],
+   "answer": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Volume conserved: $\\dfrac43\\pi R^3=8\\cdot\\dfrac43\\pi r^3 \\Rightarrow R=2r$.<br>Decrease in area $=8(4\\pi r^2)-4\\pi(2r)^2=32\\pi r^2-16\\pi r^2=16\\pi r^2$.<br>Energy released $=16\\pi r^2S$.",
+   "subject": "Physics",
+   "chapter": "Mechanical Properties of Fluids",
+   "chCls": "XI"
+  },
+  {
+   "no": 34,
+   "qid": "691121484",
+   "section": "A",
+   "type": "mcq",
+   "text": "An ideal gas at pressure $P$ and temperature $T$ is expanding such that $PT^3$ = constant. The coefficient of volume expansion of the gas is __________.",
+   "options": [
+    "$\\dfrac2T$",
+    "$\\dfrac1T$",
+    "$\\dfrac4T$",
+    "$\\dfrac3T$"
+   ],
+   "optionIds": [
+    "6911211648",
+    "6911211649",
+    "6911211650",
+    "6911211651"
+   ],
+   "answer": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$PV=nRT$ and $P\\propto T^{-3}$, so $V\\propto\\dfrac{T}{P}\\propto T^4$.<br>$\\gamma=\\dfrac1V\\dfrac{dV}{dT}=\\dfrac4T$.",
+   "subject": "Physics",
+   "chapter": "Thermal Properties of Matter",
+   "chCls": "XI"
+  },
+  {
+   "no": 35,
+   "qid": "691121485",
+   "section": "A",
+   "type": "mcq",
+   "text": "Match List - I with List - II.<br><table class=\"mt\"><tr><th>List - I</th><th>List - II</th></tr><tr><td>A. $\\sin^2\\omega t$</td><td>I. Periodic with time period $T=\\dfrac{\\pi}{\\omega}$ but not simple harmonic motion (SHM)</td></tr><tr><td>B. $\\sin^3(2\\omega t)$</td><td>II. Periodic with time period $T=\\dfrac{2\\pi}{\\omega}$ but Not SHM</td></tr><tr><td>C. $\\sin(\\omega t)+\\cos(\\pi\\omega t)$</td><td>III. Periodic with time period $T=\\dfrac{\\pi}{\\omega}$ and SHM</td></tr><tr><td>D. $\\cos\\omega t+\\cos2\\omega t$</td><td>IV. Non-periodic</td></tr></table>Choose the correct answer from the options given below :",
+   "options": [
+    "A-III, B-I, C-IV, D-II",
+    "A-II, B-I, C-III, D-IV",
+    "A-III, B-II, C-IV, D-I",
+    "A-II, B-I, C-IV, D-III"
+   ],
+   "optionIds": [
+    "6911211652",
+    "6911211653",
+    "6911211654",
+    "6911211655"
+   ],
+   "answer": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "A: $\\sin^2\\omega t=\\dfrac12-\\dfrac12\\cos2\\omega t$, an SHM about $\\dfrac12$ with period $\\dfrac{\\pi}{\\omega}$ → III.<br>B: $\\sin^3(2\\omega t)=\\dfrac{3\\sin2\\omega t-\\sin6\\omega t}{4}$, period $\\dfrac{\\pi}{\\omega}$, not SHM → I.<br>C: angular frequencies $\\omega$ and $\\pi\\omega$ have an irrational ratio, so the sum is non-periodic → IV.<br>D: periods $\\dfrac{2\\pi}{\\omega}$ and $\\dfrac{\\pi}{\\omega}$, overall period $\\dfrac{2\\pi}{\\omega}$, not SHM → II.<br>A-III, B-I, C-IV, D-II.",
+   "subject": "Physics",
+   "chapter": "Oscillations",
+   "chCls": "XI"
+  },
+  {
+   "no": 36,
+   "qid": "691121486",
+   "section": "A",
+   "type": "mcq",
+   "text": "A metal rod of length $L$ rotates about one end at origin with a uniform angular velocity $\\omega$. The magnetic field radially falls off as $B(r)=B_0e^{-\\lambda r}$; $\\lambda$ being a positive constant. The emf induced (neglecting the centripetal force on electrons in the rod) is :",
+   "options": [
+    "$B_0\\omega\\left[\\dfrac{1}{\\lambda^2}-e^{-\\lambda L}\\left(\\dfrac{1}{\\lambda^2}+\\dfrac{L}{\\lambda}\\right)\\right]$",
+    "$B_0\\omega\\left[\\dfrac{1}{\\lambda^2}+e^{-\\lambda L}\\left(\\dfrac{1}{\\lambda^2}+\\dfrac{L}{\\lambda}\\right)\\right]$",
+    "$B_0\\omega\\left[\\dfrac{4}{\\lambda^2}-e^{-2\\lambda L}\\left(\\dfrac{1}{\\lambda^2}+\\dfrac{2L}{\\lambda}\\right)\\right]$",
+    "$B_0\\omega\\left[\\dfrac{3}{\\lambda^2}-e^{-3\\lambda L}\\left(\\dfrac{3}{\\lambda^2}+\\dfrac{L}{\\lambda}\\right)\\right]$"
+   ],
+   "optionIds": [
+    "6911211656",
+    "6911211657",
+    "6911211658",
+    "6911211659"
+   ],
+   "answer": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "An element $dr$ at distance $r$ moves with speed $\\omega r$: $d\\varepsilon=B(r)\\,\\omega r\\,dr$.<br>$\\varepsilon=B_0\\omega\\displaystyle\\int_0^L re^{-\\lambda r}dr=B_0\\omega\\left[-\\dfrac{re^{-\\lambda r}}{\\lambda}-\\dfrac{e^{-\\lambda r}}{\\lambda^2}\\right]_0^L$.<br>$=B_0\\omega\\left[\\dfrac{1}{\\lambda^2}-e^{-\\lambda L}\\left(\\dfrac{1}{\\lambda^2}+\\dfrac{L}{\\lambda}\\right)\\right]$.",
+   "subject": "Physics",
+   "chapter": "Electromagnetic Induction",
+   "chCls": "XII"
+  },
+  {
+   "no": 37,
+   "qid": "691121487",
+   "section": "A",
+   "type": "mcq",
+   "text": "Under steady state condition the potential difference across the capacitor in the circuit is __________ V.",
+   "options": [
+    "$0.5$",
+    "$1.5$",
+    "$0$",
+    "$2$"
+   ],
+   "optionIds": [
+    "6911211660",
+    "6911211661",
+    "6911211662",
+    "6911211663"
+   ],
+   "answer": 0,
+   "fig": "q37.png",
+   "optionFigs": null,
+   "sol": "In steady state no current flows in the capacitor branch (capacitor + $4\\ \\Omega$).<br>Current in the loop of the 2 V cell, $6\\ \\Omega$ and $2\\ \\Omega$: $I=\\dfrac{2}{6+2}=0.25$ A.<br>P.d. across the $2\\ \\Omega$ resistor (= p.d. across the capacitor branch) $=0.25\\times2=0.5$ V; no drop across the $4\\ \\Omega$, so the capacitor has $0.5$ V.",
+   "subject": "Physics",
+   "chapter": "Current Electricity",
+   "chCls": "XII"
+  },
+  {
+   "no": 38,
+   "qid": "691121488",
+   "section": "A",
+   "type": "mcq",
+   "text": "A particle of charge $q$ and mass $m$ is projected from origin with an initial velocity $\\vec{v}=\\left(\\dfrac{v_0}{\\sqrt2}\\hat{x}+\\dfrac{v_0}{\\sqrt2}\\hat{y}\\right)$. There exists a uniform magnetic field $\\vec{B}=B_0\\hat{z}$ and a space varying electric field $\\vec{E}=E_0e^{-\\lambda x}\\hat{x}$ within the region $0\\le x\\le L$. After travelling a distance such that $x$-coordinate has changed from $x=0$ to $x=L$, the change in the kinetic energy is __________.",
+   "options": [
+    "$\\dfrac{qE_0}{\\lambda}\\left[1-e^{-\\lambda L}\\right]$",
+    "$\\left(\\dfrac{v_0qB_0}{2\\lambda}\\right)\\left[2-e^{-2\\lambda L}\\right]$",
+    "$\\dfrac{qE_0}{\\lambda}\\left[1+e^{-\\lambda L}\\right]$",
+    "$q\\left(\\dfrac{E_0+v_0B_0}{\\lambda}\\right)\\left[1-e^{-\\lambda L/2}\\right]$"
+   ],
+   "optionIds": [
+    "6911211664",
+    "6911211665",
+    "6911211666",
+    "6911211667"
+   ],
+   "answer": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "The magnetic force is perpendicular to the velocity and does no work.<br>Work by the electric field: $W=\\displaystyle\\int_0^L qE_0e^{-\\lambda x}dx=\\dfrac{qE_0}{\\lambda}\\left[1-e^{-\\lambda L}\\right]$.<br>By the work-energy theorem this is the change in kinetic energy.",
+   "subject": "Physics",
+   "chapter": "Moving Charges and Magnetism",
+   "chCls": "XII"
+  },
+  {
+   "no": 39,
+   "qid": "691121489",
+   "section": "A",
+   "type": "mcq",
+   "text": "Given below are two statements : one is labelled as Assertion (A) and the other is labelled as Reason (R).<br>Assertion (A) : The electromagnetic wave exerts pressure on the surface on which they are allowed to fall.<br>Reason (R) : There is no mass associated with the electromagnetic waves.<br>In the light of the above statements, choose the correct answer from the options given below :",
+   "options": [
+    "Both (A) and (R) are true and (R) is the correct explanation of (A)",
+    "Both (A) and (R) are true but (R) is not the correct explanation of (A)",
+    "(A) is true but (R) is false",
+    "(A) is false but (R) is true"
+   ],
+   "optionIds": [
+    "6911211668",
+    "6911211669",
+    "6911211670",
+    "6911211671"
+   ],
+   "answer": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "EM waves carry momentum $p=\\dfrac{U}{c}$; when they fall on a surface, momentum is transferred, giving radiation pressure. (A) is true.<br>EM waves (photons) have no rest mass, so (R) is true.<br>But the pressure arises from the momentum carried by the wave, not from the absence of mass, so (R) does not explain (A).",
+   "subject": "Physics",
+   "chapter": "Electromagnetic Waves",
+   "chCls": "XII"
+  },
+  {
+   "no": 40,
+   "qid": "691121490",
+   "section": "A",
+   "type": "mcq",
+   "text": "A thin convex lens and a thin concave lens are kept in contact and are co-axial. Which of the following statements is correct for this combination of two lenses ?",
+   "options": [
+    "behaves as concave lens if $|f_{\\text{convex}}|>|f_{\\text{concave}}|$",
+    "behaves as concave lens if $|f_{\\text{convex}}|&lt;|f_{\\text{concave}}|$",
+    "behaves as convex lens if $|f_{\\text{convex}}|>|f_{\\text{concave}}|$",
+    "Focal length of the lens system will change if the positions of two lenses are interchanged"
+   ],
+   "optionIds": [
+    "6911211672",
+    "6911211673",
+    "6911211674",
+    "6911211675"
+   ],
+   "answer": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Power of the combination: $P=\\dfrac{1}{|f_{\\text{convex}}|}-\\dfrac{1}{|f_{\\text{concave}}|}$.<br>If $|f_{\\text{convex}}|>|f_{\\text{concave}}|$, then $P&lt;0$: the combination behaves as a concave (diverging) lens.<br>For thin lenses in contact, interchanging them does not change $P$.",
+   "subject": "Physics",
+   "chapter": "Ray Optics and Optical Instruments",
+   "chCls": "XII"
+  },
+  {
+   "no": 41,
+   "qid": "691121491",
+   "section": "A",
+   "type": "mcq",
+   "text": "An object $AB$ is placed 15 cm on the left of a convex lens $P$ of focal length 10 cm. Another convex lens $Q$ is now placed 15 cm right of lens $P$. If the focal length of lens $Q$ is 15 cm, the final image is __________.",
+   "options": [
+    "virtual, formed at 7.5 cm right of lens $Q$, with a size bigger than that of $AB$",
+    "real, formed at 7.5 cm right of lens $Q$, with a size same as that of $AB$",
+    "formed at infinity.",
+    "real, formed at 7 cm right of lens $Q$, with a size smaller than that of $AB$"
+   ],
+   "optionIds": [
+    "6911211676",
+    "6911211677",
+    "6911211678",
+    "6911211679"
+   ],
+   "answer": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Lens P: $u=-15$, $f=10$: $\\dfrac1v=\\dfrac1{10}-\\dfrac1{15}=\\dfrac1{30} \\Rightarrow v=30$ cm; $m_1=\\dfrac{30}{-15}=-2$.<br>This image is 15 cm beyond Q, so it is a virtual object for Q: $u=+15$, $f=15$: $\\dfrac1v=\\dfrac1{15}+\\dfrac1{15} \\Rightarrow v=7.5$ cm; $m_2=\\dfrac{7.5}{15}=\\dfrac12$.<br>$m=m_1m_2=-1$: real (inverted) image 7.5 cm right of Q, same size as AB.",
+   "subject": "Physics",
+   "chapter": "Ray Optics and Optical Instruments",
+   "chCls": "XII"
+  },
+  {
+   "no": 42,
+   "qid": "691121492",
+   "section": "A",
+   "type": "mcq",
+   "text": "The maximum intensity in a Young's double slit experiment is $I_o$. Distance between the slits $(d)$ is $5\\lambda$, where $\\lambda$ is the wavelength of light used. The intensity of the fringe, exactly opposite to one of the slits on the screen, placed at $D=10d$ is __________.",
+   "options": [
+    "$\\dfrac{I_o}{4}$",
+    "$\\dfrac{I_o}{2}$",
+    "$I_o$",
+    "$\\dfrac{3I_o}{4}$"
+   ],
+   "optionIds": [
+    "6911211680",
+    "6911211681",
+    "6911211682",
+    "6911211683"
+   ],
+   "answer": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Opposite a slit, $y=\\dfrac d2$: path difference $=\\dfrac{yd}{D}=\\dfrac{d^2}{2D}=\\dfrac{d}{20}=\\dfrac{5\\lambda}{20}=\\dfrac{\\lambda}{4}$.<br>Phase difference $\\phi=\\dfrac{2\\pi}{\\lambda}\\cdot\\dfrac{\\lambda}{4}=\\dfrac{\\pi}{2}$.<br>$I=I_o\\cos^2\\dfrac{\\phi}{2}=I_o\\cos^2\\dfrac{\\pi}{4}=\\dfrac{I_o}{2}$.",
+   "subject": "Physics",
+   "chapter": "Wave Optics",
+   "chCls": "XII"
+  },
+  {
+   "no": 43,
+   "qid": "691121493",
+   "section": "A",
+   "type": "mcq",
+   "text": "An electron is travelling with a velocity $v$ in free space and when it enters a medium, its velocity is reduced by 20%. The de Broglie wavelength of electron in the medium is $\\alpha\\lambda_0$, where $\\lambda_0$ is its de Broglie wavelength in free space. The value of $\\alpha$ is __________.",
+   "options": [
+    "$1.20$",
+    "$1.0$",
+    "$1.25$",
+    "$0.75$"
+   ],
+   "optionIds": [
+    "6911211684",
+    "6911211685",
+    "6911211686",
+    "6911211687"
+   ],
+   "answer": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$\\lambda=\\dfrac{h}{mv}\\propto\\dfrac1v$.<br>In the medium $v'=0.8v$, so $\\lambda=\\dfrac{\\lambda_0}{0.8}=1.25\\lambda_0$.<br>$\\alpha=1.25$.",
+   "subject": "Physics",
+   "chapter": "Dual Nature of Radiation and Matter",
+   "chCls": "XII"
+  },
+  {
+   "no": 44,
+   "qid": "691121494",
+   "section": "A",
+   "type": "mcq",
+   "text": "Assuming the experimental mass of ${}^{12}_{6}C$ as 12 u, the mass defect of ${}^{12}_{6}C$ atom is __________ $\\mathrm{MeV/c^2}$.<br>(Mass of proton = 1.00727 u. mass of neutron = 1.00866 u, 1 u = 931.5 $\\mathrm{MeV/c^2}$ and c is the speed of the light in vacuum).",
+   "options": [
+    "$127.5$",
+    "$89.03$",
+    "$272.0$",
+    "$92.0$"
+   ],
+   "optionIds": [
+    "6911211688",
+    "6911211689",
+    "6911211690",
+    "6911211691"
+   ],
+   "answer": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Mass of 6 protons and 6 neutrons $=6(1.00727)+6(1.00866)=6.04362+6.05196=12.09558$ u.<br>Mass defect $=12.09558-12=0.09558$ u.<br>$0.09558\\times931.5\\approx89.03\\ \\mathrm{MeV/c^2}$.",
+   "subject": "Physics",
+   "chapter": "Nuclei",
+   "chCls": "XII"
+  },
+  {
+   "no": 45,
+   "qid": "691121495",
+   "section": "A",
+   "type": "mcq",
+   "text": "In a semiconductor p-n diode, the doping concentrations on p-side and n-side are $10^{15}$ atoms/cm$^3$ and $10^{18}$ atoms/cm$^3$, respectively. Which one of the following statements is true ?",
+   "options": [
+    "Widths of depletion region on either side of the interface are equal",
+    "The depletion region width is more on p-side compared to that in n-side",
+    "The depletion region width is more on n-side compared to that in p-side",
+    "No depletion region forms because of unequal doping concentrations on p and n-sides"
+   ],
+   "optionIds": [
+    "6911211692",
+    "6911211693",
+    "6911211694",
+    "6911211695"
+   ],
+   "answer": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Charge neutrality of the depletion layer: $N_Ax_p=N_Dx_n$.<br>$\\dfrac{x_p}{x_n}=\\dfrac{N_D}{N_A}=\\dfrac{10^{18}}{10^{15}}=1000$.<br>So the depletion region extends much more into the lightly doped p-side.",
+   "subject": "Physics",
+   "chapter": "Semiconductor Electronics",
+   "chCls": "XII"
+  },
+  {
+   "no": 46,
+   "qid": "691121496",
+   "section": "B",
+   "type": "num",
+   "text": "A copper wire of length 3 m is stretched by 3 mm by applying an external force. The volume of the wire is $600\\times10^{-6}\\ \\mathrm{m^3}$. The elastic potential energy stored in the wire in stretched condition would be __________ J.<br>(Given Young modulus of copper $=1.1\\times10^{11}\\ \\mathrm{N/m^2}$)",
+   "answer": 33,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Strain $=\\dfrac{3\\times10^{-3}}{3}=10^{-3}$.<br>Energy $=\\dfrac12Y(\\text{strain})^2\\times\\text{volume}=\\dfrac12\\times1.1\\times10^{11}\\times10^{-6}\\times600\\times10^{-6}$.<br>$=33$ J.",
+   "subject": "Physics",
+   "chapter": "Mechanical Properties of Solids",
+   "chCls": "XI"
+  },
+  {
+   "no": 47,
+   "qid": "691121497",
+   "section": "B",
+   "type": "num",
+   "text": "The heat extracted out of $x$ gram of water initially at $50\\ {}^\\circ$C to cool it down to $0\\ {}^\\circ$C is sufficient to evaporate $(1000-x)$ gram of water also initially at $50\\ {}^\\circ$C. The value of $x$ (closest integer) is __________.<br>(Take latent heat of water 2256 kJ/kg. K, specific heat capacity of water 4200 J/kg. K)",
+   "answer": 922,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Heat released by $x$ g cooling $50\\to0\\ {}^\\circ$C: $x\\times4.2\\times50=210x$ J.<br>Heat to take $(1000-x)$ g from $50$ to $100\\ {}^\\circ$C and evaporate it: $(1000-x)(4.2\\times50+2256)=2466(1000-x)$ J.<br>$210x=2466(1000-x) \\Rightarrow x=\\dfrac{2466000}{2676}\\approx921.5$.<br>Closest integer: $922$.",
+   "subject": "Physics",
+   "chapter": "Thermal Properties of Matter",
+   "chCls": "XI"
+  },
+  {
+   "no": 48,
+   "qid": "691121498",
+   "section": "B",
+   "type": "num",
+   "text": "A series LCR circuit with $R=20\\ \\Omega$, $L=1.6$ H and $C=40\\ \\mu$F is connected to a variable frequency a.c. source. The inductive reactance at resonant frequency is __________ $\\Omega$.",
+   "answer": 200,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$\\omega_0=\\dfrac{1}{\\sqrt{LC}}=\\dfrac{1}{\\sqrt{1.6\\times40\\times10^{-6}}}=\\dfrac{1}{8\\times10^{-3}}=125$ rad/s.<br>$X_L=\\omega_0L=125\\times1.6=200\\ \\Omega$.",
+   "subject": "Physics",
+   "chapter": "Alternating Current",
+   "chCls": "XII"
+  },
+  {
+   "no": 49,
+   "qid": "691121499",
+   "section": "B",
+   "type": "num",
+   "text": "When an external resistance of $5\\ \\Omega$ is connected across terminals of a cell, a current of 0.25 A flows through it. When the $5\\ \\Omega$ resistor is replaced by a $2\\ \\Omega$ resistor, a current of 0.5 A flows through it. The internal resistance of the cell is __________ $\\Omega$.",
+   "answer": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$E=0.25(5+r)=0.5(2+r)$.<br>$1.25+0.25r=1+0.5r \\Rightarrow r=1\\ \\Omega$.",
+   "subject": "Physics",
+   "chapter": "Current Electricity",
+   "chCls": "XII"
+  },
+  {
+   "no": 50,
+   "qid": "691121500",
+   "section": "B",
+   "type": "num",
+   "text": "A circular loop of radius 20 cm and resistance $2\\ \\Omega$ is placed in a time varying magnetic field $\\vec{B}=(2t^2+2t+3)$ T. At $t=0$, for the plane of the loop being perpendicular to the magnetic field and, the induced current in the loop at $t=3$ s is $\\dfrac{\\alpha}{50}$ A. The value of $\\alpha$ is __________.<br>(Take $\\pi=22/7$)",
+   "answer": 44,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Flux $\\phi=BA$ with $A=\\pi(0.2)^2=0.04\\pi\\ \\mathrm{m^2}$.<br>$\\varepsilon=A\\dfrac{dB}{dt}=0.04\\pi(4t+2)$; at $t=3$ s: $\\varepsilon=0.04\\times\\dfrac{22}{7}\\times14=1.76$ V.<br>$I=\\dfrac{1.76}{2}=0.88$ A $=\\dfrac{44}{50}$ A.<br>$\\alpha=44$.",
+   "subject": "Physics",
+   "chapter": "Electromagnetic Induction",
+   "chCls": "XII"
+  },
+  {
+   "no": 51,
+   "qid": "691121501",
+   "section": "A",
+   "type": "mcq",
+   "text": "What volume of hydrogen gas at STP would be liberated by action of 50 mL of $\\mathrm{H_2SO_4}$ of 50% purity (density $=1.3\\ \\mathrm{g\\ mL^{-1}}$) on 20 g of zinc ?<br>Given : Molar mass of H, O, S, Zn are 1, 16, 32, 65 $\\mathrm{g\\ mol^{-1}}$ respectively.",
+   "options": [
+    "5.824 L",
+    "7.428 L",
+    "6.892 L",
+    "8.375 L"
+   ],
+   "optionIds": [
+    "6911211701",
+    "6911211702",
+    "6911211703",
+    "6911211704"
+   ],
+   "answer": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$\\mathrm{Zn + H_2SO_4 \\rightarrow ZnSO_4 + H_2}$.<br>Mass of $\\mathrm{H_2SO_4}=50\\times1.3\\times0.5=32.5$ g $=\\dfrac{32.5}{98}=0.332$ mol.<br>Zn $=\\dfrac{20}{65}=0.308$ mol, so Zn is limiting.<br>$V(\\mathrm{H_2})=\\dfrac{20}{65}\\times22.4=6.892$ L.",
+   "subject": "Chemistry",
+   "chapter": "Some Basic Concepts of Chemistry",
+   "chCls": "XI"
+  },
+  {
+   "no": 52,
+   "qid": "691121502",
+   "section": "A",
+   "type": "mcq",
+   "text": "Which of the following statement(s) is/are true ?<br>A. If two orbitals have the same value of $(n+l)$, the orbital with lower value of n will have lower energy.<br>B. Energies of the orbitals in the same subshell increase with increase in atomic number.<br>C. The size of $2p_x$ orbital is less than the size of $3p_x$ orbital.<br>D. Among 5f, 6s, 4d, 5p and 5d orbitals, none of the orbitals have 2 radial nodes.<br>Choose the correct answer from the options given below :",
+   "options": [
+    "A, B and C only",
+    "A and C only",
+    "C and D only",
+    "A only"
+   ],
+   "optionIds": [
+    "6911211705",
+    "6911211706",
+    "6911211707",
+    "6911211708"
+   ],
+   "answer": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "A: true (the $(n+l)$ rule).<br>B: false; with increasing atomic number the effective nuclear charge increases and orbital energies decrease.<br>C: true; size increases with $n$.<br>D: radial nodes $=n-l-1$: 5f 1, 6s 5, 4d 1, 5p 3, 5d 2. The 5d orbital has 2 radial nodes, so D is false.<br>A and C only.",
+   "subject": "Chemistry",
+   "chapter": "Structure of Atom",
+   "chCls": "XI"
+  },
+  {
+   "no": 53,
+   "qid": "691121503",
+   "section": "A",
+   "type": "mcq",
+   "text": "The covalent radii of atoms A and B are $r_A$ and $r_B$, respectively. The covalent bond length and total length of AB molecule are respectively",
+   "options": [
+    "$(r_A+r_B)$, $2(r_A+r_B)$",
+    "$\\dfrac12(r_A+r_B)$, $(r_A+r_B)$",
+    "$(r_A+r_B)$, $(r_A+r_B)$",
+    "$2(r_A+r_B)$, $\\dfrac12(r_A+r_B)$"
+   ],
+   "optionIds": [
+    "6911211709",
+    "6911211710",
+    "6911211711",
+    "6911211712"
+   ],
+   "answer": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Bond length = distance between the two nuclei $=r_A+r_B$.<br>The total length of the molecule runs from the outer edge of A to the outer edge of B: $r_A+(r_A+r_B)+r_B=2(r_A+r_B)$.",
+   "subject": "Chemistry",
+   "chapter": "Chemical Bonding and Molecular Structure",
+   "chCls": "XI"
+  },
+  {
+   "no": 54,
+   "qid": "691121504",
+   "section": "A",
+   "type": "mcq",
+   "text": "Consider the following data for the reaction $\\mathrm{X_2(g)+Y_2(g)\\rightleftharpoons 2XY(g)}$ at 600 K. The $\\Delta_rG^\\ominus$ (in $\\mathrm{kJ\\ mol^{-1}}$) for the reaction is :$$\\begin{array}{|c|c|c|}\\hline \\text{Compound} & \\Delta_fH^\\ominus_{600\\,K}\\ (\\mathrm{kJ\\ mol^{-1}}) & S^\\ominus_{600\\,K}\\ (\\mathrm{J\\ mol^{-1}\\ K^{-1}}) \\\\ \\hline \\mathrm{XY(g)} & 42 & 200 \\\\ \\hline \\mathrm{X_2(g)} & 8 & 140 \\\\ \\hline \\mathrm{Y_2(g)} & 80 & 250 \\\\ \\hline \\end{array}$$",
+   "options": [
+    "$-21000$",
+    "$-10$",
+    "$-1000$",
+    "$-9.012$"
+   ],
+   "optionIds": [
+    "6911211713",
+    "6911211714",
+    "6911211715",
+    "6911211716"
+   ],
+   "answer": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$\\Delta_rH^\\ominus=2(42)-(8+80)=-4\\ \\mathrm{kJ\\ mol^{-1}}$.<br>$\\Delta_rS^\\ominus=2(200)-(140+250)=10\\ \\mathrm{J\\ mol^{-1}K^{-1}}=0.010\\ \\mathrm{kJ\\ mol^{-1}K^{-1}}$.<br>$\\Delta_rG^\\ominus=\\Delta_rH^\\ominus-T\\Delta_rS^\\ominus=-4-600\\times0.010=-10\\ \\mathrm{kJ\\ mol^{-1}}$.",
+   "subject": "Chemistry",
+   "chapter": "Thermodynamics",
+   "chCls": "XI"
+  },
+  {
+   "no": 55,
+   "qid": "691121505",
+   "section": "A",
+   "type": "mcq",
+   "text": "The correct order of molar heat capacities measured at 298 K and 1 bar is :",
+   "options": [
+    "Copper(s) > Bromine(l) > Helium(g)",
+    "Bromine(l) > Copper(s) > Helium(g)",
+    "Helium(g) > Bromine(l) > Copper(s)",
+    "Helium(g) > Bromine(l) = Copper(s)"
+   ],
+   "optionIds": [
+    "6911211717",
+    "6911211718",
+    "6911211719",
+    "6911211720"
+   ],
+   "answer": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Molar heat capacities ($C_p$, J $\\mathrm{K^{-1}\\ mol^{-1}}$) at 298 K: $\\mathrm{Br_2(l)}\\approx75.7$, Cu(s) $\\approx24.4$, He(g) $=\\dfrac52R\\approx20.8$.<br>A polyatomic liquid has many more modes to store energy than a metal (Dulong-Petit $\\approx3R$) or a monatomic gas.<br>Order: Bromine(l) > Copper(s) > Helium(g).",
+   "subject": "Chemistry",
+   "chapter": "Thermodynamics",
+   "chCls": "XI"
+  },
+  {
+   "no": 56,
+   "qid": "691121506",
+   "section": "A",
+   "type": "mcq",
+   "text": "The reaction $\\mathrm{A(g)\\rightleftharpoons B(g)+C(g)}$ was initiated with the amount 'a' of A(g). At equilibrium it is found that the amount of A(g) remaining is $(a-x)$ at a total pressure of p.<br>The equilibrium constant Kp of the reaction can be calculated from the expression :",
+   "options": [
+    "$\\dfrac{x^2}{a^2+x^2}\\times p$",
+    "$\\dfrac{x^2}{a^2-x^2}\\times p$",
+    "$\\dfrac{a+x^2}{x^2}\\times p$",
+    "$\\dfrac{a^2-x^2}{x^2}\\times p$"
+   ],
+   "optionIds": [
+    "6911211721",
+    "6911211722",
+    "6911211723",
+    "6911211724"
+   ],
+   "answer": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "At equilibrium: A $=a-x$, B $=x$, C $=x$; total $=a+x$.<br>$K_p=\\dfrac{\\left(\\dfrac{x}{a+x}p\\right)^2}{\\dfrac{a-x}{a+x}p}=\\dfrac{x^2p}{(a+x)(a-x)}=\\dfrac{x^2}{a^2-x^2}\\times p$.",
+   "subject": "Chemistry",
+   "chapter": "Equilibrium",
+   "chCls": "XI"
+  },
+  {
+   "no": 57,
+   "qid": "691121507",
+   "section": "A",
+   "type": "mcq",
+   "text": "One half cell in a voltaic cell is constructed by dipping silver rod in $\\mathrm{AgNO_3}$ solution of unknown concentration, other half cell is Zn rod dipped in 1 molar solution of $\\mathrm{ZnSO_4}$.<br>A voltage of 1.60 V is measured at 298 K for this cell. What is the concentration of $\\mathrm{Ag^+}$ ions used in terms of $\\log x$ $(x=[\\mathrm{Ag^+}])$ ?<br>$E^\\ominus_{\\mathrm{Zn^{2+}/Zn}}=-0.76$ V, $E^\\ominus_{\\mathrm{Ag^+/Ag}}=+0.80$ V, $\\dfrac{2.303RT}{F}=0.059$ V",
+   "options": [
+    "$\\dfrac{2}{3.9}$",
+    "$\\dfrac{4}{5.9}$",
+    "$\\dfrac{2.9}{2}$",
+    "$\\dfrac{5.9}{4}$"
+   ],
+   "optionIds": [
+    "6911211725",
+    "6911211726",
+    "6911211727",
+    "6911211728"
+   ],
+   "answer": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Cell: $\\mathrm{Zn + 2Ag^+ \\rightarrow Zn^{2+} + 2Ag}$, $E^\\ominus_{cell}=0.80-(-0.76)=1.56$ V, $n=2$.<br>$E=1.56-\\dfrac{0.059}{2}\\log\\dfrac{[\\mathrm{Zn^{2+}}]}{[\\mathrm{Ag^+}]^2}=1.56+0.059\\log x$.<br>$1.60=1.56+0.059\\log x \\Rightarrow \\log x=\\dfrac{0.04}{0.059}=\\dfrac{4}{5.9}$.",
+   "subject": "Chemistry",
+   "chapter": "Electrochemistry",
+   "chCls": "XII"
+  },
+  {
+   "no": 58,
+   "qid": "691121508",
+   "section": "A",
+   "type": "mcq",
+   "text": "Given below are two statements :<br>Statement I : The number of pairs among $[\\mathrm{Al_2O_3, Cr_2O_3}]$, $[\\mathrm{Cl_2O_7, Mn_2O_7}]$, $[\\mathrm{Na_2O, V_2O_3}]$ and $[\\mathrm{CO, N_2O}]$ that contain oxides of same nature (acidic, basic, neutral or amphoteric) is 4.<br>Statement II : Among $\\mathrm{Na_2O}$, $\\mathrm{Al_2O_3}$, CO and $\\mathrm{Cl_2O_7}$, the most basic and acidic oxides are $\\mathrm{Na_2O}$ and $\\mathrm{Cl_2O_7}$, respectively.<br>In the light of the above statements, choose the correct answer from the options given below :",
+   "options": [
+    "Both Statement I and Statement II are true",
+    "Both Statement I and Statement II are false",
+    "Statement I is true but Statement II is false",
+    "Statement I is false but Statement II is true"
+   ],
+   "optionIds": [
+    "6911211729",
+    "6911211730",
+    "6911211731",
+    "6911211732"
+   ],
+   "answer": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$\\mathrm{Al_2O_3}$, $\\mathrm{Cr_2O_3}$: both amphoteric. $\\mathrm{Cl_2O_7}$, $\\mathrm{Mn_2O_7}$: both acidic. $\\mathrm{Na_2O}$, $\\mathrm{V_2O_3}$: both basic. CO, $\\mathrm{N_2O}$: both neutral.<br>All 4 pairs match, so Statement I is true.<br>$\\mathrm{Na_2O}$ is strongly basic and $\\mathrm{Cl_2O_7}$ (anhydride of $\\mathrm{HClO_4}$) is strongly acidic; $\\mathrm{Al_2O_3}$ is amphoteric and CO neutral. Statement II is true.",
+   "subject": "Chemistry",
+   "chapter": "Classification of Elements and Periodicity in Properties",
+   "chCls": "XI"
+  },
+  {
+   "no": 59,
+   "qid": "691121509",
+   "section": "A",
+   "type": "mcq",
+   "text": "Given below are two statements :<br>Statement I : Aluminium upon reaction with NaOH forms $[\\mathrm{Al(OH)_6}]^{3-}$ ion.<br>Statement II : The geometry of $\\mathrm{ICl_4^-}$, $\\mathrm{ClO_3^-}$ and $\\mathrm{IBr_2^-}$ is square planar, pyramidal and linear respectively.<br>In the light of the above statements, choose the correct answer from the options given below :",
+   "options": [
+    "Both Statement I and Statement II are true",
+    "Both Statement I and Statement II are false",
+    "Statement I is true but Statement II is false",
+    "Statement I is false but Statement II is true"
+   ],
+   "optionIds": [
+    "6911211733",
+    "6911211734",
+    "6911211735",
+    "6911211736"
+   ],
+   "answer": 3,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$\\mathrm{2Al + 2NaOH + 6H_2O \\rightarrow 2Na^+[Al(OH)_4]^- + 3H_2}$: the product is tetrahydroxidoaluminate, $[\\mathrm{Al(OH)_4}]^-$. Statement I is false.<br>$\\mathrm{ICl_4^-}$: 4 bp + 2 lp, square planar. $\\mathrm{ClO_3^-}$: 3 bp + 1 lp, pyramidal. $\\mathrm{IBr_2^-}$: 2 bp + 3 lp, linear. Statement II is true.",
+   "subject": "Chemistry",
+   "chapter": "Chemical Bonding and Molecular Structure",
+   "chCls": "XI"
+  },
+  {
+   "no": 60,
+   "qid": "691121510",
+   "section": "A",
+   "type": "mcq",
+   "text": "Given below are two statements :<br>Statement I : Presence of large number of unpaired electrons in transition metal atoms results in higher enthalpies of their atomisation.<br>Statement II : $d_{xy}=d_{xz}=d_{yz}&lt;d_{x^2-y^2}=d_{z^2}$ and $d_{x^2-y^2}=d_{z^2}&lt;d_{xy}=d_{xz}=d_{yz}$ are the d-orbital splittings in $[\\mathrm{Fe(H_2O)_6}]^{3+}$ and $[\\mathrm{Ni(Cl)_4}]^{2-}$ complex ions respectively.<br>In the light of the above statements, choose the correct answer from the options given below :",
+   "options": [
+    "Both Statement I and Statement II are correct",
+    "Both Statement I and Statement II are incorrect",
+    "Statement I is correct but Statement II is incorrect",
+    "Statement I is incorrect but Statement II is correct"
+   ],
+   "optionIds": [
+    "6911211737",
+    "6911211738",
+    "6911211739",
+    "6911211740"
+   ],
+   "answer": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "More unpaired d electrons give stronger metallic bonding, so higher enthalpy of atomisation (the maxima near the middle of each series). Statement I is correct.<br>$[\\mathrm{Fe(H_2O)_6}]^{3+}$ is octahedral: $t_{2g}$ ($d_{xy}, d_{xz}, d_{yz}$) lower than $e_g$ ($d_{x^2-y^2}, d_{z^2}$).<br>$[\\mathrm{NiCl_4}]^{2-}$ is tetrahedral: $e$ ($d_{x^2-y^2}, d_{z^2}$) lower than $t_2$. Statement II is correct.",
+   "subject": "Chemistry",
+   "chapter": "The d- and f-Block Elements",
+   "chCls": "XII"
+  },
+  {
+   "no": 61,
+   "qid": "691121511",
+   "section": "A",
+   "type": "mcq",
+   "text": "Identify the correct statements from the following<br>A. $[\\mathrm{Fe(C_2O_4)_3}]^{3-}$ is the most stable complex among $[\\mathrm{Fe(OH)_6}]^{3-}$, $[\\mathrm{Fe(C_2O_4)_3}]^{3-}$ and $[\\mathrm{Fe(SCN)_6}]^{3-}$<br>B. The stability of $[\\mathrm{Cu(NH_3)_4}]^{2+}$ is greater than that of $[\\mathrm{Cu(en)_2}]^{2+}$<br>C. The hybridization of Fe in $\\mathrm{K_4[Fe(CN)_6]}$ is $d^2sp^3$<br>D. $[\\mathrm{Fe(NO_2)_3Cl_3}]^{3-}$ exhibits linkage isomerism<br>E. $\\mathrm{NO_2^-}$ and $\\mathrm{SCN^-}$ ligands are NOT ambidentate ligands<br>Choose the correct answer from the options given below :",
+   "options": [
+    "A, B, C, D and E",
+    "B, C and D only",
+    "A, C and D only",
+    "A, C and E only"
+   ],
+   "optionIds": [
+    "6911211741",
+    "6911211742",
+    "6911211743",
+    "6911211744"
+   ],
+   "answer": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "A: oxalate is a chelating ligand, so $[\\mathrm{Fe(C_2O_4)_3}]^{3-}$ is the most stable. True.<br>B: en is chelating, so $[\\mathrm{Cu(en)_2}]^{2+}$ is more stable (chelate effect). False.<br>C: $\\mathrm{Fe^{2+}}$ ($3d^6$) with strong-field $\\mathrm{CN^-}$ is low spin, inner orbital $d^2sp^3$. True.<br>D: $\\mathrm{NO_2^-}$ can bind through N or O, so linkage isomerism is possible. True.<br>E: $\\mathrm{NO_2^-}$ and $\\mathrm{SCN^-}$ are ambidentate. False.<br>A, C and D only.",
+   "subject": "Chemistry",
+   "chapter": "Coordination Compounds",
+   "chCls": "XII"
+  },
+  {
+   "no": 62,
+   "qid": "691121512",
+   "section": "A",
+   "type": "mcq",
+   "text": "Match List - I with List - II.<br><table class=\"mt\"><tr><th>List - I<br>Purification technique</th><th>List - II<br>Used to separate</th></tr><tr><td>A. Simple distillation</td><td>I. Steam volatile compound</td></tr><tr><td>B. Fractional distillation</td><td>II. Two liquids with large difference in boiling points</td></tr><tr><td>C. Steam distillation</td><td>III. Liquid decomposing at its boiling point</td></tr><tr><td>D. Distillation under reduced pressure</td><td>IV. Two liquids with close boiling points</td></tr></table>Choose the correct answer from the options given below :",
+   "options": [
+    "A-II, B-III, C-I, D-IV",
+    "A-II, B-IV, C-I, D-III",
+    "A-II, B-IV, C-III, D-I",
+    "A-IV, B-III, C-II, D-I"
+   ],
+   "optionIds": [
+    "6911211745",
+    "6911211746",
+    "6911211747",
+    "6911211748"
+   ],
+   "answer": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Simple distillation: liquids with a large difference in boiling points (II).<br>Fractional distillation: liquids with close boiling points (IV).<br>Steam distillation: steam-volatile, water-immiscible compounds (I).<br>Reduced-pressure distillation: liquids that decompose at their boiling point (III).<br>A-II, B-IV, C-I, D-III.",
+   "subject": "Chemistry",
+   "chapter": "Organic Chemistry – Some Basic Principles and Techniques",
+   "chCls": "XI"
+  },
+  {
+   "no": 63,
+   "qid": "691121513",
+   "section": "A",
+   "type": "mcq",
+   "text": "IUPAC name of the some alkenes are given below.<br>Find out the correct stability order.<br>A. 2-Methylbut-2-ene<br>B. cis-But-2-ene<br>C. 2, 3-Dimethylbut-2-ene<br>D. Prop-1-ene<br>Choose the correct answer from the options given below :",
+   "options": [
+    "C > A > B > D",
+    "C > A > D > B",
+    "B > D > A > C",
+    "A > B > C > D"
+   ],
+   "optionIds": [
+    "6911211749",
+    "6911211750",
+    "6911211751",
+    "6911211752"
+   ],
+   "answer": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Alkene stability increases with the number of alkyl groups on the C=C (hyperconjugation).<br>C tetrasubstituted, A trisubstituted, B disubstituted, D monosubstituted.<br>Order: C > A > B > D.",
+   "subject": "Chemistry",
+   "chapter": "Hydrocarbons",
+   "chCls": "XI"
+  },
+  {
+   "no": 64,
+   "qid": "691121514",
+   "section": "A",
+   "type": "mcq",
+   "text": "Identify the correct IUPAC name of hydrocarbon $(x)$ containing three primary carbon atoms and with molar mass $72\\ \\mathrm{g\\ mol^{-1}}$.",
+   "options": [
+    "1, 1 - Dimethylcyclopropane",
+    "2, 2 - Dimethylpropane",
+    "2 - Methylbutane",
+    "n-pentane"
+   ],
+   "optionIds": [
+    "6911211753",
+    "6911211754",
+    "6911211755",
+    "6911211756"
+   ],
+   "answer": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Molar mass 72 corresponds to $\\mathrm{C_5H_{12}}$ (1,1-dimethylcyclopropane is $\\mathrm{C_5H_{10}}$, 70).<br>Primary carbons: n-pentane 2, 2,2-dimethylpropane 4, 2-methylbutane $\\mathrm{(CH_3)_2CHCH_2CH_3}$ 3.<br>So $x$ is 2-methylbutane.",
+   "subject": "Chemistry",
+   "chapter": "Organic Chemistry – Some Basic Principles and Techniques",
+   "chCls": "XI"
+  },
+  {
+   "no": 65,
+   "qid": "691121515",
+   "section": "A",
+   "type": "mcq",
+   "text": "Complete the following reaction sequence and give the name of major product 'P'.",
+   "options": [
+    "2-Chloropropanoic acid",
+    "3-Chloropropanoic acid",
+    "1-Chloropropane",
+    "2-Chloropropane"
+   ],
+   "optionIds": [
+    "6911211757",
+    "6911211758",
+    "6911211759",
+    "6911211760"
+   ],
+   "answer": 0,
+   "fig": "q65.png",
+   "optionFigs": null,
+   "sol": "The starting compound is propanenitrile, $\\mathrm{CH_3CH_2C{\\equiv}N}$.<br>(i) $\\mathrm{OH^-/H_2O/\\Delta}$, (ii) $\\mathrm{H_3O^+}$: hydrolysis to propanoic acid, $\\mathrm{CH_3CH_2COOH}$.<br>(iii) $\\mathrm{Cl_2}$/red P, (iv) $\\mathrm{H_2O}$: Hell-Volhard-Zelinsky α-chlorination gives $\\mathrm{CH_3CHClCOOH}$.<br>P = 2-chloropropanoic acid.",
+   "subject": "Chemistry",
+   "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+   "chCls": "XII"
+  },
+  {
+   "no": 66,
+   "qid": "691121516",
+   "section": "A",
+   "type": "mcq",
+   "text": "Given below are two statements :<br>Statement I : The condensation reaction between $\\mathrm{CH_3-CH{=}O}$ and $\\mathrm{H_2N-NH-C(=O)-NH_2}$ under optimum pH will produce $\\mathrm{CH_3-CH{=}N-C(=O)-NH-NH_2}$<br>Statement II : The molecule, $\\mathrm{Ph-CH(OH)(O-CH_3)}$ will generate $\\mathrm{Ph-CH{=}O}$ in the presence of dilute acid.<br>In the light of the above statements, choose the correct answer from the options given below :",
+   "options": [
+    "Both Statement I and Statement II are true",
+    "Both Statement I and Statement II are false",
+    "Statement I is true but Statement II is false",
+    "Statement I is false but Statement II is true"
+   ],
+   "optionIds": [
+    "6911211761",
+    "6911211762",
+    "6911211763",
+    "6911211764"
+   ],
+   "answer": 3,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "In semicarbazide only the terminal $\\mathrm{NH_2}$ of the hydrazine part is nucleophilic (the amide $\\mathrm{NH_2}$ is delocalised into C=O), so the product is the semicarbazone $\\mathrm{CH_3-CH{=}N-NH-C(=O)-NH_2}$, not the structure given. Statement I is false.<br>$\\mathrm{Ph-CH(OH)(OCH_3)}$ is a hemiacetal; in dilute acid it loses methanol to give benzaldehyde, $\\mathrm{Ph-CHO}$. Statement II is true.",
+   "subject": "Chemistry",
+   "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+   "chCls": "XII"
+  },
+  {
+   "no": 67,
+   "qid": "691121517",
+   "section": "A",
+   "type": "mcq",
+   "text": "Given below are two statements :<br>Statement I : Heating benzamide with bromine in an ethanolic solution of sodium hydroxide will give benzylamine.<br>Statement II : Nitration of aniline with $\\mathrm{HNO_3/H_2SO_4}$ at 288 K produces m-nitroaniline in higher amount than o-nitroaniline (pH adjusted).<br>In the light of the above statements, choose the correct answer from the options given below :",
+   "options": [
+    "Both Statement I and Statement II are true",
+    "Both Statement I and Statement II are false",
+    "Statement I is true but Statement II is false",
+    "Statement I is false but Statement II is true"
+   ],
+   "optionIds": [
+    "6911211765",
+    "6911211766",
+    "6911211767",
+    "6911211768"
+   ],
+   "answer": 3,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Hofmann bromamide degradation removes one carbon: $\\mathrm{C_6H_5CONH_2 \\rightarrow C_6H_5NH_2}$ (aniline), not benzylamine. Statement I is false.<br>In strongly acidic medium aniline is protonated to anilinium ion (meta-directing), so nitration gives p-nitroaniline 51%, m-nitroaniline 47%, o-nitroaniline 2%. Statement II is true.",
+   "subject": "Chemistry",
+   "chapter": "Amines",
+   "chCls": "XII"
+  },
+  {
+   "no": 68,
+   "qid": "691121518",
+   "section": "A",
+   "type": "mcq",
+   "text": "Identify the incorrect statement about tertiary structure of proteins.",
+   "options": [
+    "They can be fibrous or globular in structure.",
+    "The main forces that stabilize the structure are hydrogen bonding, disulphide links, van der Waals and electrostatic forces of attraction.",
+    "The structure remains intact when exposed to pH changes.",
+    "A linear polypeptide chain will convert to a secondary structure and then further folding of the secondary structure will convert to tertiary structure."
+   ],
+   "optionIds": [
+    "6911211769",
+    "6911211770",
+    "6911211771",
+    "6911211772"
+   ],
+   "answer": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "The tertiary structure (fibrous or globular) arises from further folding of the secondary structure and is held by H-bonds, disulphide links, van der Waals and electrostatic forces.<br>A change in pH disrupts these interactions and denatures the protein, so the structure does not remain intact.<br>The incorrect statement is the third one.",
+   "subject": "Chemistry",
+   "chapter": "Biomolecules",
+   "chCls": "XII"
+  },
+  {
+   "no": 69,
+   "qid": "691121519",
+   "section": "A",
+   "type": "mcq",
+   "text": "Given below are two statements :<br>Statement I : The two structures shown in the figure are two anomers of D-(+)-glucose.<br>Statement II : The open chain forms of D-glucose and D- fructose contain three similar chiral carbons at $C_3$, $C_4$ and $C_5$.<br>In the light of the above statements, choose the correct answer from the options given below :",
+   "options": [
+    "Both Statement I and Statement II are true",
+    "Both Statement I and Statement II are false",
+    "Statement I is true but Statement II is false",
+    "Statement I is false but Statement II is true"
+   ],
+   "optionIds": [
+    "6911211773",
+    "6911211774",
+    "6911211775",
+    "6911211776"
+   ],
+   "answer": 0,
+   "fig": "q69.png",
+   "optionFigs": null,
+   "sol": "The two Haworth structures are identical except at C-1 (OH down in one, up in the other): they are α- and β-D-glucopyranose, the two anomers of D-(+)-glucose. Statement I is true.<br>Open-chain D-glucose has chiral C-2 to C-5; D-fructose (C-2 is the C=O) has chiral C-3, C-4, C-5 with the same configurations as in glucose. Statement II is true.",
+   "subject": "Chemistry",
+   "chapter": "Biomolecules",
+   "chCls": "XII"
+  },
+  {
+   "no": 70,
+   "qid": "691121520",
+   "section": "A",
+   "type": "mcq",
+   "text": "A paper dipped in a dil. $\\mathrm{H_2SO_4}$ solution of 'X' upon treatment with $\\mathrm{SO_2}$ gas turns into green. The compound 'X' is :",
+   "options": [
+    "KI-starch",
+    "$\\mathrm{KMnO_4}$",
+    "$\\mathrm{Pb(CH_3COO)_2}$",
+    "$\\mathrm{K_2Cr_2O_7}$"
+   ],
+   "optionIds": [
+    "6911211777",
+    "6911211778",
+    "6911211779",
+    "6911211780"
+   ],
+   "answer": 3,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$\\mathrm{SO_2}$ reduces acidified dichromate (orange) to $\\mathrm{Cr^{3+}}$ (green):<br>$\\mathrm{Cr_2O_7^{2-} + 3SO_2 + 2H^+ \\rightarrow 2Cr^{3+} + 3SO_4^{2-} + H_2O}$.<br>X is $\\mathrm{K_2Cr_2O_7}$.",
+   "subject": "Chemistry",
+   "chapter": "The d- and f-Block Elements",
+   "chCls": "XII"
+  },
+  {
+   "no": 71,
+   "qid": "691121521",
+   "section": "B",
+   "type": "num",
+   "text": "The total number of unpaired electrons present in the $d^3$, $d^4$ (low spin) $d^5$ (high spin), $d^6$ (high spin) and $d^7$ (low spin) octahedral complex systems is __________.",
+   "answer": 15,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$d^3$: $t_{2g}^3$, 3 unpaired. $d^4$ low spin: $t_{2g}^4$, 2. $d^5$ high spin: $t_{2g}^3e_g^2$, 5.<br>$d^6$ high spin: $t_{2g}^4e_g^2$, 4. $d^7$ low spin: $t_{2g}^6e_g^1$, 1.<br>Total $=3+2+5+4+1=15$.",
+   "subject": "Chemistry",
+   "chapter": "Coordination Compounds",
+   "chCls": "XII"
+  },
+  {
+   "no": 72,
+   "qid": "691121522",
+   "section": "B",
+   "type": "num",
+   "text": "RMgI when treated with ice cold water liberated a gas which occupied $1.4\\ \\mathrm{dm^3/g}$ at STP. The gas produced is further reacted with iodine in presence of $\\mathrm{HIO_3}$ to give compound (X). Compound (X) in presence of Na and dry ether produced compound (Y). Molar mass of compound (Y) is __________ $\\mathrm{g\\ mol^{-1}}$. (Nearest integer)",
+   "answer": 30,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Molar mass of the gas $=\\dfrac{22.4}{1.4}=16\\ \\mathrm{g\\ mol^{-1}}$, so the gas is $\\mathrm{CH_4}$ (R = $\\mathrm{CH_3}$).<br>$\\mathrm{CH_4 + I_2 \\xrightarrow{HIO_3} CH_3I}$ (X).<br>Wurtz reaction: $\\mathrm{2CH_3I + 2Na \\xrightarrow{dry\\ ether} C_2H_6}$ (Y).<br>Molar mass of Y $=30\\ \\mathrm{g\\ mol^{-1}}$.",
+   "subject": "Chemistry",
+   "chapter": "Haloalkanes and Haloarenes",
+   "chCls": "XII"
+  },
+  {
+   "no": 73,
+   "qid": "691121523",
+   "section": "B",
+   "type": "num",
+   "text": "20 g hemoglobin in a 1 L aqueous solution (A) at 300 K is separated from pure water by semi permeable membrane. At equilibrium the height of solution in a tube dipped in a solution (A) is found to be 80.0 mm higher than the tube dipped in water.<br>The molar mass of hemoglobin is __________ $\\mathrm{kg\\ mol^{-1}}$. (Nearest integer)<br>(Given : $g=10\\ \\mathrm{m\\ s^{-2}}$, $R=8.3\\ \\mathrm{kPa\\ dm^3\\ K^{-1}mol^{-1}}$, density of solution $=1000\\ \\mathrm{kg\\ m^{-3}}$)",
+   "answer": 62,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Osmotic pressure $\\pi=h\\rho g=0.080\\times1000\\times10=800$ Pa $=0.8$ kPa.<br>$\\pi=\\dfrac{w}{MV}RT \\Rightarrow M=\\dfrac{wRT}{\\pi V}=\\dfrac{20\\times8.3\\times300}{0.8\\times1}=62250\\ \\mathrm{g\\ mol^{-1}}$.<br>$M\\approx62\\ \\mathrm{kg\\ mol^{-1}}$.",
+   "subject": "Chemistry",
+   "chapter": "Solutions",
+   "chCls": "XII"
+  },
+  {
+   "no": 74,
+   "qid": "691121524",
+   "section": "B",
+   "type": "num",
+   "text": "At 298 K, the molar conductivity of $x$% (w/w) MX solution (aqueous) is $123.5\\ \\mathrm{S\\ cm^2\\ mol^{-1}}$. The conductance of same solution is $1.9\\times10^{-3}$ S. The value of $x$ is __________ $\\times10^{-2}$.<br>(Given : cell constant $=1.3\\ \\mathrm{cm^{-1}}$; molar mass of MX is $75\\ \\mathrm{g\\ mol^{-1}}$, density of aqueous solution of MX at 298 K is $1.0\\ \\mathrm{g\\ mL^{-1}}$)",
+   "answer": 15,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$\\kappa=G\\times\\text{cell constant}=1.9\\times10^{-3}\\times1.3=2.47\\times10^{-3}\\ \\mathrm{S\\ cm^{-1}}$.<br>$c=\\dfrac{1000\\kappa}{\\Lambda_m}=\\dfrac{2.47}{123.5}=0.02\\ \\mathrm{mol\\ L^{-1}}$.<br>1 L of solution (1000 g) contains $0.02\\times75=1.5$ g MX, so $x=\\dfrac{1.5}{1000}\\times100=0.15=15\\times10^{-2}$.",
+   "subject": "Chemistry",
+   "chapter": "Electrochemistry",
+   "chCls": "XII"
+  },
+  {
+   "no": 75,
+   "qid": "691121525",
+   "section": "B",
+   "type": "num",
+   "text": "For a reaction $\\mathrm{A\\rightarrow P}$ at T K, the half life $(t_{1/2})$ is plotted as a function of initial concentration $[\\mathrm{A}]_o$ of A as given below.<br>The value of $x$ in the given figure is __________ s (Nearest integer)",
+   "answer": 90,
+   "fig": "q75.png",
+   "optionFigs": null,
+   "sol": "The graph is a straight line through the origin: $t_{1/2}\\propto[\\mathrm{A}]_o$, a zero-order reaction ($t_{1/2}=\\dfrac{[\\mathrm{A}]_o}{2k}$).<br>$\\dfrac{x}{240}=\\dfrac{1.5\\times10^{-3}}{4\\times10^{-3}} \\Rightarrow x=90$ s.",
+   "subject": "Chemistry",
+   "chapter": "Chemical Kinetics",
+   "chCls": "XII"
+  }
+ ]
+}

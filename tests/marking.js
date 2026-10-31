@@ -96,6 +96,16 @@
     ['NEET (UG) 2026 re-exam, code 50', '../neet/2026-reexam-50/', 180, 720],
     ['JEE Advanced 2026 Paper 1', '../jee-adv/2026-p1/', 48, 180],
     ['JEE Advanced 2026 Paper 2', '../jee-adv/2026-p2/', 54, 180],
+    ['JEE Main 2026, 2 April Shift 2', '../jee/2026-04-02-s2/', 75, 300],
+    ['JEE Main 2026, 4 April Shift 1', '../jee/2026-04-04-s1/', 75, 300],
+    ['JEE Main 2026, 4 April Shift 2', '../jee/2026-04-04-s2/', 75, 300],
+    ['JEE Main 2026, 5 April Shift 1', '../jee/2026-04-05-s1/', 75, 300],
+    ['JEE Main 2026, 5 April Shift 2', '../jee/2026-04-05-s2/', 75, 300],
+    ['JEE Main 2026, 6 April Shift 1', '../jee/2026-04-06-s1/', 75, 300],
+    ['JEE Main 2026, 6 April Shift 2', '../jee/2026-04-06-s2/', 75, 300],
+    ['JEE Main 2026, 8 April Shift 2', '../jee/2026-04-08-s2/', 75, 300],
+    ['JEE Advanced 2025 Paper 1', '../jee-adv/2025-p1/', 48, 180],
+    ['JEE Advanced 2025 Paper 2', '../jee-adv/2025-p2/', 48, 180],
   ];
   const keyOf = p => p.type === 'choice' ? String(p.ans) : p.type === 'multi' ? p.ans.join(',') : p.lo != null ? String(p.lo) : String(p.ans);
   function wrongOf(p) {

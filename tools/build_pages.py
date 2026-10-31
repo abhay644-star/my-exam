@@ -325,7 +325,7 @@ def answer(q, OL):
         lo, hi = (a['lo'], a['hi']) if isinstance(a, dict) else (a, a)
         rng = lambda l, h: num(l) if l == h else f'{num(l)} to {num(h)}'
         # further ranges the final key accepts are shown too; the test key is the main range
-        text = ' or '.join([rng(lo, hi)] + [rng(r['lo'], r['hi']) for r in (q.get('accept') or [])])
+        text = q.get('keyText') or ' or '.join([rng(lo, hi)] + [rng(r['lo'], r['hi']) for r in (q.get('accept') or [])])
         return text, (num(lo) if lo == hi else f'{num(lo)}~{num(hi)}')
     if q['type'] == 'multi':
         text = ', '.join(f'({OL[j]})' for j in a)
@@ -345,6 +345,8 @@ def solved(q, no, OL, fig):
             f'<li><img class="ofig" src="{fig}{q["optionFigs"][j]}" alt="Option {OL[j]}" loading="lazy"></li>' if q.get('optionFigs') and q['optionFigs'][j] else f'<li>{wrap_math(safe(o))}</li>'
             for j, o in enumerate(q['options'])))
     sol = f'<p>{wrap_math(safe(q["sol"]))}</p>' if q.get('sol') else ''
+    if q.get('note'):
+        sol += f'<p><i>Note: {wrap_math(safe(q["note"]))}</i></p>'
     return (f'<li class="sq"><p class="sqt"><small>Question {no} · {esc(q["subject"])} · {esc(q["chapter"])}</small><br>{text}</p>{opts}'
             f'<details><summary>Show answer and solution</summary><p><b>Answer:</b> {wrap_math(safe(answer(q, OL)[0]))}</p>{sol}</details></li>')
 
@@ -361,6 +363,8 @@ def paper_page(e, p):
     marks = lambda q: q.get('full') or 4
     total = sum(marks(q) for q in qs)
     dur = dur_text(p['min'])
+    # the paper's own marking scheme when it has one (it can differ from year to year), else the exam's usual pattern
+    marking = ' '.join(data['instr'][1:]) if data.get('instr') else e['note']
 
     rows = ''.join(f'<tr><td>{esc(s)}</td><td class="n">{sum(q["subject"] == s for q in qs)}</td><td class="n">{sum(marks(q) for q in qs if q["subject"] == s)}</td></tr>' for s in subjects)
     glance = f'''  <div class="card tbl">
@@ -368,7 +372,7 @@ def paper_page(e, p):
       <thead><tr><th>Subject</th><th class="n">Questions</th><th class="n">Marks</th></tr></thead>
       <tbody>{rows}<tr class="total"><td>Total</td><td class="n">{len(qs)}</td><td class="n">{total}</td></tr></tbody>
     </table>
-    <p style="margin:10px 0 0"><small>Time: {dur}. {e['note']}</small></p>
+    <p style="margin:10px 0 0"><small>Time: {dur}. {marking}</small></p>
   </div>'''
 
     # chapter-wise weightage: chapters by number of questions, then in paper order; a chapter the app also offers links to its chapter test

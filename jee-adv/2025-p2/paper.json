@@ -1,0 +1,1028 @@
+{
+ "id": "2025-p2",
+ "exam": "JEE Advanced",
+ "board": "IIT",
+ "title": "JEE Advanced 2025 · Paper 2",
+ "duration": 180,
+ "renumber": true,
+ "secNames": {
+  "1": "single correct",
+  "2": "one or more correct",
+  "3": "numerical"
+ },
+ "instr": [
+  "Official JEE (Advanced) 2025 Paper 2 with the final answer key published by the organising IIT (IIT Kanpur).",
+  "48 questions: Mathematics, Physics and Chemistry, 16 in each subject, in three sections. Total 180 marks.",
+  "Section 1 – single correct option: <b>+3</b> if correct, <b>−1</b> if wrong, 0 if not answered.",
+  "Section 2 – one or more correct options: <b>+4</b> if you choose all the correct options; <b>+3 / +2 / +1</b> if you choose only some of the correct options and no wrong one; <b>−2</b> if any chosen option is wrong.",
+  "Section 3 – numerical answer: <b>+4</b> if correct, no negative marks. Give the value to two decimal places."
+ ],
+ "source": "JEE (Advanced) 2025 question paper and final answer key, organising IIT (IIT Kanpur). Worked solutions: All in All Exam Practice.",
+ "questions": [
+  {
+   "no": 1,
+   "section": 1,
+   "type": "single",
+   "text": "Let $x_0$ be the real number such that $e^{x_0}+x_0=0$. For a given real number $\\alpha$, define $$g(x)=\\dfrac{3xe^x+3x-\\alpha e^x-\\alpha x}{3(e^x+1)}$$ for all real numbers $x$.<br><br>Then which one of the following statements is TRUE?",
+   "options": [
+    "For $\\alpha=2$, $\\lim_{x \\to x_0}\\left|\\dfrac{g(x)+e^{x_0}}{x-x_0}\\right|=0$",
+    "For $\\alpha=2$, $\\lim_{x \\to x_0}\\left|\\dfrac{g(x)+e^{x_0}}{x-x_0}\\right|=1$",
+    "For $\\alpha=3$, $\\lim_{x \\to x_0}\\left|\\dfrac{g(x)+e^{x_0}}{x-x_0}\\right|=0$",
+    "For $\\alpha=3$, $\\lim_{x \\to x_0}\\left|\\dfrac{g(x)+e^{x_0}}{x-x_0}\\right|=\\dfrac{2}{3}$"
+   ],
+   "answer": 2,
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$g(x)=\\dfrac{3x(e^x+1)-\\alpha(e^x+x)}{3(e^x+1)}=x-\\dfrac{\\alpha}{3}\\cdot\\dfrac{e^x+x}{e^x+1}$.<br>At $x_0$: $e^{x_0}+x_0=0$, so $g(x_0)=x_0=-e^{x_0}$. Hence $g(x)+e^{x_0}=g(x)-g(x_0)$ and the limit is $|g'(x_0)|$.<br>With $h(x)=e^x+x$ (so $h(x_0)=0$): $\\dfrac{d}{dx}\\dfrac{h}{e^x+1}\\Big|_{x_0}=\\dfrac{h'(x_0)}{e^{x_0}+1}=\\dfrac{e^{x_0}+1}{e^{x_0}+1}=1$.<br>So $g'(x_0)=1-\\dfrac{\\alpha}{3}$.<br>$\\alpha=2$: limit $=\\dfrac13$ (A, B false); $\\alpha=3$: limit $=0$ (C true, D false). Answer (C).",
+   "subject": "Mathematics",
+   "chapter": "Limits and Derivatives",
+   "chCls": "XI"
+  },
+  {
+   "no": 2,
+   "section": 1,
+   "type": "single",
+   "text": "Let $\\mathbb{R}$ denote the set of all real numbers. Then the area of the region $$\\left\\{(x,y)\\in\\mathbb{R}\\times\\mathbb{R} : x>0,\\ y>\\dfrac{1}{x},\\ 5x-4y-1>0,\\ 4x+4y-17&lt;0\\right\\}$$ is",
+   "options": [
+    "$\\dfrac{17}{16}-\\log_e 4$",
+    "$\\dfrac{33}{8}-\\log_e 4$",
+    "$\\dfrac{57}{8}-\\log_e 4$",
+    "$\\dfrac{17}{2}-\\log_e 4$"
+   ],
+   "answer": 1,
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "The region lies above $y=\\dfrac1x$ and below both lines $y=\\dfrac{5x-1}{4}$ and $y=\\dfrac{17-4x}{4}$.<br>The lines meet at $(2,\\tfrac94)$; $y=\\dfrac1x$ meets $5x-4y=1$ at $x=1$ ($5x^2-x-4=0$) and $4x+4y=17$ at $x=4$ ($4x^2-17x+4=0$).<br>Area $=\\displaystyle\\int_1^2\\dfrac{5x-1}{4}dx+\\int_2^4\\dfrac{17-4x}{4}dx-\\int_1^4\\dfrac{dx}{x}$.<br>$=\\dfrac14\\left[\\dfrac{5x^2}{2}-x\\right]_1^2+\\dfrac14\\left[17x-2x^2\\right]_2^4-\\ln4=\\dfrac{13}{8}+\\dfrac{5}{2}-\\ln4$.<br>$=\\dfrac{33}{8}-\\log_e4$. Answer (B).",
+   "subject": "Mathematics",
+   "chapter": "Application of Integrals",
+   "chCls": "XII"
+  },
+  {
+   "no": 3,
+   "section": 1,
+   "type": "single",
+   "text": "The total number of real solutions of the equation $$\\theta=\\tan^{-1}(2\\tan\\theta)-\\dfrac{1}{2}\\sin^{-1}\\left(\\dfrac{6\\tan\\theta}{9+\\tan^2\\theta}\\right)$$ is<br>(Here, the inverse trigonometric functions $\\sin^{-1}x$ and $\\tan^{-1}x$ assume values in $\\left[-\\dfrac{\\pi}{2},\\dfrac{\\pi}{2}\\right]$ and $\\left(-\\dfrac{\\pi}{2},\\dfrac{\\pi}{2}\\right)$, respectively.)",
+   "options": [
+    "$1$",
+    "$2$",
+    "$3$",
+    "$5$"
+   ],
+   "answer": 2,
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Let $t=\\tan\\theta$. Then $\\dfrac{6t}{9+t^2}=\\dfrac{2(t/3)}{1+(t/3)^2}$.<br>Case $|t|\\le3$: $\\sin^{-1}\\left(\\dfrac{6t}{9+t^2}\\right)=2\\tan^{-1}\\dfrac t3$, so $\\theta=\\tan^{-1}2t-\\tan^{-1}\\dfrac t3\\in\\left(-\\dfrac\\pi2,\\dfrac\\pi2\\right)$, hence $\\theta=\\tan^{-1}t$.<br>Taking tangents: $t=\\dfrac{2t-t/3}{1+2t^2/3}=\\dfrac{5t}{3+2t^2}\\Rightarrow t=0$ or $t^2=1$, giving $\\theta=0,\\pm\\dfrac\\pi4$ (3 solutions).<br>Case $t>3$: $\\sin^{-1}(\\cdot)=\\pi-2\\tan^{-1}\\dfrac t3$, so $\\theta=\\tan^{-1}2t+\\tan^{-1}\\dfrac t3-\\dfrac\\pi2\\in\\left(0,\\dfrac\\pi2\\right)$ and $\\tan\\theta=\\dfrac{2t^2-3}{7t}$. Setting this $=t$ gives $5t^2=-3$: no solution. By symmetry ($\\theta\\to-\\theta$) none for $t&lt;-3$.<br>Total $=3$. Answer (C).",
+   "subject": "Mathematics",
+   "chapter": "Inverse Trigonometric Functions",
+   "chCls": "XII"
+  },
+  {
+   "no": 4,
+   "section": 1,
+   "type": "single",
+   "text": "Let $S$ denote the locus of the point of intersection of the pair of lines $$4x-3y=12\\alpha,\\qquad 4\\alpha x+3\\alpha y=12,$$ where $\\alpha$ varies over the set of non-zero real numbers. Let $T$ be the tangent to $S$ passing through the points $(p,0)$ and $(0,q)$, $q>0$, and parallel to the line $4x-\\dfrac{3}{\\sqrt{2}}y=0$.<br><br>Then the value of $pq$ is",
+   "options": [
+    "$-6\\sqrt{2}$",
+    "$-3\\sqrt{2}$",
+    "$-9\\sqrt{2}$",
+    "$-12\\sqrt{2}$"
+   ],
+   "answer": 0,
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "The second line is $4x+3y=\\dfrac{12}{\\alpha}$. Multiplying with $4x-3y=12\\alpha$: $16x^2-9y^2=144$, i.e. $S:\\dfrac{x^2}{9}-\\dfrac{y^2}{16}=1$.<br>Slope of $T$: $m=\\dfrac{4\\sqrt2}{3}$. Tangent: $y=mx\\pm\\sqrt{a^2m^2-b^2}=mx\\pm\\sqrt{9\\cdot\\dfrac{32}{9}-16}=mx\\pm4$.<br>$q>0\\Rightarrow q=4$, and $p=-\\dfrac{4}{m}=-\\dfrac{3}{\\sqrt2}$.<br>$pq=-\\dfrac{12}{\\sqrt2}=-6\\sqrt2$. Answer (A).",
+   "subject": "Mathematics",
+   "chapter": "Conic Sections",
+   "chCls": "XI"
+  },
+  {
+   "no": 5,
+   "section": 2,
+   "type": "multi",
+   "text": "Let $I=\\begin{pmatrix}1&0\\\\0&1\\end{pmatrix}$ and $P=\\begin{pmatrix}2&0\\\\0&3\\end{pmatrix}$. Let $Q=\\begin{pmatrix}x&y\\\\z&4\\end{pmatrix}$ for some non-zero real numbers $x$, $y$, and $z$, for which there is a $2\\times2$ matrix $R$ with all entries being non-zero real numbers, such that $QR=RP$.<br><br>Then which of the following statements is (are) TRUE?",
+   "options": [
+    "The determinant of $Q-2I$ is zero",
+    "The determinant of $Q-6I$ is $12$",
+    "The determinant of $Q-3I$ is $15$",
+    "$yz=2$"
+   ],
+   "answer": [
+    0,
+    1
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Let $r_1, r_2$ be the columns of $R$ (non-zero vectors). $QR=RP$ means $Qr_1=2r_1$ and $Qr_2=3r_2$.<br>So $2$ and $3$ are the eigenvalues of $Q$ (eigenvectors of distinct eigenvalues are independent).<br>Trace: $x+4=5\\Rightarrow x=1$; determinant: $4x-yz=6\\Rightarrow yz=-2$ (D false).<br>$\\det(Q-\\lambda I)=(2-\\lambda)(3-\\lambda)$: $\\det(Q-2I)=0$ (A true), $\\det(Q-6I)=(-4)(-3)=12$ (B true), $\\det(Q-3I)=0$ (C false).<br>Answer (A), (B).",
+   "subject": "Mathematics",
+   "chapter": "Matrices",
+   "chCls": "XII"
+  },
+  {
+   "no": 6,
+   "section": 2,
+   "type": "multi",
+   "text": "Let $S$ denote the locus of the mid-points of those chords of the parabola $y^2=x$, such that the area of the region enclosed between the parabola and the chord is $\\dfrac{4}{3}$. Let $\\mathcal{R}$ denote the region lying in the first quadrant, enclosed by the parabola $y^2=x$, the curve $S$, and the lines $x=1$ and $x=4$.<br><br>Then which of the following statements is (are) TRUE?",
+   "options": [
+    "$(4,\\sqrt{3})\\in S$",
+    "$(5,\\sqrt{2})\\in S$",
+    "Area of $\\mathcal{R}$ is $\\dfrac{14}{3}-2\\sqrt{3}$",
+    "Area of $\\mathcal{R}$ is $\\dfrac{14}{3}-\\sqrt{3}$"
+   ],
+   "answer": [
+    0,
+    2
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Take the chord through $(y_1^2,y_1)$ and $(y_2^2,y_2)$: $x=(y_1+y_2)y-y_1y_2$.<br>Area $=\\displaystyle\\int_{y_1}^{y_2}\\left[(y_1+y_2)y-y_1y_2-y^2\\right]dy=\\dfrac{|y_2-y_1|^3}{6}=\\dfrac43\\Rightarrow|y_2-y_1|=2$.<br>Mid-point: $k=\\dfrac{y_1+y_2}{2}$, $h=\\dfrac{y_1^2+y_2^2}{2}=\\dfrac{(y_1+y_2)^2+(y_1-y_2)^2}{4}=k^2+1$. So $S: x=y^2+1$.<br>$(4,\\sqrt3)$: $3+1=4$ (A true); $(5,\\sqrt2)$: $2+1\\ne5$ (B false).<br>Area of $\\mathcal R=\\displaystyle\\int_1^4\\left(\\sqrt x-\\sqrt{x-1}\\right)dx=\\dfrac23(8-1)-\\dfrac23\\cdot3\\sqrt3=\\dfrac{14}{3}-2\\sqrt3$ (C true, D false).<br>Answer (A), (C).",
+   "subject": "Mathematics",
+   "chapter": "Application of Integrals",
+   "chCls": "XII"
+  },
+  {
+   "no": 7,
+   "section": 2,
+   "type": "multi",
+   "text": "Let $P(x_1,y_1)$ and $Q(x_2,y_2)$ be two distinct points on the ellipse $$\\dfrac{x^2}{9}+\\dfrac{y^2}{4}=1$$ such that $y_1>0$, and $y_2>0$. Let $C$ denote the circle $x^2+y^2=9$, and $M$ be the point $(3,0)$.<br><br>Suppose the line $x=x_1$ intersects $C$ at $R$, and the line $x=x_2$ intersects $C$ at $S$, such that the $y$-coordinates of $R$ and $S$ are positive. Let $\\angle ROM=\\dfrac{\\pi}{6}$ and $\\angle SOM=\\dfrac{\\pi}{3}$, where $O$ denotes the origin $(0,0)$. Let $|XY|$ denote the length of the line segment $XY$.<br><br>Then which of the following statements is (are) TRUE?",
+   "options": [
+    "The equation of the line joining $P$ and $Q$ is $2x+3y=3(1+\\sqrt{3})$",
+    "The equation of the line joining $P$ and $Q$ is $2x+y=3(1+\\sqrt{3})$",
+    "If $N_2=(x_2,0)$, then $3|N_2Q|=2|N_2S|$",
+    "If $N_1=(x_1,0)$, then $9|N_1P|=4|N_1R|$"
+   ],
+   "answer": [
+    0,
+    2
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$C$ is the auxiliary circle, so $P$ and $Q$ have eccentric angles $\\dfrac\\pi6$ and $\\dfrac\\pi3$.<br>$R=\\left(\\dfrac{3\\sqrt3}{2},\\dfrac32\\right)$, $P=\\left(\\dfrac{3\\sqrt3}{2},1\\right)$; $S=\\left(\\dfrac32,\\dfrac{3\\sqrt3}{2}\\right)$, $Q=\\left(\\dfrac32,\\sqrt3\\right)$.<br>Slope $PQ=\\dfrac{\\sqrt3-1}{\\frac32-\\frac{3\\sqrt3}{2}}=-\\dfrac23$; line: $y-1=-\\dfrac23\\left(x-\\dfrac{3\\sqrt3}{2}\\right)\\Rightarrow2x+3y=3(1+\\sqrt3)$ (A true, B false).<br>$|N_2Q|=\\sqrt3$, $|N_2S|=\\dfrac{3\\sqrt3}{2}$: $3\\sqrt3=2\\cdot\\dfrac{3\\sqrt3}{2}$ (C true).<br>$|N_1P|=1$, $|N_1R|=\\dfrac32$: $9\\ne6$ (D false).<br>Answer (A), (C).",
+   "subject": "Mathematics",
+   "chapter": "Conic Sections",
+   "chCls": "XI"
+  },
+  {
+   "no": 8,
+   "section": 2,
+   "type": "multi",
+   "text": "Let $\\mathbb{R}$ denote the set of all real numbers. Let $f:\\mathbb{R}\\to\\mathbb{R}$ be defined by $$f(x)=\\begin{cases}\\dfrac{6x+\\sin x}{2x+\\sin x} & \\text{if } x\\neq0,\\\\[2mm] \\dfrac{7}{3} & \\text{if } x=0.\\end{cases}$$ Then which of the following statements is (are) TRUE?",
+   "options": [
+    "The point $x=0$ is a point of local maxima of $f$",
+    "The point $x=0$ is a point of local minima of $f$",
+    "Number of points of local maxima of $f$ in the interval $[\\pi,6\\pi]$ is $3$",
+    "Number of points of local minima of $f$ in the interval $[2\\pi,4\\pi]$ is $1$"
+   ],
+   "answer": [
+    1,
+    2,
+    3
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$f(x)=1+\\dfrac{4x}{2x+\\sin x}$. Near $0$: $2x+\\sin x=3x-\\dfrac{x^3}{6}+\\ldots$, so $f(x)=\\dfrac73+\\dfrac{2x^2}{27}+\\ldots>\\dfrac73$. So $x=0$ is a local minimum (B true, A false).<br>$f'(x)=\\dfrac{4(\\sin x-x\\cos x)}{(2x+\\sin x)^2}$. Let $\\varphi(x)=\\sin x-x\\cos x$; $\\varphi'(x)=x\\sin x$.<br>Critical points: $\\tan x=x$, one root $x_k\\in\\left(k\\pi,k\\pi+\\dfrac\\pi2\\right)$ for each $k\\ge1$: $x_1\\approx4.49$, $x_2\\approx7.73$, $x_3\\approx10.90$, $x_4\\approx14.07$, $x_5\\approx17.22$ ($6\\pi\\approx18.85$).<br>At $x_k$, $\\varphi'$ has the sign of $\\sin x$, i.e. $(-1)^k$: $f'$ changes $+\\to-$ for odd $k$ (maxima) and $-\\to+$ for even $k$ (minima).<br>Maxima in $[\\pi,6\\pi]$: $x_1,x_3,x_5$ → 3 (C true). Minima in $[2\\pi,4\\pi]$: only $x_2$ → 1 (D true).<br>Answer (B), (C), (D).",
+   "subject": "Mathematics",
+   "chapter": "Application of Derivatives",
+   "chCls": "XII"
+  },
+  {
+   "no": 9,
+   "section": 3,
+   "type": "num",
+   "text": "Let $y(x)$ be the solution of the differential equation $$x^2\\dfrac{dy}{dx}+xy=x^2+y^2,\\qquad x>\\dfrac{1}{e},$$ satisfying $y(1)=0$. Then the value of $2\\dfrac{(y(e))^2}{y(e^2)}$ is ________.",
+   "options": null,
+   "answer": {
+    "lo": 0.7,
+    "hi": 0.8
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Homogeneous: put $y=vx$. Then $x^2(v+xv')+x^2v=x^2+x^2v^2\\Rightarrow x\\dfrac{dv}{dx}=(v-1)^2$.<br>$\\displaystyle\\int\\dfrac{dv}{(v-1)^2}=\\int\\dfrac{dx}{x}\\Rightarrow\\dfrac{1}{1-v}=\\ln x+c$; $y(1)=0\\Rightarrow v=0$ at $x=1$, so $c=1$.<br>$v=1-\\dfrac{1}{1+\\ln x}=\\dfrac{\\ln x}{1+\\ln x}$, so $y=\\dfrac{x\\ln x}{1+\\ln x}$.<br>$y(e)=\\dfrac e2$, $y(e^2)=\\dfrac{2e^2}{3}$.<br>$2\\cdot\\dfrac{e^2/4}{2e^2/3}=\\dfrac34=0.75$.",
+   "subject": "Mathematics",
+   "chapter": "Differential Equations",
+   "chCls": "XII"
+  },
+  {
+   "no": 10,
+   "section": 3,
+   "type": "num",
+   "text": "Let $a_0,a_1,\\ldots,a_{23}$ be real numbers such that $$\\left(1+\\dfrac{2}{5}x\\right)^{23}=\\sum_{i=0}^{23}a_ix^i$$ for every real number $x$. Let $a_r$ be the largest among the numbers $a_j$ for $0\\le j\\le23$.<br>Then the value of $r$ is ________.",
+   "options": null,
+   "answer": {
+    "lo": 6,
+    "hi": 6
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$a_j=\\binom{23}{j}\\left(\\dfrac25\\right)^j$, all positive.<br>$\\dfrac{a_{j+1}}{a_j}=\\dfrac{23-j}{j+1}\\cdot\\dfrac25\\ge1\\iff46-2j\\ge5j+5\\iff j\\le\\dfrac{41}{7}\\approx5.86$.<br>So $a_j$ increases up to $j=6$ and decreases after: $a_6$ is the largest.<br>$r=6$.",
+   "subject": "Mathematics",
+   "chapter": "Binomial Theorem",
+   "chCls": "XI"
+  },
+  {
+   "no": 11,
+   "section": 3,
+   "type": "num",
+   "text": "A factory has a total of three manufacturing units, $M_1$, $M_2$, and $M_3$, which produce bulbs independent of each other. The units $M_1$, $M_2$, and $M_3$ produce bulbs in the proportions of $2:2:1$, respectively. It is known that $20\\%$ of the bulbs produced in the factory are defective. It is also known that, of all the bulbs produced by $M_1$, $15\\%$ are defective. Suppose that, if a randomly chosen bulb produced in the factory is found to be defective, the probability that it was produced by $M_2$ is $\\dfrac{2}{5}$.<br><br>If a bulb is chosen randomly from the bulbs produced by $M_3$, then the probability that it is defective is ________.",
+   "options": null,
+   "answer": {
+    "lo": 0.27,
+    "hi": 0.33
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$P(M_1)=P(M_2)=0.4$, $P(M_3)=0.2$, $P(D)=0.2$.<br>$P(D\\cap M_1)=0.4\\times0.15=0.06$; $P(D\\cap M_2)=P(M_2\\mid D)P(D)=\\dfrac25\\times0.2=0.08$.<br>$P(D\\cap M_3)=0.2-0.06-0.08=0.06$.<br>$P(D\\mid M_3)=\\dfrac{0.06}{0.2}=0.3$.",
+   "subject": "Mathematics",
+   "chapter": "Probability",
+   "chCls": "XII"
+  },
+  {
+   "no": 12,
+   "section": 3,
+   "type": "num",
+   "text": "Consider the vectors $$\\vec{x}=\\hat{i}+2\\hat{j}+3\\hat{k},\\quad \\vec{y}=2\\hat{i}+3\\hat{j}+\\hat{k},\\quad\\text{and}\\quad \\vec{z}=3\\hat{i}+\\hat{j}+2\\hat{k}.$$ For two distinct positive real numbers $\\alpha$ and $\\beta$, define $$\\vec{X}=\\alpha\\vec{x}+\\beta\\vec{y}-\\vec{z},\\quad \\vec{Y}=\\alpha\\vec{y}+\\beta\\vec{z}-\\vec{x},\\quad\\text{and}\\quad \\vec{Z}=\\alpha\\vec{z}+\\beta\\vec{x}-\\vec{y}.$$ If the vectors $\\vec{X}$, $\\vec{Y}$, and $\\vec{Z}$ lie in a plane, then the value of $\\alpha+\\beta-3$ is ________.",
+   "options": null,
+   "answer": {
+    "lo": -2,
+    "hi": -2
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$[\\vec x\\ \\vec y\\ \\vec z]=\\begin{vmatrix}1&2&3\\\\2&3&1\\\\3&1&2\\end{vmatrix}=-18\\ne0$, so $\\vec x,\\vec y,\\vec z$ are independent.<br>Hence $[\\vec X\\ \\vec Y\\ \\vec Z]=0\\iff\\begin{vmatrix}\\alpha&\\beta&-1\\\\-1&\\alpha&\\beta\\\\\\beta&-1&\\alpha\\end{vmatrix}=0$.<br>This circulant determinant with $a=\\alpha$, $b=\\beta$, $c=-1$ equals $a^3+b^3+c^3-3abc=(a+b+c)\\cdot\\tfrac12\\left[(a-b)^2+(b-c)^2+(c-a)^2\\right]$.<br>The second factor is non-zero since $\\alpha\\ne\\beta$, so $\\alpha+\\beta-1=0$.<br>$\\alpha+\\beta-3=-2$.",
+   "subject": "Mathematics",
+   "chapter": "Vector Algebra",
+   "chCls": "XII"
+  },
+  {
+   "no": 13,
+   "section": 3,
+   "type": "num",
+   "text": "For a non-zero complex number $z$, let $\\arg(z)$ denote the principal argument of $z$, with $-\\pi&lt;\\arg(z)\\le\\pi$. Let $\\omega$ be the cube root of unity for which $0&lt;\\arg(\\omega)&lt;\\pi$. Let $$\\alpha=\\arg\\left(\\sum_{n=1}^{2025}(-\\omega)^n\\right).$$ Then the value of $\\dfrac{3\\alpha}{\\pi}$ is ________.",
+   "options": null,
+   "answer": {
+    "lo": -2,
+    "hi": -2
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$\\omega=e^{2\\pi i/3}$, so $-\\omega=e^{-i\\pi/3}$ is a primitive 6th root of unity; the sum over any 6 consecutive powers is $0$.<br>$2025=6\\times337+3$, so the sum $=(-\\omega)+(-\\omega)^2+(-\\omega)^3=-\\omega+\\omega^2-1$.<br>Using $1+\\omega+\\omega^2=0$: $-\\omega+\\omega^2-1=-2-2\\omega=-2(1+\\omega)=2\\omega^2$.<br>$\\omega^2=e^{4\\pi i/3}$ has principal argument $-\\dfrac{2\\pi}{3}$, so $\\alpha=-\\dfrac{2\\pi}{3}$.<br>$\\dfrac{3\\alpha}{\\pi}=-2$.",
+   "subject": "Mathematics",
+   "chapter": "Complex Numbers",
+   "chCls": "XI"
+  },
+  {
+   "no": 14,
+   "section": 3,
+   "type": "num",
+   "text": "Let $\\mathbb{R}$ denote the set of all real numbers. Let $f:\\mathbb{R}\\to\\mathbb{R}$ and $g:\\mathbb{R}\\to(0,4)$ be functions defined by $$f(x)=\\log_e(x^2+2x+4),\\quad\\text{and}\\quad g(x)=\\dfrac{4}{1+e^{-2x}}.$$ Define the composite function $f\\circ g^{-1}$ by $(f\\circ g^{-1})(x)=f\\left(g^{-1}(x)\\right)$, where $g^{-1}$ is the inverse of the function $g$.<br><br>Then the value of the derivative of the composite function $f\\circ g^{-1}$ at $x=2$ is ________.",
+   "options": null,
+   "answer": {
+    "lo": 0.2,
+    "hi": 0.3
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$g(a)=2\\Rightarrow1+e^{-2a}=2\\Rightarrow a=0$, so $g^{-1}(2)=0$.<br>$(f\\circ g^{-1})'(2)=\\dfrac{f'(0)}{g'(0)}$.<br>$f'(x)=\\dfrac{2x+2}{x^2+2x+4}\\Rightarrow f'(0)=\\dfrac12$; $g'(x)=\\dfrac{8e^{-2x}}{(1+e^{-2x})^2}\\Rightarrow g'(0)=2$.<br>Value $=\\dfrac{1/2}{2}=0.25$.",
+   "subject": "Mathematics",
+   "chapter": "Continuity and Differentiability",
+   "chCls": "XII"
+  },
+  {
+   "no": 15,
+   "section": 3,
+   "type": "num",
+   "text": "Let $$\\alpha=\\dfrac{1}{\\sin60^\\circ\\sin61^\\circ}+\\dfrac{1}{\\sin62^\\circ\\sin63^\\circ}+\\cdots+\\dfrac{1}{\\sin118^\\circ\\sin119^\\circ}.$$ Then the value of $$\\left(\\dfrac{\\operatorname{cosec}1^\\circ}{\\alpha}\\right)^2$$ is ________.",
+   "options": null,
+   "answer": {
+    "lo": 3,
+    "hi": 3
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$\\dfrac{1}{\\sin a\\sin(a+1^\\circ)}=\\dfrac{\\sin\\left((a+1^\\circ)-a\\right)}{\\sin1^\\circ\\sin a\\sin(a+1^\\circ)}=\\dfrac{\\cot a-\\cot(a+1^\\circ)}{\\sin1^\\circ}$.<br>So $\\alpha\\sin1^\\circ=\\cot60^\\circ-\\cot61^\\circ+\\cot62^\\circ-\\cot63^\\circ+\\cdots+\\cot118^\\circ-\\cot119^\\circ$.<br>Since $\\cot(180^\\circ-\\theta)=-\\cot\\theta$: the even angles $62^\\circ,\\ldots,118^\\circ$ cancel in pairs ($\\cot90^\\circ=0$) and the odd angles $61^\\circ,\\ldots,119^\\circ$ cancel in pairs.<br>So $\\alpha\\sin1^\\circ=\\cot60^\\circ=\\dfrac{1}{\\sqrt3}$, i.e. $\\dfrac{\\operatorname{cosec}1^\\circ}{\\alpha}=\\sqrt3$.<br>Value $=3$.",
+   "subject": "Mathematics",
+   "chapter": "Trigonometric Functions",
+   "chCls": "XI"
+  },
+  {
+   "no": 16,
+   "section": 3,
+   "type": "num",
+   "text": "If $$\\alpha=\\int_{1/2}^{2}\\dfrac{\\tan^{-1}x}{2x^2-3x+2}\\,dx,$$ then the value of $\\sqrt{7}\\tan\\left(\\dfrac{2\\alpha\\sqrt{7}}{\\pi}\\right)$ is ________.<br>(Here, the inverse trigonometric function $\\tan^{-1}x$ assumes values in $\\left(-\\dfrac{\\pi}{2},\\dfrac{\\pi}{2}\\right)$.)",
+   "options": null,
+   "answer": {
+    "lo": 21,
+    "hi": 21
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Put $x=\\dfrac1u$: $dx=-\\dfrac{du}{u^2}$ and $2x^2-3x+2=\\dfrac{2-3u+2u^2}{u^2}$, so $\\alpha=\\displaystyle\\int_{1/2}^{2}\\dfrac{\\tan^{-1}(1/u)}{2u^2-3u+2}du$.<br>Adding ($\\tan^{-1}x+\\tan^{-1}\\frac1x=\\frac\\pi2$ for $x>0$): $2\\alpha=\\dfrac\\pi2\\displaystyle\\int_{1/2}^{2}\\dfrac{dx}{2x^2-3x+2}$.<br>$\\displaystyle\\int\\dfrac{dx}{2\\left[(x-\\frac34)^2+\\frac7{16}\\right]}=\\dfrac{2}{\\sqrt7}\\tan^{-1}\\dfrac{4x-3}{\\sqrt7}$; from $\\frac12$ to $2$: $\\dfrac{2}{\\sqrt7}\\left(\\tan^{-1}\\dfrac{5}{\\sqrt7}+\\tan^{-1}\\dfrac{1}{\\sqrt7}\\right)=\\dfrac{2}{\\sqrt7}\\tan^{-1}(3\\sqrt7)$ (since $\\dfrac{6/\\sqrt7}{1-5/7}=3\\sqrt7$).<br>So $\\alpha=\\dfrac{\\pi}{2\\sqrt7}\\tan^{-1}(3\\sqrt7)$, i.e. $\\dfrac{2\\alpha\\sqrt7}{\\pi}=\\tan^{-1}(3\\sqrt7)$.<br>$\\sqrt7\\tan\\left(\\dfrac{2\\alpha\\sqrt7}{\\pi}\\right)=\\sqrt7\\cdot3\\sqrt7=21$.",
+   "subject": "Mathematics",
+   "chapter": "Integrals",
+   "chCls": "XII"
+  },
+  {
+   "no": 1,
+   "section": 1,
+   "type": "single",
+   "text": "A temperature difference can generate e.m.f. in some materials. Let $S$ be the e.m.f. produced per unit temperature difference between the ends of a wire, $\\sigma$ the electrical conductivity and $\\kappa$ the thermal conductivity of the material of the wire. Taking $M, L, T, I$ and $K$ as dimensions of mass, length, time, current and temperature, respectively, the dimensional formula of the quantity $Z=\\dfrac{S^2\\sigma}{\\kappa}$ is:",
+   "options": [
+    "$[M^0L^0T^0I^0K^0]$",
+    "$[M^0L^0T^0I^0K^{-1}]$",
+    "$[M^1L^2T^{-2}I^{-1}K^{-1}]$",
+    "$[M^1L^2T^{-4}I^{-1}K^{-1}]$"
+   ],
+   "answer": 1,
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Voltage: $[ML^2T^{-3}I^{-1}]$, so $[S]=[ML^2T^{-3}I^{-1}K^{-1}]$.<br>Resistivity $\\rho=\\dfrac{RA}{l}$: $[ML^3T^{-3}I^{-2}]$, so $[\\sigma]=[M^{-1}L^{-3}T^3I^2]$.<br>Thermal conductivity (W m$^{-1}$ K$^{-1}$): $[\\kappa]=[MLT^{-3}K^{-1}]$.<br>$[Z]=\\dfrac{[M^2L^4T^{-6}I^{-2}K^{-2}][M^{-1}L^{-3}T^3I^2]}{[MLT^{-3}K^{-1}]}=[M^0L^0T^0I^0K^{-1}]$. Answer (B).",
+   "subject": "Physics",
+   "chapter": "Units and Measurements",
+   "chCls": "XI"
+  },
+  {
+   "no": 2,
+   "section": 1,
+   "type": "single",
+   "text": "Two co-axial conducting cylinders of same length $\\ell$ with radii $\\sqrt{2}R$ and $2R$ are kept, as shown in Fig. 1. The charge on the inner cylinder is $Q$ and the outer cylinder is grounded. The annular region between the cylinders is filled with a material of dielectric constant $\\kappa=5$. Consider an imaginary plane of the same length $\\ell$ at a distance $R$ from the common axis of the cylinders. This plane is parallel to the axis of the cylinders. The cross-sectional view of this arrangement is shown in Fig. 2. Ignoring edge effects, the flux of the electric field through the plane is ($\\epsilon_0$ is the permittivity of free space):",
+   "options": [
+    "$\\dfrac{Q}{30\\epsilon_0}$",
+    "$\\dfrac{Q}{15\\epsilon_0}$",
+    "$\\dfrac{Q}{60\\epsilon_0}$",
+    "$\\dfrac{Q}{120\\epsilon_0}$"
+   ],
+   "answer": 2,
+   "full": 3,
+   "neg": 1,
+   "fig": "phy-q2.png",
+   "optionFigs": null,
+   "sol": "The field is non-zero only between the cylinders: $E=\\dfrac{Q}{2\\pi\\kappa\\epsilon_0\\ell r}$, radial (zero inside the inner conductor and outside the grounded outer one).<br>For a radial field of a line charge, the flux through a strip equals $\\dfrac{Q}{\\kappa\\epsilon_0}\\times\\dfrac{\\text{angle subtended at the axis}}{2\\pi}$.<br>On the plane (distance $R$), $\\sqrt2R\\le r\\le2R$ corresponds to angles from the perpendicular between $45^\\circ$ ($\\cos^{-1}\\frac{1}{\\sqrt2}$) and $60^\\circ$ ($\\cos^{-1}\\frac12$): $15^\\circ$ on each side, $30^\\circ=\\dfrac\\pi6$ in total.<br>Flux $=\\dfrac{Q}{5\\epsilon_0}\\times\\dfrac{1}{12}=\\dfrac{Q}{60\\epsilon_0}$. Answer (C).",
+   "subject": "Physics",
+   "chapter": "Electric Charges and Fields",
+   "chCls": "XII"
+  },
+  {
+   "no": 3,
+   "section": 1,
+   "type": "single",
+   "text": "As shown in the figures, a uniform rod $OO'$ of length $l$ is hinged at the point $O$ and held in place vertically between two walls using two massless springs of same spring constant. The springs are connected at the midpoint and at the top-end ($O'$) of the rod, as shown in Fig. 1 and the rod is made to oscillate by a small angular displacement. The frequency of oscillation of the rod is $f_1$. On the other hand, if both the springs are connected at the midpoint of the rod, as shown in Fig. 2 and the rod is made to oscillate by a small angular displacement, then the frequency of oscillation is $f_2$. Ignoring gravity and assuming motion only in the plane of the diagram, the value of $\\dfrac{f_1}{f_2}$ is:",
+   "options": [
+    "$2$",
+    "$\\sqrt{2}$",
+    "$\\sqrt{\\dfrac{5}{2}}$",
+    "$\\sqrt{\\dfrac{2}{5}}$"
+   ],
+   "answer": 2,
+   "full": 3,
+   "neg": 1,
+   "fig": "phy-q3.png",
+   "optionFigs": null,
+   "sol": "For a small angle $\\theta$, a spring attached at distance $d$ from $O$ stretches by $d\\theta$ and gives restoring torque $kd^2\\theta$. The moment of inertia $I$ is the same in both cases, and $f\\propto\\sqrt{\\tau/\\theta}$.<br>Fig. 1: $\\tau=k\\left(\\dfrac l2\\right)^2\\theta+kl^2\\theta=\\dfrac54kl^2\\theta$.<br>Fig. 2: $\\tau=2k\\left(\\dfrac l2\\right)^2\\theta=\\dfrac12kl^2\\theta$.<br>$\\dfrac{f_1}{f_2}=\\sqrt{\\dfrac{5/4}{1/2}}=\\sqrt{\\dfrac52}$. Answer (C).",
+   "subject": "Physics",
+   "chapter": "Oscillations",
+   "chCls": "XI"
+  },
+  {
+   "no": 4,
+   "section": 1,
+   "type": "single",
+   "text": "Consider a star of mass $m_2$ kg revolving in a circular orbit around another star of mass $m_1$ kg with $m_1\\gg m_2$. The heavier star slowly acquires mass from the lighter star at a constant rate of $\\gamma$ kg/s. In this transfer process, there is no other loss of mass. If the separation between the centers of the stars is $r$, then its relative rate of change $\\dfrac{1}{r}\\dfrac{dr}{dt}$ (in s$^{-1}$) is given by:",
+   "options": [
+    "$-\\dfrac{3\\gamma}{2m_2}$",
+    "$-\\dfrac{2\\gamma}{m_2}$",
+    "$-\\dfrac{2\\gamma}{m_1}$",
+    "$-\\dfrac{3\\gamma}{2m_1}$"
+   ],
+   "answer": 1,
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Orbital angular momentum (with $m_1\\gg m_2$): $L=m_2\\sqrt{Gm_1r}$, conserved since the transfer exerts no external torque.<br>$\\dfrac{dL}{L}=0\\Rightarrow\\dfrac{\\dot m_2}{m_2}+\\dfrac{\\dot m_1}{2m_1}+\\dfrac{\\dot r}{2r}=0$, with $\\dot m_2=-\\gamma$, $\\dot m_1=+\\gamma$.<br>$\\dfrac1r\\dfrac{dr}{dt}=\\dfrac{2\\gamma}{m_2}-\\dfrac{\\gamma}{m_1}\\approx+\\dfrac{2\\gamma}{m_2}$ (the orbit widens).<br>All four options are negative, so none is correct; option (B) has the right magnitude but the wrong sign. The official final key gives full marks to everyone.",
+   "subject": "Physics",
+   "chapter": "Gravitation",
+   "chCls": "XI",
+   "dropped": true,
+   "note": "Dropped in the official final key: full marks to everyone."
+  },
+  {
+   "no": 5,
+   "section": 2,
+   "type": "multi",
+   "text": "A positive point charge of $10^{-8}$ C is kept at a distance of 20 cm from the center of a neutral conducting sphere of radius 10 cm. The sphere is then grounded and the charge on the sphere is measured. The grounding is then removed and subsequently the point charge is moved by a distance of 10 cm further away from the center of the sphere along the radial direction. Taking $\\dfrac{1}{4\\pi\\epsilon_0}=9\\times10^9$ Nm$^2$/C$^2$ (where $\\epsilon_0$ is the permittivity of free space), which of the following statements is/are correct:",
+   "options": [
+    "Before the grounding, the electrostatic potential of the sphere is 450 V.",
+    "Charge flowing from the sphere to the ground because of grounding is $5\\times10^{-9}$ C.",
+    "After the grounding is removed, the charge on the sphere is $-5\\times10^{-9}$ C.",
+    "The final electrostatic potential of the sphere is 300 V."
+   ],
+   "answer": [
+    0,
+    1,
+    2
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "The sphere is equipotential, so its potential equals that at its centre, where the induced charges (all at distance $0.1$ m) contribute $\\dfrac{kq_{\\text{sphere}}}{0.1}$.<br>Neutral: $V=\\dfrac{kq}{0.2}=\\dfrac{9\\times10^9\\times10^{-8}}{0.2}=450$ V (A true).<br>Grounded: $\\dfrac{kq}{0.2}+\\dfrac{kq'}{0.1}=0\\Rightarrow q'=-\\dfrac q2=-5\\times10^{-9}$ C. So $+5\\times10^{-9}$ C flows from the sphere to the ground (B true) and the sphere keeps $-5\\times10^{-9}$ C after the ground is removed (C true).<br>Charge moved to $0.3$ m: $V=\\dfrac{kq}{0.3}+\\dfrac{kq'}{0.1}=300-450=-150$ V (D false).<br>Answer (A), (B), (C).",
+   "subject": "Physics",
+   "chapter": "Electrostatic Potential and Capacitance",
+   "chCls": "XII"
+  },
+  {
+   "no": 6,
+   "section": 2,
+   "type": "multi",
+   "text": "Two identical concave mirrors each of focal length $f$ are facing each other as shown in the schematic diagram. The focal length $f$ is much larger than the size of the mirrors. A glass slab of thickness $t$ and refractive index $n_0$ is kept equidistant from the mirrors and perpendicular to their common principal axis. A monochromatic point light source $S$ is embedded at the center of the slab on the principal axis, as shown in the schematic diagram. For the image to be formed on $S$ itself, which of the following distances between the two mirrors is/are correct:",
+   "options": [
+    "$4f+\\left(1-\\dfrac{1}{n_0}\\right)t$",
+    "$2f+\\left(1-\\dfrac{1}{n_0}\\right)t$",
+    "$4f+(n_0-1)t$",
+    "$2f+(n_0-1)t$"
+   ],
+   "answer": [
+    0,
+    1
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": "phy-q6.png",
+   "optionFigs": null,
+   "sol": "Let the mirror separation be $D$. Seen from either mirror, $S$ lies behind glass of thickness $t/2$, so its apparent distance from the mirror is $\\dfrac D2-\\dfrac t2\\left(1-\\dfrac1{n_0}\\right)$.<br>Case 1: $S$ appears at the centre of curvature of each mirror; light returns on itself to $S$: $\\dfrac D2-\\dfrac t2\\left(1-\\dfrac1{n_0}\\right)=2f\\Rightarrow D=4f+\\left(1-\\dfrac1{n_0}\\right)t$.<br>Case 2: $S$ appears at the focus of each mirror; light from $S$ leaves mirror 1 parallel and mirror 2 focuses it back on $S$: $\\dfrac D2-\\dfrac t2\\left(1-\\dfrac1{n_0}\\right)=f\\Rightarrow D=2f+\\left(1-\\dfrac1{n_0}\\right)t$.<br>Answer (A), (B).",
+   "subject": "Physics",
+   "chapter": "Ray Optics and Optical Instruments",
+   "chCls": "XII"
+  },
+  {
+   "no": 7,
+   "section": 2,
+   "type": "multi",
+   "text": "Six infinitely large and thin non-conducting sheets are fixed in configurations I and II. As shown in the figure, the sheets carry uniform surface charge densities which are indicated in terms of $\\sigma_0$. The separation between any two consecutive sheets is $1\\ \\mu$m. The various regions between the sheets are denoted as 1, 2, 3, 4 and 5. If $\\sigma_0=9\\ \\mu$C/m$^2$, then which of the following statements is/are correct:<br>(Take permittivity of free space $\\epsilon_0=9\\times10^{-12}$ F/m)",
+   "options": [
+    "In region 4 of the configuration I, the magnitude of the electric field is zero.",
+    "In region 3 of the configuration II, the magnitude of the electric field is $\\dfrac{\\sigma_0}{\\epsilon_0}$.",
+    "Potential difference between the first and the last sheets of the configuration I is 5 V.",
+    "Potential difference between the first and the last sheets of the configuration II is zero."
+   ],
+   "answer": [
+    0
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": "phy-q7.png",
+   "optionFigs": null,
+   "sol": "Field between sheets $=\\dfrac{(\\text{charge to the left})-(\\text{charge to the right})}{2\\epsilon_0}$ (per unit area, taken positive to the right).<br>Configuration I: regions 1, 3, 5 have $E=\\dfrac{\\sigma_0-(-\\sigma_0)}{2\\epsilon_0}=\\dfrac{\\sigma_0}{\\epsilon_0}$; regions 2, 4 have $E=0$ (A true).<br>PD (I) $=3\\times\\dfrac{\\sigma_0}{\\epsilon_0}\\times10^{-6}=3\\times10^6\\times10^{-6}=3$ V (C false).<br>Configuration II: in every region $|E|=\\dfrac{\\sigma_0}{2\\epsilon_0}$, pointing right in 1, 3, 5 and left in 2, 4. So region 3 has $\\dfrac{\\sigma_0}{2\\epsilon_0}$ (B false).<br>PD (II) $=\\dfrac{\\sigma_0}{2\\epsilon_0}\\times10^{-6}\\times(1-1+1-1+1)=0.5$ V $\\ne0$ (D false).<br>Answer (A).",
+   "subject": "Physics",
+   "chapter": "Electric Charges and Fields",
+   "chCls": "XII"
+  },
+  {
+   "no": 8,
+   "section": 2,
+   "type": "multi",
+   "text": "The efficiency of a Carnot engine operating with a hot reservoir kept at a temperature of 1000 K is 0.4. It extracts 150 J of heat per cycle from the hot reservoir. The work extracted from this engine is being fully used to run a heat pump which has a coefficient of performance 10. The hot reservoir of the heat pump is at a temperature of 300 K. Which of the following statements is/are correct:",
+   "options": [
+    "Work extracted from the Carnot engine in one cycle is 60 J.",
+    "Temperature of the cold reservoir of the Carnot engine is 600 K.",
+    "Temperature of the cold reservoir of the heat pump is 270 K.",
+    "Heat supplied to the hot reservoir of the heat pump in one cycle is 540 J."
+   ],
+   "answer": [
+    0,
+    1,
+    2
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$W=\\eta Q_H=0.4\\times150=60$ J (A true).<br>$\\eta=1-\\dfrac{T_C}{1000}=0.4\\Rightarrow T_C=600$ K (B true).<br>Heat pump: $\\text{COP}=\\dfrac{T_H}{T_H-T_C}=\\dfrac{300}{300-T_C}=10\\Rightarrow T_C=270$ K (C true).<br>Heat delivered to its hot reservoir $=\\text{COP}\\times W=10\\times60=600$ J, not 540 J (D false).<br>Answer (A), (B), (C).",
+   "subject": "Physics",
+   "chapter": "Thermodynamics",
+   "chCls": "XI"
+  },
+  {
+   "no": 9,
+   "section": 3,
+   "type": "num",
+   "text": "A conducting solid sphere of radius $R$ and mass $M$ carries a charge $Q$. The sphere is rotating about an axis passing through its center with a uniform angular speed $\\omega$. The ratio of the magnitudes of the magnetic dipole moment to the angular momentum about the same axis is given as $\\alpha\\dfrac{Q}{2M}$. The value of $\\alpha$ is ________.",
+   "options": null,
+   "answer": {
+    "lo": 1.65,
+    "hi": 1.67
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "On a conductor the charge sits on the surface: a rotating charged shell has $\\mu=\\dfrac{QR^2\\omega}{3}$ (sum of rings $dq\\cdot\\dfrac{\\omega}{2\\pi}\\cdot\\pi R^2\\sin^2\\theta$, with $\\langle\\sin^2\\theta\\rangle=\\tfrac23$).<br>The mass is spread through the solid sphere: $L=\\dfrac25MR^2\\omega$.<br>$\\dfrac{\\mu}{L}=\\dfrac{Q/3}{2M/5}=\\dfrac{5Q}{6M}=\\dfrac53\\cdot\\dfrac{Q}{2M}$.<br>$\\alpha=\\dfrac53\\approx1.67$.",
+   "subject": "Physics",
+   "chapter": "Moving Charges and Magnetism",
+   "chCls": "XII"
+  },
+  {
+   "no": 10,
+   "section": 3,
+   "type": "num",
+   "text": "A hydrogen atom, initially at rest in its ground state, absorbs a photon of frequency $\\nu_1$ and ejects the electron with a kinetic energy of 10 eV. The electron then combines with a positron at rest to form a positronium atom in its ground state and simultaneously emits a photon of frequency $\\nu_2$. The center of mass of the resulting positronium atom moves with a kinetic energy of 5 eV. It is given that positron has the same mass as that of electron and the positronium atom can be considered as a Bohr atom, in which the electron and the positron orbit around their center of mass. Considering no other energy loss during the whole process, the difference between the two photon energies (in eV) is ________.",
+   "options": null,
+   "answer": {
+    "lo": 11.7,
+    "hi": 11.9
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Ionisation: $h\\nu_1=13.6+10=23.6$ eV.<br>Positronium is a Bohr atom with reduced mass $\\dfrac{m_e}{2}$, so its ground-state energy is $-\\dfrac{13.6}{2}=-6.8$ eV.<br>Energy conservation in forming it: $10=5+(-6.8)+h\\nu_2\\Rightarrow h\\nu_2=11.8$ eV.<br>$h\\nu_1-h\\nu_2=23.6-11.8=11.8$ eV.",
+   "subject": "Physics",
+   "chapter": "Atoms",
+   "chCls": "XII"
+  },
+  {
+   "no": 11,
+   "section": 3,
+   "type": "num",
+   "text": "An ideal monatomic gas of $n$ moles is taken through a cycle $WXYZW$ consisting of consecutive adiabatic and isobaric quasi-static processes, as shown in the schematic $V$-$T$ diagram. The volume of the gas at $W$, $X$ and $Y$ points are, 64 cm$^3$, 125 cm$^3$ and 250 cm$^3$, respectively. If the absolute temperature of the gas $T_W$ at the point $W$ is such that $nRT_W=1$ J ($R$ is the universal gas constant), then the amount of heat absorbed (in J) by the gas along the path $XY$ is ________.",
+   "options": null,
+   "answer": {
+    "lo": 1.6,
+    "hi": 1.6
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": "phy-q11.png",
+   "optionFigs": null,
+   "sol": "On the $V$-$T$ diagram, $XY$ and $ZW$ lie on straight lines through the origin (isobaric); $WX$ and $YZ$ are adiabatic.<br>$W\\to X$ adiabatic: $TV^{\\gamma-1}=$ const with $\\gamma-1=\\dfrac23$: $T_X=T_W\\left(\\dfrac{64}{125}\\right)^{2/3}=\\dfrac{16}{25}T_W$.<br>$X\\to Y$ isobaric: $T_Y=T_X\\dfrac{V_Y}{V_X}=2T_X=\\dfrac{32}{25}T_W$.<br>$Q_{XY}=nC_p(T_Y-T_X)=\\dfrac52\\cdot\\dfrac{16}{25}nRT_W=1.6$ J.",
+   "subject": "Physics",
+   "chapter": "Thermodynamics",
+   "chCls": "XI"
+  },
+  {
+   "no": 12,
+   "section": 3,
+   "type": "num",
+   "text": "A geostationary satellite above the equator is orbiting around the earth at a fixed distance $r_1$ from the center of the earth. A second satellite is orbiting in the equatorial plane in the opposite direction to the earth's rotation, at a distance $r_2$ from the center of the earth, such that $r_1=1.21\\,r_2$. The time period of the second satellite as measured from the geostationary satellite is $\\dfrac{24}{p}$ hours. The value of $p$ is ________.",
+   "options": null,
+   "answer": {
+    "lo": 2.3,
+    "hi": 2.4
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Kepler: $T_2=T_1\\left(\\dfrac{r_2}{r_1}\\right)^{3/2}=\\dfrac{24}{(1.21)^{3/2}}=\\dfrac{24}{1.331}$ h.<br>The satellites move in opposite senses, so the relative angular speed is $\\omega_1+\\omega_2=\\dfrac{2\\pi}{24}(1+1.331)$.<br>Relative period $=\\dfrac{24}{2.331}$ h.<br>$p=2.331$.",
+   "subject": "Physics",
+   "chapter": "Gravitation",
+   "chCls": "XI"
+  },
+  {
+   "no": 13,
+   "section": 3,
+   "type": "num",
+   "text": "The left and right compartments of a thermally isolated container of length $L$ are separated by a thermally conducting, movable piston of area $A$. The left and right compartments are filled with $\\dfrac{3}{2}$ and 1 moles of an ideal gas, respectively. In the left compartment the piston is attached by a spring with spring constant $k$ and natural length $\\dfrac{2L}{5}$. In thermodynamic equilibrium, the piston is at a distance $\\dfrac{L}{2}$ from the left and right edges of the container as shown in the figure. Under the above conditions, if the pressure in the right compartment is $P=\\dfrac{kL}{A}\\alpha$, then the value of $\\alpha$ is ________.",
+   "options": null,
+   "answer": {
+    "lo": 0.2,
+    "hi": 0.2
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": "phy-q13.png",
+   "optionFigs": null,
+   "sol": "The piston conducts heat, so both gases have the same temperature; the volumes are equal ($AL/2$ each). So $P_{\\text{left}}=\\dfrac32P$.<br>The spring is stretched by $\\dfrac L2-\\dfrac{2L}{5}=\\dfrac{L}{10}$ and pulls the piston to the left with force $\\dfrac{kL}{10}$.<br>Piston equilibrium: $P_{\\text{left}}A=PA+\\dfrac{kL}{10}\\Rightarrow\\dfrac12PA=\\dfrac{kL}{10}\\Rightarrow P=\\dfrac{kL}{5A}$.<br>$\\alpha=0.2$.",
+   "subject": "Physics",
+   "chapter": "Thermodynamics",
+   "chCls": "XI"
+  },
+  {
+   "no": 14,
+   "section": 3,
+   "type": "num",
+   "text": "In a Young's double slit experiment, a combination of two glass wedges $A$ and $B$, having refractive indices 1.7 and 1.5, respectively, are placed in front of the slits, as shown in the figure. The separation between the slits is $d=2$ mm and the shortest distance between the slits and the screen is $D=2$ m. Thickness of the combination of the wedges is $t=12\\ \\mu$m. The value of $l$ as shown in the figure is 1 mm. Neglect any refraction effect at the slanted interface of the wedges. Due to the combination of the wedges, the central maximum shifts (in mm) with respect to O by ________.",
+   "options": null,
+   "answer": {
+    "lo": 1.2,
+    "hi": 1.2
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": "phy-q14.png",
+   "optionFigs": null,
+   "sol": "The combination has height $d+2l=4$ mm; the thickness of $A$ falls linearly from $t$ at the top to $0$ at the bottom, and $B$ makes up the rest.<br>At the upper slit (1 mm from the top): $A=\\dfrac34t$, $B=\\dfrac14t$. At the lower slit: $A=\\dfrac14t$, $B=\\dfrac34t$.<br>Extra optical paths: upper $=0.7\\cdot\\dfrac34t+0.5\\cdot\\dfrac14t=0.65t$; lower $=0.7\\cdot\\dfrac14t+0.5\\cdot\\dfrac34t=0.55t$.<br>Path difference $=0.1t=1.2\\ \\mu$m.<br>Shift $=\\dfrac{\\Delta D}{d}=\\dfrac{1.2\\times10^{-6}\\times2}{2\\times10^{-3}}=1.2\\times10^{-3}$ m $=1.2$ mm (towards the upper slit).",
+   "subject": "Physics",
+   "chapter": "Wave Optics",
+   "chCls": "XII"
+  },
+  {
+   "no": 15,
+   "section": 3,
+   "type": "num",
+   "text": "A projectile of mass 200 g is launched in a viscous medium at an angle $60^\\circ$ with the horizontal, with an initial velocity of 270 m/s. It experiences a viscous drag force $\\vec{F}=-c\\vec{v}$ where the drag coefficient $c=0.1$ kg/s and $\\vec{v}$ is the instantaneous velocity of the projectile. The projectile hits a vertical wall after 2 s. Taking $e=2.7$, the horizontal distance of the wall from the point of projection (in m) is ________.",
+   "options": null,
+   "answer": {
+    "lo": 167,
+    "hi": 171
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Horizontal motion: $m\\dfrac{dv_x}{dt}=-cv_x\\Rightarrow v_x=u_xe^{-ct/m}$, with $\\dfrac cm=\\dfrac{0.1}{0.2}=0.5$ s$^{-1}$ and $u_x=270\\cos60^\\circ=135$ m/s.<br>$x=\\dfrac{u_xm}{c}\\left(1-e^{-ct/m}\\right)=135\\times2\\times\\left(1-e^{-1}\\right)$ at $t=2$ s.<br>$x=270\\left(1-\\dfrac{1}{2.7}\\right)=270\\times\\dfrac{1.7}{2.7}=170$ m.",
+   "subject": "Physics",
+   "chapter": "Laws of Motion",
+   "chCls": "XI"
+  },
+  {
+   "no": 16,
+   "section": 3,
+   "type": "num",
+   "text": "An audio transmitter (T) and a receiver (R) are hung vertically from two identical massless strings of length 8 m with their pivots well separated along the $X$ axis. They are pulled from the equilibrium position in opposite directions along the $X$ axis by a small angular amplitude $\\theta_0=\\cos^{-1}(0.9)$ and released simultaneously. If the natural frequency of the transmitter is 660 Hz and the speed of sound in air is 330 m/s, the maximum variation in the frequency (in Hz) as measured by the receiver (Take the acceleration due to gravity $g=10$ m/s$^2$) is ________.",
+   "options": null,
+   "answer": {
+    "lo": 26,
+    "hi": 33
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": "phy-q16.png",
+   "optionFigs": null,
+   "sol": "Maximum speed of each bob (at the lowest point, moving along $X$): $v=\\sqrt{2gL(1-\\cos\\theta_0)}=\\sqrt{2\\times10\\times8\\times0.1}=4$ m/s.<br>The two pendulums move as mirror images, so at the lowest point they approach each other, or recede, each at 4 m/s.<br>Approaching: $f_{\\max}=660\\times\\dfrac{330+4}{330-4}=660\\times\\dfrac{334}{326}\\approx676.2$ Hz.<br>Receding: $f_{\\min}=660\\times\\dfrac{326}{334}\\approx644.2$ Hz.<br>Maximum variation $=f_{\\max}-f_{\\min}\\approx32$ Hz.",
+   "subject": "Physics",
+   "chapter": "Waves",
+   "chCls": "XI"
+  },
+  {
+   "no": 1,
+   "section": 1,
+   "type": "single",
+   "text": "During sodium nitroprusside test of sulphide ion in an aqueous solution, one of the ligands coordinated to the metal ion is converted to",
+   "options": [
+    "$\\mathrm{NOS^-}$",
+    "$\\mathrm{SCN^-}$",
+    "$\\mathrm{SNO^-}$",
+    "$\\mathrm{NCS^-}$"
+   ],
+   "answer": 0,
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Sodium nitroprusside is $\\mathrm{Na_2[Fe(CN)_5NO]}$.<br>With sulphide: $\\mathrm{[Fe(CN)_5NO]^{2-}+S^{2-}\\rightarrow[Fe(CN)_5NOS]^{4-}}$ (violet).<br>The nitrosyl ligand $\\mathrm{NO^+}$ is converted to $\\mathrm{NOS^-}$. Answer (A).",
+   "subject": "Chemistry",
+   "chapter": "Coordination Compounds",
+   "chCls": "XII"
+  },
+  {
+   "no": 2,
+   "section": 1,
+   "type": "single",
+   "text": "The complete hydrolysis of ICl, $\\mathrm{ClF_3}$ and $\\mathrm{BrF_5}$, respectively, gives",
+   "options": [
+    "$\\mathrm{IO^-}$, $\\mathrm{ClO_2^-}$ and $\\mathrm{BrO_3^-}$",
+    "$\\mathrm{IO_3^-}$, $\\mathrm{ClO_2^-}$ and $\\mathrm{BrO_3^-}$",
+    "$\\mathrm{IO^-}$, $\\mathrm{ClO^-}$ and $\\mathrm{BrO_2^-}$",
+    "$\\mathrm{IO_3^-}$, $\\mathrm{ClO_4^-}$ and $\\mathrm{BrO_2^-}$"
+   ],
+   "answer": 0,
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "On hydrolysis the central (less electronegative) halogen keeps its oxidation state and forms an oxoacid; the more electronegative halogen gives $\\mathrm{HX}$.<br>$\\mathrm{ICl}$: I is $+1$ → $\\mathrm{HOI}$, i.e. $\\mathrm{IO^-}$.<br>$\\mathrm{ClF_3}$: Cl is $+3$ → $\\mathrm{HClO_2}$, i.e. $\\mathrm{ClO_2^-}$.<br>$\\mathrm{BrF_5}$: Br is $+5$ → $\\mathrm{HBrO_3}$, i.e. $\\mathrm{BrO_3^-}$.<br>Answer (A).",
+   "subject": "Chemistry",
+   "chapter": "Redox Reactions",
+   "chCls": "XI"
+  },
+  {
+   "no": 3,
+   "section": 1,
+   "type": "single",
+   "text": "Monocyclic compounds $\\mathbf{P}$, $\\mathbf{Q}$, $\\mathbf{R}$ and $\\mathbf{S}$ are the major products formed in the reaction sequences given below.<br>The product having the highest number of unsaturated carbon atom(s) is",
+   "options": [
+    "$\\mathbf{P}$",
+    "$\\mathbf{Q}$",
+    "$\\mathbf{R}$",
+    "$\\mathbf{S}$"
+   ],
+   "answer": 3,
+   "full": 3,
+   "neg": 1,
+   "fig": "che-q3.png",
+   "optionFigs": null,
+   "sol": "$\\mathbf{P}$: Hell–Volhard–Zelinsky α-bromination gives $\\mathrm{PhCH_2CHBrCOOH}$: 6 ring + 1 COOH = 7 unsaturated C.<br>$\\mathbf{Q}$: Claisen–Schmidt condensation gives cinnamaldehyde $\\mathrm{PhCH{=}CHCHO}$: 6 + 2 + 1 = 9.<br>$\\mathbf{R}$: the acetylide is allylated to $\\mathrm{PhC{\\equiv}CCH_2CH{=}CH_2}$; hydration gives $\\mathrm{PhCOCH_2CH_2CH{=}CH_2}$: 6 + 1 + 2 = 9.<br>$\\mathbf{S}$: ozonolysis of 2-methylindene opens the five-membered ring to $o$-$\\mathrm{(CH_3COCH_2)C_6H_4CHO}$; 2 $\\mathrm{CH_3MgBr}$ give the diol $o$-$\\mathrm{(CH_3)_2C(OH)CH_2-C_6H_4-CH(OH)CH_3}$; acid and heat dehydrate both to $o$-$\\mathrm{(CH_3)_2C{=}CH-C_6H_4-CH{=}CHCH_3}$: 6 + 2 + 2 = 10.<br>$\\mathbf{S}$ has the most. Answer (D).",
+   "subject": "Chemistry",
+   "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+   "chCls": "XII"
+  },
+  {
+   "no": 4,
+   "section": 1,
+   "type": "single",
+   "text": "The correct reaction/reaction sequence that would produce a dicarboxylic acid as the major product is",
+   "options": [
+    "",
+    "",
+    "",
+    ""
+   ],
+   "answer": 2,
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": [
+    "che-q4a.png",
+    "che-q4b.png",
+    "che-q4c.png",
+    "che-q4d.png"
+   ],
+   "sol": "(A) $\\mathrm{HOCH_2CH_2Cl\\xrightarrow{NaCN}HOCH_2CH_2CN}$, hydrolysis → $\\mathrm{HOCH_2CH_2COOH}$: a hydroxy monoacid.<br>(B) Bromine water oxidises only the aldehyde of glucose → gluconic acid: a monoacid.<br>(C) $\\mathrm{KOH/EtOH}$ eliminates HBr to give cyclohexene; hot acidic $\\mathrm{KMnO_4}$ cleaves the C=C → $\\mathrm{HOOC(CH_2)_4COOH}$ (adipic acid): a dicarboxylic acid.<br>(D) Chromic acid oxidises the primary alcohol to COOH; the ketone is untouched → a keto monoacid.<br>Answer (C).",
+   "subject": "Chemistry",
+   "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+   "chCls": "XII"
+  },
+  {
+   "no": 5,
+   "section": 2,
+   "type": "multi",
+   "text": "The correct statement(s) about intermolecular forces is(are)",
+   "options": [
+    "The potential energy between two point charges approaches zero more rapidly than the potential energy between a point dipole and a point charge as the distance between them approaches infinity.",
+    "The average potential energy of two rotating polar molecules that are separated by a distance $r$ has $1/r^3$ dependence.",
+    "The dipole-induced dipole average interaction energy is independent of temperature.",
+    "Nonpolar molecules attract one another even though neither has a permanent dipole moment."
+   ],
+   "answer": [
+    2,
+    3
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "(A) Charge–charge energy $\\propto\\dfrac1r$, charge–dipole $\\propto\\dfrac1{r^2}$: the charge–charge energy falls off more slowly. False.<br>(B) For freely rotating polar molecules the Boltzmann-averaged (Keesom) energy $\\propto\\dfrac{1}{r^6}$, not $\\dfrac1{r^3}$. False.<br>(C) The induced dipole always lines up with the permanent dipole, so the dipole–induced dipole (Debye) energy does not depend on temperature. True.<br>(D) Nonpolar molecules attract through London dispersion forces (instantaneous dipoles). True.<br>Answer (C), (D).",
+   "subject": "Chemistry",
+   "chapter": "Chemical Bonding and Molecular Structure",
+   "chCls": "XI"
+  },
+  {
+   "no": 6,
+   "section": 2,
+   "type": "multi",
+   "text": "The compound(s) with P$-$H bond(s) is(are)",
+   "options": [
+    "$\\mathrm{H_3PO_4}$",
+    "$\\mathrm{H_3PO_3}$",
+    "$\\mathrm{H_4P_2O_7}$",
+    "$\\mathrm{H_3PO_2}$"
+   ],
+   "answer": [
+    1,
+    3
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$\\mathrm{H_3PO_4}$: $\\mathrm{O{=}P(OH)_3}$, no P–H.<br>$\\mathrm{H_3PO_3}$ (phosphorous acid): $\\mathrm{O{=}PH(OH)_2}$, one P–H (dibasic).<br>$\\mathrm{H_4P_2O_7}$: $\\mathrm{(HO)_2P(O)-O-P(O)(OH)_2}$, no P–H.<br>$\\mathrm{H_3PO_2}$ (hypophosphorous acid): $\\mathrm{O{=}PH_2(OH)}$, two P–H (monobasic).<br>Answer (B), (D).",
+   "subject": "Chemistry",
+   "chapter": "Chemical Bonding and Molecular Structure",
+   "chCls": "XI"
+  },
+  {
+   "no": 7,
+   "section": 2,
+   "type": "multi",
+   "text": "For the reaction sequence given below, the correct statement(s) is(are)",
+   "options": [
+    "Both $\\mathbf{X}$ and $\\mathbf{Y}$ are oxygen containing compounds.",
+    "$\\mathbf{Y}$ on heating with $\\mathrm{CHCl_3/KOH}$ forms isocyanide.",
+    "$\\mathbf{Z}$ reacts with Hinsberg's reagent.",
+    "$\\mathbf{Z}$ is an aromatic primary amine."
+   ],
+   "answer": [
+    0,
+    2
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": "che-q7.png",
+   "optionFigs": null,
+   "sol": "Hot acidic $\\mathrm{KMnO_4}$ oxidises tetralin's saturated ring to phthalic acid; $\\mathrm{NH_3}$ with heat ($-2\\mathrm{H_2O}$) gives phthalimide = $\\mathbf{X}$.<br>Gabriel synthesis: ethanolic KOH gives potassium phthalimide, and R–Br gives N-alkylphthalimide = $\\mathbf{Y}$.<br>NaOH hydrolysis gives sodium phthalate (aromatic) + $\\mathrm{R{-}NH_2}$ = $\\mathbf{Z}$, an aliphatic primary amine.<br>(A) X and Y both contain C=O: true. (B) Y has no free $\\mathrm{NH_2}$, so no carbylamine reaction: false. (C) A primary amine reacts with Hinsberg's reagent: true. (D) Z is aliphatic: false.<br>Answer (A), (C).",
+   "subject": "Chemistry",
+   "chapter": "Amines",
+   "chCls": "XII"
+  },
+  {
+   "no": 8,
+   "section": 2,
+   "type": "multi",
+   "text": "For the reaction sequence given below, the correct statement(s) is(are)",
+   "options": [
+    "$\\mathbf{P}$ is optically active.",
+    "$\\mathbf{S}$ gives Bayer's test.",
+    "$\\mathbf{Q}$ gives effervescence with aq. $\\mathrm{NaHCO_3}$.",
+    "$\\mathbf{R}$ is an alkyne."
+   ],
+   "answer": [
+    1,
+    2
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": "che-q8.png",
+   "optionFigs": null,
+   "sol": "The lactone is 4-benzyl-tetrahydropyran-2-one. $\\mathrm{LiAlH_4}$ reduces it to the diol $\\mathrm{HOCH_2CH_2CH(CH_2Ph)CH_2CH_2OH}$ = $\\mathbf{P}$; both arms are identical, so P is achiral (A false).<br>$\\mathrm{CrO_3{-}H_2SO_4}$ oxidises both $\\mathrm{CH_2OH}$ groups → $\\mathrm{HOOCCH_2CH(CH_2Ph)CH_2COOH}$ = $\\mathbf{Q}$, a dicarboxylic acid: effervescence with $\\mathrm{NaHCO_3}$ (C true).<br>Soda-lime decarboxylation removes both COOH → $\\mathrm{(CH_3)_2CHCH_2Ph}$ = $\\mathbf{R}$, an alkane side chain, not an alkyne (D false).<br>Conc. $\\mathrm{H_2SO_4}$ at 443 K dehydrates the diol to the diene $\\mathbf{S}$, which decolourises Baeyer's reagent (B true).<br>Answer (B), (C).",
+   "subject": "Chemistry",
+   "chapter": "Alcohols, Phenols and Ethers",
+   "chCls": "XII"
+  },
+  {
+   "no": 9,
+   "section": 3,
+   "type": "num",
+   "text": "The density (in g cm$^{-3}$) of the metal which forms a cubic close packed (ccp) lattice with an axial distance (edge length) equal to 400 pm is ________.<br>Use: Atomic mass of metal $=105.6$ amu and Avogadro's constant $=6\\times10^{23}$ mol$^{-1}$",
+   "options": null,
+   "answer": {
+    "lo": 10.85,
+    "hi": 11.1
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "ccp = fcc: $Z=4$ atoms per unit cell; $a=400$ pm $=4\\times10^{-8}$ cm, $a^3=6.4\\times10^{-23}$ cm$^3$.<br>$\\rho=\\dfrac{ZM}{N_Aa^3}=\\dfrac{4\\times105.6}{6\\times10^{23}\\times6.4\\times10^{-23}}=\\dfrac{422.4}{38.4}$.<br>$\\rho=11.0$ g cm$^{-3}$.",
+   "subject": "Chemistry",
+   "chapter": "Some Basic Concepts of Chemistry",
+   "chCls": "XI"
+  },
+  {
+   "no": 10,
+   "section": 3,
+   "type": "num",
+   "text": "The solubility of barium iodate in an aqueous solution prepared by mixing 200 mL of 0.010 M barium nitrate with 100 mL of 0.10 M sodium iodate is $\\boldsymbol{X}\\times10^{-6}$ mol dm$^{-3}$. The value of $\\boldsymbol{X}$ is ________.<br>Use: Solubility product constant ($K_{sp}$) of barium iodate $=1.58\\times10^{-9}$",
+   "options": null,
+   "answer": {
+    "lo": 3.85,
+    "hi": 4.15
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$\\mathrm{Ba^{2+}}$: $200\\times0.010=2$ mmol; $\\mathrm{IO_3^-}$: $100\\times0.10=10$ mmol; total volume 300 mL.<br>$\\mathrm{Ba(IO_3)_2}$ precipitates: 2 mmol $\\mathrm{Ba^{2+}}$ uses 4 mmol $\\mathrm{IO_3^-}$, leaving 6 mmol in 300 mL, so $[\\mathrm{IO_3^-}]=0.020$ M.<br>Solubility $s=\\dfrac{K_{sp}}{[\\mathrm{IO_3^-}]^2}=\\dfrac{1.58\\times10^{-9}}{4\\times10^{-4}}=3.95\\times10^{-6}$ mol dm$^{-3}$.<br>$X=3.95$.",
+   "subject": "Chemistry",
+   "chapter": "Equilibrium",
+   "chCls": "XI"
+  },
+  {
+   "no": 11,
+   "section": 3,
+   "type": "num",
+   "text": "Adsorption of phenol from its aqueous solution on to fly ash obeys Freundlich isotherm. At a given temperature, from 10 mg g$^{-1}$ and 16 mg g$^{-1}$ aqueous phenol solutions, the concentrations of adsorbed phenol are measured to be 4 mg g$^{-1}$ and 10 mg g$^{-1}$, respectively. At this temperature, the concentration (in mg g$^{-1}$) of adsorbed phenol from 20 mg g$^{-1}$ aqueous solution of phenol will be ________.<br>Use: $\\log_{10}2=0.3$",
+   "options": null,
+   "answer": {
+    "lo": 15.5,
+    "hi": 16.5
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Freundlich: $\\dfrac xm=kC^{1/n}$.<br>$\\dfrac{10}{4}=\\left(\\dfrac{16}{10}\\right)^{1/n}\\Rightarrow\\log2.5=\\dfrac1n\\log1.6$.<br>$\\log2.5=1-2(0.3)=0.4$, $\\log1.6=4(0.3)-1=0.2$, so $\\dfrac1n=2$.<br>At $C=20$: $\\dfrac xm=4\\times\\left(\\dfrac{20}{10}\\right)^2=16$ mg g$^{-1}$.",
+   "subject": "Chemistry",
+   "chapter": "Solutions",
+   "chCls": "XII"
+  },
+  {
+   "no": 12,
+   "section": 3,
+   "type": "num",
+   "text": "Consider a reaction $A+R\\longrightarrow\\text{Product}$. The rate of this reaction is measured to be $k[A][R]$. At the start of the reaction, the concentration of $R$, $[R]_0$, is 10-times the concentration of $A$, $[A]_0$. The reaction can be considered to be a pseudo first order reaction with assumption that $k[R]=k'$ is constant. Due to this assumption, the relative error (in %) in the rate when this reaction is 40 % complete, is ________.<br>[$k$ and $k'$ represent corresponding rate constants]",
+   "options": null,
+   "answer": {
+    "lo": 4,
+    "hi": 4.25
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "At 40% completion: $[A]=0.6[A]_0$ and $[R]=10[A]_0-0.4[A]_0=9.6[A]_0$.<br>True rate $=k[A](9.6[A]_0)$; pseudo-first-order rate $=k[R]_0[A]=k[A](10[A]_0)$.<br>Relative error $=\\dfrac{10-9.6}{9.6}\\times100\\%=4.17\\%$.",
+   "subject": "Chemistry",
+   "chapter": "Chemical Kinetics",
+   "chCls": "XII"
+  },
+  {
+   "no": 13,
+   "section": 3,
+   "type": "num",
+   "text": "At 300 K, an ideal dilute solution of a macromolecule exerts osmotic pressure that is expressed in terms of the height ($h$) of the solution (density $=1.00$ g cm$^{-3}$) where $h$ is equal to 2.00 cm. If the concentration of the dilute solution of the macromolecule is 2.00 g dm$^{-3}$, the molar mass of the macromolecule is calculated to be $\\boldsymbol{X}\\times10^4$ g mol$^{-1}$. The value of $\\boldsymbol{X}$ is ________.<br>Use: Universal gas constant ($R$) $=8.3$ J K$^{-1}$ mol$^{-1}$ and acceleration due to gravity ($g$) $=10$ m s$^{-2}$",
+   "options": null,
+   "answer": {
+    "lo": 2.4,
+    "hi": 2.55
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$\\pi=h\\rho g=0.02\\times1000\\times10=200$ Pa.<br>$\\pi=\\dfrac{c}{M}RT$ with $c=2.00$ g dm$^{-3}=2000$ g m$^{-3}$.<br>$M=\\dfrac{cRT}{\\pi}=\\dfrac{2000\\times8.3\\times300}{200}=24900$ g mol$^{-1}=2.49\\times10^4$ g mol$^{-1}$.<br>$X=2.49$.",
+   "subject": "Chemistry",
+   "chapter": "Solutions",
+   "chCls": "XII"
+  },
+  {
+   "no": 14,
+   "section": 3,
+   "type": "num",
+   "text": "An electrochemical cell is fueled by the combustion of butane at 1 bar and 298 K. Its cell potential is $\\dfrac{\\boldsymbol{X}}{F}\\times10^3$ volts, where $F$ is the Faraday constant. The value of $\\boldsymbol{X}$ is ________.<br>Use: Standard Gibbs energies of formation at 298 K are: $\\Delta_fG^\\circ_{\\mathrm{CO_2}}=-394$ kJ mol$^{-1}$; $\\Delta_fG^\\circ_{\\text{water}}=-237$ kJ mol$^{-1}$; $\\Delta_fG^\\circ_{\\text{butane}}=-18$ kJ mol$^{-1}$",
+   "options": null,
+   "answer": {
+    "lo": 105.4,
+    "hi": 105.6
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$\\mathrm{C_4H_{10}+\\tfrac{13}{2}O_2\\rightarrow4CO_2+5H_2O}$.<br>$\\Delta G^\\circ=4(-394)+5(-237)-(-18)=-2743$ kJ mol$^{-1}$.<br>Electrons transferred: carbon goes from $-\\tfrac52$ to $+4$, so $n=4\\times6.5=26$.<br>$E=-\\dfrac{\\Delta G^\\circ}{nF}=\\dfrac{2743\\times10^3}{26F}=\\dfrac{105.5}{F}\\times10^3$ V.<br>$X=105.5$.",
+   "subject": "Chemistry",
+   "chapter": "Electrochemistry",
+   "chCls": "XII"
+  },
+  {
+   "no": 15,
+   "section": 3,
+   "type": "num",
+   "text": "The sum of the spin only magnetic moment values (in B.M.) of $\\mathrm{[Mn(Br)_6]^{3-}}$ and $\\mathrm{[Mn(CN)_6]^{3-}}$ is ________.",
+   "options": null,
+   "answer": {
+    "lo": 7.5,
+    "hi": 7.8
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Both contain $\\mathrm{Mn^{3+}}$, $3d^4$.<br>$\\mathrm{Br^-}$ is a weak-field ligand: high spin $t_{2g}^3e_g^1$, 4 unpaired, $\\mu=\\sqrt{4\\times6}=4.90$ B.M.<br>$\\mathrm{CN^-}$ is a strong-field ligand: low spin $t_{2g}^4$, 2 unpaired, $\\mu=\\sqrt{2\\times4}=2.83$ B.M.<br>Sum $=4.90+2.83=7.73$ B.M.",
+   "subject": "Chemistry",
+   "chapter": "Coordination Compounds",
+   "chCls": "XII"
+  },
+  {
+   "no": 16,
+   "section": 3,
+   "type": "num",
+   "text": "A linear octasaccharide (molar mass $=1024$ g mol$^{-1}$) on complete hydrolysis produces three monosaccharides: ribose, 2-deoxyribose and glucose. The amount of 2-deoxyribose formed is 58.26 % (w/w) of the total amount of the monosaccharides produced in the hydrolyzed products. The number of ribose unit(s) present in one molecule of octasaccharide is ________.<br>Use: Molar mass (in g mol$^{-1}$): ribose $=150$, 2-deoxyribose $=134$, glucose $=180$; Atomic mass (in amu): H $=1$, O $=16$",
+   "options": null,
+   "answer": {
+    "lo": 2,
+    "hi": 2
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "A linear octasaccharide has 7 glycosidic links, so complete hydrolysis takes up 7 $\\mathrm{H_2O}$ $=126$ g.<br>Mass of monosaccharides $=1024+126=1150$ g per mole.<br>2-Deoxyribose: $0.5826\\times1150=670$ g $=5\\times134$, i.e. 5 units.<br>Remaining 3 units weigh $1150-670=480$ g: $150r+180g=480$ with $r+g=3\\Rightarrow g=1$, $r=2$.<br>Number of ribose units $=2$.",
+   "subject": "Chemistry",
+   "chapter": "Biomolecules",
+   "chCls": "XII"
+  }
+ ]
+}

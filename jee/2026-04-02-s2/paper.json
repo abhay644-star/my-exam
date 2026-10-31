@@ -1,0 +1,1786 @@
+{
+ "id": "2026-04-02-s2",
+ "exam": "JEE Main",
+ "title": "JEE Main 2026 · 2 April 2026 · Shift 2",
+ "source": "Question paper \"B Tech 2nd Apr 2026 Shift 2\" and JEE (Main) 2026 Session 2 Final Answer Key, National Testing Agency (NTA). Worked solutions: All in All Exam Practice.",
+ "duration": 180,
+ "total": 300,
+ "marking": "+4 correct, -1 wrong, 0 unanswered (Sections A and B)",
+ "questions": [
+  {
+   "no": 1,
+   "qid": "691121151",
+   "section": "A",
+   "type": "mcq",
+   "text": "Let $\\alpha, \\beta$ be the roots of the equation $x^2-3x+r=0$, and $\\dfrac{\\alpha}{2}, 2\\beta$ be the roots of the equation $x^2+3x+r=0$. If the roots of the equation $x^2+6x=m$ are $2\\alpha+\\beta+2r$ and $\\alpha-2\\beta-\\dfrac{r}{2}$, then $m$ is equal to :",
+   "options": [
+    "$-135$",
+    "$-567$",
+    "$135$",
+    "$567$"
+   ],
+   "optionIds": [
+    "691121511",
+    "691121512",
+    "691121513",
+    "691121514"
+   ],
+   "answer": 3,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "From the first equation: $\\alpha+\\beta=3$, $\\alpha\\beta=r$. From the second: $\\dfrac{\\alpha}{2}+2\\beta=-3$ (and the product is again $\\alpha\\beta=r$).<br>$\\alpha=3-\\beta \\Rightarrow \\dfrac{3-\\beta}{2}+2\\beta=-3 \\Rightarrow \\beta=-3,\\ \\alpha=6,\\ r=-18$.<br>Roots of $x^2+6x-m=0$: $2\\alpha+\\beta+2r=12-3-36=-27$ and $\\alpha-2\\beta-\\dfrac r2=6+6+9=21$ (sum $-6$, as required).<br>Product $=-m \\Rightarrow -m=(-27)(21)=-567 \\Rightarrow m=567$.",
+   "subject": "Mathematics",
+   "chapter": "Complex Numbers",
+   "chCls": "XI"
+  },
+  {
+   "no": 2,
+   "qid": "691121152",
+   "section": "A",
+   "type": "mcq",
+   "text": "Let the circles $C_1: |z|=r$ and $C_2: |z-3-4i|=5$, $z \\in \\mathbb{C}$, be such that $C_2$ lies within $C_1$. If $z_1$ moves on $C_1$, $z_2$ moves on $C_2$ and $\\min|z_1-z_2|=2$, then $\\max|z_1-z_2|$ is equal to :",
+   "options": [
+    "$12$",
+    "$17$",
+    "$22$",
+    "$24$"
+   ],
+   "optionIds": [
+    "691121515",
+    "691121516",
+    "691121517",
+    "691121518"
+   ],
+   "answer": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$C_2$ has centre $3+4i$ (at distance $5$ from the origin) and radius $5$.<br>Since $C_2$ lies inside $C_1$: $\\min|z_1-z_2| = r-(5+5) = 2 \\Rightarrow r=12$.<br>$\\max|z_1-z_2| = r+5+5 = 22$.",
+   "subject": "Mathematics",
+   "chapter": "Complex Numbers",
+   "chCls": "XI"
+  },
+  {
+   "no": 3,
+   "qid": "691121153",
+   "section": "A",
+   "type": "mcq",
+   "text": "If the system of equations<br>$$x+5y+6z=4,\\quad 2x+3y+4z=7,\\quad x+6y+az=b$$ has infinitely many solutions, then the point $(a, b)$ lies on the line",
+   "options": [
+    "$y-x=3$",
+    "$x-y=3$",
+    "$x+y=11$",
+    "$x+y=12$"
+   ],
+   "optionIds": [
+    "691121519",
+    "691121520",
+    "691121521",
+    "691121522"
+   ],
+   "answer": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "For infinitely many solutions the third equation must be a combination $p(\\text{I})+q(\\text{II})$.<br>Coefficients of $x, y$: $p+2q=1$, $5p+3q=6 \\Rightarrow q=-\\dfrac17,\\ p=\\dfrac97$.<br>$a=6p+4q=\\dfrac{54-4}{7}=\\dfrac{50}{7}$, $b=4p+7q=\\dfrac{36-7}{7}=\\dfrac{29}{7}$.<br>$a-b=\\dfrac{21}{7}=3$, so $(a,b)$ lies on $x-y=3$.",
+   "subject": "Mathematics",
+   "chapter": "Determinants",
+   "chCls": "XII"
+  },
+  {
+   "no": 4,
+   "qid": "691121154",
+   "section": "A",
+   "type": "mcq",
+   "text": "Let $a_1, a_2, a_3, \\ldots$ be an A.P. and $g_1=a_1, g_2, g_3, \\ldots$ be an increasing G.P. If $a_1=a_2+g_2=1$ and $a_3+g_3=4$, then $a_{10}+g_5$ is equal to :",
+   "options": [
+    "$81$",
+    "$76$",
+    "$62$",
+    "$55$"
+   ],
+   "optionIds": [
+    "691121523",
+    "691121524",
+    "691121525",
+    "691121526"
+   ],
+   "answer": 3,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$a_1=g_1=1$; let the A.P. have common difference $d$ and the G.P. ratio $q$.<br>$a_2+g_2=1+d+q=1 \\Rightarrow d=-q$.<br>$a_3+g_3=1+2d+q^2=4 \\Rightarrow q^2-2q-3=0 \\Rightarrow q=3$ (increasing G.P.), $d=-3$.<br>$a_{10}=1+9(-3)=-26$, $g_5=3^4=81$.<br>$a_{10}+g_5=55$.",
+   "subject": "Mathematics",
+   "chapter": "Sequences and Series",
+   "chCls": "XI"
+  },
+  {
+   "no": 5,
+   "qid": "691121155",
+   "section": "A",
+   "type": "mcq",
+   "text": "The sum $\\dfrac{1^3}{1}+\\dfrac{1^3+2^3}{1+3}+\\dfrac{1^3+2^3+3^3}{1+3+5}+\\ldots$ up to 8 terms, is :",
+   "options": [
+    "$70$",
+    "$71$",
+    "$72$",
+    "$73$"
+   ],
+   "optionIds": [
+    "691121527",
+    "691121528",
+    "691121529",
+    "691121530"
+   ],
+   "answer": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$n$th term $=\\dfrac{\\left(\\frac{n(n+1)}{2}\\right)^2}{n^2}=\\dfrac{(n+1)^2}{4}$.<br>Sum $=\\dfrac14\\left(2^2+3^2+\\ldots+9^2\\right)=\\dfrac14(285-1)=71$.",
+   "subject": "Mathematics",
+   "chapter": "Sequences and Series",
+   "chCls": "XI"
+  },
+  {
+   "no": 6,
+   "qid": "691121156",
+   "section": "A",
+   "type": "mcq",
+   "text": "If for $3 \\le r \\le 30$, $\\left({}^{30}C_{30-r}\\right)+3\\left({}^{30}C_{31-r}\\right)+3\\left({}^{30}C_{32-r}\\right)+\\left({}^{30}C_{33-r}\\right)={}^{m}C_r$, then $m$ equals :",
+   "options": [
+    "$31$",
+    "$32$",
+    "$33$",
+    "$34$"
+   ],
+   "optionIds": [
+    "691121531",
+    "691121532",
+    "691121533",
+    "691121534"
+   ],
+   "answer": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Using ${}^nC_k={}^nC_{n-k}$, the sum is ${}^{30}C_r+3\\,{}^{30}C_{r-1}+3\\,{}^{30}C_{r-2}+{}^{30}C_{r-3}$.<br>This is the coefficient of $x^r$ in $(1+x)^{30}(1+x)^3=(1+x)^{33}$, i.e. ${}^{33}C_r$.<br>So $m=33$.",
+   "subject": "Mathematics",
+   "chapter": "Binomial Theorem",
+   "chCls": "XI"
+  },
+  {
+   "no": 7,
+   "qid": "691121157",
+   "section": "A",
+   "type": "mcq",
+   "text": "Let $p_n$ denote the total number of triangles formed by joining the vertices of an $n$-side regular polygon. If $p_{n+1}-p_n=66$, then the sum of all distinct prime divisors of $n$ is :",
+   "options": [
+    "$7$",
+    "$8$",
+    "$5$",
+    "$6$"
+   ],
+   "optionIds": [
+    "691121535",
+    "691121536",
+    "691121537",
+    "691121538"
+   ],
+   "answer": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$p_n={}^nC_3$, so $p_{n+1}-p_n={}^{n+1}C_3-{}^nC_3={}^nC_2$.<br>$\\dfrac{n(n-1)}{2}=66 \\Rightarrow n=12$.<br>$12=2^2\\cdot 3$; sum of distinct prime divisors $=2+3=5$.",
+   "subject": "Mathematics",
+   "chapter": "Permutations and Combinations",
+   "chCls": "XI"
+  },
+  {
+   "no": 8,
+   "qid": "691121158",
+   "section": "A",
+   "type": "mcq",
+   "text": "A man throws a fair coin repeatedly. He gets 10 points for each head he throws and 5 points for each tail he throws. If the probability that he gets exactly 30 points is $\\dfrac{m}{n}$, $\\gcd(m, n)=1$, then $m+n$ is equal to :",
+   "options": [
+    "$53$",
+    "$55$",
+    "$107$",
+    "$105$"
+   ],
+   "optionIds": [
+    "691121539",
+    "691121540",
+    "691121541",
+    "691121542"
+   ],
+   "answer": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Count in units of 5 points: a tail adds 1, a head adds 2. Let $P_k$ be the probability that the score is ever exactly $k$ units.<br>$P_k=\\dfrac12P_{k-1}+\\dfrac12P_{k-2}$, with $P_0=1$, $P_1=\\dfrac12$.<br>$P_2=\\dfrac34$, $P_3=\\dfrac58$, $P_4=\\dfrac{11}{16}$, $P_5=\\dfrac{21}{32}$, $P_6=\\dfrac{43}{64}$.<br>30 points $=6$ units, so $\\dfrac mn=\\dfrac{43}{64}$ and $m+n=107$.",
+   "subject": "Mathematics",
+   "chapter": "Probability",
+   "chCls": "XII"
+  },
+  {
+   "no": 9,
+   "qid": "691121159",
+   "section": "A",
+   "type": "mcq",
+   "text": "The mean and variance of $n$ observations are 8 and 16, respectively. If the sum of the first $(n-1)$ observations is 48 and the sum of squares of the first $(n-1)$ observations is 496, then the value of $n$ is :",
+   "options": [
+    "$21$",
+    "$16$",
+    "$13$",
+    "$7$"
+   ],
+   "optionIds": [
+    "691121543",
+    "691121544",
+    "691121545",
+    "691121546"
+   ],
+   "answer": 3,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$\\sum x_i=8n$ and $\\sum x_i^2=n(16+64)=80n$.<br>Last observation $x_n=8n-48$ and $x_n^2=80n-496$.<br>$(8n-48)^2=80n-496 \\Rightarrow 64n^2-848n+2800=0 \\Rightarrow 4n^2-53n+175=0$.<br>$n=\\dfrac{53\\pm3}{8}=7$ or $\\dfrac{25}{4}$; $n$ is an integer, so $n=7$.",
+   "subject": "Mathematics",
+   "chapter": "Statistics",
+   "chCls": "XI"
+  },
+  {
+   "no": 10,
+   "qid": "691121160",
+   "section": "A",
+   "type": "mcq",
+   "text": "Let a circle pass through the origin and its centre be the point of intersection of two mutually perpendicular lines $x+(k-1)y+3=0$ and $2x+k^2y-4=0$. If the line $x-y+2=0$ intersects the circle at the points A and B, then $(AB)^2$ is equal to :",
+   "options": [
+    "$10$",
+    "$27$",
+    "$18$",
+    "$34$"
+   ],
+   "optionIds": [
+    "691121547",
+    "691121548",
+    "691121549",
+    "691121550"
+   ],
+   "answer": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Perpendicular: $1\\cdot2+(k-1)k^2=0 \\Rightarrow k^3-k^2+2=0 \\Rightarrow k=-1$.<br>Lines $x-2y+3=0$ and $2x+y-4=0$ meet at $(1,2)$: centre $(1,2)$, radius$^2=1+4=5$.<br>Distance of the centre from $x-y+2=0$: $\\dfrac{|1-2+2|}{\\sqrt2}=\\dfrac1{\\sqrt2}$.<br>$(AB)^2=4\\left(5-\\dfrac12\\right)=18$.",
+   "subject": "Mathematics",
+   "chapter": "Conic Sections",
+   "chCls": "XI"
+  },
+  {
+   "no": 11,
+   "qid": "691121161",
+   "section": "A",
+   "type": "mcq",
+   "text": "Let O be the origin, and P and Q be two points on the rectangular hyperbola $xy=12$ such that the mid point of the line segment PQ is $\\left(\\dfrac12, -\\dfrac12\\right)$. Then the area of the triangle OPQ equals :",
+   "options": [
+    "$\\dfrac32$",
+    "$\\dfrac52$",
+    "$\\dfrac72$",
+    "$\\dfrac92$"
+   ],
+   "optionIds": [
+    "691121551",
+    "691121552",
+    "691121553",
+    "691121554"
+   ],
+   "answer": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Let $P\\left(x_1,\\dfrac{12}{x_1}\\right)$, $Q\\left(x_2,\\dfrac{12}{x_2}\\right)$: $x_1+x_2=1$ and $\\dfrac{12}{x_1}+\\dfrac{12}{x_2}=-1 \\Rightarrow x_1x_2=-12$.<br>Area $=\\dfrac12\\left|x_1\\cdot\\dfrac{12}{x_2}-x_2\\cdot\\dfrac{12}{x_1}\\right|=\\dfrac{6|x_1^2-x_2^2|}{|x_1x_2|}=\\dfrac12|x_1-x_2||x_1+x_2|$.<br>$(x_1-x_2)^2=1+48=49 \\Rightarrow |x_1-x_2|=7$.<br>Area $=\\dfrac72$.",
+   "subject": "Mathematics",
+   "chapter": "Conic Sections",
+   "chCls": "XI"
+  },
+  {
+   "no": 12,
+   "qid": "691121162",
+   "section": "A",
+   "type": "mcq",
+   "text": "Let the parabola $y=x^2+px+q$ passing through the point $(1, -1)$ be such that the distance between its vertex and the $x$-axis is minimum. Then the value of $p^2+q^2$ is :",
+   "options": [
+    "$2$",
+    "$4$",
+    "$5$",
+    "$8$"
+   ],
+   "optionIds": [
+    "691121555",
+    "691121556",
+    "691121557",
+    "691121558"
+   ],
+   "answer": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$1+p+q=-1 \\Rightarrow q=-2-p$.<br>Vertex ordinate $=q-\\dfrac{p^2}{4}=-\\left(\\dfrac{p^2}{4}+p+2\\right)=-\\left[\\left(\\dfrac p2+1\\right)^2+1\\right]$.<br>Its distance from the $x$-axis is least ($=1$) when $p=-2$, so $q=0$.<br>$p^2+q^2=4$.",
+   "subject": "Mathematics",
+   "chapter": "Conic Sections",
+   "chCls": "XI"
+  },
+  {
+   "no": 13,
+   "qid": "691121163",
+   "section": "A",
+   "type": "mcq",
+   "text": "Let $P=\\{\\theta \\in [0, 4\\pi] : \\tan^2\\theta \\neq 1\\}$ and $S=\\{a \\in \\mathbf{Z} : 2(\\cos^8\\theta-\\sin^8\\theta)\\sec 2\\theta=a^2,\\ \\theta \\in P\\}$. Then $n(S)$ is :",
+   "options": [
+    "$0$",
+    "$1$",
+    "$2$",
+    "$3$"
+   ],
+   "optionIds": [
+    "691121559",
+    "691121560",
+    "691121561",
+    "691121562"
+   ],
+   "answer": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$\\cos^8\\theta-\\sin^8\\theta=(\\cos^4\\theta-\\sin^4\\theta)(\\cos^4\\theta+\\sin^4\\theta)=\\cos2\\theta\\left(1-\\dfrac12\\sin^22\\theta\\right)$.<br>$\\tan^2\\theta\\neq1 \\Rightarrow \\cos2\\theta\\neq0$, so the expression is $2-\\sin^22\\theta$ with $\\sin^22\\theta\\neq1$.<br>Hence $a^2 \\in (1, 2]$, which contains no perfect square.<br>$n(S)=0$.",
+   "subject": "Mathematics",
+   "chapter": "Trigonometric Functions",
+   "chCls": "XI"
+  },
+  {
+   "no": 14,
+   "qid": "691121164",
+   "section": "A",
+   "type": "mcq",
+   "text": "Let the vectors $\\vec a=-\\hat i+\\hat j+3\\hat k$ and $\\vec b=\\hat i+3\\hat j+\\hat k$. For some $\\lambda, \\mu \\in \\mathbf{R}$, let $\\vec c=\\lambda\\vec a+\\mu\\vec b$. If $\\vec c\\cdot\\left(3\\hat i-6\\hat j+2\\hat k\\right)=10$ and $\\vec c\\cdot\\left(\\hat i+\\hat j+\\hat k\\right)=-2$, then $|\\vec c|^2$ is equal to :",
+   "options": [
+    "$8$",
+    "$12$",
+    "$14$",
+    "$15$"
+   ],
+   "optionIds": [
+    "691121563",
+    "691121564",
+    "691121565",
+    "691121566"
+   ],
+   "answer": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$\\vec c=(-\\lambda+\\mu,\\ \\lambda+3\\mu,\\ 3\\lambda+\\mu)$.<br>$\\vec c\\cdot(3,-6,2)=-3\\lambda-13\\mu=10$ and $\\vec c\\cdot(1,1,1)=3\\lambda+5\\mu=-2$.<br>Adding: $-8\\mu=8 \\Rightarrow \\mu=-1$, $\\lambda=1$.<br>$\\vec c=(-2,-2,2)$, $|\\vec c|^2=12$.",
+   "subject": "Mathematics",
+   "chapter": "Vector Algebra",
+   "chCls": "XII"
+  },
+  {
+   "no": 15,
+   "qid": "691121165",
+   "section": "A",
+   "type": "mcq",
+   "text": "Let the point A be the foot of perpendicular drawn from the point $P(a, b, 0)$ on the line $\\dfrac{x-1}{2}=\\dfrac{y-2}{1}=\\dfrac{z-\\alpha}{3}$. If the midpoint of the line segment PA is $\\left(0, \\dfrac34, \\dfrac{-1}{4}\\right)$, then the value of $a^2+b^2+\\alpha^2$ is equal to :",
+   "options": [
+    "$1$",
+    "$2$",
+    "$6$",
+    "$9$"
+   ],
+   "optionIds": [
+    "691121567",
+    "691121568",
+    "691121569",
+    "691121570"
+   ],
+   "answer": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Let $A=(1+2t,\\ 2+t,\\ \\alpha+3t)$.<br>Midpoint: $a=-1-2t$, $b=-\\dfrac12-t$, $\\alpha=-\\dfrac12-3t$.<br>$\\overrightarrow{PA}=\\left(2+4t,\\ \\dfrac52+2t,\\ -\\dfrac12\\right)$ is perpendicular to $(2,1,3)$: $4+8t+\\dfrac52+2t-\\dfrac32=0 \\Rightarrow t=-\\dfrac12$.<br>$a=0$, $b=0$, $\\alpha=1$, so $a^2+b^2+\\alpha^2=1$.",
+   "subject": "Mathematics",
+   "chapter": "Three Dimensional Geometry",
+   "chCls": "XII"
+  },
+  {
+   "no": 16,
+   "qid": "691121166",
+   "section": "A",
+   "type": "mcq",
+   "text": "Two adjacent sides of a parallelogram PQRS are given by $\\overrightarrow{PQ}=\\hat j+\\hat k$ and $\\overrightarrow{PS}=\\hat i-\\hat j$. If the side PS is rotated about the point P by an acute angle $\\alpha$ in the plane of the parallelogram so that it becomes perpendicular to the side PQ, then $\\sin^2\\left(\\dfrac{5\\alpha}{2}\\right)-\\sin^2\\left(\\dfrac{\\alpha}{2}\\right)$ is equal to :",
+   "options": [
+    "$\\dfrac12$",
+    "$\\dfrac{\\sqrt3}{2}$",
+    "$\\dfrac{\\sqrt3}{4}$",
+    "$\\dfrac{2\\sqrt3}{5}$"
+   ],
+   "optionIds": [
+    "691121571",
+    "691121572",
+    "691121573",
+    "691121574"
+   ],
+   "answer": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$\\cos\\angle QPS=\\dfrac{(0,1,1)\\cdot(1,-1,0)}{\\sqrt2\\cdot\\sqrt2}=-\\dfrac12 \\Rightarrow \\angle QPS=120^\\circ$.<br>To become perpendicular to PQ, PS turns through the acute angle $\\alpha=30^\\circ$.<br>$\\sin^2 75^\\circ-\\sin^2 15^\\circ=\\sin(75^\\circ+15^\\circ)\\sin(75^\\circ-15^\\circ)=\\sin90^\\circ\\sin60^\\circ=\\dfrac{\\sqrt3}{2}$.",
+   "subject": "Mathematics",
+   "chapter": "Vector Algebra",
+   "chCls": "XII"
+  },
+  {
+   "no": 17,
+   "qid": "691121167",
+   "section": "A",
+   "type": "mcq",
+   "text": "The value of $\\displaystyle\\int_0^{20\\pi}(\\sin^4x+\\cos^4x)\\,dx$ is equal to :",
+   "options": [
+    "$\\dfrac{15\\pi}{2}$",
+    "$25\\pi$",
+    "$15\\pi$",
+    "$\\dfrac{25\\pi}{2}$"
+   ],
+   "optionIds": [
+    "691121575",
+    "691121576",
+    "691121577",
+    "691121578"
+   ],
+   "answer": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$\\sin^4x+\\cos^4x=1-\\dfrac12\\sin^22x=\\dfrac34+\\dfrac14\\cos4x$.<br>Over $[0, 20\\pi]$ the cosine term integrates to $0$.<br>Integral $=\\dfrac34\\cdot20\\pi=15\\pi$.",
+   "subject": "Mathematics",
+   "chapter": "Integrals",
+   "chCls": "XII"
+  },
+  {
+   "no": 18,
+   "qid": "691121168",
+   "section": "A",
+   "type": "mcq",
+   "text": "Let $f(x)$ be a polynomial of degree 5, and have extrema at $x=1$ and $x=-1$. If $\\displaystyle\\lim_{x\\to0}\\left(\\dfrac{f(x)}{x^3}\\right)=-5$, then $f(2)-f(-2)$ is equal to :",
+   "options": [
+    "$0$",
+    "$50$",
+    "$92$",
+    "$112$"
+   ],
+   "optionIds": [
+    "691121579",
+    "691121580",
+    "691121581",
+    "691121582"
+   ],
+   "answer": 3,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "The limit forces $f(x)=-5x^3+ax^4+bx^5$.<br>$f'(x)=-15x^2+4ax^3+5bx^4$; $f'(1)=f'(-1)=0$: $-15+4a+5b=0$ and $-15-4a+5b=0 \\Rightarrow a=0,\\ b=3$.<br>$f(x)=3x^5-5x^3$ is odd: $f(2)=96-40=56$.<br>$f(2)-f(-2)=112$.",
+   "subject": "Mathematics",
+   "chapter": "Application of Derivatives",
+   "chCls": "XII"
+  },
+  {
+   "no": 19,
+   "qid": "691121169",
+   "section": "A",
+   "type": "mcq",
+   "text": "Let $f(x)=\\displaystyle\\int\\left(\\dfrac{16x+24}{x^2+2x-15}\\right)dx$. If $f(4)=14\\log_e(3)$ and $f(7)=\\log_e(2^\\alpha\\cdot3^\\beta)$, $\\alpha, \\beta \\in \\mathbf{N}$, then $\\alpha+\\beta$ is equal to :",
+   "options": [
+    "$31$",
+    "$37$",
+    "$39$",
+    "$41$"
+   ],
+   "optionIds": [
+    "691121583",
+    "691121584",
+    "691121585",
+    "691121586"
+   ],
+   "answer": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$\\dfrac{16x+24}{(x-3)(x+5)}=\\dfrac{9}{x-3}+\\dfrac{7}{x+5}$.<br>$f(x)=9\\ln|x-3|+7\\ln|x+5|+C$.<br>$f(4)=7\\ln9+C=14\\ln3 \\Rightarrow C=0$.<br>$f(7)=9\\ln4+7\\ln12=32\\ln2+7\\ln3=\\ln(2^{32}\\cdot3^7)$.<br>$\\alpha+\\beta=39$.",
+   "subject": "Mathematics",
+   "chapter": "Integrals",
+   "chCls": "XII"
+  },
+  {
+   "no": 20,
+   "qid": "691121170",
+   "section": "A",
+   "type": "mcq",
+   "text": "Let $x=x(y)$ be the solution of the differential equation $2y^2\\dfrac{dx}{dy}-2xy+x^2=0$, $y>1$, $x(e)=e$. Then $x(e^2)$ is equal to :",
+   "options": [
+    "$\\dfrac32e^2$",
+    "$\\dfrac23e^2$",
+    "$e^2$",
+    "$2e^2$"
+   ],
+   "optionIds": [
+    "691121587",
+    "691121588",
+    "691121589",
+    "691121590"
+   ],
+   "answer": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$\\dfrac{dx}{dy}=\\dfrac xy-\\dfrac{x^2}{2y^2}$. Put $x=vy$: $v+y\\dfrac{dv}{dy}=v-\\dfrac{v^2}{2}$.<br>$\\dfrac{dv}{v^2}=-\\dfrac{dy}{2y} \\Rightarrow \\dfrac1v=\\dfrac12\\ln y+C$.<br>$x(e)=e \\Rightarrow v=1$ at $y=e$: $1=\\dfrac12+C \\Rightarrow C=\\dfrac12$.<br>At $y=e^2$: $\\dfrac1v=1+\\dfrac12=\\dfrac32 \\Rightarrow v=\\dfrac23$, so $x(e^2)=\\dfrac23e^2$.",
+   "subject": "Mathematics",
+   "chapter": "Differential Equations",
+   "chCls": "XII"
+  },
+  {
+   "no": 21,
+   "qid": "691121171",
+   "section": "B",
+   "type": "num",
+   "text": "Let $A=\\{2, 3, 4, 5, 6\\}$. Let R be a relation on the set $A\\times A$ given by $(x, y)R(z, w)$ if and only if $x$ divides $z$ and $y \\le w$. Then the number of elements in R is __________.",
+   "answer": 120,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Pairs $(x,z)$ with $x \\mid z$: $x=2$: $z=2,4,6$; $x=3$: $z=3,6$; $x=4,5,6$: one each. Total $3+2+1+1+1=8$.<br>Pairs $(y,w)$ with $y\\le w$: $\\dfrac{5\\cdot6}{2}=15$.<br>Number of elements $=8\\times15=120$.",
+   "subject": "Mathematics",
+   "chapter": "Relations and Functions",
+   "chCls": "XII"
+  },
+  {
+   "no": 22,
+   "qid": "691121172",
+   "section": "B",
+   "type": "num",
+   "text": "Consider the matrices $A=\\begin{bmatrix}2&-2\\\\4&-2\\end{bmatrix}$ and $B=\\begin{bmatrix}3&9\\\\1&3\\end{bmatrix}$. If matrices P and Q are such that $PA=B$ and $AQ=B$, then the absolute value of the sum of the diagonal elements of $2(P+Q)$ is __________.",
+   "answer": 34,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$|A|=-4+8=4$, $A^{-1}=\\dfrac14\\begin{bmatrix}-2&2\\\\-4&2\\end{bmatrix}$.<br>$P=BA^{-1}$, $Q=A^{-1}B$, and $\\operatorname{tr}(BA^{-1})=\\operatorname{tr}(A^{-1}B)$.<br>Diagonal of $A^{-1}B$: $\\dfrac14(-6+2)=-1$ and $\\dfrac14(-36+6)=-\\dfrac{15}{2}$; trace $=-\\dfrac{17}{2}$.<br>$\\operatorname{tr}\\,2(P+Q)=2\\left(-\\dfrac{17}{2}-\\dfrac{17}{2}\\right)=-34$; absolute value $34$.",
+   "subject": "Mathematics",
+   "chapter": "Matrices",
+   "chCls": "XII"
+  },
+  {
+   "no": 23,
+   "qid": "691121173",
+   "section": "B",
+   "type": "num",
+   "text": "Let A be the point $(3, 0)$ and circles with variable diameter AB touch the circle $x^2+y^2=36$ internally. Let the curve C be the locus of the point B. If the eccentricity of C is $e$, then $72e^2$ is equal to __________.",
+   "answer": 18,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Let M be the midpoint of AB (centre of the variable circle). Internal touching: $OM=6-\\dfrac{AB}{2}$.<br>With $A'=(-3,0)$, $2\\,OM=|\\overrightarrow{OA}+\\overrightarrow{OB}|=BA'$, so $BA'+BA=12$.<br>Locus of B: ellipse with foci $(\\pm3,0)$, $2a=12$: $a=6$, $c=3$, $e=\\dfrac12$.<br>$72e^2=18$.",
+   "subject": "Mathematics",
+   "chapter": "Conic Sections",
+   "chCls": "XI"
+  },
+  {
+   "no": 24,
+   "qid": "691121174",
+   "section": "B",
+   "type": "num",
+   "text": "If the area of the region bounded by $16x^2-9y^2=144$ and $8x-3y=24$ is A, then $3(A+6\\log_e(3))$ is equal to __________.",
+   "answer": 24,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Hyperbola $\\dfrac{x^2}{9}-\\dfrac{y^2}{16}=1$; the line $y=\\dfrac{8x-24}{3}$ meets it where $x^2-8x+15=0$: $x=3$ (point $(3,0)$) and $x=5$ (point $(5,\\tfrac{16}{3})$).<br>Between them the hyperbola $y=\\dfrac43\\sqrt{x^2-9}$ lies above the line.<br>$\\displaystyle\\int_3^5\\sqrt{x^2-9}\\,dx=\\left[\\dfrac x2\\sqrt{x^2-9}-\\dfrac92\\ln\\left(x+\\sqrt{x^2-9}\\right)\\right]_3^5=10-\\dfrac92\\ln3$.<br>$A=\\dfrac43\\left(10-\\dfrac92\\ln3\\right)-\\dfrac13\\left[4x^2-24x\\right]_3^5=\\dfrac{40}{3}-6\\ln3-\\dfrac{16}{3}=8-6\\ln3$.<br>$3(A+6\\ln3)=24$.",
+   "subject": "Mathematics",
+   "chapter": "Application of Integrals",
+   "chCls": "XII"
+  },
+  {
+   "no": 25,
+   "qid": "691121175",
+   "section": "B",
+   "type": "num",
+   "text": "The number of points in the interval $[2, 4]$, at which the function $f(x)=\\left[x^2-x-\\dfrac12\\right]$, where $[\\cdot]$ denotes the greatest integer function, is discontinuous, is __________.",
+   "answer": 10,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$g(x)=x^2-x-\\dfrac12$ is increasing on $[2,4]$, from $g(2)=\\dfrac32$ to $g(4)=\\dfrac{23}{2}$.<br>$f$ is discontinuous where $g(x)$ crosses an integer: $g(x)=2,3,\\ldots,11$.<br>Number of points $=10$.",
+   "subject": "Mathematics",
+   "chapter": "Continuity and Differentiability",
+   "chCls": "XII"
+  },
+  {
+   "no": 26,
+   "qid": "691121176",
+   "section": "A",
+   "type": "mcq",
+   "text": "Dimensions of universal gravitational constant (G) in terms of Planck's constant $(h)$, distance $(L)$, mass $(M)$ and time $(T)$ are __________.",
+   "options": [
+    "$[hTLM^{-2}]$",
+    "$[hT^{-1}LM^{-2}]$",
+    "$[hTL^2M^{-2}]$",
+    "$[h^{-1}T^{-1}LM^{-2}]$"
+   ],
+   "optionIds": [
+    "691121596",
+    "691121597",
+    "691121598",
+    "691121599"
+   ],
+   "answer": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$[G]=[M^{-1}L^3T^{-2}]$ and $[h]=[ML^2T^{-1}]$.<br>Let $G=h^aL^bM^cT^d$: mass $a+c=-1$, length $2a+b=3$, time $-a+d=-2$.<br>With $a=1$: $c=-2$, $b=1$, $d=-1$.<br>$[G]=[hT^{-1}LM^{-2}]$.",
+   "subject": "Physics",
+   "chapter": "Units and Measurements",
+   "chCls": "XI"
+  },
+  {
+   "no": 27,
+   "qid": "691121177",
+   "section": "A",
+   "type": "mcq",
+   "text": "A 0.5 kg mass is in contact against the inner wall of a cylindrical drum of radius 4 m rotating about its vertical axis. The minimum rotational speed of the drum to enable the mass to remain stuck to the wall (without falling) is 5 rad/s. The coefficient of friction between the drum's inner wall surface and mass is __________. (Take $g=10$ m/s$^2$)",
+   "options": [
+    "$0.1$",
+    "$0.5$",
+    "$0.7$",
+    "$0.3$"
+   ],
+   "optionIds": [
+    "691121600",
+    "691121601",
+    "691121602",
+    "691121603"
+   ],
+   "answer": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "The wall supplies the normal force $N=m\\omega^2r$; friction must balance the weight: $\\mu m\\omega^2 r \\ge mg$.<br>At the minimum speed: $\\mu=\\dfrac{g}{\\omega^2 r}=\\dfrac{10}{25\\times4}=0.1$.",
+   "subject": "Physics",
+   "chapter": "Laws of Motion",
+   "chCls": "XI"
+  },
+  {
+   "no": 28,
+   "qid": "691121178",
+   "section": "A",
+   "type": "mcq",
+   "text": "Two blocks of masses 2 kg and 1 kg respectively, are tied to the ends of a string which passes over a light frictionless pulley as shown in the figure below. The masses are held at rest at the same horizontal level and then released. The distance traversed by the centre of mass in 2 s is __________ m. (Take $g=10$ m/s$^2$)",
+   "options": [
+    "$3.33$",
+    "$3.12$",
+    "$2.22$",
+    "$1.42$"
+   ],
+   "optionIds": [
+    "691121604",
+    "691121605",
+    "691121606",
+    "691121607"
+   ],
+   "answer": 2,
+   "fig": "q28.png",
+   "optionFigs": null,
+   "sol": "Acceleration of each block: $a=\\dfrac{(2-1)g}{2+1}=\\dfrac{10}{3}$ m/s$^2$ (2 kg down, 1 kg up).<br>$a_{cm}=\\dfrac{2a-1\\cdot a}{3}=\\dfrac a3=\\dfrac{10}{9}$ m/s$^2$ (downward), starting from rest.<br>Distance $=\\dfrac12\\cdot\\dfrac{10}{9}\\cdot2^2=\\dfrac{20}{9}\\approx2.22$ m.",
+   "subject": "Physics",
+   "chapter": "System of Particles and Rotational Motion",
+   "chCls": "XI"
+  },
+  {
+   "no": 29,
+   "qid": "691121179",
+   "section": "A",
+   "type": "mcq",
+   "text": "A particle having charge $10^{-9}$ C moving in $x$-$y$ plane in fields of $0.4\\,\\hat j$ N/C and $4\\times10^{-3}\\,\\hat k$ T experiences a force of $\\left(4\\hat i+2\\hat j\\right)\\times10^{-10}$ N. The velocity of the particle at that instant is __________ m/s.",
+   "options": [
+    "$50\\hat i+100\\hat j$",
+    "$100\\hat i+50\\hat j$",
+    "$-50\\hat i+100\\hat j$",
+    "$50\\hat i-100\\hat j$"
+   ],
+   "optionIds": [
+    "691121608",
+    "691121609",
+    "691121610",
+    "691121611"
+   ],
+   "answer": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Electric force: $q\\vec E=10^{-9}\\times0.4\\,\\hat j=4\\times10^{-10}\\,\\hat j$ N.<br>Magnetic force $=\\vec F-q\\vec E=(4\\hat i-2\\hat j)\\times10^{-10}$ N.<br>With $\\vec v=v_x\\hat i+v_y\\hat j$: $q\\vec v\\times\\vec B=qB(v_y\\hat i-v_x\\hat j)$, $qB=4\\times10^{-12}$.<br>$4\\times10^{-12}v_y=4\\times10^{-10} \\Rightarrow v_y=100$; $4\\times10^{-12}v_x=2\\times10^{-10} \\Rightarrow v_x=50$.<br>$\\vec v=50\\hat i+100\\hat j$ m/s.",
+   "subject": "Physics",
+   "chapter": "Moving Charges and Magnetism",
+   "chCls": "XII"
+  },
+  {
+   "no": 30,
+   "qid": "691121180",
+   "section": "A",
+   "type": "mcq",
+   "text": "If X and Y are the inputs, the given circuit works as __________.",
+   "options": [
+    "OR gate",
+    "AND gate",
+    "NAND gate",
+    "NOR gate"
+   ],
+   "optionIds": [
+    "691121612",
+    "691121613",
+    "691121614",
+    "691121615"
+   ],
+   "answer": 3,
+   "fig": "q30.png",
+   "optionFigs": null,
+   "sol": "A NAND gate with both inputs joined acts as a NOT gate, so the first stage gives $\\bar X$ and $\\bar Y$.<br>The middle NAND gives $\\overline{\\bar X\\cdot\\bar Y}=X+Y$.<br>The last NAND (inputs joined) inverts it: output $=\\overline{X+Y}$, a NOR gate.",
+   "subject": "Physics",
+   "chapter": "Semiconductor Electronics",
+   "chCls": "XII"
+  },
+  {
+   "no": 31,
+   "qid": "691121181",
+   "section": "A",
+   "type": "mcq",
+   "text": "If a body of mass 1 kg falls on the earth from infinity, it attains velocity $(v)$ and kinetic energy $(k)$ on reaching the surface of earth. The values of $v$ and $k$ respectively are __________.<br>(Take radius of earth to be 6400 km and $g=9.8$ m/s$^2$)",
+   "options": [
+    "11.2 km/s; $6.27\\times10^7$ J",
+    "11.2 km/s; $12.54\\times10^7$ J",
+    "8.8 km/s; $6.27\\times10^7$ J",
+    "8.8 km/s; $12.54\\times10^7$ J"
+   ],
+   "optionIds": [
+    "691121616",
+    "691121617",
+    "691121618",
+    "691121619"
+   ],
+   "answer": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Energy conservation: $\\dfrac12mv^2=\\dfrac{GMm}{R}=mgR$.<br>$v=\\sqrt{2gR}=\\sqrt{2\\times9.8\\times6.4\\times10^6}=\\sqrt{1.2544\\times10^8}=11.2$ km/s.<br>$k=mgR=1\\times9.8\\times6.4\\times10^6=6.27\\times10^7$ J.",
+   "subject": "Physics",
+   "chapter": "Gravitation",
+   "chCls": "XI"
+  },
+  {
+   "no": 32,
+   "qid": "691121182",
+   "section": "A",
+   "type": "mcq",
+   "text": "In a screw gauge the zero of main scale reference line coincides with the fifth division of the circular scale when two studs are in contact. There are 100 divisions in circular scale and pitch of screw gauge is 0.1 mm. When diameter of a sphere is measured, the reading of main scale is 5 mm and $50^{\\text{th}}$ division of circular scale coincides with the reference line of main scale. The diameter of sphere is __________ mm.",
+   "options": [
+    "$5.045$",
+    "$5.055$",
+    "$5.450$",
+    "$5.550$"
+   ],
+   "optionIds": [
+    "691121620",
+    "691121621",
+    "691121622",
+    "691121623"
+   ],
+   "answer": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Least count $=\\dfrac{0.1}{100}=0.001$ mm.<br>With the studs in contact the reading is $+5$ divisions: zero error $=+0.005$ mm.<br>Observed reading $=5+50\\times0.001=5.050$ mm.<br>Diameter $=5.050-0.005=5.045$ mm.",
+   "subject": "Physics",
+   "chapter": "Units and Measurements",
+   "chCls": "XI"
+  },
+  {
+   "no": 33,
+   "qid": "691121183",
+   "section": "A",
+   "type": "mcq",
+   "text": "The surface tension of a soap bubble is 0.03 N/m. The work done in increasing the diameter of bubble from 2 cm to 6 cm is $\\alpha\\pi\\times10^{-4}$ J. The value of $\\alpha$ is __________. (Take $\\pi=3.14$)",
+   "options": [
+    "$0.86$",
+    "$0.64$",
+    "$1.92$",
+    "$7.68$"
+   ],
+   "optionIds": [
+    "691121624",
+    "691121625",
+    "691121626",
+    "691121627"
+   ],
+   "answer": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "A soap bubble has two surfaces: $W=T\\times2\\times4\\pi(r_2^2-r_1^2)$.<br>$W=0.03\\times8\\pi\\times(9-1)\\times10^{-4}=1.92\\pi\\times10^{-4}$ J.<br>$\\alpha=1.92$.",
+   "subject": "Physics",
+   "chapter": "Mechanical Properties of Fluids",
+   "chCls": "XI"
+  },
+  {
+   "no": 34,
+   "qid": "691121184",
+   "section": "A",
+   "type": "mcq",
+   "text": "A mixture of carbon dioxide and oxygen has volume 8310 cm$^3$, temperature 300 K, pressure 100 kPa and mass 13.2 g. The number of moles of carbon dioxide and oxygen gases in the mixture respectively are __________.<br>(Assume both carbon dioxide and oxygen gases behave like ideal gases) [$R=8.31$ J/mol.K]",
+   "options": [
+    "0.15 and 0.18",
+    "0.25 and 0.08",
+    "0.21 and 0.12",
+    "0.13 and 0.20"
+   ],
+   "optionIds": [
+    "691121628",
+    "691121629",
+    "691121630",
+    "691121631"
+   ],
+   "answer": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Total moles $n=\\dfrac{PV}{RT}=\\dfrac{10^5\\times8.31\\times10^{-3}}{8.31\\times300}=\\dfrac13$.<br>Let $x$ mol CO$_2$ (44 g/mol) and $y$ mol O$_2$ (32 g/mol): $x+y=\\dfrac13$, $44x+32y=13.2$.<br>$12x=13.2-\\dfrac{32}{3}=2.53 \\Rightarrow x\\approx0.21$, $y\\approx0.12$.",
+   "subject": "Physics",
+   "chapter": "Kinetic Theory",
+   "chCls": "XI"
+  },
+  {
+   "no": 35,
+   "qid": "691121185",
+   "section": "A",
+   "type": "mcq",
+   "text": "If an air bubble of diameter 2 mm rises steadily through a liquid of density 2000 kg/m$^3$ at a rate of 0.5 cm/s, then the coefficient of viscosity of liquid is __________ Poise. (Take $g=10$ m/s$^2$)",
+   "options": [
+    "$0.88$",
+    "$8.8$",
+    "$88.8$",
+    "$0.088$"
+   ],
+   "optionIds": [
+    "691121632",
+    "691121633",
+    "691121634",
+    "691121635"
+   ],
+   "answer": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Terminal velocity (neglecting the density of air): $v=\\dfrac{2r^2\\rho g}{9\\eta}$.<br>$\\eta=\\dfrac{2\\times(10^{-3})^2\\times2000\\times10}{9\\times5\\times10^{-3}}=\\dfrac{0.04}{0.045}=0.89$ Pa s.<br>$1$ Pa s $=10$ Poise, so $\\eta\\approx8.8$ Poise.",
+   "subject": "Physics",
+   "chapter": "Mechanical Properties of Fluids",
+   "chCls": "XI"
+  },
+  {
+   "no": 36,
+   "qid": "691121186",
+   "section": "A",
+   "type": "mcq",
+   "text": "A spherical ball of mass 2 kg falls from a height of 10 m and is brought to rest after penetrating 10 cm into sand. The average force exerted by sand on the ball is __________ N.<br>(Take $g=10$ m/s$^2$)",
+   "options": [
+    "$1980$",
+    "$2020$",
+    "$2000$",
+    "$1000$"
+   ],
+   "optionIds": [
+    "691121636",
+    "691121637",
+    "691121638",
+    "691121639"
+   ],
+   "answer": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Work-energy theorem from release to rest: $mg(h+d)-Fd=0$.<br>$F=\\dfrac{2\\times10\\times10.1}{0.1}=2020$ N.",
+   "subject": "Physics",
+   "chapter": "Work, Energy and Power",
+   "chCls": "XI"
+  },
+  {
+   "no": 37,
+   "qid": "691121187",
+   "section": "A",
+   "type": "mcq",
+   "text": "An electromagnetic wave travels in free space along the $x$-direction. At a particular point in space and time, $\\vec B=2\\times10^{-7}\\,\\hat j$ T is associated with this wave. The value of corresponding electric field $\\vec E$ at this point is __________ V/m.",
+   "options": [
+    "$60\\,\\hat k$",
+    "$-60\\,\\hat k$",
+    "$30\\,\\hat k$",
+    "$-600\\,\\hat k$"
+   ],
+   "optionIds": [
+    "691121640",
+    "691121641",
+    "691121642",
+    "691121643"
+   ],
+   "answer": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$|\\vec E|=c|\\vec B|=3\\times10^8\\times2\\times10^{-7}=60$ V/m.<br>$\\vec E\\times\\vec B$ must point along $+\\hat i$: $(-\\hat k)\\times\\hat j=\\hat i$, so $\\vec E$ is along $-\\hat k$.<br>$\\vec E=-60\\,\\hat k$ V/m.",
+   "subject": "Physics",
+   "chapter": "Electromagnetic Waves",
+   "chCls": "XII"
+  },
+  {
+   "no": 38,
+   "qid": "691121188",
+   "section": "A",
+   "type": "mcq",
+   "text": "Two resistors of $200\\ \\Omega$ and $400\\ \\Omega$ are connected in series with a battery of 100 V. A bulb rated at 200 V, 100 W is connected across the $400\\ \\Omega$ resistance. The potential drop across the bulb is __________ V.",
+   "options": [
+    "$25$",
+    "$50$",
+    "$66.6$",
+    "$100$"
+   ],
+   "optionIds": [
+    "691121644",
+    "691121645",
+    "691121646",
+    "691121647"
+   ],
+   "answer": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Bulb resistance $=\\dfrac{V^2}{P}=\\dfrac{200^2}{100}=400\\ \\Omega$.<br>Bulb in parallel with $400\\ \\Omega$: $200\\ \\Omega$; in series with $200\\ \\Omega$, total $400\\ \\Omega$.<br>The 100 V divides equally: potential drop across the bulb $=50$ V.",
+   "subject": "Physics",
+   "chapter": "Current Electricity",
+   "chCls": "XII"
+  },
+  {
+   "no": 39,
+   "qid": "691121189",
+   "section": "A",
+   "type": "mcq",
+   "text": "Two metal plates $(A, B)$ are kept horizontally with separation of $\\left(\\dfrac{12}{\\pi}\\right)$ cm, with plate A on the top. An atomizer jet sprays oil (density 1.5 g/cm$^3$) droplets of radius 1 mm horizontally. All oil droplets carry a charge 5 nC. The potentials $V_A$ and $V_B$ are required on plates A and B respectively in order to ensure the droplets do not descend. The values of $V_A$ and $V_B$ are __________.<br>(Neglect the air resistance to the droplets and take $g=10$ m/s$^2$)",
+   "options": [
+    "100 V and 580 V",
+    "580 V and 100 V",
+    "60 V and 400 V",
+    "0 V and $-200$ V"
+   ],
+   "optionIds": [
+    "691121648",
+    "691121649",
+    "691121650",
+    "691121651"
+   ],
+   "answer": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Mass of a droplet: $m=1500\\times\\dfrac43\\pi(10^{-3})^3=2\\pi\\times10^{-6}$ kg.<br>Balance: $qE=mg \\Rightarrow E=\\dfrac{2\\pi\\times10^{-5}}{5\\times10^{-9}}=4\\pi\\times10^3$ V/m, directed upward (positive charge).<br>$V_B-V_A=Ed=4\\pi\\times10^3\\times\\dfrac{0.12}{\\pi}=480$ V, with the lower plate B at the higher potential.<br>Only $V_A=100$ V, $V_B=580$ V fits.",
+   "subject": "Physics",
+   "chapter": "Electrostatic Potential and Capacitance",
+   "chCls": "XII"
+  },
+  {
+   "no": 40,
+   "qid": "691121190",
+   "section": "A",
+   "type": "mcq",
+   "text": "Two point charges $8\\ \\mu C$ and $-2\\ \\mu C$ are located at $x=2$ cm and $x=4$ cm, respectively on the $x$-axis. The ratio of electric flux due to these charges through two spheres of radii 3 cm and 5 cm with their centers at the origin is __________.",
+   "options": [
+    "$4:1$",
+    "$3:4$",
+    "$4:3$",
+    "$4:5$"
+   ],
+   "optionIds": [
+    "691121652",
+    "691121653",
+    "691121654",
+    "691121655"
+   ],
+   "answer": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Gauss's law: flux $=\\dfrac{q_{enc}}{\\epsilon_0}$.<br>Sphere of radius 3 cm encloses only $8\\ \\mu C$; sphere of radius 5 cm encloses $8-2=6\\ \\mu C$.<br>Ratio $=8:6=4:3$.",
+   "subject": "Physics",
+   "chapter": "Electric Charges and Fields",
+   "chCls": "XII"
+  },
+  {
+   "no": 41,
+   "qid": "691121191",
+   "section": "A",
+   "type": "mcq",
+   "text": "One side of an equilateral prism is painted by a transparent material of refractive index $n_2$. The refractive index of prism is 1.6. The minimum value of $n_2$ required for total internal reflection from painted face is __________.",
+   "options": [
+    "$3\\sqrt3/1.6$",
+    "$\\sqrt3$",
+    "$3.2/\\sqrt3$",
+    "$4\\sqrt3/5$"
+   ],
+   "optionIds": [
+    "691121656",
+    "691121657",
+    "691121658",
+    "691121659"
+   ],
+   "answer": 3,
+   "fig": "q41.png",
+   "optionFigs": null,
+   "sol": "The ray enters the first face normally, so it meets the painted base at an angle of incidence of $60^\\circ$ (geometry of the equilateral prism).<br>Total internal reflection at the prism-paint boundary needs $1.6\\sin60^\\circ \\ge n_2$.<br>Limiting value: $n_2=1.6\\times\\dfrac{\\sqrt3}{2}=0.8\\sqrt3=\\dfrac{4\\sqrt3}{5}$.",
+   "subject": "Physics",
+   "chapter": "Ray Optics and Optical Instruments",
+   "chCls": "XII"
+  },
+  {
+   "no": 42,
+   "qid": "691121192",
+   "section": "A",
+   "type": "mcq",
+   "text": "The figure given below shows an $LCR$ series circuit with two switches S$_1$ and S$_2$. When switch S$_1$ is closed keeping S$_2$ open, the phase difference $(\\phi)$ between the current and source voltage is $30^\\circ$ and phase difference is $60^\\circ$ when S$_2$ is closed keeping S$_1$ open. The value of $(3L_1-L_2)$ is __________ H.",
+   "options": [
+    "$\\dfrac92$",
+    "$\\dfrac29$",
+    "$\\dfrac13$",
+    "$3$"
+   ],
+   "optionIds": [
+    "691121660",
+    "691121661",
+    "691121662",
+    "691121663"
+   ],
+   "answer": 1,
+   "fig": "q42.png",
+   "optionFigs": null,
+   "sol": "Closing S$_1$ shorts $L_2$: series $C, R, L_1$. Closing S$_2$ shorts $L_1$: series $C, R, L_2$.<br>$X_C=\\dfrac{1}{\\omega C}=\\dfrac{1}{300\\times10^{-4}}=\\dfrac{100}{3}\\ \\Omega$.<br>$\\tan30^\\circ=\\dfrac{\\omega L_1-X_C}{R}$, $\\tan60^\\circ=\\dfrac{\\omega L_2-X_C}{R}$, so $\\omega L_2-X_C=3(\\omega L_1-X_C)$.<br>$\\omega(3L_1-L_2)=2X_C \\Rightarrow 3L_1-L_2=\\dfrac{2\\times100/3}{300}=\\dfrac29$ H.",
+   "subject": "Physics",
+   "chapter": "Alternating Current",
+   "chCls": "XII"
+  },
+  {
+   "no": 43,
+   "qid": "691121193",
+   "section": "A",
+   "type": "mcq",
+   "text": "A circular current loop of radius $R$ is placed inside square loop of side length $L$ $(L \\gg R)$ such that they are co-planar and their centers coincide. The permeability of free space is $\\mu_0$. The mutual inductance between circular loop and square loop is __________.",
+   "options": [
+    "$2\\sqrt2\\dfrac{\\mu_0L^2}{R}$",
+    "$\\sqrt2\\dfrac{\\mu_0L^2}{R}$",
+    "$\\sqrt2\\dfrac{\\mu_0R^2}{L}$",
+    "$2\\sqrt2\\dfrac{\\mu_0R^2}{L}$"
+   ],
+   "optionIds": [
+    "691121664",
+    "691121665",
+    "691121666",
+    "691121667"
+   ],
+   "answer": 3,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Field at the centre of the square carrying current $I$: $B=4\\times\\dfrac{\\mu_0I}{4\\pi(L/2)}\\times2\\sin45^\\circ=\\dfrac{2\\sqrt2\\mu_0I}{\\pi L}$.<br>Since $L \\gg R$, this field is uniform over the small circle: $\\Phi=B\\pi R^2=\\dfrac{2\\sqrt2\\mu_0IR^2}{L}$.<br>$M=\\dfrac{\\Phi}{I}=2\\sqrt2\\dfrac{\\mu_0R^2}{L}$.",
+   "subject": "Physics",
+   "chapter": "Electromagnetic Induction",
+   "chCls": "XII"
+  },
+  {
+   "no": 44,
+   "qid": "691121194",
+   "section": "A",
+   "type": "mcq",
+   "text": "The binding energy per nucleon of ${}^{209}_{83}Bi$ is __________ MeV.<br>[Take $m\\left({}^{209}_{83}Bi\\right)=208.980388$ u, $m_p=1.007825$ u, $m_n=1.008665$ u, $1$ u $=931$ MeV/c$^2$]",
+   "options": [
+    "$7.48$",
+    "$7.84$",
+    "$8.79$",
+    "$6.94$"
+   ],
+   "optionIds": [
+    "691121668",
+    "691121669",
+    "691121670",
+    "691121671"
+   ],
+   "answer": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Mass defect $=83\\times1.007825+126\\times1.008665-208.980388$.<br>$=83.649475+127.091790-208.980388=1.760877$ u.<br>Binding energy $=1.760877\\times931\\approx1639.4$ MeV.<br>Per nucleon $=\\dfrac{1639.4}{209}\\approx7.84$ MeV.",
+   "subject": "Physics",
+   "chapter": "Nuclei",
+   "chCls": "XII"
+  },
+  {
+   "no": 45,
+   "qid": "691121195",
+   "section": "A",
+   "type": "mcq",
+   "text": "The equation of motion of a particle is given by $x=a\\sin\\left(50t+\\pi/3\\right)$ cm. The particle will come to rest at time $t_1$ and it will have zero acceleration at time $t_2$. The $t_1$ and $t_2$ respectively are __________.",
+   "options": [
+    "$\\dfrac{\\pi}{300}$ s, $\\dfrac{\\pi}{75}$ s",
+    "$\\dfrac{\\pi}{75}$ s, $\\dfrac{\\pi}{300}$ s",
+    "$\\dfrac{\\pi}{300}$ s, $\\dfrac{\\pi}{25}$ s",
+    "$\\dfrac{\\pi}{50}$ s, $\\dfrac{\\pi}{100}$ s"
+   ],
+   "optionIds": [
+    "691121672",
+    "691121673",
+    "691121674",
+    "691121675"
+   ],
+   "answer": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Velocity $v=50a\\cos(50t+\\pi/3)=0$ first when $50t+\\dfrac\\pi3=\\dfrac\\pi2 \\Rightarrow t_1=\\dfrac{\\pi}{300}$ s.<br>Acceleration $\\propto\\sin(50t+\\pi/3)=0$ first (for $t>0$) when $50t+\\dfrac\\pi3=\\pi \\Rightarrow t_2=\\dfrac{2\\pi}{150}=\\dfrac{\\pi}{75}$ s.",
+   "subject": "Physics",
+   "chapter": "Oscillations",
+   "chCls": "XI"
+  },
+  {
+   "no": 46,
+   "qid": "691121196",
+   "section": "B",
+   "type": "num",
+   "text": "In a Young's double slit experiment, the intensity at some point on the screen is found to be $\\dfrac34$ times of the maximum of the interference pattern. The path difference between the interfering waves at this point is $\\dfrac{\\lambda}{x}$ where $\\lambda$ is wavelength of the incident light. The value of $x$ is __________.",
+   "answer": 6,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$I=I_{max}\\cos^2\\dfrac{\\phi}{2}=\\dfrac34I_{max} \\Rightarrow \\cos\\dfrac\\phi2=\\dfrac{\\sqrt3}{2} \\Rightarrow \\phi=\\dfrac\\pi3$.<br>Path difference $=\\dfrac{\\lambda}{2\\pi}\\phi=\\dfrac{\\lambda}{6}$.<br>$x=6$.",
+   "subject": "Physics",
+   "chapter": "Wave Optics",
+   "chCls": "XII"
+  },
+  {
+   "no": 47,
+   "qid": "691121197",
+   "section": "B",
+   "type": "num",
+   "text": "Using Bohr's model, calculate the ratio of the magnetic fields generated due to the motion of the electrons in the $2^{\\text{nd}}$ and $4^{\\text{th}}$ orbits of hydrogen atom __________.",
+   "answer": 32,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Field at the nucleus: $B=\\dfrac{\\mu_0I}{2r}$ with $I=\\dfrac{ev}{2\\pi r}$, so $B\\propto\\dfrac{v}{r^2}$.<br>In Bohr's model $v\\propto\\dfrac1n$ and $r\\propto n^2$, so $B\\propto\\dfrac{1}{n^5}$.<br>$\\dfrac{B_2}{B_4}=\\left(\\dfrac42\\right)^5=32$.",
+   "subject": "Physics",
+   "chapter": "Atoms",
+   "chCls": "XII"
+  },
+  {
+   "no": 48,
+   "qid": "691121198",
+   "section": "B",
+   "type": "num",
+   "text": "5 moles of unknown gas is heated at constant volume from 10 $^\\circ$C to 20 $^\\circ$C. The molar specific heat of this gas at constant pressure $c_p=8$ cal/mol.$^\\circ$C and $R=8.36$ J/mol.$^\\circ$C. The change in the internal energy of the gas is __________ calorie.",
+   "answer": 300,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$R=8.36$ J/mol $^\\circ$C $=\\dfrac{8.36}{4.18}=2$ cal/mol $^\\circ$C.<br>$c_v=c_p-R=8-2=6$ cal/mol $^\\circ$C.<br>$\\Delta U=nc_v\\Delta T=5\\times6\\times10=300$ cal.",
+   "subject": "Physics",
+   "chapter": "Thermodynamics",
+   "chCls": "XI"
+  },
+  {
+   "no": 49,
+   "qid": "691121199",
+   "section": "B",
+   "type": "num",
+   "text": "If sunlight is focused on a paper using convex lens, it starts burning the paper in shortest time when the lens is kept at 30 cm above the paper. If the radius of curvature of the lens is 60 cm then the refractive index of the lens material is $\\dfrac{\\alpha}{10}$. The value of $\\alpha$ is __________.",
+   "answer": 20,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "The paper burns fastest at the focus: $f=30$ cm.<br>For an equiconvex lens with $R=60$ cm: $\\dfrac1f=(\\mu-1)\\dfrac{2}{R} \\Rightarrow \\dfrac1{30}=\\dfrac{\\mu-1}{30}$.<br>$\\mu=2=\\dfrac{20}{10}$, so $\\alpha=20$.",
+   "subject": "Physics",
+   "chapter": "Ray Optics and Optical Instruments",
+   "chCls": "XII"
+  },
+  {
+   "no": 50,
+   "qid": "691121200",
+   "section": "B",
+   "type": "num",
+   "text": "Moment of inertia about an axis $AB$ for a rod of mass 40 kg and length 3 m is same as that of a solid sphere of mass of 10 kg and radius $R$ about an axis parallel to $AB$ axis with separation of 3 m as shown in figure below. The value of $R$ is given as $\\sqrt{\\dfrac{\\alpha}{2}}$. The value of $\\alpha$ is __________.",
+   "answer": 60,
+   "fig": "q50.png",
+   "optionFigs": null,
+   "sol": "The rod rotates about AB through its end: $I_{rod}=\\dfrac{ML^2}{3}=\\dfrac{40\\times9}{3}=120$ kg m$^2$.<br>As drawn, the sphere's axis is its own diameter (the dotted line through its centre, parallel to AB and 3 m from it): $I_{sphere}=\\dfrac25\\times10\\times R^2=4R^2$.<br>$4R^2=120 \\Rightarrow R^2=30=\\dfrac{60}{2}$.<br>$\\alpha=60$.",
+   "subject": "Physics",
+   "chapter": "System of Particles and Rotational Motion",
+   "chCls": "XI"
+  },
+  {
+   "no": 51,
+   "qid": "691121201",
+   "section": "A",
+   "type": "mcq",
+   "text": "The ratio of mass percentage (w/w) of C : H in a hydrocarbon is 12 : 1. It has two carbon atoms. The weight (in g) of CO$_2$(g) formed when 3.38 g of this hydrocarbon is completely burnt in oxygen is : (Given : Molar mass in g mol$^{-1}$ C : 12, H : 1, O : 16)",
+   "options": [
+    "$5.68$",
+    "$11.44$",
+    "$22.74$",
+    "$17.05$"
+   ],
+   "optionIds": [
+    "691121681",
+    "691121682",
+    "691121683",
+    "691121684"
+   ],
+   "answer": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Mole ratio C : H $=\\dfrac{12}{12}:\\dfrac11=1:1$; with two C atoms the hydrocarbon is C$_2$H$_2$ (26 g/mol).<br>Moles $=\\dfrac{3.38}{26}=0.13$; each mole gives 2 mol CO$_2$: $0.26$ mol.<br>Mass of CO$_2=0.26\\times44=11.44$ g.",
+   "subject": "Chemistry",
+   "chapter": "Some Basic Concepts of Chemistry",
+   "chCls": "XI"
+  },
+  {
+   "no": 52,
+   "qid": "691121202",
+   "section": "A",
+   "type": "mcq",
+   "text": "The first and second ionization constants of a weak dibasic acid H$_2$A are $8.1\\times10^{-8}$ and $1.0\\times10^{-13}$ respectively. 0.1 mol of H$_2$A was dissolved in 1L of 0.1 M HCl solution. The concentration of HA$^-$ in the resultant solution is :",
+   "options": [
+    "0.1 M",
+    "$9.53\\times10^{-6}$ M",
+    "$8.1\\times10^{-8}$ M",
+    "$1.0\\times10^{-13}$ M"
+   ],
+   "optionIds": [
+    "691121685",
+    "691121686",
+    "691121687",
+    "691121688"
+   ],
+   "answer": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "HCl fixes $[\\mathrm{H^+}]=0.1$ M and suppresses ionisation, so $[\\mathrm{H_2A}]\\approx0.1$ M.<br>$K_{a1}=\\dfrac{[\\mathrm{H^+}][\\mathrm{HA^-}]}{[\\mathrm{H_2A}]} \\Rightarrow [\\mathrm{HA^-}]=\\dfrac{8.1\\times10^{-8}\\times0.1}{0.1}=8.1\\times10^{-8}$ M.",
+   "subject": "Chemistry",
+   "chapter": "Equilibrium",
+   "chCls": "XI"
+  },
+  {
+   "no": 53,
+   "qid": "691121203",
+   "section": "A",
+   "type": "mcq",
+   "text": "SF$_4$ is isostructural with :<br>A. BrF$_4^{\\ominus}$<br>B. CH$_4$<br>C. IF$_4^{\\oplus}$<br>D. XeF$_4$<br>E. XeO$_2$F$_2$<br>Choose the correct answer from the options given below :",
+   "options": [
+    "C Only",
+    "C and E Only",
+    "A and D Only",
+    "B and E Only"
+   ],
+   "optionIds": [
+    "691121689",
+    "691121690",
+    "691121691",
+    "691121692"
+   ],
+   "answer": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "SF$_4$: 4 bond pairs + 1 lone pair, see-saw.<br>BrF$_4^-$ and XeF$_4$: 4 bp + 2 lp, square planar. CH$_4$: tetrahedral.<br>IF$_4^+$: I has $7-1=6$ valence electrons, 4 bp + 1 lp, see-saw. XeO$_2$F$_2$: 4 $\\sigma$ bonds + 1 lp, see-saw.<br>Isostructural: C and E only.",
+   "subject": "Chemistry",
+   "chapter": "Chemical Bonding and Molecular Structure",
+   "chCls": "XI"
+  },
+  {
+   "no": 54,
+   "qid": "691121204",
+   "section": "A",
+   "type": "mcq",
+   "text": "Gas 'A' undergoes change from state 'X' to state 'Y'. In this process, the heat absorbed and work done by the gas is 10 J and 18 J respectively. Now gas is brought back to state 'X' by another process during which 6 J of heat is evolved. In the reverse process of 'Y' to 'X',",
+   "options": [
+    "18 J of the work is done by the gas 'A'.",
+    "2 J of the work is done by the gas 'A'.",
+    "12 J of the work is done on the gas 'A' by the surrounding.",
+    "14 J of the work is done on the gas 'A' by the surrounding."
+   ],
+   "optionIds": [
+    "691121693",
+    "691121694",
+    "691121695",
+    "691121696"
+   ],
+   "answer": 3,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "X $\\to$ Y: $\\Delta U=q-w_{by}=10-18=-8$ J.<br>Y $\\to$ X: $\\Delta U=+8$ J with $q=-6$ J.<br>$\\Delta U=q+w_{on} \\Rightarrow w_{on}=8+6=14$ J: 14 J of work is done on the gas.",
+   "subject": "Chemistry",
+   "chapter": "Thermodynamics",
+   "chCls": "XI"
+  },
+  {
+   "no": 55,
+   "qid": "691121205",
+   "section": "A",
+   "type": "mcq",
+   "text": "Solution A is prepared by dissolving 1 g of a protein (molar mass $=50000$ g mol$^{-1}$) in 0.5 L of water at 300 K. Its osmotic pressure is $x$ bar. Solution B is made by dissolving 2 g of same protein in 1 L of water at 300 K. Osmotic pressure of solution B is $y$ bar. Entire solution of A is mixed with entire solution of B at same temperature. The osmotic pressure of resultant solution is $z$ bar. $x$, $y$ and $z$ respectively are :<br>($R=0.083$ L bar mol$^{-1}$ K$^{-1}$)",
+   "options": [
+    "$9.96\\times10^{-4}$; $9.96\\times10^{-4}$; $9.96\\times10^{-4}$",
+    "$9.96\\times10^{-4}$; $9.96\\times10^{-4}$; $19.92\\times10^{-4}$",
+    "$4.98\\times10^{-4}$; $4.98\\times10^{-4}$; $9.96\\times10^{-4}$",
+    "$4.98\\times10^{-4}$; $4.98\\times10^{-4}$; $4.98\\times10^{-4}$"
+   ],
+   "optionIds": [
+    "691121697",
+    "691121698",
+    "691121699",
+    "691121700"
+   ],
+   "answer": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "A: $C=\\dfrac{1/50000}{0.5}=4\\times10^{-5}$ M; B: $C=\\dfrac{2/50000}{1}=4\\times10^{-5}$ M; mixture: $\\dfrac{3/50000}{1.5}=4\\times10^{-5}$ M.<br>All three have the same concentration: $\\pi=CRT=4\\times10^{-5}\\times0.083\\times300=9.96\\times10^{-4}$ bar.<br>$x=y=z=9.96\\times10^{-4}$.",
+   "subject": "Chemistry",
+   "chapter": "Solutions",
+   "chCls": "XII"
+  },
+  {
+   "no": 56,
+   "qid": "691121206",
+   "section": "A",
+   "type": "mcq",
+   "text": "At 25$^\\circ$C, 20.0 mL of 0.2 M weak monoprotic acid HX is titrated against 0.2 M NaOH. The pH of the solution (a) at the start of the titration (when NaOH has not been added) and (b) when 10 mL of NaOH is added respectively, are :<br>Given : $K_a=5\\times10^{-4}$, $\\mathrm{p}K_a=3.3$, $\\alpha \\ll 1$",
+   "options": [
+    "(a) 0.7, (b) 2.0",
+    "(a) 2.0, (b) 3.3",
+    "(a) 1.1, (b) 2.2",
+    "(a) 3.0, (b) 2.2"
+   ],
+   "optionIds": [
+    "691121701",
+    "691121702",
+    "691121703",
+    "691121704"
+   ],
+   "answer": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "(a) Weak acid alone: $\\mathrm{pH}=\\dfrac12(\\mathrm pK_a-\\log C)=\\dfrac12(3.3+0.7)=2.0$.<br>(b) 10 mL NaOH neutralises half of the acid (2 mmol of 4 mmol): $[\\mathrm{X^-}]=[\\mathrm{HX}]$.<br>Buffer at half-neutralisation: $\\mathrm{pH}=\\mathrm pK_a=3.3$.",
+   "subject": "Chemistry",
+   "chapter": "Equilibrium",
+   "chCls": "XI"
+  },
+  {
+   "no": 57,
+   "qid": "691121207",
+   "section": "A",
+   "type": "mcq",
+   "text": "Consider the reaction aX $\\to$ bY, for which the rate constant at 30$^\\circ$C is $1\\times10^{-3}$ mol$^{-1}$ L s$^{-1}$. Which of the following statements are true ?<br>A. When concentration of 'X' is increased to four times, the rate of reaction becomes 16 times.<br>B. The reaction is a second order reaction.<br>C. The half-life period is independent of the concentration of X.<br>D. Decomposition of N$_2$O$_5$ is an example of the above reaction.<br>E. The plot of $\\ln\\dfrac{[R_0]}{[R]}$ against time shown in the figure is valid for the above reaction.<br>Choose the correct answer from the options given below :",
+   "options": [
+    "A and B Only",
+    "A, B and C Only",
+    "A, B, D and E Only",
+    "C and D Only"
+   ],
+   "optionIds": [
+    "691121705",
+    "691121706",
+    "691121707",
+    "691121708"
+   ],
+   "answer": 0,
+   "fig": "q57.png",
+   "optionFigs": null,
+   "sol": "Units mol$^{-1}$ L s$^{-1}$ mean a second order reaction: B is true.<br>Rate $\\propto[\\mathrm X]^2$: four times the concentration gives 16 times the rate, so A is true.<br>For second order $t_{1/2}=\\dfrac{1}{k[\\mathrm X]_0}$ depends on concentration: C false.<br>N$_2$O$_5$ decomposition is first order, and a straight line of $\\ln\\dfrac{[R_0]}{[R]}$ vs $t$ is the first-order plot: D and E false.<br>Answer: A and B only.",
+   "subject": "Chemistry",
+   "chapter": "Chemical Kinetics",
+   "chCls": "XII"
+  },
+  {
+   "no": 58,
+   "qid": "691121208",
+   "section": "A",
+   "type": "mcq",
+   "text": "The correct set that contains all kinds (basic, acidic, amphoteric and neutral) of oxides is :",
+   "options": [
+    "Na$_2$O, K$_2$O, Al$_2$O$_3$ and As$_2$O$_3$",
+    "Al$_2$O$_3$, As$_2$O$_3$, CO and NO",
+    "K$_2$O, Cl$_2$O$_7$, As$_2$O$_3$ and NO",
+    "Na$_2$O, N$_2$O, Al$_2$O$_3$ and CO"
+   ],
+   "optionIds": [
+    "691121709",
+    "691121710",
+    "691121711",
+    "691121712"
+   ],
+   "answer": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "K$_2$O is basic, Cl$_2$O$_7$ is acidic, As$_2$O$_3$ is amphoteric and NO is neutral.<br>The other sets each miss at least one kind (e.g. no acidic oxide in the first, second and fourth sets).<br>Answer: K$_2$O, Cl$_2$O$_7$, As$_2$O$_3$ and NO.",
+   "subject": "Chemistry",
+   "chapter": "Classification of Elements and Periodicity in Properties",
+   "chCls": "XI"
+  },
+  {
+   "no": 59,
+   "qid": "691121209",
+   "section": "A",
+   "type": "mcq",
+   "text": "Given below are two statements :<br>Statement I : The second ionization enthalpy of B, Al and Ga is in the order of B > Al > Ga.<br>Statement II : The correct order in terms of first ionization enthalpy is Si &lt; Ge &lt; Pb &lt; Sn.<br>In the light of the above statements, choose the correct answer from the options given below :",
+   "options": [
+    "Both Statement I and Statement II are true",
+    "Both Statement I and Statement II are false",
+    "Statement I is true but Statement II is false",
+    "Statement I is false but Statement II is true"
+   ],
+   "optionIds": [
+    "691121713",
+    "691121714",
+    "691121715",
+    "691121716"
+   ],
+   "answer": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Second ionization enthalpies (kJ/mol): B 2427, Al 1817, Ga 1979, so the order is B > Ga > Al (poor d-shielding in Ga). Statement I is false.<br>First ionization enthalpies (kJ/mol): Si 786, Ge 762, Sn 709, Pb 716, so the order is Sn &lt; Pb &lt; Ge &lt; Si. Statement II is false.<br>Both statements are false.",
+   "subject": "Chemistry",
+   "chapter": "Classification of Elements and Periodicity in Properties",
+   "chCls": "XI"
+  },
+  {
+   "no": 60,
+   "qid": "691121210",
+   "section": "A",
+   "type": "mcq",
+   "text": "Given below are two statements :<br>Statement I : Among Zn, Mn, Sc and Cu, the energy required to remove the third valence electron is highest for Zn and lowest for Sc.<br>Statement II : The correct order of the following complexes in terms of CFSE is $[\\mathrm{Co(H_2O)_6}]^{2+}$ &lt; $[\\mathrm{Co(H_2O)_6}]^{3+}$ &lt; $[\\mathrm{Co(en)_3}]^{3+}$.<br>In the light of the above statements, choose the correct answer from the options given below :",
+   "options": [
+    "Both Statement I and Statement II are true",
+    "Both Statement I and Statement II are false",
+    "Statement I is true but Statement II is false",
+    "Statement I is false but Statement II is true"
+   ],
+   "optionIds": [
+    "691121717",
+    "691121718",
+    "691121719",
+    "691121720"
+   ],
+   "answer": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Third ionization enthalpies: Zn (from stable 3d$^{10}$) is highest, about 3833 kJ/mol; Sc (giving the noble-gas core Sc$^{3+}$) is lowest, about 2389 kJ/mol. Statement I is true.<br>CFSE rises with the oxidation state of the metal (Co$^{3+}$ > Co$^{2+}$) and with ligand strength (en > H$_2$O), so the given order is correct. Statement II is true.<br>Both statements are true.",
+   "subject": "Chemistry",
+   "chapter": "The d- and f-Block Elements",
+   "chCls": "XII"
+  },
+  {
+   "no": 61,
+   "qid": "691121211",
+   "section": "A",
+   "type": "mcq",
+   "text": "Which of the following complexes will show coordination isomerism ?<br>A. $[\\mathrm{Ag(NH_3)_2}][\\mathrm{Ag(CN)_2}]$<br>B. $[\\mathrm{Co(NH_3)_6}][\\mathrm{Cr(CN)_6}]$<br>C. $[\\mathrm{Co(NH_3)_6}][\\mathrm{Co(CN)_6}]$<br>D. $[\\mathrm{Fe(NH_3)_6}][\\mathrm{Co(CN)_6}]$<br>E. $[\\mathrm{Co(NH_3)_6}][\\mathrm{Fe(CN)_6}]$<br>Choose the correct answer from the options given below :",
+   "options": [
+    "B, C and D Only",
+    "B, D and E Only",
+    "A, C and D Only",
+    "C, D and E Only"
+   ],
+   "optionIds": [
+    "691121721",
+    "691121722",
+    "691121723",
+    "691121724"
+   ],
+   "answer": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Coordination isomerism arises from interchange of ligands between the cationic and anionic complex entities of different metal ions, e.g. $[\\mathrm{Co(NH_3)_6}][\\mathrm{Cr(CN)_6}]$ and $[\\mathrm{Cr(NH_3)_6}][\\mathrm{Co(CN)_6}]$.<br>B, D and E have different metals in the cation and the anion, so the interchange gives a different compound.<br>In A and C both centres are the same metal, so this interchange gives back the same compound.<br>Answer: B, D and E only.",
+   "subject": "Chemistry",
+   "chapter": "Coordination Compounds",
+   "chCls": "XII"
+  },
+  {
+   "no": 62,
+   "qid": "691121212",
+   "section": "A",
+   "type": "mcq",
+   "text": "Complete combustion of X g of an organic compound gave 0.25 g of CO$_2$ and 0.12 g of H$_2$O. If the % of carbon is 25% and of hydrogen is 4.89%, then X = _____ $\\times10^{-3}$ g. (Nearest integer)<br>(Molar mass of C, H and O are 12, 1 and 16 g mol$^{-1}$ respectively.)",
+   "options": [
+    "$273$",
+    "$27$",
+    "$2730$",
+    "$227$"
+   ],
+   "optionIds": [
+    "691121725",
+    "691121726",
+    "691121727",
+    "691121728"
+   ],
+   "answer": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Mass of C $=0.25\\times\\dfrac{12}{44}=0.0682$ g; this is 25% of X.<br>$X=\\dfrac{0.0682}{0.25}=0.273$ g $=273\\times10^{-3}$ g.<br>Check: H $=0.12\\times\\dfrac{2}{18}=0.01333$ g, and $\\dfrac{0.01333}{0.273}\\times100=4.89\\%$.",
+   "subject": "Chemistry",
+   "chapter": "Organic Chemistry – Some Basic Principles and Techniques",
+   "chCls": "XI"
+  },
+  {
+   "no": 63,
+   "qid": "691121213",
+   "section": "A",
+   "type": "mcq",
+   "text": "Given below are two statements :<br>Statement I : In $\\mathrm{O_2N{-}C_6H_4{-}\\overset{\\oplus}{C}H{-}C_6H_4{-}OCH_3}$ (both benzene rings para-substituted), the carbocation is stabilised by $+R$ effect of $-\\mathrm{OCH_3}$ group.<br>Statement II : In $\\mathrm{O_2N{-}C_6H_4{-}\\overset{\\ominus}{C}H{-}C_6H_4{-}OCH_3}$ (both benzene rings para-substituted), the carbanion is stabilised by $-R$ effect of $-\\mathrm{NO_2}$ group.<br>In the light of the above statements, choose the correct answer from the options given below :",
+   "options": [
+    "Both Statement I and Statement II are true",
+    "Both Statement I and Statement II are false",
+    "Statement I is true but Statement II is false",
+    "Statement I is false but Statement II is true"
+   ],
+   "optionIds": [
+    "691121729",
+    "691121730",
+    "691121731",
+    "691121732"
+   ],
+   "answer": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "The para $-\\mathrm{OCH_3}$ group donates its lone pair through the ring ($+R$) into the empty p orbital of the carbocation carbon, stabilising it. Statement I is true.<br>The para $-\\mathrm{NO_2}$ group withdraws the negative charge of the carbanion through the ring ($-R$), delocalising it onto oxygen. Statement II is true.<br>Both statements are true.",
+   "subject": "Chemistry",
+   "chapter": "Organic Chemistry – Some Basic Principles and Techniques",
+   "chCls": "XI"
+  },
+  {
+   "no": 64,
+   "qid": "691121214",
+   "section": "A",
+   "type": "mcq",
+   "text": "The compound (X) on<br>(i) on heating in the presence of anhydrous AlCl$_3$ and HCl gas gives 2,4-dimethyl pentane<br>(ii) aromatization gives toulene and<br>(iii) cyclisation gives methyl cyclohexane<br>The correct name of compound (X) is :",
+   "options": [
+    "Hept-2-ene",
+    "Hept-1,3,5-triene",
+    "Heptane",
+    "Hept-2,4,6-triene"
+   ],
+   "optionIds": [
+    "691121733",
+    "691121734",
+    "691121735",
+    "691121736"
+   ],
+   "answer": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Heating with anhydrous AlCl$_3$/HCl isomerises an n-alkane to a branched isomer: n-heptane gives 2,4-dimethylpentane (C$_7$H$_{16}$).<br>Aromatisation (Cr$_2$O$_3$/V$_2$O$_5$/Mo$_2$O$_3$, heat) of n-heptane gives toluene; cyclisation gives methylcyclohexane.<br>X is heptane.",
+   "subject": "Chemistry",
+   "chapter": "Hydrocarbons",
+   "chCls": "XI"
+  },
+  {
+   "no": 65,
+   "qid": "691121215",
+   "section": "A",
+   "type": "mcq",
+   "text": "Correct statements regarding alkyl halides (R$-$X) among the following are :<br>A. Alcohol being less polar solvent as compared to water, alcoholic KOH favours elimination reaction with R$-$X.<br>B. Order of reactivity towards S$_\\mathrm{N}$1 mechanism is C$_6$H$_5-$CH$_2-$Cl > C$_6$H$_5-$CHCl$-$C$_6$H$_5$.<br>C. Non substituted aryl halides exhibit properties similar to alkyl halides.<br>D. Vinyl chloride is an example of haloalkene and allyl chloride is an example of haloalkyne.<br>E. R$-$Cl can be prepared by reacting R$-$OH with SOCl$_2$ but Ar$-$Cl cannot be prepared by reacting Ar$-$OH with SOCl$_2$.<br>Choose the correct answer from the options given below :",
+   "options": [
+    "A, B and C Only",
+    "B and D Only",
+    "A and E Only",
+    "D and E Only"
+   ],
+   "optionIds": [
+    "691121737",
+    "691121738",
+    "691121739",
+    "691121740"
+   ],
+   "answer": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "A: true; the less polar alcoholic medium (with the stronger base RO$^-$) favours elimination.<br>B: false; the diphenylmethyl cation is more stabilised than the benzyl cation, so C$_6$H$_5$CHClC$_6$H$_5$ reacts faster by S$_\\mathrm{N}$1.<br>C: false; aryl halides are much less reactive (partial double bond character of C$-$X).<br>D: false; allyl chloride (CH$_2$=CHCH$_2$Cl) is also a haloalkene.<br>E: true; the C$-$O bond of phenol has partial double bond character and is not replaced by SOCl$_2$.<br>Answer: A and E only.",
+   "subject": "Chemistry",
+   "chapter": "Haloalkanes and Haloarenes",
+   "chCls": "XII"
+  },
+  {
+   "no": 66,
+   "qid": "691121216",
+   "section": "A",
+   "type": "mcq",
+   "text": "An organic compound \\\"$x$\\\" where molar ratio of C, O and H are equal, on treatment with 50% KOH under reflux followed by acidification produced \\\"$y$\\\". The most likely structure of \\\"$y$\\\" is :<br>[Molar mass of '$x$' is 58 g mol$^{-1}$]",
+   "options": [
+    "$\\mathrm{CH_2{=}CH{-}C({=}O){-}OH}$",
+    "$\\mathrm{CH_3-CH=CH-CH=O}$",
+    "$\\mathrm{O{=}C(OH){-}CH_2{-}OH}$",
+    "$\\mathrm{CH_3{-}C({=}O){-}OH}$"
+   ],
+   "optionIds": [
+    "691121741",
+    "691121742",
+    "691121743",
+    "691121744"
+   ],
+   "answer": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Empirical formula CHO (29); molar mass 58 gives C$_2$H$_2$O$_2$: glyoxal, OHC$-$CHO.<br>With concentrated KOH glyoxal undergoes an intramolecular Cannizzaro reaction: one CHO is oxidised, the other reduced, giving HOCH$_2$COO$^-$K$^+$.<br>Acidification gives glycolic acid, HOCH$_2$COOH.",
+   "subject": "Chemistry",
+   "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+   "chCls": "XII"
+  },
+  {
+   "no": 67,
+   "qid": "691121217",
+   "section": "A",
+   "type": "mcq",
+   "text": "A molecule (X) with following structure under mild acidic condition is hydrolysed to produce (Y) and (Z). Identify the correct statements about (Y) and (Z).<br>A. Both (Y) and (Z) have same molar mass.<br>B. (Y) and (Z) can be distinguished from each other by NaHCO$_3$.<br>C. (Y) and (Z) react with HCN with same rates.<br>D. (Y) and (Z) undergo addition reaction with 2,4-DNP.<br>Choose the correct answer from the options given below :",
+   "options": [
+    "A, B and C Only",
+    "B and C Only",
+    "C and D Only",
+    "A and D Only"
+   ],
+   "optionIds": [
+    "691121745",
+    "691121746",
+    "691121747",
+    "691121748"
+   ],
+   "answer": 3,
+   "fig": "q67.png",
+   "optionFigs": null,
+   "sol": "X is CH$_3$CH=CH$-$O$-$C(CH$_3$)=CH$_2$, a divinyl-type ether. Acid hydrolysis gives two enols that tautomerise: propanal CH$_3$CH$_2$CHO and acetone CH$_3$COCH$_3$.<br>A: both C$_3$H$_6$O, 58 g/mol: true.<br>B: neither is acidic, so NaHCO$_3$ cannot distinguish them: false.<br>C: the aldehyde adds HCN faster than the ketone: false.<br>D: both carbonyl compounds react with 2,4-DNP: true.<br>Answer: A and D only.",
+   "subject": "Chemistry",
+   "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+   "chCls": "XII"
+  },
+  {
+   "no": 68,
+   "qid": "691121218",
+   "section": "A",
+   "type": "mcq",
+   "text": "Identify compounds A and E in the following reaction sequence.",
+   "options": [
+    "",
+    "",
+    "",
+    ""
+   ],
+   "optionIds": [
+    "691121749",
+    "691121750",
+    "691121751",
+    "691121752"
+   ],
+   "answer": 1,
+   "fig": "q68.png",
+   "optionFigs": [
+    "q68a.png",
+    "q68b.png",
+    "q68c.png",
+    "q68d.png"
+   ],
+   "sol": "In 4-nitroethylbenzene the ethyl group directs ortho/para and the NO$_2$ group directs meta; both favour the position ortho to C$_2$H$_5$. A = 2-bromo-1-ethyl-4-nitrobenzene.<br>Sn/HCl reduces NO$_2$ to NH$_2$ (B); NaNO$_2$/HCl at 273-278 K gives the diazonium salt (C).<br>Ethanol replaces $-\\mathrm{N_2^+}$ by H: D = 1-bromo-2-ethylbenzene.<br>Alkaline KMnO$_4$ then H$_3$O$^+$ oxidises the ethyl side chain to COOH: E = 2-bromobenzoic acid.<br>This matches option (2).",
+   "subject": "Chemistry",
+   "chapter": "Amines",
+   "chCls": "XII"
+  },
+  {
+   "no": 69,
+   "qid": "691121219",
+   "section": "A",
+   "type": "mcq",
+   "text": "Identify the correct pair having amino acid (A) and the hormone (B) that is iodinated derivative of the amino acid (A).<br>(T and Y represent one letter code for amino acids)",
+   "options": [
+    "Amino acid (A): T; Hormone (B): Insulin",
+    "Amino acid (A): T; Hormone (B): Thyroxine",
+    "Amino acid (A): Y; Hormone (B): Thyroxine",
+    "Amino acid (A): Y; Hormone (B): Insulin"
+   ],
+   "optionIds": [
+    "691121753",
+    "691121754",
+    "691121755",
+    "691121756"
+   ],
+   "answer": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Thyroxine (a thyroid hormone) is an iodinated derivative of the amino acid tyrosine.<br>The one-letter code of tyrosine is Y (T is threonine); insulin is a peptide hormone, not an iodinated amino acid.<br>Answer: Y and thyroxine.",
+   "subject": "Chemistry",
+   "chapter": "Biomolecules",
+   "chCls": "XII"
+  },
+  {
+   "no": 70,
+   "qid": "691121220",
+   "section": "A",
+   "type": "mcq",
+   "text": "Among Fe$^{2+}$, Fe$^{3+}$, Cr$^{2+}$ and Zn$^{2+}$, the ion that shows positive borax bead test and with highest ionisation enthalpy is :",
+   "options": [
+    "Fe$^{2+}$",
+    "Zn$^{2+}$",
+    "Cr$^{2+}$",
+    "Fe$^{3+}$"
+   ],
+   "optionIds": [
+    "691121757",
+    "691121758",
+    "691121759",
+    "691121760"
+   ],
+   "answer": 3,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Borax bead test needs coloured metaborates: Fe$^{2+}$, Fe$^{3+}$ and Cr$^{2+}$ respond; Zn$^{2+}$ ($d^{10}$, colourless) does not.<br>Removing an electron from Fe$^{3+}$ is the fourth ionisation enthalpy of Fe (about 5290 kJ/mol), far above the third ionisation enthalpies of Fe (about 2957) and Cr (about 2987) needed for Fe$^{2+}$ and Cr$^{2+}$.<br>Answer: Fe$^{3+}$.",
+   "subject": "Chemistry",
+   "chapter": "The d- and f-Block Elements",
+   "chCls": "XII"
+  },
+  {
+   "no": 71,
+   "qid": "691121221",
+   "section": "B",
+   "type": "num",
+   "text": "The surface of sodium metal is irradiated with radiation of wavelength $x$ nm. The kinetic energy of ejected electrons is $2.8\\times10^{-20}$ J. The work function of sodium is 2.3 eV. The value of $x$ is __________ $\\times10^2$ nm. (Nearest integer)<br>(Given : $h=6.6\\times10^{-34}$ J s ; 1 eV $=1.6\\times10^{-19}$ J; $c=3.0\\times10^8$ m s$^{-1}$)",
+   "answer": 5,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Photon energy $=\\phi+K=2.3\\times1.6\\times10^{-19}+0.28\\times10^{-19}=3.96\\times10^{-19}$ J.<br>$\\lambda=\\dfrac{hc}{E}=\\dfrac{6.6\\times10^{-34}\\times3\\times10^8}{3.96\\times10^{-19}}=5\\times10^{-7}$ m $=500$ nm.<br>$500=5\\times10^2$ nm, so the answer is $5$.",
+   "subject": "Chemistry",
+   "chapter": "Structure of Atom",
+   "chCls": "XI"
+  },
+  {
+   "no": 72,
+   "qid": "691121222",
+   "section": "B",
+   "type": "num",
+   "text": "Consider the following gas phase reaction being carried out in a closed vessel at 25$^\\circ$C.<br>$$2\\mathrm{A(g)}\\longrightarrow4\\mathrm{B(g)}+\\mathrm{C(g)}$$ $$\\begin{array}{c|c}\\text{time (min)} & \\text{total pressure of the system (mm Hg)}\\\\\\hline 30 & 300\\\\\\hline \\infty & 600\\end{array}$$The pressure of C(g) at 30 minutes time interval would be __________ mm Hg. (nearest integer)",
+   "answer": 20,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Let the initial pressure of A be $p_0$. At completion 2 A give 5 molecules: $\\dfrac52p_0=600 \\Rightarrow p_0=240$ mm Hg.<br>If $p_C=x$ at 30 min: $p_A=240-2x$, $p_B=4x$, total $=240+3x=300 \\Rightarrow x=20$.<br>Pressure of C $=20$ mm Hg.",
+   "subject": "Chemistry",
+   "chapter": "Chemical Kinetics",
+   "chCls": "XII"
+  },
+  {
+   "no": 73,
+   "qid": "691121223",
+   "section": "B",
+   "type": "num",
+   "text": "Consider the following two half-cell reactions along with the standard reduction potential given :<br>$\\mathrm{CO_2+6H^++6e^-\\longrightarrow CH_3OH+H_2O}$ $\\quad E^\\circ_{red}=0.02$ V<br>$\\mathrm{\\dfrac12O_2+2H^++2e^-\\longrightarrow H_2O}$ $\\quad E^\\circ_{red}=1.23$ V<br>A fuel cell was set up using the above two reactions such that the cell operates under the standard condition of 1 bar pressure and 298 K temperature. The fuel cell works with 80% efficiency. If the work derived from the cell using 1 mol of CH$_3$OH is used to compress an ideal gas isothermally against a constant pressure of 1 kPa, then the change in the volume of the gas, $\\Delta V=$ __________ m$^3$. (nearest integer)<br>Given : $F=96500$ C mol$^{-1}$",
+   "answer": 560,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Cell reaction: $\\mathrm{CH_3OH+\\tfrac32O_2\\to CO_2+2H_2O}$, $n=6$, $E^\\circ_{cell}=1.23-0.02=1.21$ V.<br>$-\\Delta G^\\circ=6\\times96500\\times1.21=700590$ J per mol CH$_3$OH.<br>Useful work at 80%: $0.8\\times700590=560472$ J.<br>$W=P\\Delta V \\Rightarrow \\Delta V=\\dfrac{560472}{1000}\\approx560$ m$^3$ (magnitude).",
+   "subject": "Chemistry",
+   "chapter": "Electrochemistry",
+   "chCls": "XII"
+  },
+  {
+   "no": 74,
+   "qid": "691121224",
+   "section": "B",
+   "type": "num",
+   "text": "Number of paramagnetic ions among the following d- and f-block metal ions is __________.<br>Mn$^{2+}$, Cu$^{2+}$, Zn$^{2+}$, Yb$^{2+}$, Sc$^{3+}$, La$^{3+}$, Gd$^{3+}$, Lu$^{3+}$, Ti$^{4+}$, Ce$^{4+}$<br>(Atomic number of Mn $=25$, Cu $=29$, Zn $=30$, Yb $=70$, Sc $=21$, La $=57$, Gd $=64$, Lu $=71$, Ti $=22$, Ce $=58$)",
+   "answer": 3,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Mn$^{2+}$ $3d^5$ and Cu$^{2+}$ $3d^9$: unpaired electrons. Gd$^{3+}$ $4f^7$: unpaired electrons.<br>Zn$^{2+}$ $3d^{10}$, Yb$^{2+}$ $4f^{14}$, Lu$^{3+}$ $4f^{14}$, Sc$^{3+}$, La$^{3+}$, Ti$^{4+}$, Ce$^{4+}$ (noble-gas cores): diamagnetic.<br>Paramagnetic ions: 3.",
+   "subject": "Chemistry",
+   "chapter": "The d- and f-Block Elements",
+   "chCls": "XII"
+  },
+  {
+   "no": 75,
+   "qid": "691121225",
+   "section": "B",
+   "type": "num",
+   "text": "Consider the following reactions sequence (starting from 4-nitrotoluene, shown in the figure; reagents (i) Sn/HCl; OH$^-$ (ii) (CH$_3$CO)$_2$O (iii) Br$_2$/AlBr$_3$ (iv) H$_3$O$^+$, giving Major Product (P)).<br>When the product (P) is subjected to Carius analysis using AgNO$_3$, 1.0 g of the product (P) will produce __________ g of the precipitate of AgBr. (Nearest Integer)<br>(Given : molar mass in g mol$^{-1}$ C : 12, H : 1, O : 16, N : 14, Br : 80, Ag : 108)",
+   "answer": 1,
+   "fig": "q75.png",
+   "optionFigs": null,
+   "sol": "(i) 4-nitrotoluene $\\to$ 4-methylaniline; (ii) acetylation $\\to$ 4-methylacetanilide.<br>(iii) Bromination ortho to the more activating $-\\mathrm{NHCOCH_3}$ group; (iv) hydrolysis $\\to$ P = 2-bromo-4-methylaniline, C$_7$H$_8$BrN, $M=186$ g/mol.<br>1 mol P gives 1 mol AgBr (188 g): mass from 1.0 g $=\\dfrac{188}{186}\\approx1.01$ g.<br>Nearest integer: 1.",
+   "subject": "Chemistry",
+   "chapter": "Organic Chemistry – Some Basic Principles and Techniques",
+   "chCls": "XI"
+  }
+ ]
+}
