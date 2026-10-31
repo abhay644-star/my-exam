@@ -12,11 +12,11 @@ Live site: https://my-exam.in
 ## Hosting
 - Hosted on GitHub Pages from the `main` branch (root folder).
 - `CNAME` sets the custom domain `my-exam.in`.
-- The app is one static page (`index.html`) with no build step. School question banks are in `banks/` and official exam papers in `jee/`, `jee-adv/` and `neet/`; both load only when a paper needs them.
+- The app is one static page (`index.html`) with no build step. School question banks are in `school-questions/` and official exam papers in `jee/`, `jee-adv/` and `neet/`; both load only when a paper needs them.
 
 ## Editing a question bank
-1. Edit the subject's file in `banks/` (for example `banks/physics.json`).
-2. Run `py tools/build_bank_index.py` from the site folder. It updates the bank index in `index.html` (chapters and question counts) and the list of files the service worker keeps for offline use in `sw.js`.
+1. Edit the subject's file in `school-questions/` (for example `school-questions/physics.json`).
+2. Run `py tools/build_school_index.py` from the site folder. It updates the bank index in `index.html` (chapters and question counts) and the list of files the service worker keeps for offline use in `sw.js`.
 3. Run the tests (below) and upload the changed files together.
 
 ## Tests
