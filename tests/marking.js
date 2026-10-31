@@ -153,7 +153,7 @@
     eq(g, 'total questions in the banks', total, Object.values(A.BANK_INDEX).reduce((s, b) => s + Object.values(b.classes).reduce((a, c) => a + Object.values(c).reduce((x, y) => x + y, 0), 0), 0));
   }
 
-  // ---------- the school pages for search engines (cbse/…, built by tools/build_school_pages.py) ----------
+  // ---------- the school pages for search engines (cbse/…, built by tools/build_pages.py) ----------
   async function schoolPages(A) {
     const g = 'School pages', ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
     const slug = s => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
@@ -172,9 +172,37 @@
         if (q.get('class') !== c || q.get('subject') !== s || (q.get('chapter') && !A.topicsFor(s, c).includes(q.get('chapter')))) badLinks.push(url + ' ' + a.getAttribute('href')); });
     }
     eq(g, 'every class and subject the app offers has a page', missing, []);
-    eq(g, 'every page lists the same chapters as the app (rebuild with tools/build_school_pages.py)', stale, []);
+    eq(g, 'every page lists the same chapters as the app (rebuild with tools/build_pages.py)', stale, []);
     eq(g, 'every "start" and chapter link opens the right class, subject and chapter', badLinks, []);
     eq(g, 'number of class and subject pages', n, 81);
+  }
+
+  // ---------- the official paper pages (jee-main/…, jee-advanced/…, neet/…, built by tools/build_pages.py) ----------
+  // the key each answer-key entry carries: option numbers, a number or lo~hi range, or "dropped"
+  const keyText = q => { const p = q.parts[0];
+    return q.dropped ? 'dropped' : p.type === 'num' ? (p.lo != null && p.lo !== p.hi ? `${p.lo}~${p.hi}` : String(p.ans))
+      : p.type === 'multi' ? p.ans.join(',') : p.accept ? p.accept.join('/') : String(p.ans); };
+  async function paperPages(A) {
+    const html = async u => { const r = await fetch(u); if (!r.ok) throw new Error(u + ' ' + r.status); return new DOMParser().parseFromString(await r.text(), 'text/html'); };
+    for (const [list, ex] of Object.entries(A.EXAM_PAGES)) {
+      // the exam's list page links to one page per paper; each paper page's start button names its paper
+      const pages = {};
+      for (const a of (await html(`../${list}/`)).querySelectorAll(`.links a[href^="/${list}/"]`)) {
+        const doc = await html('..' + a.getAttribute('href')), btn = doc.querySelector('a.btn');
+        const id = btn && new URL(btn.getAttribute('href'), location.href).searchParams.get('paper');
+        pages[id] = { url: a.getAttribute('href'), doc };
+      }
+      eq('Paper pages', `every ${ex.crumb} paper has a page, linked from /${list}/ (rebuild with tools/build_pages.py, then add the link)`,
+        ex.papers.map(p => p.id).filter(id => !pages[id]), []);
+      for (const p of ex.papers.filter(p => pages[p.id])) {
+        const g = 'Paper page: ' + pages[p.id].url, data = await (await fetch('../' + p.path + 'paper.json')).json();
+        const qs = A.examQs(data, '');
+        const shown = [...pages[p.id].doc.querySelectorAll('.akey li')].map(li => [li.dataset.no, li.dataset.key]);
+        eq(g, 'the answer key lists every question', shown.length, qs.length);
+        eq(g, 'every answer matches the key the test is marked with', shown.filter(([no, key], i) => !qs[i] || String(qs[i].no) !== no || keyText(qs[i]) !== key).map(([no]) => no), []);
+        eq(g, 'the start button opens this paper on its exam page', pages[p.id].doc.querySelector('a.btn').getAttribute('href'), `/?paper=${p.id}#${list}`);
+      }
+    }
   }
 
   // ---------- run ----------
@@ -192,7 +220,7 @@
     let A = null;
     for (let i = 0; i < 100 && !A; i++) { await new Promise(r => setTimeout(r, 100)); A = frame.contentWindow && frame.contentWindow.__aaTest; }
     if (!A) { ok('Setup', 'the site loads with ?test', false, 'window.__aaTest not found'); return render(); }
-    for (const t of [parsing, checking, rules, labels, papers, banks, schoolPages]) {
+    for (const t of [parsing, checking, rules, labels, papers, banks, schoolPages, paperPages]) {
       try { await t(A); } catch (e) { ok('Setup', t.name + ' ran without an error', false, e && e.stack || String(e)); }
     }
     render();

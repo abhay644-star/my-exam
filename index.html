@@ -317,7 +317,8 @@ sup,sub{font-size:.7em}
   <div id="invite" class="msg info invite" role="status" hidden></div>
 
   <!-- HOME -->
-  <section id="homeView" hidden>
+  <!-- shown without JavaScript, so crawlers that do not run scripts read it; route() hides it for other screens -->
+  <section id="homeView">
     <h2 class="sr">What are you preparing for?</h2>
     <div class="tracks">
       <a class="track school" href="#school">
@@ -1125,7 +1126,7 @@ function renderPlan(){
   $('#planNote').textContent=isMaths()?'Answers are marked automatically. Written answers accept forms like 4 1/5, 21/5, 0.375, −1/6, 2^4 or 3.84 × 10^5; units such as cm, °, % and ₹ are optional.':`Answers are marked automatically. Written answers are short – a word, a term, a name or a number; capital letters and punctuation are ignored${S.subject==='English'?', but spelling must be exact':' and small spelling slips are accepted'}. Units are optional for numerical answers.${S.subject==='Hindi'?' Type Hindi answers in Devanagari (हिंदी); on a phone, add the Hindi keyboard first.':''}`;
   const secs=sections(p),check=S.duration>=45?3:2,avail=Math.max(0,S.duration-check);
   $('#timeBody').innerHTML=secs.map(s=>`<tr><td>Section ${s.letter}: ${s.name}</td><td class="n">${s.count} Q · ${s.marks} marks</td><td class="n">${Math.round(avail*s.marks/(tm||1))} min</td></tr>`).join('')+`<tr><td>Checking</td><td></td><td class="n">${check} min</td></tr>`;
-  Object.keys(PRESETS).forEach(k=>{$(`[data-pl="${k}"]`).textContent=PRESETS[k].nq+' questions'+(S.mode!=='practice'?' · '+PRESETS[k].duration+' min':'');});
+  Object.keys(PRESETS).forEach(k=>{const z=presetSize(k);$(`[data-pl="${k}"]`).textContent=(z.capped?'All ':'')+z.nq+' questions'+(S.mode!=='practice'?' · '+z.duration+' min':'');});
   $('#gen').textContent=S.mode==='practice'?'Start custom practice':'Start custom paper';
   const fm=$('#formMsg');if(v.errs.length){fm.innerHTML=v.errs.map(esc).join('<br>');fm.hidden=false;}else fm.hidden=true;
   $('#gen').disabled=v.errs.length>0;
@@ -1212,9 +1213,16 @@ function startTest0(useSample,seed){
   track(useSample?'start/sample-paper':`start/${P.mode}/${paperTag()}`,useSample?'Started: CBSE sample paper':`Started ${P.mode}: Class ${P.klass} ${P.subject}`);
   begin();
 }
+// a preset on chapters with fewer questions than it asks for uses all of them, with the time cut to match (shown on the button)
+function presetSize(k){
+  const pr=PRESETS[k],av=capQs()?availCount():Infinity;
+  if(av>=pr.nq)return{nq:pr.nq,duration:pr.duration,capped:false};
+  const nq=Math.max(S.topics==='ALL'?3:1,av);
+  return{nq,duration:Math.max(10,Math.round(pr.duration*nq/pr.nq/5)*5),capped:true};
+}
 function startPreset(k){
-  const pr=PRESETS[k];Object.assign(S,{nq:pr.nq,duration:pr.duration,usemcq:true,nmcq:pr.nmcq,mix:Object.assign({},pr.mix)});
-  if(capQs()){const av=availCount();if(av<S.nq){S.nq=Math.max(S.topics==='ALL'?3:1,av);S.nmcq=Math.min(S.nmcq,Math.max(1,Math.floor(S.nq/2)));}}
+  const pr=PRESETS[k],z=presetSize(k);Object.assign(S,{nq:z.nq,duration:z.duration,usemcq:true,nmcq:pr.nmcq,mix:Object.assign({},pr.mix)});
+  if(z.capped)S.nmcq=Math.min(S.nmcq,Math.max(1,Math.floor(S.nq/2)));
   writeForm();readForm();
   const v=validate(),qm=$('#quickMsg');
   if(v.errs.length){qm.innerHTML=v.errs.map(esc).join('<br>');qm.hidden=false;return;}

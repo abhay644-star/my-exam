@@ -17,10 +17,17 @@ Live site: https://my-exam.in
 ## Editing a question bank
 1. Edit the subject's file in `school-questions/` (for example `school-questions/physics.json`).
 2. Run `py tools/build_school_index.py` from the site folder. It updates the bank index in `index.html` (chapters and question counts) and the list of files the service worker keeps for offline use in `sw.js`.
-3. Run `py tools/build_school_pages.py`. It rebuilds the school pages for search engines (`cbse/`: one page per class and subject, with chapters and sample questions) and `sitemap.xml`. Do not edit the pages in `cbse/` by hand.
+3. Run `py tools/build_pages.py`. It rebuilds the pages for search engines and `sitemap.xml`. Do not edit the pages it makes by hand.
 4. Run the tests (below) and upload the changed files together.
+
+## Pages for search engines
+`py tools/build_pages.py` makes:
+- `cbse/`: one page per class and subject, with chapters and sample questions.
+- One page per official paper, such as `jee-main/2026-2-april-shift-1/`: the pattern, subject-wise marks, chapter-wise weightage, a few solved questions and the full answer key.
+
+After adding an official paper (its `paper.json` and its entry in `EXAM_PAGES` in `index.html`), run the tool and add a link to the new paper page under the papers list on its exam page (`jee-main/index.html`, `jee-advanced/index.html` or `neet/index.html`). The tests check that the link exists.
 
 ## Tests
 - `powershell -File tests\run-tests.ps1` runs `tests/marking.html` in headless Microsoft Edge (needs Python and Edge) and prints PASS or the failed checks.
-- The tests cover reading typed numbers, checking answers, the marking rules (+4 / −1, numerical ranges, dropped questions, JEE Advanced partial marks, school part marks), option labels in My mistakes, every official paper (question count, maximum marks, answer keys) and every school bank (counts match the index, every answer key is accepted).
+- The tests cover reading typed numbers, checking answers, the marking rules (+4 / −1, numerical ranges, dropped questions, JEE Advanced partial marks, school part marks), option labels in My mistakes, every official paper (question count, maximum marks, answer keys), every school bank (counts match the index, every answer key is accepted) and the pages for search engines (every class, subject and paper has a page, and every paper page's answer key matches the marking).
 - You can also open `tests/marking.html` in a browser from any local web server.

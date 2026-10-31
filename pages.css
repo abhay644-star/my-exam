@@ -65,6 +65,17 @@ details p{margin:8px 0 0}
 .sq details p{margin:6px 0 0}
 .links a{display:inline-block;margin:0 12px 6px 0}
 .cls h2{margin-top:22px}
+/* official paper pages (jee-main/…, jee-advanced/…, neet/…): chapter weightage, solved questions, answer key */
+h3{font-size:1.08rem;margin:18px 0 8px}
+.weight{max-width:none}
+.weight td:nth-child(2){white-space:nowrap;color:var(--muted)}
+.dm{overflow-x:auto;overflow-y:hidden;margin:4px 0}
+.katex-display{overflow-x:auto;overflow-y:hidden}
+.qfig,.ofig{display:block;max-width:100%;height:auto;margin:6px 0;background:#fff;border-radius:6px}
+.keybox h3{margin-top:14px}
+.akey{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:4px 12px;font-variant-numeric:tabular-nums}
+.akey li{padding:3px 0;border-bottom:1px solid var(--line)}
+.akey b{display:inline-block;min-width:2.4em;color:var(--muted)}
 .foot{margin-top:36px;padding-top:16px;border-top:1px solid var(--line);font-size:.88rem;color:var(--muted)}
 .foot a{margin-right:14px;display:inline-block}
 .foot .note{margin:12px 0 0;font-size:.82rem}
