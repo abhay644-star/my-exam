@@ -182,7 +182,7 @@
     const g = 'Chapter pages', slug = s => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
     const missing = [], unlinked = [], badStart = [];
     let n = 0;
-    const scope = [['IX', 9, ['Science']], ['X', 10, ['Science']], ['XI', 11, ['Physics', 'Chemistry', 'Biology', 'Mathematics']], ['XII', 12, ['Physics', 'Chemistry', 'Biology', 'Mathematics']]];
+    const scope = [['IX', 9, ['Science']], ['X', 10, ['Science', 'Social Science', 'English']], ['XI', 11, ['Physics', 'Chemistry', 'Biology', 'Mathematics']], ['XII', 12, ['Physics', 'Chemistry', 'Biology', 'Mathematics']]];
     for (const [c, num, subjects] of scope) for (const s of subjects) {
       const subjUrl = `../cbse/class-${num}/${slug(s)}/`;
       const subjDoc = new DOMParser().parseFromString(await (await fetch(subjUrl)).text(), 'text/html');
