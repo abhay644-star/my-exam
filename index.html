@@ -364,7 +364,7 @@ sup,sub{font-size:.7em}
       <h3>Previous year papers</h3>
       <div id="jeeList" class="examgrid"></div>
       <div id="jeeMsg" class="msg" role="status" hidden></div>
-      <p class="hint" style="margin:0"><span id="examSource">Questions and answer keys: NTA.</span> Worked solutions: All in All Exam Practice. More papers are being added. Found a mistake? <button type="button" class="linkbtn" id="jeeReport">Tell us</button>.</p>
+      <p class="hint" style="margin:0"><span id="examSource">Questions and answer keys: NTA.</span> Worked solutions: All in All Exam Practice.<span id="examMore"> More papers are being added.</span> Found a mistake? <button type="button" class="linkbtn" id="jeeReport">Tell us</button>.</p>
     </div>
   </section>
 
@@ -1581,21 +1581,13 @@ const EXAM_PAGES={
       {id:'2026-04-06-s1',name:'JEE Main 2026',date:'6 April 2026',shift:'Shift 1',head:'6 April 2026',sub:'Shift 1 · official NTA paper',pat:'75 questions · 3 hours · 300 marks · +4 / −1',path:'jee/2026-04-06-s1/',min:180},
       {id:'2026-04-06-s2',name:'JEE Main 2026',date:'6 April 2026',shift:'Shift 2',head:'6 April 2026',sub:'Shift 2 · official NTA paper',pat:'75 questions · 3 hours · 300 marks · +4 / −1',path:'jee/2026-04-06-s2/',min:180},
       {id:'2026-04-08-s2',name:'JEE Main 2026',date:'8 April 2026',shift:'Shift 2',head:'8 April 2026',sub:'Shift 2 · official NTA paper',pat:'75 questions · 3 hours · 300 marks · +4 / −1',path:'jee/2026-04-08-s2/',min:180}],
-    later:[{head:'2025',sub:'January and April sessions',pat:'75 questions per shift · 3 hours · 300 marks'},
-      {head:'2024',sub:'January and April sessions',pat:'90 questions, 75 to answer · 3 hours · 300 marks'},
-      {head:'2023',sub:'January and April sessions',pat:'90 questions, 75 to answer · 3 hours · 300 marks'},
-      {head:'2022',sub:'June and July sessions',pat:'90 questions, 75 to answer · 3 hours · 300 marks'},
-      {head:'2021',sub:'February, March, July and August sessions',pat:'90 questions, 75 to answer · 3 hours · 300 marks'}]},
+    later:[]},
   'neet':{crumb:'NEET (UG)',title:'NEET (UG): previous year papers',
     lede:'The latest NEET (UG) paper with the final answer key published by the National Testing Agency (NTA). Take it as a timed exam, or practise question by question with explanations.',
     source:'Questions: NEET (UG) 2026 re-examination, Test Booklet Code 50. Answers: NTA final answer key.',patTitle:'NEET (UG) 2026',
     patNote:'180 compulsory multiple-choice questions, each with four options and one correct answer. Correct answer <b>+4</b>, wrong answer <b>−1</b>, not answered <b>0</b>. The 2026 exam held on 3 May was cancelled by NTA and re-held on 21 June 2026; this is the re-examination paper.',
     papers:[{id:'2026-reexam-50',name:'NEET (UG) 2026',date:'21 June 2026 (re-exam)',shift:'Code 50',head:'21 June 2026',sub:'Re-examination · booklet code 50',pat:'180 questions · 3 h 15 min · 720 marks · +4 / −1',path:'neet/2026-reexam-50/',min:195}],
-    later:[{head:'2025',sub:'4 May 2025',pat:'180 questions · 3 hours · 720 marks · +4 / −1'},
-      {head:'2024',sub:'5 May 2024',pat:'200 questions, 180 to answer · 3 h 20 min · 720 marks'},
-      {head:'2023',sub:'7 May 2023',pat:'200 questions, 180 to answer · 3 h 20 min · 720 marks'},
-      {head:'2022',sub:'17 July 2022',pat:'200 questions, 180 to answer · 3 h 20 min · 720 marks'},
-      {head:'2021',sub:'12 September 2021',pat:'200 questions, 180 to answer · 3 hours · 720 marks'}]},
+    later:[]},
   'jee-advanced':{crumb:'JEE Advanced',title:'JEE Advanced: previous year papers',
     lede:'Official question papers with the final answer keys published by the organising IIT. Both papers are compulsory and last 3 hours each. Take a paper as a timed exam, or practise question by question with worked solutions.',
     source:'Questions and answer keys: JEE (Advanced) 2026, organising IIT.',patTitle:'JEE Advanced 2026',
@@ -1635,7 +1627,7 @@ function wantPapers(){try{return JSON.parse(localStorage.getItem('aa-want-papers
 let inviteHl=null;
 function renderJee(){
   const pid=examPageId(),pg=EXAM_PAGES[pid],ex=EXAMS.flatMap(g=>g.items).find(i=>i.id===pid);
-  $('#examCrumb').textContent=pg.crumb;$('#examTitle').textContent=pg.title;$('#examLede').textContent=pg.lede;$('#examSource').textContent=pg.source;$('#jeeMsg').hidden=true;
+  $('#examCrumb').textContent=pg.crumb;$('#examTitle').textContent=pg.title;$('#examLede').textContent=pg.lede;$('#examSource').textContent=pg.source;$('#examMore').hidden=!(pg.later&&pg.later.length);$('#jeeMsg').hidden=true;
   $('#jeePattern').innerHTML=`<div><p class="eyebrow">Exam pattern</p><h3>${esc(pg.patTitle)}: ${esc(ex.pat)}</h3></div><div class="tblwrap">${examTable(ex)}</div><p class="hint" style="margin:0">${pg.patNote}</p>`;
   $('#jeeList').innerHTML=pg.papers.map(x=>`<article class="examcard"><div class="head"><h4>${esc(x.head)}</h4><span class="soon ready">Final key</span></div><p class="body">${esc(x.sub)}</p><p class="pat">${esc(x.pat)}</p><div class="btns"><button type="button" class="primary small" data-jee="${x.id}" data-mode="exam">Start ${durLabel(x.min)} exam</button><button type="button" class="small" data-jee="${x.id}" data-mode="practice">Practise with solutions</button></div></article>`).join('')
     +(pg.later||[]).map(x=>`<article class="examcard later"><div class="head"><h4>${esc(x.head)}</h4><span class="soon">Coming soon</span></div><p class="body">${esc(x.sub)}</p><p class="pat">${esc(x.pat)}</p>${wantPapers().indexOf(pid+'/'+x.head)<0?`<button type="button" class="small" data-wantpaper="${pid}/${esc(x.head)}">I want this paper</button>`:'<button type="button" class="small" disabled>Thanks, noted</button>'}</article>`).join('');
