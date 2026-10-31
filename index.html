@@ -450,7 +450,7 @@ sup,sub{font-size:.7em}
     <div class="bar" id="bar">
       <div class="barrow">
         <div><div class="timer" id="timer">60:00</div><div class="hint" id="timerLbl" style="margin:2px 0 0">time left</div></div>
-        <div class="barinfo"><span><b id="answered">0</b> of <b id="partsTotal">0</b> answers filled</span><span class="prog" aria-hidden="true"><i id="progbar"></i></span><button type="button" class="small" id="navBtn" aria-expanded="false" aria-controls="navWrap">Questions</button><button type="button" class="small flag" id="flagBtn" aria-pressed="false" hidden>Review flagged (0)</button><button type="button" class="small" id="printNowBtn">Print</button></div>
+        <div class="barinfo"><span><b id="answered">0</b> of <b id="partsTotal">0</b> answers filled</span><span class="prog" aria-hidden="true"><i id="progbar"></i></span><button type="button" class="small" id="navBtn" aria-expanded="false" aria-controls="navWrap">Questions</button><button type="button" class="small flag" id="flagBtn" aria-pressed="false" hidden>Review flagged (0)</button><button type="button" class="small" id="blankBtn" hidden>Show all questions</button><button type="button" class="small" id="printNowBtn">Print</button></div>
         <div class="btns"><button type="button" class="primary" id="submitBtn">Submit</button><button type="button" class="danger" id="quitBtn">Quit</button></div>
       </div>
       <div id="navWrap" class="stack" style="gap:6px" hidden><div class="nav" id="nav"></div><p class="hint" id="navKey" style="margin:0"></p></div>
@@ -459,7 +459,7 @@ sup,sub{font-size:.7em}
     <div id="confirm" class="confirm" hidden>
       <h3 id="confirmTitle">Submit your paper?</h3>
       <p class="hint" id="confirmText" style="margin:6px 0 12px"></p>
-      <div class="btns"><button type="button" class="primary" id="confirmYes">Submit and mark</button><button type="button" id="confirmBlank" hidden>Go to first blank</button><button type="button" class="flag" id="confirmFlag" hidden>Review flagged</button><button type="button" id="confirmNo">Keep working</button></div>
+      <div class="btns"><button type="button" class="primary" id="confirmYes">Submit and mark</button><button type="button" id="confirmBlank" hidden>Review blank</button><button type="button" class="flag" id="confirmFlag" hidden>Review flagged</button><button type="button" id="confirmNo">Keep working</button></div>
     </div>
     <article class="sheet" id="sheet"></article>
   </section>
@@ -1233,7 +1233,7 @@ function startSample(){
   writeForm();readForm();startTest(true);
 }
 function begin(){
-  $('#invite').hidden=true;warned={};onlyFlag=false;const exam=P.mode==='exam';
+  $('#invite').hidden=true;warned={};onlyFlag=false;onlyBlank=null;const exam=P.mode==='exam';
   const total=P.qs.reduce((a,q)=>a+q.marks,0),check=P.duration>=45?3:2,avail=P.duration-check;
   const secs=P.secs.map(s=>{const qs=secQs(s);return{s,qs,each:qs.length?qs[0].marks:0,marks:qs.reduce((a,q)=>a+q.marks,0)};}).filter(x=>x.qs.length);
   const secHtml=secs.map(x=>`<section class="section"><div class="sechead"><h3>${secTitle(x.s)}</h3><small>${x.qs.every(q=>q.marks===x.each)?`${x.qs.length} × ${x.each} = `:''}${x.marks} marks</small></div>${x.qs.map(qHtml).join('')}</section>`).join('');
@@ -1317,23 +1317,28 @@ function updateCount(){
     if(nav[i])nav[i].className='nb'+(CHK[i]?(q.got===q.marks?' right':' wrong'):any?' done':'')+(FLAG[i]?' flag':'');});
   $('#answered').textContent=n;$('#progbar').style.width=(t?n/t*100:0)+'%';
   const nf=nFlag();if(!nf)onlyFlag=false;
-  const fb=$('#flagBtn');fb.hidden=!nf;fb.textContent=onlyFlag?'Show all questions':`Review flagged (${nf})`;fb.setAttribute('aria-pressed',onlyFlag?'true':'false');fb.classList.toggle('on',onlyFlag);
+  const fb=$('#flagBtn');fb.hidden=!nf||!!onlyBlank;fb.textContent=onlyFlag?'Show all questions':`Review flagged (${nf})`;fb.setAttribute('aria-pressed',onlyFlag?'true':'false');fb.classList.toggle('on',onlyFlag);
+  $('#blankBtn').hidden=!onlyBlank;
   applyFlagFilter();return{n,t};
 }
-// "Review flagged" shows only the questions the student flagged; sections with none left are hidden too
-let onlyFlag=false;
+// "Review flagged" shows only the questions the student flagged; sections with none left are hidden too.
+// "Review blank" (from the submit box) shows only the questions that had a blank answer when it was chosen: the list is
+// kept as it was, so a question does not disappear while the student is answering it.
+let onlyFlag=false,onlyBlank=null;
 const nFlag=()=>P.qs.filter((q,i)=>FLAG[i]).length;
+const blankQs=()=>P.qs.map((q,i)=>i).filter(i=>!CHK[i]&&P.qs[i].parts.some((p,j)=>blankV(ANS[i+'-'+j])));
 function applyFlagFilter(){
-  const sh=$('#sheet');sh.querySelectorAll('.q').forEach(el=>{el.hidden=onlyFlag&&!FLAG[+el.id.slice(1)];});
-  sh.querySelectorAll('.section').forEach(s=>{s.hidden=onlyFlag&&!s.querySelector('.q:not([hidden])');});
-  sh.querySelectorAll('.instr,.msg.warn').forEach(x=>{x.hidden=onlyFlag;});
+  const sh=$('#sheet'),on=onlyFlag||!!onlyBlank;
+  sh.querySelectorAll('.q').forEach(el=>{const i=+el.id.slice(1);el.hidden=(onlyFlag&&!FLAG[i])||(!!onlyBlank&&!onlyBlank.has(i));});
+  sh.querySelectorAll('.section').forEach(s=>{s.hidden=on&&!s.querySelector('.q:not([hidden])');});
+  sh.querySelectorAll('.instr,.msg.warn').forEach(x=>{x.hidden=on;});
 }
-function toggleFlagView(on){onlyFlag=on;updateCount();const first=P.qs.findIndex((q,i)=>FLAG[i]);if(on&&first>=0)goQ(first);else window.scrollTo(0,0);}
-function goQ(i){const el=$('#q'+i);if(!el)return;if(onlyFlag&&!FLAG[i]){onlyFlag=false;updateCount();} // a question hidden by "Review flagged" has no position to scroll to
+function toggleFlagView(on){onlyFlag=on;onlyBlank=null;updateCount();const first=P.qs.findIndex((q,i)=>FLAG[i]);if(on&&first>=0)goQ(first);else window.scrollTo(0,0);}
+function showBlank(on){const b=blankQs();onlyBlank=on&&b.length?new Set(b):null;onlyFlag=false;updateCount();if(onlyBlank)goQ(b[0]);else window.scrollTo(0,0);}
+function goQ(i){const el=$('#q'+i);if(!el)return;if((onlyFlag&&!FLAG[i])||(onlyBlank&&!onlyBlank.has(i))){onlyFlag=false;onlyBlank=null;updateCount();} // a question hidden by a filter has no position to scroll to
   $('#navWrap').hidden=true;$('#navBtn').setAttribute('aria-expanded','false');
   window.scrollTo({top:el.getBoundingClientRect().top+window.scrollY-$('#bar').offsetHeight-16});
   const f=el.querySelector('input:not(:disabled),select:not(:disabled)');if(f)f.focus({preventScroll:true});}
-function firstBlank(){return P.qs.findIndex((q,i)=>!CHK[i]&&q.parts.some((p,j)=>blankV(ANS[i+'-'+j])));}
 function toast(msg){const t=$('#toast');t.textContent=msg;t.hidden=false;clearTimeout(toastId);toastId=setTimeout(()=>{t.hidden=true;},8000);}
 function tick(){
   const el=$('#timer');
@@ -1343,12 +1348,12 @@ function tick(){
   if(left<=0){clearInterval(timerId);finish(true);}
 }
 function askSubmit(){
-  const c=updateCount(),fbI=firstBlank();
+  const c=updateCount(),nb=blankQs().length;
   if(P.mode==='practice'){const nc=Object.keys(CHK).length;$('#confirmTitle').textContent='Finish practice?';$('#confirmText').textContent=`You have checked ${nc} of ${P.qs.length} questions. The rest will be marked now${c.n<c.t?' and blank answers score zero':''}.`;$('#confirmYes').textContent='Finish and see my score';}
   else{$('#confirmTitle').textContent='Submit your paper?';$('#confirmText').textContent=`You have filled ${c.n} of ${c.t} answers.${c.n<c.t?' Blank answers score zero.':''} You cannot change answers after submitting.`;$('#confirmYes').textContent='Submit and mark';}
   const nf=nFlag();$('#confirmFlag').hidden=!nf;$('#confirmFlag').textContent=`Review flagged (${nf})`;
   if(nf)$('#confirmText').textContent+=` You flagged ${nf} question${nf>1?'s':''} for review.`;
-  $('#confirmBlank').hidden=fbI<0;$('#confirmYes').dataset.mode='submit';$('#confirm').hidden=false;$('#confirm').scrollIntoView({block:'nearest'});
+  $('#confirmBlank').hidden=!nb;$('#confirmBlank').textContent=`Review blank (${nb})`;$('#confirmYes').dataset.mode='submit';$('#confirm').hidden=false;$('#confirm').scrollIntoView({block:'nearest'});
 }
 function askQuit(){$('#confirmTitle').textContent='Quit this paper?';$('#confirmText').textContent=`Your answers will be discarded and you will return to ${P.exam?`the ${EXAM_PAGES[P.exam.list].crumb} papers`:'the start page'}.`;$('#confirmYes').textContent='Quit without marking';$('#confirmYes').dataset.mode='quit';$('#confirmBlank').hidden=true;$('#confirmFlag').hidden=true;$('#confirm').hidden=false;$('#confirm').scrollIntoView({block:'nearest'});}
 
@@ -1837,7 +1842,8 @@ $('#results').addEventListener('click',e=>{const b=e.target.closest('[data-repor
 $('#navBtn').addEventListener('click',()=>{const w=$('#navWrap');w.hidden=!w.hidden;$('#navBtn').setAttribute('aria-expanded',String(!w.hidden));});
 $('#nav').addEventListener('click',e=>{const b=e.target.closest('[data-go]');if(b)goQ(+b.dataset.go);});
 $('#confirmNo').addEventListener('click',()=>{$('#confirm').hidden=true;});
-$('#confirmBlank').addEventListener('click',()=>{$('#confirm').hidden=true;const i=firstBlank();if(i>=0)goQ(i);});
+$('#confirmBlank').addEventListener('click',()=>{$('#confirm').hidden=true;showBlank(true);});
+$('#blankBtn').addEventListener('click',()=>showBlank(false));
 // quitting an exam paper goes back to that exam's papers; a school paper goes back to the School page
 $('#confirmYes').addEventListener('click',e=>{$('#confirm').hidden=true;if(e.currentTarget.dataset.mode==='quit'){const ex=P&&P.exam;clearInterval(timerId);clearActive();P=null;
   if(!ex)return goSchool();const h='#'+ex.list;if(location.hash===h)route();else location.hash=h;}else finish(false);});
