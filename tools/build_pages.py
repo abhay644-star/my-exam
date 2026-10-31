@@ -63,15 +63,17 @@ def chapters(subj, cls):
 
 offer = {cls: [s for s in SUBJECTS if chapters(s, cls)] for cls in ROMAN}
 
-# chapter pages: these subjects and classes only, and only chapters with enough questions to show (bank chapters with
+# chapter pages: these classes and subjects only, and only chapters with enough questions to show (bank chapters with
 # at least CH_MIN questions; Mathematics chapters with samples in tools/maths-samples.json, made by make-maths-samples.ps1)
-CH_SUBJECTS, CH_CLASSES, CH_MIN = ['Physics', 'Chemistry', 'Biology', 'Mathematics'], ['XI', 'XII'], 15
+CH_SCOPE = {'IX': ['Science'], 'X': ['Science'],
+            'XI': ['Physics', 'Chemistry', 'Biology', 'Mathematics'], 'XII': ['Physics', 'Chemistry', 'Biology', 'Mathematics']}
+CH_CLASSES, CH_MIN = list(CH_SCOPE), 15
 msamples_file = site / 'tools' / 'maths-samples.json'
 MSAMPLES = json.loads(msamples_file.read_text(encoding='utf-8')) if msamples_file.exists() else {}
 def bank_count(subj, cls, ch):
     return sum(1 for q in banks.get(subj, []) if q['c'] == cls and q['t'] == ch)
 def has_chapter_page(subj, cls, ch):
-    if subj not in CH_SUBJECTS or cls not in CH_CLASSES:
+    if subj not in CH_SCOPE.get(cls, []):
         return False
     if subj == 'Mathematics':
         return bool(MSAMPLES.get(cls, {}).get(ch))
