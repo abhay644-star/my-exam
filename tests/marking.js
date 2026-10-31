@@ -24,6 +24,7 @@
       ['exact decimal key 7.73', { type: 'num', ans: 7.73, ansText: '7.73' }, { '7.73': true, '7.730': true, '7.74': false, '7.7': false }],
       ['non-terminating key 1/3', { type: 'num', ans: 1 / 3, ansText: '1/3' }, { '1/3': true, '0.33': true, '0.333': true, '0.3': false, '0.34': false }],
       ['range key 0.72 to 0.76', { type: 'num', ans: 0.72, lo: 0.72, hi: 0.76, ansText: '0.72 to 0.76' }, { '0.72': true, '0.74': true, '0.76': true, '0.71': false, '0.77': false }],
+      ['two ranges: -29.95 to -29.8 or 29.8 to 29.95', { type: 'num', ans: -29.95, lo: -29.95, hi: -29.8, ranges: [[29.8, 29.95]], ansText: '' }, { '-29.9': true, '29.9': true, '29.95': true, '0': false, '-29.7': false, '30': false }],
       ['single option, key (c)', { type: 'choice', ans: 2, options: ['p', 'q', 'r', 's'] }, { '2': true, '1': false, '': false }],
       ['single option, key accepts (b) or (c)', { type: 'choice', ans: 1, accept: [1, 2], options: ['p', 'q', 'r', 's'] }, { '1': true, '2': true, '3': false }],
       ['one or more options, key (a)(c)', { type: 'multi', ans: [0, 2], options: ['p', 'q', 'r', 's'] }, { '0,2': true, '2,0': true, '0': false, '0,1,2': false }],

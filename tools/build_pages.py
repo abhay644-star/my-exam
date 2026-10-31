@@ -323,7 +323,10 @@ def answer(q, OL):
         return 'Dropped: full marks to everyone', 'dropped'
     if q['type'] == 'num':
         lo, hi = (a['lo'], a['hi']) if isinstance(a, dict) else (a, a)
-        return (num(lo) if lo == hi else f'{num(lo)} to {num(hi)}'), (num(lo) if lo == hi else f'{num(lo)}~{num(hi)}')
+        rng = lambda l, h: num(l) if l == h else f'{num(l)} to {num(h)}'
+        # further ranges the final key accepts are shown too; the test key is the main range
+        text = ' or '.join([rng(lo, hi)] + [rng(r['lo'], r['hi']) for r in (q.get('accept') or [])])
+        return text, (num(lo) if lo == hi else f'{num(lo)}~{num(hi)}')
     if q['type'] == 'multi':
         text = ', '.join(f'({OL[j]})' for j in a)
         if q.get('alts'):
