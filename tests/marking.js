@@ -177,6 +177,32 @@
     eq(g, 'number of class and subject pages', n, 81);
   }
 
+  // ---------- the chapter pages (cbse/class-11|12/<subject>/<chapter>/, built by tools/build_pages.py) ----------
+  async function chapterPages(A) {
+    const g = 'Chapter pages', slug = s => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+    const missing = [], unlinked = [], badStart = [];
+    let n = 0;
+    for (const [c, num] of [['XI', 11], ['XII', 12]]) for (const s of ['Physics', 'Chemistry', 'Biology', 'Mathematics']) {
+      const subjUrl = `../cbse/class-${num}/${slug(s)}/`;
+      const subjDoc = new DOMParser().parseFromString(await (await fetch(subjUrl)).text(), 'text/html');
+      const links = [...subjDoc.querySelectorAll('.chapters a')].map(a => a.getAttribute('href'));
+      for (const ch of A.topicsFor(s, c)) {
+        n++;
+        const path = `/cbse/class-${num}/${slug(s)}/${slug(ch)}/`;
+        const r = await fetch('..' + path);
+        if (!r.ok) { missing.push(path); continue; }
+        if (!links.includes(path)) unlinked.push(path);
+        const doc = new DOMParser().parseFromString(await r.text(), 'text/html'), btn = doc.querySelector('a.btn');
+        const q = btn && new URL(btn.getAttribute('href'), location.href).searchParams;
+        if (!q || q.get('class') !== c || q.get('subject') !== s || q.get('chapter') !== ch || !doc.querySelectorAll('.samples .sq').length) badStart.push(path);
+      }
+    }
+    eq(g, 'every Class 11 and 12 Physics, Chemistry, Biology and Mathematics chapter has a page (rebuild with tools/build_pages.py)', missing, []);
+    eq(g, 'every chapter page is linked from its subject page', unlinked, []);
+    eq(g, 'every chapter page has sample questions and a start button for that chapter', badStart, []);
+    ok(g, 'number of chapter pages checked: ' + n, n > 0);
+  }
+
   // ---------- the official paper pages (jee-main/…, jee-advanced/…, neet/…, built by tools/build_pages.py) ----------
   // the key each answer-key entry carries: option numbers, a number or lo~hi range, or "dropped"
   const keyText = q => { const p = q.parts[0];
@@ -220,7 +246,7 @@
     let A = null;
     for (let i = 0; i < 100 && !A; i++) { await new Promise(r => setTimeout(r, 100)); A = frame.contentWindow && frame.contentWindow.__aaTest; }
     if (!A) { ok('Setup', 'the site loads with ?test', false, 'window.__aaTest not found'); return render(); }
-    for (const t of [parsing, checking, rules, labels, papers, banks, schoolPages, paperPages]) {
+    for (const t of [parsing, checking, rules, labels, papers, banks, schoolPages, chapterPages, paperPages]) {
       try { await t(A); } catch (e) { ok('Setup', t.name + ' ran without an error', false, e && e.stack || String(e)); }
     }
     render();

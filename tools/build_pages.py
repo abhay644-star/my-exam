@@ -63,6 +63,21 @@ def chapters(subj, cls):
 
 offer = {cls: [s for s in SUBJECTS if chapters(s, cls)] for cls in ROMAN}
 
+# chapter pages: these subjects and classes only, and only chapters with enough questions to show (bank chapters with
+# at least CH_MIN questions; Mathematics chapters with samples in tools/maths-samples.json, made by make-maths-samples.ps1)
+CH_SUBJECTS, CH_CLASSES, CH_MIN = ['Physics', 'Chemistry', 'Biology', 'Mathematics'], ['XI', 'XII'], 15
+msamples_file = site / 'tools' / 'maths-samples.json'
+MSAMPLES = json.loads(msamples_file.read_text(encoding='utf-8')) if msamples_file.exists() else {}
+def bank_count(subj, cls, ch):
+    return sum(1 for q in banks.get(subj, []) if q['c'] == cls and q['t'] == ch)
+def has_chapter_page(subj, cls, ch):
+    if subj not in CH_SUBJECTS or cls not in CH_CLASSES:
+        return False
+    if subj == 'Mathematics':
+        return bool(MSAMPLES.get(cls, {}).get(ch))
+    return bank_count(subj, cls, ch) >= CH_MIN
+chapter_path = lambda cls, subj, ch: f'/cbse/class-{NUM[cls]}/{slug(subj)}/{slug(ch)}/'
+
 # official papers: EXAM_PAGES in index.html, one entry per paper on a single line
 exam_block = re.search(r'const EXAM_PAGES=\{(.*?)\n\};', page, re.S).group(1)
 heads = list(re.finditer(r"'([\w-]+)':\{crumb:'([^']+)'", exam_block))
@@ -176,8 +191,9 @@ def subject_page(cls, subj):
     title = f'CBSE Class {n} {subj} Online Test – Free Chapter-wise Practice | All in All Exam Practice'
     desc = (f'Free CBSE Class {n} {subj} practice tests: {len(chs)} NCERT chapters, chapter tests and full mock papers, '
             f'marked instantly with {"worked solutions" if maths else "explanations"}. No sign-up.')
+    # a chapter with its own page links there (questions and answers, then its test); the others open the app directly
     rows = ''.join(
-        f'<li><a href="{esc(app_link(cls, subj, c))}"><b>{esc(c)}</b>'
+        f'<li><a href="{esc(chapter_path(cls, subj, c) if has_chapter_page(subj, cls, c) else app_link(cls, subj, c))}"><b>{esc(c)}</b>'
         f'{"" if maths and c not in counts else f"<small>{counts.get(c, 0)} questions</small>"}</a></li>' for c in chs)
     sq = samples(subj, cls)
     sq_html = (f'\n  <h2>Sample questions</h2>\n  <p>A few questions from the Class {n} {esc(subj)} bank. Every test picks a fresh mix.</p>\n'
@@ -204,6 +220,67 @@ def subject_page(cls, subj):
   {f'<p class="links">{esc(subj)} in other classes: {classes}</p>' if classes else ''}
 '''
     crumbs = [('Home', '/'), ('CBSE', '/cbse/'), (f'Class {n}', f'/cbse/#class-{n}'), (subj, None)]
+    return path, shell(path, title, desc, crumbs, body)
+
+def chapter_samples(subj, cls, ch, n=8):
+    """Up to n multiple-choice questions from one chapter, taking Easy, Medium, Complex and Challenging in turn."""
+    pool = {l: [] for l in 'EMCX'}
+    for i, q in enumerate(banks.get(subj, [])):
+        if q['c'] == cls and q['t'] == ch and not q.get('p') and isinstance(q.get('o'), list) and len(q['o']) >= 3:
+            pool[q['l']].append((i, q))
+    out, k = [], 0
+    while len(out) < n and any(pool.values()):
+        lst = pool['EMCX'[k % 4]]
+        if lst:
+            out.append(lst.pop(0))
+        k += 1
+    items = []
+    for i, q in out:
+        unit = ' ' + q['n'] if q.get('n') else ''
+        fx = lambda x: f'{x}{unit}' if unit and re.fullmatch(r'-?[\d.]+', str(x).strip()) else str(x)
+        correct = fx(str(q['a']).split('|')[0])
+        opts = [correct] + [fx(o) for o in q['o'][:3]]
+        random.Random(f'{subj}|{i}').shuffle(opts)
+        li = ''.join(f'<li>{o}</li>' for o in opts)
+        items.append(f'<li class="sq"><p class="sqt">{q["q"]}</p><ol type="a">{li}</ol>'
+                     f'<details><summary>Show answer</summary><p><b>Answer:</b> {correct}</p><p>{q["e"]}</p></details></li>')
+    return items
+
+def maths_samples(cls, ch):
+    """The generated Mathematics questions saved in tools/maths-samples.json, with their answers and worked solutions."""
+    items = []
+    for s in MSAMPLES.get(cls, {}).get(ch, []):
+        parts = s['parts']
+        if len(parts) == 1 and not parts[0]['q']:
+            ans = f'<p><b>Answer:</b> {parts[0]["ans"]}</p>'
+        else:
+            ans = '<ul>' + ''.join(f'<li>{p["q"]} <b>{p["ans"]}</b></li>' for p in parts) + '</ul>'
+        sol = f'<p>{s["sol"]}</p>' if s.get('sol') else ''
+        items.append(f'<li class="sq"><p class="sqt">{s["q"]}</p><details><summary>Show answer and solution</summary>{ans}{sol}</details></li>')
+    return items
+
+def chapter_page(cls, subj, ch):
+    n, path, maths = NUM[cls], chapter_path(cls, subj, ch), subj == 'Mathematics'
+    count = bank_count(subj, cls, ch)
+    sq = maths_samples(cls, ch) if maths else chapter_samples(subj, cls, ch)
+    size = 'New questions are made for every test, so you can practise it again and again.' if maths else f'This chapter has {count} questions; every test picks a fresh mix.'
+    title = f'Class {n} {subj} {ch} MCQ Online Test with Answers – CBSE | All in All Exam Practice'
+    desc = (f'Free online test for CBSE Class {n} {subj}, chapter {ch}: practice questions with answers and '
+            f'{"worked solutions" if maths else "explanations"}, marked instantly. No sign-up.')
+    others = ''.join(f'<a href="{chapter_path(cls, subj, c)}">{esc(c)}</a>' for c in chapters(subj, cls) if c != ch and has_chapter_page(subj, cls, c))
+    body = f'''  <h1>Class {n} {esc(subj)}: {esc(ch)}</h1>
+  <p class="lede">Practise the NCERT chapter {esc(ch)} (CBSE Class {n} {esc(subj)}) with an online test that is marked instantly, with {"worked solutions" if maths else "explanations"}. {size} Free, no sign-up.</p>
+  <a class="btn" href="{esc(app_link(cls, subj, ch))}">Start a {esc(ch)} test →</a>
+
+  <h2>Practice questions with answers</h2>
+  <p>A few questions from this chapter. Open each one to see the answer.</p>
+  <ol class="samples">{"".join(sq)}</ol>
+  <a class="btn" href="{esc(app_link(cls, subj, ch))}">Take the full {esc(ch)} test →</a>
+
+  <h2>More Class {n} {esc(subj)} chapters</h2>
+  <p class="links"><a href="/cbse/class-{n}/{slug(subj)}/">All Class {n} {esc(subj)} chapters</a>{others}</p>
+'''
+    crumbs = [('Home', '/'), ('CBSE', '/cbse/'), (f'Class {n}', f'/cbse/#class-{n}'), (subj, f'/cbse/class-{n}/{slug(subj)}/'), (ch, None)]
     return path, shell(path, title, desc, crumbs, body)
 
 def hub_page():
@@ -360,8 +437,9 @@ def paper_page(e, p):
 
 # ---------- write pages, remove stale ones, write the sitemap ----------
 school = [hub_page()] + [subject_page(c, s) for c in ROMAN for s in offer[c]]
+chapter_pages = [chapter_page(c, s, ch) for c in CH_CLASSES for s in offer[c] for ch in chapters(s, c) if has_chapter_page(s, c, ch)]
 papers = [paper_page(e, p) for e in EXAMS for p in e['papers']]
-pages = school + papers
+pages = school + chapter_pages + papers
 written, unchanged = [], 0
 for path, text in pages:
     f = site / path.strip('/') / 'index.html'
@@ -375,6 +453,9 @@ for path, text in pages:
 keep = {site / p.strip('/') for p, _ in pages}
 removed = []
 for d in sorted((site / 'cbse').glob('class-*/*')):
+    if d.is_dir() and d not in keep:
+        shutil.rmtree(d); removed.append('/' + d.relative_to(site).as_posix() + '/')
+for d in sorted((site / 'cbse').glob('class-*/*/*')):
     if d.is_dir() and d not in keep:
         shutil.rmtree(d); removed.append('/' + d.relative_to(site).as_posix() + '/')
 for d in (site / 'cbse').glob('class-*'):
@@ -399,7 +480,7 @@ for u in urls:
 lines.append('</urlset>')
 smap.write_text('\n'.join(lines) + '\n', encoding='utf-8', newline='\n')
 
-print(f'{len(school)} school pages ({len(school) - 1} class and subject pages + /cbse/), {len(papers)} paper pages: '
+print(f'{len(school)} school pages ({len(school) - 1} class and subject pages + /cbse/), {len(chapter_pages)} chapter pages, {len(papers)} paper pages: '
       f'{len(written)} written, {unchanged} unchanged, {len(removed)} removed')
 for p in written:
     if not p.startswith('/cbse/'):
