@@ -104,10 +104,16 @@
     return String(bad[0]);
   }
   async function papers(A) {
+    const listed = Object.values(A.EXAM_PAGES).flatMap(p => p.papers);
+    eq('Official papers', 'every paper offered on the site is in this test list (add new papers to PAPERS)',
+      listed.map(m => '../' + m.path).filter(p => !PAPERS.some(x => x[1] === p)), []);
+    eq('Official papers', 'start buttons read "3-hour" and "3 h 15 min"', [A.durLabel(180), A.durLabel(195)], ['3-hour', '3 h 15 min']);
     for (const [name, path, n, total] of PAPERS) {
       const g = 'Official paper: ' + name;
       let data;
       try { const r = await fetch(path + 'paper.json'); data = await r.json(); } catch (e) { ok(g, 'paper.json loads', false, String(e)); continue; }
+      const meta = listed.find(m => '../' + m.path === path);
+      eq(g, 'the start button shows the paper\'s real length', meta && meta.min, data.duration || 180);
       const qs = A.examQs(data, path + 'fig/');
       eq(g, 'number of questions', qs.length, n);
       eq(g, 'maximum marks', qs.reduce((s, q) => s + q.marks, 0), total);
@@ -147,6 +153,30 @@
     eq(g, 'total questions in the banks', total, Object.values(A.BANK_INDEX).reduce((s, b) => s + Object.values(b.classes).reduce((a, c) => a + Object.values(c).reduce((x, y) => x + y, 0), 0), 0));
   }
 
+  // ---------- the school pages for search engines (cbse/…, built by tools/build_school_pages.py) ----------
+  async function schoolPages(A) {
+    const g = 'School pages', ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
+    const slug = s => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+    const missing = [], stale = [], badLinks = [];
+    let n = 0;
+    for (const [i, c] of ROMAN.entries()) for (const s of A.SUBJECTS.filter(s => A.topicsFor(s, c).length)) {
+      n++;
+      const url = `../cbse/class-${i + 1}/${slug(s)}/`;
+      let doc;
+      try { const r = await fetch(url); if (!r.ok) throw new Error(r.status); doc = new DOMParser().parseFromString(await r.text(), 'text/html'); }
+      catch (e) { missing.push(url); continue; }
+      const shown = [...doc.querySelectorAll('.chapters b')].map(b => b.textContent);
+      if (JSON.stringify(shown) !== JSON.stringify(A.topicsFor(s, c))) stale.push(url);
+      // every link into the app names this class and subject, and a chapter the app offers
+      [...doc.querySelectorAll('a[href^="/?class="]')].forEach(a => { const q = new URL(a.getAttribute('href'), location.href).searchParams;
+        if (q.get('class') !== c || q.get('subject') !== s || (q.get('chapter') && !A.topicsFor(s, c).includes(q.get('chapter')))) badLinks.push(url + ' ' + a.getAttribute('href')); });
+    }
+    eq(g, 'every class and subject the app offers has a page', missing, []);
+    eq(g, 'every page lists the same chapters as the app (rebuild with tools/build_school_pages.py)', stale, []);
+    eq(g, 'every "start" and chapter link opens the right class, subject and chapter', badLinks, []);
+    eq(g, 'number of class and subject pages', n, 81);
+  }
+
   // ---------- run ----------
   function render() {
     const fails = results.filter(r => !r.pass), sum = document.getElementById('summary');
@@ -162,7 +192,7 @@
     let A = null;
     for (let i = 0; i < 100 && !A; i++) { await new Promise(r => setTimeout(r, 100)); A = frame.contentWindow && frame.contentWindow.__aaTest; }
     if (!A) { ok('Setup', 'the site loads with ?test', false, 'window.__aaTest not found'); return render(); }
-    for (const t of [parsing, checking, rules, labels, papers, banks]) {
+    for (const t of [parsing, checking, rules, labels, papers, banks, schoolPages]) {
       try { await t(A); } catch (e) { ok('Setup', t.name + ' ran without an error', false, e && e.stack || String(e)); }
     }
     render();

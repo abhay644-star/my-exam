@@ -471,7 +471,7 @@ sup,sub{font-size:.7em}
 
   <p class="foot">Questions follow the CBSE / NCERT syllabus for Classes I to XII: Mathematics, English, Hindi and Computer Science for every class; EVS for Classes I to V; Science and Social Science for Classes VI to X; Physics, Chemistry, Biology, Accountancy, Business Studies, Economics, History, Geography and Political Science for Classes XI and XII. Every paper is a fresh selection.</p>
   <p class="foot contact">Found a mistake or have an idea? <button type="button" class="linkbtn" id="contactOpen">Send us a message</button> or email <a href="mailto:aa.exampractice@gmail.com">aa.exampractice@gmail.com</a></p>
-  <p class="foot links">Previous year papers: <a href="jee-main/">JEE Main</a> · <a href="jee-advanced/">JEE Advanced</a> · <a href="neet/">NEET (UG)</a> · <a href="privacy.html">Privacy</a></p>
+  <p class="foot links">Previous year papers: <a href="jee-main/">JEE Main</a> · <a href="jee-advanced/">JEE Advanced</a> · <a href="neet/">NEET (UG)</a> · School: <a href="cbse/">CBSE Classes I–XII by subject</a> · <a href="privacy.html">Privacy</a></p>
   <p class="foot">All in All Exam Practice is an independent site and is not affiliated with CBSE, NCERT, NTA or the IITs. Official question papers and answer keys are published by those bodies.</p>
   <p class="foot" id="installRow" hidden>Use it like an app, even offline: <button type="button" class="linkbtn" id="installBtn">Install on this device</button></p>
 
@@ -1753,7 +1753,13 @@ function openInvite(){const q=new URLSearchParams(location.search),go=q.get('go'
 // a link from an exam page to one paper (/?paper=2026-p1#jee-advanced): open that exam's papers with the paper highlighted
 function openPaperLink(){const q=new URLSearchParams(location.search),id=q.get('paper'),pg=EXAM_PAGES[location.hash.slice(1)];if(!id||q.get('go'))return;
   if(pg&&pg.papers.some(x=>x.id===id))inviteHl=id;history.replaceState(null,'',location.pathname+location.hash);}
-fillSelects();writeForm();readForm();openInvite();openPaperLink();route();
+// a link from a school page (/?class=X&subject=Science&chapter=Light#school): open School with that class, subject
+// and chapter chosen; anything the app does not offer is ignored
+function openSchoolLink(){const q=new URLSearchParams(location.search),c=q.get('class'),sub=q.get('subject');if(!c||q.get('go'))return;
+  if(ROMAN.indexOf(c)>=0&&subjectsFor(c).indexOf(sub)>=0){const ch=q.getAll('chapter').filter(x=>topicsFor(sub,c).indexOf(x)>=0);
+    Object.assign(S,{klass:c,subject:sub,topics:ch.length?ch:'ALL'});writeForm();readForm();}
+  history.replaceState(null,'',location.pathname+location.hash);}
+fillSelects();writeForm();readForm();openInvite();openPaperLink();openSchoolLink();route();
 window.addEventListener('hashchange',route);
 // a link to the screen's own address (e.g. "School" while viewing results) does not change the hash, so route it directly
 document.addEventListener('click',e=>{const a=e.target.closest('a[href^="#"]');if(a&&a.getAttribute('href')===(location.hash||'#home')){e.preventDefault();route();}});

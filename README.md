@@ -17,7 +17,8 @@ Live site: https://my-exam.in
 ## Editing a question bank
 1. Edit the subject's file in `school-questions/` (for example `school-questions/physics.json`).
 2. Run `py tools/build_school_index.py` from the site folder. It updates the bank index in `index.html` (chapters and question counts) and the list of files the service worker keeps for offline use in `sw.js`.
-3. Run the tests (below) and upload the changed files together.
+3. Run `py tools/build_school_pages.py`. It rebuilds the school pages for search engines (`cbse/`: one page per class and subject, with chapters and sample questions) and `sitemap.xml`. Do not edit the pages in `cbse/` by hand.
+4. Run the tests (below) and upload the changed files together.
 
 ## Tests
 - `powershell -File tests\run-tests.ps1` runs `tests/marking.html` in headless Microsoft Edge (needs Python and Edge) and prints PASS or the failed checks.
