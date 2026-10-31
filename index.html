@@ -472,6 +472,7 @@ sup,sub{font-size:.7em}
   <p class="foot">Questions follow the CBSE / NCERT syllabus for Classes I to XII: Mathematics, English, Hindi and Computer Science for every class; EVS for Classes I to V; Science and Social Science for Classes VI to X; Physics, Chemistry, Biology, Accountancy, Business Studies, Economics, History, Geography and Political Science for Classes XI and XII. Every paper is a fresh selection.</p>
   <p class="foot contact">Found a mistake or have an idea? <button type="button" class="linkbtn" id="contactOpen">Send us a message</button> or email <a href="mailto:aa.exampractice@gmail.com">aa.exampractice@gmail.com</a></p>
   <p class="foot links">Previous year papers: <a href="jee-main/">JEE Main</a> · <a href="jee-advanced/">JEE Advanced</a> · <a href="neet/">NEET (UG)</a> · <a href="privacy.html">Privacy</a></p>
+  <p class="foot">All in All Exam Practice is an independent site and is not affiliated with CBSE, NCERT, NTA or the IITs. Official question papers and answer keys are published by those bodies.</p>
   <p class="foot" id="installRow" hidden>Use it like an app, even offline: <button type="button" class="linkbtn" id="installBtn">Install on this device</button></p>
 
   <dialog id="contactDlg" aria-labelledby="contactTitle">
@@ -1535,7 +1536,7 @@ const EXAM_PAGES={
     lede:'Official question papers with the final answer keys from the National Testing Agency (NTA). Take a paper as a timed 3-hour exam, or practise question by question with worked solutions.',
     source:'Questions and answer keys: NTA.',patTitle:'JEE Main Paper 1 (B.E. / B.Tech)',
     patNote:'Each subject has Section A (20 multiple-choice questions) and Section B (5 numerical questions), all compulsory. Correct answer <b>+4</b>, wrong answer <b>−1</b>, not answered <b>0</b>, in both sections.',
-    papers:[{id:'2026-04-02-s1',name:'JEE Main 2026',date:'2 April 2026',shift:'Shift 1',head:'2 April 2026',sub:'Shift 1 · official NTA paper',pat:'75 questions · 3 hours · 300 marks · +4 / −1',path:'jee/2026-04-02-s1/'}],
+    papers:[{id:'2026-04-02-s1',name:'JEE Main 2026',date:'2 April 2026',shift:'Shift 1',head:'2 April 2026',sub:'Shift 1 · official NTA paper',pat:'75 questions · 3 hours · 300 marks · +4 / −1',path:'jee/2026-04-02-s1/',min:180}],
     later:[{head:'2025',sub:'January and April sessions',pat:'75 questions per shift · 3 hours · 300 marks'},
       {head:'2024',sub:'January and April sessions',pat:'90 questions, 75 to answer · 3 hours · 300 marks'},
       {head:'2023',sub:'January and April sessions',pat:'90 questions, 75 to answer · 3 hours · 300 marks'},
@@ -1545,7 +1546,7 @@ const EXAM_PAGES={
     lede:'The latest NEET (UG) paper with the final answer key published by the National Testing Agency (NTA). Take it as a timed exam, or practise question by question with explanations.',
     source:'Questions: NEET (UG) 2026 re-examination, Test Booklet Code 50. Answers: NTA final answer key.',patTitle:'NEET (UG) 2026',
     patNote:'180 compulsory multiple-choice questions, each with four options and one correct answer. Correct answer <b>+4</b>, wrong answer <b>−1</b>, not answered <b>0</b>. The 2026 exam held on 3 May was cancelled by NTA and re-held on 21 June 2026; this is the re-examination paper.',
-    papers:[{id:'2026-reexam-50',name:'NEET (UG) 2026',date:'21 June 2026 (re-exam)',shift:'Code 50',head:'21 June 2026',sub:'Re-examination · booklet code 50',pat:'180 questions · 3 h 15 min · 720 marks · +4 / −1',path:'neet/2026-reexam-50/'}],
+    papers:[{id:'2026-reexam-50',name:'NEET (UG) 2026',date:'21 June 2026 (re-exam)',shift:'Code 50',head:'21 June 2026',sub:'Re-examination · booklet code 50',pat:'180 questions · 3 h 15 min · 720 marks · +4 / −1',path:'neet/2026-reexam-50/',min:195}],
     later:[{head:'2025',sub:'4 May 2025',pat:'180 questions · 3 hours · 720 marks · +4 / −1'},
       {head:'2024',sub:'5 May 2024',pat:'200 questions, 180 to answer · 3 h 20 min · 720 marks'},
       {head:'2023',sub:'7 May 2023',pat:'200 questions, 180 to answer · 3 h 20 min · 720 marks'},
@@ -1556,8 +1557,8 @@ const EXAM_PAGES={
     source:'Questions and answer keys: JEE (Advanced) 2026, organising IIT.',patTitle:'JEE Advanced 2026',
     patNote:'Each subject has four sections. Single correct: <b>+3 / −1</b>. One or more correct: <b>+4</b> if all correct options are chosen, <b>+3 / +2 / +1</b> if only some correct options and no wrong option are chosen, <b>−1</b> otherwise. Numerical: <b>+4</b> (Paper 2 paired questions <b>+2</b>), no negative marks. List matching (Paper 1): <b>+4 / −1</b>. The pattern changes every year.',
     papers:[
-      {id:'2026-p1',name:'JEE Advanced 2026',date:'Paper 1',shift:'',head:'Paper 1',sub:'2026 · official paper',pat:'48 questions · 3 hours · 180 marks',path:'jee-adv/2026-p1/'},
-      {id:'2026-p2',name:'JEE Advanced 2026',date:'Paper 2',shift:'',head:'Paper 2',sub:'2026 · official paper',pat:'54 questions · 3 hours · 180 marks',path:'jee-adv/2026-p2/'}],
+      {id:'2026-p1',name:'JEE Advanced 2026',date:'Paper 1',shift:'',head:'Paper 1',sub:'2026 · official paper',pat:'48 questions · 3 hours · 180 marks',path:'jee-adv/2026-p1/',min:180},
+      {id:'2026-p2',name:'JEE Advanced 2026',date:'Paper 2',shift:'',head:'Paper 2',sub:'2026 · official paper',pat:'54 questions · 3 hours · 180 marks',path:'jee-adv/2026-p2/',min:180}],
     later:[{head:'2025',sub:'Paper 1 and Paper 2',pat:'18 May 2025 · 3 hours each'},
       {head:'2024',sub:'Paper 1 and Paper 2',pat:'26 May 2024 · 3 hours each'},
       {head:'2023',sub:'Paper 1 and Paper 2',pat:'4 June 2023 · 3 hours each'},
@@ -1583,13 +1584,15 @@ function renderMath(el){if(!el||!window.renderMathInElement)return;try{renderMat
 // measured again once the maths fonts have loaded, because they change the width
 function fitMath(el){el.querySelectorAll('.dm,.katex-display').forEach(d=>{d.style.fontSize='';if(d.clientWidth&&d.scrollWidth>d.clientWidth+1)d.style.fontSize=Math.max(60,Math.floor(d.clientWidth/d.scrollWidth*100))+'%';});}
 function examInstr(){const e=P.exam;if(e.instr)return e.instr.map(s=>`<li>${s}</li>`).join('');return `<li>Official ${esc(e.name)} question paper (${esc(e.date)}, ${esc(e.shift)}) with the final answer key published by the National Testing Agency (NTA).</li><li>${P.qs.length} questions: ${esc(e.subjects)}. Each subject has Section A (multiple choice) and Section B (numerical answer).</li><li>Marking: <b>+4</b> for a correct answer, <b>−1</b> for a wrong answer and <b>0</b> if not answered, in both sections.</li><li>Section B: type a whole number; round off to the nearest integer if needed.</li>`;}
+// a paper's length for its start button: 180 → "3-hour", 195 → "3 h 15 min" (min must match the paper's own duration; the tests check it)
+const durLabel=m=>m%60?`${Math.floor(m/60)} h ${m%60} min`:`${m/60}-hour`;
 function wantPapers(){try{return JSON.parse(localStorage.getItem('aa-want-papers'))||[];}catch(e){return [];}}
 let inviteHl=null;
 function renderJee(){
   const pid=examPageId(),pg=EXAM_PAGES[pid],ex=EXAMS.flatMap(g=>g.items).find(i=>i.id===pid);
   $('#examCrumb').textContent=pg.crumb;$('#examTitle').textContent=pg.title;$('#examLede').textContent=pg.lede;$('#examSource').textContent=pg.source;$('#jeeMsg').hidden=true;
   $('#jeePattern').innerHTML=`<div><p class="eyebrow">Exam pattern</p><h3>${esc(pg.patTitle)}: ${esc(ex.pat)}</h3></div><div class="tblwrap">${examTable(ex)}</div><p class="hint" style="margin:0">${pg.patNote}</p>`;
-  $('#jeeList').innerHTML=pg.papers.map(x=>`<article class="examcard"><div class="head"><h4>${esc(x.head)}</h4><span class="soon ready">Final key</span></div><p class="body">${esc(x.sub)}</p><p class="pat">${esc(x.pat)}</p><div class="btns"><button type="button" class="primary small" data-jee="${x.id}" data-mode="exam">Start 3-hour exam</button><button type="button" class="small" data-jee="${x.id}" data-mode="practice">Practise with solutions</button></div></article>`).join('')
+  $('#jeeList').innerHTML=pg.papers.map(x=>`<article class="examcard"><div class="head"><h4>${esc(x.head)}</h4><span class="soon ready">Final key</span></div><p class="body">${esc(x.sub)}</p><p class="pat">${esc(x.pat)}</p><div class="btns"><button type="button" class="primary small" data-jee="${x.id}" data-mode="exam">Start ${durLabel(x.min)} exam</button><button type="button" class="small" data-jee="${x.id}" data-mode="practice">Practise with solutions</button></div></article>`).join('')
     +(pg.later||[]).map(x=>`<article class="examcard later"><div class="head"><h4>${esc(x.head)}</h4><span class="soon">Coming soon</span></div><p class="body">${esc(x.sub)}</p><p class="pat">${esc(x.pat)}</p>${wantPapers().indexOf(pid+'/'+x.head)<0?`<button type="button" class="small" data-wantpaper="${pid}/${esc(x.head)}">I want this paper</button>`:'<button type="button" class="small" disabled>Thanks, noted</button>'}</article>`).join('');
   if(inviteHl){const b=document.querySelector('#jeeList [data-jee="'+inviteHl+'"]'),card=b&&b.closest('.examcard');inviteHl=null;if(card){card.classList.add('hl');setTimeout(()=>card.scrollIntoView({block:'center',behavior:'smooth'}),400);}}
 }
@@ -1640,7 +1643,7 @@ $('#jeeList').addEventListener('click',e=>{const b=e.target.closest('[data-jee]'
 $('#jeeList').addEventListener('click',e=>{const b=e.target.closest('[data-wantpaper]');if(!b)return;const id=b.dataset.wantpaper;
   track('want-paper/'+id,'Wants paper: '+EXAM_PAGES[id.split('/')[0]].crumb+' '+id.split('/')[1]);const w=wantPapers();if(w.indexOf(id)<0){w.push(id);try{localStorage.setItem('aa-want-papers',JSON.stringify(w));}catch(err){}}
   b.textContent='Thanks, noted';b.disabled=true;b.removeAttribute('data-wantpaper');});
-$('#jeeReport').addEventListener('click',()=>openContact('About the JEE Main papers: '));
+$('#jeeReport').addEventListener('click',()=>openContact(`About the ${EXAM_PAGES[examPageId()].crumb} papers: `));
 
 /* ---------- entrance & competitive exams (coming soon) ---------- */
 const EXAMS=[
@@ -1747,7 +1750,10 @@ function openInvite(){const q=new URLSearchParams(location.search),go=q.get('go'
   $('#inviteClose').addEventListener('click',()=>{b.hidden=true;});
   if($('#inviteStart'))$('#inviteStart').addEventListener('click',()=>{const v=validate(),qm=$('#quickMsg');if(v.errs.length){qm.innerHTML=v.errs.map(esc).join('<br>');qm.hidden=false;return;}const sd=invitePaper;invitePaper=null;track('start/shared-paper','Started a shared school paper');startTest(false,sd);});// counted as soon as GoatCounter has loaded (its script loads after this one); gives up after 30 s
   let tries=0;const send=()=>{if(window.goatcounter&&window.goatcounter.count)track('invite/'+slug(go),'Opened a shared score link');else if(++tries<60)setTimeout(send,500);};send();}
-fillSelects();writeForm();readForm();openInvite();route();
+// a link from an exam page to one paper (/?paper=2026-p1#jee-advanced): open that exam's papers with the paper highlighted
+function openPaperLink(){const q=new URLSearchParams(location.search),id=q.get('paper'),pg=EXAM_PAGES[location.hash.slice(1)];if(!id||q.get('go'))return;
+  if(pg&&pg.papers.some(x=>x.id===id))inviteHl=id;history.replaceState(null,'',location.pathname+location.hash);}
+fillSelects();writeForm();readForm();openInvite();openPaperLink();route();
 window.addEventListener('hashchange',route);
 // a link to the screen's own address (e.g. "School" while viewing results) does not change the hash, so route it directly
 document.addEventListener('click',e=>{const a=e.target.closest('a[href^="#"]');if(a&&a.getAttribute('href')===(location.hash||'#home')){e.preventDefault();route();}});
@@ -1824,7 +1830,7 @@ let installEvt=null;
 window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();installEvt=e;$('#installRow').hidden=false;});
 $('#installBtn').addEventListener('click',async()=>{if(!installEvt)return;installEvt.prompt();const r=await installEvt.userChoice;track('app/install/'+r.outcome,'Install app: '+r.outcome);installEvt=null;$('#installRow').hidden=true;});
 // tests/marking.html opens this page with ?test and reaches the marking code through window.__aaTest
-if(new URLSearchParams(location.search).has('test'))window.__aaTest={checkPart,parseNum,partMarks,answerText,examQs,ensureBank,topicsFor,bankCounts,BANK_INDEX,SUBJECTS,T,cleanQ,
+if(new URLSearchParams(location.search).has('test'))window.__aaTest={checkPart,parseNum,partMarks,answerText,examQs,ensureBank,topicsFor,bankCounts,BANK_INDEX,SUBJECTS,T,cleanQ,EXAM_PAGES,durLabel,
   // marks qs against ans ({'<question index>-<part index>': answer}) and returns each question's mark
   markPaper(qs,ans,exam){const P0=P,A0=ANS;P={qs,exam};ANS=ans;try{qs.forEach((q,i)=>markQ(i));return qs.map(q=>q.got);}finally{P=P0;ANS=A0;}},
   withPaper(p,fn){const P0=P;P=p;try{return fn();}finally{P=P0;}}};
