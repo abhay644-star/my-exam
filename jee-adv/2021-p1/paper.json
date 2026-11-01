@@ -1,0 +1,1304 @@
+{
+ "id": "2021-p1",
+ "exam": "JEE Advanced",
+ "board": "IIT",
+ "title": "JEE Advanced 2021 · Paper 1",
+ "duration": 180,
+ "renumber": true,
+ "secNames": {
+  "1": "single correct",
+  "2": "paired numerical",
+  "3": "one or more correct",
+  "4": "non-negative integer"
+ },
+ "instr": [
+  "Official JEE (Advanced) 2021 Paper 1 with the final answer key published by the organising IIT (IIT Kharagpur).",
+  "57 questions: Mathematics, Physics and Chemistry, 19 in each subject, in four sections. Total 180 marks.",
+  "Section 1 – single correct option: <b>+3</b> if correct, <b>−1</b> if wrong, 0 if not answered.",
+  "Section 2 – three question stems with two numerical questions each: <b>+2</b> if correct, 0 in all other cases. No negative marks. Give the value to two decimal places.",
+  "Section 3 – one or more correct options: <b>+4</b> if you choose all the correct options; <b>+3</b> if all four options are correct and you choose only three; <b>+2</b> if three or more options are correct and you choose only two, both correct; <b>+1</b> if two or more options are correct and you choose only one, and it is correct; <b>−2</b> in all other cases; 0 if not answered.",
+  "Section 4 – non-negative integer answer: <b>+4</b> if correct, 0 in all other cases. No negative marks."
+ ],
+ "source": "JEE (Advanced) 2021 question paper and final answer key, organising IIT (IIT Kharagpur). Worked solutions: All in All Exam Practice.",
+ "questions": [
+  {
+   "no": 1,
+   "section": 1,
+   "type": "single",
+   "text": "Consider a triangle $\\Delta$ whose two sides lie on the $x$-axis and the line $x + y + 1 = 0$. If the orthocenter of $\\Delta$ is $(1, 1)$, then the equation of the circle passing through the vertices of the triangle $\\Delta$ is",
+   "options": [
+    "$x^2 + y^2 - 3x + y = 0$",
+    "$x^2 + y^2 + x + 3y = 0$",
+    "$x^2 + y^2 + 2y - 1 = 0$",
+    "$x^2 + y^2 + x + y = 0$"
+   ],
+   "answer": 1,
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "The two given sides meet at $A = (-1, 0)$. Let $B = (b, 0)$ lie on the $x$-axis and $C$ on $x + y + 1 = 0$.<br>The altitude from $C$ is perpendicular to the $x$-axis and passes through $H(1, 1)$, so $C$ has $x = 1$: $C = (1, -2)$.<br>The altitude from $B$ is perpendicular to $x + y + 1 = 0$ (slope $1$) and passes through $H$: it is $y = x$, which meets the $x$-axis at $B = (0, 0)$.<br>Circle $x^2 + y^2 + Dx + Ey + F = 0$ through $(0,0)$: $F = 0$; through $(-1, 0)$: $1 - D = 0$, $D = 1$; through $(1, -2)$: $5 + 1 - 2E = 0$, $E = 3$.<br>So the circle is $x^2 + y^2 + x + 3y = 0$ → (B).",
+   "subject": "Mathematics",
+   "chapter": "Conic Sections",
+   "chCls": "XI"
+  },
+  {
+   "no": 2,
+   "section": 1,
+   "type": "single",
+   "text": "The area of the region $$\\left\\{(x, y) : 0 \\le x \\le \\dfrac{9}{4},\\quad 0 \\le y \\le 1,\\quad x \\ge 3y,\\quad x + y \\ge 2\\right\\}$$ is",
+   "options": [
+    "$\\dfrac{11}{32}$",
+    "$\\dfrac{35}{96}$",
+    "$\\dfrac{37}{96}$",
+    "$\\dfrac{13}{32}$"
+   ],
+   "answer": 0,
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "The lines $x = 3y$ and $x + y = 2$ meet at $\\left(\\dfrac32, \\dfrac12\\right)$; the line $x = 3y$ meets $x = \\dfrac94$ at $y = \\dfrac34$.<br>For $0 \\le y \\le \\dfrac12$: $x$ runs from $2 - y$ to $\\dfrac94$. For $\\dfrac12 \\le y \\le \\dfrac34$: $x$ runs from $3y$ to $\\dfrac94$.<br>Area $= \\displaystyle\\int_0^{1/2}\\left(y + \\dfrac14\\right)dy + \\int_{1/2}^{3/4}\\left(\\dfrac94 - 3y\\right)dy = \\dfrac14 + \\dfrac{3}{32} = \\dfrac{11}{32}$ → (A).",
+   "subject": "Mathematics",
+   "chapter": "Application of Integrals",
+   "chCls": "XII"
+  },
+  {
+   "no": 3,
+   "section": 1,
+   "type": "single",
+   "text": "Consider three sets $E_1 = \\{1, 2, 3\\}$, $F_1 = \\{1, 3, 4\\}$ and $G_1 = \\{2, 3, 4, 5\\}$. Two elements are chosen at random, without replacement, from the set $E_1$, and let $S_1$ denote the set of these chosen elements. Let $E_2 = E_1 - S_1$ and $F_2 = F_1 \\cup S_1$. Now two elements are chosen at random, without replacement, from the set $F_2$ and let $S_2$ denote the set of these chosen elements.<br><br>Let $G_2 = G_1 \\cup S_2$. Finally, two elements are chosen at random, without replacement, from the set $G_2$ and let $S_3$ denote the set of these chosen elements.<br>Let $E_3 = E_2 \\cup S_3$. Given that $E_1 = E_3$, let $p$ be the conditional probability of the event $S_1 = \\{1, 2\\}$. Then the value of $p$ is",
+   "options": [
+    "$\\dfrac{1}{5}$",
+    "$\\dfrac{3}{5}$",
+    "$\\dfrac{1}{2}$",
+    "$\\dfrac{2}{5}$"
+   ],
+   "answer": 0,
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$E_2$ has one element, so $E_3 = E_1$ forces $S_3 = S_1$.<br>$S_1 = \\{1,2\\}$ (prob. $\\frac13$): $F_2 = \\{1,2,3,4\\}$; $S_3 = \\{1,2\\}$ needs $1 \\in G_2$, i.e. $1 \\in S_2$ (prob. $\\frac36$), then $|G_2| = 5$ and $P(S_3 = \\{1,2\\}) = \\frac1{10}$. Probability $= \\frac13\\cdot\\frac12\\cdot\\frac1{10} = \\frac1{60}$.<br>$S_1 = \\{1,3\\}$: $F_2 = \\{1,3,4\\}$; need $1 \\in S_2$ (prob. $\\frac23$), then $\\frac1{10}$. Probability $= \\frac13\\cdot\\frac23\\cdot\\frac1{10} = \\frac1{45}$.<br>$S_1 = \\{2,3\\}$: $F_2 = \\{1,2,3,4\\}$; if $1 \\in S_2$ (prob. $\\frac12$), $|G_2| = 5$, chance $\\frac1{10}$; otherwise $G_2 = \\{2,3,4,5\\}$, chance $\\frac16$. Probability $= \\frac13\\left(\\frac1{20} + \\frac1{12}\\right) = \\frac2{45}$.<br>$P(E_3 = E_1) = \\frac1{60} + \\frac1{45} + \\frac2{45} = \\frac1{12}$, so $p = \\dfrac{1/60}{1/12} = \\dfrac15$ → (A).",
+   "subject": "Mathematics",
+   "chapter": "Probability",
+   "chCls": "XII"
+  },
+  {
+   "no": 4,
+   "section": 1,
+   "type": "single",
+   "text": "Let $\\theta_1, \\theta_2, \\ldots, \\theta_{10}$ be positive valued angles (in radian) such that $\\theta_1 + \\theta_2 + \\cdots + \\theta_{10} = 2\\pi$. Define the complex numbers $z_1 = e^{i\\theta_1}$, $z_k = z_{k-1}e^{i\\theta_k}$ for $k = 2, 3, \\ldots, 10$, where $i = \\sqrt{-1}$. Consider the statements $P$ and $Q$ given below:<br>$$P : |z_2 - z_1| + |z_3 - z_2| + \\cdots + |z_{10} - z_9| + |z_1 - z_{10}| \\le 2\\pi$$ $$Q : |z_2^2 - z_1^2| + |z_3^2 - z_2^2| + \\cdots + |z_{10}^2 - z_9^2| + |z_1^2 - z_{10}^2| \\le 4\\pi$$ Then,",
+   "options": [
+    "$P$ is TRUE and $Q$ is FALSE",
+    "$Q$ is TRUE and $P$ is FALSE",
+    "both $P$ and $Q$ are TRUE",
+    "both $P$ and $Q$ are FALSE"
+   ],
+   "answer": 2,
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$z_k = e^{i(\\theta_1 + \\cdots + \\theta_k)}$, so $z_{10} = e^{2\\pi i} = 1$ and $z_1 = z_{10}e^{i\\theta_1}$.<br>Each term of $P$ is $|e^{i\\theta_k} - 1| = 2\\left|\\sin\\dfrac{\\theta_k}{2}\\right| \\le \\theta_k$, so the sum is at most $\\sum\\theta_k = 2\\pi$: $P$ is true (the points lie on the unit circle and the chords are shorter than the arcs).<br>Each term of $Q$ is $|e^{2i\\theta_k} - 1| = 2|\\sin\\theta_k| \\le 2\\theta_k$, so the sum is at most $4\\pi$: $Q$ is true.<br>Both are true → (C).",
+   "subject": "Mathematics",
+   "chapter": "Complex Numbers",
+   "chCls": "XI"
+  },
+  {
+   "no": 5,
+   "section": 2,
+   "type": "num",
+   "stem": "Question Stem for Question Nos. 5 and 6",
+   "text": "Three numbers are chosen at random, one after another with replacement, from the set $S = \\{1, 2, 3, \\ldots, 100\\}$. Let $p_1$ be the probability that the maximum of chosen numbers is at least 81 and $p_2$ be the probability that the minimum of chosen numbers is at most 40.<br><br>The value of $\\dfrac{625}{4}p_1$ is ___ .",
+   "options": null,
+   "answer": {
+    "lo": 76.1,
+    "hi": 76.4
+   },
+   "full": 2,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Maximum at least 81 is the complement of all three numbers $\\le 80$: $p_1 = 1 - (0.8)^3 = 0.488$.<br>$\\dfrac{625}{4}p_1 = 156.25 \\times 0.488 = 76.25$.",
+   "subject": "Mathematics",
+   "chapter": "Probability",
+   "chCls": "XII"
+  },
+  {
+   "no": 6,
+   "section": 2,
+   "type": "num",
+   "stem": "Question Stem for Question Nos. 5 and 6",
+   "text": "Three numbers are chosen at random, one after another with replacement, from the set $S = \\{1, 2, 3, \\ldots, 100\\}$. Let $p_1$ be the probability that the maximum of chosen numbers is at least 81 and $p_2$ be the probability that the minimum of chosen numbers is at most 40.<br><br>The value of $\\dfrac{125}{4}p_2$ is ___ .",
+   "options": null,
+   "answer": {
+    "lo": 24.4,
+    "hi": 24.6
+   },
+   "full": 2,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Minimum at most 40 is the complement of all three numbers $\\ge 41$: $p_2 = 1 - (0.6)^3 = 0.784$.<br>$\\dfrac{125}{4}p_2 = 31.25 \\times 0.784 = 24.5$.",
+   "subject": "Mathematics",
+   "chapter": "Probability",
+   "chCls": "XII"
+  },
+  {
+   "no": 7,
+   "section": 2,
+   "type": "num",
+   "stem": "Question Stem for Question Nos. 7 and 8",
+   "text": "Let $\\alpha, \\beta$ and $\\gamma$ be real numbers such that the system of linear equations $$\\begin{aligned} x + 2y + 3z &= \\alpha \\\\ 4x + 5y + 6z &= \\beta \\\\ 7x + 8y + 9z &= \\gamma - 1 \\end{aligned}$$ is consistent. Let $|M|$ represent the determinant of the matrix $$M = \\begin{bmatrix} \\alpha & 2 & \\gamma \\\\ \\beta & 1 & 0 \\\\ -1 & 0 & 1 \\end{bmatrix}$$ Let $P$ be the plane containing all those $(\\alpha, \\beta, \\gamma)$ for which the above system of linear equations is consistent, and $D$ be the square of the distance of the point $(0, 1, 0)$ from the plane $P$.<br><br>The value of $|M|$ is ___ .",
+   "options": null,
+   "answer": {
+    "lo": 0.95,
+    "hi": 1.05
+   },
+   "full": 2,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "The coefficient rows satisfy $R_1 - 2R_2 + R_3 = 0$, so the system is consistent exactly when $\\alpha - 2\\beta + (\\gamma - 1) = 0$, i.e. $\\alpha - 2\\beta + \\gamma = 1$.<br>$|M| = \\alpha(1 - 0) - 2(\\beta - 0) + \\gamma(0 + 1) = \\alpha - 2\\beta + \\gamma = 1$.",
+   "subject": "Mathematics",
+   "chapter": "Determinants",
+   "chCls": "XII"
+  },
+  {
+   "no": 8,
+   "section": 2,
+   "type": "num",
+   "stem": "Question Stem for Question Nos. 7 and 8",
+   "text": "Let $\\alpha, \\beta$ and $\\gamma$ be real numbers such that the system of linear equations $$\\begin{aligned} x + 2y + 3z &= \\alpha \\\\ 4x + 5y + 6z &= \\beta \\\\ 7x + 8y + 9z &= \\gamma - 1 \\end{aligned}$$ is consistent. Let $|M|$ represent the determinant of the matrix $$M = \\begin{bmatrix} \\alpha & 2 & \\gamma \\\\ \\beta & 1 & 0 \\\\ -1 & 0 & 1 \\end{bmatrix}$$ Let $P$ be the plane containing all those $(\\alpha, \\beta, \\gamma)$ for which the above system of linear equations is consistent, and $D$ be the square of the distance of the point $(0, 1, 0)$ from the plane $P$.<br><br>The value of $D$ is ___ .",
+   "options": null,
+   "answer": {
+    "lo": 1.45,
+    "hi": 1.55
+   },
+   "full": 2,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "From the consistency condition, $P$ is the plane $x - 2y + z = 1$.<br>Distance of $(0, 1, 0)$: $\\dfrac{|0 - 2 + 0 - 1|}{\\sqrt{1 + 4 + 1}} = \\dfrac{3}{\\sqrt6}$.<br>$D = \\dfrac{9}{6} = 1.5$.",
+   "subject": "Mathematics",
+   "chapter": "Three Dimensional Geometry",
+   "chCls": "XII"
+  },
+  {
+   "no": 9,
+   "section": 2,
+   "type": "num",
+   "stem": "Question Stem for Question Nos. 9 and 10",
+   "text": "Consider the lines $L_1$ and $L_2$ defined by $$L_1 : x\\sqrt2 + y - 1 = 0 \\quad\\text{and}\\quad L_2 : x\\sqrt2 - y + 1 = 0$$ For a fixed constant $\\lambda$, let $C$ be the locus of a point $P$ such that the product of the distance of $P$ from $L_1$ and the distance of $P$ from $L_2$ is $\\lambda^2$. The line $y = 2x + 1$ meets $C$ at two points $R$ and $S$, where the distance between $R$ and $S$ is $\\sqrt{270}$.<br><br>Let the perpendicular bisector of $RS$ meet $C$ at two distinct points $R'$ and $S'$. Let $D$ be the square of the distance between $R'$ and $S'$.<br><br>The value of $\\lambda^2$ is ___ .",
+   "options": null,
+   "answer": {
+    "lo": 8.95,
+    "hi": 9.05
+   },
+   "full": 2,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Product of distances: $\\dfrac{|(\\sqrt2x + y - 1)(\\sqrt2x - y + 1)|}{3} = \\lambda^2$, so $C : |2x^2 - (y - 1)^2| = 3\\lambda^2$.<br>On $y = 2x + 1$: $y - 1 = 2x$, so $|2x^2 - 4x^2| = 2x^2 = 3\\lambda^2$, $x = \\pm\\sqrt{\\tfrac32}\\,\\lambda$.<br>$RS^2 = (\\Delta x)^2(1 + 2^2) = 5 \\cdot 4 \\cdot \\tfrac32\\lambda^2 = 30\\lambda^2 = 270$.<br>$\\lambda^2 = 9$.",
+   "subject": "Mathematics",
+   "chapter": "Conic Sections",
+   "chCls": "XI"
+  },
+  {
+   "no": 10,
+   "section": 2,
+   "type": "num",
+   "stem": "Question Stem for Question Nos. 9 and 10",
+   "text": "Consider the lines $L_1$ and $L_2$ defined by $$L_1 : x\\sqrt2 + y - 1 = 0 \\quad\\text{and}\\quad L_2 : x\\sqrt2 - y + 1 = 0$$ For a fixed constant $\\lambda$, let $C$ be the locus of a point $P$ such that the product of the distance of $P$ from $L_1$ and the distance of $P$ from $L_2$ is $\\lambda^2$. The line $y = 2x + 1$ meets $C$ at two points $R$ and $S$, where the distance between $R$ and $S$ is $\\sqrt{270}$.<br><br>Let the perpendicular bisector of $RS$ meet $C$ at two distinct points $R'$ and $S'$. Let $D$ be the square of the distance between $R'$ and $S'$.<br><br>The value of $D$ is ___ .",
+   "options": null,
+   "answer": {
+    "lo": 77.1,
+    "hi": 77.18
+   },
+   "full": 2,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "With $\\lambda^2 = 9$, $C$ is the pair of hyperbolas $2x^2 - (y - 1)^2 = \\pm 27$; $R, S$ lie on $(y - 1)^2 - 2x^2 = 27$.<br>Midpoint of $RS$ is $(0, 1)$; the perpendicular bisector is $y - 1 = -\\dfrac{x}{2}$.<br>On $(y-1)^2 - 2x^2 = 27$ it gives $-\\dfrac{7x^2}{4} = 27$ (no points); on $2x^2 - (y - 1)^2 = 27$ it gives $\\dfrac{7x^2}{4} = 27$, $x^2 = \\dfrac{108}{7}$.<br>$D = (2x)^2\\left(1 + \\dfrac14\\right) = 5x^2 = \\dfrac{540}{7} \\approx 77.14$.",
+   "subject": "Mathematics",
+   "chapter": "Conic Sections",
+   "chCls": "XI"
+  },
+  {
+   "no": 11,
+   "section": 3,
+   "type": "multi",
+   "text": "For any $3 \\times 3$ matrix $M$, let $|M|$ denote the determinant of $M$. Let $$E = \\begin{bmatrix} 1 & 2 & 3 \\\\ 2 & 3 & 4 \\\\ 8 & 13 & 18 \\end{bmatrix},\\quad P = \\begin{bmatrix} 1 & 0 & 0 \\\\ 0 & 0 & 1 \\\\ 0 & 1 & 0 \\end{bmatrix} \\quad\\text{and}\\quad F = \\begin{bmatrix} 1 & 3 & 2 \\\\ 8 & 18 & 13 \\\\ 2 & 4 & 3 \\end{bmatrix}$$ If $Q$ is a nonsingular matrix of order $3 \\times 3$, then which of the following statements is (are) TRUE ?",
+   "options": [
+    "$F = PEP$ and $P^2 = \\begin{bmatrix} 1 & 0 & 0 \\\\ 0 & 1 & 0 \\\\ 0 & 0 & 1 \\end{bmatrix}$",
+    "$|EQ + PFQ^{-1}| = |EQ| + |PFQ^{-1}|$",
+    "$|(EF)^3| > |EF|^2$",
+    "Sum of the diagonal entries of $P^{-1}EP + F$ is equal to the sum of diagonal entries of $E + P^{-1}FP$"
+   ],
+   "answer": [
+    0,
+    1,
+    3
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "(A) $PE$ swaps rows 2 and 3 of $E$; then $\\cdot P$ swaps columns 2 and 3, giving exactly $F$. $P$ is a swap, so $P^2 = I$: true.<br>$|E| = 1(54 - 52) - 2(36 - 32) + 3(26 - 24) = 0$, so $|F| = 0$ too.<br>(B) $PF = P^2EP = EP$, so $EQ + PFQ^{-1} = E(Q + PQ^{-1})$, whose determinant is $0$; the right side is $0 + 0$: true.<br>(C) $|EF| = 0$, so both sides are $0$: false.<br>(D) Trace is linear and $\\operatorname{tr}(P^{-1}AP) = \\operatorname{tr}A$: both sums equal $\\operatorname{tr}E + \\operatorname{tr}F$: true.<br>Answer (A), (B), (D).",
+   "subject": "Mathematics",
+   "chapter": "Determinants",
+   "chCls": "XII"
+  },
+  {
+   "no": 12,
+   "section": 3,
+   "type": "multi",
+   "text": "Let $f : \\mathbb{R} \\to \\mathbb{R}$ be defined by $$f(x) = \\dfrac{x^2 - 3x - 6}{x^2 + 2x + 4}$$ Then which of the following statements is (are) TRUE ?",
+   "options": [
+    "$f$ is decreasing in the interval $(-2, -1)$",
+    "$f$ is increasing in the interval $(1, 2)$",
+    "$f$ is onto",
+    "Range of $f$ is $\\left[-\\dfrac32, 2\\right]$"
+   ],
+   "answer": [
+    0,
+    1
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$f'(x) = \\dfrac{(2x - 3)(x^2 + 2x + 4) - (x^2 - 3x - 6)(2x + 2)}{(x^2 + 2x + 4)^2} = \\dfrac{5x(x + 4)}{(x^2 + 2x + 4)^2}$.<br>$f' &lt; 0$ on $(-4, 0)$, so (A) is true; $f' > 0$ on $(0, \\infty)$, so (B) is true.<br>Extreme values: $f(0) = -\\dfrac32$ (minimum), $f(-4) = \\dfrac{22}{12} = \\dfrac{11}{6}$ (maximum), and $f \\to 1$ at $\\pm\\infty$.<br>Range $= \\left[-\\dfrac32, \\dfrac{11}{6}\\right]$, so $f$ is not onto and (D) is false.<br>Answer (A), (B).",
+   "subject": "Mathematics",
+   "chapter": "Application of Derivatives",
+   "chCls": "XII"
+  },
+  {
+   "no": 13,
+   "section": 3,
+   "type": "multi",
+   "text": "Let $E, F$ and $G$ be three events having probabilities $$P(E) = \\dfrac18,\\ P(F) = \\dfrac16 \\text{ and } P(G) = \\dfrac14, \\text{ and let } P(E \\cap F \\cap G) = \\dfrac{1}{10}.$$ For any event $H$, if $H^c$ denotes its complement, then which of the following statements is (are) TRUE ?",
+   "options": [
+    "$P(E \\cap F \\cap G^c) \\le \\dfrac{1}{40}$",
+    "$P(E^c \\cap F \\cap G) \\le \\dfrac{1}{15}$",
+    "$P(E \\cup F \\cup G) \\le \\dfrac{13}{24}$",
+    "$P(E^c \\cap F^c \\cap G^c) \\le \\dfrac{5}{12}$"
+   ],
+   "answer": [
+    0,
+    1,
+    2
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "(A) $P(E \\cap F \\cap G^c) = P(E \\cap F) - P(E \\cap F \\cap G) \\le P(E) - \\dfrac1{10} = \\dfrac18 - \\dfrac1{10} = \\dfrac1{40}$: true.<br>(B) $P(E^c \\cap F \\cap G) = P(F \\cap G) - P(E \\cap F \\cap G) \\le \\dfrac16 - \\dfrac1{10} = \\dfrac1{15}$: true.<br>(C) $P(E \\cup F \\cup G) \\le P(E) + P(F) + P(G) = \\dfrac{3 + 4 + 6}{24} = \\dfrac{13}{24}$: true.<br>(D) $P(E^c \\cap F^c \\cap G^c) = 1 - P(E \\cup F \\cup G) \\ge 1 - \\dfrac{13}{24} = \\dfrac{11}{24} > \\dfrac5{12}$: false.<br>Answer (A), (B), (C).",
+   "subject": "Mathematics",
+   "chapter": "Probability",
+   "chCls": "XII"
+  },
+  {
+   "no": 14,
+   "section": 3,
+   "type": "multi",
+   "text": "For any $3 \\times 3$ matrix $M$, let $|M|$ denote the determinant of $M$. Let $I$ be the $3 \\times 3$ identity matrix. Let $E$ and $F$ be two $3 \\times 3$ matrices such that $(I - EF)$ is invertible. If $G = (I - EF)^{-1}$, then which of the following statements is (are) TRUE ?",
+   "options": [
+    "$|FE| = |I - FE||FGE|$",
+    "$(I - FE)(I + FGE) = I$",
+    "$EFG = GEF$",
+    "$(I - FE)(I - FGE) = I$"
+   ],
+   "answer": [
+    0,
+    1,
+    2
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$G(I - EF) = (I - EF)G = I$ gives $GEF = G - I = EFG$, so (C) is true.<br>$(I - FE)(I + FGE) = I - FE + FGE - FEFGE = I - FE + F(G - EFG)E = I - FE + FE = I$ (using $G - EFG = I$): (B) is true.<br>(D) Since $I - FE$ is invertible with inverse $I + FGE$, (D) would force $I - FGE = I + FGE$, i.e. $FGE = O$, which is not true in general: false.<br>(A) $|FGE| = \\dfrac{|F||E|}{|I - EF|}$, and $|I - FE| = |I - EF|$ for square matrices, so $|I - FE||FGE| = |FE|$: true.<br>Answer (A), (B), (C).",
+   "subject": "Mathematics",
+   "chapter": "Matrices",
+   "chCls": "XII"
+  },
+  {
+   "no": 15,
+   "section": 3,
+   "type": "multi",
+   "text": "For any positive integer $n$, let $S_n : (0, \\infty) \\to \\mathbb{R}$ be defined by $$S_n(x) = \\sum_{k=1}^{n} \\cot^{-1}\\left(\\dfrac{1 + k(k+1)x^2}{x}\\right),$$ where for any $x \\in \\mathbb{R}$, $\\cot^{-1}(x) \\in (0, \\pi)$ and $\\tan^{-1}(x) \\in \\left(-\\dfrac{\\pi}{2}, \\dfrac{\\pi}{2}\\right)$. Then which of the following statements is (are) TRUE ?",
+   "options": [
+    "$S_{10}(x) = \\dfrac{\\pi}{2} - \\tan^{-1}\\left(\\dfrac{1 + 11x^2}{10x}\\right)$, for all $x > 0$",
+    "$\\displaystyle\\lim_{n \\to \\infty} \\cot(S_n(x)) = x$, for all $x > 0$",
+    "The equation $S_3(x) = \\dfrac{\\pi}{4}$ has a root in $(0, \\infty)$",
+    "$\\tan(S_n(x)) \\le \\dfrac12$, for all $n \\ge 1$ and $x > 0$"
+   ],
+   "answer": [
+    0,
+    1
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "For $x > 0$: $\\cot^{-1}\\dfrac{1 + k(k+1)x^2}{x} = \\tan^{-1}\\dfrac{(k+1)x - kx}{1 + (k+1)x\\cdot kx} = \\tan^{-1}(k+1)x - \\tan^{-1}kx$.<br>Telescoping: $S_n(x) = \\tan^{-1}(n+1)x - \\tan^{-1}x = \\tan^{-1}\\dfrac{nx}{1 + (n+1)x^2}$.<br>(A) $S_{10}(x) = \\tan^{-1}\\dfrac{10x}{1 + 11x^2} = \\dfrac\\pi2 - \\tan^{-1}\\dfrac{1 + 11x^2}{10x}$: true.<br>(B) $S_n(x) \\to \\dfrac\\pi2 - \\tan^{-1}x = \\cot^{-1}x$, so $\\cot S_n(x) \\to x$: true.<br>(C) $\\dfrac{3x}{1 + 4x^2} = 1 \\iff 4x^2 - 3x + 1 = 0$, discriminant $9 - 16 &lt; 0$: no root, false.<br>(D) At $x = 1$, $\\tan S_n = \\dfrac{n}{n + 2} > \\dfrac12$ for $n \\ge 3$: false.<br>Answer (A), (B).",
+   "subject": "Mathematics",
+   "chapter": "Inverse Trigonometric Functions",
+   "chCls": "XII"
+  },
+  {
+   "no": 16,
+   "section": 3,
+   "type": "multi",
+   "text": "For any complex number $w = c + id$, let $\\arg(w) \\in (-\\pi, \\pi]$, where $i = \\sqrt{-1}$. Let $\\alpha$ and $\\beta$ be real numbers such that for all complex numbers $z = x + iy$ satisfying $\\arg\\left(\\dfrac{z + \\alpha}{z + \\beta}\\right) = \\dfrac{\\pi}{4}$, the ordered pair $(x, y)$ lies on the circle $$x^2 + y^2 + 5x - 3y + 4 = 0$$ Then which of the following statements is (are) TRUE ?",
+   "options": [
+    "$\\alpha = -1$",
+    "$\\alpha\\beta = 4$",
+    "$\\alpha\\beta = -4$",
+    "$\\beta = 4$"
+   ],
+   "answer": [
+    1,
+    3
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "The locus $\\arg\\dfrac{z + \\alpha}{z + \\beta} = \\dfrac\\pi4$ is an arc of a circle through the points $-\\alpha$ and $-\\beta$ on the real axis.<br>The circle meets $y = 0$ where $x^2 + 5x + 4 = 0$, i.e. $x = -1, -4$. So $\\{\\alpha, \\beta\\} = \\{1, 4\\}$ and $\\alpha\\beta = 4$.<br>Centre $\\left(-\\dfrac52, \\dfrac32\\right)$, radius $\\dfrac{3}{\\sqrt2}$; the angle $\\dfrac\\pi4$ is subtended on the major arc, above the real axis. Take its top point $z \\approx -2.5 + 3.62i$: with $\\alpha = 1, \\beta = 4$, $\\arg(z + 1) - \\arg(z + 4) \\approx 1.963 - 1.178 = 0.785 = \\dfrac\\pi4$.<br>So $\\alpha = 1$, $\\beta = 4$: (B) and (D) are true.",
+   "subject": "Mathematics",
+   "chapter": "Complex Numbers",
+   "chCls": "XI"
+  },
+  {
+   "no": 17,
+   "section": 4,
+   "type": "num",
+   "text": "For $x \\in \\mathbb{R}$, the number of real roots of the equation $$3x^2 - 4|x^2 - 1| + x - 1 = 0$$ is ___ .",
+   "options": null,
+   "answer": {
+    "lo": 4,
+    "hi": 4
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "For $|x| \\ge 1$: $3x^2 - 4x^2 + 4 + x - 1 = 0 \\Rightarrow x^2 - x - 3 = 0$, $x = \\dfrac{1 \\pm \\sqrt{13}}{2} \\approx 2.30, -1.30$; both satisfy $|x| \\ge 1$.<br>For $|x| &lt; 1$: $3x^2 + 4x^2 - 4 + x - 1 = 0 \\Rightarrow 7x^2 + x - 5 = 0$, $x = \\dfrac{-1 \\pm \\sqrt{141}}{14} \\approx 0.78, -0.92$; both satisfy $|x| &lt; 1$.<br>Number of real roots $= 4$.",
+   "subject": "Mathematics",
+   "chapter": "Complex Numbers",
+   "chCls": "XI"
+  },
+  {
+   "no": 18,
+   "section": 4,
+   "type": "num",
+   "text": "In a triangle $ABC$, let $AB = \\sqrt{23}$, $BC = 3$ and $CA = 4$. Then the value of $$\\dfrac{\\cot A + \\cot C}{\\cot B}$$ is ___ .",
+   "options": null,
+   "answer": {
+    "lo": 2,
+    "hi": 2
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "With $a = BC = 3$, $b = CA = 4$, $c = AB = \\sqrt{23}$ and area $\\Delta$: $\\cot A = \\dfrac{b^2 + c^2 - a^2}{4\\Delta}$ and similarly for $B, C$.<br>$\\cot A + \\cot C = \\dfrac{2b^2}{4\\Delta}$, $\\cot B = \\dfrac{a^2 + c^2 - b^2}{4\\Delta}$.<br>Ratio $= \\dfrac{2b^2}{a^2 + c^2 - b^2} = \\dfrac{32}{9 + 23 - 16} = 2$.",
+   "subject": "Mathematics",
+   "chapter": "Trigonometric Functions",
+   "chCls": "XI"
+  },
+  {
+   "no": 19,
+   "section": 4,
+   "type": "num",
+   "text": "Let $\\vec u$, $\\vec v$ and $\\vec w$ be vectors in three-dimensional space, where $\\vec u$ and $\\vec v$ are unit vectors which are not perpendicular to each other and $$\\vec u \\cdot \\vec w = 1,\\quad \\vec v \\cdot \\vec w = 1,\\quad \\vec w \\cdot \\vec w = 4$$ If the volume of the parallelopiped, whose adjacent sides are represented by the vectors $\\vec u$, $\\vec v$ and $\\vec w$, is $\\sqrt2$, then the value of $|3\\vec u + 5\\vec v|$ is ___ .",
+   "options": null,
+   "answer": {
+    "lo": 7,
+    "hi": 7
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Let $\\vec u \\cdot \\vec v = c \\ne 0$. Then $[\\vec u\\ \\vec v\\ \\vec w]^2 = \\begin{vmatrix} 1 & c & 1 \\\\ c & 1 & 1 \\\\ 1 & 1 & 4 \\end{vmatrix} = 3 - c(4c - 1) + (c - 1) = 2 + 2c - 4c^2$.<br>Volume$^2 = 2$: $2c - 4c^2 = 0$, so $c = \\dfrac12$ (as $c \\ne 0$).<br>$|3\\vec u + 5\\vec v|^2 = 9 + 25 + 30c = 49$, so $|3\\vec u + 5\\vec v| = 7$.",
+   "subject": "Mathematics",
+   "chapter": "Vector Algebra",
+   "chCls": "XII"
+  },
+  {
+   "no": 1,
+   "section": 1,
+   "type": "single",
+   "text": "The smallest division on the main scale of a Vernier calipers is 0.1 cm. Ten divisions of the Vernier scale correspond to nine divisions of the main scale. The figure below on the left shows the reading of this calipers with no gap between its two jaws. The figure on the right shows the reading with a solid sphere held between the jaws. The correct diameter of the sphere is",
+   "options": [
+    "3.07 cm",
+    "3.11 cm",
+    "3.15 cm",
+    "3.17 cm"
+   ],
+   "answer": 2,
+   "full": 3,
+   "neg": 1,
+   "fig": "phy-q1.png",
+   "optionFigs": null,
+   "sol": "Least count $= 1\\text{ MSD} - 1\\text{ VSD} = 0.1 - 0.09 = 0.01$ cm.<br>Zero reading (left): the Vernier zero lies to the left of the main-scale zero and the 6th Vernier division coincides with a main-scale mark, so the zero error is $-(10 - 6) \\times 0.01 = -0.04$ cm.<br>With the sphere (right): main-scale reading $3.1$ cm, and the 1st Vernier division coincides: reading $= 3.1 + 1 \\times 0.01 = 3.11$ cm.<br>Correct diameter $= 3.11 - (-0.04) = 3.15$ cm → (C).",
+   "subject": "Physics",
+   "chapter": "Units and Measurements",
+   "chCls": "XI"
+  },
+  {
+   "no": 2,
+   "section": 1,
+   "type": "single",
+   "text": "An ideal gas undergoes a four step cycle as shown in the $P - V$ diagram below. During this cycle, heat is absorbed by the gas in",
+   "options": [
+    "steps 1 and 2",
+    "steps 1 and 3",
+    "steps 1 and 4",
+    "steps 2 and 4"
+   ],
+   "answer": 2,
+   "full": 3,
+   "neg": 1,
+   "fig": "phy-q2.png",
+   "optionFigs": null,
+   "sol": "Step 1: isobaric expansion, so $T$ rises and $Q = nC_p\\Delta T > 0$ (absorbed).<br>Step 2: isochoric fall in pressure, $T$ falls: heat released.<br>Step 3: isobaric compression, $T$ falls: heat released.<br>Step 4: isochoric rise in pressure, $T$ rises: heat absorbed.<br>Heat is absorbed in steps 1 and 4 → (C).",
+   "subject": "Physics",
+   "chapter": "Thermodynamics",
+   "chCls": "XI"
+  },
+  {
+   "no": 3,
+   "section": 1,
+   "type": "single",
+   "text": "An extended object is placed at point O, 10 cm in front of a convex lens $\\mathrm{L_1}$ and a concave lens $\\mathrm{L_2}$ is placed 10 cm behind it, as shown in the figure. The radii of curvature of all the curved surfaces in both the lenses are 20 cm. The refractive index of both the lenses is 1.5. The total magnification of this lens system is",
+   "options": [
+    "0.4",
+    "0.8",
+    "1.3",
+    "1.6"
+   ],
+   "answer": 1,
+   "full": 3,
+   "neg": 1,
+   "fig": "phy-q3.png",
+   "optionFigs": null,
+   "sol": "Lens maker: $\\dfrac1f = (1.5 - 1)\\left(\\dfrac{2}{20}\\right)$, so $f_1 = +20$ cm and $f_2 = -20$ cm.<br>$\\mathrm{L_1}$: $u = -10$ cm, $\\dfrac1v = \\dfrac1{20} - \\dfrac1{10} \\Rightarrow v = -20$ cm; $m_1 = \\dfrac{v}{u} = 2$.<br>This virtual image is $20 + 10 = 30$ cm in front of $\\mathrm{L_2}$: $\\dfrac1v = -\\dfrac1{20} - \\dfrac1{30} \\Rightarrow v = -12$ cm; $m_2 = \\dfrac{-12}{-30} = 0.4$.<br>Total magnification $= 2 \\times 0.4 = 0.8$ → (B).",
+   "subject": "Physics",
+   "chapter": "Ray Optics and Optical Instruments",
+   "chCls": "XII"
+  },
+  {
+   "no": 4,
+   "section": 1,
+   "type": "single",
+   "text": "A heavy nucleus $Q$ of half-life 20 minutes undergoes alpha-decay with probability of 60% and beta-decay with probability of 40%. Initially, the number of $Q$ nuclei is 1000. The number of alpha-decays of $Q$ in the first one hour is",
+   "options": [
+    "50",
+    "75",
+    "350",
+    "525"
+   ],
+   "answer": 3,
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "One hour is three half-lives, so the nuclei left are $1000 \\times \\left(\\dfrac12\\right)^3 = 125$.<br>Total decays $= 1000 - 125 = 875$.<br>Alpha-decays $= 0.6 \\times 875 = 525$ → (D).",
+   "subject": "Physics",
+   "chapter": "Nuclei",
+   "chCls": "XII"
+  },
+  {
+   "no": 5,
+   "section": 2,
+   "type": "num",
+   "stem": "Question Stem for Question Nos. 5 and 6",
+   "text": "A projectile is thrown from a point O on the ground at an angle $45^\\circ$ from the vertical and with a speed $5\\sqrt2$ m/s. The projectile at the highest point of its trajectory splits into two equal parts. One part falls vertically down to the ground, 0.5 s after the splitting. The other part, $t$ seconds after the splitting, falls to the ground at a distance $x$ meters from the point O. The acceleration due to gravity $g = 10$ m/s$^2$.<br><br>The value of $t$ is ___ .",
+   "options": null,
+   "answer": {
+    "lo": 0.45,
+    "hi": 0.55
+   },
+   "full": 2,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Velocity components: $u_x = u_y = 5$ m/s. Highest point after $0.5$ s, at height $H = \\dfrac{5^2}{2 \\times 10} = 1.25$ m and $2.5$ m from O.<br>A part falling from rest through $1.25$ m takes $\\sqrt{2H/g} = 0.5$ s, as stated, so that part has zero velocity just after splitting.<br>Momentum conservation: $m(5) = \\dfrac m2(0) + \\dfrac m2 v \\Rightarrow v = 10$ m/s, horizontal.<br>The other part also starts with zero vertical velocity, so it too lands after $t = 0.5$ s.",
+   "subject": "Physics",
+   "chapter": "Laws of Motion",
+   "chCls": "XI"
+  },
+  {
+   "no": 6,
+   "section": 2,
+   "type": "num",
+   "stem": "Question Stem for Question Nos. 5 and 6",
+   "text": "A projectile is thrown from a point O on the ground at an angle $45^\\circ$ from the vertical and with a speed $5\\sqrt2$ m/s. The projectile at the highest point of its trajectory splits into two equal parts. One part falls vertically down to the ground, 0.5 s after the splitting. The other part, $t$ seconds after the splitting, falls to the ground at a distance $x$ meters from the point O. The acceleration due to gravity $g = 10$ m/s$^2$.<br><br>The value of $x$ is ___ .",
+   "options": null,
+   "answer": {
+    "lo": 7.3,
+    "hi": 7.7
+   },
+   "full": 2,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "At the top: $u_x = 5$ m/s, horizontal distance from O $= 5 \\times 0.5 = 2.5$ m, height $1.25$ m.<br>The part that falls vertically has zero velocity after splitting, so the other part moves off horizontally at $v = 2 \\times 5 = 10$ m/s (momentum conservation).<br>It takes $0.5$ s to fall, covering $10 \\times 0.5 = 5$ m more.<br>$x = 2.5 + 5 = 7.5$ m.",
+   "subject": "Physics",
+   "chapter": "Laws of Motion",
+   "chCls": "XI"
+  },
+  {
+   "no": 7,
+   "section": 2,
+   "type": "num",
+   "stem": "Question Stem for Question Nos. 7 and 8",
+   "text": "In the circuit shown below, the switch S is connected to position P for a long time so that the charge on the capacitor becomes $q_1$ $\\mu$C. Then S is switched to position Q. After a long time, the charge on the capacitor is $q_2$ $\\mu$C.<br><br>The magnitude of $q_1$ is ___ .",
+   "options": null,
+   "answer": {
+    "lo": 1.3,
+    "hi": 1.4
+   },
+   "full": 2,
+   "neg": 0,
+   "fig": "phy-q7.png",
+   "optionFigs": null,
+   "sol": "In the steady state no current flows into the capacitor. With S at P, the $1$ V and $2$ V cells (positive terminals upward) oppose each other in the loop through $1\\ \\Omega$ and $2\\ \\Omega$.<br>Current $I = \\dfrac{2 - 1}{1 + 2} = \\dfrac13$ A, flowing from the $2$ V cell towards the $1$ V cell.<br>Capacitor voltage $= 2 - 2 \\times \\dfrac13 = \\dfrac43$ V (equivalently $1 + 1 \\times \\dfrac13$).<br>$q_1 = 1\\ \\mu\\text{F} \\times \\dfrac43\\text{ V} \\approx 1.33\\ \\mu$C.",
+   "subject": "Physics",
+   "chapter": "Current Electricity",
+   "chCls": "XII"
+  },
+  {
+   "no": 8,
+   "section": 2,
+   "type": "num",
+   "stem": "Question Stem for Question Nos. 7 and 8",
+   "text": "In the circuit shown below, the switch S is connected to position P for a long time so that the charge on the capacitor becomes $q_1$ $\\mu$C. Then S is switched to position Q. After a long time, the charge on the capacitor is $q_2$ $\\mu$C.<br><br>The magnitude of $q_2$ is ___ .",
+   "options": null,
+   "answer": {
+    "lo": 0.6,
+    "hi": 0.72
+   },
+   "full": 2,
+   "neg": 0,
+   "fig": "phy-q7.png",
+   "optionFigs": null,
+   "sol": "With S at Q, the left end of the $1\\ \\Omega$ resistor is joined directly to the bottom wire (potential $0$).<br>Steady current $I = \\dfrac{2}{1 + 2} = \\dfrac23$ A through $1\\ \\Omega$ and $2\\ \\Omega$.<br>Capacitor voltage $= 1 \\times \\dfrac23 = \\dfrac23$ V.<br>$q_2 = 1\\ \\mu\\text{F} \\times \\dfrac23\\text{ V} \\approx 0.67\\ \\mu$C.",
+   "subject": "Physics",
+   "chapter": "Current Electricity",
+   "chCls": "XII"
+  },
+  {
+   "no": 9,
+   "section": 2,
+   "type": "num",
+   "stem": "Question Stem for Question Nos. 9 and 10",
+   "text": "Two point charges $-Q$ and $+Q/\\sqrt3$ are placed in the $xy$-plane at the origin $(0, 0)$ and a point $(2, 0)$, respectively, as shown in the figure. This results in an equipotential circle of radius $R$ and potential $V = 0$ in the $xy$-plane with its center at $(b, 0)$. All lengths are measured in meters.<br><br>The value of $R$ is ___ meter.",
+   "options": null,
+   "answer": {
+    "lo": 1.7,
+    "hi": 1.8
+   },
+   "full": 2,
+   "neg": 0,
+   "fig": "phy-q9.png",
+   "optionFigs": null,
+   "sol": "$V = 0$: $\\dfrac{Q}{\\sqrt3\\,r_2} = \\dfrac{Q}{r_1}$, so $r_1^2 = 3r_2^2$ with $r_1, r_2$ the distances from $(0,0)$ and $(2,0)$.<br>$x^2 + y^2 = 3\\left[(x - 2)^2 + y^2\\right] \\Rightarrow x^2 + y^2 - 6x + 6 = 0$.<br>Centre $(3, 0)$, $R^2 = 9 - 6 = 3$, so $R = \\sqrt3 \\approx 1.73$ m.",
+   "subject": "Physics",
+   "chapter": "Electrostatic Potential and Capacitance",
+   "chCls": "XII"
+  },
+  {
+   "no": 10,
+   "section": 2,
+   "type": "num",
+   "stem": "Question Stem for Question Nos. 9 and 10",
+   "text": "Two point charges $-Q$ and $+Q/\\sqrt3$ are placed in the $xy$-plane at the origin $(0, 0)$ and a point $(2, 0)$, respectively, as shown in the figure. This results in an equipotential circle of radius $R$ and potential $V = 0$ in the $xy$-plane with its center at $(b, 0)$. All lengths are measured in meters.<br><br>The value of $b$ is ___ meter.",
+   "options": null,
+   "answer": {
+    "lo": 2.9,
+    "hi": 3.1
+   },
+   "full": 2,
+   "neg": 0,
+   "fig": "phy-q9.png",
+   "optionFigs": null,
+   "sol": "$V = 0$ requires $r_1 = \\sqrt3\\,r_2$: $x^2 + y^2 = 3\\left[(x - 2)^2 + y^2\\right]$.<br>This simplifies to $(x - 3)^2 + y^2 = 3$.<br>The centre is at $(3, 0)$, so $b = 3$ m.",
+   "subject": "Physics",
+   "chapter": "Electrostatic Potential and Capacitance",
+   "chCls": "XII"
+  },
+  {
+   "no": 11,
+   "section": 3,
+   "type": "multi",
+   "text": "A horizontal force $F$ is applied at the center of mass of a cylindrical object of mass $m$ and radius $R$, perpendicular to its axis as shown in the figure. The coefficient of friction between the object and the ground is $\\mu$. The center of mass of the object has an acceleration $a$. The acceleration due to gravity is $g$. Given that the object rolls without slipping, which of the following statement(s) is(are) correct?",
+   "options": [
+    "For the same $F$, the value of $a$ does not depend on whether the cylinder is solid or hollow",
+    "For a solid cylinder, the maximum possible value of $a$ is $2\\mu g$",
+    "The magnitude of the frictional force on the object due to the ground is always $\\mu mg$",
+    "For a thin-walled hollow cylinder, $a = \\dfrac{F}{2m}$"
+   ],
+   "answer": [
+    1,
+    3
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": "phy-q11.png",
+   "optionFigs": null,
+   "sol": "Translation: $F - f = ma$; rotation: $fR = I\\alpha = I\\dfrac{a}{R}$, so $f = \\dfrac{Ia}{R^2}$ and $a = \\dfrac{F}{m + I/R^2}$.<br>(A) $a$ depends on $I$, so it differs for solid and hollow cylinders: false.<br>(B) Solid: $f = \\dfrac{ma}{2} \\le \\mu mg$, so $a_{\\max} = 2\\mu g$: true.<br>(C) Friction is static and only as large as needed ($f = Ia/R^2$): false.<br>(D) Thin-walled: $I = mR^2$, $a = \\dfrac{F}{2m}$: true.<br>Answer (B), (D).",
+   "subject": "Physics",
+   "chapter": "System of Particles and Rotational Motion",
+   "chCls": "XI"
+  },
+  {
+   "no": 12,
+   "section": 3,
+   "type": "multi",
+   "text": "A wide slab consisting of two media of refractive indices $n_1$ and $n_2$ is placed in air as shown in the figure. A ray of light is incident from medium $n_1$ to $n_2$ at an angle $\\theta$, where $\\sin\\theta$ is slightly larger than $1/n_1$. Take refractive index of air as 1. Which of the following statement(s) is(are) correct?",
+   "options": [
+    "The light ray enters air if $n_2 = n_1$",
+    "The light ray is finally reflected back into the medium of refractive index $n_1$ if $n_2 &lt; n_1$",
+    "The light ray is finally reflected back into the medium of refractive index $n_1$ if $n_2 > n_1$",
+    "The light ray is reflected back into the medium of refractive index $n_1$ if $n_2 = 1$"
+   ],
+   "answer": [
+    1,
+    2,
+    3
+   ],
+   "alts": [
+    [
+     2,
+     3
+    ]
+   ],
+   "note": "Official final key: B, C, D or C, D (either set gets full marks).",
+   "full": 4,
+   "neg": 2,
+   "fig": "phy-q12.png",
+   "optionFigs": null,
+   "sol": "For parallel layers $n\\sin(\\text{angle})$ is the same in every layer: $n_1\\sin\\theta > 1$.<br>To enter air the ray would need $\\sin(\\text{angle in air}) = n_1\\sin\\theta > 1$, which is impossible. So the ray never enters air: (A) is false.<br>(B) $n_2 &lt; n_1$: either total internal reflection at the $n_1$–$n_2$ boundary, or the ray enters $n_2$ and is totally reflected at the top; either way it returns to $n_1$: true.<br>(C) $n_2 > n_1$: the ray enters $n_2$, is totally reflected at the $n_2$–air surface and comes back into $n_1$: true.<br>(D) $n_2 = 1$: $n_1\\sin\\theta > n_2$, so it is totally reflected at the boundary into $n_1$: true.<br>Answer (B), (C), (D); the official final key also accepts (C), (D).",
+   "subject": "Physics",
+   "chapter": "Ray Optics and Optical Instruments",
+   "chCls": "XII"
+  },
+  {
+   "no": 13,
+   "section": 3,
+   "type": "multi",
+   "text": "A particle of mass $M = 0.2$ kg is initially at rest in the $xy$-plane at a point $(x = -l, y = -h)$, where $l = 10$ m and $h = 1$ m. The particle is accelerated at time $t = 0$ with a constant acceleration $a = 10$ m/s$^2$ along the positive $x$-direction. Its angular momentum and torque with respect to the origin, in SI units, are represented by $\\vec L$ and $\\vec\\tau$, respectively. $\\hat\\imath$, $\\hat\\jmath$ and $\\hat k$ are unit vectors along the positive $x$, $y$ and $z$-directions, respectively. If $\\hat k = \\hat\\imath \\times \\hat\\jmath$ then which of the following statement(s) is(are) correct?",
+   "options": [
+    "The particle arrives at the point $(x = l, y = -h)$ at time $t = 2$ s",
+    "$\\vec\\tau = 2\\hat k$ when the particle passes through the point $(x = l, y = -h)$",
+    "$\\vec L = 4\\hat k$ when the particle passes through the point $(x = l, y = -h)$",
+    "$\\vec\\tau = \\hat k$ when the particle passes through the point $(x = 0, y = -h)$"
+   ],
+   "answer": [
+    0,
+    1,
+    2
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "(A) Distance $2l = 20$ m $= \\dfrac12(10)t^2 \\Rightarrow t = 2$ s: true.<br>Force $\\vec F = Ma\\,\\hat\\imath = 2\\hat\\imath$ N, and $\\vec r = x\\hat\\imath - h\\hat\\jmath$.<br>$\\vec\\tau = \\vec r \\times \\vec F = -h\\hat\\jmath \\times 2\\hat\\imath = 2h\\hat k = 2\\hat k$ at every point: (B) true, (D) false.<br>(C) At $t = 2$ s, $v = 20$ m/s, $\\vec p = 4\\hat\\imath$; $\\vec L = (-h\\hat\\jmath) \\times 4\\hat\\imath = 4\\hat k$: true.<br>Answer (A), (B), (C).",
+   "subject": "Physics",
+   "chapter": "System of Particles and Rotational Motion",
+   "chCls": "XI"
+  },
+  {
+   "no": 14,
+   "section": 3,
+   "type": "multi",
+   "text": "Which of the following statement(s) is(are) correct about the spectrum of hydrogen atom?",
+   "options": [
+    "The ratio of the longest wavelength to the shortest wavelength in Balmer series is $9/5$",
+    "There is an overlap between the wavelength ranges of Balmer and Paschen series",
+    "The wavelengths of Lyman series are given by $\\left(1 + \\dfrac{1}{m^2}\\right)\\lambda_0$, where $\\lambda_0$ is the shortest wavelength of Lyman series and $m$ is an integer",
+    "The wavelength ranges of Lyman and Balmer series do not overlap"
+   ],
+   "answer": [
+    0,
+    3
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$\\dfrac1\\lambda = R\\left(\\dfrac1{n_1^2} - \\dfrac1{n_2^2}\\right)$.<br>(A) Balmer: $\\lambda_{\\max} \\propto \\dfrac{1}{1/4 - 1/9} = \\dfrac{36}{5}$, $\\lambda_{\\min} \\propto 4$; ratio $= \\dfrac{9}{5}$: true.<br>(B) Balmer spans $365$–$656$ nm and Paschen $820$–$1875$ nm: no overlap, false.<br>(C) Lyman: $\\lambda = \\dfrac{\\lambda_0}{1 - 1/m^2} = \\left(1 + \\dfrac{1}{m^2 - 1}\\right)\\lambda_0$, not $\\left(1 + \\dfrac1{m^2}\\right)\\lambda_0$: false.<br>(D) Lyman spans $91$–$122$ nm, all below Balmer: true.<br>Answer (A), (D).",
+   "subject": "Physics",
+   "chapter": "Atoms",
+   "chCls": "XII"
+  },
+  {
+   "no": 15,
+   "section": 3,
+   "type": "multi",
+   "text": "A long straight wire carries a current, $I = 2$ ampere. A semi-circular conducting rod is placed beside it on two conducting parallel rails of negligible resistance. Both the rails are parallel to the wire. The wire, the rod and the rails lie in the same horizontal plane, as shown in the figure. Two ends of the semi-circular rod are at distances 1 cm and 4 cm from the wire. At time $t = 0$, the rod starts moving on the rails with a speed $v = 3.0$ m/s (see the figure).<br>A resistor $R = 1.4\\ \\Omega$ and a capacitor $C_o = 5.0\\ \\mu$F are connected in series between the rails. At time $t = 0$, $C_o$ is uncharged. Which of the following statement(s) is(are) correct? [$\\mu_0 = 4\\pi \\times 10^{-7}$ SI units. Take $\\ln 2 = 0.7$]",
+   "options": [
+    "Maximum current through $R$ is $1.2 \\times 10^{-6}$ ampere",
+    "Maximum current through $R$ is $3.8 \\times 10^{-6}$ ampere",
+    "Maximum charge on capacitor $C_o$ is $8.4 \\times 10^{-12}$ coulomb",
+    "Maximum charge on capacitor $C_o$ is $2.4 \\times 10^{-12}$ coulomb"
+   ],
+   "answer": [
+    0,
+    2
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": "phy-q15.png",
+   "optionFigs": null,
+   "sol": "The emf of the curved rod equals that of the straight segment joining its ends (from $r = 1$ cm to $4$ cm):<br>$\\varepsilon = \\displaystyle\\int_{1\\text{ cm}}^{4\\text{ cm}} \\dfrac{\\mu_0 I}{2\\pi r}v\\,dr = \\dfrac{\\mu_0 I v}{2\\pi}\\ln 4 = 2\\times10^{-7} \\times 2 \\times 3 \\times 1.4 = 1.68 \\times 10^{-6}$ V.<br>Maximum current (at $t = 0$, capacitor uncharged): $\\dfrac{\\varepsilon}{R} = \\dfrac{1.68\\times10^{-6}}{1.4} = 1.2 \\times 10^{-6}$ A: (A).<br>Maximum charge (fully charged): $C_o\\varepsilon = 5\\times10^{-6} \\times 1.68\\times10^{-6} = 8.4 \\times 10^{-12}$ C: (C).<br>Answer (A), (C).",
+   "subject": "Physics",
+   "chapter": "Electromagnetic Induction",
+   "chCls": "XII"
+  },
+  {
+   "no": 16,
+   "section": 3,
+   "type": "multi",
+   "text": "A cylindrical tube, with its base as shown in the figure, is filled with water. It is moving down with a constant acceleration $a$ along a fixed inclined plane with angle $\\theta = 45^\\circ$. $P_1$ and $P_2$ are pressures at points 1 and 2, respectively, located at the base of the tube. Let $\\beta = (P_1 - P_2)/(\\rho g d)$, where $\\rho$ is density of water, $d$ is the inner diameter of the tube and $g$ is the acceleration due to gravity. Which of the following statement(s) is(are) correct?",
+   "options": [
+    "$\\beta = 0$ when $a = g/\\sqrt2$",
+    "$\\beta > 0$ when $a = g/\\sqrt2$",
+    "$\\beta = \\dfrac{\\sqrt2 - 1}{\\sqrt2}$ when $a = g/2$",
+    "$\\beta = \\dfrac{1}{\\sqrt2}$ when $a = g/2$"
+   ],
+   "answer": [
+    0,
+    2
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": "phy-q16.png",
+   "optionFigs": null,
+   "sol": "In the tube's frame the water feels $\\vec g_{\\text{eff}} = \\vec g - \\vec a$, and $\\nabla P = \\rho\\,\\vec g_{\\text{eff}}$.<br>The base lies along the incline; point 1 is $\\sqrt2\\,d$ further down the slope than point 2 (the base spans the horizontal width $d$ at $45^\\circ$).<br>Component of $\\vec g_{\\text{eff}}$ down the slope: $g\\sin45^\\circ - a$.<br>$P_1 - P_2 = \\rho(g\\sin45^\\circ - a)\\sqrt2\\,d$, so $\\beta = 1 - \\dfrac{\\sqrt2\\,a}{g}$.<br>$a = \\dfrac{g}{\\sqrt2}$: $\\beta = 0$ (A). $a = \\dfrac g2$: $\\beta = 1 - \\dfrac{1}{\\sqrt2} = \\dfrac{\\sqrt2 - 1}{\\sqrt2}$ (C).<br>Answer (A), (C).",
+   "subject": "Physics",
+   "chapter": "Mechanical Properties of Fluids",
+   "chCls": "XI"
+  },
+  {
+   "no": 17,
+   "section": 4,
+   "type": "num",
+   "text": "An $\\alpha$-particle (mass 4 amu) and a singly charged sulfur ion (mass 32 amu) are initially at rest. They are accelerated through a potential $V$ and then allowed to pass into a region of uniform magnetic field which is normal to the velocities of the particles. Within this region, the $\\alpha$-particle and the sulfur ion move in circular orbits of radii $r_\\alpha$ and $r_S$, respectively. The ratio $(r_S/r_\\alpha)$ is ___.",
+   "options": null,
+   "answer": {
+    "lo": 4,
+    "hi": 4
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "After acceleration $\\dfrac12mv^2 = qV$, so $mv = \\sqrt{2mqV}$.<br>$r = \\dfrac{mv}{qB} = \\dfrac1B\\sqrt{\\dfrac{2mV}{q}} \\propto \\sqrt{\\dfrac mq}$.<br>$\\dfrac{r_S}{r_\\alpha} = \\sqrt{\\dfrac{32/1}{4/2}} = \\sqrt{16} = 4$.",
+   "subject": "Physics",
+   "chapter": "Moving Charges and Magnetism",
+   "chCls": "XII"
+  },
+  {
+   "no": 18,
+   "section": 4,
+   "type": "num",
+   "text": "A thin rod of mass $M$ and length $a$ is free to rotate in horizontal plane about a fixed vertical axis passing through point O. A thin circular disc of mass $M$ and of radius $a/4$ is pivoted on this rod with its center at a distance $a/4$ from the free end so that it can rotate freely about its vertical axis, as shown in the figure. Assume that both the rod and the disc have uniform density and they remain horizontal during the motion. An outside stationary observer finds the rod rotating with an angular velocity $\\Omega$ and the disc rotating about its vertical axis with angular velocity $4\\Omega$. The total angular momentum of the system about the point O is $\\left(\\dfrac{Ma^2\\Omega}{48}\\right)n$.<br>The value of $n$ is ___.",
+   "options": null,
+   "answer": {
+    "lo": 49,
+    "hi": 49
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": "phy-q18.png",
+   "optionFigs": null,
+   "sol": "Rod about O: $\\dfrac{Ma^2}{3}\\Omega$.<br>Disc centre is $\\dfrac{3a}{4}$ from O; orbital part: $M\\left(\\dfrac{3a}{4}\\right)^2\\Omega = \\dfrac{9Ma^2\\Omega}{16}$.<br>Spin part (angular velocity $4\\Omega$ as seen from the ground): $\\dfrac12M\\left(\\dfrac a4\\right)^2 \\cdot 4\\Omega = \\dfrac{Ma^2\\Omega}{8}$.<br>Total $= Ma^2\\Omega\\left(\\dfrac{16 + 27 + 6}{48}\\right) = \\dfrac{49}{48}Ma^2\\Omega$, so $n = 49$.",
+   "subject": "Physics",
+   "chapter": "System of Particles and Rotational Motion",
+   "chCls": "XI"
+  },
+  {
+   "no": 19,
+   "section": 4,
+   "type": "num",
+   "text": "A small object is placed at the center of a large evacuated hollow spherical container. Assume that the container is maintained at 0 K. At time $t = 0$, the temperature of the object is 200 K. The temperature of the object becomes 100 K at $t = t_1$ and 50 K at $t = t_2$. Assume the object and the container to be ideal black bodies. The heat capacity of the object does not depend on temperature.<br>The ratio $(t_2/t_1)$ is ___.",
+   "options": null,
+   "answer": {
+    "lo": 9,
+    "hi": 9
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "With the surroundings at 0 K: $C\\dfrac{dT}{dt} = -\\sigma A T^4$.<br>Integrating: $t = \\dfrac{C}{3\\sigma A}\\left(\\dfrac{1}{T^3} - \\dfrac{1}{T_0^3}\\right)$ with $T_0 = 200$ K.<br>$t_1 \\propto \\dfrac{1}{100^3} - \\dfrac{1}{200^3} = \\dfrac{8 - 1}{200^3}$; $t_2 \\propto \\dfrac{1}{50^3} - \\dfrac{1}{200^3} = \\dfrac{64 - 1}{200^3}$.<br>$\\dfrac{t_2}{t_1} = \\dfrac{63}{7} = 9$.",
+   "subject": "Physics",
+   "chapter": "Thermal Properties of Matter",
+   "chCls": "XI"
+  },
+  {
+   "no": 1,
+   "section": 1,
+   "type": "single",
+   "text": "The major product formed in the following reaction is",
+   "options": [
+    "",
+    "",
+    "",
+    ""
+   ],
+   "answer": 1,
+   "full": 3,
+   "neg": 1,
+   "fig": "che-q1.png",
+   "optionFigs": [
+    "che-q1a.png",
+    "che-q1b.png",
+    "che-q1c.png",
+    "che-q1d.png"
+   ],
+   "sol": "The substrate is deca-1,7-diyne: one terminal and one internal $\\mathrm{C{\\equiv}C}$.<br>$\\mathrm{NaNH_2}$ first converts the terminal alkyne into its sodium acetylide, which is not reduced by Na/liq. $\\mathrm{NH_3}$.<br>The internal alkyne is reduced by Na/liq. $\\mathrm{NH_3}$ (dissolving-metal reduction) to the trans (E) alkene.<br>On work-up the terminal alkyne is regenerated: (E)-dec-7-en-1-yne → (B).",
+   "subject": "Chemistry",
+   "chapter": "Hydrocarbons",
+   "chCls": "XI"
+  },
+  {
+   "no": 2,
+   "section": 1,
+   "type": "single",
+   "text": "Among the following, the conformation that corresponds to the most stable conformation of meso-butane-2,3-diol is",
+   "options": [
+    "",
+    "",
+    "",
+    ""
+   ],
+   "answer": 1,
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": [
+    "che-q2a.png",
+    "che-q2b.png",
+    "che-q2c.png",
+    "che-q2d.png"
+   ],
+   "sol": "In (A) the two OH groups, the two Me groups and the two H atoms are each anti: this is the anti conformer of the meso diol.<br>In (B) the OH groups are gauche (as are the Me groups), which is also a staggered conformer of the meso compound.<br>The gauche arrangement allows an intramolecular O–H···O hydrogen bond, which outweighs the gauche Me/Me and OH/OH repulsions.<br>So the most stable conformation is (B).",
+   "subject": "Chemistry",
+   "chapter": "Organic Chemistry – Some Basic Principles and Techniques",
+   "chCls": "XI"
+  },
+  {
+   "no": 3,
+   "section": 1,
+   "type": "single",
+   "text": "For the given close packed structure of a salt made of cation $\\mathbf{X}$ and anion $\\mathbf{Y}$ shown below (ions of only one face are shown for clarity), the packing fraction is approximately (packing fraction $= \\dfrac{\\text{packing efficiency}}{100}$)",
+   "options": [
+    "0.74",
+    "0.63",
+    "0.52",
+    "0.48"
+   ],
+   "answer": 1,
+   "full": 3,
+   "neg": 1,
+   "fig": "che-q3.png",
+   "optionFigs": null,
+   "sol": "Anions Y sit at the cube corners and touch along the edge: $a = 2r_Y$. Cation X sits at each face centre, touching the corner anions along the face diagonal: $\\sqrt2\\,a = 2r_Y + 2r_X$, so $r_X = (\\sqrt2 - 1)r_Y \\approx 0.414\\,r_Y$.<br>Per unit cell: Y $= 8 \\times \\frac18 = 1$; X $= 6 \\times \\frac12 = 3$.<br>Packing fraction $= \\dfrac{\\frac43\\pi\\left(r_Y^3 + 3r_X^3\\right)}{(2r_Y)^3} = \\dfrac{\\pi}{6}\\left(1 + 3 \\times 0.0711\\right) \\approx 0.5236 \\times 1.213 \\approx 0.63$ → (B).",
+   "subject": "Chemistry",
+   "chapter": "Some Basic Concepts of Chemistry",
+   "chCls": "XI"
+  },
+  {
+   "no": 4,
+   "section": 1,
+   "type": "single",
+   "text": "The calculated spin only magnetic moments of $\\mathrm{[Cr(NH_3)_6]^{3+}}$ and $\\mathrm{[CuF_6]^{3-}}$ in BM, respectively, are<br>(Atomic numbers of Cr and Cu are 24 and 29, respectively)",
+   "options": [
+    "3.87 and 2.84",
+    "4.90 and 1.73",
+    "3.87 and 1.73",
+    "4.90 and 2.84"
+   ],
+   "answer": 0,
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$\\mathrm{Cr^{3+}}$ is $d^3$: three unpaired electrons whatever the ligand; $\\mu = \\sqrt{3 \\times 5} = 3.87$ BM.<br>$\\mathrm{Cu^{3+}}$ is $d^8$; in the octahedral complex with weak-field $\\mathrm{F^-}$ the configuration is $t_{2g}^6e_g^2$, two unpaired electrons; $\\mu = \\sqrt{2 \\times 4} = 2.84$ BM.<br>Answer (A).",
+   "subject": "Chemistry",
+   "chapter": "Coordination Compounds",
+   "chCls": "XII"
+  },
+  {
+   "no": 5,
+   "section": 2,
+   "type": "num",
+   "stem": "Question Stem for Question Nos. 5 and 6",
+   "text": "For the following reaction scheme, percentage yields are given along the arrow:<br>$\\mathbf{x}$ g and $\\mathbf{y}$ g are mass of $\\mathbf{R}$ and $\\mathbf{U}$, respectively.<br>(Use: Molar mass (in g mol$^{-1}$) of H, C and O as 1, 12 and 16, respectively)<br><br>The value of $\\mathbf{x}$ is ___.",
+   "options": null,
+   "answer": {
+    "lo": 1.62,
+    "hi": 1.62
+   },
+   "full": 2,
+   "neg": 0,
+   "fig": "che-q5.png",
+   "optionFigs": null,
+   "sol": "$\\mathrm{Mg_2C_3 + 4H_2O \\rightarrow 2Mg(OH)_2 + CH_3C{\\equiv}CH}$: P is propyne ($M = 40$); $4.0$ g $= 0.1$ mol.<br>$\\mathrm{NaNH_2}$ then MeI: Q is but-2-yne, $0.1 \\times 0.75 = 0.075$ mol.<br>Red hot iron tube (873 K) trimerises the alkyne: R is hexamethylbenzene, $\\mathrm{C_{12}H_{18}}$ ($M = 162$); moles $= \\dfrac{0.075}{3} \\times 0.40 = 0.01$.<br>$\\mathbf{x} = 0.01 \\times 162 = 1.62$.",
+   "subject": "Chemistry",
+   "chapter": "Hydrocarbons",
+   "chCls": "XI"
+  },
+  {
+   "no": 6,
+   "section": 2,
+   "type": "num",
+   "stem": "Question Stem for Question Nos. 5 and 6",
+   "text": "For the following reaction scheme, percentage yields are given along the arrow:<br>$\\mathbf{x}$ g and $\\mathbf{y}$ g are mass of $\\mathbf{R}$ and $\\mathbf{U}$, respectively.<br>(Use: Molar mass (in g mol$^{-1}$) of H, C and O as 1, 12 and 16, respectively)<br><br>The value of $\\mathbf{y}$ is ___.",
+   "options": null,
+   "answer": {
+    "lo": 3.2,
+    "hi": 3.2
+   },
+   "accept": [
+    {
+     "lo": 3.9,
+     "hi": 3.91
+    }
+   ],
+   "note": "Official final key: [3.20 to 3.20] or [3.90 to 3.91] (either range is awarded marks).",
+   "full": 2,
+   "neg": 0,
+   "fig": "che-q5.png",
+   "optionFigs": null,
+   "sol": "P (propyne, $0.1$ mol) with $\\mathrm{Hg^{2+}/H^+}$ gives S = acetone, $0.1$ mol (100%).<br>$\\mathrm{Ba(OH)_2}$, heat: aldol condensation of two acetone molecules to T = mesityl oxide, $\\mathrm{(CH_3)_2C{=}CHCOCH_3}$; $\\dfrac{0.1}{2} \\times 0.80 = 0.04$ mol.<br>NaOCl (haloform reaction): U = 3-methylbut-2-enoic acid, $\\mathrm{(CH_3)_2C{=}CHCOOH}$ ($M = 100$), which still has the C=C and decolourises Baeyer's reagent; $0.04 \\times 0.80 = 0.032$ mol.<br>$\\mathbf{y} = 0.032 \\times 100 = 3.20$.<br>(Taking U as the sodium salt formed in the NaOCl medium, $M = 122$, gives $3.90$; the official key accepts both.)",
+   "subject": "Chemistry",
+   "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+   "chCls": "XII"
+  },
+  {
+   "no": 7,
+   "section": 2,
+   "type": "num",
+   "stem": "Question Stem for Question Nos. 7 and 8",
+   "text": "For the reaction, $\\mathbf{X}(s) \\rightleftharpoons \\mathbf{Y}(s) + \\mathbf{Z}(g)$, the plot of $\\ln\\dfrac{p_\\mathbf{Z}}{p^\\ominus}$ versus $\\dfrac{10^4}{T}$ is given below (in solid line), where $p_\\mathbf{Z}$ is the pressure (in bar) of the gas $\\mathbf{Z}$ at temperature $T$ and $p^\\ominus = 1$ bar.<br>(Given, $\\dfrac{d(\\ln K)}{d\\left(\\frac1T\\right)} = -\\dfrac{\\Delta H^\\ominus}{R}$, where the equilibrium constant, $K = \\dfrac{p_\\mathbf{Z}}{p^\\ominus}$ and the gas constant, $R = 8.314$ J K$^{-1}$ mol$^{-1}$)<br><br>The value of standard enthalpy, $\\Delta H^\\ominus$ (in kJ mol$^{-1}$) for the given reaction is ___.",
+   "options": null,
+   "answer": {
+    "lo": 166.2,
+    "hi": 166.3
+   },
+   "full": 2,
+   "neg": 0,
+   "fig": "che-q7.png",
+   "optionFigs": null,
+   "sol": "From the graph, $\\ln K = -3$ at $\\dfrac{10^4}{T} = 10$ and $\\ln K = -7$ at $\\dfrac{10^4}{T} = 12$.<br>Slope $\\dfrac{d\\ln K}{d(1/T)} = \\dfrac{-7 - (-3)}{(12 - 10)\\times10^{-4}} = -2 \\times 10^4$ K.<br>$\\Delta H^\\ominus = 2 \\times 10^4 \\times 8.314 = 166280$ J mol$^{-1} \\approx 166.28$ kJ mol$^{-1}$.",
+   "subject": "Chemistry",
+   "chapter": "Thermodynamics",
+   "chCls": "XI"
+  },
+  {
+   "no": 8,
+   "section": 2,
+   "type": "num",
+   "stem": "Question Stem for Question Nos. 7 and 8",
+   "text": "For the reaction, $\\mathbf{X}(s) \\rightleftharpoons \\mathbf{Y}(s) + \\mathbf{Z}(g)$, the plot of $\\ln\\dfrac{p_\\mathbf{Z}}{p^\\ominus}$ versus $\\dfrac{10^4}{T}$ is given below (in solid line), where $p_\\mathbf{Z}$ is the pressure (in bar) of the gas $\\mathbf{Z}$ at temperature $T$ and $p^\\ominus = 1$ bar.<br>(Given, $\\dfrac{d(\\ln K)}{d\\left(\\frac1T\\right)} = -\\dfrac{\\Delta H^\\ominus}{R}$, where the equilibrium constant, $K = \\dfrac{p_\\mathbf{Z}}{p^\\ominus}$ and the gas constant, $R = 8.314$ J K$^{-1}$ mol$^{-1}$)<br><br>The value of $\\Delta S^\\ominus$ (in J K$^{-1}$ mol$^{-1}$) for the given reaction, at 1000 K is ___.",
+   "options": null,
+   "answer": {
+    "lo": 141.0,
+    "hi": 142.0
+   },
+   "full": 2,
+   "neg": 0,
+   "fig": "che-q7.png",
+   "optionFigs": null,
+   "sol": "At 1000 K, $\\dfrac{10^4}{T} = 10$ and $\\ln K = -3$.<br>$\\Delta G^\\ominus = -RT\\ln K = 8.314 \\times 1000 \\times 3 = 24942$ J mol$^{-1}$.<br>From the slope, $\\Delta H^\\ominus = 2\\times10^4 \\times 8.314 = 166280$ J mol$^{-1}$.<br>$\\Delta S^\\ominus = \\dfrac{\\Delta H^\\ominus - \\Delta G^\\ominus}{T} = \\dfrac{166280 - 24942}{1000} \\approx 141.34$ J K$^{-1}$ mol$^{-1}$.",
+   "subject": "Chemistry",
+   "chapter": "Thermodynamics",
+   "chCls": "XI"
+  },
+  {
+   "no": 9,
+   "section": 2,
+   "type": "num",
+   "stem": "Question Stem for Question Nos. 9 and 10",
+   "text": "The boiling point of water in a 0.1 molal silver nitrate solution (solution $\\mathbf{A}$) is $\\mathbf{x}$ °C. To this solution $\\mathbf{A}$, an equal volume of 0.1 molal aqueous barium chloride solution is added to make a new solution $\\mathbf{B}$. The difference in the boiling points of water in the two solutions $\\mathbf{A}$ and $\\mathbf{B}$ is $\\mathbf{y} \\times 10^{-2}$ °C.<br>(Assume: Densities of the solutions $\\mathbf{A}$ and $\\mathbf{B}$ are the same as that of water and the soluble salts dissociate completely.<br>Use: Molal elevation constant (Ebullioscopic Constant), $K_b = 0.5$ K kg mol$^{-1}$; Boiling point of pure water as 100 °C.)<br><br>The value of $\\mathbf{x}$ is ___.",
+   "options": null,
+   "answer": {
+    "lo": 100.1,
+    "hi": 100.1
+   },
+   "full": 2,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$\\mathrm{AgNO_3}$ gives two ions: $i = 2$.<br>$\\Delta T_b = iK_bm = 2 \\times 0.5 \\times 0.1 = 0.1$ K.<br>$\\mathbf{x} = 100 + 0.1 = 100.1$.",
+   "subject": "Chemistry",
+   "chapter": "Solutions",
+   "chCls": "XII"
+  },
+  {
+   "no": 10,
+   "section": 2,
+   "type": "num",
+   "stem": "Question Stem for Question Nos. 9 and 10",
+   "text": "The boiling point of water in a 0.1 molal silver nitrate solution (solution $\\mathbf{A}$) is $\\mathbf{x}$ °C. To this solution $\\mathbf{A}$, an equal volume of 0.1 molal aqueous barium chloride solution is added to make a new solution $\\mathbf{B}$. The difference in the boiling points of water in the two solutions $\\mathbf{A}$ and $\\mathbf{B}$ is $\\mathbf{y} \\times 10^{-2}$ °C.<br>(Assume: Densities of the solutions $\\mathbf{A}$ and $\\mathbf{B}$ are the same as that of water and the soluble salts dissociate completely.<br>Use: Molal elevation constant (Ebullioscopic Constant), $K_b = 0.5$ K kg mol$^{-1}$; Boiling point of pure water as 100 °C.)<br><br>The value of $|\\mathbf{y}|$ is ___.",
+   "options": null,
+   "answer": {
+    "lo": 2.5,
+    "hi": 2.5
+   },
+   "full": 2,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Take 1 kg water in each solution. A: $0.1$ mol $\\mathrm{Ag^+}$ and $0.1$ mol $\\mathrm{NO_3^-}$; added: $0.1$ mol $\\mathrm{Ba^{2+}}$ and $0.2$ mol $\\mathrm{Cl^-}$.<br>$0.1$ mol AgCl precipitates. Ions left: $0.1\\ \\mathrm{NO_3^-} + 0.1\\ \\mathrm{Ba^{2+}} + 0.1\\ \\mathrm{Cl^-} = 0.3$ mol in 2 kg water, i.e. $0.15$ molal of ions.<br>$\\Delta T_b(\\mathbf{B}) = 0.5 \\times 0.15 = 0.075$ K, while $\\Delta T_b(\\mathbf{A}) = 0.1$ K.<br>Difference $= 0.025$ °C $= 2.5 \\times 10^{-2}$ °C, so $|\\mathbf{y}| = 2.5$.",
+   "subject": "Chemistry",
+   "chapter": "Solutions",
+   "chCls": "XII"
+  },
+  {
+   "no": 11,
+   "section": 3,
+   "type": "multi",
+   "text": "Given: D-glucose on reaction with $\\mathrm{HNO_3}$ gives $\\mathbf{P}$, $[\\alpha]_\\mathrm{D} = +52.7^\\circ$ (see the figure).<br>The compound(s), which on reaction with $\\mathrm{HNO_3}$ will give the product having degree of rotation, $[\\alpha]_\\mathrm{D} = -52.7^\\circ$ is(are)",
+   "options": [
+    "",
+    "",
+    "",
+    ""
+   ],
+   "answer": [
+    2,
+    3
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": "che-q11.png",
+   "optionFigs": [
+    "che-q11a.png",
+    "che-q11b.png",
+    "che-q11c.png",
+    "che-q11d.png"
+   ],
+   "sol": "$\\mathrm{HNO_3}$ oxidises both ends to $\\mathrm{COOH}$: P is D-glucaric acid. The product with $[\\alpha]_\\mathrm{D} = -52.7^\\circ$ is its enantiomer, L-glucaric acid.<br>Reading the OH positions (C-2 to C-5, R = right, L = left): D-glucose R, L, R, R.<br>(A) L, L, R, R is D-mannose → D-mannaric acid: no.<br>(B) L, L, R, L is L-gulose; its glucaric acid (read from the other end) is D-glucaric acid ($+52.7^\\circ$): no.<br>(C) L, R, L, L is L-glucose, the mirror image of D-glucose → L-glucaric acid: yes.<br>(D) R, R, L, R is D-gulose; swapping the ends of its diacid gives L, R, L, L, i.e. L-glucaric acid: yes.<br>Answer (C), (D).",
+   "subject": "Chemistry",
+   "chapter": "Biomolecules",
+   "chCls": "XII"
+  },
+  {
+   "no": 12,
+   "section": 3,
+   "type": "multi",
+   "text": "The reaction of $\\mathbf{Q}$ with PhSNa yields an organic compound (major product) that gives positive Carius test on treatment with $\\mathrm{Na_2O_2}$ followed by addition of $\\mathrm{BaCl_2}$. The correct option(s) for $\\mathbf{Q}$ is(are)",
+   "options": [
+    "",
+    "",
+    "",
+    ""
+   ],
+   "answer": [
+    0,
+    3
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": null,
+   "optionFigs": [
+    "che-q12a.png",
+    "che-q12b.png",
+    "che-q12c.png",
+    "che-q12d.png"
+   ],
+   "sol": "A positive test (white $\\mathrm{BaSO_4}$) means the product contains sulfur, so $\\mathrm{PhS^-}$ must actually substitute into Q.<br>(A) 1-fluoro-2,4-dinitrobenzene: F is ortho and para to $\\mathrm{NO_2}$ groups, so $\\mathrm{S_NAr}$ gives the aryl phenyl sulfide: yes.<br>(B) and (C) The halogen is only meta to the $\\mathrm{NO_2}$ group(s), so the ring is not activated and no substitution takes place: no product is formed.<br>(D) A benzylic chloride: $\\mathrm{S_N2}$ with $\\mathrm{PhS^-}$ gives $\\mathrm{ArCH_2SPh}$: yes.<br>Answer (A), (D).",
+   "subject": "Chemistry",
+   "chapter": "Haloalkanes and Haloarenes",
+   "chCls": "XII"
+  },
+  {
+   "no": 13,
+   "section": 3,
+   "type": "multi",
+   "text": "The correct statement(s) related to colloids is(are)",
+   "options": [
+    "The process of precipitating colloidal sol by an electrolyte is called peptization.",
+    "Colloidal solution freezes at higher temperature than the true solution at the same concentration.",
+    "Surfactants form micelle above critical micelle concentration (CMC). CMC depends on temperature.",
+    "Micelles are macromolecular colloids."
+   ],
+   "answer": [
+    1,
+    2
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "(A) Precipitating a sol with an electrolyte is coagulation; peptization is the reverse (turning a precipitate into a sol): false.<br>(B) At the same mass concentration a colloid has far fewer particles, so its freezing point depression is smaller and it freezes at a higher temperature: true.<br>(C) Micelles form only above the CMC, and the CMC varies with temperature (micelles form above the Kraft temperature): true.<br>(D) Micelles are associated colloids, not macromolecular colloids: false.<br>Answer (B), (C).",
+   "subject": "Chemistry",
+   "chapter": "Solutions",
+   "chCls": "XII"
+  },
+  {
+   "no": 14,
+   "section": 3,
+   "type": "multi",
+   "text": "An ideal gas undergoes a reversible isothermal expansion from state I to state II followed by a reversible adiabatic expansion from state II to state III. The correct plot(s) representing the changes from state I to state III is(are)<br>($p$: pressure, $V$: volume, $T$: temperature, $H$: enthalpy, $S$: entropy)",
+   "options": [
+    "",
+    "",
+    "",
+    ""
+   ],
+   "answer": [
+    0,
+    1,
+    3
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": null,
+   "optionFigs": [
+    "che-q14a.png",
+    "che-q14b.png",
+    "che-q14c.png",
+    "che-q14d.png"
+   ],
+   "sol": "I → II (isothermal expansion): $T$ and $H$ constant, $p$ falls, $V$ and $S$ increase.<br>II → III (reversible adiabatic expansion): $S$ constant, $T$ and $H$ fall, $p$ falls more steeply than on the isotherm.<br>(A) $p$–$V$: hyperbola-like fall, then a steeper fall: correct.<br>(B) $p$–$T$: vertical drop in $p$ at constant $T$, then both $p$ and $T$ fall: correct.<br>(C) $H$–$S$: II → III should be a vertical fall in $H$, not a rise: wrong.<br>(D) $T$–$S$: horizontal (constant $T$, $S$ up), then vertical drop in $T$: correct.<br>Answer (A), (B), (D).",
+   "subject": "Chemistry",
+   "chapter": "Thermodynamics",
+   "chCls": "XI"
+  },
+  {
+   "no": 15,
+   "section": 3,
+   "type": "multi",
+   "text": "The correct statement(s) related to the metal extraction processes is(are)",
+   "options": [
+    "A mixture of PbS and PbO undergoes self-reduction to produce Pb and $\\mathrm{SO_2}$.",
+    "In the extraction process of copper from copper pyrites, silica is added to produce copper silicate.",
+    "Partial oxidation of sulphide ore of copper by roasting, followed by self-reduction produces blister copper.",
+    "In cyanide process, zinc powder is utilized to precipitate gold from $\\mathrm{Na[Au(CN)_2]}$."
+   ],
+   "answer": [
+    0,
+    2,
+    3
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "(A) $\\mathrm{PbS + 2PbO \\rightarrow 3Pb + SO_2}$: true.<br>(B) Silica removes iron as slag, $\\mathrm{FeO + SiO_2 \\rightarrow FeSiO_3}$, not copper silicate: false.<br>(C) $\\mathrm{2Cu_2S + 3O_2 \\rightarrow 2Cu_2O + 2SO_2}$, then $\\mathrm{2Cu_2O + Cu_2S \\rightarrow 6Cu + SO_2}$ gives blister copper: true.<br>(D) $\\mathrm{2Na[Au(CN)_2] + Zn \\rightarrow Na_2[Zn(CN)_4] + 2Au}$: true.<br>Answer (A), (C), (D).",
+   "subject": "Chemistry",
+   "chapter": "Redox Reactions",
+   "chCls": "XI"
+  },
+  {
+   "no": 16,
+   "section": 3,
+   "type": "multi",
+   "text": "A mixture of two salts is used to prepare a solution $\\mathbf{S}$, which gives the following results:<br>The correct option(s) for the salt mixture is(are)",
+   "options": [
+    "$\\mathrm{Pb(NO_3)_2}$ and $\\mathrm{Zn(NO_3)_2}$",
+    "$\\mathrm{Pb(NO_3)_2}$ and $\\mathrm{Bi(NO_3)_3}$",
+    "$\\mathrm{AgNO_3}$ and $\\mathrm{Bi(NO_3)_3}$",
+    "$\\mathrm{Pb(NO_3)_2}$ and $\\mathrm{Hg(NO_3)_2}$"
+   ],
+   "answer": [
+    0,
+    1
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": "che-q16.png",
+   "optionFigs": null,
+   "sol": "Both reagents must give only white precipitates.<br>(A) Dilute NaOH: $\\mathrm{Pb(OH)_2}$ and $\\mathrm{Zn(OH)_2}$, both white; dilute HCl: $\\mathrm{PbCl_2}$, white: fits.<br>(B) Dilute NaOH: $\\mathrm{Pb(OH)_2}$ and $\\mathrm{Bi(OH)_3}$, both white; dilute HCl: $\\mathrm{PbCl_2}$ and BiOCl (from hydrolysis of $\\mathrm{BiCl_3}$), both white: fits.<br>(C) NaOH gives brown $\\mathrm{Ag_2O}$: no.<br>(D) NaOH gives yellow HgO: no.<br>Answer (A), (B).",
+   "subject": "Chemistry",
+   "chapter": "Equilibrium",
+   "chCls": "XI"
+  },
+  {
+   "no": 17,
+   "section": 4,
+   "type": "num",
+   "text": "The maximum number of possible isomers (including stereoisomers) which may be formed on mono-bromination of 1-methylcyclohex-1-ene using $\\mathrm{Br_2}$ and UV light is ___.",
+   "options": null,
+   "answer": {
+    "lo": 9,
+    "hi": 9
+   },
+   "accept": [
+    {
+     "lo": 13,
+     "hi": 13
+    },
+    {
+     "lo": 14,
+     "hi": 14
+    }
+   ],
+   "note": "Official final key: 9 or 13 or 14 (any of these values is awarded marks).",
+   "full": 4,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$\\mathrm{Br_2}$/UV brominates at the allylic positions through resonance-stabilised allylic radicals: C-3, C-6 and the $\\mathrm{CH_3}$ group.<br>C-3 radical: 3-bromo-1-methylcyclohexene (chiral, 2) and 3-bromo-3-methylcyclohexene (chiral, 2).<br>C-6 radical: both ends give 6-bromo-1-methylcyclohexene (chiral, 2).<br>$\\mathrm{CH_2}$ radical: 1-(bromomethyl)cyclohexene (achiral, 1) and 2-bromo-1-methylidenecyclohexane (chiral, 2).<br>Total $= 2 + 2 + 2 + 1 + 2 = 9$.<br>(Also counting substitution at C-4 and C-5 (2 + 2) gives 13, and adding the vinylic product gives 14; the official key accepts 9, 13 or 14.)",
+   "subject": "Chemistry",
+   "chapter": "Hydrocarbons",
+   "chCls": "XI"
+  },
+  {
+   "no": 18,
+   "section": 4,
+   "type": "num",
+   "text": "In the reaction given below, the total number of atoms having $sp^2$ hybridization in the major product $\\mathbf{P}$ is ___.",
+   "options": null,
+   "answer": {
+    "lo": 8,
+    "hi": 8
+   },
+   "accept": [
+    {
+     "lo": 12,
+     "hi": 12
+    }
+   ],
+   "note": "Official final key: 8 or 12 (either value is awarded marks).",
+   "full": 4,
+   "neg": 0,
+   "fig": "che-q18.png",
+   "optionFigs": null,
+   "sol": "The substrate has two tetrasubstituted C=C bonds, each shared by the eight-membered ring and a five-membered ring.<br>Ozonolysis (excess $\\mathrm{O_3}$, then Zn/$\\mathrm{H_2O}$) cleaves both, opening all three rings into one 14-membered ring with four C=O groups: cyclotetradecane-1,4,8,11-tetraone.<br>Excess $\\mathrm{NH_2OH}$ converts all four C=O into oximes, C=N–OH.<br>$sp^2$ atoms: 4 C + 4 N $= 8$.<br>(Counting the oxime O atoms as $sp^2$ as well gives 12; the official key accepts both.)",
+   "subject": "Chemistry",
+   "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+   "chCls": "XII"
+  },
+  {
+   "no": 19,
+   "section": 4,
+   "type": "num",
+   "text": "The total number of possible isomers for $\\mathrm{[Pt(NH_3)_4Cl_2]Br_2}$ is ___.",
+   "options": null,
+   "answer": {
+    "lo": 6,
+    "hi": 6
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Ionisation isomers: $\\mathrm{[Pt(NH_3)_4Cl_2]Br_2}$, $\\mathrm{[Pt(NH_3)_4Br_2]Cl_2}$ and $\\mathrm{[Pt(NH_3)_4ClBr]ClBr}$.<br>Each octahedral $\\mathrm{[MA_4B_2]}$ or $\\mathrm{[MA_4BC]}$ ion has cis and trans forms (neither is optically active).<br>Total $= 3 \\times 2 = 6$.",
+   "subject": "Chemistry",
+   "chapter": "Coordination Compounds",
+   "chCls": "XII"
+  }
+ ]
+}

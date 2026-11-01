@@ -112,6 +112,8 @@
     ['JEE Advanced 2023 Paper 2', '../jee-adv/2023-p2/', 51, 180],
     ['JEE Advanced 2022 Paper 1', '../jee-adv/2022-p1/', 54, 180],
     ['JEE Advanced 2022 Paper 2', '../jee-adv/2022-p2/', 54, 180],
+    ['JEE Advanced 2021 Paper 1', '../jee-adv/2021-p1/', 57, 180],
+    ['JEE Advanced 2021 Paper 2', '../jee-adv/2021-p2/', 57, 180],
   ];
   const keyOf = p => p.type === 'choice' ? String(p.ans) : p.type === 'multi' ? p.ans.join(',') : p.lo != null ? String(p.lo) : String(p.ans);
   function wrongOf(p) {
