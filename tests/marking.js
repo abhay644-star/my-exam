@@ -106,6 +106,12 @@
     ['JEE Main 2026, 8 April Shift 2', '../jee/2026-04-08-s2/', 75, 300],
     ['JEE Advanced 2025 Paper 1', '../jee-adv/2025-p1/', 48, 180],
     ['JEE Advanced 2025 Paper 2', '../jee-adv/2025-p2/', 48, 180],
+    ['JEE Advanced 2024 Paper 1', '../jee-adv/2024-p1/', 51, 180],
+    ['JEE Advanced 2024 Paper 2', '../jee-adv/2024-p2/', 51, 180],
+    ['JEE Advanced 2023 Paper 1', '../jee-adv/2023-p1/', 51, 180],
+    ['JEE Advanced 2023 Paper 2', '../jee-adv/2023-p2/', 51, 180],
+    ['JEE Advanced 2022 Paper 1', '../jee-adv/2022-p1/', 54, 180],
+    ['JEE Advanced 2022 Paper 2', '../jee-adv/2022-p2/', 54, 180],
   ];
   const keyOf = p => p.type === 'choice' ? String(p.ans) : p.type === 'multi' ? p.ans.join(',') : p.lo != null ? String(p.lo) : String(p.ans);
   function wrongOf(p) {
@@ -161,7 +167,77 @@
       const badTyped = items.filter(t => !t.mcqOnly).filter(t => t.gen().parts.some(p => !A.checkPart(p, p.type === 'text' ? plain(p.alts[0]) : String(p.ans)))).map(t => t.id);
       eq(g, `${subj}: every typed answer key is accepted as a right answer`, badTyped, []);
     }
+    // question quality, read from the bank files themselves
+    const norm = s => plain(s).toLowerCase().replace(/\s+/g, ' ').trim();
+    const LV = new Set(['E', 'M', 'C', 'X']), badLevel = [], dupOpt = [], dupText = [], strayTag = [], noExpl = [];
+    // a "<" that starts something the page would read as a tag, other than the formatting the banks use
+    const stray = s => /<(?!\/?(sub|sup|br|b|i|u|em|strong|span|code|small|table|tr|td|th|tbody|thead)\b)[a-zA-Z\/!]/.test(String(s));
+    for (const subj of Object.keys(A.BANK_INDEX)) {
+      let d;
+      try { d = await (await fetch('../' + A.BANK_INDEX[subj].file)).json(); } catch (e) { continue; }
+      const seen = new Map();
+      d.questions.forEach((q, i) => {
+        const id = `${subj} #${i} (Class ${q.c}, ${q.t})`;
+        if (!LV.has(q.l)) badLevel.push(id);
+        if (Array.isArray(q.o)) { const opts = [String(q.a).split('|')[0]].concat(q.o).map(norm); if (new Set(opts).size !== opts.length) dupOpt.push(id); }
+        const k = q.c + '|' + norm(q.q) + '|' + norm(q.a || '') + '|' + (q.p ? q.p.map(p => norm(p[0])).join('|') : '');
+        if (seen.has(k)) dupText.push(`${id} = #${seen.get(k)}`); else seen.set(k, i);
+        if ([q.q, q.a, q.e].concat(q.o || [], ...(q.p || [])).some(stray)) strayTag.push(id);
+        if (!q.e || !String(q.e).trim()) noExpl.push(id);
+      });
+    }
+    eq(g, 'every question has a difficulty level (E, M, C or X)', badLevel, []);
+    eq(g, 'no question shows the same option twice (answer and wrong options all differ)', dupOpt, []);
+    eq(g, 'no question is repeated within a class and subject', dupText, []);
+    eq(g, 'no stray "<" that the page would read as a tag', strayTag, []);
+    eq(g, 'every question has an explanation', noExpl, []);
     eq(g, 'total questions in the banks', total, Object.values(A.BANK_INDEX).reduce((s, b) => s + Object.values(b.classes).reduce((a, c) => a + Object.values(c).reduce((x, y) => x + y, 0), 0), 0));
+  }
+
+  // ---------- custom papers: random settings, as a student could choose them ----------
+  async function customPapers(A) {
+    const g = 'Custom papers', ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
+    let s = 20261101; const rnd = n => { s = (s * 1103515245 + 12345) % 2147483648; return Math.floor(s / 2147483648 * n); };
+    const combos = []; for (const c of ROMAN) for (const sub of A.SUBJECTS) if (A.topicsFor(sub, c).length) combos.push([c, sub]);
+    const problems = { crash: [], count: [], key: [], marks: [], chapter: [], mcq: [], repeat: [] };
+    let built = 0, refused = 0;
+    for (let i = 0; i < 150; i++) {
+      const [klass, subject] = combos[rnd(combos.length)], all = A.topicsFor(subject, klass);
+      await A.ensureBank(subject);
+      const topics = rnd(3) ? 'ALL' : all.filter(() => rnd(2)).slice(0, 3);
+      const w = [rnd(5), rnd(5), rnd(5), rnd(5)].map(x => x + 1), tw = w.reduce((a, b) => a + b, 0);
+      const mix = { E: Math.floor(w[0] / tw * 100), M: Math.floor(w[1] / tw * 100), C: Math.floor(w[2] / tw * 100) }; mix.X = 100 - mix.E - mix.M - mix.C;
+      const nq = 1 + rnd(60), usemcq = !!rnd(2);
+      const cfg = { klass, subject, topics: topics.length === 0 ? 'ALL' : topics, nq, usemcq, nmcq: 1 + rnd(nq), mix, duration: 10 + rnd(171),
+        marks: { MCQ: 1 + rnd(12), E: 1 + rnd(12), M: 1 + rnd(12), C: 1 + rnd(12), X: 1 + rnd(12) } };
+      const tag = `${subject} ${klass} n=${nq}${cfg.topics === 'ALL' ? '' : ' (' + cfg.topics.length + ' chapters)'}`;
+      let r;
+      try { r = A.buildWith(cfg, 1000 + i); } catch (e) { problems.crash.push(tag + ': ' + e.message); continue; }
+      if (r.errs.length) { refused++; continue; }
+      built++;
+      const qs = r.paper.qs;
+      if (!qs.length || (qs.length !== nq && !r.paper.notes.some(n => /instead of/.test(n)))) problems.count.push(`${tag}: ${qs.length} questions, no note`);
+      if (usemcq && qs.filter(q => q.kind === 'mcq').length > cfg.nmcq) problems.mcq.push(tag);
+      for (const q of qs) {
+        if (q.marks !== (q.kind === 'mcq' ? cfg.marks.MCQ : cfg.marks[q.level])) { problems.marks.push(`${tag}: Q${q.no}`); break; }
+        // other chapters only when the chosen ones run short, and then the paper says so
+        if (cfg.topics !== 'ALL' && !cfg.topics.includes(q.topic) && !r.paper.notes.some(n => /other Class/.test(n))) { problems.chapter.push(`${tag}: ${q.topic} (chosen: ${cfg.topics.join(' | ')}) with no note`); break; }
+        // what a student types for the key: standard-form answers as "2.63 x 10^4"
+        const typed = p => { if (p.type === 'text') return plain(p.alts[0]); if (p.sci) { const e = Math.floor(Math.log10(Math.abs(p.ans))); return `${+(p.ans / 10 ** e).toPrecision(10)} x 10^${e}`; } return String(p.ans); };
+        const bad = q.parts.find(p => !p.ansText || !A.checkPart(p, typed(p)));
+        if (bad) { problems.key.push(`${tag}: Q${q.no} "${String(q.text).slice(0, 60)}" part type ${bad.type}, ans ${JSON.stringify(bad.ans)}, ansText ${JSON.stringify(bad.ansText)}, id ${q.id || ''}`); break; }
+      }
+      const again = A.buildWith(cfg, 1000 + i);
+      if (JSON.stringify(again.paper.qs.map(q => q.text)) !== JSON.stringify(qs.map(q => q.text))) problems.repeat.push(tag);
+    }
+    eq(g, `150 random settings: no setting breaks the paper builder (${built} papers built, ${refused} settings refused with a message)`, problems.crash, []);
+    eq(g, 'every paper has the questions asked for, or says why it has fewer', problems.count, []);
+    eq(g, 'no paper has more multiple-choice questions than asked for', problems.mcq, []);
+    eq(g, 'every question carries the marks set for its level', problems.marks, []);
+    eq(g, 'chosen chapters only', problems.chapter, []);
+    eq(g, 'every answer key in a custom paper is accepted', problems.key, []);
+    eq(g, 'the same paper code rebuilds the same paper', problems.repeat, []);
+    ok(g, 'most random settings build a paper', built > 100, `${built} built`);
   }
 
   // ---------- the school pages for search engines (cbse/…, built by tools/build_pages.py) ----------
@@ -258,7 +334,7 @@
     let A = null;
     for (let i = 0; i < 100 && !A; i++) { await new Promise(r => setTimeout(r, 100)); A = frame.contentWindow && frame.contentWindow.__aaTest; }
     if (!A) { ok('Setup', 'the site loads with ?test', false, 'window.__aaTest not found'); return render(); }
-    for (const t of [parsing, checking, rules, labels, papers, banks, schoolPages, chapterPages, paperPages]) {
+    for (const t of [parsing, checking, rules, labels, papers, banks, customPapers, schoolPages, chapterPages, paperPages]) {
       try { await t(A); } catch (e) { ok('Setup', t.name + ' ran without an error', false, e && e.stack || String(e)); }
     }
     render();

@@ -1,0 +1,1184 @@
+{
+ "id": "2022-p1",
+ "exam": "JEE Advanced",
+ "board": "IIT",
+ "title": "JEE Advanced 2022 · Paper 1",
+ "duration": 180,
+ "renumber": true,
+ "secNames": {
+  "1": "numerical",
+  "2": "one or more correct",
+  "3": "matching lists"
+ },
+ "instr": [
+  "Official JEE (Advanced) 2022 Paper 1 with the final answer key published by the organising IIT (IIT Bombay).",
+  "54 questions: Mathematics, Physics and Chemistry, 18 in each subject, in three sections. Total 180 marks.",
+  "Section 1 – numerical answer: <b>+3</b> if correct, no negative marks. Give the value to two decimal places.",
+  "Section 2 – one or more correct options: <b>+4</b> if you choose all the correct options; <b>+3 / +2 / +1</b> if you choose only some of the correct options and no wrong one; <b>−2</b> if any chosen option is wrong.",
+  "Section 3 – List-I / List-II matching (one correct option): <b>+3</b> if correct, <b>−1</b> if wrong."
+ ],
+ "source": "JEE (Advanced) 2022 question paper and final answer key, organising IIT (IIT Bombay). Worked solutions: All in All Exam Practice.",
+ "questions": [
+  {
+   "no": 1,
+   "section": 1,
+   "type": "num",
+   "text": "Considering only the principal values of the inverse trigonometric functions, the value of $$\\frac{3}{2}\\cos^{-1}\\sqrt{\\frac{2}{2+\\pi^2}}+\\frac{1}{4}\\sin^{-1}\\frac{2\\sqrt{2}\\,\\pi}{2+\\pi^2}+\\tan^{-1}\\frac{\\sqrt{2}}{\\pi}$$ is ______.",
+   "options": null,
+   "answer": {
+    "lo": 2.35,
+    "hi": 2.37
+   },
+   "full": 3,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Let $\\theta=\\tan^{-1}\\dfrac{\\pi}{\\sqrt2}$, so $\\cos\\theta=\\dfrac{\\sqrt2}{\\sqrt{2+\\pi^2}}$ and the first angle is $\\theta$; note $\\theta>\\dfrac{\\pi}{4}$ since $\\dfrac{\\pi}{\\sqrt2}>1$.<br>$\\sin2\\theta=\\dfrac{2\\tan\\theta}{1+\\tan^2\\theta}=\\dfrac{2\\sqrt2\\,\\pi}{2+\\pi^2}$, and $2\\theta\\in\\left(\\dfrac{\\pi}{2},\\pi\\right)$, so $\\sin^{-1}\\dfrac{2\\sqrt2\\,\\pi}{2+\\pi^2}=\\pi-2\\theta$.<br>$\\tan^{-1}\\dfrac{\\sqrt2}{\\pi}=\\dfrac{\\pi}{2}-\\theta$.<br>Sum $=\\dfrac32\\theta+\\dfrac{\\pi-2\\theta}{4}+\\dfrac{\\pi}{2}-\\theta=\\dfrac{3\\pi}{4}\\approx2.36$.",
+   "subject": "Mathematics",
+   "chapter": "Inverse Trigonometric Functions",
+   "chCls": "XII"
+  },
+  {
+   "no": 2,
+   "section": 1,
+   "type": "num",
+   "text": "Let $\\alpha$ be a positive real number. Let $f:\\mathbb{R}\\to\\mathbb{R}$ and $g:(\\alpha,\\infty)\\to\\mathbb{R}$ be the functions defined by $$f(x)=\\sin\\left(\\frac{\\pi x}{12}\\right)\\qquad\\text{and}\\qquad g(x)=\\frac{2\\log_e\\left(\\sqrt{x}-\\sqrt{\\alpha}\\right)}{\\log_e\\left(e^{\\sqrt{x}}-e^{\\sqrt{\\alpha}}\\right)}.$$ Then the value of $\\displaystyle\\lim_{x\\to\\alpha^+}f(g(x))$ is ______.",
+   "options": null,
+   "answer": {
+    "lo": 0.49,
+    "hi": 0.51
+   },
+   "full": 3,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Put $t=\\sqrt x-\\sqrt\\alpha\\to0^+$. Then $e^{\\sqrt x}-e^{\\sqrt\\alpha}=e^{\\sqrt\\alpha}(e^{t}-1)$.<br>$g(x)=\\dfrac{2\\ln t}{\\sqrt\\alpha+\\ln(e^t-1)}=\\dfrac{2\\ln t}{\\sqrt\\alpha+\\ln t+\\ln\\dfrac{e^t-1}{t}}$.<br>As $t\\to0^+$, $\\ln t\\to-\\infty$ and $\\ln\\dfrac{e^t-1}{t}\\to0$, so $g(x)\\to2$.<br>$f$ is continuous, so the limit is $f(2)=\\sin\\dfrac{\\pi}{6}=0.5$.",
+   "subject": "Mathematics",
+   "chapter": "Limits and Derivatives",
+   "chCls": "XI"
+  },
+  {
+   "no": 3,
+   "section": 1,
+   "type": "num",
+   "text": "In a study about a pandemic, data of 900 persons was collected. It was found that<br>190 persons had symptom of fever,<br>220 persons had symptom of cough,<br>220 persons had symptom of breathing problem,<br>330 persons had symptom of fever or cough or both,<br>350 persons had symptom of cough or breathing problem or both,<br>340 persons had symptom of fever or breathing problem or both,<br>30 persons had all three symptoms (fever, cough and breathing problem).<br><br>If a person is chosen randomly from these 900 persons, then the probability that the person has at most one symptom is ______.",
+   "options": null,
+   "answer": {
+    "lo": 0.79,
+    "hi": 0.81
+   },
+   "full": 3,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Let $F,C,B$ be the three sets. $|F\\cap C|=190+220-330=80$, $|C\\cap B|=220+220-350=90$, $|F\\cap B|=190+220-340=70$, $|F\\cap C\\cap B|=30$.<br>Exactly one symptom: $F$ only $=190-80-70+30=70$, $C$ only $=220-80-90+30=80$, $B$ only $=220-90-70+30=90$; total $240$.<br>$|F\\cup C\\cup B|=630-240+30=420$, so $900-420=480$ have no symptom.<br>At most one symptom: $480+240=720$, probability $=\\dfrac{720}{900}=0.8$.",
+   "subject": "Mathematics",
+   "chapter": "Sets",
+   "chCls": "XI"
+  },
+  {
+   "no": 4,
+   "section": 1,
+   "type": "num",
+   "text": "Let $z$ be a complex number with non-zero imaginary part. If $$\\frac{2+3z+4z^2}{2-3z+4z^2}$$ is a real number, then the value of $|z|^2$ is ______.",
+   "options": null,
+   "answer": {
+    "lo": 0.49,
+    "hi": 0.51
+   },
+   "full": 3,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Write the ratio as $\\dfrac{1+u}{1-u}$ with $u=\\dfrac{3z}{2+4z^2}$; it is real exactly when $u$ is real, i.e. when $\\dfrac{2+4z^2}{z}=\\dfrac{2}{z}+4z$ is real.<br>With $z=re^{i\\theta}$: $\\operatorname{Im}\\left(\\dfrac2z+4z\\right)=\\sin\\theta\\left(4r-\\dfrac2r\\right)=0$.<br>$\\sin\\theta\\neq0$ (non-zero imaginary part), so $r^2=\\dfrac12$, i.e. $|z|^2=0.5$.",
+   "subject": "Mathematics",
+   "chapter": "Complex Numbers",
+   "chCls": "XI"
+  },
+  {
+   "no": 5,
+   "section": 1,
+   "type": "num",
+   "text": "Let $\\bar{z}$ denote the complex conjugate of a complex number $z$ and let $i=\\sqrt{-1}$. In the set of complex numbers, the number of distinct roots of the equation $$\\bar{z}-z^2=i\\left(\\bar{z}+z^2\\right)$$ is ______.",
+   "options": null,
+   "answer": {
+    "lo": 4,
+    "hi": 4
+   },
+   "full": 3,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$\\bar z(1-i)=z^2(1+i)\\Rightarrow \\bar z=\\dfrac{1+i}{1-i}z^2=iz^2$.<br>$z=0$ is a root.<br>Otherwise $|z|=|z|^2\\Rightarrow|z|=1$, so $\\bar z=\\dfrac1z$ and $\\dfrac1z=iz^2\\Rightarrow z^3=\\dfrac1i=-i$, which has 3 distinct roots (all of modulus 1).<br>Total: $1+3=4$ distinct roots.",
+   "subject": "Mathematics",
+   "chapter": "Complex Numbers",
+   "chCls": "XI"
+  },
+  {
+   "no": 6,
+   "section": 1,
+   "type": "num",
+   "text": "Let $l_1,l_2,\\ldots,l_{100}$ be consecutive terms of an arithmetic progression with common difference $d_1$, and let $w_1,w_2,\\ldots,w_{100}$ be consecutive terms of another arithmetic progression with common difference $d_2$, where $d_1d_2=10$. For each $i=1,2,\\ldots,100$, let $R_i$ be a rectangle with length $l_i$, width $w_i$ and area $A_i$. If $A_{51}-A_{50}=1000$, then the value of $A_{100}-A_{90}$ is ______.",
+   "options": null,
+   "answer": {
+    "lo": 18900,
+    "hi": 18900
+   },
+   "full": 3,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$A_{51}-A_{50}=(l_{50}+d_1)(w_{50}+d_2)-l_{50}w_{50}=l_{50}d_2+w_{50}d_1+d_1d_2=1000$, so $l_{50}d_2+w_{50}d_1=990$.<br>$A_{100}-A_{90}=(l_{90}+10d_1)(w_{90}+10d_2)-l_{90}w_{90}=10(l_{90}d_2+w_{90}d_1)+100d_1d_2$.<br>$l_{90}d_2+w_{90}d_1=(l_{50}+40d_1)d_2+(w_{50}+40d_2)d_1=990+80\\cdot10=1790$.<br>$A_{100}-A_{90}=17900+1000=18900$.",
+   "subject": "Mathematics",
+   "chapter": "Sequences and Series",
+   "chCls": "XI"
+  },
+  {
+   "no": 7,
+   "section": 1,
+   "type": "num",
+   "text": "The number of 4-digit integers in the closed interval $[2022, 4482]$ formed by using the digits $0, 2, 3, 4, 6, 7$ is ______.",
+   "options": null,
+   "answer": {
+    "lo": 569,
+    "hi": 569
+   },
+   "full": 3,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Digits may repeat; each place has 6 choices.<br>First digit 2: $6^3=216$ numbers, minus those below 2022 (2000, 2002, 2003, 2004, 2006, 2007, 2020): $216-7=209$.<br>First digit 3: $216$.<br>First digit 4: second digit 0, 2 or 3 gives $3\\times36=108$; second digit 4 gives $44ab$ with $a\\in\\{0,2,3,4,6,7\\}$, all $\\le 4482$: $36$; second digit 6 or 7 is too large. Total $144$.<br>Answer $=209+216+144=569$.",
+   "subject": "Mathematics",
+   "chapter": "Permutations and Combinations",
+   "chCls": "XI"
+  },
+  {
+   "no": 8,
+   "section": 1,
+   "type": "num",
+   "text": "Let $ABC$ be the triangle with $AB=1$, $AC=3$ and $\\angle BAC=\\dfrac{\\pi}{2}$. If a circle of radius $r>0$ touches the sides $AB$, $AC$ and also touches internally the circumcircle of the triangle $ABC$, then the value of $r$ is ______.",
+   "options": null,
+   "answer": {
+    "lo": 0.82,
+    "hi": 0.86
+   },
+   "full": 3,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Take $A=(0,0)$, $B=(1,0)$, $C=(0,3)$. The circumcircle has centre $\\left(\\dfrac12,\\dfrac32\\right)$ (midpoint of $BC$) and radius $\\dfrac{\\sqrt{10}}{2}$.<br>The circle touching both axes has centre $(r,r)$. Internal tangency: $\\left(r-\\dfrac12\\right)^2+\\left(r-\\dfrac32\\right)^2=\\left(\\dfrac{\\sqrt{10}}{2}-r\\right)^2$.<br>$2r^2-4r+\\dfrac52=r^2-\\sqrt{10}\\,r+\\dfrac52\\Rightarrow r=4-\\sqrt{10}\\approx0.84$.",
+   "subject": "Mathematics",
+   "chapter": "Conic Sections",
+   "chCls": "XI"
+  },
+  {
+   "no": 9,
+   "section": 2,
+   "type": "multi",
+   "text": "Consider the equation $$\\int_1^e\\frac{\\left(\\log_e x\\right)^{1/2}}{x\\left(a-\\left(\\log_e x\\right)^{3/2}\\right)^2}\\,dx=1,\\qquad a\\in(-\\infty,0)\\cup(1,\\infty).$$ Which of the following statements is/are TRUE ?",
+   "options": [
+    "<b>No</b> $a$ satisfies the above equation",
+    "An integer $a$ satisfies the above equation",
+    "An irrational number $a$ satisfies the above equation",
+    "More than one $a$ satisfy the above equation"
+   ],
+   "answer": [
+    2,
+    3
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Put $u=(\\ln x)^{3/2}$, $du=\\dfrac32\\dfrac{(\\ln x)^{1/2}}{x}dx$; $u$ runs from 0 to 1.<br>Integral $=\\dfrac23\\displaystyle\\int_0^1\\dfrac{du}{(a-u)^2}=\\dfrac23\\left(\\dfrac{1}{a-1}-\\dfrac1a\\right)=\\dfrac{2}{3a(a-1)}$.<br>Setting it equal to 1: $3a^2-3a-2=0\\Rightarrow a=\\dfrac{3\\pm\\sqrt{33}}{6}$.<br>$\\dfrac{3+\\sqrt{33}}{6}\\approx1.46>1$ and $\\dfrac{3-\\sqrt{33}}{6}\\approx-0.46&lt;0$: both are allowed and both are irrational.<br>So (C) and (D) are true; (A) and (B) are false.",
+   "subject": "Mathematics",
+   "chapter": "Integrals",
+   "chCls": "XII"
+  },
+  {
+   "no": 10,
+   "section": 2,
+   "type": "multi",
+   "text": "Let $a_1,a_2,a_3,\\ldots$ be an arithmetic progression with $a_1=7$ and common difference $8$. Let $T_1,T_2,T_3,\\ldots$ be such that $T_1=3$ and $T_{n+1}-T_n=a_n$ for $n\\ge1$. Then, which of the following is/are TRUE ?",
+   "options": [
+    "$T_{20}=1604$",
+    "$\\displaystyle\\sum_{k=1}^{20}T_k=10510$",
+    "$T_{30}=3454$",
+    "$\\displaystyle\\sum_{k=1}^{30}T_k=35610$"
+   ],
+   "answer": [
+    1,
+    2
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$a_k=8k-1$, so $T_n=3+\\sum_{k=1}^{n-1}(8k-1)=3+4n(n-1)-(n-1)=4n^2-5n+4$.<br>$T_{20}=1600-100+4=1504$ — (A) false. $T_{30}=3600-150+4=3454$ — (C) true.<br>$\\sum_{k=1}^{n}T_k=\\dfrac{2n(n+1)(2n+1)}{3}-\\dfrac{5n(n+1)}{2}+4n$.<br>$n=20$: $11480-1050+80=10510$ — (B) true.<br>$n=30$: $37820-2325+120=35615\\ne35610$ — (D) false.",
+   "subject": "Mathematics",
+   "chapter": "Sequences and Series",
+   "chCls": "XI"
+  },
+  {
+   "no": 11,
+   "section": 2,
+   "type": "multi",
+   "text": "Let $P_1$ and $P_2$ be two planes given by $$P_1:\\ 10x+15y+12z-60=0,\\qquad P_2:\\ -2x+5y+4z-20=0.$$ Which of the following straight lines can be an edge of some tetrahedron whose two faces lie on $P_1$ and $P_2$ ?",
+   "options": [
+    "$\\dfrac{x-1}{0}=\\dfrac{y-1}{0}=\\dfrac{z-1}{5}$",
+    "$\\dfrac{x-6}{-5}=\\dfrac{y}{2}=\\dfrac{z}{3}$",
+    "$\\dfrac{x}{-2}=\\dfrac{y-4}{5}=\\dfrac{z}{4}$",
+    "$\\dfrac{x}{1}=\\dfrac{y-4}{-2}=\\dfrac{z}{3}$"
+   ],
+   "answer": [
+    0,
+    1,
+    3
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "The two faces share an edge on the line $L=P_1\\cap P_2$. The other vertices are a point $U\\in P_1$ and a point $V\\in P_2$, off $L$. So an edge is $L$ itself, a line in $P_1$ or $P_2$ meeting $L$, or a line $UV$ meeting $P_1$ and $P_2$ at two different points.<br>(A) Through $(1,1,1)$, direction $(0,0,1)$: meets $P_1$ at $\\left(1,1,\\tfrac{35}{12}\\right)$ and $P_2$ at $\\left(1,1,\\tfrac{17}{4}\\right)$, neither on $L$ — possible.<br>(B) $(6,0,0)$ lies on $P_1$ (not on $P_2$); the line meets $P_2$ at $(1,2,3)$, which is not on $P_1$ — possible.<br>(C) $(0,4,0)$ lies on both planes (on $L$), and the direction $(-2,5,4)$ is parallel to neither plane, so the line meets each plane only at that one point: it cannot hold two vertices — not possible.<br>(D) Direction $(1,-2,3)$ satisfies $-2-10+12=0$, so it is parallel to $P_2$ and passes through $(0,4,0)\\in L$: it lies in $P_2$ and meets $L$ — possible.<br>Answer: (A), (B), (D).",
+   "subject": "Mathematics",
+   "chapter": "Three Dimensional Geometry",
+   "chCls": "XII"
+  },
+  {
+   "no": 12,
+   "section": 2,
+   "type": "multi",
+   "text": "Let $S$ be the reflection of a point $Q$ with respect to the plane given by $$\\vec{r}=-(t+p)\\hat{i}+t\\hat{j}+(1+p)\\hat{k}$$ where $t,p$ are real parameters and $\\hat{i},\\hat{j},\\hat{k}$ are the unit vectors along the three positive coordinate axes. If the position vectors of $Q$ and $S$ are $10\\hat{i}+15\\hat{j}+20\\hat{k}$ and $\\alpha\\hat{i}+\\beta\\hat{j}+\\gamma\\hat{k}$ respectively, then which of the following is/are TRUE ?",
+   "options": [
+    "$3(\\alpha+\\beta)=-101$",
+    "$3(\\beta+\\gamma)=-71$",
+    "$3(\\gamma+\\alpha)=-86$",
+    "$3(\\alpha+\\beta+\\gamma)=-121$"
+   ],
+   "answer": [
+    0,
+    1,
+    2
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$x=-(t+p)$, $y=t$, $z=1+p$ give $x+y+z=1$: the plane is $x+y+z=1$.<br>Reflection of $(10,15,20)$: $\\lambda=-\\dfrac{2(10+15+20-1)}{3}=-\\dfrac{88}{3}$, so $S=\\left(-\\dfrac{58}{3},-\\dfrac{43}{3},-\\dfrac{28}{3}\\right)$.<br>$3(\\alpha+\\beta)=-101$, $3(\\beta+\\gamma)=-71$, $3(\\gamma+\\alpha)=-86$, $3(\\alpha+\\beta+\\gamma)=-129$.<br>So (A), (B), (C) are true and (D) is false.",
+   "subject": "Mathematics",
+   "chapter": "Three Dimensional Geometry",
+   "chCls": "XII"
+  },
+  {
+   "no": 13,
+   "section": 2,
+   "type": "multi",
+   "text": "Consider the parabola $y^2=4x$. Let $S$ be the focus of the parabola. A pair of tangents drawn to the parabola from the point $P=(-2,1)$ meet the parabola at $P_1$ and $P_2$. Let $Q_1$ and $Q_2$ be points on the lines $SP_1$ and $SP_2$ respectively such that $PQ_1$ is perpendicular to $SP_1$ and $PQ_2$ is perpendicular to $SP_2$. Then, which of the following is/are TRUE ?",
+   "options": [
+    "$SQ_1=2$",
+    "$Q_1Q_2=\\dfrac{3\\sqrt{10}}{5}$",
+    "$PQ_1=3$",
+    "$SQ_2=1$"
+   ],
+   "answer": [
+    1,
+    2,
+    3
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$S=(1,0)$. Tangent $y=mx+\\dfrac1m$ through $(-2,1)$: $2m^2+m-1=0\\Rightarrow m=\\dfrac12$ or $-1$; contact points $\\left(\\dfrac1{m^2},\\dfrac2m\\right)=(4,4)$ and $(1,-2)$.<br>Line $S\\to(4,4)$ has unit direction $\\left(\\tfrac35,\\tfrac45\\right)$; $\\vec{SP}=(-3,1)$ projects to $-1$, so the foot is $(0.4,-0.8)$, at distance 1 from $S$, and $PQ=\\sqrt{10-1}=3$.<br>Line $S\\to(1,-2)$ is $x=1$; the foot from $P$ is $(1,1)$, again $SQ=1$ and $PQ=3$.<br>So whichever point is $P_1$: $SQ_1=SQ_2=1$, $PQ_1=3$ — (A) false, (C), (D) true.<br>$Q_1Q_2=\\sqrt{0.6^2+1.8^2}=\\sqrt{3.6}=\\dfrac{3\\sqrt{10}}{5}$ — (B) true.",
+   "subject": "Mathematics",
+   "chapter": "Conic Sections",
+   "chCls": "XI"
+  },
+  {
+   "no": 14,
+   "section": 2,
+   "type": "multi",
+   "text": "Let $|M|$ denote the determinant of a square matrix $M$. Let $g:\\left[0,\\dfrac{\\pi}{2}\\right]\\to\\mathbb{R}$ be the function defined by $$g(\\theta)=\\sqrt{f(\\theta)-1}+\\sqrt{f\\left(\\frac{\\pi}{2}-\\theta\\right)-1}$$ where $$f(\\theta)=\\frac12\\begin{vmatrix}1&\\sin\\theta&1\\\\-\\sin\\theta&1&\\sin\\theta\\\\-1&-\\sin\\theta&1\\end{vmatrix}+\\begin{vmatrix}\\sin\\pi&\\cos\\left(\\theta+\\frac{\\pi}{4}\\right)&\\tan\\left(\\theta-\\frac{\\pi}{4}\\right)\\\\\\sin\\left(\\theta-\\frac{\\pi}{4}\\right)&-\\cos\\frac{\\pi}{2}&\\log_e\\left(\\frac{4}{\\pi}\\right)\\\\\\cot\\left(\\theta+\\frac{\\pi}{4}\\right)&\\log_e\\left(\\frac{\\pi}{4}\\right)&\\tan\\pi\\end{vmatrix}.$$ Let $p(x)$ be a quadratic polynomial whose roots are the maximum and minimum values of the function $g(\\theta)$, and $p(2)=2-\\sqrt{2}$. Then, which of the following is/are TRUE ?",
+   "options": [
+    "$p\\left(\\dfrac{3+\\sqrt2}{4}\\right)&lt;0$",
+    "$p\\left(\\dfrac{1+3\\sqrt2}{4}\\right)>0$",
+    "$p\\left(\\dfrac{5\\sqrt2-1}{4}\\right)>0$",
+    "$p\\left(\\dfrac{5-\\sqrt2}{4}\\right)&lt;0$"
+   ],
+   "answer": [
+    0,
+    2
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "First determinant: $1(1+\\sin^2\\theta)-\\sin\\theta(-\\sin\\theta+\\sin\\theta)+1(\\sin^2\\theta+1)=2+2\\sin^2\\theta$; half of it is $1+\\sin^2\\theta$.<br>Second determinant: the diagonal is 0 and $\\sin\\left(\\theta-\\frac\\pi4\\right)=-\\cos\\left(\\theta+\\frac\\pi4\\right)$, $\\cot\\left(\\theta+\\frac\\pi4\\right)=-\\tan\\left(\\theta-\\frac\\pi4\\right)$, $\\ln\\frac\\pi4=-\\ln\\frac4\\pi$: it is skew-symmetric of odd order, so it is 0.<br>$f(\\theta)=1+\\sin^2\\theta\\Rightarrow g(\\theta)=\\sin\\theta+\\cos\\theta$ on $\\left[0,\\frac\\pi2\\right]$: max $\\sqrt2$, min $1$.<br>$p(x)=k(x-1)(x-\\sqrt2)$ and $p(2)=k(2-\\sqrt2)=2-\\sqrt2\\Rightarrow k=1$. So $p&lt;0$ only between $1$ and $\\sqrt2\\approx1.414$.<br>(A) $\\frac{3+\\sqrt2}{4}\\approx1.10$: $p&lt;0$ — true. (B) $\\frac{1+3\\sqrt2}{4}\\approx1.31$: $p&lt;0$ — false.<br>(C) $\\frac{5\\sqrt2-1}{4}\\approx1.52$: $p>0$ — true. (D) $\\frac{5-\\sqrt2}{4}\\approx0.90$: $p>0$ — false.",
+   "subject": "Mathematics",
+   "chapter": "Determinants",
+   "chCls": "XII"
+  },
+  {
+   "no": 15,
+   "section": 3,
+   "type": "match",
+   "text": "Consider the following lists:<table class=\"mt\"><tr><th>List-I</th><th>List-II</th></tr><tr><td>(I) $\\left\\{x\\in\\left[-\\frac{2\\pi}{3},\\frac{2\\pi}{3}\\right]:\\cos x+\\sin x=1\\right\\}$</td><td>(P) has two elements</td></tr><tr><td>(II) $\\left\\{x\\in\\left[-\\frac{5\\pi}{18},\\frac{5\\pi}{18}\\right]:\\sqrt3\\tan3x=1\\right\\}$</td><td>(Q) has three elements</td></tr><tr><td>(III) $\\left\\{x\\in\\left[-\\frac{6\\pi}{5},\\frac{6\\pi}{5}\\right]:2\\cos(2x)=\\sqrt3\\right\\}$</td><td>(R) has four elements</td></tr><tr><td>(IV) $\\left\\{x\\in\\left[-\\frac{7\\pi}{4},\\frac{7\\pi}{4}\\right]:\\sin x-\\cos x=1\\right\\}$</td><td>(S) has five elements</td></tr><tr><td></td><td>(T) has six elements</td></tr></table>The correct option is:",
+   "options": [
+    "(I) → (P); (II) → (S); (III) → (P); (IV) → (S)",
+    "(I) → (P); (II) → (P); (III) → (T); (IV) → (R)",
+    "(I) → (Q); (II) → (P); (III) → (T); (IV) → (S)",
+    "(I) → (Q); (II) → (S); (III) → (P); (IV) → (R)"
+   ],
+   "answer": 1,
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "(I) $\\sin\\left(x+\\frac\\pi4\\right)=\\frac1{\\sqrt2}\\Rightarrow x=2k\\pi$ or $\\frac\\pi2+2k\\pi$; in range: $0,\\frac\\pi2$ — two (P).<br>(II) $\\tan3x=\\frac1{\\sqrt3}\\Rightarrow x=\\frac{\\pi}{18}+\\frac{k\\pi}{3}$; in range: $\\frac{\\pi}{18},-\\frac{5\\pi}{18}$ — two (P).<br>(III) $\\cos2x=\\frac{\\sqrt3}{2}\\Rightarrow x=\\pm\\frac{\\pi}{12}+k\\pi$; in $[-1.2\\pi,1.2\\pi]$: $\\pm\\frac{\\pi}{12},\\pm\\frac{11\\pi}{12},\\pm\\frac{13\\pi}{12}$ — six (T).<br>(IV) $\\sin\\left(x-\\frac\\pi4\\right)=\\frac1{\\sqrt2}\\Rightarrow x=\\frac\\pi2+2k\\pi$ or $\\pi+2k\\pi$; in range: $\\frac\\pi2,-\\frac{3\\pi}2,\\pi,-\\pi$ — four (R).<br>Answer (B).",
+   "subject": "Mathematics",
+   "chapter": "Trigonometric Functions",
+   "chCls": "XI"
+  },
+  {
+   "no": 16,
+   "section": 3,
+   "type": "match",
+   "text": "Two players, $P_1$ and $P_2$, play a game against each other. In every round of the game, each player rolls a fair die once, where the six faces of the die have six distinct numbers. Let $x$ and $y$ denote the readings on the die rolled by $P_1$ and $P_2$, respectively. If $x>y$, then $P_1$ scores 5 points and $P_2$ scores 0 point. If $x=y$, then each player scores 2 points. If $x&lt;y$, then $P_1$ scores 0 point and $P_2$ scores 5 points. Let $X_i$ and $Y_i$ be the total scores of $P_1$ and $P_2$, respectively, after playing the $i^{th}$ round.<table class=\"mt\"><tr><th>List-I</th><th>List-II</th></tr><tr><td>(I) Probability of $(X_2\\ge Y_2)$ is</td><td>(P) $\\frac{3}{8}$</td></tr><tr><td>(II) Probability of $(X_2>Y_2)$ is</td><td>(Q) $\\frac{11}{16}$</td></tr><tr><td>(III) Probability of $(X_3=Y_3)$ is</td><td>(R) $\\frac{5}{16}$</td></tr><tr><td>(IV) Probability of $(X_3>Y_3)$ is</td><td>(S) $\\frac{355}{864}$</td></tr><tr><td></td><td>(T) $\\frac{77}{432}$</td></tr></table>The correct option is:",
+   "options": [
+    "(I) → (Q); (II) → (R); (III) → (T); (IV) → (S)",
+    "(I) → (Q); (II) → (R); (III) → (T); (IV) → (T)",
+    "(I) → (P); (II) → (R); (III) → (Q); (IV) → (S)",
+    "(I) → (P); (II) → (R); (III) → (Q); (IV) → (T)"
+   ],
+   "answer": 0,
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Each round: $P_1$ wins with probability $\\frac{15}{36}=\\frac5{12}$, loses with $\\frac5{12}$, ties with $\\frac16$. A tie adds the same to both, so the comparison depends only on wins and losses.<br>(II) $X_2>Y_2$: (win, win), or one win and one tie: $\\left(\\frac5{12}\\right)^2+2\\cdot\\frac5{12}\\cdot\\frac16=\\frac{25+20}{144}=\\frac5{16}$ (R).<br>(I) By symmetry $P(X_2&lt;Y_2)=\\frac5{16}$, so $P(X_2\\ge Y_2)=\\frac{11}{16}$ (Q).<br>(III) $X_3=Y_3$: three ties, or one win, one loss, one tie: $\\frac1{216}+6\\cdot\\frac{25}{144}\\cdot\\frac16=\\frac{4+150}{864}=\\frac{77}{432}$ (T).<br>(IV) $P(X_3>Y_3)=\\frac12\\left(1-\\frac{77}{432}\\right)=\\frac{355}{864}$ (S).<br>Answer (A).",
+   "subject": "Mathematics",
+   "chapter": "Probability",
+   "chCls": "XII"
+  },
+  {
+   "no": 17,
+   "section": 3,
+   "type": "match",
+   "text": "Let $p,q,r$ be nonzero real numbers that are, respectively, the $10^{th}$, $100^{th}$ and $1000^{th}$ terms of a harmonic progression. Consider the system of linear equations $$\\begin{aligned}x+y+z&=1\\\\10x+100y+1000z&=0\\\\qr\\,x+pr\\,y+pq\\,z&=0.\\end{aligned}$$<table class=\"mt\"><tr><th>List-I</th><th>List-II</th></tr><tr><td>(I) If $\\frac{q}{r}=10$, then the system of linear equations has</td><td>(P) $x=0,\\ y=\\frac{10}{9},\\ z=-\\frac{1}{9}$ as a solution</td></tr><tr><td>(II) If $\\frac{p}{r}\\neq100$, then the system of linear equations has</td><td>(Q) $x=\\frac{10}{9},\\ y=-\\frac{1}{9},\\ z=0$ as a solution</td></tr><tr><td>(III) If $\\frac{p}{q}\\neq10$, then the system of linear equations has</td><td>(R) infinitely many solutions</td></tr><tr><td>(IV) If $\\frac{p}{q}=10$, then the system of linear equations has</td><td>(S) no solution</td></tr><tr><td></td><td>(T) at least one solution</td></tr></table>The correct option is:",
+   "options": [
+    "(I) → (T); (II) → (R); (III) → (S); (IV) → (T)",
+    "(I) → (Q); (II) → (S); (III) → (S); (IV) → (R)",
+    "(I) → (Q); (II) → (R); (III) → (P); (IV) → (R)",
+    "(I) → (T); (II) → (S); (III) → (P); (IV) → (T)"
+   ],
+   "answer": 1,
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Let $\\frac1p=a+9d$, $\\frac1q=a+99d$, $\\frac1r=a+999d$. Dividing the third equation by $pqr$: $(a+9d)x+(a+99d)y+(a+999d)z=0$, i.e. $a(x+y+z)+d(9x+99y+999z)=0$.<br>From the first two equations $9x+99y+999z=(10x+100y+1000z)-(x+y+z)=-1$, so the third becomes $a-d=0$.<br>Hence: if $a=d$ the third equation is redundant and there are infinitely many solutions; if $a\\ne d$ there is no solution.<br>$\\frac qr=10\\iff a+999d=10(a+99d)\\iff a=d$; likewise $\\frac pr=100\\iff a=d$ and $\\frac pq=10\\iff a=d$.<br>(I) infinitely many solutions; both $\\left(\\frac{10}9,-\\frac19,0\\right)$ and $\\left(0,\\frac{10}9,-\\frac19\\right)$ satisfy the first two equations, so (Q) holds. (II) no solution (S). (III) no solution (S). (IV) infinitely many (R).<br>Only option (B) fits.",
+   "subject": "Mathematics",
+   "chapter": "Determinants",
+   "chCls": "XII"
+  },
+  {
+   "no": 18,
+   "section": 3,
+   "type": "match",
+   "text": "Consider the ellipse $$\\frac{x^2}{4}+\\frac{y^2}{3}=1.$$ Let $H(\\alpha,0)$, $0&lt;\\alpha&lt;2$, be a point. A straight line drawn through $H$ parallel to the $y$-axis crosses the ellipse and its auxiliary circle at points $E$ and $F$ respectively, in the first quadrant. The tangent to the ellipse at the point $E$ intersects the positive $x$-axis at a point $G$. Suppose the straight line joining $F$ and the origin makes an angle $\\phi$ with the positive $x$-axis.<table class=\"mt\"><tr><th>List-I</th><th>List-II</th></tr><tr><td>(I) If $\\phi=\\frac{\\pi}{4}$, then the area of the triangle $FGH$ is</td><td>(P) $\\frac{\\left(\\sqrt3-1\\right)^4}{8}$</td></tr><tr><td>(II) If $\\phi=\\frac{\\pi}{3}$, then the area of the triangle $FGH$ is</td><td>(Q) $1$</td></tr><tr><td>(III) If $\\phi=\\frac{\\pi}{6}$, then the area of the triangle $FGH$ is</td><td>(R) $\\frac{3}{4}$</td></tr><tr><td>(IV) If $\\phi=\\frac{\\pi}{12}$, then the area of the triangle $FGH$ is</td><td>(S) $\\frac{1}{2\\sqrt3}$</td></tr><tr><td></td><td>(T) $\\frac{3\\sqrt3}{2}$</td></tr></table>The correct option is:",
+   "options": [
+    "(I) → (R); (II) → (S); (III) → (Q); (IV) → (P)",
+    "(I) → (R); (II) → (T); (III) → (S); (IV) → (P)",
+    "(I) → (Q); (II) → (T); (III) → (S); (IV) → (P)",
+    "(I) → (Q); (II) → (S); (III) → (Q); (IV) → (P)"
+   ],
+   "answer": 2,
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$F=(2\\cos\\phi,2\\sin\\phi)$ on $x^2+y^2=4$, so $\\alpha=2\\cos\\phi$.<br>Tangent at $E(\\alpha,y_E)$: $\\dfrac{\\alpha x}{4}+\\dfrac{y\\,y_E}{3}=1$ meets the $x$-axis at $G=\\left(\\dfrac4\\alpha,0\\right)$.<br>Triangle $FGH$ is right-angled at $H$: area $=\\dfrac12\\left(\\dfrac4\\alpha-\\alpha\\right)(2\\sin\\phi)=\\dfrac{(4-\\alpha^2)\\sin\\phi}{\\alpha}=\\dfrac{2\\sin^3\\phi}{\\cos\\phi}$.<br>(I) $\\phi=\\frac\\pi4$: $1$ (Q). (II) $\\phi=\\frac\\pi3$: $\\dfrac{2\\cdot\\frac{3\\sqrt3}{8}}{\\frac12}=\\dfrac{3\\sqrt3}{2}$ (T). (III) $\\phi=\\frac\\pi6$: $\\dfrac{2\\cdot\\frac18}{\\frac{\\sqrt3}2}=\\dfrac1{2\\sqrt3}$ (S).<br>(IV) $\\sin\\frac\\pi{12}=\\frac{\\sqrt3-1}{2\\sqrt2}$, $\\cos\\frac\\pi{12}=\\frac{\\sqrt3+1}{2\\sqrt2}$: area $=\\dfrac{(\\sqrt3-1)^3}{4(\\sqrt3+1)}=\\dfrac{(\\sqrt3-1)^4}{8}$ (P).<br>Answer (C).",
+   "subject": "Mathematics",
+   "chapter": "Conic Sections",
+   "chCls": "XI"
+  },
+  {
+   "no": 1,
+   "section": 1,
+   "type": "num",
+   "text": "Two spherical stars $A$ and $B$ have densities $\\rho_A$ and $\\rho_B$, respectively. $A$ and $B$ have the same radius, and their masses $M_A$ and $M_B$ are related by $M_B=2M_A$. Due to an interaction process, star $A$ loses some of its mass, so that its radius is halved, while its spherical shape is retained, and its density remains $\\rho_A$. The entire mass lost by $A$ is deposited as a thick spherical shell on $B$ with the density of the shell being $\\rho_A$. If $v_A$ and $v_B$ are the escape velocities from $A$ and $B$ after the interaction process, the ratio $\\dfrac{v_B}{v_A}=\\sqrt{\\dfrac{10n}{15^{1/3}}}$. The value of $n$ is ______.",
+   "options": null,
+   "answer": {
+    "lo": 2.2,
+    "hi": 2.4
+   },
+   "full": 3,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Same density, half the radius: $A$ keeps $\\dfrac{M_A}{8}$ and loses $\\dfrac{7M_A}{8}$.<br>The shell has density $\\rho_A$, so its volume is $\\dfrac78$ of $A$'s original volume: outer radius of $B$ satisfies $R_B'^3=R^3+\\dfrac78R^3=\\dfrac{15}{8}R^3$, i.e. $R_B'=\\dfrac{15^{1/3}R}{2}$. New mass of $B$: $2M_A+\\dfrac78M_A=\\dfrac{23}{8}M_A$.<br>$v=\\sqrt{\\dfrac{2GM}{r}}$: $v_A^2=\\dfrac{2G\\,M_A/8}{R/2}=\\dfrac{2GM_A}{4R}$, $v_B^2=\\dfrac{2G\\cdot\\frac{23}{8}M_A}{15^{1/3}R/2}=\\dfrac{2GM_A}{4R}\\cdot\\dfrac{23}{15^{1/3}}$.<br>$\\dfrac{v_B}{v_A}=\\sqrt{\\dfrac{23}{15^{1/3}}}\\Rightarrow10n=23\\Rightarrow n=2.3$.",
+   "subject": "Physics",
+   "chapter": "Gravitation",
+   "chCls": "XI"
+  },
+  {
+   "no": 2,
+   "section": 1,
+   "type": "num",
+   "text": "The minimum kinetic energy needed by an alpha particle to cause the nuclear reaction ${}^{16}_{7}\\mathrm{N}+{}^{4}_{2}\\mathrm{He}\\to{}^{1}_{1}\\mathrm{H}+{}^{19}_{8}\\mathrm{O}$ in a laboratory frame is $n$ (in MeV). Assume that ${}^{16}_{7}\\mathrm{N}$ is at rest in the laboratory frame. The masses of ${}^{16}_{7}\\mathrm{N}$, ${}^{4}_{2}\\mathrm{He}$, ${}^{1}_{1}\\mathrm{H}$ and ${}^{19}_{8}\\mathrm{O}$ can be taken to be $16.006\\ u$, $4.003\\ u$, $1.008\\ u$ and $19.003\\ u$, respectively, where $1\\ u=930\\ \\mathrm{MeV}c^{-2}$. The value of $n$ is ______.",
+   "options": null,
+   "answer": {
+    "lo": 2.3,
+    "hi": 2.35
+   },
+   "full": 3,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$Q=(16.006+4.003-1.008-19.003)\\,u\\,c^2=-0.002\\times930=-1.86$ MeV.<br>At threshold the products move together with the centre of mass, so the alpha must supply $|Q|$ plus the KE of the centre of mass: $K_{th}=|Q|\\left(1+\\dfrac{m_\\alpha}{m_N}\\right)$.<br>$K_{th}=1.86\\left(1+\\dfrac{4.003}{16.006}\\right)=1.86\\times1.2501\\approx2.33$ MeV.",
+   "subject": "Physics",
+   "chapter": "Nuclei",
+   "chCls": "XII"
+  },
+  {
+   "no": 3,
+   "section": 1,
+   "type": "num",
+   "text": "In the following circuit $C_1=12\\ \\mu F$, $C_2=C_3=4\\ \\mu F$ and $C_4=C_5=2\\ \\mu F$. The charge stored in $C_3$ is ______ $\\mu C$.",
+   "options": null,
+   "answer": {
+    "lo": 7.9,
+    "hi": 8.1
+   },
+   "full": 3,
+   "neg": 0,
+   "fig": "phy-q3.png",
+   "optionFigs": null,
+   "sol": "The whole bottom wire is one node, and the apex of the triangle is joined by a plain wire along the top to the upper terminal of the 2 V battery. ($C_1$ lies between the 6 V battery's upper terminal and the apex.)<br>So $C_3$ (like $C_2$, $C_4$, $C_5$) is connected directly across the 2 V battery.<br>$Q_3=C_3V=4\\ \\mu F\\times2\\ V=8\\ \\mu C$.",
+   "subject": "Physics",
+   "chapter": "Electrostatic Potential and Capacitance",
+   "chCls": "XII"
+  },
+  {
+   "no": 4,
+   "section": 1,
+   "type": "num",
+   "text": "A rod of length $2$ cm makes an angle $\\dfrac{2\\pi}{3}$ rad with the principal axis of a thin convex lens. The lens has a focal length of $10$ cm and is placed at a distance of $\\dfrac{40}{3}$ cm from the object as shown in the figure. The height of the image is $\\dfrac{30\\sqrt3}{13}$ cm and the angle made by it with respect to the principal axis is $\\alpha$ rad. The value of $\\alpha$ is $\\dfrac{\\pi}{n}$ rad, where $n$ is ______.",
+   "options": null,
+   "answer": {
+    "lo": 5.95,
+    "hi": 6.05
+   },
+   "full": 3,
+   "neg": 0,
+   "fig": "phy-q4.png",
+   "optionFigs": null,
+   "sol": "The lower end of the rod is on the axis at $u=-\\dfrac{40}{3}$ cm; the upper end is $2\\cos60^\\circ=1$ cm further left and $2\\sin60^\\circ=\\sqrt3$ cm high, at $u=-\\dfrac{43}{3}$ cm.<br>Lower end: $\\dfrac1v=\\dfrac1{10}-\\dfrac3{40}=\\dfrac1{40}\\Rightarrow v=40$ cm.<br>Upper end: $\\dfrac1v=\\dfrac1{10}-\\dfrac3{43}=\\dfrac{13}{430}\\Rightarrow v=\\dfrac{430}{13}$ cm, magnification $\\dfrac{430/13}{-43/3}=-\\dfrac{30}{13}$, so image height $\\dfrac{30\\sqrt3}{13}$ cm (as given).<br>Horizontal extent of the image: $40-\\dfrac{430}{13}=\\dfrac{90}{13}$ cm.<br>$\\tan\\alpha=\\dfrac{30\\sqrt3/13}{90/13}=\\dfrac1{\\sqrt3}\\Rightarrow\\alpha=\\dfrac\\pi6$, so $n=6$.",
+   "subject": "Physics",
+   "chapter": "Ray Optics and Optical Instruments",
+   "chCls": "XII"
+  },
+  {
+   "no": 5,
+   "section": 1,
+   "type": "num",
+   "text": "At time $t=0$, a disk of radius $1$ m starts to roll without slipping on a horizontal plane with an angular acceleration of $\\alpha=\\dfrac23\\ \\mathrm{rad\\,s^{-2}}$. A small stone is stuck to the disk. At $t=0$, it is at the contact point of the disk and the plane. Later, at time $t=\\sqrt\\pi$ s, the stone detaches itself and flies off tangentially from the disk. The maximum height (in m) reached by the stone measured from the plane is $\\dfrac12+\\dfrac{x}{10}$. The value of $x$ is ______. [Take $g=10\\ \\mathrm{m\\,s^{-2}}$.]",
+   "options": null,
+   "answer": {
+    "lo": 0.48,
+    "hi": 0.56
+   },
+   "full": 3,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "At $t=\\sqrt\\pi$: $\\omega=\\alpha t=\\dfrac{2\\sqrt\\pi}{3}$ rad/s and the disk has turned $\\theta=\\dfrac12\\alpha t^2=\\dfrac\\pi3$.<br>The stone is then at angle $\\dfrac\\pi3$ from the lowest point: height $R-R\\cos\\dfrac\\pi3=\\dfrac12$ m above the plane.<br>Its velocity is $\\omega\\times$(distance from contact point), perpendicular to the line joining it to the contact point; this gives components $\\omega R(1-\\cos\\theta)$ horizontally and $\\omega R\\sin\\theta$ vertically.<br>$v_y=\\dfrac{2\\sqrt\\pi}{3}\\cdot\\dfrac{\\sqrt3}{2}=\\sqrt{\\dfrac\\pi3}$, so the extra rise is $\\dfrac{v_y^2}{2g}=\\dfrac{\\pi/3}{20}=\\dfrac{\\pi}{60}$.<br>$H=\\dfrac12+\\dfrac{\\pi}{60}=\\dfrac12+\\dfrac{x}{10}\\Rightarrow x=\\dfrac\\pi6\\approx0.52$.",
+   "subject": "Physics",
+   "chapter": "System of Particles and Rotational Motion",
+   "chCls": "XI"
+  },
+  {
+   "no": 6,
+   "section": 1,
+   "type": "num",
+   "text": "A solid sphere of mass $1$ kg and radius $1$ m rolls without slipping on a fixed inclined plane with an angle of inclination $\\theta=30^\\circ$ from the horizontal. Two forces of magnitude $1$ N each, parallel to the incline, act on the sphere, both at distance $r=0.5$ m from the center of the sphere, as shown in the figure. The acceleration of the sphere down the plane is ______ $\\mathrm{m\\,s^{-2}}$. (Take $g=10\\ \\mathrm{m\\,s^{-2}}$.)",
+   "options": null,
+   "answer": {
+    "lo": 2.8,
+    "hi": 2.92
+   },
+   "full": 3,
+   "neg": 0,
+   "fig": "phy-q6.png",
+   "optionFigs": null,
+   "sol": "The two forces are equal and opposite, so they add no net force; they form a couple of moment $F\\times(2r)=1\\times1=1$ N m.<br>From the figure, the down-slope force acts below the centre and the up-slope force above it, so the couple turns the sphere opposite to the rolling-down sense.<br>Let $f$ = friction up the slope, $I=\\dfrac25mR^2=0.4$ kg m$^2$, $a=\\alpha R$.<br>Translation: $ma=mg\\sin\\theta-f=5-f$. Rotation (rolling-down sense): $I\\alpha=fR-1\\Rightarrow0.4a=f-1$.<br>Adding: $1.4a=4\\Rightarrow a=\\dfrac{20}{7}\\approx2.86\\ \\mathrm{m\\,s^{-2}}$.",
+   "subject": "Physics",
+   "chapter": "System of Particles and Rotational Motion",
+   "chCls": "XI"
+  },
+  {
+   "no": 7,
+   "section": 1,
+   "type": "num",
+   "text": "Consider an LC circuit, with inductance $L=0.1$ H and capacitance $C=10^{-3}$ F, kept on a plane. The area of the circuit is $1\\ \\mathrm{m^2}$. It is placed in a constant magnetic field of strength $B_0$ which is perpendicular to the plane of the circuit. At time $t=0$, the magnetic field strength starts increasing linearly as $B=B_0+\\beta t$ with $\\beta=0.04\\ \\mathrm{T\\,s^{-1}}$. The maximum magnitude of the current in the circuit is ______ mA.",
+   "options": null,
+   "answer": {
+    "lo": 3.98,
+    "hi": 4.02
+   },
+   "full": 3,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "From $t=0$ a constant emf $\\varepsilon=A\\beta=1\\times0.04=0.04$ V acts in the loop.<br>$L\\dfrac{di}{dt}+\\dfrac qC=\\varepsilon$ with $q=i=0$ at $t=0$ gives $q=C\\varepsilon(1-\\cos\\omega t)$, $i=C\\varepsilon\\omega\\sin\\omega t$.<br>$\\omega=\\dfrac1{\\sqrt{LC}}=\\dfrac1{\\sqrt{10^{-4}}}=100$ rad/s.<br>$i_{max}=C\\varepsilon\\omega=10^{-3}\\times0.04\\times100=4\\times10^{-3}$ A $=4$ mA.",
+   "subject": "Physics",
+   "chapter": "Electromagnetic Induction",
+   "chCls": "XII"
+  },
+  {
+   "no": 8,
+   "section": 1,
+   "type": "num",
+   "text": "A projectile is fired from horizontal ground with speed $v$ and projection angle $\\theta$. When the acceleration due to gravity is $g$, the range of the projectile is $d$. If at the highest point in its trajectory, the projectile enters a different region where the effective acceleration due to gravity is $g'=\\dfrac{g}{0.81}$, then the new range is $d'=nd$. The value of $n$ is ______.",
+   "options": null,
+   "answer": {
+    "lo": 0.93,
+    "hi": 0.97
+   },
+   "full": 3,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Up to the highest point the motion is unchanged: horizontal distance $\\dfrac d2$, height $H$.<br>The fall from height $H$ takes $\\sqrt{\\dfrac{2H}{g'}}=\\sqrt{0.81}\\sqrt{\\dfrac{2H}{g}}=0.9\\times$ the original fall time, at the same horizontal speed.<br>So the second half covers $0.9\\times\\dfrac d2=0.45d$.<br>$d'=0.5d+0.45d=0.95d\\Rightarrow n=0.95$.",
+   "subject": "Physics",
+   "chapter": "Motion in a Plane",
+   "chCls": "XI"
+  },
+  {
+   "no": 9,
+   "section": 2,
+   "type": "multi",
+   "text": "A medium having dielectric constant $K>1$ fills the space between the plates of a parallel plate capacitor. The plates have large area, and the distance between them is $d$. The capacitor is connected to a battery of voltage $V$, as shown in Figure (a). Now, both the plates are moved by a distance of $\\dfrac d2$ from their original positions, as shown in Figure (b).<br>In the process of going from the configuration depicted in Figure (a) to that in Figure (b), which of the following statement(s) is(are) correct?",
+   "options": [
+    "The electric field inside the dielectric material is reduced by a factor of $2K$.",
+    "The capacitance is decreased by a factor of $\\dfrac{1}{K+1}$.",
+    "The voltage between the capacitor plates is increased by a factor of $(K+1)$.",
+    "The work done in the process <b>DOES NOT</b> depend on the presence of the dielectric material."
+   ],
+   "answer": [
+    1
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": "phy-q9.png",
+   "optionFigs": null,
+   "sol": "Initially $C=\\dfrac{K\\varepsilon_0A}{d}$. Finally the gap is $2d$: dielectric of thickness $d$ in series with air of total thickness $d$: $C'=\\dfrac{\\varepsilon_0A}{d+d/K}=\\dfrac{K\\varepsilon_0A}{(K+1)d}=\\dfrac{C}{K+1}$ — (B) correct.<br>The battery keeps $V$ fixed — (C) wrong.<br>Field in the dielectric: initially $\\dfrac Vd$; finally $E_{air}=KE_{d}$ and $V=E_{air}d+E_dd=(K+1)E_dd$, so $E_d=\\dfrac{V}{(K+1)d}$: reduced by $(K+1)$, not $2K$ — (A) wrong.<br>The work done depends on the change in $C$, which depends on $K$ — (D) wrong.",
+   "subject": "Physics",
+   "chapter": "Electrostatic Potential and Capacitance",
+   "chCls": "XII"
+  },
+  {
+   "no": 10,
+   "section": 2,
+   "type": "multi",
+   "text": "The figure shows a circuit having eight resistances of $1\\ \\Omega$ each, labelled $R_1$ to $R_8$, and two ideal batteries with voltages $\\mathcal{E}_1=12$ V and $\\mathcal{E}_2=6$ V.<br>Which of the following statement(s) is(are) correct?",
+   "options": [
+    "The magnitude of current flowing through $R_1$ is $7.2$ A.",
+    "The magnitude of current flowing through $R_2$ is $1.2$ A.",
+    "The magnitude of current flowing through $R_3$ is $4.8$ A.",
+    "The magnitude of current flowing through $R_5$ is $2.4$ A."
+   ],
+   "answer": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": "phy-q10.png",
+   "optionFigs": null,
+   "sol": "Label the corners Top, Left, Right, Bottom and the centre O. The circuit is symmetric about the horizontal line, so Top and Bottom are at the same potential; take it as 0.<br>Let $I_3$ flow Left → O through $\\mathcal E_2,R_3$ and $I_1$ flow O → Right through $\\mathcal E_1,R_1$ (both batteries drive current to the right).<br>Node Left: $I_3=2(0-V_L)$; node Right: $I_1=2V_R$; node O: $I_3+2(0-V_O)=I_1$.<br>Branches: $V_O=V_L+6-I_3$, $V_R=V_O+12-I_1$.<br>Solving: $I_1=12-I_3$ and $5I_3=24$, so $I_3=4.8$ A, $I_1=7.2$ A, $V_O=-1.2$ V, $V_L=-2.4$ V.<br>$I_{R_2}=I_{R_4}=1.2$ A and $I_{R_5}=I_{R_6}=2.4$ A. All four statements are correct.",
+   "subject": "Physics",
+   "chapter": "Current Electricity",
+   "chCls": "XII"
+  },
+  {
+   "no": 11,
+   "section": 2,
+   "type": "multi",
+   "text": "An ideal gas of density $\\rho=0.2\\ \\mathrm{kg\\,m^{-3}}$ enters a chimney of height $h$ at the rate of $\\alpha=0.8\\ \\mathrm{kg\\,s^{-1}}$ from its lower end, and escapes through the upper end as shown in the figure. The cross-sectional area of the lower end is $A_1=0.1\\ \\mathrm{m^2}$ and the upper end is $A_2=0.4\\ \\mathrm{m^2}$. The pressure and the temperature of the gas at the lower end are $600$ Pa and $300$ K, respectively, while its temperature at the upper end is $150$ K. The chimney is heat insulated so that the gas undergoes adiabatic expansion. Take $g=10\\ \\mathrm{m\\,s^{-2}}$ and the ratio of specific heats of the gas $\\gamma=2$. Ignore atmospheric pressure.<br>Which of the following statement(s) is(are) correct?",
+   "options": [
+    "The pressure of the gas at the upper end of the chimney is $300$ Pa.",
+    "The velocity of the gas at the lower end of the chimney is $40\\ \\mathrm{m\\,s^{-1}}$ and at the upper end is $20\\ \\mathrm{m\\,s^{-1}}$.",
+    "The height of the chimney is $590$ m.",
+    "The density of the gas at the upper end is $0.05\\ \\mathrm{kg\\,m^{-3}}$."
+   ],
+   "answer": [
+    1
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": "phy-q11.png",
+   "optionFigs": null,
+   "sol": "Adiabatic with $\\gamma=2$: $T\\propto\\rho^{\\gamma-1}=\\rho$, so $\\rho_2=0.2\\times\\dfrac{150}{300}=0.1\\ \\mathrm{kg\\,m^{-3}}$ — (D) wrong.<br>$P\\propto\\rho T$: $P_2=600\\times\\dfrac12\\times\\dfrac12=150$ Pa — (A) wrong.<br>Mass flow: $v_1=\\dfrac{0.8}{0.2\\times0.1}=40\\ \\mathrm{m\\,s^{-1}}$, $v_2=\\dfrac{0.8}{0.1\\times0.4}=20\\ \\mathrm{m\\,s^{-1}}$ — (B) correct.<br>Energy per unit mass for steady adiabatic flow: $\\dfrac{\\gamma}{\\gamma-1}\\dfrac P\\rho+\\dfrac{v^2}2+gh$ is constant: $2(3000)+800=2(1500)+200+10h\\Rightarrow h=360$ m, not 590 m — (C) wrong.",
+   "subject": "Physics",
+   "chapter": "Mechanical Properties of Fluids",
+   "chCls": "XI"
+  },
+  {
+   "no": 12,
+   "section": 2,
+   "type": "multi",
+   "text": "Three plane mirrors form an equilateral triangle with each side of length $L$. There is a small hole at a distance $l>0$ from one of the corners as shown in the figure. A ray of light is passed through the hole at an angle $\\theta$ and can only come out through the same hole. The cross section of the mirror configuration and the ray of light lie on the same plane.<br>Which of the following statement(s) is(are) correct?",
+   "options": [
+    "The ray of light will come out for $\\theta=30^\\circ$, for $0&lt;l&lt;L$.",
+    "There is an angle for $l=\\dfrac L2$ at which the ray of light will come out after two reflections.",
+    "The ray of light will <b>NEVER</b> come out for $\\theta=60^\\circ$, and $l=\\dfrac L3$.",
+    "The ray of light will come out for $\\theta=60^\\circ$, and $0&lt;l&lt;\\dfrac L2$ after six reflections."
+   ],
+   "answer": [
+    0,
+    1
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": "phy-q12.png",
+   "optionFigs": null,
+   "sol": "Inside, the ray travels at angle $\\theta$ to the base, heading towards the far (left) side, which makes $60^\\circ$ with the base.<br>(A) $\\theta=30^\\circ$: the ray meets the left side at $180^\\circ-60^\\circ-30^\\circ=90^\\circ$, i.e. normally, so it retraces its path to the hole for every $l$ — correct.<br>(B) $l=\\dfrac L2$, $\\theta=60^\\circ$: the ray runs along the medial triangle (midpoint of the left side, midpoint of the right side, back to the hole) — two reflections — correct.<br>(C), (D) $\\theta=60^\\circ$ from a point at $x_0$ on the base: the ray runs parallel to the right side, then parallel to the base, then parallel to the left side and returns to the base at $L-x_0$; three more reflections bring it back to $x_0$.<br>So for $l\\ne\\dfrac L2$ it does come out (after 5 reflections) — (C) wrong and (D) wrong (not six).",
+   "subject": "Physics",
+   "chapter": "Ray Optics and Optical Instruments",
+   "chCls": "XII"
+  },
+  {
+   "no": 13,
+   "section": 2,
+   "type": "multi",
+   "text": "Six charges are placed around a regular hexagon of side length $a$ as shown in the figure. Five of them have charge $q$, and the remaining one has charge $x$. The perpendicular from each charge to the nearest hexagon side passes through the center O of the hexagon and is bisected by the side.<br>Which of the following statement(s) is(are) correct in SI units?",
+   "options": [
+    "When $x=q$, the magnitude of the electric field at O is zero.",
+    "When $x=-q$, the magnitude of the electric field at O is $\\dfrac{q}{6\\pi\\epsilon_0a^2}$.",
+    "When $x=2q$, the potential at O is $\\dfrac{7q}{4\\sqrt3\\pi\\epsilon_0a}$.",
+    "When $x=-3q$, the potential at O is $-\\dfrac{3q}{4\\sqrt3\\pi\\epsilon_0a}$."
+   ],
+   "answer": [
+    0,
+    1,
+    2
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": "phy-q13.png",
+   "optionFigs": null,
+   "sol": "Distance from O to each side is $\\dfrac{\\sqrt3a}{2}$, so each charge is at $r=\\sqrt3a$ from O, the six placed symmetrically.<br>(A) Six equal charges symmetric about O: $E=0$ — correct.<br>(B) $x=-q$ is $q$ plus $-2q$ at that point: $E=\\dfrac{2q}{4\\pi\\epsilon_0(3a^2)}=\\dfrac{q}{6\\pi\\epsilon_0a^2}$ — correct.<br>(C) $V=\\dfrac{5q+2q}{4\\pi\\epsilon_0\\sqrt3a}=\\dfrac{7q}{4\\sqrt3\\pi\\epsilon_0a}$ — correct.<br>(D) $V=\\dfrac{5q-3q}{4\\pi\\epsilon_0\\sqrt3a}=+\\dfrac{2q}{4\\sqrt3\\pi\\epsilon_0a}$ — wrong.",
+   "subject": "Physics",
+   "chapter": "Electric Charges and Fields",
+   "chCls": "XII"
+  },
+  {
+   "no": 14,
+   "section": 2,
+   "type": "multi",
+   "text": "The binding energy of nucleons in a nucleus can be affected by the pairwise Coulomb repulsion. Assume that all nucleons are uniformly distributed inside the nucleus. Let the binding energy of a proton be $E_b^p$ and the binding energy of a neutron be $E_b^n$ in the nucleus.<br>Which of the following statement(s) is(are) correct?",
+   "options": [
+    "$E_b^p-E_b^n$ is proportional to $Z(Z-1)$ where $Z$ is the atomic number of the nucleus.",
+    "$E_b^p-E_b^n$ is proportional to $A^{-\\frac13}$ where $A$ is the mass number of the nucleus.",
+    "$E_b^p-E_b^n$ is positive.",
+    "$E_b^p$ increases if the nucleus undergoes a beta decay emitting a positron."
+   ],
+   "answer": [
+    0,
+    1,
+    3
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Apart from the Coulomb term, protons and neutrons are bound alike; the difference comes from the electrostatic energy of the $Z$ protons in a uniform sphere of radius $R=R_0A^{1/3}$: $E_C=\\dfrac35\\dfrac{Z(Z-1)e^2}{4\\pi\\epsilon_0R_0A^{1/3}}$.<br>This repulsion lowers the binding of the protons: $E_b^p-E_b^n=-E_C\\propto Z(Z-1)A^{-1/3}$ — (A) and (B) correct; it is negative — (C) wrong.<br>Positron emission lowers $Z$ by 1 with $A$ unchanged, so the Coulomb reduction is smaller and $E_b^p$ increases — (D) correct.",
+   "subject": "Physics",
+   "chapter": "Nuclei",
+   "chCls": "XII"
+  },
+  {
+   "no": 15,
+   "section": 3,
+   "type": "match",
+   "text": "A small circular loop of area $A$ and resistance $R$ is fixed on a horizontal $xy$-plane with the center of the loop always on the axis $\\hat n$ of a long solenoid. The solenoid has $m$ turns per unit length and carries current $I$ counterclockwise as shown in the figure. The magnetic field due to the solenoid is in $\\hat n$ direction. List-I gives time dependences of $\\hat n$ in terms of a constant angular frequency $\\omega$. List-II gives the torques experienced by the circular loop at time $t=\\dfrac{\\pi}{6\\omega}$. Let $\\alpha=\\dfrac{A^2\\mu_0^2m^2I^2\\omega}{2R}$.<table class=\"mt\"><tr><th>List-I</th><th>List-II</th></tr><tr><td>(I) $\\frac{1}{\\sqrt2}\\left(\\sin\\omega t\\,\\hat\\jmath+\\cos\\omega t\\,\\hat k\\right)$</td><td>(P) $0$</td></tr><tr><td>(II) $\\frac{1}{\\sqrt2}\\left(\\sin\\omega t\\,\\hat\\imath+\\cos\\omega t\\,\\hat\\jmath\\right)$</td><td>(Q) $-\\frac{\\alpha}{4}\\hat\\imath$</td></tr><tr><td>(III) $\\frac{1}{\\sqrt2}\\left(\\sin\\omega t\\,\\hat\\imath+\\cos\\omega t\\,\\hat k\\right)$</td><td>(R) $\\frac{3\\alpha}{4}\\hat\\imath$</td></tr><tr><td>(IV) $\\frac{1}{\\sqrt2}\\left(\\cos\\omega t\\,\\hat\\jmath+\\sin\\omega t\\,\\hat k\\right)$</td><td>(S) $\\frac{\\alpha}{4}\\hat\\jmath$</td></tr><tr><td></td><td>(T) $-\\frac{3\\alpha}{4}\\hat\\imath$</td></tr></table>Which one of the following options is correct?",
+   "options": [
+    "I → Q, II → P, III → S, IV → T",
+    "I → S, II → T, III → Q, IV → P",
+    "I → Q, II → P, III → S, IV → R",
+    "I → T, II → Q, III → P, IV → R"
+   ],
+   "answer": 2,
+   "full": 3,
+   "neg": 1,
+   "dropped": true,
+   "note": "Dropped in the official final key: full marks to everyone.",
+   "fig": "phy-q15.png",
+   "optionFigs": null,
+   "sol": "$B=\\mu_0mI\\,\\hat n$ at the loop; flux $\\Phi=\\mu_0mIA\\,(\\hat n\\cdot\\hat k)$; induced current $i=-\\dfrac1R\\dfrac{d\\Phi}{dt}$; moment $\\vec\\mu=iA\\hat k$; torque $\\vec\\tau=\\vec\\mu\\times\\vec B=iA\\mu_0mI\\,(\\hat k\\times\\hat n)$.<br>(I) $\\hat n\\cdot\\hat k=\\frac{\\cos\\omega t}{\\sqrt2}$, $i=\\dfrac{\\mu_0mIA\\omega\\sin\\omega t}{\\sqrt2R}$, $\\hat k\\times\\hat n=-\\frac{\\sin\\omega t}{\\sqrt2}\\hat\\imath$: $\\vec\\tau=-\\alpha\\sin^2\\omega t\\,\\hat\\imath=-\\dfrac\\alpha4\\hat\\imath$ (Q).<br>(II) $\\hat n\\cdot\\hat k=0$: no flux change, no current, $\\vec\\tau=0$ (P).<br>(III) same current as (I), $\\hat k\\times\\hat n=\\frac{\\sin\\omega t}{\\sqrt2}\\hat\\jmath$: $\\vec\\tau=\\alpha\\sin^2\\omega t\\,\\hat\\jmath=\\dfrac\\alpha4\\hat\\jmath$ (S).<br>(IV) $\\hat n\\cdot\\hat k=\\frac{\\sin\\omega t}{\\sqrt2}$, $i=-\\dfrac{\\mu_0mIA\\omega\\cos\\omega t}{\\sqrt2R}$, $\\hat k\\times\\hat n=-\\frac{\\cos\\omega t}{\\sqrt2}\\hat\\imath$: $\\vec\\tau=\\alpha\\cos^2\\omega t\\,\\hat\\imath=\\dfrac{3\\alpha}4\\hat\\imath$ (R).<br>This working gives option (C); the question was dropped in the official final key.",
+   "subject": "Physics",
+   "chapter": "Electromagnetic Induction",
+   "chCls": "XII"
+  },
+  {
+   "no": 16,
+   "section": 3,
+   "type": "match",
+   "text": "List I describes four systems, each with two particles $A$ and $B$ in relative motion as shown in figures. List II gives possible magnitudes of their relative velocities (in $\\mathrm{m\\,s^{-1}}$) at time $t=\\dfrac\\pi3$ s.<table class=\"mt\"><tr><th>List-I</th><th>List-II</th></tr><tr><td>(I) $A$ and $B$ are moving on a horizontal circle of radius $1$ m with uniform angular speed $\\omega=1\\ \\mathrm{rad\\,s^{-1}}$. The initial angular positions of $A$ and $B$ at time $t=0$ are $\\theta=0$ and $\\theta=\\frac\\pi2$, respectively.</td><td>(P) $\\frac{\\sqrt3+1}{2}$</td></tr><tr><td>(II) Projectiles $A$ and $B$ are fired (in the same vertical plane) at $t=0$ and $t=0.1$ s respectively, with the same speed $v=\\frac{5\\pi}{\\sqrt2}\\ \\mathrm{m\\,s^{-1}}$ and at $45^\\circ$ from the horizontal plane. The initial separation between $A$ and $B$ is large enough so that they do not collide. ($g=10\\ \\mathrm{m\\,s^{-2}}$).</td><td>(Q) $\\frac{\\sqrt3-1}{\\sqrt2}$</td></tr><tr><td>(III) Two harmonic oscillators $A$ and $B$ moving in the $x$ direction according to $x_A=x_0\\sin\\frac{t}{t_0}$ and $x_B=x_0\\sin\\left(\\frac{t}{t_0}+\\frac\\pi2\\right)$ respectively, starting from $t=0$. Take $x_0=1$ m, $t_0=1$ s.</td><td>(R) $\\sqrt{10}$</td></tr><tr><td>(IV) Particle $A$ is rotating in a horizontal circular path of radius $1$ m on the $xy$ plane, with constant angular speed $\\omega=1\\ \\mathrm{rad\\,s^{-1}}$. Particle $B$ is moving up at a constant speed $3\\ \\mathrm{m\\,s^{-1}}$ in the vertical direction as shown in the figure. (Ignore gravity.)</td><td>(S) $\\sqrt2$</td></tr><tr><td></td><td>(T) $\\sqrt{25\\pi^2+1}$</td></tr></table>Which one of the following options is correct?",
+   "options": [
+    "I → R, II → T, III → P, IV → S",
+    "I → S, II → P, III → Q, IV → R",
+    "I → S, II → T, III → P, IV → R",
+    "I → T, II → P, III → R, IV → S"
+   ],
+   "answer": 2,
+   "full": 3,
+   "neg": 1,
+   "fig": "phy-q16.png",
+   "optionFigs": null,
+   "sol": "(I) Both have speed 1 m/s and their velocities stay $90^\\circ$ apart: $|v_{rel}|=\\sqrt2$ (S).<br>(II) The $45^\\circ$ angles are marked on the facing sides, so A and B are fired towards each other. Horizontal: $v\\cos45^\\circ-(-v\\cos45^\\circ)=2\\cdot\\frac{5\\pi}{2}=5\\pi$; vertical: $(v\\sin45^\\circ-gt)-(v\\sin45^\\circ-g(t-0.1))=-1$. Both are still in flight at $t=\\frac\\pi3$ (flight time $\\frac\\pi2$ s). $|v_{rel}|=\\sqrt{25\\pi^2+1}$ (T).<br>(III) $v_A=\\cos t$, $v_B=-\\sin t$; $|v_A-v_B|=\\cos\\frac\\pi3+\\sin\\frac\\pi3=\\frac{\\sqrt3+1}{2}$ (P).<br>(IV) $A$ moves horizontally at 1 m/s, $B$ vertically at 3 m/s: $\\sqrt{10}$ (R).<br>Answer (C).",
+   "subject": "Physics",
+   "chapter": "Motion in a Plane",
+   "chCls": "XI"
+  },
+  {
+   "no": 17,
+   "section": 3,
+   "type": "match",
+   "text": "List I describes thermodynamic processes in four different systems. List II gives the magnitudes (either exactly or as a close approximation) of possible changes in the internal energy of the system due to the process.<table class=\"mt\"><tr><th>List-I</th><th>List-II</th></tr><tr><td>(I) $10^{-3}$ kg of water at $100^\\circ$C is converted to steam at the same temperature, at a pressure of $10^5$ Pa. The volume of the system changes from $10^{-6}\\ \\mathrm{m^3}$ to $10^{-3}\\ \\mathrm{m^3}$ in the process. Latent heat of water $=2250$ kJ/kg.</td><td>(P) 2 kJ</td></tr><tr><td>(II) 0.2 moles of a rigid diatomic ideal gas with volume $V$ at temperature $500$ K undergoes an isobaric expansion to volume $3V$. Assume $R=8.0\\ \\mathrm{J\\,mol^{-1}K^{-1}}$.</td><td>(Q) 7 kJ</td></tr><tr><td>(III) One mole of a monatomic ideal gas is compressed adiabatically from volume $V=\\frac13\\ \\mathrm{m^3}$ and pressure 2 kPa to volume $\\frac V8$.</td><td>(R) 4 kJ</td></tr><tr><td>(IV) Three moles of a diatomic ideal gas whose molecules can vibrate, is given 9 kJ of heat and undergoes isobaric expansion.</td><td>(S) 5 kJ</td></tr><tr><td></td><td>(T) 3 kJ</td></tr></table>Which one of the following options is correct?",
+   "options": [
+    "I → T, II → R, III → S, IV → Q",
+    "I → S, II → P, III → T, IV → P",
+    "I → P, II → R, III → T, IV → Q",
+    "I → Q, II → R, III → S, IV → T"
+   ],
+   "answer": 2,
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "(I) $Q=mL=2.25$ kJ, $W=P\\Delta V=10^5(10^{-3}-10^{-6})\\approx0.1$ kJ, $\\Delta U\\approx2.15$ kJ $\\approx2$ kJ (P).<br>(II) $T$: 500 K → 1500 K; $\\Delta U=nC_v\\Delta T=0.2\\times\\frac52\\times8\\times1000=4$ kJ (R).<br>(III) $TV^{2/3}$ constant: $V\\to V/8$ multiplies $T$ (and $PV$) by 4. $\\Delta U=\\frac32(P_2V_2-P_1V_1)=\\frac32\\times\\frac{2000}{3}\\times3=3$ kJ (T).<br>(IV) With vibration $C_v=\\frac72R$, $C_p=\\frac92R$; isobaric: $\\Delta U=Q\\dfrac{C_v}{C_p}=9\\times\\frac79=7$ kJ (Q).<br>Answer (C).",
+   "subject": "Physics",
+   "chapter": "Thermodynamics",
+   "chCls": "XI"
+  },
+  {
+   "no": 18,
+   "section": 3,
+   "type": "match",
+   "text": "List I contains four combinations of two lenses (1 and 2) whose focal lengths (in cm) are indicated in the figures. In all cases, the object is placed 20 cm from the first lens on the left, and the distance between the two lenses is 5 cm. List II contains the positions of the final images.<table class=\"mt\"><tr><th>List-I</th><th>List-II</th></tr><tr><td>(I) $f_1=+10$, $f_2=+15$</td><td>(P) Final image is formed at 7.5 cm on the right side of lens 2.</td></tr><tr><td>(II) $f_1=+10$, $f_2=-10$</td><td>(Q) Final image is formed at 60.0 cm on the right side of lens 2.</td></tr><tr><td>(III) $f_1=+10$, $f_2=-20$</td><td>(R) Final image is formed at 30.0 cm on the left side of lens 2.</td></tr><tr><td>(IV) $f_1=-20$, $f_2=+10$</td><td>(S) Final image is formed at 6.0 cm on the right side of lens 2.</td></tr><tr><td></td><td>(T) Final image is formed at 30.0 cm on the right side of lens 2.</td></tr></table>Which one of the following options is correct?",
+   "options": [
+    "(I) → P; (II) → R; (III) → Q; (IV) → T",
+    "(I) → Q; (II) → P; (III) → T; (IV) → S",
+    "(I) → P; (II) → T; (III) → R; (IV) → Q",
+    "(I) → T; (II) → S; (III) → Q; (IV) → R"
+   ],
+   "answer": 0,
+   "full": 3,
+   "neg": 1,
+   "fig": "phy-q18.png",
+   "optionFigs": null,
+   "sol": "For $f_1=+10$, $u=-20$: $v_1=+20$ cm, i.e. 15 cm beyond lens 2 (virtual object, $u_2=+15$).<br>(I) $f_2=15$: $\\frac1v=\\frac1{15}+\\frac1{15}\\Rightarrow v=7.5$ cm right (P).<br>(II) $f_2=-10$: $\\frac1v=-\\frac1{10}+\\frac1{15}=-\\frac1{30}\\Rightarrow v=-30$: 30 cm left (R).<br>(III) $f_2=-20$: $\\frac1v=-\\frac1{20}+\\frac1{15}=\\frac1{60}\\Rightarrow v=60$ cm right (Q).<br>(IV) $f_1=-20$: $\\frac1{v_1}=-\\frac1{20}-\\frac1{20}\\Rightarrow v_1=-10$; for lens 2, $u_2=-15$: $\\frac1v=\\frac1{10}-\\frac1{15}=\\frac1{30}\\Rightarrow v=30$ cm right (T).<br>Answer (A).",
+   "subject": "Physics",
+   "chapter": "Ray Optics and Optical Instruments",
+   "chCls": "XII"
+  },
+  {
+   "no": 1,
+   "section": 1,
+   "type": "num",
+   "text": "2 mol of $\\mathrm{Hg(g)}$ is combusted in a fixed volume bomb calorimeter with excess of $\\mathrm{O_2}$ at 298 K and 1 atm into $\\mathrm{HgO(s)}$. During the reaction, temperature increases from 298.0 K to 312.8 K. If heat capacity of the bomb calorimeter and enthalpy of formation of $\\mathrm{Hg(g)}$ are $20.00\\ \\mathrm{kJ\\,K^{-1}}$ and $61.32\\ \\mathrm{kJ\\,mol^{-1}}$ at 298 K, respectively, the calculated standard molar enthalpy of formation of $\\mathrm{HgO(s)}$ at 298 K is $X\\ \\mathrm{kJ\\,mol^{-1}}$. The value of $|X|$ is ______.<br>[Given: Gas constant $R=8.3\\ \\mathrm{J\\,K^{-1}\\,mol^{-1}}$]",
+   "options": null,
+   "answer": {
+    "lo": 89.0,
+    "hi": 91.0
+   },
+   "full": 3,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Heat released at constant volume: $20.00\\times(312.8-298.0)=296$ kJ, so for $\\mathrm{2Hg(g)+O_2(g)\\to2HgO(s)}$, $\\Delta U=-296$ kJ.<br>$\\Delta n_g=0-3=-3$: $\\Delta H=\\Delta U+\\Delta n_gRT=-296-3\\times8.3\\times10^{-3}\\times298=-303.42$ kJ.<br>$\\Delta H=2\\Delta_fH(\\mathrm{HgO})-2\\Delta_fH(\\mathrm{Hg,g})\\Rightarrow2\\Delta_fH(\\mathrm{HgO})=-303.42+2(61.32)=-180.78$ kJ.<br>$\\Delta_fH(\\mathrm{HgO})=-90.39\\ \\mathrm{kJ\\,mol^{-1}}$, so $|X|\\approx90.39$.",
+   "subject": "Chemistry",
+   "chapter": "Thermodynamics",
+   "chCls": "XI"
+  },
+  {
+   "no": 2,
+   "section": 1,
+   "type": "num",
+   "text": "The reduction potential ($E^0$, in V) of $\\mathrm{MnO_4^-(aq)/Mn(s)}$ is ______.<br>[Given: $E^0_{\\left(\\mathrm{MnO_4^-(aq)/MnO_2(s)}\\right)}=1.68$ V; $E^0_{\\left(\\mathrm{MnO_2(s)/Mn^{2+}(aq)}\\right)}=1.21$ V; $E^0_{\\left(\\mathrm{Mn^{2+}(aq)/Mn(s)}\\right)}=-1.03$ V]",
+   "options": null,
+   "answer": {
+    "lo": 0.74,
+    "hi": 0.8
+   },
+   "full": 3,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Add the free energies ($\\Delta G^0=-nFE^0$) of the three steps: $\\mathrm{MnO_4^-\\to MnO_2}$ ($n=3$), $\\mathrm{MnO_2\\to Mn^{2+}}$ ($n=2$), $\\mathrm{Mn^{2+}\\to Mn}$ ($n=2$); overall $n=7$.<br>$E^0=\\dfrac{3(1.68)+2(1.21)+2(-1.03)}{7}=\\dfrac{5.04+2.42-2.06}{7}=\\dfrac{5.40}{7}\\approx0.77$ V.",
+   "subject": "Chemistry",
+   "chapter": "Electrochemistry",
+   "chCls": "XII"
+  },
+  {
+   "no": 3,
+   "section": 1,
+   "type": "num",
+   "text": "A solution is prepared by mixing 0.01 mol each of $\\mathrm{H_2CO_3}$, $\\mathrm{NaHCO_3}$, $\\mathrm{Na_2CO_3}$, and $\\mathrm{NaOH}$ in 100 mL of water. pH of the resulting solution is ______.<br>[Given: $pK_{a1}$ and $pK_{a2}$ of $\\mathrm{H_2CO_3}$ are 6.37 and 10.32, respectively; $\\log2=0.30$]",
+   "options": null,
+   "answer": {
+    "lo": 10.0,
+    "hi": 10.04
+   },
+   "full": 3,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$\\mathrm{NaOH}$ neutralises $\\mathrm{H_2CO_3}$: $\\mathrm{H_2CO_3+OH^-\\to HCO_3^-+H_2O}$ (0.01 mol each).<br>Left: $\\mathrm{HCO_3^-}$ 0.02 mol and $\\mathrm{CO_3^{2-}}$ 0.01 mol — a buffer of the second dissociation.<br>$\\mathrm{pH}=pK_{a2}+\\log\\dfrac{[\\mathrm{CO_3^{2-}}]}{[\\mathrm{HCO_3^-}]}=10.32+\\log\\dfrac{0.01}{0.02}=10.32-0.30=10.02$.",
+   "subject": "Chemistry",
+   "chapter": "Equilibrium",
+   "chCls": "XI"
+  },
+  {
+   "no": 4,
+   "section": 1,
+   "type": "num",
+   "text": "The treatment of an aqueous solution of 3.74 g of $\\mathrm{Cu(NO_3)_2}$ with excess KI results in a brown solution along with the formation of a precipitate. Passing $\\mathrm{H_2S}$ through this brown solution gives another precipitate X. The amount of X (in g) is ______.<br>[Given: Atomic mass of H = 1, N = 14, O = 16, S = 32, K = 39, Cu = 63, I = 127]",
+   "options": null,
+   "answer": {
+    "lo": 0.31,
+    "hi": 0.33
+   },
+   "full": 3,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$M(\\mathrm{Cu(NO_3)_2})=63+2(62)=187$; $\\dfrac{3.74}{187}=0.02$ mol.<br>$\\mathrm{2Cu^{2+}+4I^-\\to2CuI\\downarrow+I_2}$; the $\\mathrm{I_2}$ (0.01 mol) stays in solution as brown $\\mathrm{I_3^-}$.<br>$\\mathrm{H_2S+I_2\\to2HI+S\\downarrow}$: X is sulphur, 0.01 mol $=0.32$ g.",
+   "subject": "Chemistry",
+   "chapter": "Redox Reactions",
+   "chCls": "XI"
+  },
+  {
+   "no": 5,
+   "section": 1,
+   "type": "num",
+   "text": "Dissolving 1.24 g of white phosphorous in boiling NaOH solution in an inert atmosphere gives a gas Q. The amount of $\\mathrm{CuSO_4}$ (in g) required to completely consume the gas Q is ______.<br>[Given: Atomic mass of H = 1, O = 16, Na = 23, P = 31, S = 32, Cu = 63]",
+   "options": null,
+   "answer": {
+    "lo": 2.37,
+    "hi": 2.41
+   },
+   "full": 3,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$\\mathrm{P_4}$: $\\dfrac{1.24}{124}=0.01$ mol. $\\mathrm{P_4+3NaOH+3H_2O\\to PH_3+3NaH_2PO_2}$, so Q $=\\mathrm{PH_3}$, 0.01 mol.<br>$\\mathrm{3CuSO_4+2PH_3\\to Cu_3P_2+3H_2SO_4}$: $\\mathrm{CuSO_4}$ needed $=0.015$ mol.<br>$M(\\mathrm{CuSO_4})=63+32+64=159$; mass $=0.015\\times159=2.385\\approx2.39$ g.",
+   "subject": "Chemistry",
+   "chapter": "Some Basic Concepts of Chemistry",
+   "chCls": "XI"
+  },
+  {
+   "no": 6,
+   "section": 1,
+   "type": "num",
+   "text": "Consider the following reaction.<br>On estimation of bromine in 1.00 g of $\\mathbf{R}$ using Carius method, the amount of AgBr formed (in g) is ______.<br>[Given: Atomic mass of H = 1, C = 12, O = 16, P = 31, Br = 80, Ag = 108]",
+   "options": null,
+   "answer": {
+    "lo": 1.49,
+    "hi": 1.51
+   },
+   "full": 3,
+   "neg": 0,
+   "fig": "che-q6.png",
+   "optionFigs": null,
+   "sol": "Red P/$\\mathrm{Br_2}$ (i.e. $\\mathrm{PBr_3}$) converts the $\\mathrm{CH_2OH}$ group to $\\mathrm{CH_2Br}$: R is 4-bromobenzyl bromide, $\\mathrm{C_7H_6Br_2}$, $M=84+6+160=250$.<br>1.00 g of R $=\\dfrac1{250}$ mol, containing $\\dfrac2{250}$ mol Br.<br>AgBr ($M=188$): $\\dfrac{2}{250}\\times188=1.504$ g $\\approx1.50$ g.",
+   "subject": "Chemistry",
+   "chapter": "Organic Chemistry – Some Basic Principles and Techniques",
+   "chCls": "XI"
+  },
+  {
+   "no": 7,
+   "section": 1,
+   "type": "num",
+   "text": "The weight percentage of hydrogen in $\\mathbf{Q}$, formed in the following reaction sequence, is ______.<br>[Given: Atomic mass of H = 1, C = 12, N = 14, O = 16, S = 32, Cl = 35]",
+   "options": null,
+   "answer": {
+    "lo": 1.3,
+    "hi": 1.32
+   },
+   "full": 3,
+   "neg": 0,
+   "fig": "che-q7.png",
+   "optionFigs": null,
+   "sol": "NaOH at 623 K, 300 atm (Dow process) converts chlorobenzene to phenol (via sodium phenoxide).<br>Phenol with conc. $\\mathrm{H_2SO_4}$ (sulphonation) and then conc. $\\mathrm{HNO_3}$ gives picric acid, 2,4,6-trinitrophenol, $\\mathrm{C_6H_3N_3O_7}$.<br>$M=72+3+42+112=229$; %H $=\\dfrac{3}{229}\\times100\\approx1.31$.",
+   "subject": "Chemistry",
+   "chapter": "Alcohols, Phenols and Ethers",
+   "chCls": "XII"
+  },
+  {
+   "no": 8,
+   "section": 1,
+   "type": "num",
+   "text": "If the reaction sequence given below is carried out with 15 moles of acetylene, the amount of the product $\\mathbf{D}$ formed (in g) is ______.<br>The yields of $\\mathbf{A}$, $\\mathbf{B}$, $\\mathbf{C}$ and $\\mathbf{D}$ are given in parentheses.<br>[Given: Atomic mass of H = 1, C = 12, O = 16, Cl = 35]",
+   "options": null,
+   "answer": {
+    "lo": 135.8,
+    "hi": 136.2
+   },
+   "full": 3,
+   "neg": 0,
+   "fig": "che-q8.png",
+   "optionFigs": null,
+   "sol": "A: benzene by cyclic trimerisation; 15 mol acetylene → 5 mol × 80% = 4 mol.<br>B: Friedel–Crafts with 1-chloropropane gives cumene (the carbocation rearranges to isopropyl); 50% → 2 mol.<br>C: cumene process ($\\mathrm{O_2}$, then $\\mathrm{H_3O^+}$, acetone removed) gives phenol; 50% → 1 mol.<br>D: acetylation with $\\mathrm{CH_3COCl}$/pyridine gives phenyl acetate, $\\mathrm{C_8H_8O_2}$, $M=136$; 100% → 136 g.",
+   "subject": "Chemistry",
+   "chapter": "Alcohols, Phenols and Ethers",
+   "chCls": "XII"
+  },
+  {
+   "no": 9,
+   "section": 2,
+   "type": "multi",
+   "text": "For diatomic molecules, the correct statement(s) about the molecular orbitals formed by the overlap of two $2p_z$ orbitals is(are)",
+   "options": [
+    "$\\sigma$ orbital has a total of two nodal planes.",
+    "$\\sigma^*$ orbital has one node in the $xz$-plane containing the molecular axis.",
+    "$\\pi$ orbital has one node in the plane which is perpendicular to the molecular axis and goes through the center of the molecule.",
+    "$\\pi^*$ orbital has one node in the $xy$-plane containing the molecular axis."
+   ],
+   "answer": [
+    0,
+    3
+   ],
+   "alts": [
+    [
+     3
+    ]
+   ],
+   "full": 4,
+   "neg": 2,
+   "note": "Official final key: AD or D (either set gets full marks).",
+   "fig": null,
+   "optionFigs": null,
+   "sol": "(B) $\\sigma^*(2p_z)$ (end-on overlap along $z$) has its nodal plane perpendicular to the axis, through the centre — not a plane containing the axis: wrong.<br>(C) A $\\pi$ bonding orbital has no node perpendicular to the axis; its nodal plane contains the axis: wrong.<br>(D) When two $2p_z$ orbitals overlap sideways (molecular axis along $x$ or $y$), the $\\pi^*$ orbital has the $xy$-plane, which contains the molecular axis, as a nodal plane: correct.<br>(A) The $\\sigma(2p_z)$ orbital keeps a nodal surface behind each nucleus (from the nodes of the $p$ orbitals), two in all; the final key accepts (A) together with (D) as well as (D) alone.",
+   "subject": "Chemistry",
+   "chapter": "Chemical Bonding and Molecular Structure",
+   "chCls": "XI"
+  },
+  {
+   "no": 10,
+   "section": 2,
+   "type": "multi",
+   "text": "The correct option(s) related to adsorption processes is(are)",
+   "options": [
+    "Chemisorption results in a unimolecular layer.",
+    "The enthalpy change during physisorption is in the range of 100 to 140 kJ $\\mathrm{mol^{-1}}$.",
+    "Chemisorption is an endothermic process.",
+    "Lowering the temperature favors physisorption processes."
+   ],
+   "answer": [
+    0,
+    3
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "(A) Chemisorption involves chemical bonding with surface sites, so it forms a single (unimolecular) layer — correct.<br>(B) Physisorption enthalpy is only about 20–40 kJ mol$^{-1}$; 100–140 kJ mol$^{-1}$ is typical of chemisorption — wrong.<br>(C) Chemisorption, like all adsorption, is exothermic — wrong.<br>(D) Physisorption is exothermic and weak, so lower temperature favours it — correct.",
+   "subject": "Chemistry",
+   "chapter": "Chemical Kinetics",
+   "chCls": "XII"
+  },
+  {
+   "no": 11,
+   "section": 2,
+   "type": "multi",
+   "text": "The electrochemical extraction of aluminum from bauxite ore involves",
+   "options": [
+    "the reaction of $\\mathrm{Al_2O_3}$ with coke (C) at a temperature > 2500 °C.",
+    "the neutralization of aluminate solution by passing $\\mathrm{CO_2}$ gas to precipitate hydrated alumina ($\\mathrm{Al_2O_3\\cdot3H_2O}$).",
+    "the dissolution of $\\mathrm{Al_2O_3}$ in hot aqueous NaOH.",
+    "the electrolysis of $\\mathrm{Al_2O_3}$ mixed with $\\mathrm{Na_3AlF_6}$ to give Al and $\\mathrm{CO_2}$."
+   ],
+   "answer": [
+    1,
+    2,
+    3
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Bayer process: bauxite is leached with hot aqueous NaOH, $\\mathrm{Al_2O_3+2NaOH+3H_2O\\to2Na[Al(OH)_4]}$ — (C).<br>The aluminate solution is neutralised with $\\mathrm{CO_2}$ to precipitate hydrated alumina, which is ignited to $\\mathrm{Al_2O_3}$ — (B).<br>Hall–Héroult: $\\mathrm{Al_2O_3}$ dissolved in molten cryolite is electrolysed; Al forms at the cathode and the carbon anodes burn to $\\mathrm{CO/CO_2}$ — (D).<br>Carbon reduction of $\\mathrm{Al_2O_3}$ is not used — (A) wrong.",
+   "subject": "Chemistry",
+   "chapter": "Redox Reactions",
+   "chCls": "XI"
+  },
+  {
+   "no": 12,
+   "section": 2,
+   "type": "multi",
+   "text": "The treatment of galena with $\\mathrm{HNO_3}$ produces a gas that is",
+   "options": [
+    "paramagnetic",
+    "bent in geometry",
+    "an acidic oxide",
+    "colorless"
+   ],
+   "answer": [
+    0,
+    3
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$\\mathrm{3PbS+8HNO_3\\to3Pb(NO_3)_2+3S+2NO+4H_2O}$: the gas is NO.<br>NO has 11 valence electrons (one unpaired): paramagnetic — (A).<br>It is diatomic, hence linear, not bent — (B) wrong; it is a neutral oxide — (C) wrong; it is colourless — (D).",
+   "subject": "Chemistry",
+   "chapter": "Chemical Bonding and Molecular Structure",
+   "chCls": "XI"
+  },
+  {
+   "no": 13,
+   "section": 2,
+   "type": "multi",
+   "text": "Considering the reaction sequence given below, the correct statement(s) is(are)",
+   "options": [
+    "$\\mathbf{P}$ can be reduced to a primary alcohol using $\\mathrm{NaBH_4}$.",
+    "Treating $\\mathbf{P}$ with conc. $\\mathrm{NH_4OH}$ solution followed by acidification gives $\\mathbf{Q}$.",
+    "Treating $\\mathbf{Q}$ with a solution of $\\mathrm{NaNO_2}$ in aq. HCl liberates $\\mathrm{N_2}$.",
+    "$\\mathbf{P}$ is more acidic than $\\mathrm{CH_3CH_2COOH}$."
+   ],
+   "answer": [
+    1,
+    2,
+    3
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": "che-q13.png",
+   "optionFigs": null,
+   "sol": "HVZ reaction: P $=\\mathrm{CH_3CHBrCOOH}$ (2-bromopropanoic acid).<br>Gabriel synthesis with potassium phthalimide, then hydrolysis, gives Q $=\\mathrm{CH_3CH(NH_2)COOH}$ (alanine) and phthalic acid.<br>(A) $\\mathrm{NaBH_4}$ does not reduce carboxylic acids — wrong.<br>(B) Excess ammonia substitutes the $\\alpha$-Br; acidification gives alanine — correct.<br>(C) A primary aliphatic amine with $\\mathrm{HNO_2}$ gives $\\mathrm{N_2}$ — correct.<br>(D) The $-I$ effect of the $\\alpha$-Br makes P more acidic than propanoic acid — correct.",
+   "subject": "Chemistry",
+   "chapter": "Amines",
+   "chCls": "XII"
+  },
+  {
+   "no": 14,
+   "section": 2,
+   "type": "multi",
+   "text": "Considering the following reaction sequence, the correct option(s) is(are)",
+   "options": [
+    "",
+    "",
+    "",
+    ""
+   ],
+   "answer": [
+    0,
+    1,
+    2
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": "che-q14.png",
+   "optionFigs": [
+    "che-q14a.png",
+    "che-q14b.png",
+    "che-q14c.png",
+    "che-q14d.png"
+   ],
+   "sol": "P reduces $\\mathrm{NO_2}$ to $\\mathrm{NH_2}$ (Q = $p$-toluidine; $\\mathrm{H_2}$/Pd or Sn/HCl). R diazotises it ($\\mathrm{NaNO_2}$/HCl, i.e. $\\mathrm{HNO_2}$): S = $p$-methylbenzenediazonium chloride.<br>Warming S with water gives T = $p$-cresol.<br>U: replace $\\mathrm{N_2^+}$ by H ($\\mathrm{H_3PO_2}$ or ethanol) to give toluene, then oxidise $\\mathrm{CH_3}$ with alkaline $\\mathrm{KMnO_4}$ on heating (and acidify) to benzoic acid.<br>So (A), (B) and (C) are all consistent.<br>(D) Q is not $p$-nitrobenzoic acid, and $\\mathrm{H_2}$/Pd cannot give the diazonium salt S — wrong.",
+   "subject": "Chemistry",
+   "chapter": "Amines",
+   "chCls": "XII"
+  },
+  {
+   "no": 15,
+   "section": 3,
+   "type": "match",
+   "text": "Match the rate expressions in LIST-I for the decomposition of X with the corresponding profiles provided in LIST-II. $\\mathrm{X_s}$ and k are constants having appropriate units. (The five profiles of LIST-II are shown in the figure.)<table class=\"mt\"><tr><th>LIST-I</th><th>LIST-II</th></tr><tr><td>(I) $\\text{rate}=\\dfrac{k[\\mathrm{X}]}{\\mathrm{X_s}+[\\mathrm{X}]}$ under all possible initial concentrations of X</td><td>(P) half life ($t_{1/2}$) vs initial concentration of X: straight line rising from a positive intercept</td></tr><tr><td>(II) $\\text{rate}=\\dfrac{k[\\mathrm{X}]}{\\mathrm{X_s}+[\\mathrm{X}]}$ where initial concentrations of X are much less than $\\mathrm{X_s}$</td><td>(Q) half life ($t_{1/2}$) vs initial concentration of X: horizontal line</td></tr><tr><td>(III) $\\text{rate}=\\dfrac{k[\\mathrm{X}]}{\\mathrm{X_s}+[\\mathrm{X}]}$ where initial concentrations of X are much higher than $\\mathrm{X_s}$</td><td>(R) rate vs initial concentration of X: rising curve that levels off</td></tr><tr><td>(IV) $\\text{rate}=\\dfrac{k[\\mathrm{X}]^2}{\\mathrm{X_s}+[\\mathrm{X}]}$ where initial concentration of X is much higher than $\\mathrm{X_s}$</td><td>(S) [X] vs time: straight line falling</td></tr><tr><td></td><td>(T) ln[X] vs time: straight line falling</td></tr></table>",
+   "options": [
+    "I → P; II → Q; III → S; IV → T",
+    "I → R; II → S; III → S; IV → T",
+    "I → P; II → Q; III → Q; IV → R",
+    "I → R; II → S; III → Q; IV → R"
+   ],
+   "answer": 0,
+   "full": 3,
+   "neg": 1,
+   "fig": "che-q15.png",
+   "optionFigs": null,
+   "sol": "(I) $\\left(\\dfrac{\\mathrm{X_s}}{[\\mathrm X]}+1\\right)d[\\mathrm X]=-k\\,dt$ integrates to $\\mathrm{X_s}\\ln\\dfrac{[\\mathrm X]_0}{[\\mathrm X]}+[\\mathrm X]_0-[\\mathrm X]=kt$, so $t_{1/2}=\\dfrac{\\mathrm{X_s}\\ln2+[\\mathrm X]_0/2}{k}$: linear in $[\\mathrm X]_0$ with a positive intercept (P).<br>(II) $[\\mathrm X]\\ll\\mathrm{X_s}$: rate $\\approx\\dfrac{k}{\\mathrm{X_s}}[\\mathrm X]$, first order, $t_{1/2}$ independent of $[\\mathrm X]_0$ (Q).<br>(III) $[\\mathrm X]\\gg\\mathrm{X_s}$: rate $\\approx k$, zero order, $[\\mathrm X]$ falls linearly with time (S).<br>(IV) $[\\mathrm X]\\gg\\mathrm{X_s}$: rate $\\approx k[\\mathrm X]$, first order, $\\ln[\\mathrm X]$ falls linearly with time (T).<br>Answer (A).",
+   "subject": "Chemistry",
+   "chapter": "Chemical Kinetics",
+   "chCls": "XII"
+  },
+  {
+   "no": 16,
+   "section": 3,
+   "type": "match",
+   "text": "LIST-I contains compounds and LIST-II contains reactions<table class=\"mt\"><tr><th>LIST-I</th><th>LIST-II</th></tr><tr><td>(I) $\\mathrm{H_2O_2}$</td><td>(P) $\\mathrm{Mg(HCO_3)_2+Ca(OH)_2\\to}$</td></tr><tr><td>(II) $\\mathrm{Mg(OH)_2}$</td><td>(Q) $\\mathrm{BaO_2+H_2SO_4\\to}$</td></tr><tr><td>(III) $\\mathrm{BaCl_2}$</td><td>(R) $\\mathrm{Ca(OH)_2+MgCl_2\\to}$</td></tr><tr><td>(IV) $\\mathrm{CaCO_3}$</td><td>(S) $\\mathrm{BaO_2+HCl\\to}$</td></tr><tr><td></td><td>(T) $\\mathrm{Ca(HCO_3)_2+Ca(OH)_2\\to}$</td></tr></table>Match each compound in LIST-I with its formation reaction(s) in LIST-II, and choose the correct option",
+   "options": [
+    "I → Q; II → P; III → S; IV → R",
+    "I → T; II → P; III → Q; IV → R",
+    "I → T; II → R; III → Q; IV → P",
+    "I → Q; II → R; III → S; IV → P"
+   ],
+   "answer": 3,
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "(Q) $\\mathrm{BaO_2+H_2SO_4\\to BaSO_4\\downarrow+H_2O_2}$ — forms $\\mathrm{H_2O_2}$ (I).<br>(R) $\\mathrm{Ca(OH)_2+MgCl_2\\to Mg(OH)_2\\downarrow+CaCl_2}$ — forms $\\mathrm{Mg(OH)_2}$ (II).<br>(S) $\\mathrm{BaO_2+2HCl\\to BaCl_2+H_2O_2}$ — forms $\\mathrm{BaCl_2}$ (III).<br>(P) $\\mathrm{Mg(HCO_3)_2+2Ca(OH)_2\\to2CaCO_3\\downarrow+Mg(OH)_2\\downarrow+2H_2O}$ — forms $\\mathrm{CaCO_3}$ (IV). (T) also gives $\\mathrm{CaCO_3}$, but no option pairs I with T correctly, since T gives no $\\mathrm{H_2O_2}$.<br>Only option (D) is consistent: I → Q, II → R, III → S, IV → P.",
+   "subject": "Chemistry",
+   "chapter": "Redox Reactions",
+   "chCls": "XI"
+  },
+  {
+   "no": 17,
+   "section": 3,
+   "type": "match",
+   "text": "LIST-I contains metal species and LIST-II contains their properties.<table class=\"mt\"><tr><th>LIST-I</th><th>LIST-II</th></tr><tr><td>(I) $\\mathrm{[Cr(CN)_6]^{4-}}$</td><td>(P) $t_{2g}$ orbitals contain 4 electrons</td></tr><tr><td>(II) $\\mathrm{[RuCl_6]^{2-}}$</td><td>(Q) $\\mu$(spin-only) $=4.9$ BM</td></tr><tr><td>(III) $\\mathrm{[Cr(H_2O)_6]^{2+}}$</td><td>(R) low spin complex ion</td></tr><tr><td>(IV) $\\mathrm{[Fe(H_2O)_6]^{2+}}$</td><td>(S) metal ion in $4+$ oxidation state</td></tr><tr><td></td><td>(T) $d^4$ species</td></tr></table>[Given: Atomic number of Cr = 24, Ru = 44, Fe = 26]<br>Match each metal species in LIST-I with their properties in LIST-II, and choose the correct option",
+   "options": [
+    "I → R, T; II → P, S; III → Q, T; IV → P, Q",
+    "I → R, S; II → P, T; III → P, Q; IV → Q, T",
+    "I → P, R; II → R, S; III → R, T; IV → P, T",
+    "I → Q, T; II → S, T; III → P, T; IV → Q, R"
+   ],
+   "answer": 0,
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "(I) $\\mathrm{Cr^{2+}}$, $d^4$; $\\mathrm{CN^-}$ is strong field: low spin $t_{2g}^4$ — R, T (and P).<br>(II) $\\mathrm{Ru^{4+}}$, $4d^4$; a $4d$ ion is low spin: $t_{2g}^4$ — P, S (and R, T).<br>(III) $\\mathrm{Cr^{2+}}$, $d^4$, high spin $t_{2g}^3e_g^1$: 4 unpaired, $\\mu=\\sqrt{24}=4.9$ BM — Q, T.<br>(IV) $\\mathrm{Fe^{2+}}$, $d^6$, high spin $t_{2g}^4e_g^2$: 4 unpaired — P, Q.<br>Only option (A) contains no false pairing.",
+   "subject": "Chemistry",
+   "chapter": "Coordination Compounds",
+   "chCls": "XII"
+  },
+  {
+   "no": 18,
+   "section": 3,
+   "type": "match",
+   "text": "Match the compounds in LIST-I with the observations in LIST-II, and choose the correct option.<table class=\"mt\"><tr><th>LIST-I</th><th>LIST-II</th></tr><tr><td>(I) Aniline</td><td>(P) Sodium fusion extract of the compound on boiling with $\\mathrm{FeSO_4}$, followed by acidification with conc. $\\mathrm{H_2SO_4}$, gives Prussian blue color.</td></tr><tr><td>(II) o-Cresol</td><td>(Q) Sodium fusion extract of the compound on treatment with sodium nitroprusside gives blood red color.</td></tr><tr><td>(III) Cysteine</td><td>(R) Addition of the compound to a saturated solution of $\\mathrm{NaHCO_3}$ results in effervescence.</td></tr><tr><td>(IV) Caprolactam</td><td>(S) The compound reacts with bromine water to give a white precipitate.</td></tr><tr><td></td><td>(T) Treating the compound with neutral $\\mathrm{FeCl_3}$ solution produces violet color.</td></tr></table>",
+   "options": [
+    "I → P, Q; II → S; III → Q, R; IV → P",
+    "I → P; II → R, S; III → R; IV → Q, S",
+    "I → Q, S; II → P, T; III → P; IV → S",
+    "I → P, S; II → T; III → Q, R; IV → P"
+   ],
+   "answer": 3,
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "(I) Aniline contains N (Prussian blue, P) and gives 2,4,6-tribromoaniline as a white precipitate with bromine water (S).<br>(II) o-Cresol is a phenol: violet colour with neutral $\\mathrm{FeCl_3}$ (T).<br>(III) Cysteine, $\\mathrm{HSCH_2CH(NH_2)COOH}$, contains sulphur, detected in the sodium fusion extract (Q as given in the paper), and its $-\\mathrm{COOH}$ releases $\\mathrm{CO_2}$ with $\\mathrm{NaHCO_3}$ (R).<br>(IV) Caprolactam (a cyclic amide) contains N: Prussian blue (P).<br>Answer (D).",
+   "subject": "Chemistry",
+   "chapter": "Organic Chemistry – Some Basic Principles and Techniques",
+   "chCls": "XI"
+  }
+ ]
+}

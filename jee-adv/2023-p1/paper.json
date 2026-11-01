@@ -1,0 +1,1109 @@
+{
+ "id": "2023-p1",
+ "exam": "JEE Advanced",
+ "board": "IIT",
+ "title": "JEE Advanced 2023 · Paper 1",
+ "duration": 180,
+ "renumber": true,
+ "secNames": {
+  "1": "one or more correct",
+  "2": "single correct",
+  "3": "integer answer",
+  "4": "matching lists"
+ },
+ "instr": [
+  "Official JEE (Advanced) 2023 Paper 1 with the final answer key published by the organising IIT (IIT Guwahati).",
+  "51 questions: Mathematics, Physics and Chemistry, 17 in each subject, in four sections. Total 180 marks.",
+  "Section 1 – one or more correct options: <b>+4</b> if you choose all the correct options; <b>+3</b> if all four options are correct and you choose only three; <b>+2</b> if three or more options are correct and you choose only two, both correct; <b>+1</b> if two or more options are correct and you choose only one, which is correct; <b>−2</b> in all other cases; 0 if not answered.",
+  "Section 2 – single correct option: <b>+3</b> if correct, <b>−1</b> if wrong, 0 if not answered.",
+  "Section 3 – non-negative integer answer: <b>+4</b> if correct, 0 otherwise. No negative marks.",
+  "Section 4 – List-I / List-II matching (one correct option): <b>+3</b> if correct, <b>−1</b> if wrong, 0 if not answered."
+ ],
+ "source": "JEE (Advanced) 2023 question paper and final answer key, organising IIT (IIT Guwahati). Worked solutions: All in All Exam Practice.",
+ "questions": [
+  {
+   "no": 1,
+   "section": 1,
+   "type": "multi",
+   "text": "Let $S=(0,1)\\cup(1,2)\\cup(3,4)$ and $T=\\{0,1,2,3\\}$. Then which of the following statements is(are) true?",
+   "options": [
+    "There are infinitely many functions from $S$ to $T$",
+    "There are infinitely many strictly increasing functions from $S$ to $T$",
+    "The number of continuous functions from $S$ to $T$ is at most $120$",
+    "Every continuous function from $S$ to $T$ is differentiable"
+   ],
+   "answer": [
+    0,
+    2,
+    3
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "(A) $S$ is infinite and $T$ has 4 elements, so there are infinitely many functions $S \\to T$ (in fact uncountably many). True.<br>(B) A strictly increasing function is one-one, but an infinite set cannot map one-one into a 4-element set. So there is none. False.<br>(C) A continuous function into the discrete set $T$ is constant on each interval $(0,1)$, $(1,2)$, $(3,4)$. So there are $4^3 = 64 \\le 120$ continuous functions. True.<br>(D) Each continuous function is locally constant, so its derivative exists and equals $0$ everywhere on $S$. True.<br>Answer (A), (C), (D).",
+   "subject": "Mathematics",
+   "chapter": "Continuity and Differentiability",
+   "chCls": "XII"
+  },
+  {
+   "no": 2,
+   "section": 1,
+   "type": "multi",
+   "text": "Let $T_1$ and $T_2$ be two distinct common tangents to the ellipse $E : \\dfrac{x^2}{6}+\\dfrac{y^2}{3}=1$ and the parabola $P : y^2 = 12x$. Suppose that the tangent $T_1$ touches $P$ and $E$ at the points $A_1$ and $A_2$, respectively and the tangent $T_2$ touches $P$ and $E$ at the points $A_4$ and $A_3$, respectively. Then which of the following statements is(are) true?",
+   "options": [
+    "The area of the quadrilateral $A_1A_2A_3A_4$ is $35$ square units",
+    "The area of the quadrilateral $A_1A_2A_3A_4$ is $36$ square units",
+    "The tangents $T_1$ and $T_2$ meet the $x$-axis at the point $(-3,0)$",
+    "The tangents $T_1$ and $T_2$ meet the $x$-axis at the point $(-6,0)$"
+   ],
+   "answer": [
+    0,
+    2
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "A tangent to $y^2=12x$ is $y = mx + \\dfrac{3}{m}$. It touches the ellipse if $c^2 = 6m^2 + 3$: $\\dfrac{9}{m^2} = 6m^2+3 \\Rightarrow 2m^4 + m^2 - 3 = 0 \\Rightarrow m^2 = 1$.<br>So $T_1 : y = x+3$ and $T_2 : y = -x-3$; both meet the $x$-axis at $(-3,0)$. (C) true, (D) false.<br>Points on the parabola: $\\left(\\dfrac{3}{m^2}, \\dfrac{6}{m}\\right)$, i.e. $A_1 = (3,6)$, $A_4 = (3,-6)$.<br>Points on the ellipse for $y = mx + c$: $\\left(-\\dfrac{6m}{c}, \\dfrac{3}{c}\\right)$, i.e. $A_2 = (-2,1)$, $A_3 = (-2,-1)$.<br>$A_1A_2A_3A_4$ is a trapezium with parallel vertical sides $12$ and $2$ at distance $5$: area $= \\dfrac{12+2}{2}\\times 5 = 35$. (A) true, (B) false.<br>Answer (A), (C).",
+   "subject": "Mathematics",
+   "chapter": "Conic Sections",
+   "chCls": "XI"
+  },
+  {
+   "no": 3,
+   "section": 1,
+   "type": "multi",
+   "text": "Let $f : [0,1] \\to [0,1]$ be the function defined by $f(x) = \\dfrac{x^3}{3} - x^2 + \\dfrac{5}{9}x + \\dfrac{17}{36}$. Consider the square region $S = [0,1]\\times[0,1]$. Let $G = \\{(x,y) \\in S : y > f(x)\\}$ be called the green region and $R = \\{(x,y) \\in S : y &lt; f(x)\\}$ be called the red region. Let $L_h = \\{(x,h) \\in S : x \\in [0,1]\\}$ be the horizontal line drawn at a height $h \\in [0,1]$. Then which of the following statements is(are) true?",
+   "options": [
+    "There exists an $h \\in \\left[\\dfrac14, \\dfrac23\\right]$ such that the area of the green region above the line $L_h$ equals the area of the green region below the line $L_h$",
+    "There exists an $h \\in \\left[\\dfrac14, \\dfrac23\\right]$ such that the area of the red region above the line $L_h$ equals the area of the red region below the line $L_h$",
+    "There exists an $h \\in \\left[\\dfrac14, \\dfrac23\\right]$ such that the area of the green region above the line $L_h$ equals the area of the red region below the line $L_h$",
+    "There exists an $h \\in \\left[\\dfrac14, \\dfrac23\\right]$ such that the area of the red region above the line $L_h$ equals the area of the green region below the line $L_h$"
+   ],
+   "answer": [
+    1,
+    2,
+    3
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$f^{\\prime}(x) = x^2 - 2x + \\dfrac59 = \\left(x-\\dfrac13\\right)\\left(x-\\dfrac53\\right)$, so on $[0,1]$ the maximum is $f\\left(\\dfrac13\\right) \\approx 0.559$; also $f(0) = \\dfrac{17}{36}$, $f(1) = \\dfrac{13}{36}$. Hence $0.36 \\le f \\le 0.56$.<br>$\\int_0^1 f\\,dx = \\dfrac{1}{12} - \\dfrac13 + \\dfrac{5}{18} + \\dfrac{17}{36} = \\dfrac12$, so red area $=$ green area $= \\dfrac12$.<br>Write $G_a, G_b, R_a, R_b$ for the green/red areas above/below $L_h$. Then $R_a - G_b = \\int_0^1 (f-h)\\,dx = \\dfrac12 - h$ and $G_a + R_a = 1-h$, $G_b + R_b = h$.<br>(A) Needs $G_b = \\dfrac14$. But $G_b(h)$ increases with $h$ and $G_b\\left(\\dfrac23\\right) = \\dfrac23 - \\dfrac12 = \\dfrac16 &lt; \\dfrac14$. False.<br>(B) Needs $R_b = \\dfrac14$. At $h = \\dfrac14$ the whole strip below $L_h$ is red ($f > \\dfrac14$), so $R_b = \\dfrac14$. True.<br>(C) $G_a - R_b = (1 - h - R_a) - (h - G_b) = 1 - 2h - (R_a - G_b) = \\dfrac12 - h$, zero at $h = \\dfrac12$. True.<br>(D) $R_a - G_b = \\dfrac12 - h$, zero at $h = \\dfrac12$. True.<br>Answer (B), (C), (D).",
+   "subject": "Mathematics",
+   "chapter": "Application of Integrals",
+   "chCls": "XII"
+  },
+  {
+   "no": 4,
+   "section": 2,
+   "type": "single",
+   "text": "Let $f : (0,1) \\to \\mathbb{R}$ be the function defined as $f(x) = \\sqrt{n}$ if $x \\in \\left[\\dfrac{1}{n+1}, \\dfrac{1}{n}\\right)$ where $n \\in \\mathbb{N}$. Let $g : (0,1) \\to \\mathbb{R}$ be a function such that $\\displaystyle\\int_{x^2}^{x} \\sqrt{\\dfrac{1-t}{t}}\\,dt &lt; g(x) &lt; 2\\sqrt{x}$ for all $x \\in (0,1)$. Then $\\displaystyle\\lim_{x\\to0} f(x)g(x)$",
+   "options": [
+    "does NOT exist",
+    "is equal to $1$",
+    "is equal to $2$",
+    "is equal to $3$"
+   ],
+   "answer": 2,
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "For $x \\in \\left[\\dfrac{1}{n+1}, \\dfrac1n\\right)$: $\\dfrac{n}{n+1} \\le nx &lt; 1$, so $f(x)\\sqrt{x} = \\sqrt{nx} \\to 1$ as $x \\to 0$ ($n \\to \\infty$).<br>Upper bound: $f(x)g(x) &lt; 2\\sqrt{nx} \\to 2$.<br>Lower bound: for $t \\le x$, $\\sqrt{\\dfrac{1-t}{t}} \\ge \\dfrac{\\sqrt{1-x}}{\\sqrt t}$, so $\\displaystyle\\int_{x^2}^{x} \\ge \\sqrt{1-x}\\,(2\\sqrt x - 2x)$, and $f(x)g(x) > 2\\sqrt{nx}\\,\\sqrt{1-x}\\,(1 - \\sqrt x) \\to 2$.<br>By the sandwich theorem the limit is $2$. Answer (C).",
+   "subject": "Mathematics",
+   "chapter": "Limits and Derivatives",
+   "chCls": "XI"
+  },
+  {
+   "no": 5,
+   "section": 2,
+   "type": "single",
+   "text": "Let $Q$ be the cube with the set of vertices $\\left\\{(x_1,x_2,x_3) \\in \\mathbb{R}^3 : x_1, x_2, x_3 \\in \\{0,1\\}\\right\\}$. Let $F$ be the set of all twelve lines containing the diagonals of the six faces of the cube $Q$. Let $S$ be the set of all four lines containing the main diagonals of the cube $Q$; for instance, the line passing through the vertices $(0,0,0)$ and $(1,1,1)$ is in $S$. For lines $\\ell_1$ and $\\ell_2$, let $d(\\ell_1,\\ell_2)$ denote the shortest distance between them. Then the maximum value of $d(\\ell_1,\\ell_2)$, as $\\ell_1$ varies over $F$ and $\\ell_2$ varies over $S$, is",
+   "options": [
+    "$\\dfrac{1}{\\sqrt6}$",
+    "$\\dfrac{1}{\\sqrt8}$",
+    "$\\dfrac{1}{\\sqrt3}$",
+    "$\\dfrac{1}{\\sqrt{12}}$"
+   ],
+   "answer": 0,
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "By symmetry take $\\ell_2$ through $(0,0,0)$ with direction $(1,1,1)$. A face diagonal that shares a vertex with it meets it (distance $0$).<br>The others are skew, e.g. the diagonal from $(1,0,0)$ to $(0,1,0)$, direction $(-1,1,0)$.<br>$(1,1,1)\\times(-1,1,0) = (-1,-1,2)$, of length $\\sqrt6$; joining vector $(1,0,0)$ gives $|(1,0,0)\\cdot(-1,-1,2)| = 1$.<br>So $d = \\dfrac{1}{\\sqrt6}$; every skew pair is equivalent to this one by symmetry. Answer (A).",
+   "subject": "Mathematics",
+   "chapter": "Three Dimensional Geometry",
+   "chCls": "XII"
+  },
+  {
+   "no": 6,
+   "section": 2,
+   "type": "single",
+   "text": "Let $X = \\left\\{(x,y) \\in \\mathbb{Z}\\times\\mathbb{Z} : \\dfrac{x^2}{8} + \\dfrac{y^2}{20} &lt; 1 \\text{ and } y^2 &lt; 5x\\right\\}$. Three distinct points $P$, $Q$ and $R$ are randomly chosen from $X$. Then the probability that $P$, $Q$ and $R$ form a triangle whose area is a positive integer, is",
+   "options": [
+    "$\\dfrac{71}{220}$",
+    "$\\dfrac{73}{220}$",
+    "$\\dfrac{79}{220}$",
+    "$\\dfrac{83}{220}$"
+   ],
+   "answer": 1,
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$y^2 &lt; 5x$ needs $x \\ge 1$, and $x^2 &lt; 8$ gives $x \\in \\{1,2\\}$.<br>$x=1$: $y^2 &lt; 5$ (and $&lt; 17.5$): $y \\in \\{-2,\\ldots,2\\}$, 5 points. $x=2$: $y^2 &lt; 10$: $y \\in \\{-3,\\ldots,3\\}$, 7 points. Total 12, so $\\binom{12}{3} = 220$ choices.<br>A triangle uses two points on one vertical line (gap $d$) and one on the other; the lines are 1 apart, so area $= \\dfrac d2$, an integer iff $d$ is even.<br>On $x=1$: pairs with even gap $= 3 + 1 = 4$, times 7 points on $x=2$: $28$.<br>On $x=2$: pairs with even gap $= 5 + 3 + 1 = 9$, times 5 points on $x=1$: $45$.<br>Probability $= \\dfrac{73}{220}$. Answer (B).",
+   "subject": "Mathematics",
+   "chapter": "Probability",
+   "chCls": "XI"
+  },
+  {
+   "no": 7,
+   "section": 2,
+   "type": "single",
+   "text": "Let $P$ be a point on the parabola $y^2 = 4ax$, where $a > 0$. The normal to the parabola at $P$ meets the $x$-axis at a point $Q$. The area of the triangle $PFQ$, where $F$ is the focus of the parabola, is $120$. If the slope $m$ of the normal and $a$ are both positive integers, then the pair $(a,m)$ is",
+   "options": [
+    "$(2,3)$",
+    "$(1,3)$",
+    "$(2,4)$",
+    "$(3,4)$"
+   ],
+   "answer": 0,
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Take $P = (at^2, 2at)$; the normal there has slope $-t$, so $t = -m$.<br>Normal: $y - 2at = -t(x - at^2)$; with $y = 0$, $Q = (2a + at^2, 0)$. With $F = (a,0)$, $FQ = a(1+t^2)$.<br>Area $= \\dfrac12 \\cdot a(1+m^2)\\cdot 2am = a^2 m(1+m^2) = 120$.<br>$m = 3$: $30a^2 = 120 \\Rightarrow a = 2$ (other options fail: $(1,3)$ gives $30$, $(2,4)$ gives $272$, $(3,4)$ gives $612$).<br>Answer (A).",
+   "subject": "Mathematics",
+   "chapter": "Conic Sections",
+   "chCls": "XI"
+  },
+  {
+   "no": 8,
+   "section": 3,
+   "type": "num",
+   "text": "Let $\\tan^{-1}(x) \\in \\left(-\\dfrac{\\pi}{2}, \\dfrac{\\pi}{2}\\right)$, for $x \\in \\mathbb{R}$. Then the number of real solutions of the equation $$\\sqrt{1+\\cos(2x)} = \\sqrt2\\,\\tan^{-1}(\\tan x)$$ in the set $\\left(-\\dfrac{3\\pi}{2}, -\\dfrac{\\pi}{2}\\right) \\cup \\left(-\\dfrac{\\pi}{2}, \\dfrac{\\pi}{2}\\right) \\cup \\left(\\dfrac{\\pi}{2}, \\dfrac{3\\pi}{2}\\right)$ is equal to ______.",
+   "options": null,
+   "answer": {
+    "lo": 3,
+    "hi": 3
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$\\sqrt{1+\\cos 2x} = \\sqrt2\\,|\\cos x|$, so the equation is $|\\cos x| = \\tan^{-1}(\\tan x)$; the right side must be $\\ge 0$.<br>On $\\left(-\\dfrac\\pi2, \\dfrac\\pi2\\right)$: $\\cos x = x$, one root in $\\left(0, \\dfrac\\pi2\\right)$.<br>On $\\left(\\dfrac\\pi2, \\dfrac{3\\pi}2\\right)$: $\\tan^{-1}(\\tan x) = x - \\pi = u$; need $u \\in \\left[0, \\dfrac\\pi2\\right)$ and $|\\cos x| = \\cos u = u$: one root.<br>On $\\left(-\\dfrac{3\\pi}2, -\\dfrac\\pi2\\right)$: $\\tan^{-1}(\\tan x) = x + \\pi = u$, again $\\cos u = u$ with $u \\in \\left[0, \\dfrac\\pi2\\right)$: one root.<br>Number of solutions $= 3$.",
+   "subject": "Mathematics",
+   "chapter": "Inverse Trigonometric Functions",
+   "chCls": "XII"
+  },
+  {
+   "no": 9,
+   "section": 3,
+   "type": "num",
+   "text": "Let $n \\ge 2$ be a natural number and $f : [0,1] \\to \\mathbb{R}$ be the function defined by $$f(x) = \\begin{cases} n(1-2nx) & \\text{if } 0 \\le x \\le \\dfrac{1}{2n} \\\\ 2n(2nx-1) & \\text{if } \\dfrac{1}{2n} \\le x \\le \\dfrac{3}{4n} \\\\ 4n(1-nx) & \\text{if } \\dfrac{3}{4n} \\le x \\le \\dfrac{1}{n} \\\\ \\dfrac{n}{n-1}(nx-1) & \\text{if } \\dfrac{1}{n} \\le x \\le 1 \\end{cases}$$ If $n$ is such that the area of the region bounded by the curves $x = 0$, $x = 1$, $y = 0$ and $y = f(x)$ is $4$, then the maximum value of the function $f$ is ______.",
+   "options": null,
+   "answer": {
+    "lo": 8,
+    "hi": 8
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Each piece is linear and the graph is four triangles:<br>$\\left[0, \\dfrac1{2n}\\right]$: from $n$ to $0$, area $\\dfrac12\\cdot\\dfrac1{2n}\\cdot n = \\dfrac14$.<br>$\\left[\\dfrac1{2n}, \\dfrac3{4n}\\right]$: from $0$ to $n$, area $\\dfrac18$; $\\left[\\dfrac3{4n}, \\dfrac1n\\right]$: from $n$ to $0$, area $\\dfrac18$.<br>$\\left[\\dfrac1n, 1\\right]$: from $0$ to $n$, area $\\dfrac12\\left(1 - \\dfrac1n\\right)n = \\dfrac{n-1}{2}$.<br>Total $= \\dfrac12 + \\dfrac{n-1}2 = \\dfrac n2 = 4 \\Rightarrow n = 8$.<br>The maximum value of $f$ is $n = 8$.",
+   "subject": "Mathematics",
+   "chapter": "Application of Integrals",
+   "chCls": "XII"
+  },
+  {
+   "no": 10,
+   "section": 3,
+   "type": "num",
+   "text": "Let $7\\overbrace{5\\cdots5}^{r}7$ denote the $(r+2)$ digit number where the first and the last digits are $7$ and the remaining $r$ digits are $5$. Consider the sum $S = 77 + 757 + 7557 + \\cdots + 7\\overbrace{5\\cdots5}^{98}7$. If $S = \\dfrac{7\\overbrace{5\\cdots5}^{99}7 + m}{n}$, where $m$ and $n$ are natural numbers less than $3000$, then the value of $m+n$ is ______.",
+   "options": null,
+   "answer": {
+    "lo": 1219,
+    "hi": 1219
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$T_r = 7\\overbrace{5\\cdots5}^{r}7 = 7\\cdot10^{r+1} + \\dfrac{50(10^r-1)}{9} + 7$, so $9T_r = 680\\cdot10^r + 13$ (check: $9\\times77 = 693$).<br>$9S = \\displaystyle\\sum_{r=0}^{98}(680\\cdot10^r + 13) = \\dfrac{680(10^{99}-1)}{9} + 1287$, so $81S = 680\\cdot10^{99} + 10903$.<br>Since $680\\cdot10^{99} = 9T_{99} - 13$: $81S = 9T_{99} + 10890$, so $S = \\dfrac{T_{99} + 1210}{9}$.<br>$m = 1210$, $n = 9$, $m + n = 1219$.",
+   "subject": "Mathematics",
+   "chapter": "Sequences and Series",
+   "chCls": "XI"
+  },
+  {
+   "no": 11,
+   "section": 3,
+   "type": "num",
+   "text": "Let $A = \\left\\{\\dfrac{1967 + 1686\\,i\\sin\\theta}{7 - 3i\\cos\\theta} : \\theta \\in \\mathbb{R}\\right\\}$. If $A$ contains exactly one positive integer $n$, then the value of $n$ is ______.",
+   "options": null,
+   "answer": {
+    "lo": 281,
+    "hi": 281
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Multiply by the conjugate: $\\dfrac{(1967 + 1686 i\\sin\\theta)(7 + 3i\\cos\\theta)}{49 + 9\\cos^2\\theta}$.<br>Imaginary part $0$: $5901\\cos\\theta + 11802\\sin\\theta = 0 \\Rightarrow \\cos\\theta = -2\\sin\\theta$, so $\\sin^2\\theta = \\dfrac15$, $\\cos^2\\theta = \\dfrac45$, $\\sin\\theta\\cos\\theta = -\\dfrac25$.<br>Real part $= \\dfrac{13769 - 5058\\sin\\theta\\cos\\theta}{49 + 9\\cos^2\\theta} = \\dfrac{13769 + \\frac{10116}{5}}{49 + \\frac{36}{5}} = \\dfrac{78961}{281} = 281$.<br>So $n = 281$.",
+   "subject": "Mathematics",
+   "chapter": "Complex Numbers",
+   "chCls": "XI"
+  },
+  {
+   "no": 12,
+   "section": 3,
+   "type": "num",
+   "text": "Let $P$ be the plane $\\sqrt3x + 2y + 3z = 16$ and let $$S = \\left\\{\\alpha\\hat{i} + \\beta\\hat{j} + \\gamma\\hat{k} : \\alpha^2 + \\beta^2 + \\gamma^2 = 1 \\text{ and the distance of } (\\alpha,\\beta,\\gamma) \\text{ from the plane } P \\text{ is } \\dfrac72\\right\\}.$$ Let $\\vec{u}, \\vec{v}$ and $\\vec{w}$ be three distinct vectors in $S$ such that $|\\vec{u}-\\vec{v}| = |\\vec{v}-\\vec{w}| = |\\vec{w}-\\vec{u}|$. Let $V$ be the volume of the parallelepiped determined by vectors $\\vec{u}, \\vec{v}$ and $\\vec{w}$. Then the value of $\\dfrac{80}{\\sqrt3}V$ is ______.",
+   "options": null,
+   "answer": {
+    "lo": 45,
+    "hi": 45
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "The normal $(\\sqrt3, 2, 3)$ has length $4$. Distance $\\dfrac{|\\sqrt3\\alpha + 2\\beta + 3\\gamma - 16|}{4} = \\dfrac72 \\Rightarrow \\sqrt3\\alpha + 2\\beta + 3\\gamma = 2$ (the value $30$ is impossible, as the left side is at most $4$).<br>So the tips of the vectors in $S$ lie on a circle: the plane is at distance $\\dfrac24 = \\dfrac12$ from $O$, radius $\\sqrt{1 - \\frac14} = \\dfrac{\\sqrt3}{2}$.<br>$\\vec u, \\vec v, \\vec w$ form an equilateral triangle inscribed in it: side $= \\sqrt3 \\cdot \\dfrac{\\sqrt3}{2} = \\dfrac32$, area $= \\dfrac{\\sqrt3}{4}\\cdot\\dfrac94 = \\dfrac{9\\sqrt3}{16}$.<br>$V = 6\\times$ volume of tetrahedron $O\\,UVW = 6\\cdot\\dfrac13\\cdot\\dfrac{9\\sqrt3}{16}\\cdot\\dfrac12 = \\dfrac{9\\sqrt3}{16}$.<br>$\\dfrac{80}{\\sqrt3}V = \\dfrac{80\\times9}{16} = 45$.",
+   "subject": "Mathematics",
+   "chapter": "Vector Algebra",
+   "chCls": "XII"
+  },
+  {
+   "no": 13,
+   "section": 3,
+   "type": "num",
+   "text": "Let $a$ and $b$ be two nonzero real numbers. If the coefficient of $x^5$ in the expansion of $\\left(ax^2 + \\dfrac{70}{27bx}\\right)^4$ is equal to the coefficient of $x^{-5}$ in the expansion of $\\left(ax - \\dfrac{1}{bx^2}\\right)^7$, then the value of $2b$ is ______.",
+   "options": null,
+   "answer": {
+    "lo": 3,
+    "hi": 3
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "First expansion: $T_{r+1} = \\binom4r (ax^2)^{4-r}\\left(\\dfrac{70}{27bx}\\right)^r$ has power $8 - 3r = 5 \\Rightarrow r = 1$: coefficient $4a^3\\cdot\\dfrac{70}{27b} = \\dfrac{280a^3}{27b}$.<br>Second: $T_{r+1} = \\binom7r (ax)^{7-r}\\left(-\\dfrac{1}{bx^2}\\right)^r$ has power $7 - 3r = -5 \\Rightarrow r = 4$: coefficient $\\dfrac{35a^3}{b^4}$.<br>$\\dfrac{280}{27b} = \\dfrac{35}{b^4} \\Rightarrow b^3 = \\dfrac{27}{8} \\Rightarrow b = \\dfrac32$.<br>$2b = 3$.",
+   "subject": "Mathematics",
+   "chapter": "Binomial Theorem",
+   "chCls": "XI"
+  },
+  {
+   "no": 14,
+   "section": 4,
+   "type": "match",
+   "text": "Let $\\alpha, \\beta$ and $\\gamma$ be real numbers. Consider the following system of linear equations $$\\begin{aligned} x + 2y + z &= 7 \\\\ x + \\alpha z &= 11 \\\\ 2x - 3y + \\beta z &= \\gamma \\end{aligned}$$ Match each entry in List-I to the correct entries in List-II.<br><table class=\"mt\"><tr><th>List-I</th><th>List-II</th></tr><tr><td>(P) If $\\beta = \\dfrac12(7\\alpha - 3)$ and $\\gamma = 28$, then the system has</td><td>(1) a unique solution</td></tr><tr><td>(Q) If $\\beta = \\dfrac12(7\\alpha - 3)$ and $\\gamma \\ne 28$, then the system has</td><td>(2) no solution</td></tr><tr><td>(R) If $\\beta \\ne \\dfrac12(7\\alpha - 3)$ where $\\alpha = 1$ and $\\gamma \\ne 28$, then the system has</td><td>(3) infinitely many solutions</td></tr><tr><td>(S) If $\\beta \\ne \\dfrac12(7\\alpha - 3)$ where $\\alpha = 1$ and $\\gamma = 28$, then the system has</td><td>(4) $x = 11$, $y = -2$ and $z = 0$ as a solution</td></tr><tr><td></td><td>(5) $x = -15$, $y = 4$ and $z = 0$ as a solution</td></tr></table>",
+   "options": [
+    "(P) → (3), (Q) → (2), (R) → (1), (S) → (4)",
+    "(P) → (3), (Q) → (2), (R) → (5), (S) → (4)",
+    "(P) → (2), (Q) → (1), (R) → (4), (S) → (5)",
+    "(P) → (2), (Q) → (1), (R) → (1), (S) → (3)"
+   ],
+   "answer": 0,
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$\\Delta = \\begin{vmatrix} 1 & 2 & 1 \\\\ 1 & 0 & \\alpha \\\\ 2 & -3 & \\beta \\end{vmatrix} = 7\\alpha - 2\\beta - 3$, so $\\Delta = 0 \\iff \\beta = \\dfrac12(7\\alpha - 3)$.<br>When $\\Delta = 0$, the left side of eq 3 equals $\\dfrac72(\\text{eq 2}) - \\dfrac32(\\text{eq 1})$ (coefficients $2$, $-3$, $\\dfrac{7\\alpha - 3}{2} = \\beta$), so the system is consistent iff $\\gamma = \\dfrac{77}{2} - \\dfrac{21}{2} = 28$.<br>(P) $\\Delta = 0$, $\\gamma = 28$: consistent, infinitely many solutions → (3). (Q) $\\gamma \\ne 28$: no solution → (2).<br>(R) $\\Delta \\ne 0$: unique solution → (1).<br>(S) $\\alpha = 1$, $\\gamma = 28$: eqs 1, 2 give $y = -2$, $x + z = 11$; eq 3: $2(11 - z) + 6 + \\beta z = 28 \\Rightarrow (\\beta - 2)z = 0 \\Rightarrow z = 0$, $x = 11$ → (4).<br>Answer (A).",
+   "subject": "Mathematics",
+   "chapter": "Determinants",
+   "chCls": "XII"
+  },
+  {
+   "no": 15,
+   "section": 4,
+   "type": "match",
+   "text": "Consider the given data with frequency distribution $$\\begin{array}{c|cccccc} x_i & 3 & 8 & 11 & 10 & 5 & 4 \\\\ f_i & 5 & 2 & 3 & 2 & 4 & 4 \\end{array}$$ Match each entry in List-I to the correct entries in List-II.<br><table class=\"mt\"><tr><th>List-I</th><th>List-II</th></tr><tr><td>(P) The mean of the above data is</td><td>(1) $2.5$</td></tr><tr><td>(Q) The median of the above data is</td><td>(2) $5$</td></tr><tr><td>(R) The mean deviation about the mean of the above data is</td><td>(3) $6$</td></tr><tr><td>(S) The mean deviation about the median of the above data is</td><td>(4) $2.7$</td></tr><tr><td></td><td>(5) $2.4$</td></tr></table>",
+   "options": [
+    "(P) → (3), (Q) → (2), (R) → (4), (S) → (5)",
+    "(P) → (3), (Q) → (2), (R) → (1), (S) → (5)",
+    "(P) → (2), (Q) → (3), (R) → (4), (S) → (1)",
+    "(P) → (3), (Q) → (3), (R) → (5), (S) → (5)"
+   ],
+   "answer": 0,
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$N = 20$, $\\sum f_ix_i = 15 + 16 + 33 + 20 + 20 + 16 = 120$, mean $= 6$ → (3).<br>Ordered: $3(5), 4(4), 5(4), 8(2), 10(2), 11(3)$; cumulative $5, 9, 13, \\ldots$ The 10th and 11th values are both $5$: median $= 5$ → (2).<br>About the mean: $\\sum f|x - 6| = 15 + 8 + 4 + 4 + 8 + 15 = 54$, so $\\dfrac{54}{20} = 2.7$ → (4).<br>About the median: $\\sum f|x - 5| = 10 + 4 + 0 + 6 + 10 + 18 = 48$, so $\\dfrac{48}{20} = 2.4$ → (5).<br>Answer (A).",
+   "subject": "Mathematics",
+   "chapter": "Statistics",
+   "chCls": "XI"
+  },
+  {
+   "no": 16,
+   "section": 4,
+   "type": "match",
+   "text": "Let $\\ell_1$ and $\\ell_2$ be the lines $\\vec{r}_1 = \\lambda(\\hat{i} + \\hat{j} + \\hat{k})$ and $\\vec{r}_2 = (\\hat{j} - \\hat{k}) + \\mu(\\hat{i} + \\hat{k})$, respectively. Let $X$ be the set of all the planes $H$ that contain the line $\\ell_1$. For a plane $H$, let $d(H)$ denote the smallest possible distance between the points of $\\ell_2$ and $H$. Let $H_0$ be a plane in $X$ for which $d(H_0)$ is the maximum value of $d(H)$ as $H$ varies over all planes in $X$.<br>Match each entry in List-I to the correct entries in List-II.<br><table class=\"mt\"><tr><th>List-I</th><th>List-II</th></tr><tr><td>(P) The value of $d(H_0)$ is</td><td>(1) $\\sqrt3$</td></tr><tr><td>(Q) The distance of the point $(0,1,2)$ from $H_0$ is</td><td>(2) $\\dfrac{1}{\\sqrt3}$</td></tr><tr><td>(R) The distance of origin from $H_0$ is</td><td>(3) $0$</td></tr><tr><td>(S) The distance of origin from the point of intersection of planes $y = z$, $x = 1$ and $H_0$ is</td><td>(4) $\\sqrt2$</td></tr><tr><td></td><td>(5) $\\dfrac{1}{\\sqrt2}$</td></tr></table>",
+   "options": [
+    "(P) → (2), (Q) → (4), (R) → (5), (S) → (1)",
+    "(P) → (5), (Q) → (4), (R) → (3), (S) → (1)",
+    "(P) → (2), (Q) → (1), (R) → (3), (S) → (2)",
+    "(P) → (5), (Q) → (1), (R) → (4), (S) → (2)"
+   ],
+   "answer": 1,
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "If $\\ell_2$ is not parallel to $H$ it meets $H$ and $d(H) = 0$. So $H_0$ contains $\\ell_1$ and is parallel to $\\ell_2$.<br>Normal: $(1,1,1)\\times(1,0,1) = (1, 0, -1)$; $H_0$ passes through $O$: $x - z = 0$.<br>(P) $d(H_0)$ = distance of $(0,1,-1)$: $\\dfrac{|0 + 1|}{\\sqrt2} = \\dfrac{1}{\\sqrt2}$ → (5).<br>(Q) $(0,1,2)$: $\\dfrac{|0 - 2|}{\\sqrt2} = \\sqrt2$ → (4). (R) $O$ lies on $H_0$: $0$ → (3).<br>(S) $y = z$, $x = 1$, $x = z$ meet at $(1,1,1)$, at distance $\\sqrt3$ from $O$ → (1).<br>Answer (B).",
+   "subject": "Mathematics",
+   "chapter": "Three Dimensional Geometry",
+   "chCls": "XII"
+  },
+  {
+   "no": 17,
+   "section": 4,
+   "type": "match",
+   "text": "Let $z$ be a complex number satisfying $|z|^3 + 2z^2 + 4\\bar{z} - 8 = 0$, where $\\bar{z}$ denotes the complex conjugate of $z$. Let the imaginary part of $z$ be nonzero.<br>Match each entry in List-I to the correct entries in List-II.<br><table class=\"mt\"><tr><th>List-I</th><th>List-II</th></tr><tr><td>(P) $|z|^2$ is equal to</td><td>(1) $12$</td></tr><tr><td>(Q) $|z - \\bar{z}|^2$ is equal to</td><td>(2) $4$</td></tr><tr><td>(R) $|z|^2 + |z + \\bar{z}|^2$ is equal to</td><td>(3) $8$</td></tr><tr><td>(S) $|z + 1|^2$ is equal to</td><td>(4) $10$</td></tr><tr><td></td><td>(5) $7$</td></tr></table>",
+   "options": [
+    "(P) → (1), (Q) → (3), (R) → (5), (S) → (4)",
+    "(P) → (2), (Q) → (1), (R) → (3), (S) → (5)",
+    "(P) → (2), (Q) → (4), (R) → (5), (S) → (1)",
+    "(P) → (2), (Q) → (3), (R) → (5), (S) → (4)"
+   ],
+   "answer": 1,
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Let $z = x + iy$, $r = |z|$. Imaginary part: $4xy - 4y = 0 \\Rightarrow x = 1$ (as $y \\ne 0$).<br>Real part: $r^3 + 2(x^2 - y^2) + 4x - 8 = 0 \\Rightarrow r^3 - 2y^2 - 2 = 0$. With $y^2 = r^2 - 1$: $r^3 - 2r^2 = 0 \\Rightarrow r = 2$, $y^2 = 3$.<br>(P) $|z|^2 = 4$ → (2). (Q) $|2iy|^2 = 4y^2 = 12$ → (1).<br>(R) $4 + |2x|^2 = 4 + 4 = 8$ → (3). (S) $(x+1)^2 + y^2 = 4 + 3 = 7$ → (5).<br>Answer (B).",
+   "subject": "Mathematics",
+   "chapter": "Complex Numbers",
+   "chCls": "XI"
+  },
+  {
+   "no": 1,
+   "section": 1,
+   "type": "multi",
+   "text": "A slide with a frictionless curved surface, which becomes horizontal at its lower end, is fixed on the terrace of a building of height $3h$ from the ground, as shown in the figure. A spherical ball of mass $m$ is released on the slide from rest at a height $h$ from the top of the terrace. The ball leaves the slide with a velocity $\\vec{u}_0 = u_0\\hat{x}$ and falls on the ground at a distance $d$ from the building making an angle $\\theta$ with the horizontal. It bounces off with a velocity $\\vec{v}$ and reaches a maximum height $h_1$. The acceleration due to gravity is $g$ and the coefficient of restitution of the ground is $1/\\sqrt3$. Which of the following statement(s) is(are) correct?",
+   "options": [
+    "$\\vec{u}_0 = \\sqrt{2gh}\\,\\hat{x}$",
+    "$\\vec{v} = \\sqrt{2gh}\\,(\\hat{x} - \\hat{z})$",
+    "$\\theta = 60^{\\circ}$",
+    "$d/h_1 = 2\\sqrt3$"
+   ],
+   "answer": [
+    0,
+    2,
+    3
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": "phy-q1.png",
+   "optionFigs": null,
+   "sol": "Frictionless slide: $u_0 = \\sqrt{2gh}$, horizontal. (A) true.<br>Falling $3h$: vertical speed at impact $\\sqrt{6gh}$, time $t = \\sqrt{6h/g}$. $\\tan\\theta = \\dfrac{\\sqrt{6gh}}{\\sqrt{2gh}} = \\sqrt3 \\Rightarrow \\theta = 60^{\\circ}$. (C) true.<br>After the bounce: $v_x = \\sqrt{2gh}$, $v_z = \\dfrac{1}{\\sqrt3}\\sqrt{6gh} = \\sqrt{2gh}$ upward, so $\\vec v = \\sqrt{2gh}(\\hat x + \\hat z)$. (B) false.<br>$h_1 = \\dfrac{v_z^2}{2g} = h$ and $d = u_0 t = \\sqrt{2gh}\\sqrt{6h/g} = 2\\sqrt3\\,h$, so $d/h_1 = 2\\sqrt3$. (D) true.<br>Answer (A), (C), (D).",
+   "subject": "Physics",
+   "chapter": "Work, Energy and Power",
+   "chCls": "XI"
+  },
+  {
+   "no": 2,
+   "section": 1,
+   "type": "multi",
+   "text": "A plane polarized blue light ray is incident on a prism such that there is no reflection from the surface of the prism. The angle of deviation of the emergent ray is $\\delta = 60^{\\circ}$ (see Figure-1). The angle of minimum deviation for red light from the same prism is $\\delta_{\\min} = 30^{\\circ}$ (see Figure-2). The refractive index of the prism material for blue light is $\\sqrt3$. Which of the following statement(s) is(are) correct?",
+   "options": [
+    "The blue light is polarized in the plane of incidence.",
+    "The angle of the prism is $45^{\\circ}$.",
+    "The refractive index of the material of the prism for red light is $\\sqrt2$.",
+    "The angle of refraction for blue light in air at the exit plane of the prism is $60^{\\circ}$."
+   ],
+   "answer": [
+    0,
+    2,
+    3
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": "phy-q2.png",
+   "optionFigs": null,
+   "sol": "No reflection means incidence at Brewster’s angle with the light polarized in the plane of incidence. (A) true.<br>$\\tan i = \\sqrt3 \\Rightarrow i = 60^{\\circ}$, and then $r_1 = 90^{\\circ} - 60^{\\circ} = 30^{\\circ}$.<br>$\\delta = i + e - A = 60^{\\circ} \\Rightarrow e = A$, and $r_2 = A - 30^{\\circ}$. Snell at the exit face: $\\sin A = \\sqrt3\\sin(A - 30^{\\circ}) = \\dfrac32\\sin A - \\dfrac{\\sqrt3}{2}\\cos A \\Rightarrow \\tan A = \\sqrt3$.<br>So $A = 60^{\\circ}$ (B false) and the angle of refraction in air at the exit face is $e = 60^{\\circ}$ (D true).<br>Red light: $n = \\dfrac{\\sin\\frac{A + \\delta_{\\min}}{2}}{\\sin\\frac A2} = \\dfrac{\\sin45^{\\circ}}{\\sin30^{\\circ}} = \\sqrt2$. (C) true.<br>Answer (A), (C), (D).",
+   "subject": "Physics",
+   "chapter": "Ray Optics and Optical Instruments",
+   "chCls": "XII"
+  },
+  {
+   "no": 3,
+   "section": 1,
+   "type": "multi",
+   "text": "In a circuit shown in the figure, the capacitor $C$ is initially uncharged and the key $K$ is open. In this condition, a current of $1$ A flows through the $1\\,\\Omega$ resistor. The key is closed at time $t = t_0$. Which of the following statement(s) is(are) correct?<br>[Given: $e^{-1} = 0.36$]",
+   "options": [
+    "The value of the resistance $R$ is $3\\,\\Omega$.",
+    "For $t &lt; t_0$, the value of current $I_1$ is $2$ A.",
+    "At $t = t_0 + 7.2\\ \\mu$s, the current in the capacitor is $0.6$ A.",
+    "For $t \\to \\infty$, the charge on the capacitor is $12\\ \\mu$C."
+   ],
+   "answer": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": "phy-q3.png",
+   "optionFigs": null,
+   "sol": "Let $V$ be the potential difference between the two vertical rails. In the $5$ V branch $|V - 5| = 1$; the $15$ V cell drives current back through the $5$ V cell, so $V = 6$ V.<br>Then $I_1 = \\dfrac{6}{3} = 2$ A (B true), and the $15$ V branch carries $I_1 + 1 = 3$ A: $\\dfrac{15 - 6}{R} = 3 \\Rightarrow R = 3\\,\\Omega$ (A true).<br>Seen from the capacitor branch, the rest is a source of $6$ V with internal resistance $3 \\parallel 1 \\parallel 3 = \\dfrac37\\,\\Omega$.<br>Total resistance $3 + \\dfrac37 = \\dfrac{24}{7}\\,\\Omega$, $\\tau = \\dfrac{24}{7}\\times2\\ \\mu\\text{s} \\approx 6.9\\ \\mu$s, initial current $\\dfrac{6}{24/7} = 1.75$ A.<br>At $7.2\\ \\mu$s ($\\approx\\tau$): $i \\approx 1.75\\,e^{-1.05} \\approx 0.6$ A (C true). Finally $Q = CV = 2\\times6 = 12\\ \\mu$C (D true).<br>Answer (A), (B), (C), (D).",
+   "subject": "Physics",
+   "chapter": "Current Electricity",
+   "chCls": "XII"
+  },
+  {
+   "no": 4,
+   "section": 2,
+   "type": "single",
+   "text": "A bar of mass $M = 1.00$ kg and length $L = 0.20$ m is lying on a horizontal frictionless surface. One end of the bar is pivoted at a point about which it is free to rotate. A small mass $m = 0.10$ kg is moving on the same horizontal surface with $5.00\\ \\text{m s}^{-1}$ speed on a path perpendicular to the bar. It hits the bar at a distance $L/2$ from the pivoted end and returns back on the same path with speed $v$. After this elastic collision, the bar rotates with an angular velocity $\\omega$. Which of the following statement is correct?",
+   "options": [
+    "$\\omega = 6.98\\ \\text{rad s}^{-1}$ and $v = 4.30\\ \\text{m s}^{-1}$",
+    "$\\omega = 3.75\\ \\text{rad s}^{-1}$ and $v = 4.30\\ \\text{m s}^{-1}$",
+    "$\\omega = 3.75\\ \\text{rad s}^{-1}$ and $v = 10.0\\ \\text{m s}^{-1}$",
+    "$\\omega = 6.80\\ \\text{rad s}^{-1}$ and $v = 4.10\\ \\text{m s}^{-1}$"
+   ],
+   "answer": 0,
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$I = \\dfrac{ML^2}{3} = \\dfrac{0.04}{3}\\ \\text{kg m}^2$; the impact point is at $\\dfrac L2 = 0.1$ m.<br>Angular momentum about the pivot: $0.1\\times5\\times0.1 = I\\omega - 0.1\\,v\\times0.1 \\Rightarrow 0.05 = \\dfrac{0.04}{3}\\omega - 0.01v$.<br>Elastic (relative speed at the contact point reversed): $\\omega\\dfrac L2 + v = 5 \\Rightarrow 0.1\\omega + v = 5$.<br>Solving: $\\omega = \\dfrac{10}{1.4333} = 6.98\\ \\text{rad s}^{-1}$, $v = 4.30\\ \\text{m s}^{-1}$. Answer (A).",
+   "subject": "Physics",
+   "chapter": "System of Particles and Rotational Motion",
+   "chCls": "XI"
+  },
+  {
+   "no": 5,
+   "section": 2,
+   "type": "single",
+   "text": "A container has a base of $50\\ \\text{cm}\\times5\\ \\text{cm}$ and height $50$ cm, as shown in the figure. It has two parallel electrically conducting walls each of area $50\\ \\text{cm}\\times50\\ \\text{cm}$. The remaining walls of the container are thin and non-conducting. The container is being filled with a liquid of dielectric constant $3$ at a uniform rate of $250\\ \\text{cm}^3\\,\\text{s}^{-1}$. What is the value of the capacitance of the container after $10$ seconds?<br>[Given: Permittivity of free space $\\epsilon_0 = 9\\times10^{-12}\\ \\text{C}^2\\text{N}^{-1}\\text{m}^{-2}$, the effects of the non-conducting walls on the capacitance are negligible]",
+   "options": [
+    "$27$ pF",
+    "$63$ pF",
+    "$81$ pF",
+    "$135$ pF"
+   ],
+   "answer": 1,
+   "full": 3,
+   "neg": 1,
+   "fig": "phy-q5.png",
+   "optionFigs": null,
+   "sol": "After $10$ s the volume is $2500\\ \\text{cm}^3$; base area $250\\ \\text{cm}^2$, so the liquid height is $10$ cm. Plate separation $d = 5$ cm $= 0.05$ m.<br>Filled part (area $50\\times10\\ \\text{cm}^2 = 0.05\\ \\text{m}^2$): $C_1 = \\dfrac{3\\times9\\times10^{-12}\\times0.05}{0.05} = 27$ pF.<br>Empty part (area $0.20\\ \\text{m}^2$): $C_2 = \\dfrac{9\\times10^{-12}\\times0.20}{0.05} = 36$ pF.<br>The parts are in parallel: $C = 63$ pF. Answer (B).",
+   "subject": "Physics",
+   "chapter": "Electrostatic Potential and Capacitance",
+   "chCls": "XII"
+  },
+  {
+   "no": 6,
+   "section": 2,
+   "type": "single",
+   "text": "One mole of an ideal gas expands adiabatically from an initial state $(T_{\\mathrm A}, V_0)$ to final state $(T_{\\mathrm f}, 5V_0)$. Another mole of the same gas expands isothermally from a different initial state $(T_{\\mathrm B}, V_0)$ to the same final state $(T_{\\mathrm f}, 5V_0)$. The ratio of the specific heats at constant pressure and constant volume of this ideal gas is $\\gamma$. What is the ratio $T_{\\mathrm A}/T_{\\mathrm B}$?",
+   "options": [
+    "$5^{\\gamma-1}$",
+    "$5^{1-\\gamma}$",
+    "$5^{\\gamma}$",
+    "$5^{1+\\gamma}$"
+   ],
+   "answer": 0,
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Adiabatic: $T_{\\mathrm A}V_0^{\\gamma-1} = T_{\\mathrm f}(5V_0)^{\\gamma-1} \\Rightarrow T_{\\mathrm A} = 5^{\\gamma-1}T_{\\mathrm f}$.<br>Isothermal: $T_{\\mathrm B} = T_{\\mathrm f}$.<br>$T_{\\mathrm A}/T_{\\mathrm B} = 5^{\\gamma-1}$. Answer (A).",
+   "subject": "Physics",
+   "chapter": "Thermodynamics",
+   "chCls": "XI"
+  },
+  {
+   "no": 7,
+   "section": 2,
+   "type": "single",
+   "text": "Two satellites P and Q are moving in different circular orbits around the Earth (radius $R$). The heights of P and Q from the Earth surface are $h_{\\mathrm P}$ and $h_{\\mathrm Q}$, respectively, where $h_{\\mathrm P} = R/3$. The accelerations of P and Q due to Earth’s gravity are $g_{\\mathrm P}$ and $g_{\\mathrm Q}$, respectively. If $g_{\\mathrm P}/g_{\\mathrm Q} = 36/25$, what is the value of $h_{\\mathrm Q}$?",
+   "options": [
+    "$3R/5$",
+    "$R/6$",
+    "$6R/5$",
+    "$5R/6$"
+   ],
+   "answer": 0,
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$g \\propto \\dfrac{1}{(R+h)^2}$, so $\\dfrac{g_{\\mathrm P}}{g_{\\mathrm Q}} = \\left(\\dfrac{R + h_{\\mathrm Q}}{R + h_{\\mathrm P}}\\right)^2 = \\dfrac{36}{25}$.<br>$R + h_{\\mathrm Q} = \\dfrac65\\cdot\\dfrac{4R}{3} = \\dfrac{8R}{5} \\Rightarrow h_{\\mathrm Q} = \\dfrac{3R}{5}$. Answer (A).",
+   "subject": "Physics",
+   "chapter": "Gravitation",
+   "chCls": "XI"
+  },
+  {
+   "no": 8,
+   "section": 3,
+   "type": "num",
+   "text": "A Hydrogen-like atom has atomic number $Z$. Photons emitted in the electronic transitions from level $n = 4$ to level $n = 3$ in these atoms are used to perform photoelectric effect experiment on a target metal. The maximum kinetic energy of the photoelectrons generated is $1.95$ eV. If the photoelectric threshold wavelength for the target metal is $310$ nm, the value of $Z$ is ______.<br>[Given: $hc = 1240$ eV-nm and $Rhc = 13.6$ eV, where $R$ is the Rydberg constant, $h$ is the Planck’s constant and $c$ is the speed of light in vacuum]",
+   "options": null,
+   "answer": {
+    "lo": 3,
+    "hi": 3
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Work function $\\phi = \\dfrac{1240}{310} = 4$ eV, so the photon energy is $4 + 1.95 = 5.95$ eV.<br>$E = 13.6Z^2\\left(\\dfrac19 - \\dfrac1{16}\\right) = 13.6Z^2\\cdot\\dfrac{7}{144} = 0.661Z^2$ eV.<br>$Z^2 = \\dfrac{5.95}{0.661} = 9 \\Rightarrow Z = 3$.",
+   "subject": "Physics",
+   "chapter": "Atoms",
+   "chCls": "XII"
+  },
+  {
+   "no": 9,
+   "section": 3,
+   "type": "num",
+   "text": "An optical arrangement consists of two concave mirrors $\\mathrm{M_1}$ and $\\mathrm{M_2}$, and a convex lens L with a common principal axis, as shown in the figure. The focal length of L is $10$ cm. The radii of curvature of $\\mathrm{M_1}$ and $\\mathrm{M_2}$ are $20$ cm and $24$ cm, respectively. The distance between L and $\\mathrm{M_2}$ is $20$ cm. A point object S is placed at the mid-point between L and $\\mathrm{M_2}$ on the axis. When the distance between L and $\\mathrm{M_1}$ is $n/7$ cm, one of the images coincides with S. The value of $n$ is ______.",
+   "options": null,
+   "answer": {
+    "lo": 80,
+    "hi": 80
+   },
+   "accept": [
+    {
+     "lo": 150,
+     "hi": 150
+    },
+    {
+     "lo": 220,
+     "hi": 220
+    }
+   ],
+   "note": "Official final key: 80 or 150 or 220 (any of these is awarded marks).",
+   "full": 4,
+   "neg": 0,
+   "fig": "phy-q9.png",
+   "optionFigs": null,
+   "sol": "S is $10$ cm from L (its focus) and $10$ cm from $\\mathrm{M_2}$ ($f = 12$ cm).<br>Reflection at $\\mathrm{M_2}$: $\\dfrac1v = \\dfrac1{10} - \\dfrac1{12} = \\dfrac1{60}$: virtual image $60$ cm behind $\\mathrm{M_2}$, i.e. $80$ cm to the right of L.<br>Through L (object $80$ cm away): $\\dfrac1v = \\dfrac1{10} - \\dfrac1{80} = \\dfrac{7}{80}$, image $\\dfrac{80}{7}$ cm to the left of L.<br>The light retraces its path (and the final image falls on S) if this image is at the pole of $\\mathrm{M_1}$: $x = \\dfrac{80}{7}$, or at its centre of curvature: $x = \\dfrac{80}{7} + 20 = \\dfrac{220}{7}$.<br>Path S → L → $\\mathrm{M_1}$ → L → $\\mathrm{M_2}$: S is at the focus of L, so the beam is parallel and $\\mathrm{M_1}$ focuses it $10$ cm in front of it. For the final image at S, L must image this point to $80$ cm on its right, i.e. it must be $\\dfrac{80}{7}$ cm from L: $x - 10 = \\dfrac{80}{7} \\Rightarrow x = \\dfrac{150}{7}$.<br>So $n = 80$, $150$ or $220$; the official key accepts all three.",
+   "subject": "Physics",
+   "chapter": "Ray Optics and Optical Instruments",
+   "chCls": "XII"
+  },
+  {
+   "no": 10,
+   "section": 3,
+   "type": "num",
+   "text": "In an experiment for determination of the focal length of a thin convex lens, the distance of the object from the lens is $10 \\pm 0.1$ cm and the distance of its real image from the lens is $20 \\pm 0.2$ cm. The error in the determination of focal length of the lens is $n$ %. The value of $n$ is ______.",
+   "options": null,
+   "answer": {
+    "lo": 1,
+    "hi": 1
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "For a real image, $\\dfrac1f = \\dfrac1u + \\dfrac1v$ (magnitudes): $f = \\dfrac{10\\times20}{30} = \\dfrac{20}{3}$ cm.<br>$\\dfrac{\\Delta f}{f^2} = \\dfrac{\\Delta u}{u^2} + \\dfrac{\\Delta v}{v^2} = \\dfrac{0.1}{100} + \\dfrac{0.2}{400} = 0.0015$.<br>$\\dfrac{\\Delta f}{f} = 0.0015\\times\\dfrac{20}{3} = 0.01 = 1\\%$. So $n = 1$.",
+   "subject": "Physics",
+   "chapter": "Ray Optics and Optical Instruments",
+   "chCls": "XII"
+  },
+  {
+   "no": 11,
+   "section": 3,
+   "type": "num",
+   "text": "A closed container contains a homogeneous mixture of two moles of an ideal monatomic gas $(\\gamma = 5/3)$ and one mole of an ideal diatomic gas $(\\gamma = 7/5)$. Here, $\\gamma$ is the ratio of the specific heats at constant pressure and constant volume of an ideal gas. The gas mixture does a work of $66$ Joule when heated at constant pressure. The change in its internal energy is ______ Joule.",
+   "options": null,
+   "answer": {
+    "lo": 121,
+    "hi": 121
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "At constant pressure $W = nR\\Delta T = 3R\\Delta T = 66 \\Rightarrow R\\Delta T = 22$ J.<br>$\\Delta U = \\left(2\\cdot\\dfrac32 + 1\\cdot\\dfrac52\\right)R\\Delta T = \\dfrac{11}{2}\\times22 = 121$ J.",
+   "subject": "Physics",
+   "chapter": "Thermodynamics",
+   "chCls": "XI"
+  },
+  {
+   "no": 12,
+   "section": 3,
+   "type": "num",
+   "text": "A person of height $1.6$ m is walking away from a lamp post of height $4$ m along a straight path on the flat ground. The lamp post and the person are always perpendicular to the ground. If the speed of the person is $60\\ \\text{cm s}^{-1}$, the speed of the tip of the person’s shadow on the ground with respect to the person is ______ $\\text{cm s}^{-1}$.",
+   "options": null,
+   "answer": {
+    "lo": 40,
+    "hi": 40
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Let the person be at $x$ and the shadow tip at $s$ from the post. Similar triangles: $\\dfrac{4}{s} = \\dfrac{1.6}{s - x} \\Rightarrow s = \\dfrac53x$.<br>Tip speed $= \\dfrac53\\times60 = 100\\ \\text{cm s}^{-1}$; relative to the person: $100 - 60 = 40\\ \\text{cm s}^{-1}$.",
+   "subject": "Physics",
+   "chapter": "Motion in a Straight Line",
+   "chCls": "XI"
+  },
+  {
+   "no": 13,
+   "section": 3,
+   "type": "num",
+   "text": "Two point-like objects of masses $20$ gm and $30$ gm are fixed at the two ends of a rigid massless rod of length $10$ cm. This system is suspended vertically from a rigid ceiling using a thin wire attached to its center of mass, as shown in the figure. The resulting torsional pendulum undergoes small oscillations. The torsional constant of the wire is $1.2\\times10^{-8}\\ \\text{N m rad}^{-1}$. The angular frequency of the oscillations in $n\\times10^{-3}\\ \\text{rad s}^{-1}$. The value of $n$ is ______.",
+   "options": null,
+   "answer": {
+    "lo": 10,
+    "hi": 10
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": "phy-q13.png",
+   "optionFigs": null,
+   "sol": "Centre of mass: $4$ cm from the $30$ gm mass and $6$ cm from the $20$ gm mass.<br>$I = 0.03(0.04)^2 + 0.02(0.06)^2 = 4.8\\times10^{-5} + 7.2\\times10^{-5} = 1.2\\times10^{-4}\\ \\text{kg m}^2$.<br>$\\omega = \\sqrt{\\dfrac{k}{I}} = \\sqrt{\\dfrac{1.2\\times10^{-8}}{1.2\\times10^{-4}}} = 10^{-2} = 10\\times10^{-3}\\ \\text{rad s}^{-1}$. So $n = 10$.",
+   "subject": "Physics",
+   "chapter": "Oscillations",
+   "chCls": "XI"
+  },
+  {
+   "no": 14,
+   "section": 4,
+   "type": "match",
+   "text": "List-I shows different radioactive decay processes and List-II provides possible emitted particles. Match each entry in List-I with an appropriate entry from List-II, and choose the correct option.<br><table class=\"mt\"><tr><th>List-I</th><th>List-II</th></tr><tr><td>(P) ${}^{238}_{92}U \\to {}^{234}_{91}Pa$</td><td>(1) one $\\alpha$ particle and one $\\beta^+$ particle</td></tr><tr><td>(Q) ${}^{214}_{82}Pb \\to {}^{210}_{82}Pb$</td><td>(2) three $\\beta^-$ particles and one $\\alpha$ particle</td></tr><tr><td>(R) ${}^{210}_{81}Tl \\to {}^{206}_{82}Pb$</td><td>(3) two $\\beta^-$ particles and one $\\alpha$ particle</td></tr><tr><td>(S) ${}^{228}_{91}Pa \\to {}^{224}_{88}Ra$</td><td>(4) one $\\alpha$ particle and one $\\beta^-$ particle</td></tr><tr><td></td><td>(5) one $\\alpha$ particle and two $\\beta^+$ particles</td></tr></table>",
+   "options": [
+    "P → 4, Q → 3, R → 2, S → 1",
+    "P → 4, Q → 1, R → 2, S → 5",
+    "P → 5, Q → 3, R → 1, S → 4",
+    "P → 5, Q → 1, R → 3, S → 2"
+   ],
+   "answer": 0,
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Each mass number falls by $4$, so each process has one $\\alpha$ (which lowers $Z$ by 2); the remaining change in $Z$ is made by $\\beta$ particles.<br>(P) $92 \\to 90$ by $\\alpha$, then $+1$: one $\\beta^-$ → (4).<br>(Q) $82 \\to 80$, then $+2$: two $\\beta^-$ → (3).<br>(R) $81 \\to 79$, then $+3$: three $\\beta^-$ → (2).<br>(S) $91 \\to 89$, then $-1$: one $\\beta^+$ → (1).<br>Answer (A).",
+   "subject": "Physics",
+   "chapter": "Nuclei",
+   "chCls": "XII"
+  },
+  {
+   "no": 15,
+   "section": 4,
+   "type": "match",
+   "text": "Match the temperature of a black body given in List-I with an appropriate statement in List-II, and choose the correct option.<br>[Given: Wien’s constant as $2.9\\times10^{-3}$ m-K and $\\dfrac{hc}{e} = 1.24\\times10^{-6}$ V-m]<br><table class=\"mt\"><tr><th>List-I</th><th>List-II</th></tr><tr><td>(P) $2000$ K</td><td>(1) The radiation at peak wavelength can lead to emission of photoelectrons from a metal of work function $4$ eV.</td></tr><tr><td>(Q) $3000$ K</td><td>(2) The radiation at peak wavelength is visible to human eye.</td></tr><tr><td>(R) $5000$ K</td><td>(3) The radiation at peak emission wavelength will result in the widest central maximum of a single slit diffraction.</td></tr><tr><td>(S) $10000$ K</td><td>(4) The power emitted per unit area is $1/16$ of that emitted by a blackbody at temperature $6000$ K.</td></tr><tr><td></td><td>(5) The radiation at peak emission wavelength can be used to image human bones.</td></tr></table>",
+   "options": [
+    "P → 3, Q → 5, R → 2, S → 3",
+    "P → 3, Q → 2, R → 4, S → 1",
+    "P → 3, Q → 4, R → 2, S → 1",
+    "P → 1, Q → 2, R → 5, S → 3"
+   ],
+   "answer": 2,
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$\\lambda_{\\max} = \\dfrac{2.9\\times10^{-3}}{T}$: $2000$ K → $1450$ nm; $3000$ K → $967$ nm; $5000$ K → $580$ nm; $10000$ K → $290$ nm.<br>(P) Longest wavelength gives the widest central maximum → (3).<br>(Q) $\\left(\\dfrac{3000}{6000}\\right)^4 = \\dfrac1{16}$ → (4).<br>(R) $580$ nm is visible → (2).<br>(S) Photon energy $= \\dfrac{1240}{290} \\approx 4.3$ eV $> 4$ eV → (1).<br>Answer (C).",
+   "subject": "Physics",
+   "chapter": "Dual Nature of Radiation and Matter",
+   "chCls": "XII"
+  },
+  {
+   "no": 16,
+   "section": 4,
+   "type": "match",
+   "text": "A series LCR circuit is connected to a $45\\sin(\\omega t)$ Volt source. The resonant angular frequency of the circuit is $10^5\\ \\text{rad s}^{-1}$ and current amplitude at resonance is $I_0$. When the angular frequency of the source is $\\omega = 8\\times10^4\\ \\text{rad s}^{-1}$, the current amplitude in the circuit is $0.05\\,I_0$. If $L = 50$ mH, match each entry in List-I with an appropriate value from List-II and choose the correct option.<br><table class=\"mt\"><tr><th>List-I</th><th>List-II</th></tr><tr><td>(P) $I_0$ in mA</td><td>(1) $44.4$</td></tr><tr><td>(Q) The quality factor of the circuit</td><td>(2) $18$</td></tr><tr><td>(R) The bandwidth of the circuit in $\\text{rad s}^{-1}$</td><td>(3) $400$</td></tr><tr><td>(S) The peak power dissipated at resonance in Watt</td><td>(4) $2250$</td></tr><tr><td></td><td>(5) $500$</td></tr></table>",
+   "options": [
+    "P → 2, Q → 3, R → 5, S → 1",
+    "P → 3, Q → 1, R → 4, S → 2",
+    "P → 4, Q → 5, R → 3, S → 1",
+    "P → 4, Q → 2, R → 1, S → 5"
+   ],
+   "answer": 1,
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$C = \\dfrac{1}{\\omega_0^2L} = \\dfrac{1}{10^{10}\\times0.05} = 2\\times10^{-9}$ F.<br>At $\\omega = 8\\times10^4$: $\\omega L = 4000\\ \\Omega$, $\\dfrac{1}{\\omega C} = 6250\\ \\Omega$, $X = 2250\\ \\Omega$.<br>Current $0.05I_0$ means $Z = 20R$: $R^2 + 2250^2 = 400R^2 \\Rightarrow R = \\dfrac{2250}{\\sqrt{399}} \\approx 112.6\\ \\Omega$.<br>(P) $I_0 = \\dfrac{45}{112.6} \\approx 0.4$ A $= 400$ mA → (3). (Q) $Q = \\dfrac{\\omega_0L}{R} = \\dfrac{5000}{112.6} \\approx 44.4$ → (1).<br>(R) Bandwidth $= \\dfrac RL \\approx 2250\\ \\text{rad s}^{-1}$ → (4). (S) $P = I_0^2R \\approx 0.16\\times112.6 \\approx 18$ W → (2).<br>Answer (B).",
+   "subject": "Physics",
+   "chapter": "Alternating Current",
+   "chCls": "XII"
+  },
+  {
+   "no": 17,
+   "section": 4,
+   "type": "match",
+   "text": "A thin conducting rod MN of mass $20$ gm, length $25$ cm and resistance $10\\ \\Omega$ is held on frictionless, long, perfectly conducting vertical rails as shown in the figure. There is a uniform magnetic field $B_0 = 4$ T directed perpendicular to the plane of the rod-rail arrangement. The rod is released from rest at time $t = 0$ and it moves down along the rails. Assume air drag is negligible. Match each quantity in List-I with an appropriate value from List-II, and choose the correct option.<br>[Given: The acceleration due to gravity $g = 10\\ \\text{m s}^{-2}$ and $e^{-1} = 0.4$]<br><table class=\"mt\"><tr><th>List-I</th><th>List-II</th></tr><tr><td>(P) At $t = 0.2$ s, the magnitude of the induced emf in Volt</td><td>(1) $0.07$</td></tr><tr><td>(Q) At $t = 0.2$ s, the magnitude of the magnetic force in Newton</td><td>(2) $0.14$</td></tr><tr><td>(R) At $t = 0.2$ s, the power dissipated as heat in Watt</td><td>(3) $1.20$</td></tr><tr><td>(S) The magnitude of terminal velocity of the rod in $\\text{m s}^{-1}$</td><td>(4) $0.12$</td></tr><tr><td></td><td>(5) $2.00$</td></tr></table>",
+   "options": [
+    "P → 5, Q → 2, R → 3, S → 1",
+    "P → 3, Q → 1, R → 4, S → 5",
+    "P → 4, Q → 3, R → 1, S → 2",
+    "P → 3, Q → 4, R → 2, S → 5"
+   ],
+   "answer": 3,
+   "full": 3,
+   "neg": 1,
+   "fig": "phy-q17.png",
+   "optionFigs": null,
+   "sol": "$m\\dfrac{dv}{dt} = mg - \\dfrac{B^2l^2}{R}v$ with $\\dfrac{B^2l^2}{R} = \\dfrac{16\\times0.0625}{10} = 0.1$.<br>Terminal velocity $v_T = \\dfrac{mg}{0.1} = \\dfrac{0.2}{0.1} = 2$ m/s → (S)(5); time constant $\\tau = \\dfrac{m}{0.1} = 0.2$ s.<br>At $t = 0.2$ s: $v = 2(1 - e^{-1}) = 1.2$ m/s.<br>(P) emf $= Blv = 4\\times0.25\\times1.2 = 1.20$ V → (3). (Q) $F = 0.1\\times1.2 = 0.12$ N → (4). (R) $P = \\dfrac{1.2^2}{10} = 0.144 \\approx 0.14$ W → (2).<br>Answer (D).",
+   "subject": "Physics",
+   "chapter": "Electromagnetic Induction",
+   "chCls": "XII"
+  },
+  {
+   "no": 1,
+   "section": 1,
+   "type": "multi",
+   "text": "The correct statement(s) related to processes involved in the extraction of metals is(are)",
+   "options": [
+    "Roasting of Malachite produces Cuprite.",
+    "Calcination of Calamine produces Zincite.",
+    "Copper pyrites is heated with silica in a reverberatory furnace to remove iron.",
+    "Impure silver is treated with aqueous KCN in the presence of oxygen followed by reduction with zinc metal."
+   ],
+   "answer": [
+    1,
+    2,
+    3
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "(A) Malachite $\\mathrm{CuCO_3\\cdot Cu(OH)_2}$ on heating gives $\\mathrm{CuO}$ (tenorite), not cuprite $\\mathrm{Cu_2O}$. False.<br>(B) Calamine $\\mathrm{ZnCO_3} \\xrightarrow{\\Delta} \\mathrm{ZnO}$ (zincite) $+ \\mathrm{CO_2}$. True.<br>(C) In the reverberatory furnace iron is removed as slag: $\\mathrm{FeO + SiO_2 \\to FeSiO_3}$. True.<br>(D) Cyanide process: $\\mathrm{4Ag + 8CN^- + O_2 + 2H_2O \\to 4[Ag(CN)_2]^- + 4OH^-}$, then $\\mathrm{2[Ag(CN)_2]^- + Zn \\to [Zn(CN)_4]^{2-} + 2Ag}$. True.<br>Answer (B), (C), (D).",
+   "subject": "Chemistry",
+   "chapter": "Redox Reactions",
+   "chCls": "XI"
+  },
+  {
+   "no": 2,
+   "section": 1,
+   "type": "multi",
+   "text": "In the following reactions, $\\mathbf{P}$, $\\mathbf{Q}$, $\\mathbf{R}$, and $\\mathbf{S}$ are the major products.$$\\mathrm{CH_3CH_2CH(CH_3)CH_2CN} \\xrightarrow[\\text{(ii) PhMgBr, then }\\mathrm{H_2O}]{\\text{(i) PhMgBr, then }\\mathrm{H_3O^+}} \\mathbf{P}$$$$\\text{Ph-H} + \\mathrm{CH_3COCl} \\xrightarrow[\\text{(ii) PhMgBr, then }\\mathrm{H_2O}]{\\text{(i) anhyd. }\\mathrm{AlCl_3}} \\mathbf{Q}$$$$\\mathrm{CH_3CH_2COCl} \\xrightarrow[\\text{(ii) PhMgBr, then }\\mathrm{H_2O}]{\\text{(i) }\\tfrac12\\,\\mathrm{(PhCH_2)_2Cd}} \\mathbf{R}$$$$\\mathrm{PhCH_2CHO} \\xrightarrow[\\text{(iii) HCN; (iv) }\\mathrm{H_2SO_4},\\ \\Delta]{\\text{(i) PhMgBr, then }\\mathrm{H_2O}\\text{; (ii) }\\mathrm{CrO_3}\\text{, dil. }\\mathrm{H_2SO_4}} \\mathbf{S}$$The correct statement(s) about $\\mathbf{P}$, $\\mathbf{Q}$, $\\mathbf{R}$, and $\\mathbf{S}$ is(are)",
+   "options": [
+    "Both $\\mathbf{P}$ and $\\mathbf{Q}$ have asymmetric carbon(s).",
+    "Both $\\mathbf{Q}$ and $\\mathbf{R}$ have asymmetric carbon(s).",
+    "Both $\\mathbf{P}$ and $\\mathbf{R}$ have asymmetric carbon(s).",
+    "$\\mathbf{P}$ has asymmetric carbon(s), $\\mathbf{S}$ does not have any asymmetric carbon."
+   ],
+   "answer": [
+    2,
+    3
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "P: the nitrile gives the ketone $\\mathrm{CH_3CH_2CH(CH_3)CH_2COPh}$, then the $3^{\\circ}$ alcohol $\\mathrm{CH_3CH_2CH(CH_3)CH_2C(OH)Ph_2}$; the $\\mathrm{CH(CH_3)}$ carbon is asymmetric.<br>Q: Friedel-Crafts acylation gives acetophenone, then $\\mathrm{Ph_2C(OH)CH_3}$: no asymmetric carbon.<br>R: the cadmium reagent gives $\\mathrm{CH_3CH_2COCH_2Ph}$, then $\\mathrm{CH_3CH_2C(OH)(Ph)CH_2Ph}$: asymmetric (Et, Ph, $\\mathrm{CH_2Ph}$, OH).<br>S: $\\mathrm{PhCH_2CH(OH)Ph} \\to \\mathrm{PhCH_2COPh}$ (oxidation) $\\to$ cyanohydrin $\\to$ hydrolysis and dehydration give $\\mathrm{PhCH{=}C(Ph)COOH}$: no asymmetric carbon.<br>So (A) and (B) are false, (C) and (D) are true. Answer (C), (D).",
+   "subject": "Chemistry",
+   "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+   "chCls": "XII"
+  },
+  {
+   "no": 3,
+   "section": 1,
+   "type": "multi",
+   "text": "Consider the following reaction scheme and choose the correct option(s) for the major products $\\mathbf{Q}$, $\\mathbf{R}$ and $\\mathbf{S}$.$$\\text{Styrene} \\xrightarrow[\\text{(ii) NaOH, }\\mathrm{H_2O_2},\\ \\mathrm{H_2O}]{\\text{(i) }\\mathrm{B_2H_6}} \\mathbf{P} \\xrightarrow[\\text{(ii) }\\mathrm{Cl_2}\\text{, Red phosphorus; (iii) }\\mathrm{H_2O}]{\\text{(i) }\\mathrm{CrO_3},\\ \\mathrm{H_2SO_4}} \\mathbf{Q}$$$$\\mathbf{P} \\xrightarrow[\\text{(ii) NaCN; (iii) }\\mathrm{H_3O^+},\\ \\Delta]{\\text{(i) }\\mathrm{SOCl_2}} \\mathbf{R} \\xrightarrow{\\text{conc. }\\mathrm{H_2SO_4}} \\mathbf{S}$$",
+   "options": [
+    "",
+    "",
+    "",
+    ""
+   ],
+   "answer": [
+    1
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": null,
+   "optionFigs": [
+    "che-q3a.png",
+    "che-q3b.png",
+    "che-q3c.png",
+    "che-q3d.png"
+   ],
+   "sol": "Hydroboration-oxidation of styrene (anti-Markovnikov) gives P $= \\mathrm{PhCH_2CH_2OH}$.<br>$\\mathrm{CrO_3/H_2SO_4}$: $\\mathrm{PhCH_2COOH}$; HVZ ($\\mathrm{Cl_2}$, red P, then $\\mathrm{H_2O}$): Q $= \\mathrm{PhCHClCOOH}$.<br>$\\mathrm{SOCl_2}$: $\\mathrm{PhCH_2CH_2Cl}$; NaCN: $\\mathrm{PhCH_2CH_2CN}$; $\\mathrm{H_3O^+}$, $\\Delta$: R $= \\mathrm{PhCH_2CH_2COOH}$.<br>Conc. $\\mathrm{H_2SO_4}$ causes intramolecular Friedel-Crafts acylation: S = 1-indanone.<br>This matches option (B) only. Answer (B).",
+   "subject": "Chemistry",
+   "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+   "chCls": "XII"
+  },
+  {
+   "no": 4,
+   "section": 2,
+   "type": "single",
+   "text": "In the scheme given below, $\\mathbf{X}$ and $\\mathbf{Y}$, respectively, are$$\\text{Metal halide} \\xrightarrow{\\text{aq. NaOH}} \\text{White precipitate }(\\mathbf{P}) + \\text{Filtrate }(\\mathbf{Q})$$$$\\mathbf{P} \\xrightarrow[\\text{heat}]{\\text{aq. }\\mathrm{H_2SO_4},\\ \\mathrm{PbO_2}\\text{ (excess)}} \\mathbf{X}\\ \\text{(a coloured species in solution)}$$$$\\mathbf{Q} \\xrightarrow[\\text{warm}]{\\mathrm{MnO(OH)_2},\\ \\text{Conc. }\\mathrm{H_2SO_4}} \\mathbf{Y}\\ \\text{(gives blue-coloration with KI-starch paper)}$$",
+   "options": [
+    "$\\mathrm{CrO_4^{2-}}$ and $\\mathrm{Br_2}$",
+    "$\\mathrm{MnO_4^{2-}}$ and $\\mathrm{Cl_2}$",
+    "$\\mathrm{MnO_4^{-}}$ and $\\mathrm{Cl_2}$",
+    "$\\mathrm{MnSO_4}$ and $\\mathrm{HOCl}$"
+   ],
+   "answer": 2,
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "The white precipitate with NaOH is $\\mathrm{Mn(OH)_2}$, so the salt is $\\mathrm{MnCl_2}$ and the filtrate contains $\\mathrm{Cl^-}$.<br>$\\mathrm{PbO_2}$ in acid oxidises $\\mathrm{Mn^{2+}}$ to purple $\\mathrm{MnO_4^-}$: X $= \\mathrm{MnO_4^-}$.<br>$\\mathrm{MnO(OH)_2}$ with conc. $\\mathrm{H_2SO_4}$ oxidises $\\mathrm{Cl^-}$ to $\\mathrm{Cl_2}$, which liberates $\\mathrm{I_2}$ from KI (blue with starch): Y $= \\mathrm{Cl_2}$.<br>Answer (C).",
+   "subject": "Chemistry",
+   "chapter": "The d- and f-Block Elements",
+   "chCls": "XII"
+  },
+  {
+   "no": 5,
+   "section": 2,
+   "type": "single",
+   "text": "Plotting $1/\\Lambda_{\\mathrm m}$ against $c\\Lambda_{\\mathrm m}$ for aqueous solutions of a monobasic weak acid (HX) resulted in a straight line with y-axis intercept of P and slope of S. The ratio P/S is<br>[$\\Lambda_{\\mathrm m}$ = molar conductivity, $\\Lambda_{\\mathrm m}^{\\mathrm o}$ = limiting molar conductivity, c = molar concentration, $\\mathrm{K_a}$ = dissociation constant of HX]",
+   "options": [
+    "$\\mathrm{K_a}\\Lambda_{\\mathrm m}^{\\mathrm o}$",
+    "$\\mathrm{K_a}\\Lambda_{\\mathrm m}^{\\mathrm o}/2$",
+    "$2\\,\\mathrm{K_a}\\Lambda_{\\mathrm m}^{\\mathrm o}$",
+    "$1/(\\mathrm{K_a}\\Lambda_{\\mathrm m}^{\\mathrm o})$"
+   ],
+   "answer": 0,
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "With $\\alpha = \\dfrac{\\Lambda_{\\mathrm m}}{\\Lambda_{\\mathrm m}^{\\mathrm o}}$ and $K_a = \\dfrac{c\\alpha^2}{1-\\alpha}$: $K_a(1-\\alpha) = c\\alpha^2$.<br>$K_a\\left(1 - \\dfrac{\\Lambda_{\\mathrm m}}{\\Lambda_{\\mathrm m}^{\\mathrm o}}\\right) = \\dfrac{c\\Lambda_{\\mathrm m}^2}{(\\Lambda_{\\mathrm m}^{\\mathrm o})^2}$; divide by $K_a\\Lambda_{\\mathrm m}$: $\\dfrac{1}{\\Lambda_{\\mathrm m}} = \\dfrac{1}{\\Lambda_{\\mathrm m}^{\\mathrm o}} + \\dfrac{c\\Lambda_{\\mathrm m}}{K_a(\\Lambda_{\\mathrm m}^{\\mathrm o})^2}$.<br>$P = \\dfrac{1}{\\Lambda_{\\mathrm m}^{\\mathrm o}}$, $S = \\dfrac{1}{K_a(\\Lambda_{\\mathrm m}^{\\mathrm o})^2}$, so $\\dfrac PS = K_a\\Lambda_{\\mathrm m}^{\\mathrm o}$. Answer (A).",
+   "subject": "Chemistry",
+   "chapter": "Electrochemistry",
+   "chCls": "XII"
+  },
+  {
+   "no": 6,
+   "section": 2,
+   "type": "single",
+   "text": "On decreasing the $p$H from 7 to 2, the solubility of a sparingly soluble salt (MX) of a weak acid (HX) increased from $10^{-4}\\ \\text{mol L}^{-1}$ to $10^{-3}\\ \\text{mol L}^{-1}$. The $p\\mathrm{K_a}$ of HX is",
+   "options": [
+    "3",
+    "4",
+    "5",
+    "2"
+   ],
+   "answer": 1,
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "With hydrolysis of $\\mathrm{X^-}$ by acid: $s^2 = K_{sp}\\left(1 + \\dfrac{[\\mathrm{H^+}]}{K_a}\\right)$.<br>At pH 7 the bracket is $\\approx 1$, so $K_{sp} = 10^{-8}$.<br>At pH 2: $10^{-6} = 10^{-8}\\left(1 + \\dfrac{10^{-2}}{K_a}\\right) \\Rightarrow \\dfrac{10^{-2}}{K_a} = 99 \\Rightarrow K_a \\approx 10^{-4}$.<br>$p\\mathrm{K_a} = 4$. Answer (B).",
+   "subject": "Chemistry",
+   "chapter": "Equilibrium",
+   "chCls": "XI"
+  },
+  {
+   "no": 7,
+   "section": 2,
+   "type": "single",
+   "text": "In the given reaction scheme, $\\mathbf{P}$ is a phenyl alkyl ether, $\\mathbf{Q}$ is an aromatic compound; $\\mathbf{R}$ and $\\mathbf{S}$ are the major products.$$\\mathbf{P} \\xrightarrow{\\text{HI}} \\mathbf{Q} \\xrightarrow[\\text{(iii) }\\mathrm{H_3O^+}]{\\text{(i) NaOH; (ii) }\\mathrm{CO_2}} \\mathbf{R} \\xrightarrow[\\text{(ii) }\\mathrm{H_3O^+}]{\\text{(i) }\\mathrm{(CH_3CO)_2O}} \\mathbf{S}$$The correct statement about $\\mathbf{S}$ is",
+   "options": [
+    "It primarily inhibits noradrenaline degrading enzymes.",
+    "It inhibits the synthesis of prostaglandin.",
+    "It is a narcotic drug.",
+    "It is ortho-acetylbenzoic acid."
+   ],
+   "answer": 1,
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "HI cleaves the phenyl alkyl ether to phenol (Q).<br>Kolbe reaction (NaOH, $\\mathrm{CO_2}$, then acid) gives salicylic acid (R).<br>Acetylation of the OH gives acetylsalicylic acid, aspirin (S): a non-narcotic analgesic that inhibits prostaglandin synthesis. It is 2-acetoxybenzoic acid, not ortho-acetylbenzoic acid.<br>Answer (B).",
+   "subject": "Chemistry",
+   "chapter": "Alcohols, Phenols and Ethers",
+   "chCls": "XII"
+  },
+  {
+   "no": 8,
+   "section": 3,
+   "type": "num",
+   "text": "The stoichiometric reaction of $516$ g of dimethyldichlorosilane with water results in a tetrameric cyclic product $\\mathbf{X}$ in $75\\%$ yield. The weight (in g) of $\\mathbf{X}$ obtained is ______.<br>[Use, molar mass (g $\\text{mol}^{-1}$): H = 1, C = 12, O = 16, Si = 28, Cl = 35.5]",
+   "options": null,
+   "answer": {
+    "lo": 222,
+    "hi": 222
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$\\mathrm{(CH_3)_2SiCl_2}$: $M = 30 + 28 + 71 = 129$, so $516$ g $= 4$ mol.<br>Hydrolysis and condensation: $\\mathrm{4(CH_3)_2SiCl_2 + 4H_2O \\to [(CH_3)_2SiO]_4 + 8HCl}$, giving $1$ mol of the cyclic tetramer.<br>$M(\\mathbf X) = 4\\times74 = 296$; at $75\\%$ yield: $0.75\\times296 = 222$ g.",
+   "subject": "Chemistry",
+   "chapter": "Some Basic Concepts of Chemistry",
+   "chCls": "XI"
+  },
+  {
+   "no": 9,
+   "section": 3,
+   "type": "num",
+   "text": "A gas has a compressibility factor of $0.5$ and a molar volume of $0.4\\ \\text{dm}^3\\,\\text{mol}^{-1}$ at a temperature of $800$ K and pressure $\\mathbf{x}$ atm. If it shows ideal gas behaviour at the same temperature and pressure, the molar volume will be $\\mathbf{y}\\ \\text{dm}^3\\,\\text{mol}^{-1}$. The value of $\\mathbf{x/y}$ is ______.<br>[Use: Gas constant, $R = 8\\times10^{-2}\\ \\text{L atm K}^{-1}\\text{mol}^{-1}$]",
+   "options": null,
+   "answer": {
+    "lo": 100,
+    "hi": 100
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$Z = \\dfrac{PV_m}{RT}$: $0.5 = \\dfrac{x\\times0.4}{0.08\\times800} \\Rightarrow x = 80$ atm.<br>Ideal: $y = \\dfrac{RT}{P} = \\dfrac{64}{80} = 0.8\\ \\text{dm}^3\\,\\text{mol}^{-1}$.<br>$\\dfrac xy = \\dfrac{80}{0.8} = 100$.",
+   "subject": "Chemistry",
+   "chapter": "Some Basic Concepts of Chemistry",
+   "chCls": "XI"
+  },
+  {
+   "no": 10,
+   "section": 3,
+   "type": "num",
+   "text": "The plot of $\\log k_f$ versus $1/T$ for a reversible reaction $\\mathrm{A(g) \\rightleftharpoons P(g)}$ is shown.<br>Pre-exponential factors for the forward and backward reactions are $10^{15}\\ \\text{s}^{-1}$ and $10^{11}\\ \\text{s}^{-1}$, respectively. If the value of $\\log K$ for the reaction at $500$ K is $6$, the value of $|\\log k_b|$ at $250$ K is ______.<br>[$K$ = equilibrium constant of the reaction, $k_f$ = rate constant of forward reaction, $k_b$ = rate constant of backward reaction]",
+   "options": null,
+   "answer": {
+    "lo": 5,
+    "hi": 5
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": "che-q10.png",
+   "optionFigs": null,
+   "sol": "At $500$ K ($1/T = 0.002$) the graph gives $\\log k_f = 9$.<br>$K = \\dfrac{k_f}{k_b} \\Rightarrow \\log k_b = 9 - 6 = 3$ at $500$ K.<br>$\\log k_b = 11 - \\dfrac{E_b}{2.303RT}$: $3 = 11 - \\dfrac{E_b}{2.303R}(0.002) \\Rightarrow \\dfrac{E_b}{2.303R} = 4000$ K.<br>At $250$ K: $\\log k_b = 11 - \\dfrac{4000}{250} = -5$, so $|\\log k_b| = 5$.",
+   "subject": "Chemistry",
+   "chapter": "Chemical Kinetics",
+   "chCls": "XII"
+  },
+  {
+   "no": 11,
+   "section": 3,
+   "type": "num",
+   "text": "One mole of an ideal monoatomic gas undergoes two reversible processes ($\\mathrm{A \\to B}$ and $\\mathrm{B \\to C}$) as shown in the given figure:<br>$\\mathrm{A \\to B}$ is an adiabatic process. If the total heat absorbed in the entire process ($\\mathrm{A \\to B}$ and $\\mathrm{B \\to C}$) is $RT_2\\ln10$, the value of $2\\log V_3$ is ______.<br>[Use, molar heat capacity of the gas at constant pressure, $C_{\\mathrm{p,m}} = \\dfrac52R$]",
+   "options": null,
+   "answer": {
+    "lo": 7,
+    "hi": 7
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": "che-q11.png",
+   "optionFigs": null,
+   "sol": "$\\mathrm{A \\to B}$ is adiabatic ($q = 0$), so all the heat is absorbed in the isothermal $\\mathrm{B \\to C}$: $RT_2\\ln\\dfrac{V_3}{V_2} = RT_2\\ln10 \\Rightarrow V_3 = 10V_2$.<br>Adiabatic, $\\gamma = \\dfrac53$: $T_1V_1^{2/3} = T_2V_2^{2/3} \\Rightarrow 600\\times10^{2/3} = 60\\,V_2^{2/3} \\Rightarrow V_2^{2/3} = 10^{5/3} \\Rightarrow V_2 = 10^{5/2}$.<br>$V_3 = 10^{7/2}$, so $2\\log V_3 = 7$.",
+   "subject": "Chemistry",
+   "chapter": "Thermodynamics",
+   "chCls": "XI"
+  },
+  {
+   "no": 12,
+   "section": 3,
+   "type": "num",
+   "text": "In a one-litre flask, 6 moles of A undergoes the reaction $\\mathrm{A(g) \\rightleftharpoons P(g)}$. The progress of product formation at two temperatures (in Kelvin), $T_1$ and $T_2$, is shown in the figure:<br>If $T_1 = 2T_2$ and $\\left(\\Delta G_2^{\\ominus} - \\Delta G_1^{\\ominus}\\right) = RT_2\\ln x$, then the value of x is ______.<br>[$\\Delta G_1^{\\ominus}$ and $\\Delta G_2^{\\ominus}$ are standard Gibb’s free energy change for the reaction at temperatures $T_1$ and $T_2$, respectively.]",
+   "options": null,
+   "answer": {
+    "lo": 8,
+    "hi": 8
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": "che-q12.png",
+   "optionFigs": null,
+   "sol": "At $T_1$: $[\\mathrm P] = 4$, $[\\mathrm A] = 2$, $K_1 = 2$. At $T_2$: $[\\mathrm P] = 2$, $[\\mathrm A] = 4$, $K_2 = \\dfrac12$.<br>$\\Delta G_1^{\\ominus} = -RT_1\\ln2 = -2RT_2\\ln2$; $\\Delta G_2^{\\ominus} = -RT_2\\ln\\dfrac12 = RT_2\\ln2$.<br>$\\Delta G_2^{\\ominus} - \\Delta G_1^{\\ominus} = 3RT_2\\ln2 = RT_2\\ln8$, so $x = 8$.",
+   "subject": "Chemistry",
+   "chapter": "Equilibrium",
+   "chCls": "XI"
+  },
+  {
+   "no": 13,
+   "section": 3,
+   "type": "num",
+   "text": "The total number of $sp^2$ hybridised carbon atoms in the major product $\\mathbf{P}$ (a non-heterocyclic compound) of the following reaction is ______.<br>[Reagents: (i) $\\mathrm{LiAlH_4}$ (excess), then $\\mathrm{H_2O}$; (ii) Acetophenone (excess)]",
+   "options": null,
+   "answer": {
+    "lo": 28,
+    "hi": 28
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": "che-q13.png",
+   "optionFigs": null,
+   "sol": "The reactant is 1,1,2,2-tetracyanoethane, $\\mathrm{(NC)_2CH{-}CH(CN)_2}$.<br>Excess $\\mathrm{LiAlH_4}$ reduces all four $\\mathrm{C{\\equiv}N}$ to $\\mathrm{CH_2NH_2}$: $\\mathrm{(H_2NCH_2)_2CH{-}CH(CH_2NH_2)_2}$.<br>Each $\\mathrm{NH_2}$ condenses with acetophenone to an imine $\\mathrm{{-}CH_2N{=}C(CH_3)Ph}$ (four imines; the product is acyclic, not heterocyclic).<br>$sp^2$ carbons per imine unit: $1$ (C=N) $+ 6$ (phenyl) $= 7$; total $4\\times7 = 28$.",
+   "subject": "Chemistry",
+   "chapter": "Amines",
+   "chCls": "XII"
+  },
+  {
+   "no": 14,
+   "section": 4,
+   "type": "match",
+   "text": "Match the reactions (in the given stoichiometry of the reactants) in List-I with one of their products given in List-II and choose the correct option.<br><table class=\"mt\"><tr><th>List-I</th><th>List-II</th></tr><tr><td>(P) $\\mathrm{P_2O_3 + 3H_2O \\to}$</td><td>(1) $\\mathrm{P(O)(OCH_3)Cl_2}$</td></tr><tr><td>(Q) $\\mathrm{P_4 + 3NaOH + 3H_2O \\to}$</td><td>(2) $\\mathrm{H_3PO_3}$</td></tr><tr><td>(R) $\\mathrm{PCl_5 + CH_3COOH \\to}$</td><td>(3) $\\mathrm{PH_3}$</td></tr><tr><td>(S) $\\mathrm{H_3PO_2 + 2H_2O + 4AgNO_3 \\to}$</td><td>(4) $\\mathrm{POCl_3}$</td></tr><tr><td></td><td>(5) $\\mathrm{H_3PO_4}$</td></tr></table>",
+   "options": [
+    "P → 2; Q → 3; R → 1; S → 5",
+    "P → 3; Q → 5; R → 4; S → 2",
+    "P → 5; Q → 2; R → 1; S → 3",
+    "P → 2; Q → 3; R → 4; S → 5"
+   ],
+   "answer": 3,
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "(P) $\\mathrm{P_2O_3 + 3H_2O \\to 2H_3PO_3}$ → (2).<br>(Q) $\\mathrm{P_4 + 3NaOH + 3H_2O \\to PH_3 + 3NaH_2PO_2}$ → (3).<br>(R) $\\mathrm{PCl_5 + CH_3COOH \\to CH_3COCl + POCl_3 + HCl}$ → (4).<br>(S) $\\mathrm{H_3PO_2 + 2H_2O + 4AgNO_3 \\to H_3PO_4 + 4Ag + 4HNO_3}$ → (5).<br>Answer (D).",
+   "subject": "Chemistry",
+   "chapter": "Redox Reactions",
+   "chCls": "XI"
+  },
+  {
+   "no": 15,
+   "section": 4,
+   "type": "match",
+   "text": "Match the electronic configurations in List-I with appropriate metal complex ions in List-II and choose the correct option.<br>[Atomic Number: Fe = 26, Mn = 25, Co = 27]<br><table class=\"mt\"><tr><th>List-I</th><th>List-II</th></tr><tr><td>(P) $t_{2g}^6\\,e_g^0$</td><td>(1) $\\mathrm{[Fe(H_2O)_6]^{2+}}$</td></tr><tr><td>(Q) $t_{2g}^3\\,e_g^2$</td><td>(2) $\\mathrm{[Mn(H_2O)_6]^{2+}}$</td></tr><tr><td>(R) $e^2\\,t_2^3$</td><td>(3) $\\mathrm{[Co(NH_3)_6]^{3+}}$</td></tr><tr><td>(S) $t_{2g}^4\\,e_g^2$</td><td>(4) $\\mathrm{[FeCl_4]^-}$</td></tr><tr><td></td><td>(5) $\\mathrm{[CoCl_4]^{2-}}$</td></tr></table>",
+   "options": [
+    "P → 1; Q → 4; R → 2; S → 3",
+    "P → 1; Q → 2; R → 4; S → 5",
+    "P → 3; Q → 2; R → 5; S → 1",
+    "P → 3; Q → 2; R → 4; S → 1"
+   ],
+   "answer": 3,
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "(P) Low-spin $d^6$ octahedral: $\\mathrm{Co^{3+}}$ with strong-field $\\mathrm{NH_3}$, $\\mathrm{[Co(NH_3)_6]^{3+}}$ → (3).<br>(Q) High-spin $d^5$ octahedral: $\\mathrm{Mn^{2+}}$ with weak-field water → (2).<br>(R) Tetrahedral $d^5$ ($e^2t_2^3$): $\\mathrm{Fe^{3+}}$ in $\\mathrm{[FeCl_4]^-}$ → (4). ($\\mathrm{[CoCl_4]^{2-}}$ is $d^7$: $e^4t_2^3$.)<br>(S) High-spin $d^6$ octahedral: $\\mathrm{Fe^{2+}}$ in $\\mathrm{[Fe(H_2O)_6]^{2+}}$ → (1).<br>Answer (D).",
+   "subject": "Chemistry",
+   "chapter": "Coordination Compounds",
+   "chCls": "XII"
+  },
+  {
+   "no": 16,
+   "section": 4,
+   "type": "match",
+   "text": "Match the reactions in List-I with the features of their products in List-II and choose the correct option.<br><table class=\"mt\"><tr><th>List-I</th><th>List-II</th></tr><tr><td>(P) (-)-1-Bromo-2-ethylpentane (single enantiomer) $\\xrightarrow[\\mathrm{S_N2}\\text{ reaction}]{\\text{aq. NaOH}}$</td><td>(1) Inversion of configuration</td></tr><tr><td>(Q) (-)-2-Bromopentane (single enantiomer) $\\xrightarrow[\\mathrm{S_N2}\\text{ reaction}]{\\text{aq. NaOH}}$</td><td>(2) Retention of configuration</td></tr><tr><td>(R) (-)-3-Bromo-3-methylhexane (single enantiomer) $\\xrightarrow[\\mathrm{S_N1}\\text{ reaction}]{\\text{aq. NaOH}}$</td><td>(3) Mixture of enantiomers</td></tr><tr><td>(S) The compound shown in the figure (single enantiomer) $\\xrightarrow[\\mathrm{S_N1}\\text{ reaction}]{\\text{aq. NaOH}}$</td><td>(4) Mixture of structural isomers</td></tr><tr><td></td><td>(5) Mixture of diastereomers</td></tr></table>",
+   "options": [
+    "P → 1; Q → 2; R → 5; S → 3",
+    "P → 2; Q → 1; R → 3; S → 5",
+    "P → 1; Q → 2; R → 5; S → 4",
+    "P → 2; Q → 4; R → 3; S → 5"
+   ],
+   "answer": 1,
+   "full": 3,
+   "neg": 1,
+   "fig": "che-q16.png",
+   "optionFigs": null,
+   "sol": "(P) $\\mathrm{S_N2}$ occurs at the $\\mathrm{CH_2Br}$ carbon, not at the stereocentre (C-2), so its configuration is retained → (2).<br>(Q) $\\mathrm{S_N2}$ at the stereocentre (C-2): inversion of configuration → (1).<br>(R) $\\mathrm{S_N1}$ at the only stereocentre: the planar carbocation is attacked from both faces, giving a racemic mixture of enantiomers → (3).<br>(S) $\\mathrm{S_N1}$ at the C-Br stereocentre while the other stereocentre (C-Me, H) is unchanged: the two products are diastereomers → (5).<br>Answer (B).",
+   "subject": "Chemistry",
+   "chapter": "Haloalkanes and Haloarenes",
+   "chCls": "XII"
+  },
+  {
+   "no": 17,
+   "section": 4,
+   "type": "match",
+   "text": "The major products obtained from the reactions in List-II are the reactants for the named reactions mentioned in List-I. Match List-I with List-II and choose the correct option.<br><table class=\"mt\"><tr><th>List-I</th><th>List-II</th></tr><tr><td>(P) Etard reaction</td><td>(1) Acetophenone $\\xrightarrow{\\text{Zn-Hg, HCl}}$</td></tr><tr><td>(Q) Gattermann reaction</td><td>(2) Toluene $\\xrightarrow[\\text{(ii) }\\mathrm{SOCl_2}]{\\text{(i) }\\mathrm{KMnO_4}\\text{, KOH, }\\Delta}$</td></tr><tr><td>(R) Gattermann-Koch reaction</td><td>(3) Benzene $\\xrightarrow[\\text{anhyd. }\\mathrm{AlCl_3}]{\\mathrm{CH_3Cl}}$</td></tr><tr><td>(S) Rosenmund reduction</td><td>(4) Aniline $\\xrightarrow[\\text{273-278 K}]{\\mathrm{NaNO_2/HCl}}$</td></tr><tr><td></td><td>(5) Phenol $\\xrightarrow{\\text{Zn},\\ \\Delta}$</td></tr></table>",
+   "options": [
+    "P → 2; Q → 4; R → 1; S → 3",
+    "P → 1; Q → 3; R → 5; S → 2",
+    "P → 3; Q → 2; R → 1; S → 4",
+    "P → 3; Q → 4; R → 5; S → 2"
+   ],
+   "answer": 3,
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Products of List-II: (1) ethylbenzene (Clemmensen); (2) benzoyl chloride; (3) toluene; (4) benzenediazonium chloride; (5) benzene.<br>(P) Etard reaction oxidises toluene to benzaldehyde → (3).<br>(Q) Gattermann reaction uses a diazonium salt with Cu/HX → (4).<br>(R) Gattermann-Koch formylates benzene (CO, HCl) → (5).<br>(S) Rosenmund reduction converts an acid chloride (benzoyl chloride) to an aldehyde → (2).<br>Answer (D).",
+   "subject": "Chemistry",
+   "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+   "chCls": "XII"
+  }
+ ]
+}

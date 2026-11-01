@@ -1,0 +1,1121 @@
+{
+ "id": "2024-p2",
+ "exam": "JEE Advanced",
+ "board": "IIT",
+ "title": "JEE Advanced 2024 · Paper 2",
+ "duration": 180,
+ "renumber": true,
+ "secNames": {
+  "1": "single correct",
+  "2": "one or more correct",
+  "3": "non-negative integer",
+  "4": "paragraph numerical"
+ },
+ "instr": [
+  "Official JEE (Advanced) 2024 Paper 2 with the final answer key published by the organising IIT (IIT Madras).",
+  "51 questions: Mathematics, Physics and Chemistry, 17 in each subject, in four sections. Total 180 marks.",
+  "Section 1 – single correct option: <b>+3</b> if correct, <b>−1</b> if wrong, 0 if not answered.",
+  "Section 2 – one or more correct options: <b>+4</b> if you choose all the correct options; <b>+3 / +2 / +1</b> if you choose only some of the correct options and no wrong one; <b>−2</b> in all other cases.",
+  "Section 3 – non-negative integer answer: <b>+4</b> if correct, no negative marks.",
+  "Section 4 – two paragraphs with two numerical questions each: <b>+3</b> if correct, no negative marks. Give the value to two decimal places."
+ ],
+ "source": "JEE (Advanced) 2024 question paper and final answer key, organising IIT (IIT Madras). Worked solutions: All in All Exam Practice.",
+ "questions": [
+  {
+   "no": 1,
+   "section": 1,
+   "type": "single",
+   "text": "Considering only the principal values of the inverse trigonometric functions, the value of $$\\tan\\left(\\sin^{-1}\\left(\\dfrac{3}{5}\\right)-2\\cos^{-1}\\left(\\dfrac{2}{\\sqrt5}\\right)\\right)$$ is",
+   "options": [
+    "$\\dfrac{7}{24}$",
+    "$\\dfrac{-7}{24}$",
+    "$\\dfrac{-5}{24}$",
+    "$\\dfrac{5}{24}$"
+   ],
+   "answer": 1,
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Let $a=\\sin^{-1}\\dfrac35$, so $\\tan a=\\dfrac34$; let $b=\\cos^{-1}\\dfrac{2}{\\sqrt5}$, so $\\tan b=\\dfrac12$.<br>$\\tan 2b=\\dfrac{2\\cdot\\frac12}{1-\\frac14}=\\dfrac43$.<br>$\\tan(a-2b)=\\dfrac{\\frac34-\\frac43}{1+\\frac34\\cdot\\frac43}=\\dfrac{-\\frac{7}{12}}{2}=-\\dfrac{7}{24}$ → (B).",
+   "subject": "Mathematics",
+   "chapter": "Inverse Trigonometric Functions",
+   "chCls": "XII"
+  },
+  {
+   "no": 2,
+   "section": 1,
+   "type": "single",
+   "text": "Let $S=\\left\\{(x,y)\\in\\mathbb{R}\\times\\mathbb{R} : x\\ge 0,\\ y\\ge 0,\\ y^2\\le 4x,\\ y^2\\le 12-2x \\text{ and } 3y+\\sqrt8\\,x\\le 5\\sqrt8\\right\\}$. If the area of the region $S$ is $\\alpha\\sqrt2$, then $\\alpha$ is equal to",
+   "options": [
+    "$\\dfrac{17}{2}$",
+    "$\\dfrac{17}{3}$",
+    "$\\dfrac{17}{4}$",
+    "$\\dfrac{17}{5}$"
+   ],
+   "answer": 1,
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$y^2=4x$ and $y^2=12-2x$ meet at $(2,2\\sqrt2)$; the line $3y+2\\sqrt2\\,x=10\\sqrt2$ also passes through $(2,2\\sqrt2)$ and meets $y=0$ at $x=5$ (while $y^2=12-2x$ meets it at $x=6$).<br>So for $0\\le y\\le 2\\sqrt2$ the region runs from the parabola $x=\\dfrac{y^2}{4}$ to the line $x=\\dfrac{10\\sqrt2-3y}{2\\sqrt2}=5-\\dfrac{3y}{2\\sqrt2}$.<br>Area $=\\displaystyle\\int_0^{2\\sqrt2}\\left(5-\\dfrac{3y}{2\\sqrt2}-\\dfrac{y^2}{4}\\right)dy=10\\sqrt2-3\\sqrt2-\\dfrac{4\\sqrt2}{3}=\\dfrac{17}{3}\\sqrt2$.<br>$\\alpha=\\dfrac{17}{3}$ → (B).",
+   "subject": "Mathematics",
+   "chapter": "Application of Integrals",
+   "chCls": "XII"
+  },
+  {
+   "no": 3,
+   "section": 1,
+   "type": "single",
+   "text": "Let $k\\in\\mathbb{R}$. If $\\displaystyle\\lim_{x\\to0+}\\left(\\sin(\\sin kx)+\\cos x+x\\right)^{\\frac{2}{x}}=e^6$, then the value of $k$ is",
+   "options": [
+    "$1$",
+    "$2$",
+    "$3$",
+    "$4$"
+   ],
+   "answer": 1,
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "The form is $1^\\infty$, so the limit is $e^{L}$ with $L=\\displaystyle\\lim_{x\\to0+}\\dfrac{2}{x}\\left(\\sin(\\sin kx)+\\cos x+x-1\\right)$.<br>$\\sin(\\sin kx)\\approx kx$, $\\cos x-1\\approx -\\dfrac{x^2}{2}$, so $L=2(k+1)$.<br>$2(k+1)=6\\Rightarrow k=2$ → (B).",
+   "subject": "Mathematics",
+   "chapter": "Limits and Derivatives",
+   "chCls": "XI"
+  },
+  {
+   "no": 4,
+   "section": 1,
+   "type": "single",
+   "text": "Let $f:\\mathbb{R}\\to\\mathbb{R}$ be a function defined by $$f(x)=\\begin{cases} x^2\\sin\\left(\\dfrac{\\pi}{x^2}\\right), & \\text{if } x\\ne 0,\\\\ 0, & \\text{if } x=0.\\end{cases}$$ Then which of the following statements is TRUE?",
+   "options": [
+    "$f(x)=0$ has infinitely many solutions in the interval $\\left[\\dfrac{1}{10^{10}},\\infty\\right)$.",
+    "$f(x)=0$ has no solutions in the interval $\\left[\\dfrac{1}{\\pi},\\infty\\right)$.",
+    "The set of solutions of $f(x)=0$ in the interval $\\left(0,\\dfrac{1}{10^{10}}\\right)$ is finite.",
+    "$f(x)=0$ has more than 25 solutions in the interval $\\left(\\dfrac{1}{\\pi^2},\\dfrac{1}{\\pi}\\right)$."
+   ],
+   "answer": 3,
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "For $x\\ne0$: $f(x)=0\\iff \\dfrac{\\pi}{x^2}=n\\pi\\iff x=\\pm\\dfrac{1}{\\sqrt n}$, $n\\in\\mathbb{N}$.<br>(A) $\\dfrac{1}{\\sqrt n}\\ge10^{-10}\\iff n\\le10^{20}$: finitely many → false.<br>(B) $x=1\\ge\\dfrac1\\pi$ is a solution → false. (C) $n>10^{20}$ gives infinitely many → false.<br>(D) $\\dfrac{1}{\\pi^2}&lt;\\dfrac{1}{\\sqrt n}&lt;\\dfrac1\\pi\\iff \\pi^2&lt;n&lt;\\pi^4$, i.e. $n=10,11,\\ldots,97$: $88$ solutions, more than $25$ → (D).",
+   "subject": "Mathematics",
+   "chapter": "Trigonometric Functions",
+   "chCls": "XI"
+  },
+  {
+   "no": 5,
+   "section": 2,
+   "type": "multi",
+   "text": "Let $S$ be the set of all $(\\alpha,\\beta)\\in\\mathbb{R}\\times\\mathbb{R}$ such that $$\\lim_{x\\to\\infty}\\dfrac{\\sin(x^2)(\\log_e x)^{\\alpha}\\sin\\left(\\dfrac{1}{x^2}\\right)}{x^{\\alpha\\beta}(\\log_e(1+x))^{\\beta}}=0.$$ Then which of the following is (are) correct?",
+   "options": [
+    "$(-1,3)\\in S$",
+    "$(-1,1)\\in S$",
+    "$(1,-1)\\in S$",
+    "$(1,-2)\\in S$"
+   ],
+   "answer": [
+    1,
+    2
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "As $x\\to\\infty$: $\\sin\\left(\\dfrac1{x^2}\\right)\\sim\\dfrac1{x^2}$ and $\\log_e(1+x)\\sim\\log_e x$.<br>So the expression behaves like $\\sin(x^2)\\,\\dfrac{(\\log_e x)^{\\alpha-\\beta}}{x^{2+\\alpha\\beta}}$; with $\\sin(x^2)$ bounded and oscillating, the limit is $0$ iff $2+\\alpha\\beta>0$, or $2+\\alpha\\beta=0$ and $\\alpha-\\beta&lt;0$.<br>(A) $2+\\alpha\\beta=-1&lt;0$ → not in $S$. (B) $2+\\alpha\\beta=1>0$ → in $S$. (C) $2+\\alpha\\beta=1>0$ → in $S$.<br>(D) $2+\\alpha\\beta=0$ but $\\alpha-\\beta=3>0$, so $\\sin(x^2)(\\log_e x)^3$ does not tend to $0$ → not in $S$.<br>Answer: (B), (C).",
+   "subject": "Mathematics",
+   "chapter": "Limits and Derivatives",
+   "chCls": "XI"
+  },
+  {
+   "no": 6,
+   "section": 2,
+   "type": "multi",
+   "text": "A straight line drawn from the point $P(1,3,2)$, parallel to the line $\\dfrac{x-2}{1}=\\dfrac{y-4}{2}=\\dfrac{z-6}{1}$, intersects the plane $L_1 : x-y+3z=6$ at the point $Q$. Another straight line which passes through $Q$ and is perpendicular to the plane $L_1$ intersects the plane $L_2 : 2x-y+z=-4$ at the point $R$. Then which of the following statements is (are) TRUE?",
+   "options": [
+    "The length of the line segment $PQ$ is $\\sqrt6$",
+    "The coordinates of $R$ are $(1,6,3)$",
+    "The centroid of the triangle $PQR$ is $\\left(\\dfrac43,\\dfrac{14}{3},\\dfrac53\\right)$",
+    "The perimeter of the triangle $PQR$ is $\\sqrt2+\\sqrt6+\\sqrt{11}$"
+   ],
+   "answer": [
+    0,
+    2
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Line through $P$: $(1+t,\\,3+2t,\\,2+t)$. In $L_1$: $(1+t)-(3+2t)+3(2+t)=6\\Rightarrow 2t=2$, $t=1$, so $Q=(2,5,3)$ and $PQ=\\sqrt{1+4+1}=\\sqrt6$ → (A) true.<br>Line through $Q$ along $(1,-1,3)$: $(2+s,\\,5-s,\\,3+3s)$. In $L_2$: $2(2+s)-(5-s)+(3+3s)=-4\\Rightarrow 6s=-6$, $s=-1$, so $R=(1,6,0)$ → (B) false.<br>Centroid $=\\left(\\dfrac{1+2+1}{3},\\dfrac{3+5+6}{3},\\dfrac{2+3+0}{3}\\right)=\\left(\\dfrac43,\\dfrac{14}3,\\dfrac53\\right)$ → (C) true.<br>$QR=\\sqrt{1+1+9}=\\sqrt{11}$, $PR=\\sqrt{0+9+4}=\\sqrt{13}$, so perimeter $=\\sqrt6+\\sqrt{11}+\\sqrt{13}$ → (D) false.<br>Answer: (A), (C).",
+   "subject": "Mathematics",
+   "chapter": "Three Dimensional Geometry",
+   "chCls": "XII"
+  },
+  {
+   "no": 7,
+   "section": 2,
+   "type": "multi",
+   "text": "Let $A_1,B_1,C_1$ be three points in the $xy$-plane. Suppose that the lines $A_1C_1$ and $B_1C_1$ are tangents to the curve $y^2=8x$ at $A_1$ and $B_1$, respectively. If $O=(0,0)$ and $C_1=(-4,0)$, then which of the following statements is (are) TRUE?",
+   "options": [
+    "The length of the line segment $OA_1$ is $4\\sqrt3$",
+    "The length of the line segment $A_1B_1$ is $16$",
+    "The orthocenter of the triangle $A_1B_1C_1$ is $(0,0)$",
+    "The orthocenter of the triangle $A_1B_1C_1$ is $(1,0)$"
+   ],
+   "answer": [
+    0,
+    2
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "For $y^2=8x$ ($a=2$), the tangent at $(2t^2,4t)$ is $ty=x+2t^2$. Through $(-4,0)$: $2t^2=4$, $t=\\pm\\sqrt2$.<br>So $A_1=(4,4\\sqrt2)$, $B_1=(4,-4\\sqrt2)$. $OA_1=\\sqrt{16+32}=4\\sqrt3$ → (A) true; $A_1B_1=8\\sqrt2\\ne16$ → (B) false.<br>By symmetry the altitude from $C_1$ is the $x$-axis. Slope of $B_1C_1=\\dfrac{-4\\sqrt2}{8}=-\\dfrac{1}{\\sqrt2}$, so the altitude from $A_1$ has slope $\\sqrt2$: $y-4\\sqrt2=\\sqrt2(x-4)$, which meets $y=0$ at $x=0$.<br>Orthocentre $=(0,0)$ → (C) true, (D) false.<br>Answer: (A), (C).",
+   "subject": "Mathematics",
+   "chapter": "Conic Sections",
+   "chCls": "XI"
+  },
+  {
+   "no": 8,
+   "section": 3,
+   "type": "num",
+   "text": "Let $f:\\mathbb{R}\\to\\mathbb{R}$ be a function such that $f(x+y)=f(x)+f(y)$ for all $x,y\\in\\mathbb{R}$, and $g:\\mathbb{R}\\to(0,\\infty)$ be a function such that $g(x+y)=g(x)g(y)$ for all $x,y\\in\\mathbb{R}$. If $f\\left(\\dfrac{-3}{5}\\right)=12$ and $g\\left(\\dfrac{-1}{3}\\right)=2$, then the value of $$\\left(f\\left(\\dfrac14\\right)+g(-2)-8\\right)g(0)$$ is ________.",
+   "options": null,
+   "answer": {
+    "lo": 51,
+    "hi": 51
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Additivity gives $f(r)=r\\,f(1)$ for every rational $r$: $f\\left(-\\dfrac35\\right)=-\\dfrac35f(1)=12\\Rightarrow f(1)=-20$, so $f\\left(\\dfrac14\\right)=-5$.<br>Similarly $g(r)=g(1)^r$ for rational $r$ and $g(0)=1$: $g(1)^{-1/3}=2\\Rightarrow g(1)=\\dfrac18$, so $g(-2)=8^2=64$.<br>Value $=(-5+64-8)\\times1=51$.",
+   "subject": "Mathematics",
+   "chapter": "Relations and Functions",
+   "chCls": "XI"
+  },
+  {
+   "no": 9,
+   "section": 3,
+   "type": "num",
+   "text": "A bag contains $N$ balls out of which $3$ balls are white, $6$ balls are green, and the remaining balls are blue. Assume that the balls are identical otherwise. Three balls are drawn randomly one after the other without replacement. For $i=1,2,3$, let $W_i, G_i$, and $B_i$ denote the events that the ball drawn in the $i^{\\text{th}}$ draw is a white ball, green ball, and blue ball, respectively. If the probability $P(W_1\\cap G_2\\cap B_3)=\\dfrac{2}{5N}$ and the conditional probability $P(B_3\\mid W_1\\cap G_2)=\\dfrac29$, then $N$ equals ______.",
+   "options": null,
+   "answer": {
+    "lo": 11,
+    "hi": 11
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$P(B_3\\mid W_1\\cap G_2)=\\dfrac{N-9}{N-2}=\\dfrac29\\Rightarrow 9N-81=2N-4\\Rightarrow N=11$.<br>Check: $P(W_1\\cap G_2\\cap B_3)=\\dfrac{3}{11}\\cdot\\dfrac{6}{10}\\cdot\\dfrac{2}{9}=\\dfrac{2}{55}=\\dfrac{2}{5N}$ ✓.<br>$N=11$.",
+   "subject": "Mathematics",
+   "chapter": "Probability",
+   "chCls": "XII"
+  },
+  {
+   "no": 10,
+   "section": 3,
+   "type": "num",
+   "text": "Let the function $f:\\mathbb{R}\\to\\mathbb{R}$ be defined by $$f(x)=\\dfrac{\\sin x}{e^{\\pi x}}\\,\\dfrac{\\left(x^{2023}+2024x+2025\\right)}{\\left(x^2-x+3\\right)}+\\dfrac{2}{e^{\\pi x}}\\,\\dfrac{\\left(x^{2023}+2024x+2025\\right)}{\\left(x^2-x+3\\right)}.$$ Then the number of solutions of $f(x)=0$ in $\\mathbb{R}$ is ______.",
+   "options": null,
+   "answer": {
+    "lo": 1,
+    "hi": 1
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$f(x)=\\dfrac{(\\sin x+2)\\left(x^{2023}+2024x+2025\\right)}{e^{\\pi x}\\left(x^2-x+3\\right)}$.<br>$\\sin x+2>0$, $e^{\\pi x}>0$ and $x^2-x+3>0$ (discriminant $-11$), so $f(x)=0\\iff h(x)=x^{2023}+2024x+2025=0$.<br>$h'(x)=2023x^{2022}+2024>0$, so $h$ is strictly increasing with exactly one real root ($h(-1)=0$).<br>Number of solutions $=1$.",
+   "subject": "Mathematics",
+   "chapter": "Application of Derivatives",
+   "chCls": "XII"
+  },
+  {
+   "no": 11,
+   "section": 3,
+   "type": "num",
+   "text": "Let $\\vec p=2\\hat i+\\hat j+3\\hat k$ and $\\vec q=\\hat i-\\hat j+\\hat k$. If for some real numbers $\\alpha,\\beta$, and $\\gamma$, we have $$15\\hat i+10\\hat j+6\\hat k=\\alpha\\left(2\\vec p+\\vec q\\right)+\\beta\\left(\\vec p-2\\vec q\\right)+\\gamma\\left(\\vec p\\times\\vec q\\right),$$ then the value of $\\gamma$ is _______.",
+   "options": null,
+   "answer": {
+    "lo": 2,
+    "hi": 2
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$\\vec p\\times\\vec q=\\begin{vmatrix}\\hat i&\\hat j&\\hat k\\\\2&1&3\\\\1&-1&1\\end{vmatrix}=4\\hat i+\\hat j-3\\hat k$, and $|\\vec p\\times\\vec q|^2=26$.<br>$\\vec p\\times\\vec q$ is perpendicular to $2\\vec p+\\vec q$ and $\\vec p-2\\vec q$, so dotting both sides with it:<br>$15(4)+10(1)+6(-3)=26\\gamma\\Rightarrow 52=26\\gamma\\Rightarrow\\gamma=2$.",
+   "subject": "Mathematics",
+   "chapter": "Vector Algebra",
+   "chCls": "XII"
+  },
+  {
+   "no": 12,
+   "section": 3,
+   "type": "num",
+   "text": "A normal with slope $\\dfrac{1}{\\sqrt6}$ is drawn from the point $(0,-\\alpha)$ to the parabola $x^2=-4ay$, where $a>0$. Let $L$ be the line passing through $(0,-\\alpha)$ and parallel to the directrix of the parabola. Suppose that $L$ intersects the parabola at two points $A$ and $B$. Let $r$ denote the length of the latus rectum and $s$ denote the square of the length of the line segment $AB$. If $r:s=1:16$, then the value of $24a$ is __________.",
+   "options": null,
+   "answer": {
+    "lo": 12,
+    "hi": 12
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$L$ is $y=-\\alpha$; it meets $x^2=-4ay$ at $x=\\pm2\\sqrt{a\\alpha}$, so $s=AB^2=16a\\alpha$; $r=4a$.<br>$r:s=4a:16a\\alpha=1:16\\Rightarrow\\alpha=4$.<br>Point $(2at,-at^2)$: slope of tangent $=-t$, so slope of normal $=\\dfrac1t=\\dfrac{1}{\\sqrt6}\\Rightarrow t=\\sqrt6$; normal: $y+6a=\\dfrac{1}{\\sqrt6}\\left(x-2\\sqrt6\\,a\\right)$.<br>Through $(0,-4)$: $-4+6a=-2a\\Rightarrow a=\\dfrac12$.<br>$24a=12$.",
+   "subject": "Mathematics",
+   "chapter": "Conic Sections",
+   "chCls": "XI"
+  },
+  {
+   "no": 13,
+   "section": 3,
+   "type": "num",
+   "text": "Let the function $f:[1,\\infty)\\to\\mathbb{R}$ be defined by $$f(t)=\\begin{cases}(-1)^{n+1}\\,2, & \\text{if } t=2n-1,\\ n\\in\\mathbb{N},\\\\ \\dfrac{(2n+1-t)}{2}f(2n-1)+\\dfrac{(t-(2n-1))}{2}f(2n+1), & \\text{if } 2n-1&lt;t&lt;2n+1,\\ n\\in\\mathbb{N}.\\end{cases}$$ Define $g(x)=\\displaystyle\\int_1^x f(t)\\,dt$, $x\\in(1,\\infty)$. Let $\\alpha$ denote the number of solutions of the equation $g(x)=0$ in the interval $(1,8]$ and $\\beta=\\displaystyle\\lim_{x\\to1+}\\dfrac{g(x)}{x-1}$. Then the value of $\\alpha+\\beta$ is equal to _____.",
+   "options": null,
+   "answer": {
+    "lo": 5,
+    "hi": 5
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$f(1)=2$, $f(3)=-2$, $f(5)=2$, $f(7)=-2$, $f(9)=2$, and $f$ is linear in between: a zigzag through zero at $t=2,4,6,8$.<br>Each triangle has area $1$, so $g(2)=1$, $g(3)=0$, $g(4)=-1$, $g(5)=0$, $g(6)=1$, $g(7)=0$, $g(8)=-1$, with $g$ monotonic between these points.<br>Zeros of $g$ in $(1,8]$: $x=3,5,7$, so $\\alpha=3$.<br>$\\beta=\\displaystyle\\lim_{x\\to1+}\\dfrac{g(x)}{x-1}=g'(1^+)=f(1)=2$.<br>$\\alpha+\\beta=5$.",
+   "subject": "Mathematics",
+   "chapter": "Integrals",
+   "chCls": "XII"
+  },
+  {
+   "no": 14,
+   "section": 4,
+   "type": "num",
+   "stem": "Paragraph I for Question Nos. 14 and 15",
+   "text": "Let $S=\\{1,2,3,4,5,6\\}$ and $X$ be the set of all relations $R$ from $S$ to $S$ that satisfy both the following properties:<br>i. $R$ has exactly $6$ elements.<br>ii. For each $(a,b)\\in R$, we have $|a-b|\\ge 2$.<br>Let $Y=\\{R\\in X : \\text{The range of } R \\text{ has exactly one element}\\}$ and $Z=\\{R\\in X : R \\text{ is a function from } S \\text{ to } S\\}$.<br>Let $n(A)$ denote the number of elements in a set $A$.<br><br>If $n(X)={}^{m}C_6$, then the value of $m$ is __________.",
+   "options": null,
+   "answer": {
+    "lo": 19.99,
+    "hi": 20.01
+   },
+   "full": 3,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Ordered pairs in $S\\times S$ with $|a-b|\\ge2$: $36-6$ (with $a=b$) $-10$ (with $|a-b|=1$) $=20$.<br>$X$ consists of all $6$-element subsets of these $20$ pairs, so $n(X)={}^{20}C_6$.<br>$m=20$.",
+   "subject": "Mathematics",
+   "chapter": "Permutations and Combinations",
+   "chCls": "XI"
+  },
+  {
+   "no": 15,
+   "section": 4,
+   "type": "num",
+   "stem": "Paragraph I for Question Nos. 14 and 15",
+   "text": "Let $S=\\{1,2,3,4,5,6\\}$ and $X$ be the set of all relations $R$ from $S$ to $S$ that satisfy both the following properties:<br>i. $R$ has exactly $6$ elements.<br>ii. For each $(a,b)\\in R$, we have $|a-b|\\ge 2$.<br>Let $Y=\\{R\\in X : \\text{The range of } R \\text{ has exactly one element}\\}$ and $Z=\\{R\\in X : R \\text{ is a function from } S \\text{ to } S\\}$.<br>Let $n(A)$ denote the number of elements in a set $A$.<br><br>If the value of $n(Y)+n(Z)$ is $k^2$, then $|k|$ is _____________.",
+   "options": null,
+   "answer": {
+    "lo": 35.99,
+    "hi": 36.01
+   },
+   "full": 3,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$Y$: all $6$ pairs have the same second entry $b$, so we need at least $6$ values of $a$ with $|a-b|\\ge2$; but for $b=1,\\ldots,6$ there are only $4,3,3,3,3,4$ such $a$. So $n(Y)=0$.<br>$Z$: a function assigns each $a$ one image $b$ with $|a-b|\\ge2$: $4,3,3,3,3,4$ choices for $a=1,\\ldots,6$.<br>$n(Z)=4\\cdot3^4\\cdot4=1296$.<br>$k^2=0+1296\\Rightarrow|k|=36$.",
+   "subject": "Mathematics",
+   "chapter": "Relations and Functions",
+   "chCls": "XII"
+  },
+  {
+   "no": 16,
+   "section": 4,
+   "type": "num",
+   "stem": "Paragraph II for Question Nos. 16 and 17",
+   "text": "Let $f:\\left[0,\\dfrac{\\pi}{2}\\right]\\to[0,1]$ be the function defined by $f(x)=\\sin^2 x$ and let $g:\\left[0,\\dfrac{\\pi}{2}\\right]\\to[0,\\infty)$ be the function defined by $g(x)=\\sqrt{\\dfrac{\\pi x}{2}-x^2}$.<br><br>The value of $$2\\int_0^{\\frac{\\pi}{2}}f(x)g(x)\\,dx-\\int_0^{\\frac{\\pi}{2}}g(x)\\,dx$$ is __________.",
+   "options": null,
+   "answer": {
+    "lo": 0,
+    "hi": 0
+   },
+   "full": 3,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$g\\left(\\dfrac\\pi2-x\\right)=\\sqrt{\\dfrac\\pi2\\left(\\dfrac\\pi2-x\\right)-\\left(\\dfrac\\pi2-x\\right)^2}=\\sqrt{\\dfrac{\\pi x}{2}-x^2}=g(x)$.<br>Let $I=\\displaystyle\\int_0^{\\pi/2}\\sin^2x\\,g(x)\\,dx$. Replacing $x$ by $\\dfrac\\pi2-x$: $I=\\displaystyle\\int_0^{\\pi/2}\\cos^2x\\,g(x)\\,dx$.<br>Adding: $2I=\\displaystyle\\int_0^{\\pi/2}g(x)\\,dx$.<br>So the value is $0$.",
+   "subject": "Mathematics",
+   "chapter": "Integrals",
+   "chCls": "XII"
+  },
+  {
+   "no": 17,
+   "section": 4,
+   "type": "num",
+   "stem": "Paragraph II for Question Nos. 16 and 17",
+   "text": "Let $f:\\left[0,\\dfrac{\\pi}{2}\\right]\\to[0,1]$ be the function defined by $f(x)=\\sin^2 x$ and let $g:\\left[0,\\dfrac{\\pi}{2}\\right]\\to[0,\\infty)$ be the function defined by $g(x)=\\sqrt{\\dfrac{\\pi x}{2}-x^2}$.<br><br>The value of $$\\dfrac{16}{\\pi^3}\\int_0^{\\frac{\\pi}{2}}f(x)g(x)\\,dx$$ is ____________.",
+   "options": null,
+   "answer": {
+    "lo": 0.24,
+    "hi": 0.26
+   },
+   "full": 3,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "From the previous question, $\\displaystyle\\int_0^{\\pi/2}f g\\,dx=\\dfrac12\\int_0^{\\pi/2}g\\,dx$.<br>$y=g(x)$ is the upper half of $\\left(x-\\dfrac\\pi4\\right)^2+y^2=\\left(\\dfrac\\pi4\\right)^2$, so $\\displaystyle\\int_0^{\\pi/2}g\\,dx=\\dfrac12\\pi\\left(\\dfrac\\pi4\\right)^2=\\dfrac{\\pi^3}{32}$.<br>$\\displaystyle\\int_0^{\\pi/2}fg\\,dx=\\dfrac{\\pi^3}{64}$, and $\\dfrac{16}{\\pi^3}\\cdot\\dfrac{\\pi^3}{64}=\\dfrac14=0.25$.",
+   "subject": "Mathematics",
+   "chapter": "Integrals",
+   "chCls": "XII"
+  },
+  {
+   "no": 1,
+   "section": 1,
+   "type": "single",
+   "text": "A region in the form of an equilateral triangle (in $x$-$y$ plane) of height $L$ has a uniform magnetic field $\\vec B$ pointing in the $+z$-direction. A conducting loop PQR, in the form of an equilateral triangle of the same height $L$, is placed in the $x$-$y$ plane with its vertex P at $x=0$ in the orientation shown in the figure. At $t=0$, the loop starts entering the region of the magnetic field with a uniform velocity $\\vec v$ along the $+x$-direction. The plane of the loop and its orientation remain unchanged throughout its motion.<br>Which of the following graph best depicts the variation of the induced emf ($E$) in the loop as a function of the distance ($x$) starting from $x=0$?",
+   "options": [
+    "",
+    "",
+    "",
+    ""
+   ],
+   "answer": 0,
+   "full": 3,
+   "neg": 1,
+   "fig": "phy-q1.png",
+   "optionFigs": [
+    "phy-q1a.png",
+    "phy-q1b.png",
+    "phy-q1c.png",
+    "phy-q1d.png"
+   ],
+   "sol": "Measure depth $s$ from $x=0$ into the field triangle; both triangles have width $\\dfrac{2}{\\sqrt3}\\times$(distance from their apex). With P at distance $x$, the loop occupies $x-L\\le s\\le x$ and the field $0\\le s\\le L$.<br>$0\\le x\\le L$: overlap width is $\\dfrac{2}{\\sqrt3}\\min(s,\\,x-s)$, area $A=\\dfrac{x^2}{2\\sqrt3}$, so $|E|=Bv\\dfrac{dA}{dx}=\\dfrac{Bvx}{\\sqrt3}$: grows linearly to $\\dfrac{BvL}{\\sqrt3}$ at $x=L$.<br>$L\\le x\\le 2L$: $A=\\dfrac{1}{\\sqrt3}\\left[\\dfrac{x^2}{2}-2(x-L)^2\\right]$, so $\\dfrac{dA}{dx}=\\dfrac{4L-3x}{\\sqrt3}$.<br>This falls linearly, is zero at $x=\\dfrac{4L}{3}$ (between $L$ and $\\dfrac{3L}{2}$), and at $x=2L$ equals $-\\dfrac{2L}{\\sqrt3}$: the emf reverses and reaches twice the earlier peak. At $x=2L$ the overlap vanishes, so $E=0$ beyond.<br>Linear rise to $L$, reversal crossing zero before $\\dfrac{3L}{2}$ and a peak of double size at $2L$ → (A).",
+   "subject": "Physics",
+   "chapter": "Electromagnetic Induction",
+   "chCls": "XII"
+  },
+  {
+   "no": 2,
+   "section": 1,
+   "type": "single",
+   "text": "A particle of mass $m$ is under the influence of the gravitational field of a body of mass $M\\ (\\gg m)$. The particle is moving in a circular orbit of radius $r_0$ with time period $T_0$ around the mass $M$. Then, the particle is subjected to an additional central force, corresponding to the potential energy $V_c(r)=m\\alpha/r^3$, where $\\alpha$ is a positive constant of suitable dimensions and $r$ is the distance from the center of the orbit. If the particle moves in the same circular orbit of radius $r_0$ in the combined gravitational potential due to $M$ and $V_c(r)$, but with a new time period $T_1$, then $(T_1^2-T_0^2)/T_1^2$ is given by<br>[$G$ is the gravitational constant.]",
+   "options": [
+    "$\\dfrac{3\\alpha}{GMr_0^2}$",
+    "$\\dfrac{\\alpha}{2GMr_0^2}$",
+    "$\\dfrac{\\alpha}{GMr_0^2}$",
+    "$\\dfrac{2\\alpha}{GMr_0^2}$"
+   ],
+   "answer": 0,
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Extra force: $F=-\\dfrac{dV_c}{dr}=\\dfrac{3m\\alpha}{r^4}$, directed outward.<br>Before: $m\\omega_0^2r_0=\\dfrac{GMm}{r_0^2}$. After: $m\\omega_1^2r_0=\\dfrac{GMm}{r_0^2}-\\dfrac{3m\\alpha}{r_0^4}$.<br>$\\dfrac{T_1^2-T_0^2}{T_1^2}=1-\\dfrac{\\omega_1^2}{\\omega_0^2}=\\dfrac{3\\alpha/r_0^5}{GM/r_0^3}=\\dfrac{3\\alpha}{GMr_0^2}$ → (A).",
+   "subject": "Physics",
+   "chapter": "Gravitation",
+   "chCls": "XI"
+  },
+  {
+   "no": 3,
+   "section": 1,
+   "type": "single",
+   "text": "A metal target with atomic number $Z=46$ is bombarded with a high energy electron beam. The emission of X-rays from the target is analyzed. The ratio $r$ of the wavelengths of the $K_\\alpha$-line and the cut-off is found to be $r=2$. If the same electron beam bombards another metal target with $Z=41$, the value of $r$ will be",
+   "options": [
+    "$2.53$",
+    "$1.27$",
+    "$2.24$",
+    "$1.58$"
+   ],
+   "answer": 0,
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "The cut-off wavelength $\\lambda_c=\\dfrac{hc}{eV}$ depends only on the beam, so it is unchanged.<br>Moseley: $\\dfrac{1}{\\lambda_{K\\alpha}}\\propto(Z-1)^2$, so $r\\propto\\dfrac{1}{(Z-1)^2}$.<br>$r'=2\\times\\left(\\dfrac{45}{40}\\right)^2=2\\times1.2656=2.53$ → (A).",
+   "subject": "Physics",
+   "chapter": "Atoms",
+   "chCls": "XII"
+  },
+  {
+   "no": 4,
+   "section": 1,
+   "type": "single",
+   "text": "A thin stiff insulated metal wire is bent into a circular loop with its two ends extending tangentially from the same point of the loop. The wire loop has mass $m$ and radius $r$ and it is in a uniform vertical magnetic field $B_0$, as shown in the figure. Initially, it hangs vertically downwards, because of acceleration due to gravity $g$, on two conducting supports at P and Q. When a current $I$ is passed through the loop, the loop turns about the line PQ by an angle $\\theta$ given by",
+   "options": [
+    "$\\tan\\theta=\\pi rIB_0/(mg)$",
+    "$\\tan\\theta=2\\pi rIB_0/(mg)$",
+    "$\\tan\\theta=\\pi rIB_0/(2mg)$",
+    "$\\tan\\theta=mg/(\\pi rIB_0)$"
+   ],
+   "answer": 0,
+   "full": 3,
+   "neg": 1,
+   "fig": "phy-q4.png",
+   "optionFigs": null,
+   "sol": "Magnetic moment $\\mu=I\\pi r^2$, along the normal to the loop. When the loop has turned by $\\theta$ about PQ, its normal makes angle $90^\\circ-\\theta$ with the vertical field.<br>Magnetic torque about PQ: $I\\pi r^2B_0\\sin(90^\\circ-\\theta)=I\\pi r^2B_0\\cos\\theta$.<br>Gravity acts at the centre, a distance $r$ from PQ: torque $mgr\\sin\\theta$.<br>Balance: $I\\pi r^2B_0\\cos\\theta=mgr\\sin\\theta\\Rightarrow\\tan\\theta=\\dfrac{\\pi rIB_0}{mg}$ → (A).",
+   "subject": "Physics",
+   "chapter": "Moving Charges and Magnetism",
+   "chCls": "XII"
+  },
+  {
+   "no": 5,
+   "section": 2,
+   "type": "multi",
+   "text": "A small electric dipole $\\vec p_0$, having a moment of inertia $I$ about its center, is kept at a distance $r$ from the center of a spherical shell of radius $R$. The surface charge density $\\sigma$ is uniformly distributed on the spherical shell. The dipole is initially oriented at a small angle $\\theta$ as shown in the figure. While staying at a distance $r$, the dipole is free to rotate about its center.<br>If released from rest, then which of the following statement(s) is(are) correct?<br>[$\\varepsilon_0$ is the permittivity of free space.]",
+   "options": [
+    "The dipole will undergo small oscillations at any finite value of $r$.",
+    "The dipole will undergo small oscillations at any finite value of $r>R$.",
+    "The dipole will undergo small oscillations with an angular frequency of $\\sqrt{\\dfrac{2\\sigma p_0}{\\epsilon_0 I}}$ at $r=2R$.",
+    "The dipole will undergo small oscillations with an angular frequency of $\\sqrt{\\dfrac{\\sigma p_0}{100\\epsilon_0 I}}$ at $r=10R$."
+   ],
+   "answer": [
+    1,
+    3
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": "phy-q5.png",
+   "optionFigs": null,
+   "sol": "Inside the shell ($r&lt;R$) the field is zero, so there is no torque and no oscillation → (A) false.<br>Outside, $E=\\dfrac{\\sigma R^2}{\\epsilon_0r^2}$ (radial), and the restoring torque $p_0E\\sin\\theta\\approx p_0E\\theta$ gives SHM for any $r>R$ → (B) true.<br>$\\omega=\\sqrt{\\dfrac{p_0E}{I}}=\\sqrt{\\dfrac{\\sigma p_0R^2}{\\epsilon_0Ir^2}}$.<br>$r=2R$: $\\omega=\\sqrt{\\dfrac{\\sigma p_0}{4\\epsilon_0I}}$ → (C) false. $r=10R$: $\\omega=\\sqrt{\\dfrac{\\sigma p_0}{100\\epsilon_0I}}$ → (D) true.<br>Answer: (B), (D).",
+   "subject": "Physics",
+   "chapter": "Electric Charges and Fields",
+   "chCls": "XII"
+  },
+  {
+   "no": 6,
+   "section": 2,
+   "type": "multi",
+   "text": "A table tennis ball has radius $(3/2)\\times10^{-2}$ m and mass $(22/7)\\times10^{-3}$ kg. It is slowly pushed down into a swimming pool to a depth of $d=0.7$ m below the water surface and then released from rest. It emerges from the water surface at speed $v$, without getting wet, and rises up to a height $H$. Which of the following option(s) is(are) correct?<br>[Given: $\\pi=22/7$, $g=10\\ \\text{m s}^{-2}$, density of water $=1\\times10^3\\ \\text{kg m}^{-3}$, viscosity of water $=1\\times10^{-3}$ Pa-s.]",
+   "options": [
+    "The work done in pushing the ball to the depth $d$ is $0.077$ J.",
+    "If we neglect the viscous force in water, then the speed $v=7$ m/s.",
+    "If we neglect the viscous force in water, then the height $H=1.4$ m.",
+    "The ratio of the magnitudes of the net force excluding the viscous force to the maximum viscous force in water is $500/9$."
+   ],
+   "answer": [
+    0,
+    1,
+    3
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$V=\\dfrac43\\cdot\\dfrac{22}{7}\\cdot(1.5\\times10^{-2})^3=1.4143\\times10^{-5}\\ \\text{m}^3$; buoyancy $=\\rho Vg=0.14143$ N; weight $=0.03143$ N.<br>Net upward force (excluding viscosity) $F=0.11$ N. Work to push it slowly to $0.7$ m: $0.11\\times0.7=0.077$ J → (A) true.<br>Without viscosity: $a=\\dfrac{0.11}{(22/7)\\times10^{-3}}=35\\ \\text{m s}^{-2}$, $v^2=2(35)(0.7)=49$, $v=7$ m/s → (B) true.<br>$H=\\dfrac{v^2}{2g}=2.45$ m → (C) false.<br>Maximum viscous force (at $v=7$ m/s): $6\\pi\\eta rv=6\\cdot\\dfrac{22}{7}\\cdot10^{-3}\\cdot1.5\\times10^{-2}\\cdot7=1.98\\times10^{-3}$ N; ratio $=\\dfrac{0.11}{1.98\\times10^{-3}}=\\dfrac{500}{9}$ → (D) true.<br>Answer: (A), (B), (D).",
+   "subject": "Physics",
+   "chapter": "Mechanical Properties of Fluids",
+   "chCls": "XI"
+  },
+  {
+   "no": 7,
+   "section": 2,
+   "type": "multi",
+   "text": "A positive, singly ionized atom of mass number $A_{\\text{M}}$ is accelerated from rest by the voltage $192$ V. Thereafter, it enters a rectangular region of width $w$ with magnetic field $\\vec B_0=0.1\\hat k$ Tesla, as shown in the figure. The ion finally hits a detector at the distance $x$ below its starting trajectory.<br>[Given: Mass of neutron/proton $=(5/3)\\times10^{-27}$ kg, charge of the electron $=1.6\\times10^{-19}$ C.]<br>Which of the following option(s) is(are) correct?",
+   "options": [
+    "The value of $x$ for $H^+$ ion is $4$ cm.",
+    "The value of $x$ for an ion with $A_{\\text{M}}=144$ is $48$ cm.",
+    "For detecting ions with $1\\le A_{\\text{M}}\\le196$, the minimum height $(x_1-x_0)$ of the detector is $55$ cm.",
+    "The minimum width $w$ of the region of the magnetic field for detecting ions with $A_{\\text{M}}=196$ is $56$ cm."
+   ],
+   "answer": [
+    0,
+    1
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": "phy-q7.png",
+   "optionFigs": null,
+   "sol": "Radius $R=\\dfrac{\\sqrt{2mqV}}{qB}$. For $H^+$: $\\sqrt{2\\cdot\\frac53\\times10^{-27}\\cdot1.6\\times10^{-19}\\cdot192}=3.2\\times10^{-22}$, so $R=\\dfrac{3.2\\times10^{-22}}{1.6\\times10^{-20}}=0.02$ m.<br>The ion turns through a semicircle and comes back out, so $x=2R=4$ cm → (A) true.<br>$R\\propto\\sqrt{A_{\\text{M}}}$: for $A_{\\text{M}}=144$, $x=12\\times4=48$ cm → (B) true.<br>$x_0=4$ cm ($A_{\\text{M}}=1$), $x_1=14\\times4=56$ cm ($A_{\\text{M}}=196$): height $52$ cm → (C) false.<br>Minimum width for $A_{\\text{M}}=196$ is $R=28$ cm → (D) false.<br>Answer: (A), (B).",
+   "subject": "Physics",
+   "chapter": "Moving Charges and Magnetism",
+   "chCls": "XII"
+  },
+  {
+   "no": 8,
+   "section": 3,
+   "type": "num",
+   "text": "The dimensions of a cone are measured using a scale with a least count of $2$ mm. The diameter of the base and the height are both measured to be $20.0$ cm. The maximum percentage error in the determination of the volume is ______.",
+   "options": null,
+   "answer": {
+    "lo": 3,
+    "hi": 3
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$V=\\dfrac{\\pi D^2h}{12}$, so $\\dfrac{\\Delta V}{V}=2\\dfrac{\\Delta D}{D}+\\dfrac{\\Delta h}{h}$.<br>With $\\Delta D=\\Delta h=0.2$ cm: $\\dfrac{\\Delta V}{V}=2\\left(\\dfrac{0.2}{20}\\right)+\\dfrac{0.2}{20}=0.03$.<br>Maximum percentage error $=3$.",
+   "subject": "Physics",
+   "chapter": "Units and Measurements",
+   "chCls": "XI"
+  },
+  {
+   "no": 9,
+   "section": 3,
+   "type": "num",
+   "text": "A ball is thrown from the location $(x_0,y_0)=(0,0)$ of a horizontal playground with an initial speed $v_0$ at an angle $\\theta_0$ from the $+x$-direction. The ball is to be hit by a stone, which is thrown at the same time from the location $(x_1,y_1)=(L,0)$. The stone is thrown at an angle $(180-\\theta_1)$ from the $+x$-direction with a suitable initial speed. For a fixed $v_0$, when $(\\theta_0,\\theta_1)=(45^\\circ,45^\\circ)$, the stone hits the ball after time $T_1$, and when $(\\theta_0,\\theta_1)=(60^\\circ,30^\\circ)$, it hits the ball after time $T_2$. In such a case, $(T_1/T_2)^2$ is ______.",
+   "options": null,
+   "answer": {
+    "lo": 2,
+    "hi": 2
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Both have the same acceleration $g$, so their relative velocity is constant. To meet, the vertical components must be equal: $u\\sin\\theta_1=v_0\\sin\\theta_0$.<br>Closing speed along $x$: $v_0\\cos\\theta_0+u\\cos\\theta_1$, so $T=\\dfrac{L}{v_0(\\cos\\theta_0+\\sin\\theta_0\\cot\\theta_1)}=\\dfrac{L\\sin\\theta_1}{v_0\\sin(\\theta_0+\\theta_1)}$.<br>$T_1=\\dfrac{L\\sin45^\\circ}{v_0}$, $T_2=\\dfrac{L\\sin30^\\circ}{v_0}$ (both with $\\sin90^\\circ=1$).<br>$\\left(\\dfrac{T_1}{T_2}\\right)^2=\\left(\\dfrac{1/\\sqrt2}{1/2}\\right)^2=2$.",
+   "subject": "Physics",
+   "chapter": "Motion in a Plane",
+   "chCls": "XI"
+  },
+  {
+   "no": 10,
+   "section": 3,
+   "type": "num",
+   "text": "A charge is kept at the central point P of a cylindrical region. The two edges subtend a half-angle $\\theta$ at P, as shown in the figure. When $\\theta=30^\\circ$, then the electric flux through the curved surface of the cylinder is $\\Phi$. If $\\theta=60^\\circ$, then the electric flux through the curved surface becomes $\\Phi/\\sqrt n$, where the value of $n$ is______.",
+   "options": null,
+   "answer": {
+    "lo": 3,
+    "hi": 3
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": "phy-q10.png",
+   "optionFigs": null,
+   "sol": "Each flat face subtends a cone of half-angle $\\theta$, solid angle $2\\pi(1-\\cos\\theta)$, so it receives a fraction $\\dfrac{1-\\cos\\theta}{2}$ of the total flux $\\dfrac{q}{\\epsilon_0}$.<br>Curved surface: $\\dfrac{q}{\\epsilon_0}\\left[1-2\\cdot\\dfrac{1-\\cos\\theta}{2}\\right]=\\dfrac{q}{\\epsilon_0}\\cos\\theta$.<br>$\\theta=30^\\circ$: $\\Phi=\\dfrac{\\sqrt3}{2}\\dfrac{q}{\\epsilon_0}$; $\\theta=60^\\circ$: $\\dfrac12\\dfrac{q}{\\epsilon_0}=\\dfrac{\\Phi}{\\sqrt3}$.<br>$n=3$.",
+   "subject": "Physics",
+   "chapter": "Electric Charges and Fields",
+   "chCls": "XII"
+  },
+  {
+   "no": 11,
+   "section": 3,
+   "type": "num",
+   "text": "Two equilateral-triangular prisms $\\mathrm{P_1}$ and $\\mathrm{P_2}$ are kept with their sides parallel to each other, in vacuum, as shown in the figure. A light ray enters prism $\\mathrm{P_1}$ at an angle of incidence $\\theta$ such that the outgoing ray undergoes minimum deviation in prism $\\mathrm{P_2}$. If the respective refractive indices of $\\mathrm{P_1}$ and $\\mathrm{P_2}$ are $\\sqrt{\\dfrac32}$ and $\\sqrt3$, then $\\theta=\\sin^{-1}\\left[\\sqrt{\\dfrac32}\\sin\\left(\\dfrac{\\pi}{\\beta}\\right)\\right]$, where the value of $\\beta$ is ______.",
+   "options": null,
+   "answer": {
+    "lo": 12,
+    "hi": 12
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": "phy-q11.png",
+   "optionFigs": null,
+   "sol": "Minimum deviation in $\\mathrm{P_2}$ ($A=60^\\circ$): internal angle $30^\\circ$, so the incidence on $\\mathrm{P_2}$ satisfies $\\sin i=\\sqrt3\\sin30^\\circ=\\dfrac{\\sqrt3}{2}$, $i=60^\\circ$.<br>The facing faces are parallel, so the ray leaves $\\mathrm{P_1}$ at $60^\\circ$: $\\sin r_2=\\dfrac{\\sin60^\\circ}{\\sqrt{3/2}}=\\dfrac{1}{\\sqrt2}$, $r_2=45^\\circ$.<br>$r_1=60^\\circ-45^\\circ=15^\\circ$, so $\\sin\\theta=\\sqrt{\\dfrac32}\\sin15^\\circ=\\sqrt{\\dfrac32}\\sin\\dfrac{\\pi}{12}$.<br>$\\beta=12$.",
+   "subject": "Physics",
+   "chapter": "Ray Optics and Optical Instruments",
+   "chCls": "XII"
+  },
+  {
+   "no": 12,
+   "section": 3,
+   "type": "num",
+   "text": "An infinitely long thin wire, having a uniform charge density per unit length of $5$ nC/m, is passing through a spherical shell of radius $1$ m, as shown in the figure. A $10$ nC charge is distributed uniformly over the spherical shell. If the configuration of the charges remains static, the magnitude of the potential difference between points P and R, in Volt, is ______.<br>[Given: In SI units $\\dfrac{1}{4\\pi\\epsilon_0}=9\\times10^9$, $\\ln2=0.7$. Ignore the area pierced by the wire.]",
+   "options": null,
+   "answer": {
+    "lo": 171,
+    "hi": 171
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": "phy-q12.png",
+   "optionFigs": null,
+   "sol": "P is $0.5$ m and R is $2$ m from the wire (and from the centre).<br>Shell: $V_P=\\dfrac{kQ}{1}=90$ V (inside), $V_R=\\dfrac{kQ}{2}=45$ V; difference $45$ V.<br>Wire: $V_P-V_R=2k\\lambda\\ln\\dfrac{2}{0.5}=2(9\\times10^9)(5\\times10^{-9})(2\\ln2)=90\\times1.4=126$ V.<br>Both contributions make P higher: $|V_P-V_R|=126+45=171$ V.",
+   "subject": "Physics",
+   "chapter": "Electrostatic Potential and Capacitance",
+   "chCls": "XII"
+  },
+  {
+   "no": 13,
+   "section": 3,
+   "type": "num",
+   "text": "A spherical soap bubble inside an air chamber at pressure $P_0=10^5$ Pa has a certain radius so that the excess pressure inside the bubble is $\\Delta P=144$ Pa. Now, the chamber pressure is reduced to $8P_0/27$ so that the bubble radius and its excess pressure change. In this process, all the temperatures remain unchanged. Assume air to be an ideal gas and the excess pressure $\\Delta P$ in both the cases to be much smaller than the chamber pressure. The new excess pressure $\\Delta P$ in Pa is ______.",
+   "options": null,
+   "answer": {
+    "lo": 96,
+    "hi": 96
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Since $\\Delta P\\ll$ chamber pressure, the gas inside is at about the chamber pressure.<br>Isothermal: $P_0r_1^3=\\dfrac{8P_0}{27}r_2^3\\Rightarrow r_2=\\dfrac32r_1$.<br>$\\Delta P=\\dfrac{4T}{r}$, so $\\Delta P_2=144\\times\\dfrac23=96$ Pa.",
+   "subject": "Physics",
+   "chapter": "Mechanical Properties of Fluids",
+   "chCls": "XI"
+  },
+  {
+   "no": 14,
+   "section": 4,
+   "type": "num",
+   "stem": "Paragraph I for Question Nos. 14 and 15",
+   "text": "In a Young’s double slit experiment, each of the two slits A and B, as shown in the figure, are oscillating about their fixed center and with a mean separation of $0.8$ mm. The distance between the slits at time $t$ is given by $d=(0.8+0.04\\sin\\omega t)$ mm, where $\\omega=0.08\\ \\text{rad s}^{-1}$. The distance of the screen from the slits is $1$ m and the wavelength of the light used to illuminate the slits is $6000$ Å. The interference pattern on the screen changes with time, while the central bright fringe (zeroth fringe) remains fixed at point O.<br><br>The $8^{\\text{th}}$ bright fringe above the point O oscillates with time between two extreme positions. The separation between these two extreme positions, in micrometer ($\\mu$m), is ______.",
+   "options": null,
+   "answer": {
+    "lo": 598.0,
+    "hi": 602.0
+   },
+   "full": 3,
+   "neg": 0,
+   "fig": "phy-q14.png",
+   "optionFigs": null,
+   "sol": "$y_8=\\dfrac{8\\lambda D}{d}=\\dfrac{8(6\\times10^{-7})(1)}{d}=\\dfrac{4.8\\times10^{-6}}{d}$ m.<br>$d$ varies between $0.76$ mm and $0.84$ mm.<br>$y_{\\max}=\\dfrac{4.8\\times10^{-6}}{0.76\\times10^{-3}}=6.3158$ mm, $y_{\\min}=\\dfrac{4.8\\times10^{-6}}{0.84\\times10^{-3}}=5.7143$ mm.<br>Separation $=0.6015$ mm $\\approx601.5\\ \\mu$m (within $598$ to $602$).",
+   "subject": "Physics",
+   "chapter": "Wave Optics",
+   "chCls": "XII"
+  },
+  {
+   "no": 15,
+   "section": 4,
+   "type": "num",
+   "stem": "Paragraph I for Question Nos. 14 and 15",
+   "text": "In a Young’s double slit experiment, each of the two slits A and B, as shown in the figure, are oscillating about their fixed center and with a mean separation of $0.8$ mm. The distance between the slits at time $t$ is given by $d=(0.8+0.04\\sin\\omega t)$ mm, where $\\omega=0.08\\ \\text{rad s}^{-1}$. The distance of the screen from the slits is $1$ m and the wavelength of the light used to illuminate the slits is $6000$ Å. The interference pattern on the screen changes with time, while the central bright fringe (zeroth fringe) remains fixed at point O.<br><br>The maximum speed in $\\mu$m/s at which the $8^{\\text{th}}$ bright fringe will move is __________.",
+   "options": null,
+   "answer": {
+    "lo": 23.5,
+    "hi": 24.5
+   },
+   "full": 3,
+   "neg": 0,
+   "fig": "phy-q14.png",
+   "optionFigs": null,
+   "sol": "$y_8=\\dfrac{8\\lambda D}{d}$, so $\\left|\\dfrac{dy_8}{dt}\\right|=\\dfrac{8\\lambda D}{d^2}\\left|\\dfrac{dd}{dt}\\right|$, with $\\dfrac{dd}{dt}=0.04\\omega\\cos\\omega t$ mm/s.<br>The speed is greatest near $\\cos\\omega t=\\pm1$, where $d=0.8$ mm and $\\left|\\dfrac{dd}{dt}\\right|=0.04\\times0.08=3.2\\times10^{-3}$ mm/s $=3.2\\times10^{-6}$ m/s.<br>$v_{\\max}\\approx\\dfrac{4.8\\times10^{-6}\\times3.2\\times10^{-6}}{(0.8\\times10^{-3})^2}=2.4\\times10^{-5}$ m/s $=24\\ \\mu$m/s (the small variation of $d$ shifts this only to about $24.1$).",
+   "subject": "Physics",
+   "chapter": "Wave Optics",
+   "chCls": "XII"
+  },
+  {
+   "no": 16,
+   "section": 4,
+   "type": "num",
+   "stem": "Paragraph II for Question Nos. 16 and 17",
+   "text": "Two particles, 1 and 2, each of mass $m$, are connected by a massless spring, and are on a horizontal frictionless plane, as shown in the figure. Initially, the two particles, with their center of mass at $x_0$, are oscillating with amplitude $a$ and angular frequency $\\omega$. Thus, their positions at time $t$ are given by $x_1(t)=(x_0+d)+a\\sin\\omega t$ and $x_2(t)=(x_0-d)-a\\sin\\omega t$, respectively, where $d>2a$. Particle 3 of mass $m$ moves towards this system with speed $u_0=a\\omega/2$, and undergoes instantaneous elastic collision with particle 2, at time $t_0$. Finally, particles 1 and 2 acquire a center of mass speed $v_{\\text{cm}}$ and oscillate with amplitude $b$ and the same angular frequency $\\omega$.<br><br>If the collision occurs at time $t_0=0$, the value of $v_{\\text{cm}}/(a\\omega)$ will be __________.",
+   "options": null,
+   "answer": {
+    "lo": 0.74,
+    "hi": 0.76
+   },
+   "full": 3,
+   "neg": 0,
+   "fig": "phy-q16.png",
+   "optionFigs": null,
+   "sol": "At $t=0$: $\\dot x_1=a\\omega$, $\\dot x_2=-a\\omega$ (particle 2 moving towards particle 3).<br>Elastic collision of equal masses exchanges velocities: particle 2 gets $+\\dfrac{a\\omega}{2}$.<br>$v_{\\text{cm}}=\\dfrac{a\\omega+a\\omega/2}{2}=\\dfrac34a\\omega$.<br>$v_{\\text{cm}}/(a\\omega)=0.75$.",
+   "subject": "Physics",
+   "chapter": "System of Particles and Rotational Motion",
+   "chCls": "XI"
+  },
+  {
+   "no": 17,
+   "section": 4,
+   "type": "num",
+   "stem": "Paragraph II for Question Nos. 16 and 17",
+   "text": "Two particles, 1 and 2, each of mass $m$, are connected by a massless spring, and are on a horizontal frictionless plane, as shown in the figure. Initially, the two particles, with their center of mass at $x_0$, are oscillating with amplitude $a$ and angular frequency $\\omega$. Thus, their positions at time $t$ are given by $x_1(t)=(x_0+d)+a\\sin\\omega t$ and $x_2(t)=(x_0-d)-a\\sin\\omega t$, respectively, where $d>2a$. Particle 3 of mass $m$ moves towards this system with speed $u_0=a\\omega/2$, and undergoes instantaneous elastic collision with particle 2, at time $t_0$. Finally, particles 1 and 2 acquire a center of mass speed $v_{\\text{cm}}$ and oscillate with amplitude $b$ and the same angular frequency $\\omega$.<br><br>If the collision occurs at time $t_0=\\pi/(2\\omega)$, then the value of $4b^2/a^2$ will be ________.",
+   "options": null,
+   "answer": {
+    "lo": 4.2,
+    "hi": 4.3
+   },
+   "full": 3,
+   "neg": 0,
+   "fig": "phy-q16.png",
+   "optionFigs": null,
+   "sol": "At $t_0=\\dfrac{\\pi}{2\\omega}$ both particles are momentarily at rest, each displaced by $a$ from its equilibrium relative to the CM (spring at maximum stretch).<br>After the collision particle 2 has $\\dfrac{a\\omega}{2}$ and particle 1 has $0$, so $v_{\\text{cm}}=\\dfrac{a\\omega}{4}$; relative to the CM each particle moves at $\\dfrac{a\\omega}{4}$ while displaced by $a$.<br>$b^2=a^2+\\left(\\dfrac{a\\omega/4}{\\omega}\\right)^2=\\dfrac{17}{16}a^2$.<br>$\\dfrac{4b^2}{a^2}=\\dfrac{17}{4}=4.25$.",
+   "subject": "Physics",
+   "chapter": "Oscillations",
+   "chCls": "XI"
+  },
+  {
+   "no": 1,
+   "section": 1,
+   "type": "single",
+   "text": "According to Bohr’s model, the highest kinetic energy is associated with the electron in the",
+   "options": [
+    "first orbit of H atom",
+    "first orbit of $\\mathrm{He^+}$",
+    "second orbit of $\\mathrm{He^+}$",
+    "second orbit of $\\mathrm{Li^{2+}}$"
+   ],
+   "answer": 1,
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "In Bohr’s model $\\text{KE}=13.6\\,\\dfrac{Z^2}{n^2}$ eV, so compare $\\dfrac{Z^2}{n^2}$.<br>H, $n=1$: $1$; $\\mathrm{He^+}$, $n=1$: $4$; $\\mathrm{He^+}$, $n=2$: $1$; $\\mathrm{Li^{2+}}$, $n=2$: $\\dfrac94$.<br>Highest: first orbit of $\\mathrm{He^+}$ → (B).",
+   "subject": "Chemistry",
+   "chapter": "Structure of Atom",
+   "chCls": "XI"
+  },
+  {
+   "no": 2,
+   "section": 1,
+   "type": "single",
+   "text": "In a metal deficient oxide sample, $\\mathbf{M_XY_2O_4}$ ($\\mathbf{M}$ and $\\mathbf{Y}$ are metals), $\\mathbf{M}$ is present in both +2 and +3 oxidation states and $\\mathbf{Y}$ is in +3 oxidation state. If the fraction of $\\mathbf{M^{2+}}$ ions present in $\\mathbf{M}$ is $\\dfrac13$, the value of $\\mathbf{X}$ is _____.",
+   "options": [
+    "$0.25$",
+    "$0.33$",
+    "$0.67$",
+    "$0.75$"
+   ],
+   "answer": 3,
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Charge balance: $2(+3)+X\\cdot(\\text{average charge of M})=8$, so $X\\times(\\text{average charge})=2$.<br>Average charge of M $=\\dfrac13(2)+\\dfrac23(3)=\\dfrac83$.<br>$X=\\dfrac{2}{8/3}=0.75$ → (D).",
+   "subject": "Chemistry",
+   "chapter": "Redox Reactions",
+   "chCls": "XI"
+  },
+  {
+   "no": 3,
+   "section": 1,
+   "type": "single",
+   "text": "In the following reaction sequence, the major product $\\mathbf{Q}$ is",
+   "options": [
+    "",
+    "",
+    "",
+    ""
+   ],
+   "answer": 3,
+   "full": 3,
+   "neg": 1,
+   "fig": "che-q3.png",
+   "optionFigs": [
+    "che-q3a.png",
+    "che-q3b.png",
+    "che-q3c.png",
+    "che-q3d.png"
+   ],
+   "sol": "HI/$\\Delta$ fully reduces glucose (L or D) to n-hexane.<br>$\\mathrm{Cr_2O_3}$ at 775 K and 10–20 atm aromatises n-hexane to benzene ($\\mathbf{P}$).<br>Excess $\\mathrm{Cl_2}$ under UV adds to benzene (free-radical addition) giving 1,2,3,4,5,6-hexachlorocyclohexane, $\\mathrm{C_6H_6Cl_6}$ (BHC) = $\\mathbf{Q}$ → (D).",
+   "subject": "Chemistry",
+   "chapter": "Hydrocarbons",
+   "chCls": "XI"
+  },
+  {
+   "no": 4,
+   "section": 1,
+   "type": "single",
+   "text": "The species formed on fluorination of phosphorus pentachloride in a polar organic solvent are",
+   "options": [
+    "$\\mathrm{[PF_4]^+[PF_6]^-}$ and $\\mathrm{[PCl_4]^+[PF_6]^-}$",
+    "$\\mathrm{[PCl_4]^+[PCl_4F_2]^-}$ and $\\mathrm{[PCl_4]^+[PF_6]^-}$",
+    "$\\mathrm{PF_3}$ and $\\mathrm{PCl_3}$",
+    "$\\mathrm{PF_5}$ and $\\mathrm{PCl_3}$"
+   ],
+   "answer": 0,
+   "accept": [
+    0,
+    1
+   ],
+   "note": "Official final key: A or B (either option is awarded marks).",
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "In a polar solvent $\\mathrm{PCl_5}$ ionises as $\\mathrm{[PCl_4]^+[PCl_6]^-}$, so its fluorination gives ionic chloro/fluoro-phosphonium salts, not neutral molecules.<br>Fluoride replaces chloride on phosphorus to give hexafluorophosphate salts such as $\\mathrm{[PCl_4]^+[PF_6]^-}$ (in both A and B), together with $\\mathrm{[PF_4]^+[PF_6]^-}$ or the partly fluorinated $\\mathrm{[PCl_4]^+[PCl_4F_2]^-}$.<br>(C) and (D) involve reduction to P(III) or neutral $\\mathrm{PF_5}$, which a simple halide exchange does not give.<br>The official final key accepts (A) or (B).",
+   "subject": "Chemistry",
+   "chapter": "Chemical Bonding and Molecular Structure",
+   "chCls": "XI"
+  },
+  {
+   "no": 5,
+   "section": 2,
+   "type": "multi",
+   "text": "An aqueous solution of hydrazine ($\\mathrm{N_2H_4}$) is electrochemically oxidized by $\\mathrm{O_2}$, thereby releasing chemical energy in the form of electrical energy. One of the products generated from the electrochemical reaction is $\\mathrm{N_2(g)}$.<br>Choose the correct statement(s) about the above process",
+   "options": [
+    "$\\mathrm{OH^-}$ ions react with $\\mathrm{N_2H_4}$ at the anode to form $\\mathrm{N_2(g)}$ and water, releasing 4 electrons to the anode.",
+    "At the cathode, $\\mathrm{N_2H_4}$ breaks to $\\mathrm{N_2(g)}$ and nascent hydrogen released at the electrode reacts with oxygen to form water.",
+    "At the cathode, molecular oxygen gets converted to $\\mathrm{OH^-}$.",
+    "Oxides of nitrogen are major by-products of the electrochemical process."
+   ],
+   "answer": [
+    0,
+    2
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Hydrazine fuel cell (alkaline):<br>Anode: $\\mathrm{N_2H_4+4OH^-\\to N_2+4H_2O+4e^-}$ → (A) true.<br>Cathode: $\\mathrm{O_2+2H_2O+4e^-\\to4OH^-}$ → (C) true; hydrazine is not oxidised at the cathode → (B) false.<br>Overall: $\\mathrm{N_2H_4+O_2\\to N_2+2H_2O}$; no oxides of nitrogen → (D) false.<br>Answer: (A), (C).",
+   "subject": "Chemistry",
+   "chapter": "Electrochemistry",
+   "chCls": "XII"
+  },
+  {
+   "no": 6,
+   "section": 2,
+   "type": "multi",
+   "text": "The option(s) with correct sequence of reagents for the conversion of $\\mathbf{P}$ to $\\mathbf{Q}$ is(are)",
+   "options": [
+    "i) Lindlar’s catalyst, $\\mathrm{H_2}$; ii) $\\mathrm{SnCl_2/HCl}$; iii) $\\mathrm{NaBH_4}$; iv) $\\mathrm{H_3O^+}$",
+    "i) Lindlar’s catalyst, $\\mathrm{H_2}$; ii) $\\mathrm{H_3O^+}$; iii) $\\mathrm{SnCl_2/HCl}$; iv) $\\mathrm{NaBH_4}$",
+    "i) $\\mathrm{NaBH_4}$; ii) $\\mathrm{SnCl_2/HCl}$; iii) $\\mathrm{H_3O^+}$; iv) Lindlar’s catalyst, $\\mathrm{H_2}$",
+    "i) Lindlar’s catalyst, $\\mathrm{H_2}$; ii) $\\mathrm{NaBH_4}$; iii) $\\mathrm{SnCl_2/HCl}$; iv) $\\mathrm{H_3O^+}$"
+   ],
+   "answer": [
+    2,
+    3
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": "che-q6.png",
+   "optionFigs": null,
+   "sol": "Changes needed: two $\\mathrm{C\\equiv C}\\to$ cis $\\mathrm{C=C}$ (Lindlar, $\\mathrm{H_2}$); ring $\\mathrm{C=O}\\to$ CH–OH ($\\mathrm{NaBH_4}$, which leaves ester and nitrile alone); $\\mathrm{-CN}\\to\\mathrm{-CHO}$ (Stephen: $\\mathrm{SnCl_2/HCl}$ then $\\mathrm{H_3O^+}$); acetate and ethyl ester $\\to$ OH and $\\mathrm{CO_2H}$ ($\\mathrm{H_3O^+}$).<br>$\\mathrm{NaBH_4}$ must act before any CHO (or the Stephen imine) is present, otherwise it reduces that too.<br>(A): $\\mathrm{NaBH_4}$ after $\\mathrm{SnCl_2/HCl}$ reduces the aldimine → wrong. (B): $\\mathrm{NaBH_4}$ last reduces the CHO → wrong.<br>(C) and (D) reduce the ketone first, then do the Stephen reduction and hydrolysis; Lindlar can be first or last → correct.<br>Answer: (C), (D).",
+   "subject": "Chemistry",
+   "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+   "chCls": "XII"
+  },
+  {
+   "no": 7,
+   "section": 2,
+   "type": "multi",
+   "text": "The compound(s) having peroxide linkage is(are)",
+   "options": [
+    "$\\mathrm{H_2S_2O_7}$",
+    "$\\mathrm{H_2S_2O_8}$",
+    "$\\mathrm{H_2S_2O_5}$",
+    "$\\mathrm{H_2SO_5}$"
+   ],
+   "answer": [
+    1,
+    3
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$\\mathrm{H_2S_2O_7}$ (pyrosulphuric acid): S–O–S bridge, no peroxide.<br>$\\mathrm{H_2S_2O_8}$ (peroxodisulphuric acid): $\\mathrm{HO_3S{-}O{-}O{-}SO_3H}$, has O–O.<br>$\\mathrm{H_2S_2O_5}$ (disulphurous acid): S–S bond, no peroxide.<br>$\\mathrm{H_2SO_5}$ (Caro’s acid, peroxomonosulphuric acid): $\\mathrm{HO{-}O{-}SO_2{-}OH}$, has O–O.<br>Answer: (B), (D).",
+   "subject": "Chemistry",
+   "chapter": "Chemical Bonding and Molecular Structure",
+   "chCls": "XI"
+  },
+  {
+   "no": 8,
+   "section": 3,
+   "type": "num",
+   "text": "To form a complete monolayer of acetic acid on 1g of charcoal, 100 mL of 0.5 M acetic acid was used. Some of the acetic acid remained unadsorbed. To neutralize the unadsorbed acetic acid, 40 mL of 1 M NaOH solution was required. If each molecule of acetic acid occupies $\\mathbf{P}$ $\\times10^{-23}\\ \\mathrm{m^2}$ surface area on charcoal, the value of $\\mathbf{P}$ is _____.<br>[Use given data: Surface area of charcoal $=1.5\\times10^2\\ \\mathrm{m^2g^{-1}}$; Avogadro’s number $(N_A)=6.0\\times10^{23}\\ \\mathrm{mol^{-1}}$]",
+   "options": null,
+   "answer": {
+    "lo": 2500,
+    "hi": 2500
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Acetic acid taken $=0.1\\times0.5=0.05$ mol; unadsorbed $=0.04\\times1=0.04$ mol; adsorbed $=0.01$ mol.<br>Molecules adsorbed $=0.01\\times6.0\\times10^{23}=6.0\\times10^{21}$.<br>Area per molecule $=\\dfrac{150}{6.0\\times10^{21}}=2.5\\times10^{-20}=2500\\times10^{-23}\\ \\mathrm{m^2}$.<br>$\\mathbf{P}$ $=2500$.",
+   "subject": "Chemistry",
+   "chapter": "Some Basic Concepts of Chemistry",
+   "chCls": "XI"
+  },
+  {
+   "no": 9,
+   "section": 3,
+   "type": "num",
+   "text": "Vessel-1 contains $w_2$ g of a non-volatile solute $\\mathbf{X}$ dissolved in $w_1$ g of water. Vessel-2 contains $w_2$ g of another non-volatile solute $\\mathbf{Y}$ dissolved in $w_1$ g of water. Both the vessels are at the same temperature and pressure. The molar mass of $\\mathbf{X}$ is 80% of that of $\\mathbf{Y}$. The van’t Hoff factor for $\\mathbf{X}$ is 1.2 times of that of $\\mathbf{Y}$ for their respective concentrations.<br>The elevation of boiling point for solution in Vessel-1 is _____ % of the solution in Vessel-2.",
+   "options": null,
+   "answer": {
+    "lo": 150,
+    "hi": 150
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$\\Delta T_b=iK_b\\dfrac{w_2\\times1000}{M\\,w_1}$, so with equal $w_1$, $w_2$: $\\dfrac{\\Delta T_{b,1}}{\\Delta T_{b,2}}=\\dfrac{i_X}{i_Y}\\cdot\\dfrac{M_Y}{M_X}$.<br>$=1.2\\times\\dfrac{1}{0.8}=1.5$.<br>So it is $150\\%$.",
+   "subject": "Chemistry",
+   "chapter": "Solutions",
+   "chCls": "XII"
+  },
+  {
+   "no": 10,
+   "section": 3,
+   "type": "num",
+   "text": "For a double strand DNA, one strand is given below:<br>5′ – A G T C A C G T A A G T C – 3′<br>The amount of energy required to split the double strand DNA into two single strands is _____ kcal $\\mathrm{mol^{-1}}$.<br>[Given: Average energy per H-bond for A-T base pair $=1.0$ kcal $\\mathrm{mol^{-1}}$, G-C base pair $=1.5$ kcal $\\mathrm{mol^{-1}}$, and A-U base pair $=1.25$ kcal $\\mathrm{mol^{-1}}$. Ignore electrostatic repulsion between the phosphate groups.]",
+   "options": null,
+   "answer": {
+    "lo": 41,
+    "hi": 41
+   },
+   "full": 4,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Bases: A = 4, T = 3, G = 3, C = 3, so the duplex has $7$ A-T pairs and $6$ G-C pairs.<br>A-T has 2 H-bonds, G-C has 3 H-bonds (A-U is not present in DNA).<br>Energy $=7\\times2\\times1.0+6\\times3\\times1.5=14+27=41$ kcal $\\mathrm{mol^{-1}}$.",
+   "subject": "Chemistry",
+   "chapter": "Biomolecules",
+   "chCls": "XII"
+  },
+  {
+   "no": 11,
+   "section": 3,
+   "type": "num",
+   "text": "A sample initially contains only U-238 isotope of uranium. With time, some of the U-238 radioactively decays into Pb-206 while the rest of it remains undisintegrated.<br>When the age of the sample is $\\mathbf{P}$ $\\times10^8$ years, the ratio of mass of Pb-206 to that of U-238 in the sample is found to be 7. The value of $\\mathbf{P}$ is _____.<br>[Given: Half-life of U-238 is $4.5\\times10^9$ years; $\\log_e2=0.693$]",
+   "options": null,
+   "answer": {
+    "lo": 143,
+    "hi": 143
+   },
+   "dropped": true,
+   "note": "Dropped in the official final key: full marks to everyone.",
+   "full": 4,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Mole ratio $\\dfrac{N_{\\mathrm{Pb}}}{N_{\\mathrm U}}=7\\times\\dfrac{238}{206}=8.087$, so $\\dfrac{N_0}{N}=9.087$.<br>$t=\\dfrac{t_{1/2}}{0.693}\\ln\\dfrac{N_0}{N}=\\dfrac{4.5\\times10^9}{0.693}\\times2.207\\approx1.43\\times10^{10}$ years, i.e. $\\mathbf{P}$ $\\approx143$ (not an integer).<br>If the mass ratio were taken as the atom ratio, $\\dfrac{N_0}{N}=8$ (three half-lives) and $\\mathbf{P}$ $=135$; the question is ambiguous.<br>The official final key dropped this question (marks to all).",
+   "subject": "Chemistry",
+   "chapter": "Chemical Kinetics",
+   "chCls": "XII"
+  },
+  {
+   "no": 12,
+   "section": 3,
+   "type": "num",
+   "text": "Among $\\mathrm{[Co(CN)_4]^{4-}}$, $\\mathrm{[Co(CO)_3(NO)]}$, $\\mathrm{XeF_4}$, $\\mathrm{[PCl_4]^+}$, $\\mathrm{[PdCl_4]^{2-}}$, $\\mathrm{[ICl_4]^-}$, $\\mathrm{[Cu(CN)_4]^{3-}}$ and $\\mathrm{P_4}$ the total number of species with tetrahedral geometry is _____.",
+   "options": null,
+   "answer": {
+    "lo": 4,
+    "hi": 4
+   },
+   "accept": [
+    {
+     "lo": 5,
+     "hi": 5
+    }
+   ],
+   "note": "Official final key: 4 or 5 (either value is awarded marks).",
+   "full": 4,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Tetrahedral: $\\mathrm{[Co(CO)_3(NO)]}$ (18-electron, $sp^3$, like $\\mathrm{Ni(CO)_4}$), $\\mathrm{[PCl_4]^+}$ ($sp^3$), $\\mathrm{[Cu(CN)_4]^{3-}}$ ($\\mathrm{Cu^+}$, $d^{10}$, $sp^3$), $\\mathrm{P_4}$ (tetrahedron of P atoms): $4$.<br>Square planar: $\\mathrm{XeF_4}$, $\\mathrm{[PdCl_4]^{2-}}$ ($d^8$, $dsp^2$), $\\mathrm{[ICl_4]^-}$.<br>$\\mathrm{[Co(CN)_4]^{4-}}$ (Co(0), $d^9$) is not clearly assigned; counting it as tetrahedral gives $5$.<br>Answer: $4$ (the official key also accepts $5$).",
+   "subject": "Chemistry",
+   "chapter": "Coordination Compounds",
+   "chCls": "XII"
+  },
+  {
+   "no": 13,
+   "section": 3,
+   "type": "num",
+   "text": "An organic compound $\\mathbf{P}$ having molecular formula $\\mathrm{C_6H_6O_3}$ gives ferric chloride test and does not have intramolecular hydrogen bond. The compound $\\mathbf{P}$ reacts with 3 equivalents of $\\mathrm{NH_2OH}$ to produce oxime $\\mathbf{Q}$. Treatment of $\\mathbf{P}$ with excess methyl iodide in the presence of KOH produces compound $\\mathbf{R}$ as the major product. Reaction of $\\mathbf{R}$ with excess iso-butylmagnesium bromide followed by treatment with $\\mathrm{H_3O^+}$ gives compound $\\mathbf{S}$ as the major product.<br>The total number of methyl $(-\\mathrm{CH_3})$ group(s) in compound $\\mathbf{S}$ is _____.",
+   "options": null,
+   "answer": {
+    "lo": 6,
+    "hi": 6
+   },
+   "accept": [
+    {
+     "lo": 12,
+     "hi": 12
+    }
+   ],
+   "note": "Official final key: 6 or 12 (either value is awarded marks).",
+   "full": 4,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$\\mathbf{P}$ is phloroglucinol (1,3,5-trihydroxybenzene): phenolic ($\\mathrm{FeCl_3}$ test), OH groups meta so no intramolecular H-bond, and its keto form (cyclohexane-1,3,5-trione) gives a trioxime $\\mathbf{Q}$.<br>Excess $\\mathrm{CH_3I}$/KOH C-methylates all three $\\mathrm{CH_2}$ groups of the trione: $\\mathbf{R}$ = 2,2,4,4,6,6-hexamethylcyclohexane-1,3,5-trione (6 $\\mathrm{CH_3}$).<br>The carbonyls are very hindered, so the bulky iso-butyl Grignard acts as a reducing agent ($\\beta$-hydride transfer): $\\mathbf{S}$ = 2,2,4,4,6,6-hexamethylcyclohexane-1,3,5-triol, with $6$ $\\mathrm{CH_3}$ groups.<br>If instead the Grignard adds, each iso-butyl brings 2 more $\\mathrm{CH_3}$, giving $6+6=12$.<br>Answer: $6$ (the official key also accepts $12$).",
+   "subject": "Chemistry",
+   "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+   "chCls": "XII"
+  },
+  {
+   "no": 14,
+   "section": 4,
+   "type": "num",
+   "stem": "Paragraph I for Question Nos. 14 and 15",
+   "text": "An organic compound $\\mathbf{P}$ with molecular formula $\\mathrm{C_9H_{18}O_2}$ decolorizes bromine water and also shows positive iodoform test. $\\mathbf{P}$ on ozonolysis followed by treatment with $\\mathrm{H_2O_2}$ gives $\\mathbf{Q}$ and $\\mathbf{R}$. While compound $\\mathbf{Q}$ shows positive iodoform test, compound $\\mathbf{R}$ does not give positive iodoform test. $\\mathbf{Q}$ and $\\mathbf{R}$ on oxidation with pyridinium chlorochromate (PCC) followed by heating give $\\mathbf{S}$ and $\\mathbf{T}$, respectively. Both $\\mathbf{S}$ and $\\mathbf{T}$ show positive iodoform test.<br>Complete copolymerization of 500 moles of $\\mathbf{Q}$ and 500 moles of $\\mathbf{R}$ gives one mole of a single acyclic copolymer $\\mathbf{U}$.<br>[Given, atomic mass: H = 1, C = 12, O = 16]<br><br>Sum of number of oxygen atoms in $\\mathbf{S}$ and $\\mathbf{T}$ is _____.",
+   "options": null,
+   "answer": {
+    "lo": 2,
+    "hi": 2
+   },
+   "accept": [
+    {
+     "lo": 4,
+     "hi": 4
+    }
+   ],
+   "note": "Official final key: 2 or 4 (either value is awarded marks).",
+   "full": 3,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$\\mathrm{C_9H_{18}O_2}$ has one C=C; ozonolysis with $\\mathrm{H_2O_2}$ gives two acids, and since $\\mathbf{Q}$ and $\\mathbf{R}$ copolymerise (polyester) both are hydroxy acids.<br>$\\mathbf{P}$ $=\\mathrm{CH_3CH(OH)CH_2CH{=}CHCH_2CH(OH)CH_2CH_3}$ (iodoform +).<br>$\\mathbf{Q}$ $=\\mathrm{CH_3CH(OH)CH_2COOH}$ (iodoform +); $\\mathbf{R}$ $=\\mathrm{CH_3CH_2CH(OH)CH_2COOH}$ (iodoform −).<br>PCC gives the $\\beta$-keto acids, which lose $\\mathrm{CO_2}$ on heating: $\\mathbf{S}$ = acetone, $\\mathbf{T}$ = butan-2-one (both iodoform +).<br>Oxygen atoms: $1+1=2$ (the official key also accepts $4$).",
+   "subject": "Chemistry",
+   "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+   "chCls": "XII"
+  },
+  {
+   "no": 15,
+   "section": 4,
+   "type": "num",
+   "stem": "Paragraph I for Question Nos. 14 and 15",
+   "text": "An organic compound $\\mathbf{P}$ with molecular formula $\\mathrm{C_9H_{18}O_2}$ decolorizes bromine water and also shows positive iodoform test. $\\mathbf{P}$ on ozonolysis followed by treatment with $\\mathrm{H_2O_2}$ gives $\\mathbf{Q}$ and $\\mathbf{R}$. While compound $\\mathbf{Q}$ shows positive iodoform test, compound $\\mathbf{R}$ does not give positive iodoform test. $\\mathbf{Q}$ and $\\mathbf{R}$ on oxidation with pyridinium chlorochromate (PCC) followed by heating give $\\mathbf{S}$ and $\\mathbf{T}$, respectively. Both $\\mathbf{S}$ and $\\mathbf{T}$ show positive iodoform test.<br>Complete copolymerization of 500 moles of $\\mathbf{Q}$ and 500 moles of $\\mathbf{R}$ gives one mole of a single acyclic copolymer $\\mathbf{U}$.<br>[Given, atomic mass: H = 1, C = 12, O = 16]<br><br>The molecular weight of $\\mathbf{U}$ is _____.",
+   "options": null,
+   "answer": {
+    "lo": 93018,
+    "hi": 93018
+   },
+   "full": 3,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$\\mathbf{Q}$ $=\\mathrm{C_4H_8O_3}$ ($M=104$), $\\mathbf{R}$ $=\\mathrm{C_5H_{10}O_3}$ ($M=118$).<br>A single acyclic chain of $1000$ hydroxy-acid units has $999$ ester links, each releasing one $\\mathrm{H_2O}$.<br>$M(\\mathbf U)=500(104)+500(118)-999(18)=111000-17982=93018$.",
+   "subject": "Chemistry",
+   "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+   "chCls": "XII"
+  },
+  {
+   "no": 16,
+   "section": 4,
+   "type": "num",
+   "stem": "Paragraph II for Question Nos. 16 and 17",
+   "text": "When potassium iodide is added to an aqueous solution of potassium ferricyanide, a reversible reaction is observed in which a complex $\\mathbf{P}$ is formed. In a strong acidic medium, the equilibrium shifts completely towards $\\mathbf{P}$. Addition of zinc chloride to $\\mathbf{P}$ in a slightly acidic medium results in a sparingly soluble complex $\\mathbf{Q}$.<br><br>The number of moles of potassium iodide required to produce two moles of $\\mathbf{P}$ is _____.",
+   "options": null,
+   "answer": {
+    "lo": 2,
+    "hi": 2
+   },
+   "full": 3,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$\\mathrm{2K_3[Fe(CN)_6]+2KI\\rightleftharpoons 2K_4[Fe(CN)_6]+I_2}$; in strong acid the equilibrium shifts fully to the right.<br>$\\mathbf{P}$ $=\\mathrm{K_4[Fe(CN)_6]}$; one KI is needed per $\\mathbf{P}$.<br>For two moles of $\\mathbf{P}$: $2$ moles of KI.",
+   "subject": "Chemistry",
+   "chapter": "Coordination Compounds",
+   "chCls": "XII"
+  },
+  {
+   "no": 17,
+   "section": 4,
+   "type": "num",
+   "stem": "Paragraph II for Question Nos. 16 and 17",
+   "text": "When potassium iodide is added to an aqueous solution of potassium ferricyanide, a reversible reaction is observed in which a complex $\\mathbf{P}$ is formed. In a strong acidic medium, the equilibrium shifts completely towards $\\mathbf{P}$. Addition of zinc chloride to $\\mathbf{P}$ in a slightly acidic medium results in a sparingly soluble complex $\\mathbf{Q}$.<br><br>The number of zinc ions present in the molecular formula of $\\mathbf{Q}$ is _____.",
+   "options": null,
+   "answer": {
+    "lo": 2,
+    "hi": 2
+   },
+   "accept": [
+    {
+     "lo": 3,
+     "hi": 3
+    }
+   ],
+   "note": "Official final key: 2 or 3 (either value is awarded marks).",
+   "full": 3,
+   "neg": 0,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$\\mathrm{Zn^{2+}}$ precipitates ferrocyanide: $\\mathrm{K_4[Fe(CN)_6]+2ZnCl_2\\to Zn_2[Fe(CN)_6]\\downarrow+4KCl}$, so $\\mathbf{Q}$ $=\\mathrm{Zn_2[Fe(CN)_6]}$ with $2$ zinc ions.<br>With excess ferrocyanide the double salt $\\mathrm{K_2Zn_3[Fe(CN)_6]_2}$ (3 zinc ions) forms instead.<br>Answer: $2$ (the official key also accepts $3$).",
+   "subject": "Chemistry",
+   "chapter": "Coordination Compounds",
+   "chCls": "XII"
+  }
+ ]
+}

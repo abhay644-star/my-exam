@@ -345,8 +345,8 @@ def solved(q, no, OL, fig):
             f'<li><img class="ofig" src="{fig}{q["optionFigs"][j]}" alt="Option {OL[j]}" loading="lazy"></li>' if q.get('optionFigs') and q['optionFigs'][j] else f'<li>{wrap_math(safe(o))}</li>'
             for j, o in enumerate(q['options'])))
     sol = f'<p>{wrap_math(safe(q["sol"]))}</p>' if q.get('sol') else ''
-    if q.get('note'):
-        sol += f'<p><i>Note: {wrap_math(safe(q["note"]))}</i></p>'
+    if q.get('note') or q.get('keyNote'):
+        sol += f'<p><i>Note: {wrap_math(safe(q.get("note") or q["keyNote"]))}</i></p>'
     return (f'<li class="sq"><p class="sqt"><small>Question {no} · {esc(q["subject"])} · {esc(q["chapter"])}</small><br>{text}</p>{opts}'
             f'<details><summary>Show answer and solution</summary><p><b>Answer:</b> {wrap_math(safe(answer(q, OL)[0]))}</p>{sol}</details></li>')
 

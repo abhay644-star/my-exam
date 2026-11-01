@@ -1,0 +1,1203 @@
+{
+ "id": "2022-p2",
+ "exam": "JEE Advanced",
+ "board": "IIT",
+ "title": "JEE Advanced 2022 · Paper 2",
+ "duration": 180,
+ "renumber": true,
+ "secNames": {
+  "1": "single-digit integer",
+  "2": "one or more correct",
+  "3": "single correct"
+ },
+ "instr": [
+  "Official JEE (Advanced) 2022 Paper 2 with the final answer key published by the organising IIT (IIT Bombay).",
+  "54 questions: Mathematics, Physics and Chemistry, 18 in each subject, in three sections. Total 180 marks.",
+  "Section 1 – single-digit integer answer (0 to 9): <b>+3</b> if correct, <b>−1</b> if wrong, 0 if not answered.",
+  "Section 2 – one or more correct options: <b>+4</b> if you choose all the correct options; <b>+3</b> if all four options are correct and you choose only three; <b>+2</b> if three or more options are correct and you choose only two, both correct; <b>+1</b> if two or more options are correct and you choose only one, and it is correct; <b>−2</b> in all other cases; 0 if not answered.",
+  "Section 3 – single correct option: <b>+3</b> if correct, <b>−1</b> if wrong, 0 if not answered."
+ ],
+ "source": "JEE (Advanced) 2022 question paper and final answer key, organising IIT (IIT Bombay). Worked solutions: All in All Exam Practice.",
+ "questions": [
+  {
+   "no": 1,
+   "section": 1,
+   "type": "num",
+   "text": "Let $\\alpha$ and $\\beta$ be real numbers such that $-\\dfrac{\\pi}{4} &lt; \\beta &lt; 0 &lt; \\alpha &lt; \\dfrac{\\pi}{4}$. If $\\sin(\\alpha+\\beta) = \\dfrac{1}{3}$ and $\\cos(\\alpha-\\beta) = \\dfrac{2}{3}$, then the greatest integer less than or equal to $$\\left(\\frac{\\sin\\alpha}{\\cos\\beta} + \\frac{\\cos\\beta}{\\sin\\alpha} + \\frac{\\cos\\alpha}{\\sin\\beta} + \\frac{\\sin\\beta}{\\cos\\alpha}\\right)^2$$ is ________.",
+   "options": null,
+   "answer": {
+    "lo": 1,
+    "hi": 1
+   },
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Pair the terms: $\\dfrac{\\sin\\alpha}{\\cos\\beta} + \\dfrac{\\cos\\alpha}{\\sin\\beta} = \\dfrac{\\cos(\\alpha-\\beta)}{\\sin\\beta\\cos\\beta}$ and $\\dfrac{\\cos\\beta}{\\sin\\alpha} + \\dfrac{\\sin\\beta}{\\cos\\alpha} = \\dfrac{\\cos(\\alpha-\\beta)}{\\sin\\alpha\\cos\\alpha}$.<br>So $E = 2\\cos(\\alpha-\\beta)\\,\\dfrac{\\sin2\\alpha + \\sin2\\beta}{\\sin2\\alpha\\,\\sin2\\beta}$.<br>$\\sin2\\alpha + \\sin2\\beta = 2\\sin(\\alpha+\\beta)\\cos(\\alpha-\\beta) = 2\\cdot\\dfrac13\\cdot\\dfrac23 = \\dfrac49$.<br>$\\sin2\\alpha\\sin2\\beta = \\dfrac12[\\cos2(\\alpha-\\beta) - \\cos2(\\alpha+\\beta)] = \\dfrac12\\left[-\\dfrac19 - \\dfrac79\\right] = -\\dfrac49$.<br>$E = 2\\cdot\\dfrac23\\cdot\\dfrac{4/9}{-4/9} = -\\dfrac43$, so $E^2 = \\dfrac{16}{9} \\approx 1.78$.<br>Greatest integer $= 1$.",
+   "subject": "Mathematics",
+   "chapter": "Trigonometric Functions",
+   "chCls": "XI"
+  },
+  {
+   "no": 2,
+   "section": 1,
+   "type": "num",
+   "text": "If $y(x)$ is the solution of the differential equation $$x\\,dy - (y^2 - 4y)\\,dx = 0 \\quad \\text{for } x > 0, \\qquad y(1) = 2,$$ and the slope of the curve $y = y(x)$ is never zero, then the value of $10\\,y(\\sqrt{2})$ is ________.",
+   "options": null,
+   "answer": {
+    "lo": 8,
+    "hi": 8
+   },
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Separate: $\\dfrac{dy}{y(y-4)} = \\dfrac{dx}{x}$, i.e. $\\dfrac14\\ln\\left|\\dfrac{y-4}{y}\\right| = \\ln x + C$.<br>$y(1) = 2$: $\\left|\\dfrac{-2}{2}\\right| = 1$, so $C = 0$ and $\\left|\\dfrac{y-4}{y}\\right| = x^4$.<br>The slope $\\dfrac{y^2-4y}{x}$ is never zero, so $y$ stays strictly between $0$ and $4$: $\\dfrac{4-y}{y} = x^4$, $y = \\dfrac{4}{1+x^4}$.<br>$y(\\sqrt2) = \\dfrac45$, so $10\\,y(\\sqrt2) = 8$.",
+   "subject": "Mathematics",
+   "chapter": "Differential Equations",
+   "chCls": "XII"
+  },
+  {
+   "no": 3,
+   "section": 1,
+   "type": "num",
+   "text": "The greatest integer less than or equal to $$\\int_1^2 \\log_2(x^3+1)\\,dx + \\int_1^{\\log_2 9} (2^x - 1)^{\\frac13}\\,dx$$ is ________.",
+   "options": null,
+   "answer": {
+    "lo": 5,
+    "hi": 5
+   },
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "In the second integral put $t = (2^x-1)^{1/3}$, i.e. $x = \\log_2(t^3+1)$; $t$ runs from $1$ to $2$.<br>$I_2 = \\displaystyle\\int_1^2 t\\,d\\big(\\log_2(t^3+1)\\big) = \\big[t\\log_2(t^3+1)\\big]_1^2 - \\int_1^2 \\log_2(t^3+1)\\,dt = 2\\log_2 9 - 1 - I_1$.<br>So $I_1 + I_2 = 2\\log_2 9 - 1 = 4\\log_2 3 - 1 \\approx 4(1.585) - 1 = 5.34$.<br>Greatest integer $= 5$.",
+   "subject": "Mathematics",
+   "chapter": "Integrals",
+   "chCls": "XII"
+  },
+  {
+   "no": 4,
+   "section": 1,
+   "type": "num",
+   "text": "The product of all positive real values of $x$ satisfying the equation $$x^{\\left(16(\\log_5 x)^3 - 68\\log_5 x\\right)} = 5^{-16}$$ is ________.",
+   "options": null,
+   "answer": {
+    "lo": 1,
+    "hi": 1
+   },
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Take $\\log_5$ and let $t = \\log_5 x$: $(16t^3 - 68t)\\,t = -16$.<br>$16t^4 - 68t^2 + 16 = 0 \\Rightarrow 4t^4 - 17t^2 + 4 = 0 \\Rightarrow t^2 = 4$ or $t^2 = \\dfrac14$.<br>$t = \\pm2, \\pm\\dfrac12$, whose sum is $0$.<br>Product of the $x$ values $= 5^{\\sum t} = 5^0 = 1$.",
+   "subject": "Mathematics",
+   "chapter": "Relations and Functions",
+   "chCls": "XI"
+  },
+  {
+   "no": 5,
+   "section": 1,
+   "type": "num",
+   "text": "If $$\\beta = \\lim_{x\\to0} \\frac{e^{x^3} - (1-x^3)^{\\frac13} + \\left((1-x^2)^{\\frac12} - 1\\right)\\sin x}{x\\sin^2 x},$$ then the value of $6\\beta$ is ________.",
+   "options": null,
+   "answer": {
+    "lo": 5,
+    "hi": 5
+   },
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Expand to order $x^3$: $e^{x^3} = 1 + x^3 + \\ldots$, $(1-x^3)^{1/3} = 1 - \\dfrac{x^3}{3} + \\ldots$, so $e^{x^3} - (1-x^3)^{1/3} = \\dfrac{4x^3}{3} + \\ldots$<br>$\\left((1-x^2)^{1/2} - 1\\right)\\sin x = \\left(-\\dfrac{x^2}{2} + \\ldots\\right)(x + \\ldots) = -\\dfrac{x^3}{2} + \\ldots$<br>Numerator $= \\left(\\dfrac43 - \\dfrac12\\right)x^3 + \\ldots = \\dfrac56x^3 + \\ldots$; denominator $x\\sin^2x = x^3 + \\ldots$<br>$\\beta = \\dfrac56$, so $6\\beta = 5$.",
+   "subject": "Mathematics",
+   "chapter": "Limits and Derivatives",
+   "chCls": "XI"
+  },
+  {
+   "no": 6,
+   "section": 1,
+   "type": "num",
+   "text": "Let $\\beta$ be a real number. Consider the matrix $$A = \\begin{pmatrix} \\beta & 0 & 1 \\\\ 2 & 1 & -2 \\\\ 3 & 1 & -2 \\end{pmatrix}.$$ If $A^7 - (\\beta-1)A^6 - \\beta A^5$ is a singular matrix, then the value of $9\\beta$ is ________.",
+   "options": null,
+   "answer": {
+    "lo": 3,
+    "hi": 3
+   },
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$A^7 - (\\beta-1)A^6 - \\beta A^5 = A^5\\big(A^2 - (\\beta-1)A - \\beta I\\big) = A^5(A - \\beta I)(A + I)$.<br>$\\det A = \\beta(-2+2) - 0 + 1(2-3) = -1 \\ne 0$.<br>$\\det(A+I) = \\begin{vmatrix} \\beta+1 & 0 & 1 \\\\ 2 & 2 & -2 \\\\ 3 & 1 & -1 \\end{vmatrix} = (\\beta+1)(0) + 1(2-6) = -4 \\ne 0$.<br>So we need $\\det(A - \\beta I) = \\begin{vmatrix} 0 & 0 & 1 \\\\ 2 & 1-\\beta & -2 \\\\ 3 & 1 & -2-\\beta \\end{vmatrix} = 2 - 3(1-\\beta) = 3\\beta - 1 = 0$.<br>$\\beta = \\dfrac13$, so $9\\beta = 3$.",
+   "subject": "Mathematics",
+   "chapter": "Determinants",
+   "chCls": "XII"
+  },
+  {
+   "no": 7,
+   "section": 1,
+   "type": "num",
+   "text": "Consider the hyperbola $$\\frac{x^2}{100} - \\frac{y^2}{64} = 1$$ with foci at $S$ and $S_1$, where $S$ lies on the positive $x$-axis. Let $P$ be a point on the hyperbola, in the first quadrant. Let $\\angle SPS_1 = \\alpha$, with $\\alpha &lt; \\dfrac{\\pi}{2}$. The straight line passing through the point $S$ and having the same slope as that of the tangent at $P$ to the hyperbola, intersects the straight line $S_1P$ at $P_1$. Let $\\delta$ be the distance of $P$ from the straight line $SP_1$, and $\\beta = S_1P$. Then the greatest integer less than or equal to $\\dfrac{\\beta\\delta}{9}\\sin\\dfrac{\\alpha}{2}$ is ________.",
+   "options": null,
+   "answer": {
+    "lo": 7,
+    "hi": 7
+   },
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$a = 10$, $b = 8$, $c = \\sqrt{164}$. Let $SP = r$; then $\\beta - r = 2a = 20$.<br>The tangent at $P$ bisects $\\angle SPS_1$. The line through $S$ parallel to it meets $S_1P$ (extended) at $P_1$ with $PP_1 = PS = r$ and $\\angle SPP_1 = \\pi - \\alpha$.<br>So $\\delta$ = distance from the apex of this isosceles triangle to its base $= r\\cos\\dfrac{\\pi-\\alpha}{2} = r\\sin\\dfrac{\\alpha}{2}$.<br>Required value $= \\dfrac{\\beta r}{9}\\sin^2\\dfrac{\\alpha}{2}$.<br>Cosine rule in $\\triangle SPS_1$: $4c^2 = \\beta^2 + r^2 - 2\\beta r\\cos\\alpha = (\\beta - r)^2 + 4\\beta r\\sin^2\\dfrac{\\alpha}{2}$.<br>$656 = 400 + 4\\beta r\\sin^2\\dfrac\\alpha2 \\Rightarrow \\beta r\\sin^2\\dfrac\\alpha2 = 64$.<br>Value $= \\dfrac{64}{9} \\approx 7.11$, greatest integer $= 7$.",
+   "subject": "Mathematics",
+   "chapter": "Conic Sections",
+   "chCls": "XI"
+  },
+  {
+   "no": 8,
+   "section": 1,
+   "type": "num",
+   "text": "Consider the functions $f, g : \\mathbb{R} \\to \\mathbb{R}$ defined by $$f(x) = x^2 + \\frac{5}{12} \\qquad \\text{and} \\qquad g(x) = \\begin{cases} 2\\left(1 - \\dfrac{4|x|}{3}\\right), & |x| \\le \\dfrac34, \\\\ 0, & |x| > \\dfrac34. \\end{cases}$$ If $\\alpha$ is the area of the region $$\\left\\{(x, y) \\in \\mathbb{R}\\times\\mathbb{R} : |x| \\le \\frac34,\\ 0 \\le y \\le \\min\\{f(x), g(x)\\}\\right\\},$$ then the value of $9\\alpha$ is ________.",
+   "options": null,
+   "answer": {
+    "lo": 6,
+    "hi": 6
+   },
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "For $x \\ge 0$: $x^2 + \\dfrac5{12} = 2 - \\dfrac{8x}{3} \\Rightarrow 12x^2 + 32x - 19 = 0 \\Rightarrow x = \\dfrac12$.<br>On $\\left[0, \\dfrac12\\right]$ the minimum is $f$; on $\\left[\\dfrac12, \\dfrac34\\right]$ it is $g$ (both even functions).<br>$\\displaystyle\\int_0^{1/2}\\left(x^2 + \\frac5{12}\\right)dx = \\frac1{24} + \\frac5{24} = \\frac14$.<br>On $\\left[\\dfrac12, \\dfrac34\\right]$, $g$ falls linearly from $\\dfrac23$ to $0$: area $= \\dfrac12\\cdot\\dfrac14\\cdot\\dfrac23 = \\dfrac1{12}$.<br>$\\alpha = 2\\left(\\dfrac14 + \\dfrac1{12}\\right) = \\dfrac23$, so $9\\alpha = 6$.",
+   "subject": "Mathematics",
+   "chapter": "Application of Integrals",
+   "chCls": "XII"
+  },
+  {
+   "no": 9,
+   "section": 2,
+   "type": "multi",
+   "text": "Let $PQRS$ be a quadrilateral in a plane, where $QR = 1$, $\\angle PQR = \\angle QRS = 70^\\circ$, $\\angle PQS = 15^\\circ$ and $\\angle PRS = 40^\\circ$. If $\\angle RPS = \\theta^\\circ$, $PQ = \\alpha$ and $PS = \\beta$, then the interval(s) that contain(s) the value of $4\\alpha\\beta\\sin\\theta^\\circ$ is/are",
+   "options": [
+    "$(0, \\sqrt{2})$",
+    "$(1, 2)$",
+    "$(\\sqrt{2}, 3)$",
+    "$(2\\sqrt{2}, 3\\sqrt{2})$"
+   ],
+   "answer": [
+    0,
+    1
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$\\triangle PQR$: $\\angle PQR = 70^\\circ$, $\\angle PRQ = 70^\\circ - 40^\\circ = 30^\\circ$, so $\\angle QPR = 80^\\circ$ and $\\alpha = PQ = \\dfrac{\\sin30^\\circ}{\\sin80^\\circ}$.<br>$\\triangle QRS$: $\\angle RQS = 70^\\circ - 15^\\circ = 55^\\circ$, $\\angle QRS = 70^\\circ$, so $\\angle QSR = 55^\\circ$ and $RS = QR = 1$.<br>$\\triangle PRS$, sine rule: $\\dfrac{RS}{\\sin\\theta} = \\dfrac{PS}{\\sin40^\\circ}$, so $\\beta\\sin\\theta = \\sin40^\\circ$.<br>$4\\alpha\\beta\\sin\\theta = \\dfrac{4\\sin30^\\circ\\sin40^\\circ}{\\sin80^\\circ} = \\dfrac{2\\sin40^\\circ}{2\\sin40^\\circ\\cos40^\\circ} = \\sec40^\\circ \\approx 1.305$.<br>This lies in $(0, \\sqrt2)$ and in $(1, 2)$ → (A), (B).",
+   "subject": "Mathematics",
+   "chapter": "Trigonometric Functions",
+   "chCls": "XI"
+  },
+  {
+   "no": 10,
+   "section": 2,
+   "type": "multi",
+   "text": "Let $$\\alpha = \\sum_{k=1}^{\\infty} \\sin^{2k}\\left(\\frac{\\pi}{6}\\right).$$ Let $g : [0, 1] \\to \\mathbb{R}$ be the function defined by $$g(x) = 2^{\\alpha x} + 2^{\\alpha(1-x)}.$$ Then, which of the following statements is/are TRUE ?",
+   "options": [
+    "The minimum value of $g(x)$ is $2^{\\frac76}$",
+    "The maximum value of $g(x)$ is $1 + 2^{\\frac13}$",
+    "The function $g(x)$ attains its maximum at more than one point",
+    "The function $g(x)$ attains its minimum at more than one point"
+   ],
+   "answer": [
+    0,
+    1,
+    2
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$\\alpha = \\displaystyle\\sum_{k\\ge1}\\left(\\frac14\\right)^k = \\frac13$, so $g(x) = 2^{x/3} + 2^{(1-x)/3}$.<br>By AM–GM, $g(x) \\ge 2\\sqrt{2^{1/3}} = 2^{7/6}$, with equality only at $x = \\dfrac12$: (A) true, (D) false.<br>$g$ is convex and symmetric about $x = \\dfrac12$, so its maximum is at both ends: $g(0) = g(1) = 1 + 2^{1/3}$: (B) and (C) true.<br>Answer (A), (B), (C).",
+   "subject": "Mathematics",
+   "chapter": "Application of Derivatives",
+   "chCls": "XII"
+  },
+  {
+   "no": 11,
+   "section": 2,
+   "type": "multi",
+   "text": "Let $\\bar z$ denote the complex conjugate of a complex number $z$. If $z$ is a non-zero complex number for which both real and imaginary parts of $$(\\bar z)^2 + \\frac{1}{z^2}$$ are integers, then which of the following is/are possible value(s) of $|z|$ ?",
+   "options": [
+    "$\\left(\\dfrac{43+3\\sqrt{205}}{2}\\right)^{\\frac14}$",
+    "$\\left(\\dfrac{7+\\sqrt{33}}{4}\\right)^{\\frac14}$",
+    "$\\left(\\dfrac{9+\\sqrt{65}}{4}\\right)^{\\frac14}$",
+    "$\\left(\\dfrac{7+\\sqrt{13}}{6}\\right)^{\\frac14}$"
+   ],
+   "answer": [
+    0
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Let $z = re^{i\\theta}$: $(\\bar z)^2 + \\dfrac1{z^2} = \\left(r^2 + \\dfrac1{r^2}\\right)e^{-2i\\theta}$.<br>If its real and imaginary parts are integers $p, q$, then $\\left(r^2 + \\dfrac1{r^2}\\right)^2 = r^4 + \\dfrac1{r^4} + 2 = p^2 + q^2$ must be an integer that is a sum of two squares.<br>(A) $r^4 = \\dfrac{43+3\\sqrt{205}}{2}$, $\\dfrac1{r^4} = \\dfrac{43-3\\sqrt{205}}{2}$: $r^4 + \\dfrac1{r^4} + 2 = 45 = 6^2 + 3^2$ ✓.<br>(B) $r^4 + \\dfrac1{r^4} = \\dfrac72$, giving $\\dfrac{11}2$; (C) $\\dfrac92$, giving $\\dfrac{13}2$; (D) $\\dfrac73$, giving $\\dfrac{13}3$ – not integers.<br>Answer (A).",
+   "subject": "Mathematics",
+   "chapter": "Complex Numbers",
+   "chCls": "XI"
+  },
+  {
+   "no": 12,
+   "section": 2,
+   "type": "multi",
+   "text": "Let $G$ be a circle of radius $R > 0$. Let $G_1, G_2, \\ldots, G_n$ be $n$ circles of equal radius $r > 0$. Suppose each of the $n$ circles $G_1, G_2, \\ldots, G_n$ touches the circle $G$ externally. Also, for $i = 1, 2, \\ldots, n-1$, the circle $G_i$ touches $G_{i+1}$ externally, and $G_n$ touches $G_1$ externally. Then, which of the following statements is/are TRUE ?",
+   "options": [
+    "If $n = 4$, then $(\\sqrt{2} - 1)r &lt; R$",
+    "If $n = 5$, then $r &lt; R$",
+    "If $n = 8$, then $(\\sqrt{2} - 1)r &lt; R$",
+    "If $n = 12$, then $\\sqrt{2}(\\sqrt{3} + 1)r > R$"
+   ],
+   "answer": [
+    2,
+    3
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "The centres of the small circles lie on a circle of radius $R + r$, adjacent centres $2r$ apart: $(R + r)\\sin\\dfrac{\\pi}{n} = r$, i.e. $R = r\\left(\\dfrac{1}{\\sin(\\pi/n)} - 1\\right)$.<br>$n = 4$: $R = (\\sqrt2 - 1)r$, so (A) (strict inequality) is false.<br>$n = 5$: $R = r(1/\\sin36^\\circ - 1) \\approx 0.70r$, so $r &lt; R$ is false.<br>$n = 8$: $R = r(1/\\sin22.5^\\circ - 1) \\approx 1.61r > (\\sqrt2 - 1)r$: (C) true.<br>$n = 12$: $\\dfrac1{\\sin15^\\circ} = \\sqrt2(\\sqrt3 + 1)$, so $R = \\sqrt2(\\sqrt3+1)r - r &lt; \\sqrt2(\\sqrt3+1)r$: (D) true.<br>Answer (C), (D).",
+   "subject": "Mathematics",
+   "chapter": "Conic Sections",
+   "chCls": "XI"
+  },
+  {
+   "no": 13,
+   "section": 2,
+   "type": "multi",
+   "text": "Let $\\hat\\imath$, $\\hat\\jmath$ and $\\hat k$ be the unit vectors along the three positive coordinate axes. Let $$\\vec a = 3\\hat\\imath + \\hat\\jmath - \\hat k,$$ $$\\vec b = \\hat\\imath + b_2\\hat\\jmath + b_3\\hat k, \\quad b_2, b_3 \\in \\mathbb{R},$$ $$\\vec c = c_1\\hat\\imath + c_2\\hat\\jmath + c_3\\hat k, \\quad c_1, c_2, c_3 \\in \\mathbb{R}$$ be three vectors such that $b_2b_3 > 0$, $\\vec a\\cdot\\vec b = 0$ and $$\\begin{pmatrix} 0 & -c_3 & c_2 \\\\ c_3 & 0 & -c_1 \\\\ -c_2 & c_1 & 0 \\end{pmatrix}\\begin{pmatrix} 1 \\\\ b_2 \\\\ b_3 \\end{pmatrix} = \\begin{pmatrix} 3 - c_1 \\\\ 1 - c_2 \\\\ -1 - c_3 \\end{pmatrix}.$$ Then, which of the following is/are TRUE ?",
+   "options": [
+    "$\\vec a\\cdot\\vec c = 0$",
+    "$\\vec b\\cdot\\vec c = 0$",
+    "$|\\vec b| > \\sqrt{10}$",
+    "$|\\vec c| \\le \\sqrt{11}$"
+   ],
+   "answer": [
+    1,
+    2,
+    3
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "The matrix product is $\\vec c\\times\\vec b$, so $\\vec c\\times\\vec b = \\vec a - \\vec c$.<br>Dot with $\\vec c$: $0 = \\vec a\\cdot\\vec c - |\\vec c|^2$, so $\\vec a\\cdot\\vec c = |\\vec c|^2$. If $\\vec a\\cdot\\vec c = 0$ then $\\vec c = \\vec 0$ and $\\vec a = \\vec 0$, impossible: (A) false.<br>Dot with $\\vec b$: $0 = \\vec a\\cdot\\vec b - \\vec b\\cdot\\vec c = -\\vec b\\cdot\\vec c$: (B) true.<br>$\\vec a\\cdot\\vec b = 0 \\Rightarrow b_3 = b_2 + 3$; $b_2b_3 > 0 \\Rightarrow b_2 > 0$ or $b_2 &lt; -3$, so $b_2^2 + (b_2+3)^2 > 9$ and $|\\vec b|^2 > 10$: (C) true.<br>$|\\vec c\\times\\vec b|^2 = |\\vec c|^2|\\vec b|^2$ (as $\\vec b\\perp\\vec c$) and $|\\vec a - \\vec c|^2 = 11 - 2|\\vec c|^2 + |\\vec c|^2 = 11 - |\\vec c|^2$.<br>So $|\\vec c|^2(|\\vec b|^2 + 1) = 11$, $|\\vec c|^2 &lt; 11$: (D) true.<br>Answer (B), (C), (D).",
+   "subject": "Mathematics",
+   "chapter": "Vector Algebra",
+   "chCls": "XII"
+  },
+  {
+   "no": 14,
+   "section": 2,
+   "type": "multi",
+   "text": "For $x \\in \\mathbb{R}$, let the function $y(x)$ be the solution of the differential equation $$\\frac{dy}{dx} + 12y = \\cos\\left(\\frac{\\pi}{12}x\\right), \\qquad y(0) = 0.$$ Then, which of the following statements is/are TRUE ?",
+   "options": [
+    "$y(x)$ is an increasing function",
+    "$y(x)$ is a decreasing function",
+    "There exists a real number $\\beta$ such that the line $y = \\beta$ intersects the curve $y = y(x)$ at infinitely many points",
+    "$y(x)$ is a periodic function"
+   ],
+   "answer": [
+    2
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Let $\\omega = \\dfrac{\\pi}{12}$. A particular solution $a\\cos\\omega x + b\\sin\\omega x$ needs $12a + b\\omega = 1$, $12b - a\\omega = 0$: $a = \\dfrac{12}{144+\\omega^2}$, $b = \\dfrac{\\omega}{144+\\omega^2}$.<br>With $y(0) = 0$: $y(x) = \\dfrac{12\\cos\\omega x + \\omega\\sin\\omega x - 12e^{-12x}}{144 + \\omega^2}$.<br>For large $x$, $y$ is essentially a sinusoid of period $24$, so it keeps rising and falling: (A), (B) false.<br>The term $e^{-12x}$ makes $y$ not periodic: (D) false.<br>For any $\\beta$ strictly inside the range of the sinusoid (e.g. $\\beta = 0$), the line $y = \\beta$ cuts the curve once in every half-period: infinitely many points, (C) true.<br>Answer (C).",
+   "subject": "Mathematics",
+   "chapter": "Differential Equations",
+   "chCls": "XII"
+  },
+  {
+   "no": 15,
+   "section": 3,
+   "type": "single",
+   "text": "Consider 4 boxes, where each box contains 3 red balls and 2 blue balls. Assume that all 20 balls are distinct. In how many different ways can 10 balls be chosen from these 4 boxes so that from each box at least one red ball and one blue ball are chosen ?",
+   "options": [
+    "$21816$",
+    "$85536$",
+    "$12096$",
+    "$156816$"
+   ],
+   "answer": 0,
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "From one box, with at least one red and one blue: 2 balls in $3\\cdot2 = 6$ ways, 3 balls in $\\binom32\\cdot2 + 3\\cdot1 = 9$ ways, 4 balls in $2 + 3 = 5$ ways, 5 balls in $1$ way.<br>Each box gives at least 2 balls (8 in all), so 2 extra balls are spread over the boxes.<br>One box takes 4 balls: $4\\cdot5\\cdot6^3 = 4320$.<br>Two boxes take 3 balls each: $\\binom42\\cdot9^2\\cdot6^2 = 17496$.<br>Total $= 21816$ → (A).",
+   "subject": "Mathematics",
+   "chapter": "Permutations and Combinations",
+   "chCls": "XI"
+  },
+  {
+   "no": 16,
+   "section": 3,
+   "type": "single",
+   "text": "If $M = \\begin{pmatrix} \\frac52 & \\frac32 \\\\ -\\frac32 & -\\frac12 \\end{pmatrix}$, then which of the following matrices is equal to $M^{2022}$ ?",
+   "options": [
+    "$\\begin{pmatrix} 3034 & 3033 \\\\ -3033 & -3032 \\end{pmatrix}$",
+    "$\\begin{pmatrix} 3034 & -3033 \\\\ 3033 & -3032 \\end{pmatrix}$",
+    "$\\begin{pmatrix} 3033 & 3032 \\\\ -3032 & -3031 \\end{pmatrix}$",
+    "$\\begin{pmatrix} 3032 & 3031 \\\\ -3031 & -3030 \\end{pmatrix}$"
+   ],
+   "answer": 0,
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$M = I + N$ with $N = \\begin{pmatrix} \\frac32 & \\frac32 \\\\ -\\frac32 & -\\frac32 \\end{pmatrix}$, and $N^2 = O$.<br>So $M^n = I + nN$; for $n = 2022$, $nN$ has entries $\\pm2022\\cdot\\dfrac32 = \\pm3033$.<br>$M^{2022} = \\begin{pmatrix} 3034 & 3033 \\\\ -3033 & -3032 \\end{pmatrix}$ → (A).",
+   "subject": "Mathematics",
+   "chapter": "Matrices",
+   "chCls": "XII"
+  },
+  {
+   "no": 17,
+   "section": 3,
+   "type": "single",
+   "text": "Suppose that<br>Box-I contains 8 red, 3 blue and 5 green balls,<br>Box-II contains 24 red, 9 blue and 15 green balls,<br>Box-III contains 1 blue, 12 green and 3 yellow balls,<br>Box-IV contains 10 green, 16 orange and 6 white balls.<br>A ball is chosen randomly from Box-I; call this ball $b$. If $b$ is red then a ball is chosen randomly from Box-II, if $b$ is blue then a ball is chosen randomly from Box-III, and if $b$ is green then a ball is chosen randomly from Box-IV. The conditional probability of the event ‘one of the chosen balls is white’ given that the event ‘at least one of the chosen balls is green’ has happened, is equal to",
+   "options": [
+    "$\\dfrac{15}{256}$",
+    "$\\dfrac{3}{16}$",
+    "$\\dfrac{5}{52}$",
+    "$\\dfrac{1}{8}$"
+   ],
+   "answer": 2,
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$P(\\text{at least one green}) = \\dfrac5{16} + \\dfrac8{16}\\cdot\\dfrac{15}{48} + \\dfrac3{16}\\cdot\\dfrac{12}{16} = \\dfrac{20}{64} + \\dfrac{10}{64} + \\dfrac9{64} = \\dfrac{39}{64}$.<br>White is possible only from Box-IV, i.e. when $b$ is green (so the green condition holds): $P(\\text{white} \\cap \\text{green}) = \\dfrac5{16}\\cdot\\dfrac6{32} = \\dfrac{15}{256}$.<br>Required probability $= \\dfrac{15/256}{39/64} = \\dfrac{15}{156} = \\dfrac5{52}$ → (C).",
+   "subject": "Mathematics",
+   "chapter": "Probability",
+   "chCls": "XII"
+  },
+  {
+   "no": 18,
+   "section": 3,
+   "type": "single",
+   "text": "For positive integer $n$, define $$f(n) = n + \\frac{16 + 5n - 3n^2}{4n + 3n^2} + \\frac{32 + n - 3n^2}{8n + 3n^2} + \\frac{48 - 3n - 3n^2}{12n + 3n^2} + \\cdots + \\frac{25n - 7n^2}{7n^2}.$$ Then, the value of $\\displaystyle\\lim_{n\\to\\infty} f(n)$ is equal to",
+   "options": [
+    "$3 + \\dfrac43\\log_e 7$",
+    "$4 - \\dfrac34\\log_e\\left(\\dfrac73\\right)$",
+    "$4 - \\dfrac43\\log_e\\left(\\dfrac73\\right)$",
+    "$3 + \\dfrac34\\log_e 7$"
+   ],
+   "answer": 1,
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "The $k$-th fraction is $\\dfrac{16k + (9-4k)n - 3n^2}{4kn + 3n^2}$; the last one is $k = n$ (denominator $7n^2$, numerator $25n - 7n^2$).<br>Each fraction $= -1 + \\dfrac{16k + 9n}{4kn + 3n^2}$, and the $n$ terms $-1$ cancel the leading $n$.<br>$f(n) = \\displaystyle\\sum_{k=1}^{n} \\frac1n\\cdot\\frac{16(k/n) + 9}{4(k/n) + 3} \\to \\int_0^1 \\frac{16x + 9}{4x + 3}\\,dx$.<br>$\\dfrac{16x+9}{4x+3} = 4 - \\dfrac{3}{4x+3}$, so the integral $= 4 - \\dfrac34\\ln\\dfrac73$ → (B).",
+   "subject": "Mathematics",
+   "chapter": "Integrals",
+   "chCls": "XII"
+  },
+  {
+   "no": 1,
+   "section": 1,
+   "type": "num",
+   "text": "A particle of mass $1$ kg is subjected to a force which depends on the position as $\\vec F = -k(x\\hat\\imath + y\\hat\\jmath)$ kg m s$^{-2}$ with $k = 1$ kg s$^{-2}$. At time $t = 0$, the particle’s position $\\vec r = \\left(\\dfrac{1}{\\sqrt2}\\hat\\imath + \\sqrt2\\hat\\jmath\\right)$ m and its velocity $\\vec v = \\left(-\\sqrt2\\hat\\imath + \\sqrt2\\hat\\jmath + \\dfrac{2}{\\pi}\\hat k\\right)$ m s$^{-1}$. Let $v_x$ and $v_y$ denote the $x$ and the $y$ components of the particle’s velocity, respectively. Ignore gravity. When $z = 0.5$ m, the value of $(x v_y - y v_x)$ is ________ m$^2$s$^{-1}$.",
+   "options": null,
+   "answer": {
+    "lo": 3,
+    "hi": 3
+   },
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "The force has no $z$ component and in the $xy$ plane it points towards the $z$-axis, so its torque about the $z$-axis is zero.<br>Hence $L_z = m(xv_y - yv_x)$ is conserved, whatever the value of $z$.<br>At $t = 0$: $xv_y - yv_x = \\dfrac1{\\sqrt2}\\cdot\\sqrt2 - \\sqrt2\\cdot(-\\sqrt2) = 1 + 2 = 3$ m$^2$s$^{-1}$.",
+   "subject": "Physics",
+   "chapter": "System of Particles and Rotational Motion",
+   "chCls": "XI"
+  },
+  {
+   "no": 2,
+   "section": 1,
+   "type": "num",
+   "text": "In a radioactive decay chain reaction, ${}^{230}_{90}\\mathrm{Th}$ nucleus decays into ${}^{214}_{84}\\mathrm{Po}$ nucleus. The ratio of the number of $\\alpha$ to number of $\\beta^-$ particles emitted in this process is ________.",
+   "options": null,
+   "answer": {
+    "lo": 2,
+    "hi": 2
+   },
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Mass number falls by $230 - 214 = 16$, so there are $4$ $\\alpha$ decays.<br>These lower $Z$ by $8$, but $Z$ falls only by $90 - 84 = 6$, so there are $2$ $\\beta^-$ decays.<br>Ratio $= 4 : 2 = 2$.",
+   "subject": "Physics",
+   "chapter": "Nuclei",
+   "chCls": "XII"
+  },
+  {
+   "no": 3,
+   "section": 1,
+   "type": "num",
+   "text": "Two resistances $R_1 = X\\ \\Omega$ and $R_2 = 1\\ \\Omega$ are connected to a wire $AB$ of uniform resistivity, as shown in the figure. The radius of the wire varies linearly along its axis from $0.2$ mm at $A$ to $1$ mm at $B$. A galvanometer (G) connected to the center of the wire, $50$ cm from each end along its axis, shows zero deflection when $A$ and $B$ are connected to a battery. The value of $X$ is ________.",
+   "options": null,
+   "answer": {
+    "lo": 5,
+    "hi": 5
+   },
+   "full": 3,
+   "neg": 1,
+   "fig": "phy-q3.png",
+   "optionFigs": null,
+   "sol": "For radius varying linearly, $r = r_1 + \\dfrac{(r_2 - r_1)x}{L}$: $\\displaystyle R = \\int\\frac{\\rho\\,dx}{\\pi r^2} = \\frac{\\rho L}{\\pi(r_2 - r_1)}\\left(\\frac1{r_1} - \\frac1{r_2}\\right)$, so $R \\propto \\dfrac1{r_\\text{start}} - \\dfrac1{r_\\text{end}}$ for equal slope.<br>The middle has radius $0.6$ mm. $R_{AM} \\propto \\dfrac1{0.2} - \\dfrac1{0.6} = \\dfrac{10}3$; $R_{MB} \\propto \\dfrac1{0.6} - \\dfrac11 = \\dfrac23$.<br>Balanced bridge: $\\dfrac{R_1}{R_2} = \\dfrac{R_{AM}}{R_{MB}} = 5$, so $X = 5$.",
+   "subject": "Physics",
+   "chapter": "Current Electricity",
+   "chCls": "XII"
+  },
+  {
+   "no": 4,
+   "section": 1,
+   "type": "num",
+   "text": "In a particular system of units, a physical quantity can be expressed in terms of the electric charge $e$, electron mass $m_e$, Planck’s constant $h$, and Coulomb’s constant $k = \\dfrac{1}{4\\pi\\epsilon_0}$, where $\\epsilon_0$ is the permittivity of vacuum. In terms of these physical constants, the dimension of the magnetic field is $[B] = [e]^\\alpha[m_e]^\\beta[h]^\\gamma[k]^\\delta$. The value of $\\alpha + \\beta + \\gamma + \\delta$ is ________.",
+   "options": null,
+   "answer": {
+    "lo": 4,
+    "hi": 4
+   },
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$[B] = \\mathrm{M\\,T^{-1}Q^{-1}}$, $[e] = \\mathrm Q$, $[m_e] = \\mathrm M$, $[h] = \\mathrm{ML^2T^{-1}}$, $[k] = \\mathrm{ML^3T^{-2}Q^{-2}}$.<br>M: $\\beta + \\gamma + \\delta = 1$; L: $2\\gamma + 3\\delta = 0$; T: $-\\gamma - 2\\delta = -1$; Q: $\\alpha - 2\\delta = -1$.<br>From T and L: $\\gamma = 1 - 2\\delta$, $2 - \\delta = 0$, so $\\delta = 2$, $\\gamma = -3$; then $\\beta = 2$, $\\alpha = 3$.<br>$\\alpha + \\beta + \\gamma + \\delta = 3 + 2 - 3 + 2 = 4$.",
+   "subject": "Physics",
+   "chapter": "Units and Measurements",
+   "chCls": "XI"
+  },
+  {
+   "no": 5,
+   "section": 1,
+   "type": "num",
+   "text": "Consider a configuration of $n$ identical units, each consisting of three layers. The first layer is a column of air of height $h = \\dfrac13$ cm, and the second and third layers are of equal thickness $d = \\dfrac{\\sqrt3 - 1}{2}$ cm, and refractive indices $\\mu_1 = \\sqrt{\\dfrac32}$ and $\\mu_2 = \\sqrt3$, respectively. A light source O is placed on the top of the first unit, as shown in the figure. A ray of light from O is incident on the second layer of the first unit at an angle of $\\theta = 60^\\circ$ to the normal. For a specific value of $n$, the ray of light emerges from the bottom of the configuration at a distance $l = \\dfrac{8}{\\sqrt3}$ cm, as shown in the figure. The value of $n$ is ________.",
+   "options": null,
+   "answer": {
+    "lo": 4,
+    "hi": 4
+   },
+   "full": 3,
+   "neg": 1,
+   "fig": "phy-q5.png",
+   "optionFigs": null,
+   "sol": "Snell: $\\sin60^\\circ = \\mu_1\\sin\\theta_1 \\Rightarrow \\sin\\theta_1 = \\dfrac{\\sqrt3/2}{\\sqrt{3/2}} = \\dfrac1{\\sqrt2}$, $\\theta_1 = 45^\\circ$; $\\sin\\theta_2 = \\dfrac{\\sqrt3/2}{\\sqrt3} = \\dfrac12$, $\\theta_2 = 30^\\circ$.<br>Sideways shift per unit: $h\\tan60^\\circ + d\\tan45^\\circ + d\\tan30^\\circ = \\dfrac1{\\sqrt3} + \\dfrac{\\sqrt3-1}{2} + \\dfrac{\\sqrt3-1}{2\\sqrt3}$.<br>Over the common denominator $2\\sqrt3$: $\\dfrac{2 + (3 - \\sqrt3) + (\\sqrt3 - 1)}{2\\sqrt3} = \\dfrac{4}{2\\sqrt3} = \\dfrac2{\\sqrt3}$ cm.<br>$n\\cdot\\dfrac2{\\sqrt3} = \\dfrac8{\\sqrt3} \\Rightarrow n = 4$.",
+   "subject": "Physics",
+   "chapter": "Ray Optics and Optical Instruments",
+   "chCls": "XII"
+  },
+  {
+   "no": 6,
+   "section": 1,
+   "type": "num",
+   "text": "A charge $q$ is surrounded by a closed surface consisting of an inverted cone of height $h$ and base radius $R$, and a hemisphere of radius $R$ as shown in the figure. The electric flux through the conical surface is $\\dfrac{nq}{6\\epsilon_0}$ (in SI units). The value of $n$ is ________.",
+   "options": null,
+   "answer": {
+    "lo": 3,
+    "hi": 3
+   },
+   "full": 3,
+   "neg": 1,
+   "fig": "phy-q6.png",
+   "optionFigs": null,
+   "sol": "The charge sits at the centre of the common circular face, so the hemisphere subtends exactly half of the full solid angle: flux through it $= \\dfrac{q}{2\\epsilon_0}$.<br>Total flux through the closed surface is $\\dfrac{q}{\\epsilon_0}$ (Gauss), so the cone carries $\\dfrac{q}{\\epsilon_0} - \\dfrac{q}{2\\epsilon_0} = \\dfrac{q}{2\\epsilon_0} = \\dfrac{3q}{6\\epsilon_0}$.<br>$n = 3$.",
+   "subject": "Physics",
+   "chapter": "Electric Charges and Fields",
+   "chCls": "XII"
+  },
+  {
+   "no": 7,
+   "section": 1,
+   "type": "num",
+   "text": "On a frictionless horizontal plane, a bob of mass $m = 0.1$ kg is attached to a spring with natural length $l_0 = 0.1$ m. The spring constant is $k_1 = 0.009$ N m$^{-1}$ when the length of the spring $l > l_0$ and is $k_2 = 0.016$ N m$^{-1}$ when $l &lt; l_0$. Initially the bob is released from $l = 0.15$ m. Assume that Hooke’s law remains valid throughout the motion. If the time period of the full oscillation is $T = (n\\pi)$ s, then the integer closest to $n$ is ________.",
+   "options": null,
+   "answer": {
+    "lo": 6,
+    "hi": 6
+   },
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "The bob spends half a period of each SHM on each side of $l_0$.<br>$T = \\pi\\sqrt{\\dfrac{m}{k_1}} + \\pi\\sqrt{\\dfrac{m}{k_2}} = \\pi\\left(\\sqrt{\\dfrac{0.1}{0.009}} + \\sqrt{\\dfrac{0.1}{0.016}}\\right) = \\pi\\left(\\dfrac{10}3 + \\dfrac52\\right) = \\dfrac{35}{6}\\pi$ s.<br>$n = 5.83$, closest integer $6$.",
+   "subject": "Physics",
+   "chapter": "Oscillations",
+   "chCls": "XI"
+  },
+  {
+   "no": 8,
+   "section": 1,
+   "type": "num",
+   "text": "An object and a concave mirror of focal length $f = 10$ cm both move along the principal axis of the mirror with constant speeds. The object moves with speed $V_0 = 15$ cm s$^{-1}$ towards the mirror with respect to a laboratory frame. The distance between the object and the mirror at a given moment is denoted by $u$. When $u = 30$ cm, the speed of the mirror $V_m$ is such that the image is instantaneously at rest with respect to the laboratory frame, and the object forms a real image. The magnitude of $V_m$ is ________ cm s$^{-1}$.",
+   "options": null,
+   "answer": {
+    "lo": 3,
+    "hi": 3
+   },
+   "full": 3,
+   "neg": 1,
+   "fig": "phy-q8.png",
+   "optionFigs": null,
+   "sol": "At $u = 30$ cm: $\\dfrac1v = \\dfrac1{10} - \\dfrac1{30}$, so the real image is at $v = 15$ cm in front of the mirror.<br>Differentiating $\\dfrac1u + \\dfrac1v = \\dfrac1f$: $\\dot v = -\\dfrac{v^2}{u^2}\\dot u = -\\dfrac14\\dot u$.<br>Take the axis towards the mirror, mirror at $x_m$: object at $x_m - u$, image at $x_m - v$. With mirror velocity $V_m$, $\\dot u = V_m - 15$.<br>Image velocity $= V_m - \\dot v = V_m + \\dfrac14(V_m - 15) = 0 \\Rightarrow V_m = 3$ cm s$^{-1}$.",
+   "subject": "Physics",
+   "chapter": "Ray Optics and Optical Instruments",
+   "chCls": "XII"
+  },
+  {
+   "no": 9,
+   "section": 2,
+   "type": "multi",
+   "text": "In the figure, the inner (shaded) region $A$ represents a sphere of radius $r_A = 1$, within which the electrostatic charge density varies with the radial distance $r$ from the center as $\\rho_A = kr$, where $k$ is positive. In the spherical shell $B$ of outer radius $r_B$, the electrostatic charge density varies as $\\rho_B = \\dfrac{2k}{r}$. Assume that dimensions are taken care of. All physical quantities are in their SI units.<br>Which of the following statement(s) is(are) correct?",
+   "options": [
+    "If $r_B = \\sqrt{\\dfrac32}$, then the electric field is zero everywhere outside $B$.",
+    "If $r_B = \\dfrac32$, then the electric potential just outside $B$ is $\\dfrac{k}{\\epsilon_0}$.",
+    "If $r_B = 2$, then the total charge of the configuration is $15\\pi k$.",
+    "If $r_B = \\dfrac52$, then the magnitude of the electric field just outside $B$ is $\\dfrac{13\\pi k}{\\epsilon_0}$."
+   ],
+   "answer": [
+    1
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": "phy-q9.png",
+   "optionFigs": null,
+   "sol": "$Q_A = \\displaystyle\\int_0^1 kr\\cdot4\\pi r^2\\,dr = \\pi k$; $Q_B = \\displaystyle\\int_1^{r_B}\\frac{2k}{r}4\\pi r^2\\,dr = 4\\pi k(r_B^2 - 1)$.<br>(A) Total charge is always positive, so the field outside is never zero: false.<br>(B) $r_B = \\dfrac32$: $Q = \\pi k + 5\\pi k = 6\\pi k$; $V = \\dfrac{Q}{4\\pi\\epsilon_0 r_B} = \\dfrac{6\\pi k}{6\\pi\\epsilon_0} = \\dfrac{k}{\\epsilon_0}$: true.<br>(C) $r_B = 2$: $Q = \\pi k + 12\\pi k = 13\\pi k \\ne 15\\pi k$: false.<br>(D) $r_B = \\dfrac52$: $Q = \\pi k + 21\\pi k = 22\\pi k$; $E = \\dfrac{22\\pi k}{4\\pi\\epsilon_0(25/4)} = \\dfrac{22k}{25\\epsilon_0} \\ne \\dfrac{13\\pi k}{\\epsilon_0}$: false.<br>Answer (B).",
+   "subject": "Physics",
+   "chapter": "Electric Charges and Fields",
+   "chCls": "XII"
+  },
+  {
+   "no": 10,
+   "section": 2,
+   "type": "multi",
+   "text": "In Circuit-1 and Circuit-2 shown in the figures, $R_1 = 1\\ \\Omega$, $R_2 = 2\\ \\Omega$ and $R_3 = 3\\ \\Omega$.<br>$P_1$ and $P_2$ are the power dissipations in Circuit-1 and Circuit-2 when the switches S$_1$ and S$_2$ are in open conditions, respectively.<br>$Q_1$ and $Q_2$ are the power dissipations in Circuit-1 and Circuit-2 when the switches S$_1$ and S$_2$ are in closed conditions, respectively.<br>Which of the following statement(s) is(are) correct?",
+   "options": [
+    "When a voltage source of $6$ V is connected across A and B in both circuits, $P_1 &lt; P_2$.",
+    "When a constant current source of $2$ Amp is connected across A and B in both circuits, $P_1 > P_2$.",
+    "When a voltage source of $6$ V is connected across A and B in Circuit-1, $Q_1 > P_1$.",
+    "When a constant current source of $2$ Amp is connected across A and B in both circuits, $Q_2 &lt; Q_1$."
+   ],
+   "answer": [
+    0,
+    1,
+    2
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": "phy-q10.png",
+   "optionFigs": null,
+   "sol": "Circuit-1: $R_1$ in series with $(R_2 + R_3) \\parallel \\dfrac{R_1}{2} = 5 \\parallel 0.5 = \\dfrac5{11}\\ \\Omega$. Open: $\\dfrac{16}{11}\\ \\Omega$; closed (S$_1$ shorts $R_1$): $\\dfrac5{11}\\ \\Omega$.<br>Circuit-2: $1 \\parallel 2 \\parallel 3 = \\dfrac6{11}\\ \\Omega$ open; closed, add $2R_3 = 6\\ \\Omega$ in parallel: $\\dfrac12\\ \\Omega$.<br>(A) 6 V: $P = V^2/R$, smaller $R$ dissipates more; $\\dfrac{16}{11} > \\dfrac6{11}$, so $P_1 &lt; P_2$: true.<br>(B) 2 A: $P = I^2R$, so $P_1 > P_2$: true.<br>(C) 6 V on Circuit-1: $\\dfrac5{11} &lt; \\dfrac{16}{11}$, so $Q_1 > P_1$: true.<br>(D) 2 A: $Q_2 = 4\\cdot\\dfrac12 = 2$ W, $Q_1 = 4\\cdot\\dfrac5{11} \\approx 1.82$ W, so $Q_2 > Q_1$: false.<br>Answer (A), (B), (C).",
+   "subject": "Physics",
+   "chapter": "Current Electricity",
+   "chCls": "XII"
+  },
+  {
+   "no": 11,
+   "section": 2,
+   "type": "multi",
+   "text": "A bubble has surface tension $S$. The ideal gas inside the bubble has ratio of specific heats $\\gamma = \\dfrac53$. The bubble is exposed to the atmosphere and it always retains its spherical shape. When the atmospheric pressure is $P_{a1}$, the radius of the bubble is found to be $r_1$ and the temperature of the enclosed gas is $T_1$. When the atmospheric pressure is $P_{a2}$, the radius of the bubble and the temperature of the enclosed gas are $r_2$ and $T_2$, respectively.<br>Which of the following statement(s) is(are) correct?",
+   "options": [
+    "If the surface of the bubble is a perfect heat insulator, then $\\left(\\dfrac{r_1}{r_2}\\right)^5 = \\dfrac{P_{a2} + \\frac{2S}{r_2}}{P_{a1} + \\frac{2S}{r_1}}$.",
+    "If the surface of the bubble is a perfect heat insulator, then the total internal energy of the bubble including its surface energy does not change with the external atmospheric pressure.",
+    "If the surface of the bubble is a perfect heat conductor and the change in atmospheric temperature is negligible, then $\\left(\\dfrac{r_1}{r_2}\\right)^3 = \\dfrac{P_{a2} + \\frac{4S}{r_2}}{P_{a1} + \\frac{4S}{r_1}}$.",
+    "If the surface of the bubble is a perfect heat insulator, then $\\left(\\dfrac{T_2}{T_1}\\right)^{\\frac52} = \\dfrac{P_{a2} + \\frac{4S}{r_2}}{P_{a1} + \\frac{4S}{r_1}}$."
+   ],
+   "answer": [
+    2,
+    3
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "A bubble has two surfaces, so the gas pressure is $P = P_a + \\dfrac{4S}{r}$, and $V \\propto r^3$.<br>(A) Adiabatic: $PV^\\gamma = $ const, $Pr^5 = $ const, so $\\left(\\dfrac{r_1}{r_2}\\right)^5 = \\dfrac{P_{a2} + 4S/r_2}{P_{a1} + 4S/r_1}$; the option has $2S$: false.<br>(B) The gas does work against the atmosphere as the bubble changes size, so the total energy (gas plus surface) changes: false.<br>(C) Isothermal: $Pr^3 = $ const, so $\\left(\\dfrac{r_1}{r_2}\\right)^3 = \\dfrac{P_{a2} + 4S/r_2}{P_{a1} + 4S/r_1}$: true.<br>(D) Adiabatic: $T \\propto P^{(\\gamma-1)/\\gamma} = P^{2/5}$, so $\\left(\\dfrac{T_2}{T_1}\\right)^{5/2} = \\dfrac{P_{a2} + 4S/r_2}{P_{a1} + 4S/r_1}$: true.<br>Answer (C), (D).",
+   "subject": "Physics",
+   "chapter": "Mechanical Properties of Fluids",
+   "chCls": "XI"
+  },
+  {
+   "no": 12,
+   "section": 2,
+   "type": "multi",
+   "text": "A disk of radius $R$ with uniform positive charge density $\\sigma$ is placed on the $xy$ plane with its center at the origin. The Coulomb potential along the $z$-axis is $$V(z) = \\frac{\\sigma}{2\\epsilon_0}\\left(\\sqrt{R^2 + z^2} - z\\right).$$ A particle of positive charge $q$ is placed initially at rest at a point on the $z$ axis with $z = z_0$ and $z_0 > 0$. In addition to the Coulomb force, the particle experiences a vertical force $\\vec F = -c\\,\\hat k$ with $c > 0$. Let $\\beta = \\dfrac{2c\\epsilon_0}{q\\sigma}$. Which of the following statement(s) is(are) correct?",
+   "options": [
+    "For $\\beta = \\dfrac14$ and $z_0 = \\dfrac{25}{7}R$, the particle reaches the origin.",
+    "For $\\beta = \\dfrac14$ and $z_0 = \\dfrac37R$, the particle reaches the origin.",
+    "For $\\beta = \\dfrac14$ and $z_0 = \\dfrac{R}{\\sqrt3}$, the particle returns back to $z = z_0$.",
+    "For $\\beta > 1$ and $z_0 > 0$, the particle always reaches the origin."
+   ],
+   "answer": [
+    0,
+    2,
+    3
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "With $K = \\dfrac{q\\sigma}{2\\epsilon_0}$, $c = \\beta K$ and the total potential energy is $U(z) = K\\left[\\sqrt{R^2+z^2} - (1-\\beta)z\\right]$.<br>$\\beta = \\dfrac14$: $U'(z) = K\\left[\\dfrac{z}{\\sqrt{R^2+z^2}} - \\dfrac34\\right]$, zero at $z = \\dfrac{3R}{\\sqrt7}$ (a minimum of $U$).<br>Starting beyond this point the particle moves down; it reaches the origin if $U(z_0) \\ge U(0) = KR$: $\\sqrt{R^2+z_0^2} \\ge R + \\dfrac{3z_0}{4} \\iff z_0 \\ge \\dfrac{24R}{7}$.<br>(A) $z_0 = \\dfrac{25R}{7} > \\dfrac{24R}{7}$: reaches the origin, true.<br>(B) $z_0 = \\dfrac{3R}{7}$ and (C) $z_0 = \\dfrac{R}{\\sqrt3}$ are below $\\dfrac{3R}{\\sqrt7}$: the net force is upward, the particle oscillates about the minimum and returns to $z_0$. (B) false, (C) true.<br>(D) $\\beta > 1$: $U'(z) > 0$ for all $z > 0$, so the force is always downward and the particle reaches the origin: true.<br>Answer (A), (C), (D).",
+   "subject": "Physics",
+   "chapter": "Electrostatic Potential and Capacitance",
+   "chCls": "XII"
+  },
+  {
+   "no": 13,
+   "section": 2,
+   "type": "multi",
+   "text": "A double slit setup is shown in the figure. One of the slits is in medium 2 of refractive index $n_2$. The other slit is at the interface of this medium with another medium 1 of refractive index $n_1\\ (\\ne n_2)$. The line joining the slits is perpendicular to the interface and the distance between the slits is $d$. The slit widths are much smaller than $d$. A monochromatic parallel beam of light is incident on the slits from medium 1. A detector is placed in medium 2 at a large distance from the slits, and at an angle $\\theta$ from the line joining them, so that $\\theta$ equals the angle of refraction of the beam. Consider two approximately parallel rays from the slits received by the detector.<br>Which of the following statement(s) is(are) correct?",
+   "options": [
+    "The phase difference between the two rays is independent of $d$.",
+    "The two rays interfere constructively at the detector.",
+    "The phase difference between the two rays depends on $n_1$ but is independent of $n_2$.",
+    "The phase difference between the two rays vanishes only for certain values of $d$ and the angle of incidence of the beam, with $\\theta$ being the corresponding angle of refraction."
+   ],
+   "answer": [
+    0,
+    1
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": "phy-q13.png",
+   "optionFigs": null,
+   "sol": "Both slits are reached by the refracted beam, which travels in medium 2 at angle $\\theta$ to the line joining the slits.<br>To reach the lower slit the light travels an extra $d\\cos\\theta$ in medium 2 (beyond the wavefront through the upper slit).<br>Towards the detector, at the same angle $\\theta$, the ray from the upper slit travels an extra $d\\cos\\theta$ in medium 2.<br>The two extra paths cancel, so the phase difference is zero for every $d$, $n_1$, $n_2$ and angle of incidence.<br>(A) true, (B) true (constructive), (C) false, (D) false.",
+   "subject": "Physics",
+   "chapter": "Wave Optics",
+   "chCls": "XII"
+  },
+  {
+   "no": 14,
+   "section": 2,
+   "type": "multi",
+   "text": "In the given $P$-$V$ diagram, a monoatomic gas $\\left(\\gamma = \\dfrac53\\right)$ is first compressed adiabatically from state $A$ to state $B$. Then it expands isothermally from state $B$ to state $C$. [Given: $\\left(\\dfrac13\\right)^{0.6} \\simeq 0.5$, $\\ln 2 \\simeq 0.7$].<br>Which of the following statement(s) is(are) correct?",
+   "options": [
+    "The magnitude of the total work done in the process $A \\to B \\to C$ is $144$ kJ.",
+    "The magnitude of the work done in the process $B \\to C$ is $84$ kJ.",
+    "The magnitude of the work done in the process $A \\to B$ is $60$ kJ.",
+    "The magnitude of the work done in the process $C \\to A$ is zero."
+   ],
+   "answer": [
+    1,
+    2,
+    3
+   ],
+   "dropped": true,
+   "note": "Dropped in the official final key: full marks to everyone.",
+   "full": 4,
+   "neg": 2,
+   "fig": "phy-q14.png",
+   "optionFigs": null,
+   "sol": "$A$: $100$ kPa, $0.8$ m$^3$. $B$: $300$ kPa, $V_B = 0.8\\left(\\dfrac13\\right)^{3/5} = 0.8\\times0.5 = 0.4$ m$^3$.<br>$|W_{AB}| = \\dfrac{P_BV_B - P_AV_A}{\\gamma - 1} = \\dfrac{120 - 80}{2/3} = 60$ kJ: (C).<br>$|W_{BC}| = P_BV_B\\ln\\dfrac{V_C}{V_B} = 120\\ln2 = 84$ kJ: (B).<br>$C \\to A$ is at constant volume, so its work is zero: (D).<br>Net work $A\\to B\\to C$ is $-60 + 84 = 24$ kJ (the sum of magnitudes is $144$ kJ), so (A) depends on how “total work” is read.<br>The official final key dropped this question (marks to all).",
+   "subject": "Physics",
+   "chapter": "Thermodynamics",
+   "chCls": "XI"
+  },
+  {
+   "no": 15,
+   "section": 3,
+   "type": "single",
+   "text": "A flat surface of a thin uniform disk $A$ of radius $R$ is glued to a horizontal table. Another thin uniform disk $B$ of mass $M$ and with the same radius $R$ rolls without slipping on the circumference of $A$, as shown in the figure. A flat surface of $B$ also lies on the plane of the table. The center of mass of $B$ has fixed angular speed $\\omega$ about the vertical axis passing through the center of $A$. The angular momentum of $B$ is $nM\\omega R^2$ with respect to the center of $A$. Which of the following is the value of $n$?",
+   "options": [
+    "$2$",
+    "$5$",
+    "$\\dfrac72$",
+    "$\\dfrac92$"
+   ],
+   "answer": 1,
+   "full": 3,
+   "neg": 1,
+   "fig": "phy-q15.png",
+   "optionFigs": null,
+   "sol": "The centre of $B$ moves on a circle of radius $2R$ with angular speed $\\omega$, i.e. speed $2R\\omega$.<br>Rolling without slipping on a fixed disk of equal radius: the contact point is at rest, so $B$ spins with $\\omega_B = \\dfrac{2R\\omega}{R} = 2\\omega$.<br>$L = M(2R)^2\\omega + \\dfrac12MR^2\\cdot2\\omega = 4MR^2\\omega + MR^2\\omega = 5MR^2\\omega$.<br>$n = 5$ → (B).",
+   "subject": "Physics",
+   "chapter": "System of Particles and Rotational Motion",
+   "chCls": "XI"
+  },
+  {
+   "no": 16,
+   "section": 3,
+   "type": "single",
+   "text": "When light of a given wavelength is incident on a metallic surface, the minimum potential needed to stop the emitted photoelectrons is $6.0$ V. This potential drops to $0.6$ V if another source with wavelength four times that of the first one and intensity half of the first one is used. What are the wavelength of the first source and the work function of the metal, respectively? [Take $\\dfrac{hc}{e} = 1.24\\times10^{-6}$ J m C$^{-1}$.]",
+   "options": [
+    "$1.72\\times10^{-7}$ m, $1.20$ eV",
+    "$1.72\\times10^{-7}$ m, $5.60$ eV",
+    "$3.78\\times10^{-7}$ m, $5.60$ eV",
+    "$3.78\\times10^{-7}$ m, $1.20$ eV"
+   ],
+   "answer": 0,
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "In eV: $6.0 = \\dfrac{1.24\\times10^{-6}}{\\lambda} - \\phi$ and $0.6 = \\dfrac{1.24\\times10^{-6}}{4\\lambda} - \\phi$ (intensity does not affect stopping potential).<br>Subtracting: $5.4 = \\dfrac34\\cdot\\dfrac{1.24\\times10^{-6}}{\\lambda}$, so $\\dfrac{1.24\\times10^{-6}}{\\lambda} = 7.2$ eV and $\\lambda = 1.72\\times10^{-7}$ m.<br>$\\phi = 7.2 - 6.0 = 1.20$ eV → (A).",
+   "subject": "Physics",
+   "chapter": "Dual Nature of Radiation and Matter",
+   "chCls": "XII"
+  },
+  {
+   "no": 17,
+   "section": 3,
+   "type": "single",
+   "text": "Area of the cross-section of a wire is measured using a screw gauge. The pitch of the main scale is $0.5$ mm. The circular scale has $100$ divisions and for one full rotation of the circular scale, the main scale shifts by two divisions. The measured readings are listed below.<br>Two arms of gauge touching each other without wire: main scale reading 0 division, circular scale reading 4 divisions.<br>Attempt-1, with wire: main scale reading 4 divisions, circular scale reading 20 divisions.<br>Attempt-2, with wire: main scale reading 4 divisions, circular scale reading 16 divisions.<br>What are the diameter and cross-sectional area of the wire measured using the screw gauge?",
+   "options": [
+    "$2.22 \\pm 0.02$ mm, $\\pi(1.23 \\pm 0.02)$ mm$^2$",
+    "$2.22 \\pm 0.01$ mm, $\\pi(1.23 \\pm 0.01)$ mm$^2$",
+    "$2.14 \\pm 0.02$ mm, $\\pi(1.14 \\pm 0.02)$ mm$^2$",
+    "$2.14 \\pm 0.01$ mm, $\\pi(1.14 \\pm 0.01)$ mm$^2$"
+   ],
+   "answer": 2,
+   "dropped": true,
+   "note": "Dropped in the official final key: full marks to everyone.",
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "One rotation moves $2\\times0.5 = 1.0$ mm, so the least count is $\\dfrac{1.0}{100} = 0.01$ mm. Zero error $= +4\\times0.01 = +0.04$ mm.<br>Attempt-1: $4\\times0.5 + 20\\times0.01 - 0.04 = 2.16$ mm; Attempt-2: $2.0 + 0.16 - 0.04 = 2.12$ mm.<br>Mean $d = 2.14$ mm, mean absolute deviation $0.02$ mm: $d = 2.14 \\pm 0.02$ mm.<br>$A = \\pi\\left(\\dfrac d2\\right)^2 = \\pi(1.07)^2 \\approx \\pi(1.14)$ mm$^2$, with $\\dfrac{\\Delta A}{A} = \\dfrac{2\\Delta d}{d}$, giving $\\Delta \\approx 0.02$: (C).<br>Taking the least count $0.01$ mm as the error instead gives (D), so the question is ambiguous; the official final key dropped it (marks to all).",
+   "subject": "Physics",
+   "chapter": "Units and Measurements",
+   "chCls": "XI"
+  },
+  {
+   "no": 18,
+   "section": 3,
+   "type": "single",
+   "text": "Which one of the following options represents the magnetic field $\\vec B$ at O due to the current flowing in the given wire segments lying on the $xy$ plane?",
+   "options": [
+    "$\\vec B = \\dfrac{-\\mu_0 I}{L}\\left(\\dfrac32 + \\dfrac{1}{4\\sqrt2\\pi}\\right)\\hat k$",
+    "$\\vec B = -\\dfrac{\\mu_0 I}{L}\\left(\\dfrac32 + \\dfrac{1}{2\\sqrt2\\pi}\\right)\\hat k$",
+    "$\\vec B = \\dfrac{-\\mu_0 I}{L}\\left(1 + \\dfrac{1}{4\\sqrt2\\pi}\\right)\\hat k$",
+    "$\\vec B = \\dfrac{-\\mu_0 I}{L}\\left(1 + \\dfrac{1}{4\\pi}\\right)\\hat k$"
+   ],
+   "answer": 2,
+   "full": 3,
+   "neg": 1,
+   "fig": "phy-q18.png",
+   "optionFigs": null,
+   "sol": "Straight segments whose lines pass through O (the horizontal $L/2$ wire and segment on the dashed line, and the vertical $3L/4$ wire below O) give no field at O.<br>Semicircle of radius $\\dfrac L2$ centred at O, traversed clockwise: $\\dfrac{\\mu_0 I}{4(L/2)} = \\dfrac{\\mu_0 I}{2L}$, into the page ($-\\hat k$).<br>Quarter circle of radius $\\dfrac L4$, clockwise: $\\dfrac{\\mu_0 I}{8(L/4)} = \\dfrac{\\mu_0 I}{2L}$, into the page.<br>Left vertical wire of length $L$, at distance $L$ from O, with O level with its top end: $\\dfrac{\\mu_0 I}{4\\pi L}\\sin45^\\circ = \\dfrac{\\mu_0 I}{4\\sqrt2\\pi L}$; current upward, O to its right, so into the page.<br>$\\vec B = -\\dfrac{\\mu_0 I}{L}\\left(1 + \\dfrac1{4\\sqrt2\\pi}\\right)\\hat k$ → (C).",
+   "subject": "Physics",
+   "chapter": "Moving Charges and Magnetism",
+   "chCls": "XII"
+  },
+  {
+   "no": 1,
+   "section": 1,
+   "type": "num",
+   "text": "Concentration of $\\mathrm{H_2SO_4}$ and $\\mathrm{Na_2SO_4}$ in a solution is $1$ M and $1.8\\times10^{-2}$ M, respectively. Molar solubility of $\\mathrm{PbSO_4}$ in the same solution is $\\mathrm{X}\\times10^{-\\mathrm{Y}}$ M (expressed in scientific notation). The value of Y is ________.<br>[Given: Solubility product of $\\mathrm{PbSO_4}$ $(K_{sp}) = 1.6\\times10^{-8}$. For $\\mathrm{H_2SO_4}$, $K_{a1}$ is very large and $K_{a2} = 1.2\\times10^{-2}$]",
+   "options": null,
+   "answer": {
+    "lo": 6,
+    "hi": 6
+   },
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "First ionisation is complete: $[\\mathrm{H^+}] \\approx 1$ M, $[\\mathrm{HSO_4^-}] \\approx 1$ M.<br>The strong acid suppresses $\\mathrm{SO_4^{2-}}$: $\\mathrm{SO_4^{2-}}$ from $\\mathrm{Na_2SO_4}$ largely takes up $\\mathrm{H^+}$, and $[\\mathrm{SO_4^{2-}}] = K_{a2}\\dfrac{[\\mathrm{HSO_4^-}]}{[\\mathrm{H^+}]} \\approx 1.2\\times10^{-2}\\times\\dfrac{1.018}{0.982} \\approx 1.2\\times10^{-2}$ M.<br>$s = \\dfrac{K_{sp}}{[\\mathrm{SO_4^{2-}}]} \\approx \\dfrac{1.6\\times10^{-8}}{1.2\\times10^{-2}} \\approx 1.3\\times10^{-6}$ M.<br>Y $= 6$.",
+   "subject": "Chemistry",
+   "chapter": "Equilibrium",
+   "chCls": "XI"
+  },
+  {
+   "no": 2,
+   "section": 1,
+   "type": "num",
+   "text": "An aqueous solution is prepared by dissolving $0.1$ mol of an ionic salt in $1.8$ kg of water at $35\\ ^\\circ$C. The salt remains $90\\%$ dissociated in the solution. The vapour pressure of the solution is $59.724$ mm of Hg. Vapor pressure of water at $35\\ ^\\circ$C is $60.000$ mm of Hg. The number of ions present per formula unit of the ionic salt is ________.",
+   "options": null,
+   "answer": {
+    "lo": 5,
+    "hi": 5
+   },
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Relative lowering $= \\dfrac{60.000 - 59.724}{60.000} = 0.0046$ = mole fraction of solute particles.<br>Water: $\\dfrac{1800}{18} = 100$ mol. $\\dfrac{0.1i}{100 + 0.1i} = 0.0046 \\Rightarrow i \\approx 4.62$.<br>$i = 1 + \\alpha(n - 1) = 1 + 0.9(n-1) = 4.62 \\Rightarrow n - 1 \\approx 4$.<br>$n = 5$ ions per formula unit.",
+   "subject": "Chemistry",
+   "chapter": "Solutions",
+   "chCls": "XII"
+  },
+  {
+   "no": 3,
+   "section": 1,
+   "type": "num",
+   "text": "Consider the strong electrolytes $\\mathrm{Z_mX_n}$, $\\mathrm{U_mY_p}$ and $\\mathrm{V_mX_n}$. Limiting molar conductivity ($\\Lambda^0$) of $\\mathrm{U_mY_p}$ and $\\mathrm{V_mX_n}$ are $250$ and $440$ S cm$^2$ mol$^{-1}$, respectively. The value of $(m + n + p)$ is ________.<br>Given: limiting molar conductivity of ions, $\\lambda^0$ (S cm$^2$ mol$^{-1}$): $\\mathrm{Z^{n+}}$ $50.0$, $\\mathrm{U^{p+}}$ $25.0$, $\\mathrm{V^{n+}}$ $100.0$, $\\mathrm{X^{m-}}$ $80.0$, $\\mathrm{Y^{m-}}$ $100.0$.<br>The plot of molar conductivity ($\\Lambda$) of $\\mathrm{Z_mX_n}$ vs $c^{1/2}$ is given below.",
+   "options": null,
+   "answer": {
+    "lo": 7,
+    "hi": 7
+   },
+   "full": 3,
+   "neg": 1,
+   "fig": "che-q3.png",
+   "optionFigs": null,
+   "sol": "From the plot, $\\Lambda$ falls by $1$ for every $0.01$ in $c^{1/2}$ ($339$ at $0.01$, $336$ at $0.04$), so $\\Lambda^0(\\mathrm{Z_mX_n}) = 339 + 1 = 340$.<br>$\\mathrm{Z_mX_n}$: $50m + 80n = 340$; $\\mathrm{V_mX_n}$: $100m + 80n = 440$.<br>Subtracting: $50m = 100$, $m = 2$; then $80n = 240$, $n = 3$.<br>$\\mathrm{U_mY_p}$: $25m + 100p = 250 \\Rightarrow 100p = 200$, $p = 2$.<br>$m + n + p = 7$.",
+   "subject": "Chemistry",
+   "chapter": "Electrochemistry",
+   "chCls": "XII"
+  },
+  {
+   "no": 4,
+   "section": 1,
+   "type": "num",
+   "text": "The reaction of Xe and $\\mathrm{O_2F_2}$ gives a Xe compound $\\mathbf{P}$. The number of moles of HF produced by the complete hydrolysis of $1$ mol of $\\mathbf{P}$ is ________.",
+   "options": null,
+   "answer": {
+    "lo": 2,
+    "hi": 2
+   },
+   "accept": [
+    {
+     "lo": 4,
+     "hi": 4
+    },
+    {
+     "lo": 6,
+     "hi": 6
+    }
+   ],
+   "note": "Official final key: 2 or 4 or 6 (any of these values is awarded marks).",
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$\\mathrm{Xe + O_2F_2 \\rightarrow XeF_2 + O_2}$, so $\\mathbf{P} = \\mathrm{XeF_2}$.<br>Hydrolysis: $\\mathrm{2XeF_2 + 2H_2O \\rightarrow 2Xe + 4HF + O_2}$, i.e. $2$ mol HF per mol of $\\mathbf{P}$.<br>With excess $\\mathrm{O_2F_2}$, $\\mathrm{XeF_4}$ ($\\mathrm{6XeF_4 + 12H_2O \\rightarrow 4Xe + 2XeO_3 + 24HF + 3O_2}$, 4 HF) or $\\mathrm{XeF_6}$ ($\\mathrm{XeF_6 + 3H_2O \\rightarrow XeO_3 + 6HF}$, 6 HF) can form.<br>Answer: $2$ (the official key also accepts $4$ and $6$).",
+   "subject": "Chemistry",
+   "chapter": "Redox Reactions",
+   "chCls": "XI"
+  },
+  {
+   "no": 5,
+   "section": 1,
+   "type": "num",
+   "text": "Thermal decomposition of $\\mathrm{AgNO_3}$ produces two paramagnetic gases. The total number of electrons present in the antibonding molecular orbitals of the gas that has the higher number of unpaired electrons is ________.",
+   "options": null,
+   "answer": {
+    "lo": 6,
+    "hi": 6
+   },
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$\\mathrm{2AgNO_3 \\rightarrow 2Ag + 2NO_2 + O_2}$: $\\mathrm{NO_2}$ has 1 unpaired electron, $\\mathrm{O_2}$ has 2.<br>$\\mathrm{O_2}$: $\\sigma1s^2\\,\\sigma^*1s^2\\,\\sigma2s^2\\,\\sigma^*2s^2\\,\\sigma2p_z^2\\,\\pi2p^4\\,\\pi^*2p^2$.<br>Antibonding electrons: $\\sigma^*1s^2 + \\sigma^*2s^2 + \\pi^*2p^2 = 6$.",
+   "subject": "Chemistry",
+   "chapter": "Chemical Bonding and Molecular Structure",
+   "chCls": "XI"
+  },
+  {
+   "no": 6,
+   "section": 1,
+   "type": "num",
+   "text": "The number of isomeric tetraenes (NOT containing $sp$-hybridized carbon atoms) that can be formed from the following reaction sequence is ________.",
+   "options": null,
+   "answer": {
+    "lo": 2,
+    "hi": 2
+   },
+   "full": 3,
+   "neg": 1,
+   "fig": "che-q6.png",
+   "optionFigs": null,
+   "sol": "Na/liquid $\\mathrm{NH_3}$ reduces the alkyne to the trans alkene: ring–$\\mathrm{CH_2CH{=}CHCH_3}$.<br>Excess $\\mathrm{Br_2}$ adds to both C=C, giving two vicinal dibromides (one in the ring, one in the chain).<br>Alc. KOH removes 2 HBr from each. Avoiding allenes and alkynes, the ring gives only the conjugated cyclohexa-1,3-diene, and the chain gives only $\\mathrm{{-}CH{=}CH{-}CH{=}CH_2}$.<br>Product: 5-(buta-1,3-dienyl)cyclohexa-1,3-diene, whose ring–$\\mathrm{CH{=}CH}$ double bond can be E or Z.<br>Number of isomeric tetraenes $= 2$.",
+   "subject": "Chemistry",
+   "chapter": "Hydrocarbons",
+   "chCls": "XI"
+  },
+  {
+   "no": 7,
+   "section": 1,
+   "type": "num",
+   "text": "The number of $-\\mathrm{CH_2}-$ (methylene) groups in the product formed from the following reaction sequence is ________.",
+   "options": null,
+   "answer": {
+    "lo": 0,
+    "hi": 0
+   },
+   "full": 3,
+   "neg": 1,
+   "fig": "che-q7.png",
+   "optionFigs": null,
+   "sol": "The alkene is oct-4-ene. Ozonolysis gives 2 butanal; $\\mathrm{KMnO_4}$ oxidises them to butanoic acid.<br>Kolbe electrolysis of sodium butanoate couples two propyl radicals: n-hexane.<br>$\\mathrm{Cr_2O_3}$, 770 K, 20 atm aromatises n-hexane to benzene.<br>Benzene has no $\\mathrm{CH_2}$ groups: answer $0$.",
+   "subject": "Chemistry",
+   "chapter": "Hydrocarbons",
+   "chCls": "XI"
+  },
+  {
+   "no": 8,
+   "section": 1,
+   "type": "num",
+   "text": "The total number of chiral molecules formed from one molecule of $\\mathbf{P}$ on complete ozonolysis ($\\mathrm{O_3}$, $\\mathrm{Zn/H_2O}$) is ________.",
+   "options": null,
+   "answer": {
+    "lo": 2,
+    "hi": 2
+   },
+   "full": 3,
+   "neg": 1,
+   "fig": "che-q8.png",
+   "optionFigs": null,
+   "sol": "$\\mathbf{P}$ has six C=C bonds, so ozonolysis gives seven fragments.<br>The two ends give $\\mathrm{CH_3CHO}$ (achiral).<br>The three fragments whose carbinol carbon lies between two trisubstituted-alkene carbons give $\\mathrm{CH_3CO{-}C(OH)(CH_3){-}COCH_3}$: two identical acetyl groups, achiral.<br>The two fragments whose carbinol carbon lies next to a $\\mathrm{{=}CH{-}}$ carbon give $\\mathrm{OHC{-}C(OH)(CH_3){-}COCH_3}$: four different groups, chiral.<br>Chiral molecules formed $= 2$.",
+   "subject": "Chemistry",
+   "chapter": "Hydrocarbons",
+   "chCls": "XI"
+  },
+  {
+   "no": 9,
+   "section": 2,
+   "type": "multi",
+   "text": "To check the principle of multiple proportions, a series of pure binary compounds ($\\mathrm{P_mQ_n}$) were analyzed and their composition is tabulated below. The correct option(s) is(are)<br>Compound 1: weight % of P $= 50$, weight % of Q $= 50$.<br>Compound 2: weight % of P $= 44.4$, weight % of Q $= 55.6$.<br>Compound 3: weight % of P $= 40$, weight % of Q $= 60$.",
+   "options": [
+    "If empirical formula of compound 3 is $\\mathrm{P_3Q_4}$, then the empirical formula of compound 2 is $\\mathrm{P_3Q_5}$.",
+    "If empirical formula of compound 3 is $\\mathrm{P_3Q_2}$ and atomic weight of element P is 20, then the atomic weight of Q is 45.",
+    "If empirical formula of compound 2 is PQ, then the empirical formula of the compound 1 is $\\mathrm{P_5Q_4}$.",
+    "If atomic weight of P and Q are 70 and 35, respectively, then the empirical formula of compound 1 is $\\mathrm{P_2Q}$."
+   ],
+   "answer": [
+    1,
+    2
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Mass of Q per unit mass of P: $1$, $1.25$, $1.5$ (ratio $4:5:6$).<br>(A) Compound 3 = $\\mathrm{P_3Q_4}$: $\\dfrac{4Q}{3P} = 1.5 \\Rightarrow \\dfrac QP = 1.125$. Compound 2: $\\dfrac nm = \\dfrac{1.25}{1.125} = \\dfrac{10}9$, i.e. $\\mathrm{P_9Q_{10}}$, not $\\mathrm{P_3Q_5}$: false.<br>(B) Compound 3 = $\\mathrm{P_3Q_2}$, P = 20: $\\dfrac{2Q}{60} = 1.5 \\Rightarrow Q = 45$: true.<br>(C) Compound 2 = PQ: $\\dfrac QP = 1.25$; compound 1: $\\dfrac nm = \\dfrac1{1.25} = \\dfrac45$, i.e. $\\mathrm{P_5Q_4}$: true.<br>(D) P = 70, Q = 35: compound 1 has $\\dfrac{50}{70} : \\dfrac{50}{35} = 1 : 2$, i.e. $\\mathrm{PQ_2}$, not $\\mathrm{P_2Q}$: false.<br>Answer (B), (C).",
+   "subject": "Chemistry",
+   "chapter": "Some Basic Concepts of Chemistry",
+   "chCls": "XI"
+  },
+  {
+   "no": 10,
+   "section": 2,
+   "type": "multi",
+   "text": "The correct option(s) about entropy (S) is(are)<br>[R = gas constant, F = Faraday constant, T = Temperature]",
+   "options": [
+    "For the reaction, $\\mathrm{M}(s) + 2\\mathrm{H^+}(aq) \\rightarrow \\mathrm{H_2}(g) + \\mathrm{M^{2+}}(aq)$, if $\\dfrac{dE_{cell}}{dT} = \\dfrac{R}{F}$, then the entropy change of the reaction is R (assume that entropy and internal energy changes are temperature independent).",
+    "The cell reaction, $\\mathrm{Pt}(s)\\,|\\,\\mathrm{H_2}(g, 1\\text{ bar})\\,|\\,\\mathrm{H^+}(aq, 0.01\\text{ M})\\,\\|\\,\\mathrm{H^+}(aq, 0.1\\text{ M})\\,|\\,\\mathrm{H_2}(g, 1\\text{ bar})\\,|\\,\\mathrm{Pt}(s)$, is an entropy driven process.",
+    "For racemization of an optically active compound, $\\Delta S > 0$.",
+    "$\\Delta S > 0$, for $\\mathrm{[Ni(H_2O)_6]^{2+} + 3\\,en \\rightarrow [Ni(en)_3]^{2+} + 6H_2O}$ (where en = ethylenediamine)."
+   ],
+   "answer": [
+    1,
+    2,
+    3
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "(A) $\\Delta S = nF\\dfrac{dE_\\text{cell}}{dT} = 2F\\cdot\\dfrac RF = 2R$, not $R$: false.<br>(B) A hydrogen concentration cell has $\\Delta H = 0$, so $\\Delta G = -T\\Delta S &lt; 0$ is driven entirely by entropy: true.<br>(C) Racemisation converts one enantiomer into a 50:50 mixture; the entropy of mixing makes $\\Delta S > 0$: true.<br>(D) Chelation: 4 particles on the left give 7 on the right, so $\\Delta S > 0$: true.<br>Answer (B), (C), (D).",
+   "subject": "Chemistry",
+   "chapter": "Thermodynamics",
+   "chCls": "XI"
+  },
+  {
+   "no": 11,
+   "section": 2,
+   "type": "multi",
+   "text": "The compound(s) which react(s) with $\\mathrm{NH_3}$ to give boron nitride (BN) is(are)",
+   "options": [
+    "B",
+    "$\\mathrm{B_2H_6}$",
+    "$\\mathrm{B_2O_3}$",
+    "$\\mathrm{HBF_4}$"
+   ],
+   "answer": [
+    1,
+    2
+   ],
+   "alts": [
+    [
+     0,
+     1,
+     2
+    ]
+   ],
+   "keyNote": "Official final key: B, C or A, B, C",
+   "full": 4,
+   "neg": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$\\mathrm{B_2H_6}$ with $\\mathrm{NH_3}$ gives $\\mathrm{[BH_2(NH_3)_2]^+[BH_4]^-}$, which on strong heating gives borazine and finally BN.<br>$\\mathrm{B_2O_3 + 2NH_3 \\rightarrow 2BN + 3H_2O}$ (on heating).<br>Elemental boron also forms BN with $\\mathrm{NH_3}$ at high temperature ($\\mathrm{2B + 2NH_3 \\rightarrow 2BN + 3H_2}$); $\\mathrm{HBF_4}$ does not.<br>Answer (B), (C); the official key also accepts (A), (B), (C).",
+   "subject": "Chemistry",
+   "chapter": "Chemical Bonding and Molecular Structure",
+   "chCls": "XI"
+  },
+  {
+   "no": 12,
+   "section": 2,
+   "type": "multi",
+   "text": "The correct option(s) related to the extraction of iron from its ore in the blast furnace operating in the temperature range $900 - 1500$ K is(are)",
+   "options": [
+    "Limestone is used to remove silicate impurity.",
+    "Pig iron obtained from blast furnace contains about 4% carbon.",
+    "Coke (C) converts $\\mathrm{CO_2}$ to CO.",
+    "Exhaust gases consist of $\\mathrm{NO_2}$ and CO."
+   ],
+   "answer": [
+    0,
+    1,
+    2
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "(A) $\\mathrm{CaCO_3 \\rightarrow CaO + CO_2}$; $\\mathrm{CaO + SiO_2 \\rightarrow CaSiO_3}$ (slag): true.<br>(B) Pig iron contains about 4% carbon: true.<br>(C) $\\mathrm{C + CO_2 \\rightarrow 2CO}$ in the furnace: true.<br>(D) The exhaust gases are mainly $\\mathrm{CO}$, $\\mathrm{CO_2}$ and $\\mathrm{N_2}$, not $\\mathrm{NO_2}$: false.<br>Answer (A), (B), (C).",
+   "subject": "Chemistry",
+   "chapter": "Redox Reactions",
+   "chCls": "XI"
+  },
+  {
+   "no": 13,
+   "section": 2,
+   "type": "multi",
+   "text": "Considering the following reaction sequence, the correct statement(s) is(are)",
+   "options": [
+    "Compounds $\\mathbf{P}$ and $\\mathbf{Q}$ are carboxylic acids.",
+    "Compound $\\mathbf{S}$ decolorizes bromine water.",
+    "Compounds $\\mathbf{P}$ and $\\mathbf{S}$ react with hydroxylamine to give the corresponding oximes.",
+    "Compound $\\mathbf{R}$ reacts with dialkylcadmium to give the corresponding tertiary alcohol."
+   ],
+   "answer": [
+    0,
+    1,
+    2
+   ],
+   "alts": [
+    [
+     0,
+     2
+    ]
+   ],
+   "keyNote": "Official final key: A, B, C or A, C",
+   "full": 4,
+   "neg": 2,
+   "fig": "che-q13.png",
+   "optionFigs": null,
+   "sol": "$\\mathbf{P}$: Friedel–Crafts acylation with succinic anhydride gives $\\mathrm{PhCO(CH_2)_2COOH}$ (a keto acid).<br>$\\mathbf{Q}$: Clemmensen reduction gives $\\mathrm{Ph(CH_2)_3COOH}$; $\\mathbf{R}$: the acid chloride $\\mathrm{Ph(CH_2)_3COCl}$.<br>$\\mathbf{S}$: intramolecular Friedel–Crafts acylation gives α-tetralone; Clemmensen then gives tetralin (the hydrocarbon).<br>(A) $\\mathbf{P}$ and $\\mathbf{Q}$ are carboxylic acids: true. (C) $\\mathbf{P}$ and $\\mathbf{S}$ are ketones and form oximes: true.<br>(B) α-Tetralone is an enolisable ketone that can be α-brominated by bromine water, so it is taken as true.<br>(D) Acid chlorides react with dialkylcadmium to give ketones, not tertiary alcohols: false.<br>Answer (A), (B), (C); the official key also accepts (A), (C).",
+   "subject": "Chemistry",
+   "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+   "chCls": "XII"
+  },
+  {
+   "no": 14,
+   "section": 2,
+   "type": "multi",
+   "text": "Among the following, the correct statement(s) about polymers is(are)",
+   "options": [
+    "The polymerization of chloroprene gives natural rubber.",
+    "Teflon is prepared from tetrafluoroethene by heating it with persulphate catalyst at high pressures.",
+    "PVC are thermoplastic polymers.",
+    "Ethene at 350-570 K temperature and 1000-2000 atm pressure in the presence of a peroxide initiator yields high density polythene."
+   ],
+   "answer": [
+    1,
+    2
+   ],
+   "full": 4,
+   "neg": 2,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "(A) Polymerisation of chloroprene gives neoprene; natural rubber is cis-polyisoprene: false.<br>(B) Teflon is made by heating tetrafluoroethene with a persulphate catalyst at high pressure: true.<br>(C) PVC is a thermoplastic: true.<br>(D) Ethene at 350–570 K and 1000–2000 atm with a peroxide initiator gives low density polythene: false.<br>Answer (B), (C).",
+   "subject": "Chemistry",
+   "chapter": "Organic Chemistry – Some Basic Principles and Techniques",
+   "chCls": "XI"
+  },
+  {
+   "no": 15,
+   "section": 3,
+   "type": "single",
+   "text": "Atom X occupies the fcc lattice sites as well as alternate tetrahedral voids of the same lattice. The packing efficiency (in %) of the resultant solid is closest to",
+   "options": [
+    "25",
+    "35",
+    "55",
+    "75"
+   ],
+   "answer": 1,
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "Per unit cell: 4 atoms at fcc sites + 4 in alternate tetrahedral voids = 8 atoms (diamond-like).<br>Atoms in the voids touch the fcc atoms along the body diagonal: $2r = \\dfrac{\\sqrt3a}{4}$, so $r = \\dfrac{\\sqrt3a}{8}$.<br>Packing fraction $= \\dfrac{8\\cdot\\frac43\\pi r^3}{a^3} = \\dfrac{32\\pi}{3}\\cdot\\dfrac{3\\sqrt3}{512} = \\dfrac{\\sqrt3\\pi}{16} \\approx 0.34$.<br>About 34%, closest to 35 → (B).",
+   "subject": "Chemistry",
+   "chapter": "Some Basic Concepts of Chemistry",
+   "chCls": "XI"
+  },
+  {
+   "no": 16,
+   "section": 3,
+   "type": "single",
+   "text": "The reaction of $\\mathrm{HClO_3}$ with HCl gives a paramagnetic gas, which upon reaction with $\\mathrm{O_3}$ produces",
+   "options": [
+    "$\\mathrm{Cl_2O}$",
+    "$\\mathrm{ClO_2}$",
+    "$\\mathrm{Cl_2O_6}$",
+    "$\\mathrm{Cl_2O_7}$"
+   ],
+   "answer": 2,
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$\\mathrm{2HClO_3 + 2HCl \\rightarrow 2ClO_2 + Cl_2 + 2H_2O}$; $\\mathrm{ClO_2}$ (odd electron) is the paramagnetic gas.<br>$\\mathrm{2ClO_2 + 2O_3 \\rightarrow Cl_2O_6 + 2O_2}$ → (C).",
+   "subject": "Chemistry",
+   "chapter": "Redox Reactions",
+   "chCls": "XI"
+  },
+  {
+   "no": 17,
+   "section": 3,
+   "type": "single",
+   "text": "The reaction of $\\mathrm{Pb(NO_3)_2}$ and NaCl in water produces a precipitate that dissolves upon the addition of HCl of appropriate concentration. The dissolution of the precipitate is due to the formation of",
+   "options": [
+    "$\\mathrm{PbCl_2}$",
+    "$\\mathrm{PbCl_4}$",
+    "$\\mathrm{[PbCl_4]^{2-}}$",
+    "$\\mathrm{[PbCl_6]^{2-}}$"
+   ],
+   "answer": 2,
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": null,
+   "sol": "$\\mathrm{Pb(NO_3)_2 + 2NaCl \\rightarrow PbCl_2\\downarrow + 2NaNO_3}$.<br>In excess (concentrated) HCl the precipitate dissolves as the complex ion: $\\mathrm{PbCl_2 + 2Cl^- \\rightarrow [PbCl_4]^{2-}}$ → (C).",
+   "subject": "Chemistry",
+   "chapter": "Coordination Compounds",
+   "chCls": "XII"
+  },
+  {
+   "no": 18,
+   "section": 3,
+   "type": "single",
+   "text": "Treatment of D-glucose with aqueous NaOH results in a mixture of monosaccharides, which are",
+   "options": [
+    "",
+    "",
+    "",
+    ""
+   ],
+   "answer": 2,
+   "full": 3,
+   "neg": 1,
+   "fig": null,
+   "optionFigs": [
+    "che-q18a.png",
+    "che-q18b.png",
+    "che-q18c.png",
+    "che-q18d.png"
+   ],
+   "sol": "In dilute alkali, D-glucose isomerises through its enediol (Lobry de Bruyn–van Ekenstein rearrangement).<br>The enediol re-forms D-glucose, gives D-mannose (epimer at C-2) or D-fructose (ketose).<br>Option (C) shows D-glucose, D-fructose and D-mannose → (C).",
+   "subject": "Chemistry",
+   "chapter": "Biomolecules",
+   "chCls": "XII"
+  }
+ ]
+}
