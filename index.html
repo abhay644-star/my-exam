@@ -453,6 +453,18 @@ sup,sub{font-size:.7em}
         <div class="btns"><button type="submit" class="primary" id="gen">Start custom paper</button><button type="button" id="reset">Reset</button></div>
           </div>
         </details>
+        <details id="challenge" class="custom">
+          <summary>Challenge your class or friends</summary>
+          <div class="stack">
+            <p class="hint" style="margin:0">One link, the same questions for everyone. It uses the class, subject, chapters and mode chosen above. Nothing is collected: each student sends their score back with <b>Share my score</b> at the end.</p>
+            <div class="row">
+              <div><label for="chSize">Paper</label><select id="chSize"><option value="quick">Quick quiz</option><option value="chapter" selected>Chapter test</option><option value="full">Full mock paper</option><option value="custom">My custom settings</option></select></div>
+              <div><label for="chName">Challenge name (optional)</label><input id="chName" type="text" maxlength="40" placeholder="For example: Class 10B weekly test"></div>
+            </div>
+            <div class="btns"><button type="button" class="primary" id="chMake">Create challenge link</button></div>
+            <div id="chOut" class="stack" hidden></div>
+          </div>
+        </details>
       </form>
 
       <div class="stack">
@@ -1229,16 +1241,16 @@ const paperTag=()=>P.mistakes?'mistakes':P.exam?`${slug(P.subject)}/${slug(P.exa
 function seeded(a){return()=>{a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
 // the subject's question bank is loaded first (usually already there: it starts loading when the subject is chosen)
 let starting=false;
-function startTest(useSample,seed){
+function startTest(useSample,seed,ch){
   if(useSample)return startTest0(true,seed);
   if(starting)return;starting=true;const qm=$('#quickMsg');
-  ensureBank(S.subject).then(()=>{starting=false;startTest0(false,seed);},()=>{starting=false;qm.textContent='The questions could not be loaded. Check your internet connection and try again.';qm.hidden=false;});
+  ensureBank(S.subject).then(()=>{starting=false;startTest0(false,seed,ch);},()=>{starting=false;qm.textContent='The questions could not be loaded. Check your internet connection and try again.';qm.hidden=false;});
 }
-function startTest0(useSample,seed){
+function startTest0(useSample,seed,ch){
   const sd=seed!=null?seed>>>0:Math.floor(Math.random()*4294967296),R0=Math.random;let p;
   Math.random=seeded(sd);try{p=buildPaper(useSample);}finally{Math.random=R0;}
   p.seed=sd;p.cfg={nq:S.nq,nmcq:S.nmcq,usemcq:!!S.usemcq,mix:Object.assign({},S.mix),marks:Object.assign({},S.marks),duration:S.duration};
-  P=Object.assign(p,{mode:S.mode,duration:S.duration,subject:S.subject,klass:S.klass,board:$('#board').value,country:$('#country').value,label:useSample?'CBSE model paper':'',topicsLabel:S.topics==='ALL'?'':S.topics.join(', '),topicsList:S.topics==='ALL'?null:S.topics.slice(),startAt:Date.now()});
+  P=Object.assign(p,{mode:S.mode,duration:S.duration,subject:S.subject,klass:S.klass,board:$('#board').value,country:$('#country').value,label:useSample?'CBSE model paper':'',topicsLabel:S.topics==='ALL'?'':S.topics.join(', '),topicsList:S.topics==='ALL'?null:S.topics.slice(),challenge:ch||null,startAt:Date.now()});
   P.endAt=P.startAt+P.duration*60000;ANS={};FLAG={};CHK={};
   track(useSample?'start/sample-paper':`start/${P.mode}/${paperTag()}`,useSample?'Started: CBSE sample paper':`Started ${P.mode}: Class ${P.klass} ${P.subject}`);
   begin();
@@ -1250,10 +1262,13 @@ function presetSize(k){
   const nq=Math.max(S.topics==='ALL'?3:1,av);
   return{nq,duration:Math.max(10,Math.round(pr.duration*nq/pr.nq/5)*5),capped:true};
 }
-function startPreset(k){
+function applyPreset(k){
   const pr=PRESETS[k],z=presetSize(k);Object.assign(S,{nq:z.nq,duration:z.duration,usemcq:true,nmcq:pr.nmcq,mix:Object.assign({},pr.mix)});
   if(z.capped)S.nmcq=Math.min(S.nmcq,Math.max(1,Math.floor(S.nq/2)));
   writeForm();readForm();
+}
+function startPreset(k){
+  applyPreset(k);
   const v=validate(),qm=$('#quickMsg');
   if(v.errs.length){qm.innerHTML=v.errs.map(esc).join('<br>');qm.hidden=false;return;}
   qm.hidden=true;startTest();
@@ -1432,14 +1447,42 @@ function renderHistory(){
 // falling back to wa.me if it is not installed; elsewhere wa.me (the app, or WhatsApp Web on a computer)
 function waLink(txt){const e=encodeURIComponent(txt),web='https://wa.me/?text='+e;
   return /Android/i.test(navigator.userAgent)?`intent://send?text=${e}#Intent;scheme=whatsapp;package=com.whatsapp;S.browser_fallback_url=${encodeURIComponent(web)};end`:web;}
-function shareLink(g,tot){const u=new URL('https://my-exam.in/');
+// a link to the same class / subject / chapters; paperParams adds the paper code and settings that rebuild the same questions
+function schoolLink(klass,subject,topics){const u=new URL('https://my-exam.in/');
+  u.searchParams.set('go','school');u.searchParams.set('c',klass);u.searchParams.set('sub',subject);(topics||[]).forEach(x=>u.searchParams.append('t',x));return u;}
+function paperParams(u,seed,c,mode){const L=['E','M','C','X'];
+  u.searchParams.set('p',[seed,c.nq,c.nmcq,c.usemcq?1:0,c.duration,mode==='exam'?'e':'p'].join('.'));
+  u.searchParams.set('x',L.map(l=>c.mix[l]).join('.'));u.searchParams.set('k',['MCQ'].concat(L).map(l=>c.marks[l]).join('.'));}
+// a class challenge is a paper code with a short code (from the paper code, so a link cannot pair a code with another paper)
+// and an optional name; nothing is collected, students send their scores back themselves
+const chCode=sd=>(sd%1679616).toString(36).toUpperCase().padStart(4,'0');
+function chParams(u,ch){u.searchParams.set('ch',ch.code);if(ch.name)u.searchParams.set('cn',ch.name);}
+function shareLink(g,tot){let u=new URL('https://my-exam.in/');
   if(P.exam)u.searchParams.set('go',P.exam.list+'/'+P.exam.id);
-  else if(!P.mistakes){u.searchParams.set('go','school');u.searchParams.set('c',P.klass);u.searchParams.set('sub',P.subject);(P.topicsList||[]).forEach(x=>u.searchParams.append('t',x));
+  else if(!P.mistakes){u=schoolLink(P.klass,P.subject,P.topicsList);
     // the paper code goes on fresh papers only (not the sample, a retry or a revision paper)
-    if(P.seed!=null&&P.cfg&&!P.label){const c=P.cfg,L=['E','M','C','X'];
-      u.searchParams.set('p',[P.seed,c.nq,c.nmcq,c.usemcq?1:0,c.duration,P.mode==='exam'?'e':'p'].join('.'));
-      u.searchParams.set('x',L.map(l=>c.mix[l]).join('.'));u.searchParams.set('k',['MCQ'].concat(L).map(l=>c.marks[l]).join('.'));}}
+    if(P.seed!=null&&P.cfg&&!P.label){paperParams(u,P.seed,P.cfg,P.mode);if(P.challenge)chParams(u,P.challenge);}}
   u.searchParams.set('s',`${+g}/${tot}`);return u.toString();}
+function copyText(txt){const ta=document.createElement('textarea');ta.value=txt;ta.setAttribute('readonly','');ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');}catch(e){}ta.remove();}
+// "Challenge your class or friends": the settings chosen above (or a preset size), a new paper code, and a link to send
+function makeChallenge(){readForm();const k=$('#chSize').value,keep=JSON.parse(JSON.stringify(S)),out=$('#chOut');
+  if(k!=='custom')applyPreset(k);
+  const v=validate();
+  if(v.errs.length){S=keep;writeForm();readForm();out.innerHTML=`<div class="msg err" style="margin:0">${v.errs.map(esc).join('<br>')}</div>`;out.hidden=false;return;}
+  const sd=Math.floor(Math.random()*4294967296),ch={code:chCode(sd),name:$('#chName').value.trim().slice(0,40)},snap=JSON.parse(JSON.stringify(S));
+  const u=schoolLink(S.klass,S.subject,S.topics==='ALL'?null:S.topics);paperParams(u,sd,S,S.mode);chParams(u,ch);
+  const what=`Class ${S.klass} ${S.subject}${S.topics!=='ALL'&&S.topics.length===1?` (${S.topics[0]})`:''}, ${S.nq} questions, ${S.mode==='exam'?`${S.duration}-minute exam`:'practice mode'}`;
+  const txt=`Class challenge${ch.name?` "${ch.name}"`:''}, code ${ch.code}: ${what}. Everyone gets the same questions. Take it free on All in All Exam Practice, then send me your score: ${u}`;
+  out.innerHTML=`<p class="msg ok" style="margin:0">Challenge <b>${ch.code}</b> is ready: ${esc(what)}.</p>
+    <div><label for="chLink">Challenge link</label><input id="chLink" type="text" readonly value="${esc(String(u))}"></div>
+    <div class="sharepanel"><a class="btnlink" href="${waLink(txt)}"${/Android/i.test(navigator.userAgent)?'':' target="_blank" rel="noopener"'} data-chsend="whatsapp">WhatsApp</a><button type="button" id="chCopy">Copy message</button>${navigator.share?'<button type="button" id="chMore">More apps…</button>':''}<button type="button" id="chTake">Take it myself</button><span id="chMsg" class="hint" role="status" style="margin:0"></span></div>`;
+  out.hidden=false;
+  track(`challenge/create/class-${slug(S.klass)}/${slug(S.subject)}`,`Created a class challenge: Class ${S.klass} ${S.subject}`);
+  out.querySelector('[data-chsend]').addEventListener('click',()=>track('challenge/send/whatsapp','Sent a challenge on WhatsApp'));
+  $('#chCopy').addEventListener('click',()=>{copyText(txt);$('#chMsg').textContent='Copied. Paste it into your class group or any chat.';track('challenge/send/copy','Copied a challenge');});
+  if($('#chMore'))$('#chMore').addEventListener('click',()=>{navigator.share({text:txt}).then(()=>track('challenge/send/share','Shared a challenge'),()=>{});});
+  // the setter can take it too: the settings are put back as they were when the link was made
+  $('#chTake').addEventListener('click',()=>{S=JSON.parse(JSON.stringify(snap));writeForm();readForm();track('start/challenge','Started a class challenge');startTest(false,sd,ch);});}
 // a square score card (PNG) for WhatsApp / Instagram; colours are fixed light ones so it looks the same in dark mode
 function scoreCard(g,tot,pct,band){const c=document.createElement('canvas');c.width=c.height=1080;const x=c.getContext('2d');
   const LIGHT={'var(--green-soft)':'#e2f3ea','var(--green)':'#1f7a4d','var(--amber-soft)':'#fdf0dc','var(--amber)':'#a35b00','var(--ink-soft)':'#e4eafb','var(--ink)':'#2446a8'};
@@ -1521,7 +1564,9 @@ function finish(auto){
   const nWrong=P.qs.filter(gotWrong).length,nBlank=P.qs.filter(leftBlank).length;
   // My mistakes is offered here only when it holds more than this paper's wrong answers (otherwise it repeats "Retry the N I got wrong")
   const showMk=mk.total&&(P.mistakes||mk.total>nWrong);
-  const shareTxt=`I scored ${g}/${tot} (${pct}%) in ${P.mistakes?'a revision paper':P.exam?P.exam.title:`a Class ${P.klass} ${P.subject} ${P.topicsList&&P.topicsList.length===1?`test on ${P.topicsList[0]}`:'practice paper'}`} on All in All Exam Practice. Can you beat my score? ${P.exam||(!P.mistakes&&P.seed!=null&&!P.label)?'Take the same paper':'Try one'} free: ${shareLink(g,tot)}`;
+  const chal=P.challenge,chLine=chal?`<p class="msg info" style="margin:0">Class challenge <b>${esc(chal.code)}</b>${chal.name?` · ${esc(chal.name)}`:''}. Send your score to whoever set it: <b>Share my score</b> below.</p>`:'';
+  const shareTxt=chal?`Challenge ${chal.code}${chal.name?` (${chal.name})`:''}: I scored ${g}/${tot} (${pct}%) in ${mm} min ${ss} s on Class ${P.klass} ${P.subject}, ${P.qs.length} questions. Take the same challenge free: ${shareLink(g,tot)}`
+    :`I scored ${g}/${tot} (${pct}%) in ${P.mistakes?'a revision paper':P.exam?P.exam.title:`a Class ${P.klass} ${P.subject} ${P.topicsList&&P.topicsList.length===1?`test on ${P.topicsList[0]}`:'practice paper'}`} on All in All Exam Practice. Can you beat my score? ${P.exam||(!P.mistakes&&P.seed!=null&&!P.label)?'Take the same paper':'Try one'} free: ${shareLink(g,tot)}`;
   const mkLine=P.mistakes?`<p class="msg ok" style="margin:0">${mk.removed?`${mk.removed} answered right and removed from My mistakes. `:''}${mk.total?`${mk.total} question${mk.total>1?'s':''} left to revise.`:'Your My mistakes list is now empty. Well done!'}</p>`
     :mk.added?`<p class="msg info" style="margin:0">${mk.added} question${mk.added>1?'s':''} you got wrong ${mk.added>1?'were':'was'} saved to <b>My mistakes</b> on this device, to revise later.</p>`:'';
   const nf=nFlag();
@@ -1529,7 +1574,7 @@ function finish(auto){
   $('#results').innerHTML=`
    <div class="card stack" style="margin-bottom:16px">
      <div class="score"><div class="big" style="color:${band[2]}">${g}<small> / ${tot}</small></div>
-       <div class="stack" style="gap:6px"><span class="band" style="background:${band[1]};color:${band[2]}">${band[0]} · ${pct}%</span><span style="font-weight:700">${esc(advice)}</span><span class="hint" style="margin:0">${auto?'Time ran out, so the paper was submitted automatically. ':''}${exam?`Time used: ${mm} min ${ss} s of ${P.duration} min`:`Time spent: ${mm} min ${ss} s`} · ${P.qs.length} questions${att.length?` · Accuracy ${acc}% (${nRight} of ${att.length} answered fully right)`:''}</span></div></div>${nextCard}
+       <div class="stack" style="gap:6px"><span class="band" style="background:${band[1]};color:${band[2]}">${band[0]} · ${pct}%</span><span style="font-weight:700">${esc(advice)}</span><span class="hint" style="margin:0">${auto?'Time ran out, so the paper was submitted automatically. ':''}${exam?`Time used: ${mm} min ${ss} s of ${P.duration} min`:`Time spent: ${mm} min ${ss} s`} · ${P.qs.length} questions${att.length?` · Accuracy ${acc}% (${nRight} of ${att.length} answered fully right)`:''}</span></div></div>${chLine}${nextCard}
      ${P.exam?`<div class="tblwrap"><table><thead><tr><th>Subject</th><th class="n">Correct</th><th class="n">Wrong</th><th class="n">Not answered</th><th class="n">Marks</th></tr></thead><tbody>${topicRows}</tbody></table></div>${chRows?`<div><h3 style="margin:6px 0 4px">Chapters to revise</h3><p class="hint" style="margin:0 0 6px">Where you lost the most marks, including questions left blank. Practise opens a short NCERT chapter test.</p><div class="tblwrap"><table><thead><tr><th>Chapter</th><th class="n">Fully right</th><th class="n">Marks lost</th><th class="n"><span class="sr">Action</span></th></tr></thead><tbody>${chRows}</tbody></table></div></div>`:''}`:`<div class="grid2" style="gap:16px"><div class="tblwrap"><table><thead><tr><th>Chapter</th><th class="n">Marks</th><th class="n">Score</th><th class="n"><span class="sr">Action</span></th></tr></thead><tbody>${topicRows}</tbody></table></div>
        <div class="tblwrap"><table><thead><tr><th>Difficulty</th><th class="n">Fully right</th><th class="n">Score</th></tr></thead><tbody>${lvlRows}</tbody></table></div></div>`}
      <div class="btns">${nWrong&&nWrong<P.qs.length?`<button type="button" class="primary" id="retryWrong">Retry the ${nWrong} I got wrong</button>`:''}<button type="button" ${nWrong&&nWrong<P.qs.length?'':'class="primary" '}id="againBtn">Try the whole paper again</button>${nBlank&&nBlank<P.qs.length?`<button type="button" id="retryBlank">Try the ${nBlank} I left blank</button>`:''}<button type="button" id="newBtn">New paper</button>${showMk?`<button type="button" id="mistakesBtn">Practise my mistakes (${Math.min(20,mk.total)})</button>`:''}<button type="button" id="printResBtn">Print this paper</button><button type="button" class="share" id="shareBtn" aria-expanded="false" aria-controls="sharePanel">Share my score</button></div>
@@ -1581,7 +1626,7 @@ function retry(onlyWrong){
   const qs=JSON.parse(JSON.stringify(src));qs.forEach((q,i)=>{q.no=i+1;delete q.got;q.parts.forEach(p=>{delete p.user;delete p.ok;});});
   const om=P.qs.reduce((a,q)=>a+q.marks,0),tm=qs.reduce((a,q)=>a+q.marks,0);
   const dur=onlyWrong?Math.max(5,Math.ceil(P.duration*tm/(om||1)/5)*5):P.duration;
-  P=Object.assign({},P,{qs,notes:[],duration:dur,label:blank?'Retry: questions left blank':onlyWrong?'Retry: questions to review':'Second attempt',startAt:Date.now()});
+  P=Object.assign({},P,{qs,notes:[],duration:dur,challenge:null,label:blank?'Retry: questions left blank':onlyWrong?'Retry: questions to review':'Second attempt',startAt:Date.now()});
   P.secs=P.secs.filter(s=>secQs(s).length).map((s,i)=>Object.assign({},s,{letter:s.key?'':String.fromCharCode(65+i)}));
   P.endAt=P.startAt+dur*60000;ANS={};FLAG={};CHK={};
   const kind=blank?'blank only':onlyWrong?'wrong only':'whole paper';
@@ -1831,7 +1876,7 @@ function showPrint(from){
 
 /* ---------- wiring ---------- */
 // a shared score link (?go=…&s=276/720): open the same exam paper, or the same class / subject / chapters, and show the friend's score
-let invitePaper=null;
+let invitePaper=null,inviteCh=null;
 function openInvite(){const q=new URLSearchParams(location.search),go=q.get('go');if(!go)return;
   const sc=(q.get('s')||'').match(/^(\d+(?:\.\d+)?)\/(\d+)$/),beat=sc?`A friend scored <b>${esc(sc[1])} / ${esc(sc[2])}</b>. Can you beat it?`:'A friend shared this paper with you.';let html='';
   if(go==='school'){const c=q.get('c'),sub=q.get('sub');
@@ -1845,7 +1890,11 @@ function openInvite(){const q=new URLSearchParams(location.search),go=q.get('go'
         // a paper code with settings the form would not accept (edited or broken link) is ignored: the friend gets a fresh paper instead
         if(validate().errs.length)S=keep;else invitePaper=+pc[0];}
       writeForm();readForm();
-      html=invitePaper!=null?`${beat} <button type="button" class="primary small" id="inviteStart">Take the same paper</button> <span class="hint" style="display:inline;margin:0">Same ${+pc[1]} questions, ${pc[5]==='e'?`${+pc[4]}-minute exam`:'practice mode'}.</span>`
+      // a class challenge: its code must be the one made from this paper code
+      const cc=(q.get('ch')||'').toUpperCase(),how=`${+pc[1]} questions, ${pc[5]==='e'?`${+pc[4]}-minute exam`:'practice mode'}`;
+      if(invitePaper!=null&&cc===chCode(invitePaper))inviteCh={code:cc,name:(q.get('cn')||'').trim().slice(0,40)};
+      html=inviteCh?`<b>Class challenge${inviteCh.name?`: ${esc(inviteCh.name)}`:''}</b> · code ${esc(cc)}. Class ${esc(c)} ${esc(sub)}${ts.length===1?` (${esc(ts[0])})`:''}. ${sc?`A friend scored <b>${esc(sc[1])} / ${esc(sc[2])}</b>. `:''}<button type="button" class="primary small" id="inviteStart">Start the challenge</button> <span class="hint" style="display:inline;margin:0">The same ${how} for everyone.</span>`
+        :invitePaper!=null?`${beat} <button type="button" class="primary small" id="inviteStart">Take the same paper</button> <span class="hint" style="display:inline;margin:0">Same ${how}.</span>`
         :`${beat} Pick <b>Quick quiz</b>, <b>Chapter test</b> or <b>Full mock paper</b> for a fresh Class ${esc(c)} ${esc(sub)} paper${ts.length?` on ${esc(ts.join(', '))}`:''}.`;
       history.replaceState(null,'',location.pathname+'#school');}}
   else{const [list,id]=go.split('/'),pg=EXAM_PAGES[list],pp=pg&&pg.papers.find(x=>x.id===id);
@@ -1853,8 +1902,9 @@ function openInvite(){const q=new URLSearchParams(location.search),go=q.get('go'
   if(!html){history.replaceState(null,'',location.pathname+location.hash);return;}
   const b=$('#invite');b.innerHTML=`<span>${html}</span><button type="button" class="small" id="inviteClose" aria-label="Close">✕</button>`;b.hidden=false;
   $('#inviteClose').addEventListener('click',()=>{b.hidden=true;});
-  if($('#inviteStart'))$('#inviteStart').addEventListener('click',()=>{const v=validate(),qm=$('#quickMsg');if(v.errs.length){qm.innerHTML=v.errs.map(esc).join('<br>');qm.hidden=false;return;}const sd=invitePaper;invitePaper=null;track('start/shared-paper','Started a shared school paper');startTest(false,sd);});// counted as soon as GoatCounter has loaded (its script loads after this one); gives up after 30 s
-  let tries=0;const send=()=>{if(window.goatcounter&&window.goatcounter.count)track('invite/'+slug(go),'Opened a shared score link');else if(++tries<60)setTimeout(send,500);};send();}
+  if($('#inviteStart'))$('#inviteStart').addEventListener('click',()=>{const v=validate(),qm=$('#quickMsg');if(v.errs.length){qm.innerHTML=v.errs.map(esc).join('<br>');qm.hidden=false;return;}const sd=invitePaper,ch=inviteCh;invitePaper=null;inviteCh=null;
+    if(ch)track('start/challenge','Started a class challenge');else track('start/shared-paper','Started a shared school paper');startTest(false,sd,ch);});// counted as soon as GoatCounter has loaded (its script loads after this one); gives up after 30 s
+  let tries=0;const send=()=>{if(window.goatcounter&&window.goatcounter.count)track(inviteCh?'invite/challenge':'invite/'+slug(go),inviteCh?'Opened a class challenge':'Opened a shared score link');else if(++tries<60)setTimeout(send,500);};send();}
 // a link from an exam page to one paper (/?paper=2026-p1#jee-advanced): open that exam's papers with the paper highlighted
 function openPaperLink(){const q=new URLSearchParams(location.search),id=q.get('paper'),pg=EXAM_PAGES[location.hash.slice(1)];if(!id||q.get('go'))return;
   if(pg&&pg.papers.some(x=>x.id===id))inviteHl=id;history.replaceState(null,'',location.pathname+location.hash);}
@@ -1884,6 +1934,7 @@ $('#confirmFlag').addEventListener('click',()=>{$('#confirm').hidden=true;toggle
 document.querySelectorAll('[data-preset]').forEach(b=>b.addEventListener('click',()=>{readForm();startPreset(b.dataset.preset);}));
 $('#custom').addEventListener('toggle',()=>{$('#planCard').hidden=!$('#custom').open;});
 $('#form').addEventListener('submit',e=>{e.preventDefault();readForm();if(validate().errs.length)return;startTest();});
+$('#chMake').addEventListener('click',makeChallenge);
 $('#reset').addEventListener('click',()=>{const m=S.mode;S=JSON.parse(JSON.stringify(DEF));S.mode=m;writeForm();readForm();});
 $('#submitBtn').addEventListener('click',askSubmit);$('#quitBtn').addEventListener('click',askQuit);
 

@@ -29,7 +29,8 @@ Live site: https://my-exam.in
 After adding an official paper (its `paper.json` and its entry in `EXAM_PAGES` in `index.html`), run the tool and add a link to the new paper page under the papers list on its exam page (`jee-main/index.html`, `jee-advanced/index.html` or `neet/index.html`). The tests check that the link exists.
 
 ## Tests
-- `powershell -File tests\run-tests.ps1` runs `tests/marking.html` in headless Microsoft Edge (needs Python and Edge) and prints PASS or the failed checks.
+- `powershell -File tests\run-tests.ps1` runs `tests/marking.html` and `tests/journey.html` in headless Microsoft Edge (needs Python and Edge) and prints PASS or the failed checks.
+- `tests/journey.html` drives the app at phone (390 px) and desktop (1200 px) width as a student would: the home page, a school paper (answer, flag, navigator, Review blank, resume after closing, results, Your next step, retries), practice mode, a class challenge (the link gives the same questions every time; its code goes into the results and the score message; an edited code is ignored), a JEE Main paper and, at phone width, every official paper.
 - The tests cover reading typed numbers, checking answers, the marking rules (+4 / −1, numerical ranges, dropped questions, JEE Advanced partial marks, school part marks), option labels in My mistakes, every official paper (question count, maximum marks, answer keys), every school bank (counts match the index, every answer key is accepted) and the pages for search engines (every class, subject and paper has a page, and every paper page's answer key matches the marking).
 - You can also open `tests/marking.html` in a browser from any local web server.
 - `tests/render-check.html` (open it from a local web server) renders every question, option and solution of every official paper with KaTeX and lists any maths that fails to render and any figure that fails to load. Run it after adding a paper.

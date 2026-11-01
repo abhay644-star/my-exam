@@ -117,7 +117,40 @@
     ok(g, 'practice mode: "Check answer" shows the result and the explanation', !$('#fb0').hidden && /Explanation|Working/.test($('#fb0').textContent));
     $('#quitBtn').click(); await sleep(100); $('#confirmYes').click(); await sleep(200);
 
-    // 7. an official paper: questions, maths and marking
+    // 7. a class challenge: one link gives everyone the same questions, and its code goes into the results and the score message
+    W().location.hash = '#school'; await until(() => !$('#setup').hidden);
+    $('#mode_exam').checked = true; fire($('#mode_exam'), 'change');
+    $('#challenge').open = true; $('#chSize').value = 'quick'; $('#chName').value = 'Class 10B test'; $('#chMake').click(); await sleep(200);
+    const link = $('#chLink') ? $('#chLink').value : '', code = (link.match(/[?&]ch=([0-9A-Z]{4})(&|$)/) || [])[1];
+    ok(g, 'Create challenge link gives a link with a 4-character code and the name', !!code && /[?&]cn=Class\+10B\+test/.test(link) && $('#chOut').textContent.includes(code), link || $('#chOut').textContent);
+    ok(g, 'the challenge panel fits the width', fits(), wide());
+    const sheetText = () => $$('#sheet .q').map(q => q.textContent.replace(/\s+/g, ' ').slice(0, 300));
+    async function openLink(query) {
+      await load('../index.html?test&' + query);
+      return await until(() => !$('#invite').hidden && $('#inviteStart')) ? $('#invite').textContent.replace(/\s+/g, ' ') : '';
+    }
+    let banner = await openLink(link.split('?')[1] || '');
+    ok(g, 'the challenge link opens with the challenge name, code and "Start the challenge"', banner.includes('Class challenge: Class 10B test') && banner.includes(code) && /Start the challenge/.test(banner), banner);
+    $('#inviteStart').click(); await until(() => !$('#test').hidden && $$('#sheet .q').length);
+    const first = sheetText();
+    ok(g, 'the challenge starts with the 10 questions of a quick quiz', first.length === 10, `${first.length} questions`);
+    answer(0); $('#submitBtn').click(); await sleep(100); $('#confirmYes').click();
+    await until(() => !$('#results').hidden && $('#results .score'));
+    ok(g, 'challenge results name the challenge code', $('#results').textContent.includes(`Class challenge ${code}`), $('#results .score') ? $('#results').textContent.slice(0, 200) : 'no results');
+    $('#shareBtn').click(); await sleep(150);
+    const wa = decodeURIComponent(($('#sharePanel a.btnlink') || { href: '' }).href);
+    ok(g, 'the score message names the challenge and links to the same challenge', wa.includes(`Challenge ${code} (Class 10B test): I scored`) && wa.includes(`ch=${code}`) && /[?&]p=\d+\./.test(wa), wa.slice(0, 300));
+    ok(g, 'challenge results fit the width', fits(), wide());
+    await openLink(link.split('?')[1] || ''); $('#inviteStart').click(); await until(() => !$('#test').hidden && $$('#sheet .q').length);
+    const second = sheetText();
+    ok(g, 'opening the challenge link again gives exactly the same questions', second.length === first.length && second.every((t, i) => t === first[i]), `${second.length} vs ${first.length}; first difference at ${second.findIndex((t, i) => t !== first[i])}`);
+    $('#quitBtn').click(); await sleep(100); $('#confirmYes').click(); await sleep(200);
+    // a code that does not belong to the paper code (an edited link) is ignored: it is an ordinary shared paper
+    banner = await openLink((link.split('?')[1] || '').replace(`ch=${code}`, `ch=${code === 'ZZZZ' ? 'YYYY' : 'ZZZZ'}`));
+    ok(g, 'an edited challenge code is ignored (the same paper, not a challenge)', !banner.includes('Class challenge') && /Take the same paper/.test(banner), banner);
+    await load('../index.html?test#home');  // the app tidies a shared link out of the address bar, ?test with it
+
+    // 8. an official paper: questions, maths and marking
     W().location.hash = '#jee-main'; await until(() => $('#jeeList [data-mode="exam"]'));
     $('#jeeList [data-mode="exam"]').click();
     await until(() => !$('#test').hidden && $$('#sheet .q').length, 20000);
@@ -128,7 +161,7 @@
     await until(() => !$('#results').hidden);
     ok(g, 'an all-blank official paper scores 0 out of 300', /\b0\s*\/\s*300\b/.test($('#results').textContent.replace(/\s+/g, ' ')));
 
-    // 8. at phone width, every official paper fits the screen with its maths typeset
+    // 9. at phone width, every official paper fits the screen with its maths typeset
     if (width < 500) {
       const bad = [];
       for (const [list, pg] of Object.entries(W().__aaTest.EXAM_PAGES)) for (const p of pg.papers) {

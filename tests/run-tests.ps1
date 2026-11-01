@@ -11,7 +11,7 @@ $server = Start-Process py -ArgumentList "-m http.server $port --bind 127.0.0.1 
 $code = 0
 try {
   Start-Sleep 2
-  foreach ($page in @(@('marking.html', 60000), @('journey.html', 120000))) {
+  foreach ($page in @(@('marking.html', 60000), @('journey.html', 180000))) {
     $profileDir = Join-Path $env:TEMP "aa-tests-$([guid]::NewGuid())"
     $dom = & $edge --headless=new --disable-gpu --no-first-run "--user-data-dir=$profileDir" "--virtual-time-budget=$($page[1])" --window-size=1400,1000 --dump-dom "http://127.0.0.1:$port/tests/$($page[0])" 2>$null | Out-String
     Remove-Item -Recurse -Force $profileDir -ErrorAction SilentlyContinue
