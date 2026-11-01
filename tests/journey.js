@@ -36,6 +36,11 @@
     await load('../index.html?test'); W().localStorage.clear();
     await load('../index.html?test#home');
     ok(g, 'home page shows and fits the width', !$('#homeView').hidden && fits(), `scrollWidth ${D().documentElement.scrollWidth}`);
+    const pop = [...D().querySelectorAll('#homeView .popular a')].map(a => a.getAttribute('href'));
+    const dead = [];
+    for (const h of pop) { const r = await fetch('..' + h + 'index.html').catch(() => null); if (!r || !r.ok) dead.push(h); }
+    ok(g, 'home page has popular practice links that all open', pop.length >= 5 && !dead.length, `${pop.length} links; missing ${dead.join(', ')}`);
+    ok(g, 'home page has the three how-it-works steps', D().querySelectorAll('#homeView .steps li').length === 3);
 
     // 1. start a school paper
     W().location.hash = '#school'; await until(() => !$('#setup').hidden);
