@@ -58,6 +58,7 @@ p{margin:0}
 .top{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:flex-end;justify-content:space-between;margin-bottom:20px}
 .logo{display:block;width:min(100%,385px);height:auto;margin-block:4px 6px}
 .logo text{font-family:var(--f-display);font-weight:800}
+@media (max-width:600px){body.compact .top{margin-bottom:12px;gap:4px}body.compact .top .eyebrow,body.compact .top .lede{display:none}body.compact .logo{width:min(100%,230px);margin-block:0}}
 .lg-ink{fill:var(--ink)} .lg-red{fill:var(--red)} .lg-muted{fill:var(--muted)} .lg-wood{fill:#f3d9a6} .lg-lead{fill:#1b2236}
 .lg-bar{stroke:var(--bg);stroke-width:8;stroke-linecap:round}
 .grid2{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:20px;align-items:start}
@@ -518,7 +519,7 @@ sup,sub{font-size:.7em}
   </section>
 
   <p class="foot">Questions follow the CBSE / NCERT syllabus for Classes I to XII: Mathematics, English, Hindi and Computer Science for every class; EVS for Classes I to V; Science and Social Science for Classes VI to X; Physics, Chemistry, Biology, Accountancy, Business Studies, Economics, History, Geography and Political Science for Classes XI and XII. Every paper is a fresh selection.</p>
-  <p class="foot contact">Found a mistake or have an idea? <button type="button" class="linkbtn" id="contactOpen">Send us a message</button> or email <a href="mailto:aa.exampractice@gmail.com">aa.exampractice@gmail.com</a></p>
+  <p class="foot contact">Found a mistake or have an idea? <button type="button" class="linkbtn" id="contactOpen">Send us a message</button> or email <a href="mailto:contact@my-exam.in">contact@my-exam.in</a></p>
   <p class="foot links">Previous year papers: <a href="jee-main/">JEE Main</a> · <a href="jee-advanced/">JEE Advanced</a> · <a href="neet/">NEET (UG)</a> · School: <a href="cbse/">CBSE Classes I–XII by subject</a> · <a href="teachers/">For teachers</a> · <a href="about.html">About</a> · <a href="privacy.html">Privacy</a></p>
   <p class="foot">All in All Exam Practice is an independent site and is not affiliated with CBSE, NCERT, NTA or the IITs. Official question papers and answer keys are published by those bodies.</p>
   <p class="foot" id="installRow" hidden>Use it like an app, even offline: <button type="button" class="linkbtn" id="installBtn">Install on this device</button></p>
@@ -1528,7 +1529,8 @@ function finish(auto){
   addHistory({d:Date.now(),subj:P.subject,cls:P.exam?P.exam.short:P.klass,exam:!!P.exam,pid:P.exam?P.exam.id:null,mode:P.mode,got:g,tot,pct,nq:P.qs.length,label:P.label||'',
     mix:curMix,top:P.exam||P.mistakes?null:Object.fromEntries(Object.keys(byT).map(t=>[t,[+byT[t].g.toFixed(1),byT[t].t]]))});clearActive();const mk=saveMistakes();
   track(`finish/${P.mode}/${paperTag()}/${slug(band[0])}`,`Finished ${P.mode}: ${paperName()} – ${band[0]}`);
-  const tps=Object.keys(byT).map(t=>({t,pct:Math.round(byT[t].g/(byT[t].t||1)*100),v:byT[t]})).sort((a,b)=>a.pct-b.pct);
+  // weakest first; a tie goes to more marks lost (the same order as "Your next step", so the advice and the card agree)
+  const tps=Object.keys(byT).map(t=>({t,pct:Math.round(byT[t].g/(byT[t].t||1)*100),v:byT[t]})).sort((a,b)=>a.pct-b.pct||(b.v.t-b.v.g)-(a.v.t-a.v.g));
   const weak=tps.filter(x=>x.pct<75).slice(0,2).map(x=>x.t);
   // accuracy: of the questions answered, how many were fully right (what guessing costs when wrong answers lose marks)
   const att=P.qs.filter(q=>!q.parts.every(p=>blankV(p.user))),nRight=att.filter(q=>q.got===q.marks).length,acc=att.length?Math.round(nRight/att.length*100):0;
@@ -1574,8 +1576,8 @@ function finish(auto){
   const review=P.qs.map((q,i)=>`<div class="q" data-ok="${q.got===q.marks?1:0}" data-flagged="${FLAG[i]?1:0}" data-blank="${leftBlank(q)?1:0}"><span class="qn">${q.no}</span><div class="qbody"><span class="qtopic"><span class="lvl l-${q.real||q.level}"></span>${q.topic} · ${q.kind==='mcq'?'MCQ':(q.sec?'Numerical':LNAME[q.real||q.level])}${FLAG[i]?' · <span class="flagtag">Flagged</span>':''}</span><div>${q.text}</div>${(q.parts[0].type==='choice'||q.parts[0].type==='multi')?`<div class="hint" style="margin:0">${q.parts[0].options.map((o,j)=>`(${optL(q)[j]}) ${o}`).join(' &nbsp; ')}</div>`:''}${partsReview(q)}<p class="sol"><b>${pm()?'Working':'Explanation'}:</b> ${q.sol}</p><button type="button" class="small report" data-report="${i}">Report a problem with this question</button></div><span class="mark">${+q.got.toFixed(1)}/${q.marks}</span></div>`).join('');
   $('#results').innerHTML=`
    <div class="card stack" style="margin-bottom:16px">
-     <div class="score"><div class="big" style="color:${band[2]}">${g}<small> / ${tot}</small></div>
-       <div class="stack" style="gap:6px"><span class="band" style="background:${band[1]};color:${band[2]}">${band[0]} · ${pct}%</span><span style="font-weight:700">${esc(advice)}</span><span class="hint" style="margin:0">${auto?'Time ran out, so the paper was submitted automatically. ':''}${exam?`Time used: ${mm} min ${ss} s of ${P.duration} min`:`Time spent: ${mm} min ${ss} s`} · ${P.qs.length} questions${att.length?` · Accuracy ${acc}% (${nRight} of ${att.length} answered fully right)`:''}</span></div></div>${chLine}${nextCard}
+     <div class="score"><div class="big" style="color:${band[2]}">${g}<small> / ${tot} marks</small></div>
+       <div class="stack" style="gap:6px"><span class="band" style="background:${band[1]};color:${band[2]}">${band[0]} · ${pct}%</span><span style="font-weight:700">${esc(advice)}</span><span class="hint" style="margin:0">${auto?'Time ran out, so the paper was submitted automatically. ':''}${exam?`Time used: ${mm} min ${ss} s of ${P.duration} min`:`Time spent: ${mm} min ${ss} s`} · ${P.qs.length} questions · ${att.length} answered${att.length?` · ${nRight} fully right (${acc}% accuracy)`:''}</span></div></div>${chLine}${nextCard}
      ${P.exam?`<div class="tblwrap"><table><thead><tr><th>Subject</th><th class="n">Correct</th><th class="n">Wrong</th><th class="n">Not answered</th><th class="n">Marks</th></tr></thead><tbody>${topicRows}</tbody></table></div>${chRows?`<div><h3 style="margin:6px 0 4px">Chapters to revise</h3><p class="hint" style="margin:0 0 6px">Where you lost the most marks, including questions left blank. Practise opens a short NCERT chapter test.</p><div class="tblwrap"><table><thead><tr><th>Chapter</th><th class="n">Fully right</th><th class="n">Marks lost</th><th class="n"><span class="sr">Action</span></th></tr></thead><tbody>${chRows}</tbody></table></div></div>`:''}`:`<div class="grid2" style="gap:16px"><div class="tblwrap"><table><thead><tr><th>Chapter</th><th class="n">Marks</th><th class="n">Score</th><th class="n"><span class="sr">Action</span></th></tr></thead><tbody>${topicRows}</tbody></table></div>
        <div class="tblwrap"><table><thead><tr><th>Difficulty</th><th class="n">Fully right</th><th class="n">Score</th></tr></thead><tbody>${lvlRows}</tbody></table></div></div>`}
      <div class="btns">${nWrong&&nWrong<P.qs.length?`<button type="button" class="primary" id="retryWrong">Retry the ${nWrong} I got wrong</button>`:''}<button type="button" ${nWrong&&nWrong<P.qs.length?'':'class="primary" '}id="againBtn">Try the whole paper again</button>${nBlank&&nBlank<P.qs.length?`<button type="button" id="retryBlank">Try the ${nBlank} I left blank</button>`:''}<button type="button" id="newBtn">New paper</button>${showMk?`<button type="button" id="mistakesBtn">Practise my mistakes (${Math.min(20,mk.total)})</button>`:''}<button type="button" id="printResBtn">Print this paper</button><button type="button" class="share" id="shareBtn" aria-expanded="false" aria-controls="sharePanel">Share my score</button></div>
@@ -1648,6 +1650,7 @@ function show(id){
   const SEC={home:'homeView',exams:'examsView',jee:'jeeView'}; // section ids differ from #home/#exams so the browser does not jump down to them
   ['home','exams','jee','setup','test','results','printView'].forEach(x=>{$('#'+(SEC[x]||x)).hidden=x!==id;});
   document.body.classList.toggle('printmode',id==='printView');
+  document.body.classList.toggle('compact',id!=='home'&&id!=='printView');  // a smaller header on phones, away from the home page
   if(id==='home'||id==='setup')renderResume();else $('#resumeBox').hidden=true;
   if(id==='setup'){renderHistory();ensureBank(S.subject).catch(()=>{});}
   if(id==='exams')renderExams();
@@ -1943,7 +1946,7 @@ $('#reset').addEventListener('click',()=>{const m=S.mode;S=JSON.parse(JSON.strin
 $('#submitBtn').addEventListener('click',askSubmit);$('#quitBtn').addEventListener('click',askQuit);
 
 /* ---------- contact pop-up (sent by email through formsubmit.co; the site has no server of its own) ---------- */
-const CONTACT_URL='https://formsubmit.co/ajax/aa.exampractice@gmail.com';
+const CONTACT_URL='https://formsubmit.co/ajax/contact@my-exam.in';
 const plain=html=>{const d=document.createElement('div');d.innerHTML=html;return d.textContent.replace(/\s+/g,' ').trim();};
 function openContact(prefill){
   const d=$('#contactDlg');$('#cStatus').hidden=true;$('#cSend').disabled=false;
@@ -1969,7 +1972,7 @@ async function sendContact(e){
     if(!r.ok||String(j.success)!=='true')throw new Error(j.message||'not sent');
     say('ok','Thank you! Your message has been sent.');$('#cMsg').value='';$('#cCheck').value='';track('contact/sent','Sent contact message');
     setTimeout(closeContact,2500);
-  }catch(err){say('err','Sorry, the message could not be sent. Please email us at aa.exampractice@gmail.com instead.');}
+  }catch(err){say('err','Sorry, the message could not be sent. Please email us at contact@my-exam.in instead.');}
   finally{$('#cSend').disabled=false;}
 }
 $('#contactOpen').addEventListener('click',()=>openContact(''));

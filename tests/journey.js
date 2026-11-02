@@ -93,10 +93,16 @@
     const rq = $$('#results .res .q');
     ok(g, 'results show a score, the marked paper and a solution for every question', rq.length === n && rq.every(q => q.querySelector('.sol')) && /\d/.test($('#results').textContent));
     ok(g, 'results screen fits the width', fits());
+    const scoreLine = $('#results .score').textContent.replace(/\s+/g, ' ');
+    ok(g, 'the score says "marks" and how many questions were answered', /\d+ \/ \d+ marks/.test(scoreLine) && /10 questions · 3 answered/.test(scoreLine), scoreLine.slice(0, 200));
+    const lede = $('.top .lede');
+    ok(g, width < 600 ? 'on a phone, the results screen has the smaller header' : 'on a computer, the full header stays', width < 600 ? lede.offsetParent === null : lede.offsetParent !== null);
     // "Your next step": names the weakest chapter, and its button starts a practice test on just that chapter
     const nx = $('#results .next');
     const nxName = nx && nx.querySelector('b') ? nx.querySelector('b').textContent : '';
     ok(g, 'results show "Your next step" with the weakest chapter and one Practise button', nx && nxName && nx.querySelectorAll('button').length === 1, nx ? nx.textContent.slice(0, 120) : 'missing');
+    const advice = ($('#results .score .stack > span:nth-child(2)') || { textContent: '' }).textContent;
+    ok(g, 'the advice line names the same chapter first as "Your next step"', !nxName || new RegExp('(revise|Focus next on) ' + nxName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).test(advice), `advice "${advice}" / next step "${nxName}"`);
     const blankBtn = $('#retryBlank');
     ok(g, 'results offer "Try the 7 I left blank"', blankBtn && /7/.test(blankBtn.textContent), blankBtn ? blankBtn.textContent : 'missing');
     $('#onlyLeftBlank') && $('#onlyLeftBlank').click(); await sleep(100);
