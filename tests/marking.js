@@ -196,6 +196,28 @@
     eq(g, 'total questions in the banks', total, Object.values(A.BANK_INDEX).reduce((s, b) => s + Object.values(b.classes).reduce((a, c) => a + Object.values(c).reduce((x, y) => x + y, 0), 0), 0));
   }
 
+  // ---------- the Mathematics question generators (Classes I to XII), each run many times with a fixed seed ----------
+  async function generators(A, W) {
+    const g = 'Maths generators', gens = A.T.filter(t => !t.bank && t.gen), R0 = W.Math.random;
+    const typed = p => p.type === 'choice' ? String(p.ans) : p.type === 'select' ? p.ans : p.surd || (p.disp && !isFinite(+p.disp) && /√/.test(p.disp)) ? p.disp : p.sci ? `${+(p.ans / 10 ** Math.floor(Math.log10(Math.abs(p.ans)))).toPrecision(10)} x 10^${Math.floor(Math.log10(Math.abs(p.ans)))}` : p.type === 'text' ? p.alts[0] : String(p.ans);
+    const errors = [], rejected = [], badMcq = [];
+    W.Math.random = A.seeded(20261102);
+    try {
+      for (const t of gens) for (let k = 0; k < 40; k++) {
+        let q;
+        try { q = t.gen(); } catch (e) { errors.push(`${t.id}: ${e.message}`); break; }
+        const p = q.parts.find(p => !A.checkPart(p, typed(p)));
+        if (p) { rejected.push(`${t.id}: "${String(q.text).slice(0, 50)}" key ${JSON.stringify(typed(p))}`); break; }
+        if (t.mcq) { const m = A.makeMCQ(t), o = m && m.parts[0].options;
+          if (m && (o.length !== 4 || new Set(o).size !== 4 || !(m.parts[0].ans >= 0))) { badMcq.push(`${t.id}: ${JSON.stringify(o)}`); break; } }
+      }
+    } finally { W.Math.random = R0; }
+    eq(g, 'every generator runs without an error', errors, []);
+    eq(g, 'every generated answer key is accepted when typed', rejected, []);
+    eq(g, 'every multiple-choice version has 4 different options, one of them right', badMcq, []);
+    ok(g, 'generators checked: ' + gens.length, gens.length > 100);
+  }
+
   // ---------- custom papers: random settings, as a student could choose them ----------
   async function customPapers(A) {
     const g = 'Custom papers', ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
@@ -224,8 +246,8 @@
         if (q.marks !== (q.kind === 'mcq' ? cfg.marks.MCQ : cfg.marks[q.level])) { problems.marks.push(`${tag}: Q${q.no}`); break; }
         // other chapters only when the chosen ones run short, and then the paper says so
         if (cfg.topics !== 'ALL' && !cfg.topics.includes(q.topic) && !r.paper.notes.some(n => /other Class/.test(n))) { problems.chapter.push(`${tag}: ${q.topic} (chosen: ${cfg.topics.join(' | ')}) with no note`); break; }
-        // what a student types for the key: standard-form answers as "2.63 x 10^4"
-        const typed = p => { if (p.type === 'text') return plain(p.alts[0]); if (p.sci) { const e = Math.floor(Math.log10(Math.abs(p.ans))); return `${+(p.ans / 10 ** e).toPrecision(10)} x 10^${e}`; } return String(p.ans); };
+        // what a student types for the key: standard-form answers as "2.63 x 10^4", surd answers as shown ("(√7 + √5)/2")
+        const typed = p => { if (p.type === 'text') return plain(p.alts[0]); if (p.surd) return p.disp; if (p.sci) { const e = Math.floor(Math.log10(Math.abs(p.ans))); return `${+(p.ans / 10 ** e).toPrecision(10)} x 10^${e}`; } return String(p.ans); };
         const bad = q.parts.find(p => !p.ansText || !A.checkPart(p, typed(p)));
         if (bad) { problems.key.push(`${tag}: Q${q.no} "${String(q.text).slice(0, 60)}" part type ${bad.type}, ans ${JSON.stringify(bad.ans)}, ansText ${JSON.stringify(bad.ansText)}, id ${q.id || ''}`); break; }
       }
@@ -336,8 +358,8 @@
     let A = null;
     for (let i = 0; i < 100 && !A; i++) { await new Promise(r => setTimeout(r, 100)); A = frame.contentWindow && frame.contentWindow.__aaTest; }
     if (!A) { ok('Setup', 'the site loads with ?test', false, 'window.__aaTest not found'); return render(); }
-    for (const t of [parsing, checking, rules, labels, papers, banks, customPapers, schoolPages, chapterPages, paperPages]) {
-      try { await t(A); } catch (e) { ok('Setup', t.name + ' ran without an error', false, e && e.stack || String(e)); }
+    for (const t of [parsing, checking, rules, labels, papers, banks, generators, customPapers, schoolPages, chapterPages, paperPages]) {
+      try { await t(A, frame.contentWindow); } catch (e) { ok('Setup', t.name + ' ran without an error', false, e && e.stack || String(e)); }
     }
     render();
   }

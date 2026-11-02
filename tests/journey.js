@@ -87,13 +87,16 @@
     const kept = $('#q0 input:checked') || ($('#q0 input[type=text]') && $('#q0 input[type=text]').value);
     ok(g, 'resumed paper has the same answers and flag', !!kept && /^3$/.test($('#answered').textContent) && $('#q2 [data-flag]').getAttribute('aria-pressed') === 'true', `answered ${$('#answered').textContent}`);
 
-    // 5. submit and review
+    // 5. submit and review (with practice on the two days before today, so this paper makes a 3-day streak)
+    const dk = n => { const d = new Date(); d.setHours(12, 0, 0, 0); d.setDate(d.getDate() - n); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; };
+    W().localStorage.setItem('aa-days', JSON.stringify([dk(1), dk(2), dk(4)]));
     $('#submitBtn').click(); await sleep(100); $('#confirmYes').click();
     await until(() => !$('#results').hidden && $$('#results .res .q').length);
     const rq = $$('#results .res .q');
     ok(g, 'results show a score, the marked paper and a solution for every question', rq.length === n && rq.every(q => q.querySelector('.sol')) && /\d/.test($('#results').textContent));
     ok(g, 'results screen fits the width', fits());
     const scoreLine = $('#results .score').textContent.replace(/\s+/g, ' ');
+    ok(g, 'results show the practice streak (3 days in a row; the gap before does not count)', /Practice streak: 3 days in a row/.test(scoreLine) && !/personal best|Your best/.test(scoreLine), scoreLine.slice(0, 300));
     ok(g, 'the score says "marks" and how many questions were answered', /\d+ \/ \d+ marks/.test(scoreLine) && /10 questions · 3 answered/.test(scoreLine), scoreLine.slice(0, 200));
     const lede = $('.top .lede');
     ok(g, width < 600 ? 'on a phone, the results screen has the smaller header' : 'on a computer, the full header stays', width < 600 ? lede.offsetParent === null : lede.offsetParent !== null);
@@ -148,7 +151,9 @@
     ok(g, 'the challenge starts with the 10 questions of a quick quiz', first.length === 10, `${first.length} questions`);
     answer(0); $('#submitBtn').click(); await sleep(100); $('#confirmYes').click();
     await until(() => !$('#results').hidden && $('#results .score'));
-    ok(g, 'challenge results name the challenge code', $('#results').textContent.includes(`Class challenge ${code}`), $('#results .score') ? $('#results').textContent.slice(0, 200) : 'no results');
+    const chScore = $('#results .score') ? $('#results .score').textContent.replace(/\s+/g, ' ') : '';
+    ok(g, 'a second Class X Science paper compares with the personal best', /New personal best for Class X Science: \d+% \(before: \d+%\)|Your best for Class X Science: \d+%/.test(chScore), chScore.slice(0, 300));
+    ok(g, 'challenge results name the challenge code',$('#results').textContent.includes(`Class challenge ${code}`), $('#results .score') ? $('#results').textContent.slice(0, 200) : 'no results');
     $('#shareBtn').click(); await sleep(150);
     const wa = decodeURIComponent(($('#sharePanel a.btnlink') || { href: '' }).href);
     ok(g, 'the score message names the challenge and links to the same challenge', wa.includes(`Challenge ${code} (Class 10B test): I scored`) && wa.includes(`ch=${code}`) && /[?&]p=\d+\./.test(wa), wa.slice(0, 300));

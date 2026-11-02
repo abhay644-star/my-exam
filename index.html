@@ -206,6 +206,7 @@ details.custom[open]{padding-bottom:14px}
 .hbar{height:8px;background:var(--line);border-radius:99px;overflow:hidden}
 .hbar i{display:block;height:100%}
 .hpct{text-align:right;font-variant-numeric:tabular-nums}
+.pb{font-size:.9rem;color:var(--fg)}.pb b{color:var(--green)}
 /* test bar */
 .bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:10px 14px;display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
 .barrow{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;justify-content:space-between}
@@ -963,6 +964,52 @@ T.push(
 {id:'x_tower2',cls:'X',topic:'Applications of Trigonometry',level:'X',mcq:false,gen(){const d=R(5,40)*2;return{text:`From a point P on level ground, the angle of elevation of the top of a tower is 30°. After walking ${d} m towards the tower, the angle of elevation becomes 60°.`,parts:[PT('(a) Find the height of the tower (m). You may leave √3 in your answer.',d*Math.sqrt(3)/2,FM.d2,2,{disp:`${d/2}√3 m`}),PT('(b) How far is the second point from the foot of the tower (m)?',d/2,FM.unit('m'),2),PT('(c) How far was P from the foot of the tower (m)?',3*d/2,FM.unit('m'),2)],sol:`Let the height be h and the second distance x. tan 60° = h/x gives h = x√3; tan 30° = h/(x + ${d}) gives 3x = x + ${d}, so x = ${d/2}. Then h = ${d/2}√3 m and P is ${3*d/2} m from the tower.`};}}
 );
 
+/* ---------- Class IX Introduction to Euclid's Geometry and Triangles, Class X Triangles (rationalised NCERT: no Pythagoras
+   theorem or areas of similar triangles in Class X) ---------- */
+const EUC="Introduction to Euclid's Geometry";
+T.push(
+{id:'ix_euc_fact',cls:'IX',topic:EUC,level:'E',mcq:true,mcqOnly:true,gen(){const q=pick([
+    ['How many lines can pass through two distinct points?','Exactly one',['Exactly two','Infinitely many','None'],'Given two distinct points, there is a unique line through them.'],
+    ['How many lines can pass through a single point?','Infinitely many',['Exactly one','Exactly two','None'],'Infinitely many lines can be drawn through one point.'],
+    ['At most how many points can two distinct lines have in common?','One',['Two','Three','Infinitely many'],'If two distinct lines met in two points, two different lines would pass through those two points, but only one line can.'],
+    ['According to Euclid, a line is','breadthless length',['a part with no length','length and breadth','length, breadth and thickness'],'Euclid defined a line as breadthless length.'],
+    ['According to Euclid, a point is that which has','no part',['length only','length and breadth','two ends'],'Euclid defined a point as that which has no part.'],
+    ["Which statement is equivalent to Euclid's fifth postulate?",'Through a point not on a line, exactly one line can be drawn parallel to it',['Through two distinct points, exactly one line can be drawn','All right angles are equal to one another','A circle can be drawn with any centre and any radius'],"Playfair's axiom (one parallel through a point not on the line) is equivalent to the fifth postulate."]]);
+  return CHS(q[0],q[1],q[2],q[3]);}},
+{id:'ix_euc_whole',cls:'IX',topic:EUC,level:'E',mcq:true,gen(){const a=R(3,15),b=R(2,12);return N(`Point C lies between points A and B on a line, with AC = ${a} cm and CB = ${b} cm. Find AB.`,a+b,FM.unit('cm'),`The whole is equal to the sum of its parts: AB = AC + CB = ${a} + ${b} = ${a+b} cm.`,[Math.abs(a-b)||a+b+2,a*b,a+b+1]);}},
+{id:'ix_euc_mid',cls:'IX',topic:EUC,level:'M',mcq:true,gen(){const h=R(3,20);return Math.random()<0.5?N(`C is the mid-point of the line segment AB, and AB = ${2*h} cm. Find AC.`,h,FM.unit('cm'),`AC = CB and AC + CB = AB, so 2AC = ${2*h} cm and AC = ${h} cm (things which are halves of the same thing are equal to one another).`,[2*h,4*h,h+2])
+  :N(`C is the mid-point of the line segment AB, and AC = ${h} cm. Find AB.`,2*h,FM.unit('cm'),`CB = AC = ${h} cm, and AB = AC + CB = ${2*h} cm.`,[h,4*h,2*h+2]);}},
+{id:'ix_euc_eq',cls:'IX',topic:EUC,level:'M',mcq:true,gen(){const w=R(30,60),g=R(2,8);return N(`Ravi and Amit weigh the same. Each of them gains ${g} kg. If Ravi now weighs ${w+g} kg, how much does Amit weigh now?`,w+g,FM.unit('kg'),`Euclid's second axiom: if equals are added to equals, the wholes are equal. Both weighed ${w} kg and both gained ${g} kg, so Amit also weighs ${w+g} kg.`,[w,w+2*g,w-g]);}},
+{id:'ix_tri_iso',cls:'IX',topic:'Triangles',level:'E',mcq:true,gen(){if(Math.random()<0.5){const b=R(20,80);if(b===45||b===60)return this.gen();
+    return N(`In △ABC, AB = AC and ∠B = ${b}°. Find ∠A.`,180-2*b,FM.deg,`Angles opposite equal sides are equal, so ∠C = ∠B = ${b}°. Then ∠A = 180° − 2 × ${b}° = ${180-2*b}°.`,[b,180-b,2*b]);}
+  const a=R(10,70)*2;if(a===60||a===90)return this.gen();
+  return N(`In △ABC, AB = AC and ∠A = ${a}°. Find ∠B.`,(180-a)/2,FM.deg,`Angles opposite equal sides are equal, so ∠B = ∠C and 2∠B = 180° − ${a}°, giving ∠B = ${(180-a)/2}°.`,[180-a,a,(180-a)/2+10]);}},
+{id:'ix_tri_crit',cls:'IX',topic:'Triangles',level:'M',mcq:true,mcqOnly:true,gen(){const c=pick([['AB = PQ, BC = QR and CA = RP','SSS'],['AB = PQ, ∠B = ∠Q and BC = QR','SAS'],['∠B = ∠Q, BC = QR and ∠C = ∠R','ASA'],['∠A = ∠P, ∠B = ∠Q and BC = QR','AAS'],['∠B = ∠Q = 90°, AC = PR (the hypotenuses) and AB = PQ','RHS']]);
+  return CHS(`In △ABC and △PQR, ${c[0]}. By which rule is △ABC ≅ △PQR?`,c[1],shuffle(['SSS','SAS','ASA','AAS','RHS'].filter(x=>x!==c[1])),`Given ${c[0]}: this is the ${c[1]} congruence rule.`);}},
+{id:'ix_tri_side',cls:'IX',topic:'Triangles',level:'M',mcq:true,mcqOnly:true,gen(){let b,c,a;do{b=R(25,95);c=R(25,95);a=180-b-c;}while(a<20||a===b||a===c||b===c);
+  const opp={A:'BC',B:'CA',C:'AB'},ang={A:a,B:b,C:c},long=Math.random()<0.5,k=Object.keys(ang).sort((x,y)=>long?ang[y]-ang[x]:ang[x]-ang[y])[0];
+  return CHS(`In △ABC, ∠B = ${b}° and ∠C = ${c}°. Which side is the ${long?'longest':'shortest'}?`,opp[k],['AB','BC','CA'].filter(x=>x!==opp[k]).concat(['All three sides are equal']),`∠A = 180° − ${b}° − ${c}° = ${a}°. The ${long?'longest':'shortest'} side is opposite the ${long?'largest':'smallest'} angle, ∠${k} = ${ang[k]}°, so it is ${opp[k]}.`);}},
+{id:'ix_tri_ineq',cls:'IX',topic:'Triangles',level:'M',mcq:false,gen(){let p,q;do{p=R(3,15);q=R(3,15);}while(p===q);const hi=Math.max(p,q),lo=Math.min(p,q);
+  return{text:`Two sides of a triangle are ${p} cm and ${q} cm. The third side is x cm.`,parts:[PT('(a) x must be greater than (cm)',hi-lo,FM.unit('cm'),1),PT('(b) x must be less than (cm)',p+q,FM.unit('cm'),1)],sol:`The sum of any two sides of a triangle is greater than the third side. So x + ${lo} is greater than ${hi}, which means x is greater than ${hi-lo} cm, and x is less than ${p} + ${q} = ${p+q} cm.`};}},
+{id:'ix_tri_bis',cls:'IX',topic:'Triangles',level:'C',mcq:true,mcqPart:0,gen(){const a=pick([30,40,50,70,80,100,110]),k=R(3,12);
+  return{text:`In △ABC, AB = AC and ∠A = ${a}°. The bisector of ∠A meets BC at D, and BC = ${2*k} cm.`,parts:[PT('(a) Find ∠B.',(180-a)/2,FM.deg,1,{distract:[180-a,a,a/2]}),PT('(b) Find ∠ADB.',90,FM.deg,1),PT('(c) Find BD (cm).',k,FM.unit('cm'),1)],
+    sol:`(a) ∠B = ∠C = (180° − ${a}°) ÷ 2 = ${(180-a)/2}°. (b) △ABD ≅ △ACD by SAS (AB = AC, ∠BAD = ∠CAD, AD is common), so ∠ADB = ∠ADC. They form a linear pair, so each is 90°. (c) The same congruence gives BD = DC = ${2*k} ÷ 2 = ${k} cm.`};}},
+{id:'x_bpt',cls:'X',topic:'Triangles',level:'E',mcq:true,gen(){let a,b,c,e;do{a=R(2,9);b=R(2,9);c=R(2,12);e=c*b/a;}while(!Number.isInteger(e)||a===b||c+b-a<=0||c+b-a===e);
+  return N(`In △ABC, D and E are points on AB and AC such that DE ∥ BC. If AD = ${a} cm, DB = ${b} cm and AE = ${c} cm, find EC.`,e,FM.unit('cm'),`By the basic proportionality theorem, AD/DB = AE/EC, so EC = AE × DB ÷ AD = ${c} × ${b} ÷ ${a} = ${e} cm.`,[+(c*a/b).toFixed(2),c+b-a,e+1]);}},
+{id:'x_sim',cls:'X',topic:'Triangles',level:'M',mcq:true,gen(){let a,p,b,r;do{a=R(3,12);p=R(3,18);b=R(3,15);r=b*p/a;}while(!Number.isInteger(r)||a===p||b+p-a<=0||b+p-a===r||r+2===b+p-a);
+  return N(`△ABC ~ △PQR, with AB = ${a} cm, BC = ${b} cm and PQ = ${p} cm. Find QR.`,r,FM.unit('cm'),`Corresponding sides of similar triangles are in the same ratio: QR/BC = PQ/AB, so QR = ${b} × ${p} ÷ ${a} = ${r} cm.`,[+(b*a/p).toFixed(2),b+p-a,r+2]);}},
+{id:'x_simcrit',cls:'X',topic:'Triangles',level:'M',mcq:true,mcqOnly:true,gen(){const k=pick([2,3,4,5]),c=pick([['∠A = ∠P and ∠B = ∠Q','AA'],[`AB/PQ = BC/QR = CA/RP = ${k}`,'SSS'],[`AB/PQ = AC/PR = ${k} and ∠A = ∠P`,'SAS']]);
+  return CHS(`In △ABC and △PQR, ${c[0]}. By which criterion is △ABC ~ △PQR?`,c[1],['AA','SSS','SAS','RHS'].filter(x=>x!==c[1]),`Given ${c[0]}: this is the ${c[1]} similarity criterion.`);}},
+{id:'x_shadow',cls:'X',topic:'Triangles',level:'C',mcq:true,mcqPart:0,gen(){let h,s,k,t,ts;do{h=pick([2,3,4,5,6,8]);s=pick([1.5,2,3,4,5]);k=R(4,12);t=pick([3,4.5,6,9,10,12]);ts=t*s/h;}while(t===h||s===h||Math.abs(ts*100-Math.round(ts*100))>1e-9);
+  const S=s*k,H=h*k;
+  return{text:`At a certain time of day, a vertical pole ${h} m tall casts a shadow ${s} m long. At the same time, a tower casts a shadow ${S} m long.`,parts:[PT('(a) Find the height of the tower (m).',H,FM.unit('m'),2,{distract:[+(S*s/h).toFixed(2),S+h-s,H/2]}),PT(`(b) How long is the shadow of a ${t} m tall pole at the same time (m)?`,ts,FM.unit('m'),1)],
+    sol:`The sun's rays meet the ground at the same angle, and the pole and tower are vertical, so the triangles formed are similar (AA). Height ÷ shadow is the same for all of them. (a) H = ${h} × ${S} ÷ ${s} = ${H} m. (b) ${t} × ${s} ÷ ${h} = ${+ts.toFixed(2)} m.`};}},
+{id:'x_bptx',cls:'X',topic:'Triangles',level:'X',mcq:true,mcqPart:0,gen(){let x,p,q,r;do{x=R(3,10);p=R(-2,4);q=R(-2,4);r=p+q+p*q/x;}while(!p||!q||p===q||!Number.isInteger(r)||x+p<1||x+q<1||x+r<1);
+  const L=v=>v===0?'x':`x ${v<0?'−':'+'} ${Math.abs(v)}`;
+  return{text:`In △ABC, D is a point on AB and E is a point on AC such that DE ∥ BC. AD = x cm, DB = (${L(p)}) cm, AE = (${L(q)}) cm and EC = (${L(r)}) cm.`,parts:[PT('(a) Find x.',x,FM.int,2,{distract:[x+1,x+2,2*x]}),PT('(b) Find AB (cm).',2*x+p,FM.unit('cm'),2),PT('(c) Find AC (cm).',2*x+q+r,FM.unit('cm'),2)],
+    sol:`By the basic proportionality theorem, AD/DB = AE/EC. Cross-multiplying: x(${L(r)}) = (${L(p)})(${L(q)}). The x² terms cancel, leaving ${neg(r-p-q)}x = ${neg(p*q)}, so x = ${x}. (b) AB = AD + DB = ${x} + ${x+p} = ${2*x+p} cm. (c) AC = AE + EC = ${x+q} + ${x+r} = ${2*x+q+r} cm.`};}}
+);
+
 /* ---------- Class XI ---------- */
 const piStr=f=>(f.n<0?'−':'')+(Math.abs(f.n)===1?'':Math.abs(f.n))+'π'+(f.d===1?'':'/'+f.d);
 T.push(
@@ -1081,8 +1128,8 @@ const TOPICS={
   VI:['Knowing Our Numbers','Playing with Numbers','Basic Geometrical Ideas','Understanding Elementary Shapes','Integers','Fractions','Decimals','Data Handling','Mensuration','Algebra','Ratio and Proportion'],
   VII:['Integers','Fractions and Decimals','Data Handling','Simple Equations','Lines and Angles','Triangles','Comparing Quantities','Rational Numbers','Perimeter and Area','Algebraic Expressions','Exponents and Powers'],
   VIII:['Linear Equations in One Variable','Understanding Quadrilaterals','Data Handling','Squares and Square Roots','Cubes and Cube Roots','Comparing Quantities','Algebraic Expressions and Identities','Mensuration','Exponents and Powers','Direct and Inverse Proportions','Factorisation'],
-  IX:['Number Systems','Polynomials','Coordinate Geometry','Linear Equations in Two Variables','Lines and Angles','Quadrilaterals','Circles',"Heron's Formula",'Surface Areas and Volumes','Statistics'],
-  X:['Real Numbers','Polynomials','Pair of Linear Equations','Quadratic Equations','Arithmetic Progressions','Coordinate Geometry','Introduction to Trigonometry','Applications of Trigonometry','Circles','Areas Related to Circles','Surface Areas and Volumes','Statistics','Probability'],
+  IX:['Number Systems','Polynomials','Coordinate Geometry','Linear Equations in Two Variables',"Introduction to Euclid's Geometry",'Lines and Angles','Triangles','Quadrilaterals','Circles',"Heron's Formula",'Surface Areas and Volumes','Statistics'],
+  X:['Real Numbers','Polynomials','Pair of Linear Equations','Quadratic Equations','Arithmetic Progressions','Triangles','Coordinate Geometry','Introduction to Trigonometry','Applications of Trigonometry','Circles','Areas Related to Circles','Surface Areas and Volumes','Statistics','Probability'],
   XI:['Sets','Relations and Functions','Trigonometric Functions','Complex Numbers','Linear Inequalities','Permutations and Combinations','Binomial Theorem','Sequences and Series','Straight Lines','Conic Sections','Limits and Derivatives','Statistics','Probability'],
   XII:['Relations and Functions','Inverse Trigonometric Functions','Matrices','Determinants','Continuity and Differentiability','Application of Derivatives','Integrals','Application of Integrals','Differential Equations','Vector Algebra','Three Dimensional Geometry','Linear Programming','Probability']
 };
@@ -1408,6 +1455,15 @@ function askQuit(){$('#confirmTitle').textContent='Quit this paper?';$('#confirm
 function bandOf(pct){return pct>=90?['Outstanding','var(--green-soft)','var(--green)']:pct>=75?['Very good','var(--green-soft)','var(--green)']:pct>=50?['Good effort','var(--amber-soft)','var(--amber)']:['Good start','var(--ink-soft)','var(--ink)'];}
 function getHist(){try{const a=JSON.parse(localStorage.getItem(HIST)||'[]');return Array.isArray(a)?a:[];}catch(e){return [];}}
 function addHistory(h){const a=getHist();a.unshift(h);try{localStorage.setItem(HIST,JSON.stringify(a.slice(0,50)));}catch(e){}}
+// the practice streak: local dates (YYYY-MM-DD) with at least one finished paper, newest first, kept on this device
+// (separately from the history, which keeps only 50 papers); the first time, the dates come from the history
+const DAYS='aa-days';
+const dayKey=(t=Date.now())=>{const d=new Date(t);return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;};
+function getDays(){try{const a=JSON.parse(localStorage.getItem(DAYS)||'null');if(Array.isArray(a))return a;}catch(e){}return [...new Set(getHist().map(h=>dayKey(h.d)))];}
+function addDay(){const a=getDays(),k=dayKey();if(a.indexOf(k)<0)a.unshift(k);try{localStorage.setItem(DAYS,JSON.stringify(a.slice(0,400)));}catch(e){}}
+// days in a row up to today, or up to yesterday while today has no paper yet
+function streak(){const a=new Set(getDays()),d=new Date();d.setHours(12,0,0,0);const today=a.has(dayKey(d));if(!today)d.setDate(d.getDate()-1);
+  let n=0;while(a.has(dayKey(d))){n++;d.setDate(d.getDate()-1);}return{n,today};}
 // "My mistakes": questions answered wrong in any paper (school or JEE / NEET), kept on this device to revise later, newest first.
 // A question answered fully right in a revision paper leaves the list.
 const MISTAKES='aa-mistakes';
@@ -1441,8 +1497,9 @@ function renderHistory(){
   const a=getHist(),el=$('#history');
   if(!a.length){el.innerHTML='<div><p class="eyebrow">Your progress</p><h2>No papers yet</h2></div>'+mistakesBox()+'<p class="hint" style="margin:0">Your scores appear here after you finish a paper, so you can see how you improve. They are saved on this device only.</p>';wireMistakes();return;}
   const rows=a.slice(0,10).map(h=>`<li class="hrow"><div><b>${esc(h.subj)}${h.cls?' · '+(h.exam?'':'Class ')+esc(h.cls):''}</b><span class="hint">${new Date(h.d).toLocaleDateString('en-IN',{day:'numeric',month:'short'})} · ${h.mode==='practice'?'Practice':'Exam'} · ${h.nq} Q${h.label?' · '+esc(h.label):''}</span></div><div class="hbar" aria-hidden="true"><i style="width:${h.pct}%;background:${bandOf(h.pct)[2]}"></i></div><b class="hpct">${h.pct}%</b></li>`).join('');
-  el.innerHTML=`<div><p class="eyebrow">Your progress</p><h2>Last ${Math.min(10,a.length)} paper${a.length>1?'s':''}</h2></div>${mistakesBox()}<ul class="hist">${rows}</ul><p class="hint" style="margin:0">Saved on this device only.</p><div class="btns"><button type="button" class="small" id="clearHist">Clear history</button></div>`;
-  wireMistakes();$('#clearHist').addEventListener('click',e=>{const b=e.currentTarget;if(b.dataset.sure){try{localStorage.removeItem(HIST);}catch(err){}renderHistory();}else{b.dataset.sure='1';b.textContent='Tap again to clear';}});
+  const st=streak(),stLine=st.n?`Practice streak: <b>${st.n} day${st.n>1?'s':''}</b>${st.today?'':'. Finish a paper today to keep it going.'}`:'Finish a paper today to start a practice streak.';
+  el.innerHTML=`<div><p class="eyebrow">Your progress</p><h2>Last ${Math.min(10,a.length)} paper${a.length>1?'s':''}</h2><p class="pb" style="margin:4px 0 0">${stLine}</p></div>${mistakesBox()}<ul class="hist">${rows}</ul><p class="hint" style="margin:0">Saved on this device only.</p><div class="btns"><button type="button" class="small" id="clearHist">Clear history</button></div>`;
+  wireMistakes();$('#clearHist').addEventListener('click',e=>{const b=e.currentTarget;if(b.dataset.sure){try{localStorage.removeItem(HIST);localStorage.removeItem(DAYS);}catch(err){}renderHistory();}else{b.dataset.sure='1';b.textContent='Tap again to clear';}});
 }
 // share links open the same exam paper, or the same class / subject / chapters for a fresh school paper, with the friend's score
 // WhatsApp: on Android open the regular WhatsApp app even when WhatsApp Business is the phone's default for wa.me links,
@@ -1528,6 +1585,12 @@ function finish(auto){
   const prevHist=getHist(),curMix={E:0,M:0,C:0,X:0};P.qs.forEach(q=>{const L=q.real||q.level;if(curMix[L]!=null)curMix[L]++;});
   addHistory({d:Date.now(),subj:P.subject,cls:P.exam?P.exam.short:P.klass,exam:!!P.exam,pid:P.exam?P.exam.id:null,mode:P.mode,got:g,tot,pct,nq:P.qs.length,label:P.label||'',
     mix:curMix,top:P.exam||P.mistakes?null:Object.fromEntries(Object.keys(byT).map(t=>[t,[+byT[t].g.toFixed(1),byT[t].t]]))});clearActive();const mk=saveMistakes();
+  addDay();const st=streak();
+  // personal best: the best earlier score on the same class and subject, or the same official paper (retries and revision papers do not count)
+  const pbName=P.exam?P.exam.title:`Class ${P.klass} ${P.subject}`,same=h=>!h.label&&(P.exam?h.exam&&h.pid===P.exam.id:!h.exam&&h.subj===P.subject&&h.cls===P.klass);
+  const best=P.mistakes||P.label?-1:prevHist.filter(same).reduce((m,h)=>Math.max(m,h.pct),-1);
+  const pbTxt=best<0?'':pct>best?`New personal best for ${pbName}: ${pct}% (before: ${best}%).`:`Your best for ${pbName}: ${best}%.`;
+  const stTxt=st.n>1?`Practice streak: ${st.n} days in a row.`:'Practise again tomorrow to start a streak.';
   track(`finish/${P.mode}/${paperTag()}/${slug(band[0])}`,`Finished ${P.mode}: ${paperName()} – ${band[0]}`);
   // weakest first; a tie goes to more marks lost (the same order as "Your next step", so the advice and the card agree)
   const tps=Object.keys(byT).map(t=>({t,pct:Math.round(byT[t].g/(byT[t].t||1)*100),v:byT[t]})).sort((a,b)=>a.pct-b.pct||(b.v.t-b.v.g)-(a.v.t-a.v.g));
@@ -1577,7 +1640,7 @@ function finish(auto){
   $('#results').innerHTML=`
    <div class="card stack" style="margin-bottom:16px">
      <div class="score"><div class="big" style="color:${band[2]}">${g}<small> / ${tot} marks</small></div>
-       <div class="stack" style="gap:6px"><span class="band" style="background:${band[1]};color:${band[2]}">${band[0]} · ${pct}%</span><span style="font-weight:700">${esc(advice)}</span><span class="hint" style="margin:0">${auto?'Time ran out, so the paper was submitted automatically. ':''}${exam?`Time used: ${mm} min ${ss} s of ${P.duration} min`:`Time spent: ${mm} min ${ss} s`} · ${P.qs.length} questions · ${att.length} answered${att.length?` · ${nRight} fully right (${acc}% accuracy)`:''}</span></div></div>${chLine}${nextCard}
+       <div class="stack" style="gap:6px"><span class="band" style="background:${band[1]};color:${band[2]}">${band[0]} · ${pct}%</span><span style="font-weight:700">${esc(advice)}</span><span class="pb">${pbTxt?`${pct>best?'<b>':''}${esc(pbTxt)}${pct>best?'</b>':''} `:''}${esc(stTxt)}</span><span class="hint" style="margin:0">${auto?'Time ran out, so the paper was submitted automatically. ':''}${exam?`Time used: ${mm} min ${ss} s of ${P.duration} min`:`Time spent: ${mm} min ${ss} s`} · ${P.qs.length} questions · ${att.length} answered${att.length?` · ${nRight} fully right (${acc}% accuracy)`:''}</span></div></div>${chLine}${nextCard}
      ${P.exam?`<div class="tblwrap"><table><thead><tr><th>Subject</th><th class="n">Correct</th><th class="n">Wrong</th><th class="n">Not answered</th><th class="n">Marks</th></tr></thead><tbody>${topicRows}</tbody></table></div>${chRows?`<div><h3 style="margin:6px 0 4px">Chapters to revise</h3><p class="hint" style="margin:0 0 6px">Where you lost the most marks, including questions left blank. Practise opens a short NCERT chapter test.</p><div class="tblwrap"><table><thead><tr><th>Chapter</th><th class="n">Fully right</th><th class="n">Marks lost</th><th class="n"><span class="sr">Action</span></th></tr></thead><tbody>${chRows}</tbody></table></div></div>`:''}`:`<div class="grid2" style="gap:16px"><div class="tblwrap"><table><thead><tr><th>Chapter</th><th class="n">Marks</th><th class="n">Score</th><th class="n"><span class="sr">Action</span></th></tr></thead><tbody>${topicRows}</tbody></table></div>
        <div class="tblwrap"><table><thead><tr><th>Difficulty</th><th class="n">Fully right</th><th class="n">Score</th></tr></thead><tbody>${lvlRows}</tbody></table></div></div>`}
      <div class="btns">${nWrong&&nWrong<P.qs.length?`<button type="button" class="primary" id="retryWrong">Retry the ${nWrong} I got wrong</button>`:''}<button type="button" ${nWrong&&nWrong<P.qs.length?'':'class="primary" '}id="againBtn">Try the whole paper again</button>${nBlank&&nBlank<P.qs.length?`<button type="button" id="retryBlank">Try the ${nBlank} I left blank</button>`:''}<button type="button" id="newBtn">New paper</button>${showMk?`<button type="button" id="mistakesBtn">Practise my mistakes (${Math.min(20,mk.total)})</button>`:''}<button type="button" id="printResBtn">Print this paper</button><button type="button" class="share" id="shareBtn" aria-expanded="false" aria-controls="sharePanel">Share my score</button></div>
@@ -2005,7 +2068,7 @@ let installEvt=null;
 window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();installEvt=e;$('#installRow').hidden=false;});
 $('#installBtn').addEventListener('click',async()=>{if(!installEvt)return;installEvt.prompt();const r=await installEvt.userChoice;track('app/install/'+r.outcome,'Install app: '+r.outcome);installEvt=null;$('#installRow').hidden=true;});
 // tests/marking.html opens this page with ?test and reaches the marking code through window.__aaTest
-if(new URLSearchParams(location.search).has('test'))window.__aaTest={checkPart,parseNum,partMarks,answerText,examQs,ensureBank,topicsFor,bankCounts,BANK_INDEX,SUBJECTS,T,cleanQ,EXAM_PAGES,durLabel,
+if(new URLSearchParams(location.search).has('test'))window.__aaTest={checkPart,parseNum,partMarks,answerText,examQs,ensureBank,topicsFor,bankCounts,BANK_INDEX,SUBJECTS,T,cleanQ,EXAM_PAGES,durLabel,makeMCQ,seeded,
   // marks qs against ans ({'<question index>-<part index>': answer}) and returns each question's mark
   markPaper(qs,ans,exam){const P0=P,A0=ANS;P={qs,exam};ANS=ans;try{qs.forEach((q,i)=>markQ(i));return qs.map(q=>q.got);}finally{P=P0;ANS=A0;}},
   withPaper(p,fn){const P0=P;P=p;try{return fn();}finally{P=P0;}},
