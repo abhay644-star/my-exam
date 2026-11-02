@@ -41,6 +41,12 @@
     for (const h of pop) { const r = await fetch('..' + h + 'index.html').catch(() => null); if (!r || !r.ok) dead.push(h); }
     ok(g, 'home page has popular practice links that all open', pop.length >= 5 && !dead.length, `${pop.length} links; missing ${dead.join(', ')}`);
     ok(g, 'home page has the three how-it-works steps', D().querySelectorAll('#homeView .steps li').length === 3);
+    // the teachers' page: linked from the home page, and its "Set a class test" link opens School with the challenge panel open
+    const tr = await fetch('../teachers/index.html').catch(() => null), tdoc = tr && tr.ok ? new DOMParser().parseFromString(await tr.text(), 'text/html') : null;
+    ok(g, 'home page links to the teachers\' page, which links to the challenge panel', !!$('#homeView a[href="teachers/"]') && !!tdoc && !!tdoc.querySelector('a.btn[href="/?challenge#school"]'));
+    await load('../index.html?test&challenge#school');
+    ok(g, '?challenge opens School with "Challenge your class or friends" open', !$('#setup').hidden && $('#challenge').open, `setup ${!$('#setup').hidden}, open ${$('#challenge').open}`);
+    await load('../index.html?test#home');
 
     // 1. start a school paper
     W().location.hash = '#school'; await until(() => !$('#setup').hidden);

@@ -1,7 +1,8 @@
-// Runs the app's own Mathematics question generators with a fixed seed and writes a few questions per Class XI and XII
-// chapter (text, answers, worked solution) into #out as JSON, for tools/build_pages.py to show on the chapter pages.
+// Runs the app's own Mathematics question generators with a fixed seed and writes a few questions per Class IX, X, XI and
+// XII chapter (text, answers, worked solution) into #out as JSON, for tools/build_pages.py to show on the chapter pages.
 (function () {
-  const PER_CHAPTER = 6, CLASSES = ['XI', 'XII'];
+  // IX and X come last so that adding them left the XI and XII samples (one random sequence) unchanged
+  const PER_CHAPTER = 6, CLASSES = ['XI', 'XII', 'IX', 'X'];
   const out = document.getElementById('out');
   async function run() {
     const frame = document.getElementById('app');

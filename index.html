@@ -360,6 +360,7 @@ sup,sub{font-size:.7em}
       <li><b>Set your paper</b><span>Use a ready preset, or choose the chapters, length and difficulty.</span></li>
       <li><b>Take the test</b><span>Get your score, the solutions and a suggested next step straight away.</span></li>
     </ol>
+    <p class="hint" style="margin:8px 0 0">Teachers: set the same test for your whole class with one link. <a href="teachers/">See how</a>.</p>
     <h3 class="whyhead">Why practise here</h3>
     <ul class="whys">
       <li><b>A fresh paper every time</b><span>A new mix of questions on every attempt.</span></li>
@@ -518,7 +519,7 @@ sup,sub{font-size:.7em}
 
   <p class="foot">Questions follow the CBSE / NCERT syllabus for Classes I to XII: Mathematics, English, Hindi and Computer Science for every class; EVS for Classes I to V; Science and Social Science for Classes VI to X; Physics, Chemistry, Biology, Accountancy, Business Studies, Economics, History, Geography and Political Science for Classes XI and XII. Every paper is a fresh selection.</p>
   <p class="foot contact">Found a mistake or have an idea? <button type="button" class="linkbtn" id="contactOpen">Send us a message</button> or email <a href="mailto:aa.exampractice@gmail.com">aa.exampractice@gmail.com</a></p>
-  <p class="foot links">Previous year papers: <a href="jee-main/">JEE Main</a> · <a href="jee-advanced/">JEE Advanced</a> · <a href="neet/">NEET (UG)</a> · School: <a href="cbse/">CBSE Classes I–XII by subject</a> · <a href="about.html">About</a> · <a href="privacy.html">Privacy</a></p>
+  <p class="foot links">Previous year papers: <a href="jee-main/">JEE Main</a> · <a href="jee-advanced/">JEE Advanced</a> · <a href="neet/">NEET (UG)</a> · School: <a href="cbse/">CBSE Classes I–XII by subject</a> · <a href="teachers/">For teachers</a> · <a href="about.html">About</a> · <a href="privacy.html">Privacy</a></p>
   <p class="foot">All in All Exam Practice is an independent site and is not affiliated with CBSE, NCERT, NTA or the IITs. Official question papers and answer keys are published by those bodies.</p>
   <p class="foot" id="installRow" hidden>Use it like an app, even offline: <button type="button" class="linkbtn" id="installBtn">Install on this device</button></p>
 
@@ -1910,7 +1911,10 @@ function openPaperLink(){const q=new URLSearchParams(location.search),id=q.get('
   if(pg&&pg.papers.some(x=>x.id===id))inviteHl=id;history.replaceState(null,'',location.pathname+location.hash);}
 // a link from a school page (/?class=X&subject=Science&chapter=Light#school): open School with that class, subject
 // and chapter chosen; anything the app does not offer is ignored
-function openSchoolLink(){const q=new URLSearchParams(location.search),c=q.get('class'),sub=q.get('subject');if(!c||q.get('go'))return;
+// (&challenge, as on the teachers' page, also opens "Challenge your class or friends")
+function openSchoolLink(){const q=new URLSearchParams(location.search),c=q.get('class'),sub=q.get('subject');
+  if(q.has('challenge')&&!q.get('go')){const d=$('#challenge');d.open=true;setTimeout(()=>d.scrollIntoView({block:'start'}),400);if(!c){history.replaceState(null,'',location.pathname+location.hash);return;}}
+  if(!c||q.get('go'))return;
   if(ROMAN.indexOf(c)>=0&&subjectsFor(c).indexOf(sub)>=0){const ch=q.getAll('chapter').filter(x=>topicsFor(sub,c).indexOf(x)>=0);
     Object.assign(S,{klass:c,subject:sub,topics:ch.length?ch:'ALL'});writeForm();readForm();}
   history.replaceState(null,'',location.pathname+location.hash);}

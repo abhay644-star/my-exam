@@ -245,7 +245,7 @@
   // ---------- the school pages for search engines (cbse/…, built by tools/build_pages.py) ----------
   async function schoolPages(A) {
     const g = 'School pages', ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
-    const slug = s => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+    const slug = s => s.toLowerCase().replace(/['’]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
     const missing = [], stale = [], badLinks = [];
     let n = 0;
     for (const [i, c] of ROMAN.entries()) for (const s of A.SUBJECTS.filter(s => A.topicsFor(s, c).length)) {
@@ -268,10 +268,10 @@
 
   // ---------- the chapter pages (cbse/class-11|12/<subject>/<chapter>/, built by tools/build_pages.py) ----------
   async function chapterPages(A) {
-    const g = 'Chapter pages', slug = s => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+    const g = 'Chapter pages', slug = s => s.toLowerCase().replace(/['’]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
     const missing = [], unlinked = [], badStart = [];
     let n = 0;
-    const scope = [['IX', 9, ['Science']], ['X', 10, ['Science', 'Social Science', 'English']], ['XI', 11, ['Physics', 'Chemistry', 'Biology', 'Mathematics']], ['XII', 12, ['Physics', 'Chemistry', 'Biology', 'Mathematics']]];
+    const scope = [['IX', 9, ['Science', 'Mathematics']], ['X', 10, ['Science', 'Social Science', 'English', 'Mathematics']], ['XI', 11, ['Physics', 'Chemistry', 'Biology', 'Mathematics']], ['XII', 12, ['Physics', 'Chemistry', 'Biology', 'Mathematics']]];
     for (const [c, num, subjects] of scope) for (const s of subjects) {
       const subjUrl = `../cbse/class-${num}/${slug(s)}/`;
       const subjDoc = new DOMParser().parseFromString(await (await fetch(subjUrl)).text(), 'text/html');
@@ -287,7 +287,7 @@
         if (!q || q.get('class') !== c || q.get('subject') !== s || q.get('chapter') !== ch || !doc.querySelectorAll('.samples .sq').length) badStart.push(path);
       }
     }
-    eq(g, 'every Class 9 and 10 Science and Class 11 and 12 Physics, Chemistry, Biology and Mathematics chapter has a page (rebuild with tools/build_pages.py)', missing, []);
+    eq(g, 'every Class 9 Science and Mathematics, Class 10 Science, Social Science, English and Mathematics, and Class 11 and 12 Physics, Chemistry, Biology and Mathematics chapter has a page (rebuild with tools/build_pages.py)', missing, []);
     eq(g, 'every chapter page is linked from its subject page', unlinked, []);
     eq(g, 'every chapter page has sample questions and a start button for that chapter', badStart, []);
     ok(g, 'number of chapter pages checked: ' + n, n > 0);
