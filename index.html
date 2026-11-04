@@ -2035,7 +2035,13 @@ async function sendContact(e){
     if(!r.ok||String(j.success)!=='true')throw new Error(j.message||'not sent');
     say('ok','Thank you! Your message has been sent.');$('#cMsg').value='';$('#cCheck').value='';track('contact/sent','Sent contact message');
     setTimeout(closeContact,2500);
-  }catch(err){say('err','Sorry, the message could not be sent. Please email us at contact@my-exam.in instead.');}
+  }catch(err){
+    say('err','Sorry, the message could not be sent. ');
+    const full=`${msg}\n\nPage: ${location.href}`,cut=full.length>1500?full.slice(0,1500)+'\n[message shortened]':full; // long mailto links fail in some mail apps
+    const a=document.createElement('a');a.href=`mailto:contact@my-exam.in?subject=${encodeURIComponent('Message from my-exam.in')}&body=${encodeURIComponent(cut)}`;
+    a.textContent='Email us instead';a.style.fontWeight='700';a.addEventListener('click',()=>track('contact/mailto','Sent contact message by email'));
+    st.append(a,' (your message is copied in) or write to contact@my-exam.in.');
+  }
   finally{$('#cSend').disabled=false;}
 }
 $('#contactOpen').addEventListener('click',()=>openContact(''));
