@@ -4,7 +4,8 @@
 // - School question banks (school-questions/*.json): saved when the app installs, so school papers work offline from
 //   the start. Their addresses carry a content hash (?v=…), written with BANK_FILES by tools/build_school_index.py; an updated bank
 //   replaces the old copy.
-// - Exam papers, figures, icons, KaTeX and fonts: saved the first time they are used, refreshed in the background.
+// - Exam papers (*/paper.json): network first, so a corrected answer key is used at once; the saved copy when offline.
+// - Figures, icons, KaTeX and fonts: saved the first time they are used, refreshed in the background.
 // - Analytics (GoatCounter) and the contact form are never cached.
 // Change VERSION to clear old saved copies (for example after removing files).
 const VERSION = 'v3';
@@ -49,13 +50,21 @@ self.addEventListener('fetch', e => {
     return;
   }
 
-  // everything else: saved copy at once, refreshed in the background (our own files skip the browser's 10-minute cache,
-  // so a corrected paper.json is picked up on the next visit)
+  if (same && url.pathname.endsWith('/paper.json')) {
+    e.respondWith(fetch(new Request(req, { cache: 'no-cache' })).then(res => {
+      if (res.ok) { const copy = res.clone(); e.waitUntil(caches.open(CACHE).then(c => c.put(req, copy)).catch(() => {})); }
+      return res;
+    }).catch(() => caches.match(req).then(hit => hit || Response.error())));
+    return;
+  }
+
+  // everything else: saved copy at once, refreshed in the background (our own files skip the browser's 10-minute cache)
   e.respondWith(caches.open(CACHE).then(c => c.match(req).then(hit => {
     const fresh = fetch(same ? new Request(req, { cache: 'no-cache' }) : req).then(res => {
       if (res.ok || res.type === 'opaque') {
         const copy = res.clone();
-        return c.put(req, copy).then(() => bankPath(req.url) ? dropOldBanks(c, req.url) : null).then(() => res);
+        // a copy that cannot be saved (storage full) must not lose the response itself
+        return c.put(req, copy).then(() => bankPath(req.url) ? dropOldBanks(c, req.url) : null).catch(() => {}).then(() => res);
       }
       return res;
     }).catch(() => hit);

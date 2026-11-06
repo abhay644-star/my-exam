@@ -519,7 +519,7 @@ sup,sub{font-size:.7em}
     <article class="sheet paper" id="printPaper"></article>
   </section>
 
-  <p class="foot">Questions follow the CBSE / NCERT syllabus for Classes I to XII: Mathematics, English, Hindi and Computer Science for every class; EVS for Classes I to V; Science and Social Science for Classes VI to X; Physics, Chemistry, Biology, Accountancy, Business Studies, Economics, History, Geography and Political Science for Classes XI and XII. Every paper is a fresh selection.</p>
+  <p class="foot">Questions follow the CBSE / NCERT syllabus for Classes I to XII: Mathematics, English, Hindi and Computer Science for every class (Computer Science follows the CBSE Computer Applications syllabus in Classes IX and X, Computer Science in XI and XII, and a general school computer syllabus before that); EVS for Classes I to V; Science and Social Science for Classes VI to X; Physics, Chemistry, Biology, Accountancy, Business Studies, Economics, History, Geography and Political Science for Classes XI and XII. Every paper is a fresh selection.</p>
   <p class="foot contact">Found a mistake or have an idea? <button type="button" class="linkbtn" id="contactOpen">Send us a message</button> or email <a href="mailto:contact@my-exam.in">contact@my-exam.in</a></p>
   <p class="foot links">Previous year papers: <a href="jee-main/">JEE Main</a> · <a href="jee-advanced/">JEE Advanced</a> · <a href="neet/">NEET (UG)</a> · School: <a href="cbse/">CBSE Classes I–XII by subject</a> · <a href="teachers/">For teachers</a> · <a href="about.html">About</a> · <a href="privacy.html">Privacy</a></p>
   <p class="foot">All in All Exam Practice is an independent site and is not affiliated with CBSE, NCERT, NTA or the IITs. Official question papers and answer keys are published by those bodies.</p>
@@ -1295,7 +1295,10 @@ function startTest(useSample,seed,ch){
   if(starting)return;starting=true;const qm=$('#quickMsg');
   ensureBank(S.subject).then(()=>{starting=false;startTest0(false,seed,ch);},()=>{starting=false;qm.textContent='The questions could not be loaded. Check your internet connection and try again.';qm.hidden=false;});
 }
+// a new paper replaces an unfinished one (begin() saves over it), so ask first
+const okToReplace=()=>{const a=loadActive();return !a||confirm(`You have an unfinished paper: ${paperName(a.P)}. Start a new paper instead? The unfinished one will be lost.`);};
 function startTest0(useSample,seed,ch){
+  if(!okToReplace())return;
   const sd=seed!=null?seed>>>0:Math.floor(Math.random()*4294967296),R0=Math.random;let p;
   Math.random=seeded(sd);try{p=buildPaper(useSample);}finally{Math.random=R0;}
   p.seed=sd;p.cfg={nq:S.nq,nmcq:S.nmcq,usemcq:!!S.usemcq,mix:Object.assign({},S.mix),marks:Object.assign({},S.marks),duration:S.duration};
@@ -1481,7 +1484,7 @@ function saveMistakes(){let a=getMistakes();const before=a.length;let added=0;
       const k=(q.text+'|'+q.parts.map(p=>p.type==='choice'?p.options[p.ans]:answerText(p)).join('|')).slice(0,400);
       if(a.some(m=>m.k===k))return;a.unshift({k,d:Date.now(),src,math:!!P.exam,q:cleanQ(q)});added++;});}
   setMistakes(a);return{added,removed:P.mistakes?before-a.length:0,total:Math.min(150,a.length)};}
-function startMistakes(){const a=getMistakes();if(!a.length)return;const pick=a.slice(0,20);
+function startMistakes(){const a=getMistakes();if(!a.length||!okToReplace())return;const pick=a.slice(0,20);
   const qs=pick.map((m,i)=>Object.assign(JSON.parse(JSON.stringify(m.q)),{no:i+1,mk:m.k,tag:m.src,sec:'MIS'}));
   // NEET questions saved before option labels were kept: NEET numbers its options (1)–(4)
   qs.forEach((q,i)=>{if(!q.ol&&/^NEET/.test(pick[i].src)){q.ol='1234';q.parts.forEach(p=>{p.ol='1234';});}});
@@ -1710,11 +1713,14 @@ function renderResume(){
   $('#discardBtn').addEventListener('click',()=>{clearActive();renderResume();});
 }
 function show(id){
+  // leaving the test screen (top menu, Back) leaves the paper unfinished, as closing the page does: answers are saved, the clock
+  // here stops and the paper waits under "You have an unfinished paper" (exam time still ends at the same moment)
+  if(id!=='test'&&id!=='printView')clearInterval(timerId);
   const SEC={home:'homeView',exams:'examsView',jee:'jeeView'}; // section ids differ from #home/#exams so the browser does not jump down to them
   ['home','exams','jee','setup','test','results','printView'].forEach(x=>{$('#'+(SEC[x]||x)).hidden=x!==id;});
   document.body.classList.toggle('printmode',id==='printView');
   document.body.classList.toggle('compact',id!=='home'&&id!=='printView');  // a smaller header on phones, away from the home page
-  if(id==='home'||id==='setup')renderResume();else $('#resumeBox').hidden=true;
+  if(['test','results','printView'].indexOf(id)<0)renderResume();else $('#resumeBox').hidden=true;
   if(id==='setup'){renderHistory();ensureBank(S.subject).catch(()=>{});}
   if(id==='exams')renderExams();
   if(id==='jee')renderJee();
@@ -1810,11 +1816,12 @@ function renderJee(){
 }
 async function startJee(id,mode){
   let meta=null,list='jee-main';Object.keys(EXAM_PAGES).forEach(k=>{const m=EXAM_PAGES[k].papers.find(x=>x.id===id);if(m){meta=m;list=k;}});
-  const msg=$('#jeeMsg');if(!meta)return;
+  const msg=$('#jeeMsg');if(!meta||!okToReplace())return;
   msg.className='msg info';msg.textContent='Loading the paper…';msg.hidden=false;
   // no connection, a missing file and a damaged file each get their own message; the cause is logged to the console
   let data;
-  try{const r=await fetch(meta.path+'paper.json');if(!r.ok)throw Object.assign(new Error('http '+r.status),{http:r.status});data=await r.json();}
+  // no-cache: a corrected answer key is used at once
+  try{const r=await fetch(meta.path+'paper.json',{cache:'no-cache'});if(!r.ok)throw Object.assign(new Error('http '+r.status),{http:r.status});data=await r.json();}
   catch(e){console.error('Paper '+id+' could not be loaded:',e);msg.className='msg err';
     msg.textContent=e.http?`The paper could not be loaded (error ${e.http}). Please try again later.`:e instanceof SyntaxError?'This paper could not be opened because its file is damaged. Please tell us, using "Tell us" below.':'The paper could not be loaded. Check your internet connection and try again.';return;}
   try{

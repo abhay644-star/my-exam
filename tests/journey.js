@@ -86,6 +86,13 @@
     $('#resumeBtn').click(); await until(() => !$('#test').hidden);
     const kept = $('#q0 input:checked') || ($('#q0 input[type=text]') && $('#q0 input[type=text]').value);
     ok(g, 'resumed paper has the same answers and flag', !!kept && /^3$/.test($('#answered').textContent) && $('#q2 [data-flag]').getAttribute('aria-pressed') === 'true', `answered ${$('#answered').textContent}`);
+    // leaving mid-paper by the top menu keeps it unfinished: the exam page offers to resume it, and a new paper asks first
+    W().location.hash = '#jee-main'; await until(() => !$('#jeeView').hidden && $('#jeeList [data-mode="exam"]'));
+    ok(g, 'leaving mid-paper, the exam page offers to resume it', !$('#resumeBox').hidden && /unfinished/.test($('#resumeBox').textContent), $('#resumeBox').textContent);
+    let asked = 0; W().confirm = () => { asked++; return false; };
+    $('#jeeList [data-mode="exam"]').click(); await sleep(300);
+    ok(g, 'starting another paper asks first, and No keeps the unfinished one', asked === 1 && $('#test').hidden && !!W().localStorage.getItem('aa-active'), `asked ${asked}, test shown ${!$('#test').hidden}`);
+    $('#resumeBtn').click(); await until(() => !$('#test').hidden);
 
     // 5. submit and review (with practice on the two days before today, so this paper makes a 3-day streak)
     const dk = n => { const d = new Date(); d.setHours(12, 0, 0, 0); d.setDate(d.getDate() - n); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; };

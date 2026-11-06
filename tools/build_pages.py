@@ -181,6 +181,16 @@ def shell(path, title, desc, crumbs, body, math=False):
 </html>
 '''
 
+def syllabus(subj, cls):
+    """The syllabus a class's subject follows: NCERT, except Computer Science, which has NCERT books only in Classes 11 and 12."""
+    if subj != 'Computer Science':
+        return 'the NCERT syllabus'
+    if cls in ('XI', 'XII'):
+        return 'the CBSE Computer Science (083) syllabus'
+    if cls in ('IX', 'X'):
+        return 'the CBSE Computer Applications (165) syllabus'
+    return 'a general school computer syllabus'
+
 def subject_page(cls, subj):
     n, chs = NUM[cls], chapters(subj, cls)
     path = f'/cbse/class-{n}/{slug(subj)}/'
@@ -192,7 +202,8 @@ def subject_page(cls, subj):
     total = sum(counts.values())
     size = 'new questions are made for every attempt' if maths else f'{total} questions'
     title = f'CBSE Class {n} {subj} Online Test – Free Chapter-wise Practice | All in All Exam Practice'
-    desc = (f'Free CBSE Class {n} {subj} practice tests: {len(chs)} NCERT chapters, chapter tests and full mock papers, '
+    ncert = 'NCERT ' if syllabus(subj, cls) == 'the NCERT syllabus' else ''
+    desc = (f'Free CBSE Class {n} {subj} practice tests: {len(chs)} {ncert}chapters, chapter tests and full mock papers, '
             f'marked instantly with {"worked solutions" if maths else "explanations"}. No sign-up.')
     # a chapter with its own page links there (questions and answers, then its test); the others open the app directly
     rows = ''.join(
@@ -208,7 +219,7 @@ def subject_page(cls, subj):
   <a class="btn" href="{esc(app_link(cls, subj))}">Start a Class {n} {esc(subj)} test →</a>
 
   <h2>Chapters</h2>
-  <p>{len(chs)} chapters following the NCERT syllabus; {size}. Choose a chapter to practise just that chapter.</p>
+  <p>Questions on {len(chs)} chapters of {syllabus(subj, cls)}; {size}. Choose a chapter to practise just that chapter.</p>
   <ul class="chapters">{rows}</ul>
 {sq_html}
   <h2>How it works</h2>
@@ -272,7 +283,7 @@ def chapter_page(cls, subj, ch):
             f'{"worked solutions" if maths else "explanations"}, marked instantly. No sign-up.')
     others = ''.join(f'<a href="{chapter_path(cls, subj, c)}">{esc(c)}</a>' for c in chapters(subj, cls) if c != ch and has_chapter_page(subj, cls, c))
     body = f'''  <h1>Class {n} {esc(subj)}: {esc(ch)}</h1>
-  <p class="lede">Practise the NCERT chapter {esc(ch)} (CBSE Class {n} {esc(subj)}) with an online test that is marked instantly, with {"worked solutions" if maths else "explanations"}. {size} Free, no sign-up.</p>
+  <p class="lede">Practise the {"NCERT " if syllabus(subj, cls) == "the NCERT syllabus" else ""}chapter {esc(ch)} (CBSE Class {n} {esc(subj)}) with an online test that is marked instantly, with {"worked solutions" if maths else "explanations"}. {size} Free, no sign-up.</p>
   <a class="btn" href="{esc(app_link(cls, subj, ch))}">Start a {esc(ch)} test →</a>
 
   <h2>Practice questions with answers</h2>
@@ -293,7 +304,7 @@ def hub_page():
         + ''.join(f'<a href="/cbse/class-{NUM[c]}/{slug(s)}/">{esc(s)}</a>' for s in offer[c]) + '</p></section>'
         for c in ROMAN if offer[c])
     body = f'''  <h1>CBSE Classes 1 to 12: free online practice tests</h1>
-  <p class="lede">Chapter tests and full mock papers for every class, following the NCERT syllabus, marked instantly with explanations. Choose your class and subject.</p>
+  <p class="lede">Chapter tests and full mock papers for every class, following the NCERT syllabus (Computer Science follows the CBSE syllabus in Classes 9 to 12), marked instantly with explanations. Choose your class and subject.</p>
   <a class="btn" href="/#school">Start practising →</a>
 {blocks}
 '''
