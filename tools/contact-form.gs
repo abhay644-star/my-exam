@@ -1,12 +1,13 @@
 /* my-exam.in contact form: receives "Send us a message", keeps a copy in this Google Sheet and emails it to us.
-   Set-up (once, signed in to any Google account we use; messages are still sent to contact@my-exam.in from that account):
+   Set-up (once, signed in as contact.myexam@gmail.com, the inbox contact@my-exam.in forwards to):
    1. Create a Google Sheet called "my-exam.in messages", then Extensions > Apps Script.
    2. Replace the code there with this file and save.
    3. Deploy > New deployment > type "Web app". Execute as: Me. Who has access: Anyone. Deploy, allow access.
    4. Copy the web app URL (ends in /exec) into CONTACT_ROUTES in index.html.
    After changing this code: Deploy > Manage deployments > edit > Version: New version (the URL stays the same). */
 
-const TO = 'contact@my-exam.in';
+// straight to the Gmail inbox: mail sent to contact@my-exam.in comes back through Cloudflare to the account that sent it, and Gmail hides it from the inbox
+const TO = 'contact.myexam@gmail.com';
 const MAX_LEN = 5000;      // longest message we accept
 const MAX_PER_HOUR = 30;   // all senders together; stops a flood filling the Sheet or the mail quota
 
