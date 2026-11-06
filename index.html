@@ -2008,8 +2008,19 @@ $('#chMake').addEventListener('click',makeChallenge);
 $('#reset').addEventListener('click',()=>{const m=S.mode;S=JSON.parse(JSON.stringify(DEF));S.mode=m;writeForm();readForm();});
 $('#submitBtn').addEventListener('click',askSubmit);$('#quitBtn').addEventListener('click',askQuit);
 
-/* ---------- contact pop-up (sent by email through formsubmit.co; the site has no server of its own) ---------- */
-const CONTACT_URL='https://formsubmit.co/ajax/contact@my-exam.in';
+/* ---------- contact pop-up (the site has no server of its own, so messages go out through these, tried in order) ---------- */
+const CONTACT_ROUTES=[
+  {url:'https://script.google.com/macros/s/AKfycbyu2HfS2aAfELsVYfpzGlGSSE3gCk_JHbmYEB2hjCCBYxtvomTK_Cp6CzDpBsFlyqxLGg/exec',type:'text/plain;charset=utf-8'}, // our Google Apps Script (tools/contact-form.gs): saves to a Sheet and emails us; text/plain avoids a browser pre-check it cannot answer
+  {url:'https://formsubmit.co/ajax/contact@my-exam.in',type:'application/json'} // backup
+];
+async function postContact(route,body){
+  const ctl=new AbortController(),t=setTimeout(()=>ctl.abort(),15000); // a service that is down can hang for 20s or more
+  try{
+    const r=await fetch(route.url,{method:'POST',headers:{'Content-Type':route.type,Accept:'application/json'},body:JSON.stringify(body),signal:ctl.signal});
+    const j=await r.json().catch(()=>({}));
+    if(!r.ok||String(j.success)!=='true')throw new Error(j.message||'not sent');
+  }finally{clearTimeout(t);}
+}
 const plain=html=>{const d=document.createElement('div');d.innerHTML=html;return d.textContent.replace(/\s+/g,' ').trim();};
 function openContact(prefill){
   const d=$('#contactDlg');$('#cStatus').hidden=true;$('#cSend').disabled=false;
@@ -2030,9 +2041,9 @@ async function sendContact(e){
   $('#cSend').disabled=true;say('info','Sending…');
   const body={_subject:'Message from my-exam.in',_template:'table',_captcha:'false',message:msg,page:location.href};if(em)body.email=em;
   try{
-    const r=await fetch(CONTACT_URL,{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(body)});
-    const j=await r.json().catch(()=>({}));
-    if(!r.ok||String(j.success)!=='true')throw new Error(j.message||'not sent');
+    let sent=false;
+    for(const route of CONTACT_ROUTES){if(!route.url)continue;try{await postContact(route,body);sent=true;break;}catch(_){}}
+    if(!sent)throw new Error('not sent');
     say('ok','Thank you! Your message has been sent.');$('#cMsg').value='';$('#cCheck').value='';track('contact/sent','Sent contact message');
     setTimeout(closeContact,2500);
   }catch(err){
