@@ -203,7 +203,7 @@ def subject_page(cls, subj):
             counts[q['t']] = counts.get(q['t'], 0) + 1
     total = sum(counts.values())
     size = 'new questions are made for every attempt' if maths else f'{total} questions'
-    title = f'CBSE Class {n} {subj} Online Test – Free Chapter-wise Practice | All in All Exam Practice'
+    title = f'Class {n} {subj} Online Test – CBSE | my-exam.in'
     ncert = 'NCERT ' if syllabus(subj, cls) == 'the NCERT syllabus' else ''
     desc = (f'Free CBSE Class {n} {subj} practice tests: {len(chs)} {ncert}chapters, chapter tests and full mock papers, '
             f'marked instantly with {"worked solutions" if maths else "explanations"}. No sign-up.')
@@ -280,7 +280,7 @@ def chapter_page(cls, subj, ch):
     count = bank_count(subj, cls, ch)
     sq = maths_samples(cls, ch) if maths else chapter_samples(subj, cls, ch)
     size = 'New questions are made for every test, so you can practise it again and again.' if maths else f'This chapter has {count} questions; every test picks a fresh mix.'
-    title = f'Class {n} {subj} {ch} MCQ Online Test with Answers – CBSE | All in All Exam Practice'
+    title = f'Class {n} {subj}: {ch} MCQ Test | my-exam.in'
     desc = (f'Free online test for CBSE Class {n} {subj}, chapter {ch}: practice questions with answers and '
             f'{"worked solutions" if maths else "explanations"}, marked instantly. No sign-up.')
     others = ''.join(f'<a href="{chapter_path(cls, subj, c)}">{esc(c)}</a>' for c in chapters(subj, cls) if c != ch and has_chapter_page(subj, cls, c))
@@ -310,7 +310,7 @@ def hub_page():
   <a class="btn" href="/#school">Start practising →</a>
 {blocks}
 '''
-    return path, shell(path, 'CBSE Class 1 to 12 Online Tests – Free Chapter-wise Practice | All in All Exam Practice',
+    return path, shell(path, 'CBSE Class 1 to 12 Online Tests – Free Practice | my-exam.in',
                        'Free CBSE practice tests for Classes 1 to 12: every subject, chapter by chapter, marked instantly with explanations. No sign-up.',
                        [('Home', '/'), ('CBSE', None)], body)
 
@@ -430,7 +430,7 @@ def paper_page(e, p):
 
     others = ''.join(f'<a href="{paper_path(x, o)}">{esc(paper_label(o))}</a>' for x in EXAMS for o in x['papers'] if o is not p)
     start = f"/?paper={p['id']}#{e['list']}"
-    title = f'{label} Question Paper with Answer Key and Solutions | All in All Exam Practice'
+    title = f'{label} Paper, Answer Key & Solutions | my-exam.in'
     desc = (f'{label} question paper: all {len(qs)} questions as a free online test, with the official answer key, '
             f'worked solutions and chapter-wise weightage. {len(qs)} questions, {dur}, {total} marks.')
     body = f'''  <h1>{esc(label)}: question paper with answer key and solutions</h1>
