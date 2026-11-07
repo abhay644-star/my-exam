@@ -48,6 +48,18 @@
     ok(g, '?challenge opens School with "Challenge your class or friends" open', !$('#setup').hidden && $('#challenge').open, `setup ${!$('#setup').hidden}, open ${$('#challenge').open}`);
     await load('../index.html?test#home');
 
+    // contact form: a new sum each time, and a reported question named in the email subject (sending is replaced here)
+    $('#contactOpen').click(); await sleep(100);
+    const sum = $('#cCheckQ').textContent.match(/^What is (\d+) \+ (\d+)\?$/), right = sum ? +sum[1] + +sum[2] : 0;
+    ok(g, 'the contact form asks a sum', !!sum, $('#cCheckQ').textContent);
+    let sentBody = null; W().fetch = async (u, o) => { sentBody = JSON.parse(o.body); return new (W().Response)('{"success":"true"}'); };
+    $('#cMsg').value = 'Problem with a question\nScience – Class 10 · Question 5 (Light)\nWhat is wrong: test';
+    $('#cCheck').value = String(right + 1); $('#contactForm').requestSubmit(); await sleep(150);
+    ok(g, 'the contact form refuses a wrong sum', !sentBody && /Please type the answer/.test($('#cStatus').textContent), $('#cStatus').textContent);
+    $('#cCheck').value = String(right); $('#contactForm').requestSubmit(); await until(() => sentBody);
+    ok(g, 'a reported question is named in the email subject', sentBody && sentBody.subject === 'Problem: Science – Class 10 · Question 5 (Light)', sentBody && sentBody.subject);
+    await load('../index.html?test#home');
+
     // 1. start a school paper
     W().location.hash = '#school'; await until(() => !$('#setup').hidden);
     $('#klass').value = 'X'; fire($('#klass'), 'change'); $('#subject').value = 'Science'; fire($('#subject'), 'change');
