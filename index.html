@@ -500,8 +500,8 @@ sup,sub{font-size:.7em}
       <div id="navWrap" class="stack" style="gap:6px" hidden><div class="nav" id="nav"></div><p class="hint" id="navKey" style="margin:0"></p></div>
       <p class="toast" id="toast" role="status" hidden></p>
     </div>
-    <div id="confirm" class="confirm" hidden>
-      <h3 id="confirmTitle">Submit your paper?</h3>
+    <div id="confirm" class="confirm" role="dialog" aria-labelledby="confirmTitle" aria-describedby="confirmText" hidden>
+      <h3 id="confirmTitle" tabindex="-1">Submit your paper?</h3>
       <p class="hint" id="confirmText" style="margin:6px 0 12px"></p>
       <div class="btns"><button type="button" class="primary" id="confirmYes">Submit and mark</button><button type="button" id="confirmBlank" hidden>Review blank</button><button type="button" class="flag" id="confirmFlag" hidden>Review flagged</button><button type="button" id="confirmNo">Keep working</button></div>
     </div>
@@ -1375,7 +1375,7 @@ function qHtml(q){
     // full keyboard on every phone, so students can type −, / and ^ (the iPhone decimal pad has none of them)
     else field=`<input type="text" id="${id}" data-k="${qi}-${j}" autocomplete="off" autocapitalize="off" spellcheck="false" inputmode="text" placeholder="${p.type==='expr'?'e.g. 4a^2 + 6ab - 8':p.type==='list'?'e.g. -5/6, -3/4, 2/3':p.sci?'e.g. 3.84 x 10^5':/[√π]/.test(p.disp||p.ansText||'')?'e.g. 3√2 or π/3':'Answer'}">`;
     return `<div class="part"><label class="pq" for="${id}" style="font-weight:400;margin:0">${lab}${q.parts.length>1?` <span class="qm">[${p.marks}]</span>`:''}</label>${field}</div>`;}).join('');
-  const tools=`<div class="qtools">${P.mode==='practice'?`<button type="button" class="small primary" data-check="${qi}">Check answer</button>`:''}<button type="button" class="small flag" data-flag="${qi}" aria-pressed="false">Flag for review</button></div><div class="fb" id="fb${qi}" hidden></div>`;
+  const tools=`<div class="qtools">${P.mode==='practice'?`<button type="button" class="small primary" data-check="${qi}">Check answer</button>`:''}<button type="button" class="small flag" data-flag="${qi}" aria-pressed="false">Flag for review</button></div><div class="fb" id="fb${qi}" tabindex="-1" role="group" aria-label="Question ${qi+1} result" hidden></div>`;
   return `<div class="q" id="q${qi}"><span class="qn">${q.no}</span><div class="qbody"><span class="qtopic"><span class="lvl l-${q.real||q.level}"></span>${q.topic}${q.tag?' · '+q.tag:''}</span><div>${q.text}</div>${inner}${tools}</div><span class="qm">[${q.marks}]</span></div>`;
 }
 function wire(){
@@ -1408,8 +1408,9 @@ function markQ(i){const q=P.qs[i];q.got=0;q.parts.forEach((p,j)=>{p.user=ANS[i+'
   q.got=+q.got.toFixed(2);}
 function checkQ(i){
   const q=P.qs[i],fb=$('#fb'+i);
-  if(q.parts.every((p,j)=>blankV(ANS[i+'-'+j]))){fb.hidden=false;fb.innerHTML='<p class="msg warn">Type an answer first, then check it.</p>';return;}
+  if(q.parts.every((p,j)=>blankV(ANS[i+'-'+j]))){fb.hidden=false;fb.innerHTML='<p class="msg warn" role="alert">Type an answer first, then check it.</p>';return;}
   markQ(i);CHK[i]=1;showFeedback(i);updateCount();savePaper();save();
+  fb.focus({preventScroll:true}); // the "Check answer" button has gone: focus moves to the result so it is read out
 }
 function showFeedback(i){showFeedback0(i);if(needMath())renderMath($('#fb'+i));}
 function showFeedback0(i){
@@ -1421,7 +1422,9 @@ function showFeedback0(i){
 function updateCount(){
   let n=0,t=0;const nav=$('#nav').children;
   P.qs.forEach((q,i)=>{let any=false;q.parts.forEach((p,j)=>{t++;if(!blankV(ANS[i+'-'+j])){n++;any=true;}});
-    if(nav[i])nav[i].className='nb'+(CHK[i]?(q.got===q.marks?' right':' wrong'):any?' done':'')+(FLAG[i]?' flag':'');});
+    if(nav[i]){nav[i].className='nb'+(CHK[i]?(q.got===q.marks?' right':' wrong'):any?' done':'')+(FLAG[i]?' flag':'');
+      // the colours say each question's state; the label says it to a screen reader
+      nav[i].setAttribute('aria-label',`Go to question ${i+1}: `+(CHK[i]?(q.got===q.marks?'correct':'not fully correct'):any?'answered':'not answered')+(FLAG[i]?', flagged':''));}});
   $('#answered').textContent=n;$('#progbar').style.width=(t?n/t*100:0)+'%';
   const nf=nFlag();if(!nf)onlyFlag=false;
   const fb=$('#flagBtn');fb.hidden=!nf||!!onlyBlank;fb.textContent=onlyFlag?'Show all questions':`Review flagged (${nf})`;fb.setAttribute('aria-pressed',onlyFlag?'true':'false');fb.classList.toggle('on',onlyFlag);
@@ -1460,9 +1463,14 @@ function askSubmit(){
   else{$('#confirmTitle').textContent='Submit your paper?';$('#confirmText').textContent=`You have filled ${c.n} of ${c.t} answers.${c.n<c.t?' Blank answers score zero.':''} You cannot change answers after submitting.`;$('#confirmYes').textContent='Submit and mark';}
   const nf=nFlag();$('#confirmFlag').hidden=!nf;$('#confirmFlag').textContent=`Review flagged (${nf})`;
   if(nf)$('#confirmText').textContent+=` You flagged ${nf} question${nf>1?'s':''} for review.`;
-  $('#confirmBlank').hidden=!nb;$('#confirmBlank').textContent=`Review blank (${nb})`;$('#confirmYes').dataset.mode='submit';$('#confirm').hidden=false;$('#confirm').scrollIntoView({block:'nearest'});
+  $('#confirmBlank').hidden=!nb;$('#confirmBlank').textContent=`Review blank (${nb})`;$('#confirmYes').dataset.mode='submit';openConfirm();
 }
-function askQuit(){$('#confirmTitle').textContent='Quit this paper?';$('#confirmText').textContent=`Your answers will be discarded and you will return to ${P.exam?`the ${EXAM_PAGES[P.exam.list].crumb} papers`:'the start page'}.`;$('#confirmYes').textContent='Quit without marking';$('#confirmYes').dataset.mode='quit';$('#confirmBlank').hidden=true;$('#confirmFlag').hidden=true;$('#confirm').hidden=false;$('#confirm').scrollIntoView({block:'nearest'});}
+function askQuit(){$('#confirmTitle').textContent='Quit this paper?';$('#confirmText').textContent=`Your answers will be discarded and you will return to ${P.exam?`the ${EXAM_PAGES[P.exam.list].crumb} papers`:'the start page'}.`;$('#confirmYes').textContent='Quit without marking';$('#confirmYes').dataset.mode='quit';$('#confirmBlank').hidden=true;$('#confirmFlag').hidden=true;openConfirm();}
+// the submit and quit box: focus moves to its title so a screen reader reads it out; "Keep working" or Escape closes it
+// and puts focus back on the button that opened it
+let confirmFrom=null;
+function openConfirm(){const c=$('#confirm');if(c.hidden)confirmFrom=document.activeElement;c.hidden=false;c.scrollIntoView({block:'nearest'});$('#confirmTitle').focus({preventScroll:true});}
+function closeConfirm(){$('#confirm').hidden=true;if(confirmFrom&&document.contains(confirmFrom))confirmFrom.focus();confirmFrom=null;}
 
 /* ---------- results ---------- */
 function bandOf(pct){return pct>=90?['Outstanding','var(--green-soft)','var(--green)']:pct>=75?['Very good','var(--green-soft)','var(--green)']:pct>=50?['Good effort','var(--amber-soft)','var(--amber)']:['Good start','var(--ink-soft)','var(--ink)'];}
@@ -2085,7 +2093,8 @@ $('#results').addEventListener('click',e=>{const b=e.target.closest('[data-repor
   openContact(`Problem with a question\n${paperName()} · Question ${q.no} (${q.topic})${q.qid?' · NTA question ID '+q.qid:''}\nQuestion: ${plain(q.text)}\nAnswer shown: ${q.parts.map(p=>plain(answerText(p))).join('; ')}\n\nWhat is wrong: `);});
 $('#navBtn').addEventListener('click',()=>{const w=$('#navWrap');w.hidden=!w.hidden;$('#navBtn').setAttribute('aria-expanded',String(!w.hidden));});
 $('#nav').addEventListener('click',e=>{const b=e.target.closest('[data-go]');if(b)goQ(+b.dataset.go);});
-$('#confirmNo').addEventListener('click',()=>{$('#confirm').hidden=true;});
+$('#confirmNo').addEventListener('click',closeConfirm);
+$('#confirm').addEventListener('keydown',e=>{if(e.key==='Escape'){e.preventDefault();closeConfirm();}});
 $('#confirmBlank').addEventListener('click',()=>{$('#confirm').hidden=true;showBlank(true);});
 $('#blankBtn').addEventListener('click',()=>showBlank(false));
 // quitting an exam paper goes back to that exam's papers; a school paper goes back to the School page

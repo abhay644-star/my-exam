@@ -149,6 +149,14 @@
     $('[data-preset="quick"]').click(); await until(() => !$('#test').hidden && $('#q0 [data-check]'));
     answer(0); $('#q0 [data-check]').click(); await sleep(200);
     ok(g, 'practice mode: "Check answer" shows the result and the explanation', !$('#fb0').hidden && /Explanation|Working/.test($('#fb0').textContent));
+    ok(g, 'after "Check answer", focus moves to the result', W().document.activeElement === $('#fb0'), (W().document.activeElement || {}).id);
+    const nb0 = $('#nav [data-go="0"]').getAttribute('aria-label'), nb1 = $('#nav [data-go="1"]').getAttribute('aria-label');
+    ok(g, 'the question navigator says each question\'s state', /^Go to question 1: (correct|not fully correct)$/.test(nb0) && nb1 === 'Go to question 2: not answered', `${nb0} / ${nb1}`);
+    $('#submitBtn').focus(); $('#submitBtn').click(); await sleep(100);
+    const dlg = $('#confirm');
+    ok(g, 'the finish box is a dialog and focus moves to its title', dlg.getAttribute('role') === 'dialog' && !dlg.hidden && W().document.activeElement === $('#confirmTitle'), (W().document.activeElement || {}).id);
+    dlg.dispatchEvent(new (W().KeyboardEvent)('keydown', { key: 'Escape', bubbles: true })); await sleep(50);
+    ok(g, 'Escape closes the finish box and puts focus back on Finish', dlg.hidden && W().document.activeElement === $('#submitBtn'), (W().document.activeElement || {}).id);
     $('#quitBtn').click(); await sleep(100); $('#confirmYes').click(); await sleep(200);
 
     // 7. a class challenge: one link gives everyone the same questions, and its code goes into the results and the score message
