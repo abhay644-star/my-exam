@@ -159,7 +159,7 @@
     answer(0); $('#submitBtn').click(); await sleep(100); $('#confirmYes').click();
     await until(() => !$('#results').hidden && $('#results .score'));
     const chScore = $('#results .score') ? $('#results .score').textContent.replace(/\s+/g, ' ') : '';
-    ok(g, 'a second Class X Science paper compares with the personal best', /New personal best for Class X Science: \d+% \(before: \d+%\)|Your best for Class X Science: \d+%/.test(chScore), chScore.slice(0, 300));
+    ok(g, 'a second Class 10 Science paper compares with the personal best', /New personal best for Class 10 Science: \d+% \(before: \d+%\)|Your best for Class 10 Science: \d+%/.test(chScore), chScore.slice(0, 300));
     ok(g, 'challenge results name the challenge code',$('#results').textContent.includes(`Class challenge ${code}`), $('#results .score') ? $('#results').textContent.slice(0, 200) : 'no results');
     $('#shareBtn').click(); await sleep(150);
     const wa = decodeURIComponent(($('#sharePanel a.btnlink') || { href: '' }).href);

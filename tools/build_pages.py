@@ -174,7 +174,7 @@ def shell(path, title, desc, crumbs, body, math=False):
   <p class="crumbs">{crumb_html}</p>
 {body}
   <footer class="foot">
-    <a href="/">Home</a><a href="/cbse/">CBSE Classes I–XII</a><a href="/jee-main/">JEE Main papers</a><a href="/jee-advanced/">JEE Advanced papers</a><a href="/neet/">NEET (UG) papers</a><a href="/teachers/">For teachers</a><a href="/about.html">About</a><a href="/privacy.html">Privacy</a>
+    <a href="/">Home</a><a href="/cbse/">CBSE Classes 1–12</a><a href="/jee-main/">JEE Main papers</a><a href="/jee-advanced/">JEE Advanced papers</a><a href="/neet/">NEET (UG) papers</a><a href="/teachers/">For teachers</a><a href="/about.html">About</a><a href="/privacy.html">Privacy</a>
     <p class="note">{NOTE}</p>
   </footer>
 </div>
