@@ -257,6 +257,10 @@ a.btnlink:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
 .barinfo{display:flex;gap:18px;align-items:center;flex-wrap:wrap;font-size:.9rem;color:var(--muted)}
 .prog{width:140px;height:8px;background:var(--line);border-radius:99px;overflow:hidden}
 .prog i{display:block;height:100%;background:var(--ink);width:0}
+/* on a phone, once the paper is scrolled, the bar keeps one line: the timer, Questions and Submit (Quit and Print are at the top) */
+@media (max-width:600px){.bar.mini{padding:6px 10px;gap:6px}.bar.mini .barrow{gap:8px}.bar.mini #timerLbl,.bar.mini .barinfo>span,.bar.mini #printNowBtn,.bar.mini #quitBtn{display:none}.bar.mini .barinfo{flex:1;justify-content:flex-end;gap:6px}}
+/* on touch screens, buttons, chapter chips and answer options are at least 44 px high, so they are easy to tap */
+@media (pointer:coarse){.nb{min-width:44px;min-height:44px}.chip,button.small,.opt{min-height:44px}}
 /* paper */
 .sheet{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:clamp(16px,3vw,32px);max-width:860px;margin:0 auto;overflow-x:clip;position:relative} /* KaTeX's hidden MathML copies are absolutely placed: this keeps them from widening the page on phones */
 .sheethead{text-align:center;border-bottom:2px solid var(--fg);padding-bottom:12px;margin-bottom:14px}
@@ -1351,10 +1355,11 @@ const paperTag=()=>P.mistakes?'mistakes':P.exam?`${slug(P.subject)}/${slug(P.exa
 function seeded(a){return()=>{a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
 // the subject's question bank is loaded first (usually already there: it starts loading when the subject is chosen)
 let starting=false;
-function startTest(useSample,seed,ch,cap){
+// done (optional) runs once the paper is built from S, or once starting has failed
+function startTest(useSample,seed,ch,cap,done){
   if(useSample)return startTest0(true,seed);
   if(starting)return;starting=true;const qm=$('#quickMsg');
-  ensureBank(S.subject).then(()=>{starting=false;startTest0(false,seed,ch,cap);},()=>{starting=false;qm.textContent='The questions could not be loaded. Check your internet connection and try again.';qm.hidden=false;});
+  ensureBank(S.subject).then(()=>{starting=false;startTest0(false,seed,ch,cap);if(done)done();},()=>{starting=false;qm.textContent='The questions could not be loaded. Check your internet connection and try again.';qm.hidden=false;if(done)done();});
 }
 // a new paper replaces an unfinished one (begin() saves over it), so ask first
 const okToReplace=()=>{const a=loadActive();return !a||confirm(`You have an unfinished paper: ${paperName(a.P)}. Start a new paper instead? The unfinished one will be lost.`);};
@@ -1380,12 +1385,17 @@ function applyPreset(k){
   if(z.capped)S.nmcq=Math.min(S.nmcq,Math.max(1,Math.floor(S.nq/2)));
   writeForm();readForm();
 }
-function startPreset(k){
+function startPreset(k,done){
   applyPreset(k);
   const v=validate(),qm=$('#quickMsg');
-  if(v.errs.length){qm.innerHTML=v.errs.map(esc).join('<br>');qm.hidden=false;return;}
-  qm.hidden=true;startTest();
+  if(v.errs.length){qm.innerHTML=v.errs.map(esc).join('<br>');qm.hidden=false;if(done)done();return;}
+  qm.hidden=true;startTest(false,undefined,undefined,undefined,done);
 }
+// a Practise button starts a one-chapter practice quiz, then puts back the settings the student had chosen, so the next
+// "Full mock paper" is still timed and covers every chapter
+function practiseChapter(subject,klass,topic){const keep=JSON.parse(JSON.stringify(S));
+  Object.assign(S,{subject,klass,topics:[topic],mode:'practice'});writeForm();readForm();show('setup');
+  startPreset('quick',()=>{S=keep;writeForm();try{localStorage.setItem('mpp-settings',JSON.stringify(S));}catch(e){}});}
 function startSample(){
   Object.assign(S,{subject:'Mathematics',klass:'VII',duration:DEF.duration,nq:DEF.nq,usemcq:true,nmcq:DEF.nmcq,mix:Object.assign({},DEF.mix),marks:Object.assign({},DEF.marks),topics:'ALL'});
   writeForm();readForm();startTest(true);
@@ -1406,7 +1416,7 @@ function begin(){
   $('#submitBtn').textContent=exam?'Submit':'Finish';$('#timerLbl').textContent=exam?'time left':'time spent';$('#toast').hidden=true;
   let parts=0;P.qs.forEach(q=>parts+=q.parts.length);$('#partsTotal').textContent=parts;
   wire();updateCount();savePaper();save();
-  show('test');$('#confirm').hidden=true;tick();clearInterval(timerId);timerId=setInterval(tick,1000);window.scrollTo(0,0);
+  show('test');armBack();$('#confirm').hidden=true;tick();clearInterval(timerId);timerId=setInterval(tick,1000);window.scrollTo(0,0);
 }
 // options with long wording get a full row each, so mixed text and maths reads naturally
 // visible length of an option: tags dropped, LaTeX commands and braces dropped (so $\mathrm{Hg_2Cl_2}$ counts as "Hg2Cl2")
@@ -1520,7 +1530,11 @@ function askQuit(){$('#confirmTitle').textContent='Quit this paper?';$('#confirm
 // the submit and quit box: focus moves to its title so a screen reader reads it out; "Keep working" or Escape closes it
 // and puts focus back on the button that opened it
 let confirmFrom=null;
-function openConfirm(){const c=$('#confirm');if(c.hidden)confirmFrom=document.activeElement;c.hidden=false;c.style.scrollMarginTop=($('#bar').offsetHeight+8)+'px';c.scrollIntoView({block:'start'});$('#confirmTitle').focus({preventScroll:true});}
+// the bar shrinks to one line once the paper is scrolled (the CSS does this on phones only), and is full size again near the
+// top of the paper and while the submit box is open; switching at 160 px and back at 20 px stops it flickering on short papers
+function sizeBar(){const b=$('#bar'),y=window.scrollY;b.classList.toggle('mini',!$('#test').hidden&&$('#confirm').hidden&&(b.classList.contains('mini')?y>20:y>160));}
+window.addEventListener('scroll',sizeBar,{passive:true});
+function openConfirm(){const c=$('#confirm');if(c.hidden)confirmFrom=document.activeElement;c.hidden=false;sizeBar();c.style.scrollMarginTop=($('#bar').offsetHeight+8)+'px';c.scrollIntoView({block:'start'});$('#confirmTitle').focus({preventScroll:true});}
 function closeConfirm(){$('#confirm').hidden=true;if(confirmFrom&&document.contains(confirmFrom))confirmFrom.focus();confirmFrom=null;}
 
 /* ---------- results ---------- */
@@ -1742,12 +1756,12 @@ function finish(auto){
       let cmp='';if(prev){const was=Math.round(prev.top[x.t][0]/(prev.top[x.t][1]||1)*100);
         cmp=prev.mix&&Math.abs(hard(prev.mix)-hard(curMix))<=0.2?`Your last Class ${clsNum(P.klass)} ${P.subject} paper with this chapter: ${was}%. This time: ${x.pct}%${x.pct>was?' – better.':x.pct<was?'.':' – the same.'}`
           :`Your last Class ${clsNum(P.klass)} ${P.subject} paper had a different difficulty mix, so the two scores are not compared.`;}
-      next={name:x.t,line:`${x.v.c} of ${x.v.n} question${x.v.n>1?'s':''} fully right (${x.pct}% of the marks)`,cmp,go:()=>{Object.assign(S,{subject:P.subject,klass:P.klass,topics:[x.t],mode:'practice'});writeForm();readForm();show('setup');startPreset('quick');}};}}
+      next={name:x.t,line:`${x.v.c} of ${x.v.n} question${x.v.n>1?'s':''} fully right (${x.pct}% of the marks)`,cmp,go:()=>practiseChapter(P.subject,P.klass,x.t)};}}
   else if(P.exam){const c=chs.find(c=>inBank(c.ch));if(c){
       const prev=prevHist.find(h=>h.exam&&h.pid===P.exam.id);
       next={name:c.ch.name,line:`${c.c} of ${c.n} question${c.n>1?'s':''} fully right; ${+c.lost.toFixed(1)} marks lost`,
         cmp:prev?`Last time you took this paper you scored ${prev.pct}%. This time: ${pct}%${pct>prev.pct?' – better.':pct<prev.pct?'.':' – the same.'}`:'',
-        go:()=>{history.replaceState(null,'','#school');Object.assign(S,{subject:c.ch.subj,klass:c.ch.cls,topics:[c.ch.name],mode:'practice'});writeForm();readForm();show('setup');startPreset('quick');}};}}
+        go:()=>{history.replaceState(null,'','#school');practiseChapter(c.ch.subj,c.ch.cls,c.ch.name);}};}}
   const perQ=att.length?Math.round(used/att.length/1000):0;
   const nextCard=next?`<div class="next" role="region" aria-label="Your next step"><p class="eyebrow" style="margin:0">Your next step</p>
     <p style="margin:4px 0 0"><b>${esc(next.name)}</b> was your weakest chapter in this paper: ${next.line}.</p>
@@ -1784,12 +1798,11 @@ function finish(auto){
   const nx=$('#results [data-next]');if(nx)nx.addEventListener('click',()=>{track(`next-step/${paperTag()}/${slug(next.name)}`,`Next step: practise ${next.name}`);next.go();});
   $('#againBtn').addEventListener('click',()=>retry(false));
   $('#newBtn').addEventListener('click',()=>{if(!P.exam)return goSchool();const h='#'+P.exam.list;if(location.hash===h)route();else location.hash=h;});
-  $('#results').querySelectorAll('[data-practise]').forEach(b=>b.addEventListener('click',()=>{const t=tps[+b.dataset.practise].t;
-    Object.assign(S,{subject:P.subject,klass:P.klass,topics:[t],mode:'practice'});writeForm();readForm();show('setup');startPreset('quick');}));
+  $('#results').querySelectorAll('[data-practise]').forEach(b=>b.addEventListener('click',()=>{practiseChapter(P.subject,P.klass,tps[+b.dataset.practise].t);}));
   // from an exam paper to the school chapter test (the address changes to #school without reloading the page)
   $('#results').querySelectorAll('[data-chpractise]').forEach(b=>b.addEventListener('click',()=>{const ch=chs[+b.dataset.chpractise].ch;
     track(`chapter-practise/${paperTag()}/${slug(ch.name)}`,`Practise chapter after exam: ${ch.name}`);history.replaceState(null,'','#school');
-    Object.assign(S,{subject:ch.subj,klass:ch.cls,topics:[ch.name],mode:'practice'});writeForm();readForm();show('setup');startPreset('quick');}));
+    practiseChapter(ch.subj,ch.cls,ch.name);}));
   const filt=()=>{const w=$('#onlyWrong').checked,f=!!($('#onlyFlagged')&&$('#onlyFlagged').checked),b=!!($('#onlyLeftBlank')&&$('#onlyLeftBlank').checked);
     $('#results').querySelectorAll('.res .q').forEach(q=>{q.hidden=(w&&(q.dataset.ok==='1'||q.dataset.blank==='1'))||(f&&q.dataset.flagged!=='1')||(b&&q.dataset.blank!=='1');});};
   $('#onlyWrong').addEventListener('change',filt);if($('#onlyFlagged'))$('#onlyFlagged').addEventListener('change',filt);if($('#onlyLeftBlank'))$('#onlyLeftBlank').addEventListener('change',filt);
@@ -2122,6 +2135,17 @@ fillSelects();writeForm();readForm();openInvite();openPaperLink();openSchoolLink
 window.addEventListener('hashchange',route);
 // a link to the screen's own address (e.g. "School" while viewing results) does not change the hash, so route it directly
 document.addEventListener('click',e=>{const a=e.target.closest('a[href^="#"]');if(a&&a.getAttribute('href')===(location.hash||'#home')){e.preventDefault();route();}});
+// the test screen has no address of its own, so the top menu, the logo and the phone's Back gesture would leave a paper
+// without a word: ask first (the answers are kept either way, and exam time keeps running while the paper is closed)
+const inTest=()=>!!P&&!$('#test').hidden;
+const leaveMsg=()=>`Leave this paper? Your answers are saved, and you can resume it from the home page.${P.mode==='exam'?' The exam time keeps running while you are away.':''}`;
+let testHash=null;
+// an extra history entry while a paper is open, so that Back first lands here and can be asked about
+function armBack(){testHash=location.hash;if(!(history.state&&history.state.aaTest))history.pushState({aaTest:1},'',location.href);}
+// (after the paper is marked, Back from the results goes to the screen the paper was started from)
+window.addEventListener('popstate',()=>{if(location.hash!==testHash||(history.state&&history.state.aaTest))return;
+  if(!inTest()||confirm(leaveMsg()))route();else history.pushState({aaTest:1},'',location.href);});
+document.addEventListener('click',e=>{if(e.target.closest('a[href^="#"]')&&inTest()&&!confirm(leaveMsg())){e.preventDefault();e.stopImmediatePropagation();}},true);
 $('#otherExam').addEventListener('click',()=>openContact('I would like practice tests for this exam: '));
 $('#country').addEventListener('change',()=>{fillSelects();writeForm();readForm();});
 $('#klass').addEventListener('change',()=>{S.klass=$('#klass').value;S.topics='ALL';fillClasses();renderTopics();readForm();ensureBank(S.subject).catch(()=>{});});

@@ -71,6 +71,16 @@
     const n = $$('#sheet .q').length;
     ok(g, 'Quick quiz starts with 10 questions', started && n === 10, `${n} questions`);
     ok(g, 'test screen fits the width', fits());
+    // on a phone, scrolling down the paper shrinks the bar to one line (timer, Questions, Submit); back at the top it is full size
+    if (width < 600) {
+      const full = $('#bar').offsetHeight;
+      // (headless Edge draws no frames, so the scroll event a browser sends after scrolling is sent here)
+      W().scrollTo(0, 1500); W().dispatchEvent(new (W().Event)('scroll')); await sleep(150);
+      const mini = $('#bar').offsetHeight;
+      ok(g, 'scrolled on a phone, the bar is one line and still fits', $('#bar').classList.contains('mini') && mini < full && mini <= 70 && !!$('#submitBtn').offsetParent && !!$('#navBtn').offsetParent && fits(), `${full} px → ${mini} px`);
+      W().scrollTo(0, 0); W().dispatchEvent(new (W().Event)('scroll')); await sleep(150);
+      ok(g, 'back at the top, the bar is full size again', !$('#bar').classList.contains('mini'));
+    }
 
     // 2. answer two, flag one, open the question navigator
     answer(0, true); answer(1); $('#q2 [data-flag]').click(); await sleep(150);  // one sure mistake, for My mistakes and the backup check
@@ -136,10 +146,15 @@
     const nx2 = $('#results .next');
     if (nx2) {
       ok(g, 'a second attempt compares with the last one, or says why not', /Your last|Last time|not compared/.test(nx2.textContent) || !$$('#results .next .hint').length, nx2.textContent.slice(0, 200));
-      const chap = nx2.querySelector('b').textContent;
+      const chap = nx2.querySelector('b').textContent, setB = W().localStorage.getItem('mpp-settings');
       nx2.querySelector('[data-next]').click(); await until(() => !$('#test').hidden && $$('#sheet .q').length);
       const topics = $$('#sheet .qtopic').map(t => t.textContent);
       ok(g, `"Practise ${chap}" starts a practice test on that chapter only`, topics.length && topics.every(t => t.includes(chap)), topics.slice(0, 3).join(' / '));
+      ok(g, '...and leaves the saved settings (mode, chapters, length) as they were', W().localStorage.getItem('mpp-settings') === setB, W().localStorage.getItem('mpp-settings'));
+      // the top menu during a paper asks first; No stays on the paper
+      let askedNav = 0; W().confirm = () => { askedNav++; return false; };
+      $('.topnav a[href="#home"]').click(); await sleep(150);
+      ok(g, 'the top menu during a paper asks before leaving, and No stays on the paper', askedNav === 1 && !$('#test').hidden, `asked ${askedNav}, test shown ${!$('#test').hidden}`);
     }
     $('#quitBtn').click(); await sleep(100); $('#confirmYes').click(); await sleep(200);
 
