@@ -154,6 +154,31 @@
     ok(g, 'restoring the same backup again adds nothing twice', r2.papers === 0 && r2.mist === 0 && LS.getItem('aa-history') === hist0, `${r2.papers} / ${r2.mist}`);
     let refused = false; try { A.mergeBackup({ app: 'other', data: {} }); } catch (e) { refused = true; }
     ok(g, 'a file that is not a backup is refused', refused);
+    // a hand-edited backup: markup or script in any field must not reach the page or this device's storage
+    const hist1 = LS.getItem('aa-history'), mis1 = LS.getItem('aa-mistakes'), set1 = LS.getItem('mpp-settings'), want1 = LS.getItem('aa-want');
+    const goodQ = JSON.parse(mis1)[0].q, evil = [
+      { k: 'x1', d: 1, src: 'S', q: Object.assign({}, goodQ, { text: 'Hi <img src=x onerror="window.__pwned=1">' }) },
+      { k: 'x2', d: 1, src: 'S', q: Object.assign({}, goodQ, { text: '<script>window.__pwned=1</script>' }) },
+      { k: 'x3', d: 1, src: 'S', q: Object.assign({}, goodQ, { text: '<a href="javascript:alert(1)">a</a>' }) },
+      { k: 'x4', d: 1, src: 'S', q: Object.assign({}, goodQ, { text: '<img src="https://evil.example/t.png">' }) },
+      { k: 'x5', d: 1, src: 'S', q: Object.assign({}, goodQ, { text: '<span style="background:url(https://evil.example)">a</span>' }) },
+      { k: 'x6', d: 1, src: 'S', q: Object.assign({}, goodQ, { text: 'Fine: x<sup>2</sup> and <table class="t"><tr><td>1</td></tr></table>' }) }];
+    LS.removeItem('mpp-settings'); LS.removeItem('aa-want');
+    const r3 = A.mergeBackup({ app: 'my-exam.in', v: 1, data: {
+      'aa-history': JSON.stringify([{ d: 5, subj: 'X', cls: 'VII', pct: '<img src=x onerror=alert(1)>', nq: 3 }, { d: 6, subj: 'X', cls: 'VII', pct: 50, nq: '<b>' },
+        { d: 7, subj: '<img src=x onerror="window.__pwned=1">', cls: 'VII', pct: 40, nq: 4, mode: 'practice', exam: false, mix: { E: 1, M: 1, C: 1, X: 1 }, top: { a: [1, 2] } }]),
+      'aa-mistakes': JSON.stringify(evil),
+      'mpp-settings': JSON.stringify({ mix: { E: '"><img src=x onerror=alert(1)>' }, marks: {} }), 'aa-want': JSON.stringify(['jee-main']) } });
+    const histNow = JSON.parse(LS.getItem('aa-history')), misNow = JSON.parse(LS.getItem('aa-mistakes'));
+    ok(g, 'a crafted backup: only the sound paper record is added', r3.papers === 1 && histNow.length === JSON.parse(hist1).length + 1, `${r3.papers}`);
+    ok(g, 'a crafted backup: questions with script, event handlers, links or outside images are dropped; plain markup is kept', r3.mist === 1 && misNow.some(m => m.k === 'x6') && !misNow.some(m => /^x[1-5]$/.test(m.k)), `${r3.mist}: ${misNow.filter(m => /^x\d$/.test(m.k)).map(m => m.k)}`);
+    ok(g, 'a crafted backup: settings with markup are refused, plain exam requests are kept', LS.getItem('mpp-settings') == null && LS.getItem('aa-want') === '["jee-main"]');
+    A.renderHistory();
+    ok(g, 'a crafted backup: the progress card shows the text as text and runs nothing', !W().__pwned && !$('#history img') && /&lt;img/.test($('#history').innerHTML));
+    LS.setItem('aa-history', hist1); LS.setItem('aa-mistakes', mis1);
+    if (set1 == null) LS.removeItem('mpp-settings'); else LS.setItem('mpp-settings', set1);
+    if (want1 == null) LS.removeItem('aa-want'); else LS.setItem('aa-want', want1);
+    A.renderHistory();
 
     // 6. practice mode: check an answer
     W().location.hash = '#school'; await until(() => !$('#setup').hidden);

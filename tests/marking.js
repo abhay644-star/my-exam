@@ -152,6 +152,8 @@
       eq(g, '...and no question loses marks', fresh().map((q, i) => q.marks - full[i] > 1e-9 ? q.no : null).filter(x => x != null), []);
       eq(g, 'leaving every question blank scores only the dropped questions', sum(A.markPaper(fresh(), all(() => ''))), sum(qs.map(q => q.dropped ? q.marks : 0)));
       eq(g, 'answering every question wrongly scores the negative marks', sum(A.markPaper(fresh(), all(wrongOf))), sum(qs.map(q => q.dropped ? q.marks : -q.neg)));
+      eq(g, 'every question, as saved in My mistakes, passes the backup restore check',
+        A.withPaper({ exam: { optLabels: data.optLabels || null } }, () => fresh().filter(q => !A.dataOk(A.cleanQ(q), 0)).map(q => q.no)), []);
     }
   }
 
@@ -233,6 +235,12 @@
     eq(g, 'every generated answer key is accepted when typed', rejected, []);
     eq(g, 'every multiple-choice version has 4 different options, one of them right', badMcq, []);
     ok(g, 'generators checked: ' + gens.length, gens.length > 100);
+    // every chapter in the Mathematics chapter lists has questions (generated, or fixed ones from the Mathematics bank)
+    await A.ensureBank('Mathematics');
+    const empty = [];
+    for (const c of ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'])
+      for (const tp of A.topicsFor('Mathematics', c)) if (!A.T.some(t => t.subj === 'Mathematics' && t.cls === c && t.topic === tp)) empty.push(`${c}: ${tp}`);
+    eq(g, 'every Mathematics chapter has questions', empty, []);
   }
 
   // ---------- custom papers: random settings, as a student could choose them ----------

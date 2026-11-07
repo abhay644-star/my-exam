@@ -1,0 +1,19 @@
+# Runs the site's tests (tests/run-tests.ps1: marking, journey and offline) on every push and pull request.
+# A red cross on the commit in GitHub means a check failed; the log lists which.
+name: Tests
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: windows-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run the tests in headless Edge
+        shell: powershell
+        run: powershell -ExecutionPolicy Bypass -File tests\run-tests.ps1
