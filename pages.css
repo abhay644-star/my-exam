@@ -1,6 +1,6 @@
 /* Shared look for the small standalone pages (exam landing pages, privacy). Same colours and fonts as index.html. */
 :root{
-  --bg:#edf1f8; --paper:#ffffff; --fg:#1b2236; --muted:#5b6478; --line:#d5dcea; --grid:rgba(36,70,168,.07);
+  --bg:#eaf2fb; --paper:#ffffff; --fg:#1b2236; --muted:#5b6478; --line:#d3e1f1; --grid:transparent;
   --ink:#2446a8; --ink-soft:#e4eafb; --red:#c4302b; --green:#1f7a4d; --green-soft:#e2f3ea; --amber:#a35b00; --amber-soft:#fdf0dc;
   --f-display:"Baloo 2", "Trebuchet MS", system-ui, sans-serif;
   --f-body:"Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;

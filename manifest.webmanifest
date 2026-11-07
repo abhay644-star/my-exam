@@ -7,7 +7,7 @@
   "scope": "/",
   "display": "standalone",
   "orientation": "any",
-  "background_color": "#edf1f8",
+  "background_color": "#eaf2fb",
   "theme_color": "#2446a8",
   "lang": "en-IN",
   "categories": ["education"],
@@ -17,7 +17,7 @@
     { "src": "icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
   ],
   "shortcuts": [
-    { "name": "School (Classes I–XII)", "url": "/#school", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] },
+    { "name": "School (Classes 1–12)", "url": "/#school", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] },
     { "name": "Competitive exams", "url": "/#exams", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] }
   ]
 }
