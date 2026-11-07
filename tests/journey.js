@@ -24,9 +24,9 @@
       if (out.length >= 4) break; }
     return `scrollWidth ${D().documentElement.scrollWidth}, width ${cw}: ` + out.join('; '); };
   async function load(url) { frame.src = 'about:blank'; await sleep(50); frame.src = url; await until(() => W().__aaTest && D().readyState === 'complete', 15000); await sleep(300); }
-  function answer(i, wrong) {  // answers question i: first option, or a typed value
+  function answer(i, wrong) {  // answers question i: first option (a wrong one if asked), or a typed value
     const q = $('#q' + i), r = q.querySelector('input[type=radio]');
-    if (r) { r.checked = true; fire(r, 'change'); return; }
+    if (r) { const pick = wrong ? $$(`#q${i} input[type=radio]`).find(x => +x.value !== W().__aaTest.paper.qs[i].parts[0].ans) : r; pick.checked = true; fire(pick, 'change'); return; }
     const t = q.querySelector('input[type=text],textarea'); t.value = wrong ? 'zzz 987' : '7'; fire(t, 'input');
   }
 
@@ -73,7 +73,7 @@
     ok(g, 'test screen fits the width', fits());
 
     // 2. answer two, flag one, open the question navigator
-    answer(0); answer(1); $('#q2 [data-flag]').click(); await sleep(150);
+    answer(0, true); answer(1); $('#q2 [data-flag]').click(); await sleep(150);  // one sure mistake, for My mistakes and the backup check
     ok(g, 'answer count updates (2 of …)', /^2$/.test($('#answered').textContent), $('#answered').textContent);
     ok(g, 'flagging shows "Review flagged (1)"', !$('#flagBtn').hidden && /\(1\)/.test($('#flagBtn').textContent), $('#flagBtn').textContent);
     $('#navBtn').click(); await sleep(150);
