@@ -5,7 +5,8 @@ Run from the site folder:  py tools/build_school_index.py
 - index.html: BANK_INDEX lists each subject's file (with a content hash, so browsers never mix an old file with a new
   index) and its chapters per class with the number of questions in each. The page uses it to fill the class, subject
   and chapter lists without downloading the banks.
-- sw.js: BANK_FILES lists the same files, so the service worker keeps them for offline use.
+- sw.js: BANK_FILES lists the same files, so the service worker drops the old copy of an updated bank (each bank is
+  saved for offline use the first time it is used).
 Classes and chapters keep the order they first appear in in the bank file.
 """
 import hashlib, json, re, sys

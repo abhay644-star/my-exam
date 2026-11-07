@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en-IN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Offline tests | All in All Exam Practice</title>
+<style>
+  body{font:15px/1.5 system-ui,sans-serif;max-width:1300px;margin:24px auto;padding:0 16px;color:#1b2236;background:#fff}
+  #summary{font-weight:700;padding:10px 12px;border-radius:8px;background:#e4eafb}
+  #summary.pass{background:#e2f3ea;color:#1f7a4d} #summary.fail{background:#fbe7e5;color:#c4302b}
+  li.fail{color:#c4302b} li.pass{color:#5b6478} li small{display:block;color:#5b6478}
+</style>
+</head>
+<body>
+<h1>Offline tests</h1>
+<p>Installs the service worker (sw.js) and checks what it saves: the pages at install, each question bank only when it is
+first used, and exam papers from the network. Run it from a local web server in a fresh browser profile
+(see <code>tests/run-tests.ps1</code>).</p>
+<p id="summary">Running…</p>
+<ol id="list"></ol>
+<script src="offline.js"></script>
+</body>
+</html>

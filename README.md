@@ -16,7 +16,7 @@ Live site: https://my-exam.in
 
 ## Editing a question bank
 1. Edit the subject's file in `school-questions/` (for example `school-questions/physics.json`).
-2. Run `py tools/build_school_index.py` from the site folder. It updates the bank index in `index.html` (chapters and question counts) and the list of files the service worker keeps for offline use in `sw.js`.
+2. Run `py tools/build_school_index.py` from the site folder. It updates the bank index in `index.html` (chapters and question counts) and the list of bank files in `sw.js` (the service worker saves each bank the first time it is used, and drops the old copy of an updated bank).
 3. Run `py tools/build_pages.py`. It rebuilds the pages for search engines and `sitemap.xml`. Do not edit the pages it makes by hand.
 4. Run the tests (below) and upload the changed files together.
 
@@ -29,7 +29,8 @@ Live site: https://my-exam.in
 After adding an official paper (its `paper.json` and its entry in `EXAM_PAGES` in `index.html`), run the tool and add a link to the new paper page under the papers list on its exam page (`jee-main/index.html`, `jee-advanced/index.html` or `neet/index.html`). The tests check that the link exists.
 
 ## Tests
-- `powershell -File tests\run-tests.ps1` runs `tests/marking.html` and `tests/journey.html` in headless Microsoft Edge (needs Python and Edge) and prints PASS or the failed checks.
+- `powershell -File tests\run-tests.ps1` runs `tests/marking.html`, `tests/journey.html` and `tests/offline.html` in headless Microsoft Edge (needs Python and Edge) and prints PASS or the failed checks.
+- `tests/offline.html` installs the service worker and checks what it saves: the pages at install, each question bank only when it is first used, and exam papers from the network.
 - `tests/journey.html` drives the app at phone (390 px) and desktop (1200 px) width as a student would: the home page, a school paper (answer, flag, navigator, Review blank, resume after closing, results, Your next step, retries), practice mode, a class challenge (the link gives the same questions every time; its code goes into the results and the score message; an edited code is ignored), a JEE Main paper and, at phone width, every official paper.
 - The tests cover reading typed numbers, checking answers, the marking rules (+4 / −1, numerical ranges, dropped questions, JEE Advanced partial marks, school part marks), option labels in My mistakes, every official paper (question count, maximum marks, answer keys), every school bank (counts match the index, every answer key is accepted), every Mathematics generator (runs 40 times with a fixed seed: no errors, every key accepted when typed, every multiple-choice version has 4 different options) and the pages for search engines (every class, subject and paper has a page, and every paper page's answer key matches the marking).
 - You can also open `tests/marking.html` in a browser from any local web server.

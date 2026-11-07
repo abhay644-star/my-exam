@@ -21,7 +21,9 @@
 <meta name="theme-color" content="#2446a8">
 <meta name="apple-mobile-web-app-title" content="Exam Practice">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap"></noscript>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
 {"@type":"WebSite","@id":"https://my-exam.in/#website","url":"https://my-exam.in/","name":"All in All Exam Practice","alternateName":"my-exam.in","inLanguage":"en-IN","publisher":{"@id":"https://my-exam.in/#org"}},
@@ -1113,6 +1115,11 @@ function ensureBank(subj){const b=BANK_INDEX[subj];if(!b)return Promise.resolve(
     .then(d=>{if(d.subject!==subj||!Array.isArray(d.questions))throw new Error('bad bank file');addBank(subj,d.questions);})
     .catch(e=>{delete bankLoads[subj];throw e;}); // a failed load is tried again next time
   return bankLoads[subj];}
+// the installed app keeps every subject for offline use: banks not saved yet are fetched one at a time through the service
+// worker, which saves them (a website visit saves only the subjects it uses, so a first visit on mobile data stays small)
+function saveAllBanks(){const sw=navigator.serviceWorker;if(!sw||!window.caches)return Promise.resolve();
+  const controlled=()=>sw.controller?null:new Promise(r=>sw.addEventListener('controllerchange',r,{once:true}));
+  return sw.ready.then(controlled).then(()=>Object.values(BANK_INDEX).reduce((p,b)=>p.then(()=>caches.match(b.file).then(hit=>hit||fetch(b.file))).catch(()=>{}),Promise.resolve()));}
 const bankCounts=(subj,cls)=>(BANK_INDEX[subj]&&BANK_INDEX[subj].classes[cls])||{};
 
 /* ---------- settings ---------- */
@@ -2087,12 +2094,13 @@ window.addEventListener('beforeunload',e=>{if(!$('#test').hidden){e.preventDefau
 window.addEventListener('pagehide',()=>{if(saveId)save();});
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden'&&saveId)save();});
 // installable app: the service worker keeps a copy for offline use; the browser's install prompt is offered from the footer
-if('serviceWorker' in navigator&&(location.protocol==='https:'||location.hostname==='localhost'))window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
+if('serviceWorker' in navigator&&(location.protocol==='https:'||location.hostname==='localhost')){window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
+  if(matchMedia('(display-mode: standalone)').matches||navigator.standalone)saveAllBanks();}  // opened as the installed app
 let installEvt=null;
 window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();installEvt=e;$('#installRow').hidden=false;});
 $('#installBtn').addEventListener('click',async()=>{if(!installEvt)return;installEvt.prompt();const r=await installEvt.userChoice;track('app/install/'+r.outcome,'Install app: '+r.outcome);installEvt=null;$('#installRow').hidden=true;});
 // tests/marking.html opens this page with ?test and reaches the marking code through window.__aaTest
-if(new URLSearchParams(location.search).has('test'))window.__aaTest={checkPart,parseNum,partMarks,answerText,examQs,ensureBank,topicsFor,bankCounts,BANK_INDEX,SUBJECTS,T,cleanQ,EXAM_PAGES,durLabel,makeMCQ,seeded,
+if(new URLSearchParams(location.search).has('test'))window.__aaTest={checkPart,parseNum,partMarks,answerText,examQs,ensureBank,saveAllBanks,topicsFor,bankCounts,BANK_INDEX,SUBJECTS,T,cleanQ,EXAM_PAGES,durLabel,makeMCQ,seeded,
   // marks qs against ans ({'<question index>-<part index>': answer}) and returns each question's mark
   markPaper(qs,ans,exam){const P0=P,A0=ANS;P={qs,exam};ANS=ans;try{qs.forEach((q,i)=>markQ(i));return qs.map(q=>q.got);}finally{P=P0;ANS=A0;}},
   withPaper(p,fn){const P0=P;P=p;try{return fn();}finally{P=P0;}},
@@ -2101,7 +2109,7 @@ if(new URLSearchParams(location.search).has('test'))window.__aaTest={checkPart,p
   buildWith(cfg,seed){const S0=S;S=Object.assign(JSON.parse(JSON.stringify(S0)),cfg);
     try{const v=validate();if(v.errs.length)return{errs:v.errs};const R0=Math.random;Math.random=seeded(seed>>>0);
       try{return{errs:[],paper:buildPaper(false),plan:plan(),avail:capQs()?availCount():null};}finally{Math.random=R0;}}finally{S=S0;}}};
-window.addEventListener('appinstalled',()=>{$('#installRow').hidden=true;track('app/installed','App installed');});})();
+window.addEventListener('appinstalled',()=>{$('#installRow').hidden=true;track('app/installed','App installed');saveAllBanks();});})();
 </script>
 <script data-goatcounter="https://aaexampractice.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
