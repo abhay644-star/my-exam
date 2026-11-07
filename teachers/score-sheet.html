@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en-IN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Class Score Sheet for a Challenge | my-exam.in</title>
+<meta name="description" content="A printable sheet for noting each student's score in a my-exam.in class challenge.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#2446a8">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Atkinson+Hyperlegible:wght@400;700&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Atkinson+Hyperlegible:wght@400;700&display=swap"></noscript>
+<link rel="stylesheet" href="/pages.css">
+<style>
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px 24px;margin:16px 0}
+.fields div{border-bottom:1px solid var(--fg);padding:14px 0 2px;font-size:.9rem;color:var(--muted)}
+.sheet{max-width:none;background:var(--paper)}
+.sheet th,.sheet td{border:1px solid var(--line);padding:0 8px;height:30px}
+.sheet td:first-child{width:3em;text-align:right;color:var(--muted)}
+.noprint{margin:12px 0}
+@media print{
+  @page{size:A4;margin:12mm}
+  body{background:#fff;color:#000;font-size:11pt}
+  .wrap{max-width:none;padding:0}
+  .noprint,.top,.crumbs,.foot{display:none}
+  .sheet th,.sheet td{border-color:#666;height:24px}
+  .sheet th{color:#000}
+  tr{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="/"><img src="/favicon.svg" alt=""><span><span class="blue">All</span> <span class="in">in</span> <span class="red">All</span> Exam Practice</span></a>
+  </header>
+  <p class="crumbs"><a href="/">Home</a> › <a href="./">For teachers</a> › Class score sheet</p>
+
+  <h1>Class score sheet</h1>
+  <p class="noprint">Print this page, then note each score as students send you their <b>Share my score</b> message. <button type="button" class="btn" onclick="window.print()" style="border:0;cursor:pointer;font:inherit;font-weight:700">Print the sheet</button></p>
+
+  <div class="fields">
+    <div>Class and section</div>
+    <div>Subject and chapter</div>
+    <div>Challenge code and name</div>
+    <div>Date</div>
+  </div>
+
+  <div class="tbl">
+  <table class="sheet">
+    <thead><tr><th>No.</th><th>Student's name</th><th>Score</th><th>%</th><th>Time taken</th><th>Notes</th></tr></thead>
+    <tbody id="rows"></tbody>
+  </table>
+  </div>
+  <noscript><p>Turn on JavaScript to show the rows, or rule your own rows on the printed sheet.</p></noscript>
+
+  <footer class="foot">
+    <a href="/">Home</a><a href="./">For teachers</a><a href="/cbse/">CBSE Classes 1–12</a><a href="/about.html">About</a><a href="/privacy.html">Privacy</a>
+    <p class="note">All in All Exam Practice is an independent site and is not affiliated with CBSE, NCERT, NTA or the IITs.</p>
+  </footer>
+</div>
+<script>
+// 40 numbered rows: room for a large class on two printed A4 pages
+document.getElementById('rows').innerHTML=Array.from({length:40},(_,i)=>'<tr><td>'+(i+1)+'</td><td></td><td></td><td></td><td></td><td></td></tr>').join('');
+</script>
+<script data-goatcounter="https://aaexampractice.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

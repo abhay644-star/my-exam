@@ -143,6 +143,18 @@
     }
     $('#quitBtn').click(); await sleep(100); $('#confirmYes').click(); await sleep(200);
 
+    // 5b. back up the progress, clear it, restore it: everything comes back, and restoring twice adds nothing
+    W().location.hash = '#school'; await until(() => !$('#setup').hidden && $('#history'));
+    ok(g, 'the progress card offers "Save a backup" and "Restore a backup"', !!$('#history #backupSave') && !!$('#history #backupLoad'));
+    const A = W().__aaTest, LS = W().localStorage, hist0 = LS.getItem('aa-history'), mis0 = JSON.parse(LS.getItem('aa-mistakes') || '[]').length;
+    const bk = JSON.parse(JSON.stringify(A.backupData()));
+    LS.removeItem('aa-history'); LS.removeItem('aa-mistakes');
+    const r1 = A.mergeBackup(bk), r2 = A.mergeBackup(bk);
+    ok(g, 'restoring a backup brings back every paper and mistake', LS.getItem('aa-history') === hist0 && r1.papers === JSON.parse(hist0).length && r1.mist === mis0 && mis0 > 0, `papers ${r1.papers}, mistakes ${r1.mist} of ${mis0}`);
+    ok(g, 'restoring the same backup again adds nothing twice', r2.papers === 0 && r2.mist === 0 && LS.getItem('aa-history') === hist0, `${r2.papers} / ${r2.mist}`);
+    let refused = false; try { A.mergeBackup({ app: 'other', data: {} }); } catch (e) { refused = true; }
+    ok(g, 'a file that is not a backup is refused', refused);
+
     // 6. practice mode: check an answer
     W().location.hash = '#school'; await until(() => !$('#setup').hidden);
     $('#mode_practice').checked = true; fire($('#mode_practice'), 'change');
@@ -165,6 +177,7 @@
     $('#challenge').open = true; $('#chSize').value = 'quick'; $('#chName').value = 'Class 10B test'; $('#chMake').click(); await sleep(200);
     const link = $('#chLink') ? $('#chLink').value : '', code = (link.match(/[?&]ch=([0-9A-Z]{4})(&|$)/) || [])[1];
     ok(g, 'Create challenge link gives a link with a 4-character code and the name', !!code && /[?&]cn=Class\+10B\+test/.test(link) && $('#chOut').textContent.includes(code), link || $('#chOut').textContent);
+    ok(g, 'the challenge link records the bank size, so it gives the same questions after the bank grows', /[?&]n=[1-9]\d*(&|$)/.test(link), link);
     ok(g, 'the challenge panel fits the width', fits(), wide());
     const sheetText = () => $$('#sheet .q').map(q => q.textContent.replace(/\s+/g, ' ').slice(0, 300));
     async function openLink(query) {
@@ -192,6 +205,17 @@
     // a code that does not belong to the paper code (an edited link) is ignored: it is an ordinary shared paper
     banner = await openLink((link.split('?')[1] || '').replace(`ch=${code}`, `ch=${code === 'ZZZZ' ? 'YYYY' : 'ZZZZ'}`));
     ok(g, 'an edited challenge code is ignored (the same paper, not a challenge)', !banner.includes('Class challenge') && /Take the same paper/.test(banner), banner);
+    // the teachers' page: its sample challenge link works, and the printable score sheet has a row per student
+    frame.src = '../teachers/index.html'; await until(() => D().querySelector('a[href*="ch=DEMO"]'), 10000);
+    const sample = D().querySelector('a[href*="ch=DEMO"]'), sheetLink = D().querySelector('a[href="score-sheet.html"]');
+    banner = await openLink(sample ? sample.getAttribute('href').split('?')[1] : '');
+    ok(g, 'the teachers\' sample challenge opens as a class challenge', banner.includes('Class challenge: Sample challenge') && banner.includes('DEMO'), banner);
+    $('#inviteStart').click(); await until(() => !$('#test').hidden && $$('#sheet .q').length);
+    const sTopics = $$('#sheet .qtopic').map(t => t.textContent);
+    ok(g, 'the sample challenge is a 10-question test on Chemical Reactions and Equations', sTopics.length === 10 && sTopics.every(t => t.includes('Chemical Reactions and Equations')), sTopics.slice(0, 2).join(' / '));
+    $('#quitBtn').click(); await sleep(100); $('#confirmYes').click(); await sleep(200);
+    frame.src = '../teachers/score-sheet.html'; await until(() => D().querySelectorAll('#rows tr').length, 10000);
+    ok(g, 'the teachers\' page links to a printable score sheet with 40 rows', !!sheetLink && D().querySelectorAll('#rows tr').length === 40, `${D().querySelectorAll('#rows tr').length} rows`);
     await load('../index.html?test#home');  // the app tidies a shared link out of the address bar, ?test with it
 
     // 8. an official paper: questions, maths and marking

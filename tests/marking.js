@@ -11,7 +11,8 @@
   function parsing(A) {
     const g = 'Reading typed numbers';
     [['4 1/5', 4.2], ['21/5', 4.2], ['−1/6', -1 / 6], ['2^4', 16], ['3.84 × 10^5', 384000], ['3.84 x 10^5', 384000],
-     ['₹1,250', 1250], ['12 cm', 12], ['45°', 45], ['0.375', 0.375]].forEach(([s, v]) => near(g, `"${s}" reads as ${v}`, A.parseNum(s), v));
+     ['₹1,250', 1250], ['12 cm', 12], ['45°', 45], ['0.375', 0.375],
+     ['seven', 7], ['forty-one', 41], ['two hundred and eighty', 280], ['Article 356', 356], ['20 per cent', 20], ["4 o'clock", 4]].forEach(([s, v]) => near(g, `"${s}" reads as ${v}`, A.parseNum(s), v));
     eq(g, 'an empty box reads as nothing', A.parseNum(''), null);
     eq(g, 'words read as nothing', A.parseNum('abc'), null);
   }
@@ -20,6 +21,9 @@
   function checking(A) {
     const g = 'Checking one answer';
     const cases = [
+      // a symbol answer is compared symbol for symbol: any other symbol is wrong, the word for it is right
+      ['symbol key "#" (or "hash")', { type: 'text', alts: ['hash', '#'], fuzzy: true, wrong: [] }, { '#': true, ' # ': true, 'hash': true, '?': false, '$': false, '.': false }],
+      ['symbol key "Ω" (or "ohm")', { type: 'text', alts: ['ohm', 'Ω'], fuzzy: true, wrong: [] }, { 'Ω': true, 'ohm': true, 'Ω!': false, '%': false }],
       ['whole-number key 12', { type: 'num', ans: 12, ansText: '12' }, { '12': true, '12.0': true, '12 cm': true, '12.1': false, '': false }],
       ['exact decimal key 7.73', { type: 'num', ans: 7.73, ansText: '7.73' }, { '7.73': true, '7.730': true, '7.74': false, '7.7': false }],
       ['non-terminating key 1/3', { type: 'num', ans: 1 / 3, ansText: '1/3' }, { '1/3': true, '0.33': true, '0.333': true, '0.3': false, '0.34': false }],
@@ -171,7 +175,8 @@
     }
     // question quality, read from the bank files themselves
     const norm = s => plain(s).toLowerCase().replace(/\s+/g, ' ').trim();
-    const LV = new Set(['E', 'M', 'C', 'X']), badLevel = [], dupOpt = [], dupText = [], strayTag = [], noExpl = [];
+    const LV = new Set(['E', 'M', 'C', 'X']), badLevel = [], dupOpt = [], dupText = [], strayTag = [], noExpl = [], numAlt = [], mcqOnlyNoOpts = [], emptyAlt = [];
+    const byId = new Map(A.T.filter(t => t.bank).map(t => [t.id, t]));
     // a "<" that starts something the page would read as a tag, other than the formatting the banks use
     const stray = s => /<(?!\/?(sub|sup|br|b|i|u|em|strong|span|code|small|table|tr|td|th|tbody|thead)\b)[a-zA-Z\/!]/.test(String(s));
     for (const subj of Object.keys(A.BANK_INDEX)) {
@@ -186,6 +191,15 @@
         if (seen.has(k)) dupText.push(`${id} = #${seen.get(k)}`); else seen.set(k, i);
         if ([q.q, q.a, q.e].concat(q.o || [], ...(q.p || [])).some(stray)) strayTag.push(id);
         if (!q.e || !String(q.e).trim()) noExpl.push(id);
+        // a number answer is marked as a number, so every other form it lists ("8.3|8") must also be accepted when typed
+        const t = byId.get(subj + '_' + i);
+        if (t && !q.p && !t.mcqOnly && String(q.a).includes('|')) {
+          const part = t.gen().parts[0];
+          if (part.type === 'num') String(q.a).split('|').slice(1).forEach(alt => { if (!A.checkPart(part, plain(alt))) numAlt.push(`${id}: "${alt}" (key ${part.ans})`); });
+        }
+        if (q.m && !(Array.isArray(q.o) && q.o.length >= 3)) mcqOnlyNoOpts.push(id);
+        // a typed answer made only of punctuation ("!") reads as nothing, so any other mark would be accepted too
+        if (t && !t.mcqOnly && !q.p) { const part = t.gen().parts[0]; if (part.type === 'text' && ['?', '.', '¤'].some(m => !part.alts.map(plain).includes(m) && A.checkPart(part, m))) emptyAlt.push(id); }
       });
     }
     eq(g, 'every question has a difficulty level (E, M, C or X)', badLevel, []);
@@ -193,6 +207,9 @@
     eq(g, 'no question is repeated within a class and subject', dupText, []);
     eq(g, 'no stray "<" that the page would read as a tag', strayTag, []);
     eq(g, 'every question has an explanation', noExpl, []);
+    eq(g, 'every other accepted form of a number answer is also marked right when typed', numAlt, []);
+    eq(g, 'every multiple-choice-only question has its three wrong options', mcqOnlyNoOpts, []);
+    eq(g, 'a lone "?", "." or other symbol is marked right only where it is itself an answer', emptyAlt, []);
     eq(g, 'total questions in the banks', total, Object.values(A.BANK_INDEX).reduce((s, b) => s + Object.values(b.classes).reduce((a, c) => a + Object.values(c).reduce((x, y) => x + y, 0), 0), 0));
   }
 
@@ -262,6 +279,22 @@
     eq(g, 'every answer key in a custom paper is accepted', problems.key, []);
     eq(g, 'the same paper code rebuilds the same paper', problems.repeat, []);
     ok(g, 'most random settings build a paper', built > 100, `${built} built`);
+
+    // a shared paper or class challenge records the bank size (n=…): after new questions are added to the end of the
+    // bank, the same link must still rebuild exactly the same paper
+    await A.ensureBank('Science');
+    const cfgS = { klass: 'X', subject: 'Science', topics: 'ALL', nq: 20, usemcq: false, nmcq: 1, mix: { E: 25, M: 25, C: 25, X: 25 }, duration: 40,
+      marks: { MCQ: 1, E: 1, M: 2, C: 3, X: 4 } };
+    const cap = A.bankLen('Science'), first = A.buildWith(cfgS, 4242, cap).paper.qs.map(q => q.text);
+    const proto = A.T.find(t => t.bank && t.subj === 'Science' && t.cls === 'X'), added = [];
+    for (let i = 0; i < 200; i++) added.push(Object.assign({}, proto, { id: 'Science_new' + i, bi: cap + i, level: 'EMCX'[i % 4], mcq: false, mcqOnly: false,
+      gen: () => ({ text: 'NEW QUESTION ' + i, parts: [{ type: 'text', alts: ['x'], fuzzy: false, wrong: [], w: 1 }], sol: '' }) }));
+    A.T.push(...added);
+    try {
+      const capped = A.buildWith(cfgS, 4242, cap).paper.qs.map(q => q.text), open = A.buildWith(cfgS, 4242).paper.qs.map(q => q.text);
+      ok(g, 'a link made before new questions were added rebuilds the same paper', JSON.stringify(capped) === JSON.stringify(first), capped.filter((t, i) => t !== first[i]).slice(0, 2).join(' / '));
+      ok(g, 'without the bank size, new questions can appear (so the check above means something)', open.some(t => /^NEW QUESTION/.test(t)), `${open.length} questions`);
+    } finally { A.T.splice(A.T.length - added.length, added.length); }
   }
 
   // ---------- the school pages for search engines (cbse/…, built by tools/build_pages.py) ----------
