@@ -130,6 +130,9 @@ button.share{border-color:var(--green);color:var(--green)}
 @media (max-width:480px){.topnav{gap:2px}.topnav a{padding:6px 9px;font-size:.92rem}}
 .crumbs{font-size:.85rem;color:var(--muted);margin-bottom:12px}
 .crumbs a{color:var(--ink);font-weight:700;text-decoration:none}
+.stats{display:flex;flex-wrap:wrap;gap:4px 0;margin:0 0 14px;color:var(--muted);font-size:.95rem}
+.stats span:not(:last-child)::after{content:"·";margin:0 10px;color:var(--muted)}
+.stats b{color:var(--ink)}
 .tracks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
 @media (max-width:760px){.tracks{grid-template-columns:minmax(0,1fr)}}
 a.track{display:flex;flex-direction:column;gap:10px;padding:24px;border-radius:var(--r);border:1px solid var(--line);background:var(--paper);color:var(--fg);text-decoration:none;min-width:0}
@@ -199,6 +202,8 @@ button.small{padding:6px 12px;font-size:.85rem}
 .preset b{font-family:var(--f-display);font-size:1.2rem;color:var(--ink)}
 .preset span{font-size:.85rem;color:var(--muted);font-weight:400}
 .preset.alt{background:var(--paper);border-style:dashed}
+.daily{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;justify-content:space-between;padding:12px 16px;border:1px solid var(--amber);border-radius:var(--r);background:var(--amber-soft)}
+.daily b{color:var(--amber)}.daily .hint{display:block;margin:2px 0 0}
 details.custom{border:1px solid var(--line);border-radius:var(--r);padding:0 14px}
 details.custom>summary{cursor:pointer;font-weight:700;padding:12px 0;color:var(--ink)}
 details.custom[open]{padding-bottom:14px}
@@ -220,6 +225,8 @@ details.custom[open]{padding-bottom:14px}
 .nb.right{background:var(--green-soft);border-color:var(--green);color:var(--green)}
 .nb.wrong{background:var(--red-soft);border-color:var(--red);color:var(--red)}
 .nb.flag{box-shadow:inset 0 0 0 2px var(--amber)}
+/* on touch screens, question buttons, Flag and the other small buttons are at least 44 px, so a finger hits the right one */
+@media (pointer:coarse){.nb{min-width:2.75rem;min-height:2.75rem}button.small{min-height:2.75rem}.nav{gap:8px}}
 .toast{background:var(--amber-soft);color:var(--amber);font-weight:700;border-radius:8px;padding:8px 12px}
 .qtools{display:flex;flex-wrap:wrap;gap:8px}
 button.flag{border-color:var(--line);color:var(--muted)}
@@ -342,6 +349,8 @@ sup,sub{font-size:.7em}
   <!-- shown without JavaScript, so crawlers that do not run scripts read it; route() hides it for other screens -->
   <section id="homeView">
     <h2 class="sr">What are you preparing for?</h2>
+    <!-- the counts: tools/build_school_index.py writes them here for crawlers, and the page recounts them when it loads -->
+    <p class="stats"><span><b id="qCount"><!--QCOUNT:start-->9,300+<!--QCOUNT:end--></b> school questions</span><span>new Maths questions every paper</span><span><b id="pCount"><!--PCOUNT:start-->22<!--PCOUNT:end--></b> official JEE and NEET papers</span><span>free, no sign-up</span></p>
     <div class="tracks">
       <a class="track school" href="#school">
         <p class="eyebrow">School exams</p>
@@ -437,6 +446,7 @@ sup,sub{font-size:.7em}
           <button type="button" class="preset" data-preset="chapter"><b>Chapter test</b><span data-pl="chapter">20 questions · 40 min</span></button>
           <button type="button" class="preset" data-preset="full"><b>Full mock paper</b><span data-pl="full">30 questions · 60 min</span></button>
         </div>
+        <div class="daily"><div><b>Today's challenge</b><span class="hint" id="dailyHint">10 questions across all chapters, the same for every student today. New questions tomorrow.</span></div><button type="button" class="small primary" id="dailyBtn">Take today's challenge</button></div>
         <div id="quickMsg" class="msg err" role="alert" hidden></div>
         <details id="custom" class="custom">
           <summary>Customise the paper</summary>
@@ -1279,6 +1289,7 @@ function renderPlan(){
   const secs=sections(p),check=S.duration>=45?3:2,avail=Math.max(0,S.duration-check);
   $('#timeBody').innerHTML=secs.map(s=>`<tr><td>Section ${s.letter}: ${s.name}</td><td class="n">${s.count} Q · ${s.marks} marks</td><td class="n">${Math.round(avail*s.marks/(tm||1))} min</td></tr>`).join('')+`<tr><td>Checking</td><td></td><td class="n">${check} min</td></tr>`;
   Object.keys(PRESETS).forEach(k=>{const z=presetSize(k);$(`[data-pl="${k}"]`).textContent=(z.capped?'All ':'')+z.nq+' questions'+(S.mode!=='practice'?' · '+z.duration+' min':'');});
+  $('#dailyHint').textContent=`${PRESETS.quick.nq} questions across all Class ${clsNum(S.klass)} ${S.subject} chapters${S.mode!=='practice'?`, ${PRESETS.quick.duration} min`:''}. Every student gets the same questions today; new ones tomorrow.`;
   $('#gen').textContent=S.mode==='practice'?'Start custom practice':'Start custom paper';
   const fm=$('#formMsg');if(v.errs.length){fm.innerHTML=v.errs.map(esc).join('<br>');fm.hidden=false;}else fm.hidden=true;
   $('#gen').disabled=v.errs.length>0;
@@ -1391,6 +1402,16 @@ function startPreset(k,done){
   if(v.errs.length){qm.innerHTML=v.errs.map(esc).join('<br>');qm.hidden=false;if(done)done();return;}
   qm.hidden=true;startTest(false,undefined,undefined,undefined,done);
 }
+// "Today's challenge": a quick quiz on every chapter whose paper code comes from the date, class and subject, so every student
+// taking it today gets the same questions (it runs as a class challenge, so the code goes into the results and the score message);
+// the student's own settings are put back afterwards
+function dailySeed(klass,subject,day){let h=2166136261;for(const c of `${day}|${klass}|${subject}`)h=Math.imul(h^c.codePointAt(0),16777619);return h>>>0;}
+function startDaily(){readForm();const keep=JSON.parse(JSON.stringify(S)),qm=$('#quickMsg');
+  S.topics='ALL';writeForm();readForm();applyPreset('quick');
+  const v=validate();if(v.errs.length){S=keep;writeForm();readForm();qm.innerHTML=v.errs.map(esc).join('<br>');qm.hidden=false;return;}
+  qm.hidden=true;const sd=dailySeed(S.klass,S.subject,dayKey()),ch={code:chCode(sd),name:`Today's challenge, ${new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short'})}`,daily:true};
+  track(`daily/class-${slug(S.klass)}/${slug(S.subject)}`,`Started today's challenge: Class ${clsNum(S.klass)} ${S.subject}`);
+  startTest(false,sd,ch,undefined,()=>{S=keep;writeForm();readForm();});}
 // a Practise button starts a one-chapter practice quiz, then puts back the settings the student had chosen, so the next
 // "Full mock paper" is still timed and covers every chapter
 function practiseChapter(subject,klass,topic){const keep=JSON.parse(JSON.stringify(S));
@@ -1774,7 +1795,8 @@ function finish(auto){
   const nWrong=P.qs.filter(gotWrong).length,nBlank=P.qs.filter(leftBlank).length;
   // My mistakes is offered here only when it holds more than this paper's wrong answers (otherwise it repeats "Retry the N I got wrong")
   const showMk=mk.total&&(P.mistakes||mk.total>nWrong);
-  const chal=P.challenge,chLine=chal?`<p class="msg info" style="margin:0">Class challenge <b>${esc(chal.code)}</b>${chal.name?` · ${esc(chal.name)}`:''}. Send your score to whoever set it: <b>Share my score</b> below.</p>`:'';
+  const chal=P.challenge,chLine=!chal?'':chal.daily?`<p class="msg info" style="margin:0">${esc(chal.name)} (code <b>${esc(chal.code)}</b>): every student taking Class ${clsNum(P.klass)} ${esc(P.subject)} today had these questions. Compare with your friends: <b>Share my score</b> below. A new challenge comes tomorrow.</p>`
+    :`<p class="msg info" style="margin:0">Class challenge <b>${esc(chal.code)}</b>${chal.name?` · ${esc(chal.name)}`:''}. Send your score to whoever set it: <b>Share my score</b> below.</p>`;
   const shareTxt=chal?`Challenge ${chal.code}${chal.name?` (${chal.name})`:''}: I scored ${g}/${tot} (${pct}%) in ${mm} min ${ss} s on Class ${clsNum(P.klass)} ${P.subject}, ${P.qs.length} questions. Take the same challenge free: ${shareLink(g,tot)}`
     :`I scored ${g}/${tot} (${pct}%) in ${P.mistakes?'a revision paper':P.exam?P.exam.title:`a Class ${clsNum(P.klass)} ${P.subject} ${P.topicsList&&P.topicsList.length===1?`test on ${P.topicsList[0]}`:'practice paper'}`} on All in All Exam Practice. Can you beat my score? ${P.exam||(!P.mistakes&&P.seed!=null&&!P.label)?'Take the same paper':'Try one'} free: ${shareLink(g,tot)}`;
   const mkLine=P.mistakes?`<p class="msg ok" style="margin:0">${mk.removed?`${mk.removed} answered right and removed from My mistakes. `:''}${mk.total?`${mk.total} question${mk.total>1?'s':''} left to revise.`:'Your My mistakes list is now empty. Well done!'}</p>`
@@ -2160,6 +2182,7 @@ $('#printNowBtn').addEventListener('click',()=>showPrint('test'));
 $('#flagBtn').addEventListener('click',()=>toggleFlagView(!onlyFlag));
 $('#confirmFlag').addEventListener('click',()=>{$('#confirm').hidden=true;toggleFlagView(true);});
 document.querySelectorAll('[data-preset]').forEach(b=>b.addEventListener('click',()=>{readForm();startPreset(b.dataset.preset);}));
+$('#dailyBtn').addEventListener('click',startDaily);
 $('#custom').addEventListener('toggle',()=>{$('#planCard').hidden=!$('#custom').open;});
 $('#form').addEventListener('submit',e=>{e.preventDefault();readForm();if(validate().errs.length)return;startTest();});
 $('#chMake').addEventListener('click',makeChallenge);
@@ -2249,8 +2272,13 @@ if('serviceWorker' in navigator&&(location.protocol==='https:'||location.hostnam
 let installEvt=null;
 window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();installEvt=e;$('#installRow').hidden=false;});
 $('#installBtn').addEventListener('click',async()=>{if(!installEvt)return;installEvt.prompt();const r=await installEvt.userChoice;track('app/install/'+r.outcome,'Install app: '+r.outcome);installEvt=null;$('#installRow').hidden=true;});
+// the home page counts: school questions in the banks (rounded down to the hundred) and official papers offered
+function homeCounts(){const n=Object.values(BANK_INDEX).reduce((s,b)=>s+Object.values(b.classes).reduce((a,t)=>a+Object.values(t).reduce((x,y)=>x+y,0),0),0),
+    np=Object.values(EXAM_PAGES).reduce((s,e)=>s+(e.papers||[]).length,0);
+  if(n)$('#qCount').textContent=(Math.floor(n/100)*100).toLocaleString('en-IN')+'+';if(np)$('#pCount').textContent=np;return{n,np};}
+homeCounts();
 // tests/marking.html opens this page with ?test and reaches the marking code through window.__aaTest
-if(new URLSearchParams(location.search).has('test'))window.__aaTest={checkPart,parseNum,partMarks,answerText,examQs,ensureBank,saveAllBanks,topicsFor,bankCounts,BANK_INDEX,SUBJECTS,T,cleanQ,EXAM_PAGES,durLabel,makeMCQ,seeded,dataOk,renderHistory,get paper(){return P;},
+if(new URLSearchParams(location.search).has('test'))window.__aaTest={checkPart,parseNum,partMarks,answerText,examQs,ensureBank,saveAllBanks,topicsFor,bankCounts,BANK_INDEX,SUBJECTS,T,cleanQ,EXAM_PAGES,durLabel,makeMCQ,seeded,dataOk,renderHistory,homeCounts,dailySeed,get paper(){return P;},
   // marks qs against ans ({'<question index>-<part index>': answer}) and returns each question's mark
   markPaper(qs,ans,exam){const P0=P,A0=ANS;P={qs,exam};ANS=ans;try{qs.forEach((q,i)=>markQ(i));return qs.map(q=>q.got);}finally{P=P0;ANS=A0;}},
   withPaper(p,fn){const P0=P;P=p;try{return fn();}finally{P=P0;}},

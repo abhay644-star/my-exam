@@ -245,6 +245,27 @@
     // a code that does not belong to the paper code (an edited link) is ignored: it is an ordinary shared paper
     banner = await openLink((link.split('?')[1] || '').replace(`ch=${code}`, `ch=${code === 'ZZZZ' ? 'YYYY' : 'ZZZZ'}`));
     ok(g, 'an edited challenge code is ignored (the same paper, not a challenge)', !banner.includes('Class challenge') && /Take the same paper/.test(banner), banner);
+    // 7b. today's challenge: every chapter, the same questions for everyone today, and the student's own settings kept
+    await load('../index.html?test#home');
+    const counts = W().__aaTest.homeCounts(), nPapers = Object.values(W().__aaTest.EXAM_PAGES).reduce((s, e) => s + e.papers.length, 0);
+    ok(g, 'the home page shows the question and paper counts', /^\d{1,2}(,\d{2,3})+\+$|^\d{3}\+$/.test($('#qCount').textContent) && counts.n >= 9000 && +$('#pCount').textContent === nPapers && nPapers >= 20, `${$('#qCount').textContent} / ${$('#pCount').textContent} of ${nPapers}`);
+    W().location.hash = '#school'; await until(() => !$('#setup').hidden);
+    $('#klass').value = 'X'; fire($('#klass'), 'change'); $('#subject').value = 'Science'; fire($('#subject'), 'change'); await sleep(300);
+    $('#mode_exam').checked = true; fire($('#mode_exam'), 'change');
+    $('#nq').value = '25'; fire($('#nq'), 'input'); fire($('#nq'), 'change'); await sleep(100);
+    ok(g, 'today\'s challenge is offered below the presets and names the class and subject', !!$('#dailyBtn') && /Class 10 Science/.test($('#dailyHint').textContent), $('#dailyHint').textContent);
+    $('#dailyBtn').click(); await until(() => !$('#test').hidden && $$('#sheet .q').length);
+    const daily1 = sheetText(), dTopics = new Set($$('#sheet .qtopic').map(t => t.textContent));
+    ok(g, 'today\'s challenge is 10 questions from several chapters', daily1.length === 10 && dTopics.size >= 3, `${daily1.length} questions, ${dTopics.size} chapters`);
+    answer(0); $('#submitBtn').click(); await sleep(100); $('#confirmYes').click();
+    await until(() => !$('#results').hidden && $('#results .score'));
+    ok(g, 'its results say every student had these questions today', /Today's challenge, .*every student taking Class 10 Science today had these questions/.test($('#results').textContent.replace(/\s+/g, ' ')), $('#results').textContent.replace(/\s+/g, ' ').slice(0, 300));
+    W().location.hash = '#school'; await until(() => !$('#setup').hidden);
+    ok(g, 'after today\'s challenge, the student\'s own number of questions is back', $('#nq').value === '25', $('#nq').value);
+    $('#dailyBtn').click(); await until(() => !$('#test').hidden && $$('#sheet .q').length);
+    const daily2 = sheetText();
+    ok(g, 'taking today\'s challenge again gives exactly the same questions', daily2.length === 10 && daily2.every((t, i) => t === daily1[i]), `first difference at ${daily2.findIndex((t, i) => t !== daily1[i])}`);
+    $('#quitBtn').click(); await sleep(100); $('#confirmYes').click(); await sleep(200);
     // the teachers' page: its sample challenge link works, and the printable score sheet has a row per student
     frame.src = '../teachers/index.html'; await until(() => D().querySelector('a[href*="ch=DEMO"]'), 10000);
     const sample = D().querySelector('a[href*="ch=DEMO"]'), sheetLink = D().querySelector('a[href="score-sheet.html"]');
