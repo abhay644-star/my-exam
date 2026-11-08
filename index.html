@@ -58,7 +58,7 @@ p{margin:0}
 .lede{color:var(--muted);max-width:62ch;margin-top:6px}
 .eyebrow{font-size:.78rem;text-transform:uppercase;letter-spacing:.09em;color:var(--ink);font-weight:700}
 .top{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:flex-end;justify-content:space-between;margin-bottom:20px}
-.logo{display:block;width:min(100%,385px);height:auto;margin-block:4px 6px}
+.logo{display:block;width:min(100%,300px);height:auto;margin-block:4px 6px}
 .logo text{font-family:var(--f-display);font-weight:800}
 @media (max-width:600px){body.compact .top{margin-bottom:12px;gap:4px}body.compact .top .eyebrow,body.compact .top .lede{display:none}body.compact .logo{width:min(100%,230px);margin-block:0}}
 .lg-ink{fill:var(--ink)} .lg-red{fill:var(--red)} .lg-muted{fill:var(--muted)} .lg-wood{fill:#f3d9a6} .lg-lead{fill:#1b2236}
@@ -133,6 +133,7 @@ button.share{border-color:var(--green);color:var(--green)}
 .stats{display:flex;flex-wrap:wrap;gap:4px 0;margin:0 0 14px;color:var(--muted);font-size:.95rem}
 .stats span:not(:last-child)::after{content:"·";margin:0 10px;color:var(--muted)}
 .stats b{color:var(--ink)}
+.moreexams{margin:12px 0 0;color:var(--muted);font-size:.95rem}.moreexams a{color:var(--ink);font-weight:700}
 .tracks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
 @media (max-width:760px){.tracks{grid-template-columns:minmax(0,1fr)}}
 a.track{display:flex;flex-direction:column;gap:10px;padding:24px;border-radius:var(--r);border:1px solid var(--line);background:var(--paper);color:var(--fg);text-decoration:none;min-width:0}
@@ -350,7 +351,7 @@ sup,sub{font-size:.7em}
   <section id="homeView">
     <h2 class="sr">What are you preparing for?</h2>
     <!-- the counts: tools/build_school_index.py writes them here for crawlers, and the page recounts them when it loads -->
-    <p class="stats"><span><b id="qCount"><!--QCOUNT:start-->9,400+<!--QCOUNT:end--></b> school questions</span><span>new Maths questions every paper</span><span><b id="pCount"><!--PCOUNT:start-->22<!--PCOUNT:end--></b> official JEE and NEET papers</span><span>free, no sign-up</span></p>
+    <p class="stats"><span><b id="qCount"><!--QCOUNT:start-->9,400+<!--QCOUNT:end--></b> school questions</span><span>new Maths questions every paper</span><span><b id="pCount"><!--PCOUNT:start-->22<!--PCOUNT:end--></b> JEE and NEET previous year papers</span><span>free, no sign-up</span></p>
     <div class="tracks">
       <a class="track school" href="#school">
         <p class="eyebrow">School exams</p>
@@ -361,10 +362,11 @@ sup,sub{font-size:.7em}
       <a class="track exams" href="#exams">
         <p class="eyebrow">Competitive exams</p>
         <h3>JEE Main · JEE Advanced · NEET (UG)</h3>
-        <p>Previous year papers with the official answer keys and marking are ready now. CUET, CAT, SSC, Bank and UPSC are coming soon: tell us which one you need first.</p>
+        <p>Previous year papers with the official answer keys and exam-style marking.</p>
         <span class="go">See the exams →</span>
       </a>
     </div>
+    <p class="moreexams">More exams are on the way: CUET, CAT, SSC, Bank and UPSC. <a href="#exams">Tell us which one you need first</a>.</p>
     <h3 class="whyhead">Popular practice</h3>
     <ul class="popular">
       <li><a href="/cbse/class-10/mathematics/"><b>Class 10 Maths</b><span>Chapter tests and full papers</span></a></li>

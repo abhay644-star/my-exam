@@ -35,7 +35,7 @@
     frame.style.width = width + 'px'; frame.style.height = height + 'px';
     await load('../index.html?test'); W().localStorage.clear();
     await load('../index.html?test#home');
-    ok(g, 'home page shows and fits the width', !$('#homeView').hidden && fits(), `scrollWidth ${D().documentElement.scrollWidth}`);
+    ok(g, 'home page shows and fits the width', !$('#homeView').hidden && fits(), wide());
     const pop = [...D().querySelectorAll('#homeView .popular a')].map(a => a.getAttribute('href'));
     const dead = [];
     for (const h of pop) { const r = await fetch('..' + h + 'index.html').catch(() => null); if (!r || !r.ok) dead.push(h); }
