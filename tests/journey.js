@@ -328,6 +328,27 @@
     ok(g, 'an exam chapter page fits the width, with its maths typeset', fits() && !D().querySelectorAll('.katex-error').length, wide());
     await loadLink('../index.html?test&' + D().querySelector('a.btn').getAttribute('href').replace(/^\/\?/, ''), () => $('#chPick .chbtn.hl'));
     ok(g, 'its Practise button opens the NEET screen with that chapter marked', !$('#jeeView').hidden && !!$('#chPick .chbtn.hl') && $('#chPick .chbtn.hl').textContent.startsWith(chem[0][0]), chPage);
+
+    // 8c. spaced revision: a mistake is due a day later; right once, it comes back in 3 days; right again, it leaves the list
+    const DAY = 864e5, mkKey = mk[0] && mk[0].k, rec = () => JSON.parse(W().localStorage.getItem('aa-mistakes') || '[]').find(m => m.k === mkKey);
+    const makeDue = () => { const a = JSON.parse(W().localStorage.getItem('aa-mistakes')); a.forEach(m => { m.due = m.k === mkKey ? Date.now() - 1000 : Date.now() + DAY; }); W().localStorage.setItem('aa-mistakes', JSON.stringify(a)); };
+    await load('../index.html?test#home');
+    const r0 = rec();
+    ok(g, 'a new mistake is due again a day later, and the home page does not ask for it yet', r0 && r0.st === 0 && Math.abs(r0.due - Date.now() - DAY) < 600000 && $('#dueBox').hidden, r0 && JSON.stringify({ st: r0.st, due: r0.due }));
+    async function reviseRight() {
+      makeDue(); await load('../index.html?test#home');
+      const box = $('#dueBox').hidden ? '' : $('#dueBox').textContent.replace(/\s+/g, ' ');
+      $('#dueStart') && $('#dueStart').click(); await until(() => !$('#test').hidden && $$('#sheet .q').length);
+      const n = $$('#sheet .q').length, p = W().__aaTest.paper.qs[0].parts[0], r = $(`#q0 input[type=radio][value="${p.ans}"]`);
+      if (r) { r.checked = true; fire(r, 'change'); }
+      $('#submitBtn').click(); await sleep(100); $('#confirmYes').click(); await until(() => !$('#results').hidden && $('#results .score'));
+      return { box, n, res: $('#results').textContent.replace(/\s+/g, ' ') };
+    }
+    const v1 = await reviseRight(), rv1 = rec();
+    ok(g, 'when it is due, the home page offers it, and the revision paper has just that question', /^1 question from My mistakes is due for revision today/.test(v1.box) && v1.n === 1, `${v1.box} / ${v1.n} questions`);
+    ok(g, 'answered right once, it stays and comes back in 3 days', rv1 && rv1.st === 1 && Math.abs(rv1.due - Date.now() - 3 * DAY) < 600000 && /1 answered right will come back on .+ for one more check/.test(v1.res), (rv1 ? JSON.stringify({ st: rv1.st }) : 'gone') + ' / ' + v1.res.slice(0, 200));
+    const v2 = await reviseRight();
+    ok(g, 'answered right a second time, it leaves My mistakes', !rec() && /1 answered right a second time and removed from My mistakes/.test(v2.res), v2.res.slice(0, 200));
     await load('../index.html?test#home');
 
     // 9. at phone width, every official paper fits the screen with its maths typeset

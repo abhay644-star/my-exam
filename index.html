@@ -351,6 +351,7 @@ sup,sub{font-size:.7em}
   </header>
 
   <div id="resumeBox" class="msg info resume" role="status" hidden></div>
+  <div id="dueBox" class="msg info resume" role="status" hidden></div>
   <div id="invite" class="msg info invite" role="status" hidden></div>
 
   <!-- HOME -->
@@ -1592,23 +1593,38 @@ function cleanQ(q){const c=JSON.parse(JSON.stringify(q)),ol=optL(q);delete c.got
     if(p.type==='choice'){if(p.accept)p.ansText=p.accept.map(k=>`(${ol[k]}) ${p.options[k]}`).join(' or ')+' (the final key accepts either)';else delete p.ansText;}
     else if(p.ansText==null){try{p.ansText=answerText(q.parts[j]);}catch(e){}}});
   return c;}
-function saveMistakes(){let a=getMistakes();const before=a.length;let added=0;
-  if(P.mistakes){const right=new Set(P.qs.filter(q=>q.got===q.marks).map(q=>q.mk));a=a.filter(m=>!right.has(m.k));}
+// spaced revision: a question saved to My mistakes is due again a day later; answered fully right, it comes back 3 days
+// later (st:1), and answered right again it leaves the list. A wrong answer starts it again from 1 day.
+// (Records saved before this have no due date: they are due a day after they were saved.)
+const DAY=864e5,mDue=m=>isNum(m.due,0,1e14)?m.due:(m.d||0)+DAY;
+const dueMistakes=(a,now)=>a.filter(m=>mDue(m)<=now);
+function saveMistakes(){let a=getMistakes();const before=a.length,now=Date.now();let added=0,later=0;
+  if(P.mistakes){const res={};P.qs.forEach(q=>{res[q.mk]=q.got===q.marks?'right':q.parts.every(p=>blankV(p.user))?'blank':'wrong';});
+    a=a.filter(m=>!(res[m.k]==='right'&&m.st===1)).map(m=>{if(res[m.k]==='right'){later++;return Object.assign(m,{st:1,due:now+3*DAY});}
+      return res[m.k]==='wrong'?Object.assign(m,{st:0,due:now+DAY}):m;});}
   else{const src=P.exam?P.exam.title:`Class ${clsNum(P.klass)} ${P.subject}`;
     P.qs.forEach(q=>{if(q.dropped||q.got>=q.marks||q.parts.every(p=>blankV(p.user)))return;
-      const k=(q.text+'|'+q.parts.map(p=>p.type==='choice'?p.options[p.ans]:answerText(p)).join('|')).slice(0,400);
-      if(a.some(m=>m.k===k))return;a.unshift({k,d:Date.now(),src:q.src||src,math:!!P.exam,q:cleanQ(q)});added++;});}  // q.src: its own paper, in chapter practice
-  setMistakes(a);return{added,removed:P.mistakes?before-a.length:0,total:Math.min(150,a.length)};}
-function startMistakes(){const a=getMistakes();if(!a.length||!okToReplace())return;const pick=a.slice(0,20);
+      const k=(q.text+'|'+q.parts.map(p=>p.type==='choice'?p.options[p.ans]:answerText(p)).join('|')).slice(0,400),old=a.find(m=>m.k===k);
+      if(old){Object.assign(old,{st:0,due:now+DAY});return;}  // wrong again: back to the start
+      a.unshift({k,d:now,due:now+DAY,st:0,src:q.src||src,math:!!P.exam,q:cleanQ(q)});added++;});}  // q.src: its own paper, in chapter practice
+  setMistakes(a);return{added,later,removed:P.mistakes?before-a.length:0,total:Math.min(150,a.length)};}
+// a revision paper: the questions due now (oldest due first), or, when none is due, the newest ones
+function startMistakes(){const a=getMistakes();if(!a.length||!okToReplace())return;const now=Date.now(),due=dueMistakes(a,now).sort((x,y)=>mDue(x)-mDue(y));
+  const pick=(due.length?due:a).slice(0,20);
   const qs=pick.map((m,i)=>Object.assign(JSON.parse(JSON.stringify(m.q)),{no:i+1,mk:m.k,tag:m.src,sec:'MIS'}));
   // NEET questions saved before option labels were kept: NEET numbers its options (1)–(4)
   qs.forEach((q,i)=>{if(!q.ol&&/^NEET/.test(pick[i].src)){q.ol='1234';q.parts.forEach(p=>{p.ol='1234';});}});
-  P={qs,secs:[{key:'MIS',letter:'',name:'Questions you got wrong before',kind:'w'}],notes:['Answer a question fully right and it leaves your My mistakes list.'],created:Date.now(),mode:'practice',duration:Math.max(10,qs.length*3),
+  P={qs,secs:[{key:'MIS',letter:'',name:'Questions you got wrong before',kind:'w'}],notes:[due.length?'Answer a question fully right and it comes back in 3 days; answer it right again then and it leaves your My mistakes list.':'None of your mistakes is due for revision today, so these are your newest ones. A question answered fully right comes back in 3 days.'],created:Date.now(),mode:'practice',duration:Math.max(10,qs.length*3),
      subject:'My mistakes',klass:'',board:'Revision',country:'India',label:'',topicsLabel:'',startAt:Date.now(),mistakes:true,math:pick.some(m=>m.math)};
   P.endAt=P.startAt+P.duration*60000;ANS={};FLAG={};CHK={};
   history.replaceState(null,'',location.pathname+'#school');track('start/mistakes','Started: My mistakes ('+qs.length+')');begin();}
-function mistakesBox(){const n=getMistakes().length;if(!n)return '';
-  return `<div class="mistakes"><div><b>My mistakes: ${n} question${n>1?'s':''}</b><span class="hint" style="display:block;margin:0">Questions you answered wrong in earlier papers, school and JEE / NEET. Answer one right and it leaves the list.</span></div><div class="btns"><button type="button" class="primary small" id="mistakesStart">Practise ${Math.min(20,n)} now</button><button type="button" class="small" id="mistakesClear">Clear list</button></div></div>`;}
+const dayName=t=>new Date(t).toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short'});
+function mistakesBox(){const a=getMistakes(),n=a.length;if(!n)return '';const now=Date.now(),nd=dueMistakes(a,now).length,next=Math.min(...a.map(mDue));
+  return `<div class="mistakes"><div><b>My mistakes: ${n} question${n>1?'s':''}${nd?` · ${nd} due today`:''}</b><span class="hint" style="display:block;margin:0">Questions you answered wrong, school and JEE / NEET. Each comes back a day later, then 3 days later; answer it right both times and it leaves the list.${nd?'':` Next due: ${dayName(next)}.`}</span></div><div class="btns"><button type="button" class="${nd?'primary ':''}small" id="mistakesStart">${nd?`Revise ${Math.min(20,nd)} due now`:`Practise ${Math.min(20,n)} anyway`}</button><button type="button" class="small" id="mistakesClear">Clear list</button></div></div>`;}
+// the home page reminds a student whose mistakes are due (not while a paper is unfinished: that box comes first)
+function renderDue(on){const box=$('#dueBox'),a=on&&$('#resumeBox').hidden?getMistakes():[],nd=dueMistakes(a,Date.now()).length;box.hidden=!nd;if(!nd){box.innerHTML='';return;}
+  box.innerHTML=`<div><b>${nd} question${nd>1?'s':''} from My mistakes ${nd>1?'are':'is'} due for revision today.</b> A few minutes now helps you remember ${nd>1?'them':'it'}.</div><div class="btns"><button type="button" class="primary" id="dueStart">Revise ${Math.min(20,nd)} now</button></div>`;
+  $('#dueStart').addEventListener('click',()=>{track('due/start','Revise due mistakes from home');startMistakes();});}
 function wireMistakes(){const s=$('#mistakesStart');if(!s)return;s.addEventListener('click',startMistakes);
   $('#mistakesClear').addEventListener('click',e=>{const b=e.currentTarget;if(b.dataset.sure){setMistakes([]);renderHistory();}else{b.dataset.sure='1';b.textContent='Tap again to clear';}});}
 // a backup: the progress kept on this device (papers, streak days, My mistakes, settings, exam requests) as a file the
@@ -1654,7 +1670,7 @@ function mergeBackup(b){
   if(Array.isArray(d))localStorage.setItem('aa-days',JSON.stringify([...new Set(getDays().concat(d.filter(x=>typeof x==='string'&&/^\d{4}-\d\d-\d\d$/.test(x))))].sort().reverse().slice(0,400)));
   if(Array.isArray(m)){const cur=getMistakes(),have=new Set(cur.map(x=>x.k)),
       add=m.slice(0,300).filter(x=>x&&isStr(x.k,400)&&x.k&&!have.has(x.k)&&x.q&&typeof x.q==='object'&&Array.isArray(x.q.parts)&&dataOk(x.q,0))
-        .map(x=>({k:x.k,d:isNum(x.d,0,1e14)?x.d:0,src:plainStr(x.src,200)?x.src:'Restored',math:x.math===true,q:x.q}));
+        .map(x=>Object.assign({k:x.k,d:isNum(x.d,0,1e14)?x.d:0,src:plainStr(x.src,200)?x.src:'Restored',math:x.math===true,q:x.q},isNum(x.due,0,1e14)?{due:x.due,st:x.st===1?1:0}:{}));
     mist=add.length;setMistakes(cur.concat(add).sort((x,y)=>(y.d||0)-(x.d||0)));}
   // settings and exam requests: kept as they are on this device, taken from the backup only when this device has none
   ['mpp-settings','aa-want','aa-want-papers'].forEach(k=>{const v=get(k);if(v!=null&&settingsOk(v,0)&&localStorage.getItem(k)==null)localStorage.setItem(k,JSON.stringify(v));});
@@ -1812,7 +1828,7 @@ function finish(auto){
     :`<p class="msg info" style="margin:0">Class challenge <b>${esc(chal.code)}</b>${chal.name?` · ${esc(chal.name)}`:''}. Send your score to whoever set it: <b>Share my score</b> below.</p>`;
   const shareTxt=chal?`Challenge ${chal.code}${chal.name?` (${chal.name})`:''}: I scored ${g}/${tot} (${pct}%) in ${mm} min ${ss} s on Class ${clsNum(P.klass)} ${P.subject}, ${P.qs.length} questions. Take the same challenge free: ${shareLink(g,tot)}`
     :`I scored ${g}/${tot} (${pct}%) in ${P.mistakes?'a revision paper':P.exam?P.exam.title:`a Class ${clsNum(P.klass)} ${P.subject} ${P.topicsList&&P.topicsList.length===1?`test on ${P.topicsList[0]}`:'practice paper'}`} on All in All Exam Practice. Can you beat my score? ${P.exam||(!P.mistakes&&P.seed!=null&&!P.label)?'Take the same paper':'Try one'} free: ${shareLink(g,tot)}`;
-  const mkLine=P.mistakes?`<p class="msg ok" style="margin:0">${mk.removed?`${mk.removed} answered right and removed from My mistakes. `:''}${mk.total?`${mk.total} question${mk.total>1?'s':''} left to revise.`:'Your My mistakes list is now empty. Well done!'}</p>`
+  const mkLine=P.mistakes?`<p class="msg ok" style="margin:0">${mk.removed?`${mk.removed} answered right a second time and removed from My mistakes. `:''}${mk.later?`${mk.later} answered right will come back on ${dayName(Date.now()+3*DAY)} for one more check. `:''}${mk.total?`${mk.total} question${mk.total>1?'s':''} left to revise.`:'Your My mistakes list is now empty. Well done!'}</p>`
     :mk.added?`<p class="msg info" style="margin:0">${mk.added} question${mk.added>1?'s':''} you got wrong ${mk.added>1?'were':'was'} saved to <b>My mistakes</b> on this device, to revise later.</p>`:'';
   const nf=nFlag();
   const review=P.qs.map((q,i)=>`<div class="q" data-ok="${q.got===q.marks?1:0}" data-flagged="${FLAG[i]?1:0}" data-blank="${leftBlank(q)?1:0}"><span class="qn">${q.no}</span><div class="qbody"><span class="qtopic"><span class="lvl l-${q.real||q.level}"></span>${q.topic}${q.tag?' · '+q.tag:''} · ${q.kind==='mcq'?'MCQ':(q.sec?'Numerical':LNAME[q.real||q.level])}${FLAG[i]?' · <span class="flagtag">Flagged</span>':''}</span><div>${q.text}</div>${(q.parts[0].type==='choice'||q.parts[0].type==='multi')?`<div class="hint" style="margin:0">${q.parts[0].options.map((o,j)=>`(${optL(q)[j]}) ${o}`).join(' &nbsp; ')}</div>`:''}${partsReview(q)}<p class="sol"><b>${pm()?'Working':'Explanation'}:</b> ${q.sol}</p><button type="button" class="small report" data-report="${i}">Report a problem with this question</button></div><span class="mark">${+q.got.toFixed(1)}/${q.marks}</span></div>`).join('');
@@ -1896,6 +1912,7 @@ function show(id){
   document.body.classList.toggle('printmode',id==='printView');
   document.body.classList.toggle('compact',id!=='home'&&id!=='printView');  // a smaller header on phones, away from the home page
   if(['test','results','printView'].indexOf(id)<0)renderResume();else $('#resumeBox').hidden=true;
+  renderDue(id==='home');
   if(id==='setup'){renderHistory();ensureBank(S.subject).catch(()=>{});}
   if(id==='exams')renderExams();
   if(id==='jee')renderJee();
