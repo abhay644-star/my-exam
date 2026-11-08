@@ -230,7 +230,7 @@ button.small{padding:6px 12px;font-size:.85rem}
 .wpts legend{font-weight:700;font-size:.9rem;padding:0;margin-bottom:4px}
 .smpart{display:flex;flex-direction:column;gap:2px;padding:8px 10px;border:1px solid var(--line);border-radius:8px}
 .smsum{font-weight:700;margin:4px 0 0}
-.board.hl{outline:3px solid var(--ink);outline-offset:2px}
+.board.hl,.bp.hl{outline:3px solid var(--ink);outline-offset:2px}
 #boardHome{margin:4px 0 8px}
 .bgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px}
 .btile{text-decoration:none;display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left;min-height:44px;padding:10px 12px;border:1px solid var(--ink);border-radius:var(--r);background:var(--ink-soft);color:var(--fg);font:inherit;cursor:pointer}
@@ -2187,7 +2187,7 @@ function renderBoardHome(){const box=$('#boardHome'),cs=boardGroups(),n=BOARD_PA
   box.hidden=!cs.length;if(!cs.length)return;
   box.innerHTML=`<h3 class="whyhead" id="boardHomeHead">CBSE board exam 2027: practice papers <span class="soon ready">New</span></h3><p class="hint" style="margin:0 0 10px">${n} full 3-hour papers across ${ns} subjects, in the pattern of CBSE’s 2026–27 sample papers, with model answers and marking points. Written by us, not official CBSE papers.</p>
     <div class="bgrid">${cs.map(c=>{const np=c.subs.reduce((a,s)=>a+s.ps.length,0);return `<a class="btile" href="#board" data-boardcls="${c.cls}"><b>Class ${clsNum(c.cls)} board practice</b><span>${c.subs.length} subject${c.subs.length>1?'s':''} · ${np} papers · Explore Class ${clsNum(c.cls)} →</span></a>`;}).join('')}</div>`;}
-let boardCls=null;
+let boardCls=null,boardHl=null;
 $('#boardHome').addEventListener('click',e=>{const b=e.target.closest('[data-boardcls]');if(!b)return;boardCls=b.dataset.boardcls;
   track(`board-home/class-${slug(boardCls)}`,`Home: board papers, Class ${clsNum(boardCls)}`);});
 // the board papers page (#board): a class chosen with the chips, each subject's papers with Exam and Practise buttons
@@ -2195,7 +2195,8 @@ function renderBoardPage(){const cs=boardGroups();if(!cs.length)return;if(!cs.so
   $('#boardCls').innerHTML=cs.map(c=>`<button type="button" class="chip${c.cls===boardCls?' on':''}" data-bcls="${c.cls}" aria-pressed="${c.cls===boardCls}">Class ${clsNum(c.cls)}</button>`).join('');
   const c=cs.find(x=>x.cls===boardCls);$('#boardPageMsg').hidden=true;
   $('#boardList').innerHTML=c.subs.map(s=>`<article class="card stack" style="gap:8px"><h3 style="margin:0">${esc(s.name)}</h3>
-    <div class="bpapers">${s.ps.map(x=>`<div class="bp"><b>${esc(x.date)}</b><span class="hint">${esc(x.pat)}</span><div class="btns"><button type="button" class="small primary" data-board="${x.id}" data-mode="exam">Start ${x.min%60?x.min+'-minute':x.min/60+'-hour'} exam</button><button type="button" class="small" data-board="${x.id}" data-mode="practice">Practise</button></div></div>`).join('')}</div></article>`).join('');}
+    <div class="bpapers">${s.ps.map(x=>`<div class="bp${x.id===boardHl?' hl':''}"><b>${esc(x.date)}</b><span class="hint">${esc(x.pat)}</span><div class="btns"><button type="button" class="small primary" data-board="${x.id}" data-mode="exam">Start ${x.min%60?x.min+'-minute':x.min/60+'-hour'} exam</button><button type="button" class="small" data-board="${x.id}" data-mode="practice">Practise</button></div></div>`).join('')}</div></article>`).join('');
+  if(boardHl){const h=$('#boardList .bp.hl');boardHl=null;if(h)setTimeout(()=>h.scrollIntoView({block:'center',behavior:'smooth'}),400);}}
 $('#boardView').addEventListener('click',e=>{const k=e.target.closest('[data-bcls]'),b=e.target.closest('[data-board]');
   if(k){boardCls=k.dataset.bcls;renderBoardPage();const on=$('#boardCls [data-bcls="'+boardCls+'"]');if(on)on.focus();}
   else if(b)startJee(b.dataset.board,b.dataset.mode);});
@@ -2533,7 +2534,10 @@ function openSchoolLink(){const q=new URLSearchParams(location.search),c=q.get('
     // &board (from a subject page): go straight to that subject's board practice papers
     if(q.has('board')&&!$('#boardBox').hidden)setTimeout(()=>$('#boardBox').scrollIntoView({block:'start',behavior:'smooth'}),400);}
   history.replaceState(null,'',location.pathname+location.hash);}
-fillSelects();writeForm();readForm();openInvite();openPaperLink();openChapterLink();openSchoolLink();route();
+// a link from a board paper's page (/?bp=10-maths-1#board): the board papers page on that paper's class, with the paper marked
+function openBoardLink(){const q=new URLSearchParams(location.search),bp=BOARD_PAPERS.find(x=>x.id===q.get('bp'));if(!q.get('bp')||q.get('go'))return;
+  if(bp){boardCls=bp.cls;boardHl=bp.id;}history.replaceState(null,'',location.pathname+location.hash);}
+fillSelects();writeForm();readForm();openInvite();openPaperLink();openChapterLink();openSchoolLink();openBoardLink();route();
 window.addEventListener('hashchange',route);
 // a link to the screen's own address (e.g. "School" while viewing results) does not change the hash, so route it directly
 document.addEventListener('click',e=>{const a=e.target.closest('a[href^="#"]');if(a&&a.getAttribute('href')===(location.hash||'#home')){e.preventDefault();route();}});

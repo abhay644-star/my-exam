@@ -142,10 +142,10 @@ BODY = {'jee-main': 'the National Testing Agency (NTA)', 'neet': 'the National T
 
 # CBSE board practice papers (BOARD_PAPERS in index.html, one per line): their subject pages link to them
 board_block = re.search(r'const BOARD_PAPERS=\[(.*?)\n\];', page, re.S).group(1)
-BOARD_RE = re.compile(r"\{id:'([^']+)',cls:'([^']+)',subj:'([^']+)',name:'[^']*',date:'[^']*',shift:'[^']*',pat:'([^']+)',path:'([^']+)',min:(\d+)\}")
+BOARD_RE = re.compile(r"\{id:'([^']+)',cls:'([^']+)',subj:'([^']+)',name:'([^']*)',date:'([^']*)',shift:'[^']*',pat:'([^']+)',path:'([^']+)',min:(\d+)\}")
 BOARD = {}
 for m in BOARD_RE.finditer(board_block):
-    BOARD.setdefault((m.group(2), m.group(3)), []).append({'id': m.group(1), 'pat': m.group(4)})
+    BOARD.setdefault((m.group(2), m.group(3)), []).append(dict(zip(('id', 'cls', 'subj', 'name', 'date', 'pat', 'path', 'min'), m.groups())))
 assert sum(len(v) for v in BOARD.values()) == len(re.findall(r"\{id:'", board_block)), 'a paper in BOARD_PAPERS was not read'
 assert {e['list'] for e in EXAMS} <= set(BODY), 'a new exam in EXAM_PAGES needs its body in BODY'
 
@@ -299,9 +299,11 @@ def subject_page(cls, subj):
     sq_html = (f'\n  <h2>Sample questions</h2>\n  <p>A few questions from the Class {n} {esc(subj)} bank. Every test picks a fresh mix.</p>\n'
                f'  <ol class="samples">{"".join(sq)}</ol>\n') if sq else ''
     bp = BOARD.get((cls, subj), [])
+    bp_links = ''.join(f'<a href="{board_path(x)}">{esc(x["date"])} with marking scheme</a>' for x in bp)
     board_html = (f'\n  <h2>Board exam 2027: practice papers</h2>\n  <p>{len(bp)} full practice papers ({esc(bp[0]["pat"])}) in the pattern of CBSE’s 2026–27 sample question paper: '
                   f'the same sections, marks and question types. They are written by us, not official CBSE papers. Multiple-choice questions are '
                   f'marked instantly; for written answers you see the model answer and the marking points, and mark your own answer.</p>\n'
+                  f'  <p class="links">{bp_links}<a href="/cbse/board-exam-2027/">All board practice papers</a></p>\n'
                   f'  <a class="btn" href="{esc(app_link(cls, subj).replace("#school", "&board=1#school"))}">Open the board practice papers →</a>\n') if bp else ''
     others = ''.join(f'<a href="/cbse/class-{n}/{slug(s)}/">{esc(s)}</a>' for s in offer[cls] if s != subj)
     classes = ''.join(f'<a href="/cbse/class-{NUM[c]}/{slug(subj)}/">Class {NUM[c]}</a>' for c in ROMAN if subj in offer[c] and c != cls)
@@ -399,6 +401,7 @@ def hub_page():
     body = f'''  <h1>CBSE Classes 1 to 12: free online practice tests</h1>
   <p class="lede">Chapter tests and full mock papers for every class, following the NCERT syllabus (Computer Science follows the CBSE syllabus in Classes 9 to 12), marked instantly with explanations. Choose your class and subject.</p>
   <a class="btn" href="/#school">Start practising →</a>
+{f'  <p class="links"><a href="{BOARD_HUB}">Board exam 2027: practice papers for Class 10 and Class 12, with marking schemes</a></p>' if BOARD else ''}
 {blocks}
 '''
     return path, shell(path, 'CBSE Class 1 to 12 Online Tests – Free Practice | my-exam.in',
@@ -654,13 +657,119 @@ def exam_subject_page(e, s):
     crumbs = [('Home', '/'), (f'{crumb} papers', f"/{e['list']}/"), (f'{s} chapter-wise', None)]
     return path, shell(path, title, desc, crumbs, body)
 
+# ---------- CBSE board practice papers: one page per paper (every question, answers and marking scheme) and a hub ----------
+# our own papers in the pattern of CBSE's sample question paper (BOARD_PAPERS in index.html; paper.json in board/<id>/)
+BOARD_HUB = '/cbse/board-exam-2027/'
+def board_path(x):
+    return f"/cbse/class-{NUM[x['cls']]}/{slug(x['subj'])}/practice-paper-{x['id'].rsplit('-', 1)[1]}-2027/"
+def half(m):
+    """Marks as a board marking scheme writes them: ½, 1, 1½."""
+    m = float(m); w = int(m)
+    return (str(w) if w else '') + '½' if m - w else str(w)
+def marks_txt(m):
+    return f'{half(m)} mark' + ('' if float(m) == 1 else 's')
+def board_q(q, fig):
+    """One question with its options or sub-parts; the answer, model answer and marking points hidden until opened."""
+    text = wrap_math(safe(q['text'])) + (f'<img class="qfig" src="{fig}{q["fig"]}" alt="Figure for question {q["no"]}" loading="lazy">' if q.get('fig') else '')
+    label = f'Question {q["no"]} · {marks_txt(q["full"])}' + (f' · {esc(q["chapter"])}' if q.get('chapter') else '')
+    if q['type'] == 'mcq':
+        opts = '<ol type="a">' + ''.join(f'<li>{wrap_math(safe(o))}</li>' for o in q['options']) + '</ol>'
+        ans = f'<p><b>Answer:</b> ({"abcd"[q["answer"]]}) {wrap_math(safe(q["options"][q["answer"]]))}</p>' + (f'<p>{wrap_math(safe(q["sol"]))}</p>' if q.get('sol') else '')
+        return f'<li class="sq"><p class="sqt"><small>{label}</small><br>{text}</p>{opts}<details><summary>Show answer</summary>{ans}</details></li>'
+    parts = q.get('parts') or [{'q': '', 'marks': q['full'], 'model': q['model'], 'points': q['points']}]
+    asked = ''.join(f'<p>{wrap_math(safe(p["q"]))} <small>[{half(p["marks"])}]</small></p>' for p in parts if p.get('q'))
+    ans = ''.join((f'<p><b>{wrap_math(safe(p["q"]))}</b></p>' if p.get('q') else '') + f'<p><b>Model answer:</b> {wrap_math(safe(p["model"]))}</p>'
+                  + '<p><b>Marking scheme:</b></p><ul>' + ''.join(f'<li>{wrap_math(safe(t["t"]))} <small>({marks_txt(t["m"])})</small></li>' for t in p['points']) + '</ul>' for p in parts)
+    return f'<li class="sq"><p class="sqt"><small>{label}</small><br>{text}</p>{asked}<details><summary>Show model answer and marking scheme</summary>{ans}</details></li>'
+def board_page(x, siblings):
+    data = json.loads((site / x['path'] / 'paper.json').read_text(encoding='utf-8'))
+    qs, fig, n = data['questions'], '/' + x['path'] + 'fig/', NUM[x['cls']]
+    path, sname = board_path(x), x['name'].replace('CBSE ', '')
+    subj_short = 'Maths' if x['subj'] == 'Mathematics' else x['subj']
+    pname = x['date'].replace('paper', 'Paper')  # "Practice Paper 1" in titles and headings
+    dur_adj = f"{int(x['min']) // 60}-hour" if int(x['min']) % 60 == 0 else dur_text(x['min'])
+    secs = list(dict.fromkeys(str(q['section']) for q in qs)); names = data.get('secNames') or {}
+    rows = ''.join(f'<tr><td>Section {s}{f" · {esc(names[s])}" if names.get(s) else ""}</td><td class="n">{sum(str(q["section"]) == s for q in qs)}</td>'
+                   f'<td class="n">{half(sum(q["full"] for q in qs if str(q["section"]) == s))}</td></tr>' for s in secs)
+    glance = f'''  <div class="card tbl">
+    <table>
+      <thead><tr><th>Section</th><th class="n">Questions</th><th class="n">Marks</th></tr></thead>
+      <tbody>{rows}<tr class="total"><td>Total</td><td class="n">{len(qs)}</td><td class="n">{data['maxMarks']}</td></tr></tbody>
+    </table>
+    <p style="margin:10px 0 0"><small>Time: {dur_text(x['min'])}. No negative marking.</small></p>
+  </div>'''
+    instr = ''.join(f'<li>{s}</li>' for s in data.get('instr') or [])
+    body_q = ''.join(f'\n  <h3>Section {s}{f": {esc(names[s])}" if names.get(s) else ""}</h3>\n  <ol class="samples">' + ''.join(board_q(q, fig) for q in qs if str(q['section']) == s) + '</ol>' for s in secs)
+    cm = Counter()
+    for q in qs:
+        cm[q.get('chapter') or ''] += q['full']
+    ch_rows = ''.join(f'<tr><td>{esc(c) if c else "Writing and other questions"}</td><td class="n">{half(m)}</td></tr>' for c, m in sorted(cm.items(), key=lambda kv: (kv[0] == '', -kv[1])))
+    others = ''.join(f'<a href="{board_path(o)}">{esc(o["date"])}</a>' for o in siblings if o is not x)
+    start = f"/?bp={x['id']}#board"
+    title = f'CBSE Class {n} {subj_short} {pname} 2027 (Sample Paper Pattern) with Marking Scheme | my-exam.in'
+    desc = (f'Free CBSE Class {n} {x["subj"]} practice paper for the 2027 board exam, in the 2026-27 sample paper pattern: {len(qs)} questions, '
+            f'{data["maxMarks"]} marks, {dur_text(x["min"])}, with model answers and marking scheme. Take it online as a timed test.')
+    body = f'''  <h1>CBSE Class {n} {esc(x['subj'])} {esc(pname)} (2027): with model answers and marking scheme</h1>
+  <p class="lede">An original practice paper for the CBSE board exam 2027, written by us in the pattern of CBSE’s 2026–27 sample question paper for {esc(sname.replace(f"Class {n} ", ""))}: the same sections, marks and question types. It is not an official CBSE paper. Take it online as a timed {dur_adj} exam (multiple-choice questions are marked instantly; you mark your written answers against the marking scheme), or read it below.</p>
+  <a class="btn" href="{esc(start)}">Take this paper online →</a>
+
+  <h2>Paper at a glance</h2>
+{glance}
+
+  <h2>General instructions</h2>
+  <ol>{instr}</ol>
+
+  <h2>Questions</h2>
+  <p>Try each question first, then open the model answer and the marking scheme.</p>{body_q}
+
+  <h2>Chapter-wise marks</h2>
+  <div class="card tbl">
+    <table class="weight">
+      <thead><tr><th>Chapter</th><th class="n">Marks</th></tr></thead>
+      <tbody>{ch_rows}</tbody>
+    </table>
+  </div>
+
+  <h2>More practice</h2>
+  <p class="links">{others}<a href="/cbse/class-{n}/{slug(x['subj'])}/">Class {n} {esc(x['subj'])} chapter tests</a><a href="{BOARD_HUB}">All board practice papers</a></p>
+'''
+    crumbs = [('Home', '/'), ('CBSE', '/cbse/'), ('Board exam 2027', BOARD_HUB), (f'Class {n} {subj_short} {pname}', None)]
+    return path, shell(path, title, desc, crumbs, body, math=True)
+def board_hub():
+    blocks = ''
+    for c in ROMAN:
+        subs = [(s, ps) for (cc, s), ps in BOARD.items() if cc == c]
+        if not subs:
+            continue
+        lis = ''.join(f'<li><b>{esc(ps[0]["name"].replace("CBSE ", ""))}</b><small>{esc(ps[0]["pat"])}</small><span class="links">'
+                      + ''.join(f'<a href="{board_path(x)}">{esc(x["date"])}</a>' for x in ps) + '</span></li>' for s, ps in subs)
+        blocks += f'\n  <h2>Class {NUM[c]}</h2>\n  <ul class="bplist">{lis}</ul>'
+    n = sum(len(v) for v in BOARD.values())
+    body = f'''  <h1>CBSE board exam 2027: practice papers in the sample paper pattern</h1>
+  <p class="lede">{n} free full-length practice papers for Class 10 and Class 12, written by us in the pattern of CBSE’s 2026–27 sample question papers: the same sections, marks and question types, each with model answers and a marking scheme. They are not official CBSE papers. Take any paper online as a timed 3-hour exam, or read it with the answers.</p>
+  <a class="btn" href="/#board">Take a practice paper online →</a>
+{blocks}
+
+  <h2>How the online papers work</h2>
+  <ol>
+    <li>Choose a paper and pick a timed <b>Exam</b> or <b>Practise</b> (no timer).</li>
+    <li>Multiple-choice and assertion-reason questions are marked instantly.</li>
+    <li>For written answers, you see the model answer and the marking points and tick the points your answer has, as a board examiner would.</li>
+    <li>Your result shows the chapters to revise, each with a practice test.</li>
+  </ol>
+'''
+    return BOARD_HUB, shell(BOARD_HUB, 'CBSE Board Exam 2027 Practice Papers (Sample Paper Pattern) – Class 10 & 12 | my-exam.in',
+                            f'{n} free CBSE practice papers for the 2027 board exams, Class 10 and Class 12, in the 2026-27 sample paper pattern, with model answers and marking schemes.',
+                            [('Home', '/'), ('CBSE', '/cbse/'), ('Board exam 2027', None)], body)
+
 # ---------- write pages, remove stale ones, write the sitemap ----------
 school = [hub_page()] + [subject_page(c, s) for c in ROMAN for s in offer[c]]
 chapter_pages = [chapter_page(c, s, ch) for c in CH_CLASSES for s in offer[c] for ch in chapters(s, c) if has_chapter_page(s, c, ch)]
 papers = [paper_page(e, p) for e in EXAMS for p in e['papers']]
 exam_subjects = [exam_subject_page(e, s) for e in EXAMS for s in EXAM_CH[e['list']]]
 exam_chapter_pages = [exam_chapter_page(e, s, c) for e in EXAMS for s, chs in EXAM_CH[e['list']].items() for c in chs]
-pages = school + chapter_pages + papers + exam_subjects + exam_chapter_pages
+board_pages = ([board_hub()] if BOARD else []) + [board_page(x, ps) for ps in BOARD.values() for x in ps]
+pages = school + chapter_pages + papers + exam_subjects + exam_chapter_pages + board_pages
 written, unchanged = [], 0
 for path, text in pages:
     f = site / path.strip('/') / 'index.html'
@@ -702,7 +811,7 @@ lines.append('</urlset>')
 smap.write_text('\n'.join(lines) + '\n', encoding='utf-8', newline='\n')
 
 print(f'{len(school)} school pages ({len(school) - 1} class and subject pages + /cbse/), {len(chapter_pages)} chapter pages, {len(papers)} paper pages, '
-      f'{len(exam_subjects)} exam subject pages, {len(exam_chapter_pages)} exam chapter pages: '
+      f'{len(exam_subjects)} exam subject pages, {len(exam_chapter_pages)} exam chapter pages, {len(board_pages)} board practice paper pages: '
       f'{len(written)} written, {unchanged} unchanged, {len(removed)} removed')
 for p in written:
     if not p.startswith('/cbse/') and p.count('/') < 4:  # (exam chapter pages are counted above, not listed)

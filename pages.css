@@ -85,6 +85,11 @@ h3{font-size:1.08rem;margin:18px 0 8px}
 .sq,.akey li,.card.tbl{overflow-x:auto;position:relative} /* position: keeps KaTeX's hidden MathML copies inside */
 .akey{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:4px 12px;font-variant-numeric:tabular-nums}
 .akey li{padding:3px 0;border-bottom:1px solid var(--line)}
+/* board practice papers hub: one row per subject with its papers */
+.bplist{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:8px}
+.bplist li{display:flex;flex-direction:column;gap:2px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:10px 14px}
+.bplist .links{margin-top:4px}
+.sq ul{margin:4px 0 0;padding-left:1.2em}
 .akey b{display:inline-block;min-width:2.4em;color:var(--muted)}
 .foot{margin-top:36px;padding-top:16px;border-top:1px solid var(--line);font-size:.88rem;color:var(--muted)}
 .foot a{margin-right:14px;display:inline-block;padding:6px 0}

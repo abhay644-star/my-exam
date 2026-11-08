@@ -395,6 +395,10 @@
     $('#quitBtn').click(); await sleep(100); $('#confirmYes').click(); await sleep(200);
     W().localStorage.removeItem('aa-active'); W().localStorage.removeItem('aa-active-paper');
 
+    // "Take this paper online" on a board paper's own page (/?bp=<id>#board) opens the board papers page on its class, with it marked
+    await loadLink('../index.html?bp=12-physics-1#board', () => !$('#boardView').hidden && $$('#boardList [data-board]').length);
+    const bpHl = $('#boardList .bp.hl');
+    ok(g, 'a board paper page\'s link opens the board papers page on its class, with that paper marked', $('#boardCls .chip.on[data-bcls="XII"]') && bpHl && bpHl.querySelector('[data-board="12-physics-1"]'), bpHl ? bpHl.textContent.slice(0, 80) : 'no paper marked');
     // a shared score link to a board practice paper opens School on that subject's papers, with the friend's score
     await loadLink('../index.html?go=board/12-physics-1&s=40/70#home', () => !$('#invite').hidden);
     ok(g, 'a shared board-paper score link opens School on that subject, with its papers and the score', !$('#setup').hidden && $('#klass').value === 'XII' && $('#subject').value === 'Physics' && !$('#boardBox').hidden && /40 \/ 70/.test($('#invite').textContent), `${$('#klass').value} ${$('#subject').value}: ${$('#invite').textContent.slice(0, 120)}`);

@@ -162,6 +162,28 @@
     }
   }
 
+  // the board practice papers' own pages (written by tools/build_pages.py): a hub linking every paper, and one page per paper
+  // with every question and a button that opens it in the app
+  async function boardPaperPages(A) {
+    const g = 'Board practice paper pages', slug = s => String(s).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+    const html = async u => { const r = await fetch(u); if (!r.ok) throw new Error(u + ' ' + r.status); return new DOMParser().parseFromString(await r.text(), 'text/html'); };
+    const pathOf = m => `/cbse/class-${m.cls === 'X' ? 10 : 12}/${slug(m.subj)}/practice-paper-${m.id.split('-').pop()}-2027/`;
+    const hub = await html('../cbse/board-exam-2027/').catch(() => null);
+    ok(g, 'the hub page exists and links every paper (run tools/build_pages.py)', hub && A.BOARD_PAPERS.every(m => hub.querySelector(`a[href="${pathOf(m)}"]`)),
+      hub ? A.BOARD_PAPERS.filter(m => !hub.querySelector(`a[href="${pathOf(m)}"]`)).map(m => m.id).join(', ') : 'no hub page');
+    const bad = [];
+    for (const m of A.BOARD_PAPERS) {
+      const doc = await html('..' + pathOf(m)).catch(() => null);
+      if (!doc) { bad.push(m.id + ': no page'); continue; }
+      const data = await (await fetch('../' + m.path + 'paper.json')).json();
+      const btn = doc.querySelector('a.btn');
+      if (!btn || btn.getAttribute('href') !== `/?bp=${m.id}#board`) bad.push(m.id + ': start button ' + (btn && btn.getAttribute('href')));
+      if (doc.querySelectorAll('li.sq').length !== data.questions.length) bad.push(`${m.id}: ${doc.querySelectorAll('li.sq').length} of ${data.questions.length} questions`);
+      if (!/not an official CBSE paper/.test(doc.querySelector('.lede').textContent)) bad.push(m.id + ': no "not official" line');
+    }
+    eq(g, 'every paper has its page, with every question, a "not official" line and a button opening it in the app', bad, []);
+  }
+
   // ---------- option labels kept in My mistakes ----------
   function labels(A) {
     const g = 'Option labels in My mistakes';
@@ -604,7 +626,7 @@
     let A = null;
     for (let i = 0; i < 100 && !A; i++) { await new Promise(r => setTimeout(r, 100)); A = frame.contentWindow && frame.contentWindow.__aaTest; }
     if (!A) { ok('Setup', 'the site loads with ?test', false, 'window.__aaTest not found'); return render(); }
-    for (const t of [parsing, checking, rules, written, weak, labels, realExam, weekly, greetings, papers, boardPapers, banks, generators, customPapers, schoolPages, chapterPages, hindiChapterPages, paperPages, examChapterPages]) {
+    for (const t of [parsing, checking, rules, written, weak, labels, realExam, weekly, greetings, papers, boardPapers, boardPaperPages, banks, generators, customPapers, schoolPages, chapterPages, hindiChapterPages, paperPages, examChapterPages]) {
       try { await t(A, frame.contentWindow); } catch (e) { ok('Setup', t.name + ' ran without an error', false, e && e.stack || String(e)); }
     }
     render();
