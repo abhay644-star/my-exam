@@ -139,6 +139,14 @@ for i, h in enumerate(heads):
                   'papers': [dict(zip(('id', 'name', 'date', 'shift', 'pat', 'path', 'min'), m.groups())) for m in PAPER_RE.finditer(seg)]})
 assert sum(len(e['papers']) for e in EXAMS) == len(re.findall(r"\{id:'", exam_block)), 'a paper in EXAM_PAGES was not read'
 BODY = {'jee-main': 'the National Testing Agency (NTA)', 'neet': 'the National Testing Agency (NTA)', 'jee-advanced': 'the organising IIT'}
+
+# CBSE board practice papers (BOARD_PAPERS in index.html, one per line): their subject pages link to them
+board_block = re.search(r'const BOARD_PAPERS=\[(.*?)\n\];', page, re.S).group(1)
+BOARD_RE = re.compile(r"\{id:'([^']+)',cls:'([^']+)',subj:'([^']+)',name:'[^']*',date:'[^']*',shift:'[^']*',pat:'([^']+)',path:'([^']+)',min:(\d+)\}")
+BOARD = {}
+for m in BOARD_RE.finditer(board_block):
+    BOARD.setdefault((m.group(2), m.group(3)), []).append({'id': m.group(1), 'pat': m.group(4)})
+assert sum(len(v) for v in BOARD.values()) == len(re.findall(r"\{id:'", board_block)), 'a paper in BOARD_PAPERS was not read'
 assert {e['list'] for e in EXAMS} <= set(BODY), 'a new exam in EXAM_PAGES needs its body in BODY'
 
 # "Practise by chapter" on each exam screen: EXAM_CH in index.html lists, per exam and subject, every chapter tagged in its
@@ -290,6 +298,11 @@ def subject_page(cls, subj):
     sq = samples(subj, cls)
     sq_html = (f'\n  <h2>Sample questions</h2>\n  <p>A few questions from the Class {n} {esc(subj)} bank. Every test picks a fresh mix.</p>\n'
                f'  <ol class="samples">{"".join(sq)}</ol>\n') if sq else ''
+    bp = BOARD.get((cls, subj), [])
+    board_html = (f'\n  <h2>Board exam 2027: practice papers</h2>\n  <p>{len(bp)} full practice papers ({esc(bp[0]["pat"])}) in the pattern of CBSE’s 2026–27 sample question paper: '
+                  f'the same sections, marks and question types. They are written by us, not official CBSE papers. Multiple-choice questions are '
+                  f'marked instantly; for written answers you see the model answer and the marking points, and mark your own answer.</p>\n'
+                  f'  <a class="btn" href="{esc(app_link(cls, subj).replace("#school", "&board=1#school"))}">Open the board practice papers →</a>\n') if bp else ''
     others = ''.join(f'<a href="/cbse/class-{n}/{slug(s)}/">{esc(s)}</a>' for s in offer[cls] if s != subj)
     classes = ''.join(f'<a href="/cbse/class-{NUM[c]}/{slug(subj)}/">Class {NUM[c]}</a>' for c in ROMAN if subj in offer[c] and c != cls)
     body = f'''  <h1>CBSE Class {n} {esc(subj)}: free online practice tests</h1>
@@ -299,7 +312,7 @@ def subject_page(cls, subj):
   <h2>Chapters</h2>
   <p>Questions on {len(chs)} chapters of {syllabus(subj, cls)}; {size}. Choose a chapter to practise just that chapter.</p>
   <ul class="chapters">{rows}</ul>
-{sq_html}
+{board_html}{sq_html}
   <h2>How it works</h2>
   <ol>
     <li>Choose <b>Quick quiz</b> (10 questions), <b>Chapter test</b> (20) or <b>Full mock paper</b> (30), or set your own number of questions, time and difficulty.</li>

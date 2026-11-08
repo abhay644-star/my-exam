@@ -377,6 +377,53 @@
     ok(g, 'once closed, the greeting stays closed', gb.hidden && W().localStorage.getItem('aa-greet-test') === 'closed');
     W().localStorage.removeItem('aa-greet-test'); GA.GREETS.shift(); GA.renderGreet();
 
+    // 8b. a CBSE board practice paper (tests/board-sample): listed on School for its class and subject; a written answer is
+    // marked by the student, after "Check answer" in practice and on one marking screen after submitting an exam
+    {
+      await load('../index.html?test#school');
+      const GB = W().__aaTest;
+      GB.BOARD_PAPERS.push({ id: 'test-board', cls: 'X', subj: 'Mathematics', name: 'Test board paper', date: 'Practice paper T', shift: '', pat: '4 questions · 3 hours · 8 marks', path: 'tests/board-sample/', min: 180 });
+      const pickSchool = () => { $('#klass').value = 'X'; fire($('#klass'), 'change'); $('#subject').value = 'Mathematics'; fire($('#subject'), 'change'); };
+      pickSchool();
+      ok(g, 'board practice papers show on School for Class 10 Mathematics, and fit the width', !$('#boardBox').hidden && !!$('#boardBox [data-board="test-board"][data-mode="exam"]') && fits(), wide());
+      $('#boardBox [data-board="test-board"][data-mode="practice"]').click();
+      await until(() => !$('#test').hidden && $$('#sheet .q').length === 4, 15000);
+      const ta = $('#q2 textarea');
+      ok(g, 'a written question has an answer box', !!ta);
+      if (ta) {
+        ta.value = 'a = 3, d = 4\na10 = 3 + 9 x 4 = 39'; fire(ta, 'input');
+        $('#q2 [data-check]').click(); await until(() => $$('#fb2 [data-sm]').length);
+        ok(g, 'Check answer on a written question locks the answer and shows the model answer with a tick box per marking point', ta.disabled && $$('#fb2 [data-sm]').length === 2 && !!$('#fb2 .wmodel'), `${ta.disabled} ${$$('#fb2 [data-sm]').length}`);
+        const c0 = $('#fb2 [data-sm]'); c0.checked = true; fire(c0, 'change');
+        ok(g, 'ticking a point updates the marks', /Your marks: 1 \/ 2/.test($('#fb2 [data-smsum]').textContent), $('#fb2 [data-smsum]').textContent);
+        $('#fb2 [data-smsave]').click(); await sleep(150);
+        ok(g, 'Save my marks shows part marks for the question, marked by the student', !!$('#fb2 .pr.part') && /1 \/ 2, marked by you/.test($('#fb2').textContent) && fits(), $('#fb2').textContent.slice(0, 200));
+      }
+      $('#quitBtn').click(); await sleep(100); $('#confirmYes').click(); await sleep(200);
+      W().location.hash = '#school'; await until(() => !$('#setup').hidden); pickSchool();
+      $('#boardBox [data-board="test-board"][data-mode="exam"]').click();
+      await until(() => !$('#test').hidden && $$('#sheet .q').length === 4, 15000);
+      const type = (sel, v) => { const t = $(sel); t.value = v; fire(t, 'input'); };
+      const r1 = $('#q0 input[value="1"]'); r1.checked = true; fire(r1, 'change');
+      const r2 = $('#q1 input[value="2"]'); r2.checked = true; fire(r2, 'change');
+      type('#a2_0', 'a10 = 39'); type('#a3_0', '60 m2'); type('#a3_2', 'sqrt(144 + 25) = 13 m');
+      $('#submitBtn').click(); await sleep(100); $('#confirmYes').click();
+      await until(() => $('#smDone'));
+      ok(g, 'submitting an exam with written answers opens the marking screen first', !!$('#smDone') && $$('#results .res .q').length === 2 && $$('#results [data-sm]').length === 5 && /Not answered/.test($('#results .res').textContent) && fits(), `${$$('#results .res .q').length} questions, ${$$('#results [data-sm]').length} tick boxes`);
+      const tick = n => { const c = $$('#results [data-sm]')[n]; c.checked = true; fire(c, 'change'); };
+      tick(0); tick(1); tick(2); await sleep(700);
+      W().location.hash = '#home'; await until(() => !$('#resumeBox').hidden);
+      ok(g, 'leaving the marking screen keeps the paper waiting to be marked', /waiting to be marked/.test($('#resumeBox').textContent), $('#resumeBox').textContent);
+      $('#resumeBtn').click(); await until(() => $('#smDone'));
+      ok(g, 'Resume goes back to the marking, with the ticks kept', $$('#results [data-sm]:checked').length === 3, String($$('#results [data-sm]:checked').length));
+      tick(3);
+      $('#smDone').click(); await until(() => $('#results .score'));
+      // MCQ right 1 + wrong 0 + written 2 + case (i) 1 + (ii) blank 0 + (iii) 1 = 5
+      ok(g, 'the result adds the multiple-choice marks and the marks the student gave', /^5\s*\/\s*8 marks/.test($('#results .score .big').textContent.trim()) && /marked by you/.test($('#results .res').textContent) && fits(), $('#results .score .big').textContent);
+      ok(g, 'the board paper is finished: no unfinished paper is left', !W().localStorage.getItem('aa-active-paper'));
+      GB.BOARD_PAPERS.pop();
+    }
+
     // 9. at phone width, every official paper fits the screen with its maths typeset
     if (width < 500) {
       const bad = [];

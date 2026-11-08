@@ -9,7 +9,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/contrib/auto-render.min.js"></script>
 </head>
 <body>
-<p>Renders every question, option, answer and solution of every official paper with KaTeX, as the app does, and reports
+<p>Renders every question, option, answer and solution of every official paper and board practice paper with KaTeX, as the app does, and reports
 maths that fails to render and images that fail to load. Run from a local web server.</p>
 <pre id="out">Running…</pre>
 <div id="box"></div>
@@ -19,19 +19,23 @@ maths that fails to render and images that fail to load. Run from a local web se
   const out = document.getElementById('out'), box = document.getElementById('box');
   let A = null;
   for (let i = 0; i < 100 && !A; i++) { await new Promise(r => setTimeout(r, 100)); A = document.getElementById('app').contentWindow.__aaTest; }
-  const papers = Object.values(A.EXAM_PAGES).flatMap(p => p.papers), lines = [];
+  // the official papers and the CBSE board practice papers
+  const papers = Object.values(A.EXAM_PAGES).flatMap(p => p.papers).concat(A.BOARD_PAPERS || []), lines = [];
   for (const p of papers) {
     const data = await (await fetch('../' + p.path + 'paper.json')).json();
     const qs = A.examQs(data, '../' + p.path + 'fig/');
     const div = document.createElement('div');
-    div.innerHTML = qs.map(q => `<div class="q" data-no="${q.no}">${q.text}${(q.parts[0].options || []).map(o => `<div>${o}</div>`).join('')}<div>${q.parts.map(A.answerText).join(' ')}</div><div>${q.sol}</div></div>`).join('');
+    div.innerHTML = qs.map(q => `<div class="q" data-no="${q.no}">${q.text}${(q.parts[0].options || []).map(o => `<div>${o}</div>`).join('')}${q.parts.map(p => p.q ? `<div>${p.q}</div>` : '').join('')}<div>${q.parts.map(A.answerText).join(' ')}</div><div>${q.sol}</div></div>`).join('');
     box.appendChild(div);
     renderMathInElement(div, { delimiters: [{ left: '$$', right: '$$', display: true }, { left: '$', right: '$', display: false }], throwOnError: false });
     const imgs = [...div.querySelectorAll('img')];
     await Promise.all(imgs.map(i => i.complete ? 0 : new Promise(r => { i.onload = i.onerror = r; })));
     const badMath = [...div.querySelectorAll('.katex-error')].map(e => e.closest('.q').dataset.no + ': ' + (e.getAttribute('title') || '').slice(0, 90));
     const leftover = [...div.querySelectorAll('.q')].filter(q => /\$/.test(q.textContent.replace(/\\\$/g, ''))).map(q => q.dataset.no);
-    const badImg = imgs.filter(i => !i.naturalWidth).map(i => i.getAttribute('src'));
+    // the local test server now and then drops a burst of image requests: an image that failed is loaded once more before it counts as broken
+    const retry = imgs.filter(i => !i.naturalWidth);
+    await Promise.all(retry.map(i => new Promise(r => { i.onload = i.onerror = r; i.loading = 'eager'; i.src = i.getAttribute('src').split('?')[0] + '?retry=1'; })));
+    const badImg = imgs.filter(i => !i.naturalWidth).map(i => i.getAttribute('src').split('?')[0]);
     lines.push(`${p.path}: ${qs.length} questions, ${imgs.length} images; maths errors ${badMath.length}, unrendered $ in ${leftover.length}, broken images ${badImg.length}`);
     badMath.slice(0, 8).forEach(x => lines.push('   maths  Q' + x));
     leftover.slice(0, 8).forEach(x => lines.push('   stray $ in Q' + x));

@@ -82,6 +82,60 @@
     eq(g, 'school question: part marks always add up to the question total (5 over 3 parts)', odd.parts.reduce((s, p) => s + p.marks, 0), 5);
   }
 
+  // ---------- written answers marked by the student (CBSE board practice papers) ----------
+  const W = { questions: [
+    { no: 1, subject: 'Mathematics', section: 'A', type: 'mcq', full: 1, neg: 0, text: 'x', options: opts, answer: 2, sol: 's' },
+    { no: 2, subject: 'Mathematics', section: 'B', type: 'written', full: 2, neg: 0, text: 'x', model: 'model answer', points: [{ t: 'formula', m: 1 }, { t: 'answer', m: 1 }] },
+    { no: 3, subject: 'Mathematics', section: 'E', type: 'written', full: 4, neg: 0, text: 'case', parts: [
+      { q: '(i) a', marks: 1, model: 'm1', points: [{ t: 'p', m: 1 }] },
+      { q: '(ii) b', marks: 1, model: 'm2', points: [{ t: 'p', m: 0.5 }, { t: 'q', m: 0.5 }] },
+      { q: '(iii) c', marks: 2, model: 'm3', points: [{ t: 'p', m: 1 }, { t: 'q', m: 1 }] }] }] };
+  function written(A) {
+    const g = 'Written answers (board papers)';
+    const qs = () => A.examQs(W, 'fig/'), mark = ans => A.markPaper(qs(), ans);
+    eq(g, 'case-based parts keep their own marks (1 + 1 + 2)', qs()[2].parts.map(p => p.marks), [1, 1, 2]);
+    eq(g, 'a written question is not multiple choice', [qs()[1].kind, qs()[1].parts[0].type], ['w', 'self']);
+    eq(g, 'MCQ: right 1, wrong 0 (no negative marks)', [mark({ '0-0': '2' })[0], mark({ '0-0': '1' })[0]], [1, 0]);
+    eq(g, 'written: the marks of the points ticked', mark({ '1-0': 'my answer', '1-0s': '0' })[1], 1);
+    eq(g, 'written: every point ticked = full marks', mark({ '1-0': 'my answer', '1-0s': '0,1' })[1], 2);
+    eq(g, 'written: no point ticked = 0', mark({ '1-0': 'my answer' })[1], 0);
+    eq(g, 'written: a blank answer scores 0, even with points ticked', mark({ '1-0': ' ', '1-0s': '0,1' })[1], 0);
+    eq(g, 'written: a tick that is not a marking point is ignored', mark({ '1-0': 'a', '1-0s': '0,5,x' })[1], 1);
+    eq(g, 'case-based: half marks add up across the parts', mark({ '2-0': 'a', '2-0s': '0', '2-1': 'b', '2-1s': '1', '2-2': 'c', '2-2s': '1' })[2], 2.5);
+    eq(g, 'case-based: only the parts answered score', mark({ '2-2': 'c', '2-2s': '0,1', '2-0s': '0' })[2], 2);
+    const q = qs()[1];
+    A.markPaper([q], { '0-0': 'a', '0-0s': '0' });
+    ok(g, 'the answer key shows the model answer and the marking points', /^model answer/.test(A.answerText(q.parts[0])) && /Marking points: formula \(1 mark\); answer \(1 mark\)/.test(A.answerText(q.parts[0])), A.answerText(q.parts[0]));
+    const saved = A.withPaper({ exam: {} }, () => A.cleanQ(q));
+    eq(g, 'saved in My mistakes without the student\'s answer or marks', ['user', 'ok', 'got', 'ticks'].filter(k => k in saved.parts[0]), []);
+    ok(g, '...and passes the backup restore check', A.dataOk(saved, 0));
+  }
+  // every board practice paper offered: loads, adds up, and full marks are reachable
+  async function boardPapers(A) {
+    const ids = A.BOARD_PAPERS.map(m => m.id);
+    eq('Board practice papers', 'every paper id is unique', ids.filter((x, i) => ids.indexOf(x) !== i), []);
+    for (const m of A.BOARD_PAPERS) {
+      const g = 'Board practice paper: ' + m.id, path = '../' + m.path;
+      let data;
+      try { const r = await fetch(path + 'paper.json'); data = await r.json(); } catch (e) { ok(g, 'paper.json loads', false, String(e)); continue; }
+      eq(g, 'the paper is the one listed', [data.id, data.label, data.board], [m.id, 'Practice paper', 'CBSE pattern']);
+      eq(g, 'the start button shows the paper\'s real length', m.min, data.duration);
+      const qs = A.examQs(data, path + 'fig/');
+      ok(g, 'the listed pattern gives the right number of questions and marks', m.pat.indexOf(`${qs.length} questions`) === 0 && m.pat.indexOf(`${data.maxMarks} marks`) > 0, m.pat);
+      eq(g, 'maximum marks', A.maxMarks(qs, null), data.maxMarks);
+      eq(g, 'no negative marks', qs.filter(q => q.neg).map(q => q.no), []);
+      eq(g, 'the parts of each question add up to its marks', qs.filter(q => Math.abs(q.parts.reduce((s, p) => s + p.marks, 0) - q.marks) > 1e-9).map(q => q.no), []);
+      eq(g, 'the marking points of each written answer add up to its marks', qs.filter(q => q.parts.some(p => p.type === 'self' && Math.abs(p.points.reduce((s, t) => s + t.m, 0) - p.marks) > 1e-9)).map(q => q.no), []);
+      eq(g, 'every MCQ key points to a real option', qs.filter(q => q.parts[0].type === 'choice' && !(q.parts[0].ans >= 0 && q.parts[0].ans < q.parts[0].options.length)).map(q => q.no), []);
+      const ans = {};
+      qs.forEach((q, i) => q.parts.forEach((p, j) => { if (p.type === 'choice') ans[i + '-' + j] = String(p.ans); else if (p.type === 'self') { ans[i + '-' + j] = 'answer'; ans[i + '-' + j + 's'] = p.points.map((t, k) => k).join(','); } }));
+      eq(g, 'every key and every marking point gives full marks', +A.markPaper(A.examQs(data, path + 'fig/'), ans).reduce((s, x) => s + x, 0).toFixed(2), data.maxMarks);
+      const chs = A.topicsFor(m.subj, m.cls);
+      eq(g, 'every question has a school chapter, for "Chapters to revise"', qs.filter(q => !q.ch || q.ch.cls !== m.cls || chs.indexOf(q.ch.name) < 0).map(q => q.no), []);
+      eq(g, 'every question, as saved in My mistakes, passes the backup restore check', A.withPaper({ exam: {} }, () => qs.filter(q => !A.dataOk(A.cleanQ(q), 0)).map(q => q.no)), []);
+    }
+  }
+
   // ---------- option labels kept in My mistakes ----------
   function labels(A) {
     const g = 'Option labels in My mistakes';
@@ -524,7 +578,7 @@
     let A = null;
     for (let i = 0; i < 100 && !A; i++) { await new Promise(r => setTimeout(r, 100)); A = frame.contentWindow && frame.contentWindow.__aaTest; }
     if (!A) { ok('Setup', 'the site loads with ?test', false, 'window.__aaTest not found'); return render(); }
-    for (const t of [parsing, checking, rules, labels, realExam, weekly, greetings, papers, banks, generators, customPapers, schoolPages, chapterPages, hindiChapterPages, paperPages, examChapterPages]) {
+    for (const t of [parsing, checking, rules, written, labels, realExam, weekly, greetings, papers, boardPapers, banks, generators, customPapers, schoolPages, chapterPages, hindiChapterPages, paperPages, examChapterPages]) {
       try { await t(A, frame.contentWindow); } catch (e) { ok('Setup', t.name + ' ran without an error', false, e && e.stack || String(e)); }
     }
     render();
