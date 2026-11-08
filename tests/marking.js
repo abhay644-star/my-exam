@@ -148,6 +148,7 @@
     ['NEET (UG) 2026 re-exam, code 50', '../neet/2026-reexam-50/', 180, 720],
     ['NEET (UG) 2025, code 45', '../neet/2025-45/', 180, 720],
     ['NEET (UG) 2024, code T1', '../neet/2024-T1/', 200, 720],
+    ['NEET (UG) 2023, code E1', '../neet/2023-E1/', 200, 720],
     ['JEE Advanced 2026 Paper 1', '../jee-adv/2026-p1/', 48, 180],
     ['JEE Advanced 2026 Paper 2', '../jee-adv/2026-p2/', 54, 180],
     ['JEE Main 2026, 2 April Shift 2', '../jee/2026-04-02-s2/', 75, 300],
