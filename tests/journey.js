@@ -380,6 +380,16 @@
     // 8b. a CBSE board practice paper (tests/board-sample): listed on School for its class and subject; a written answer is
     // marked by the student, after "Check answer" in practice and on one marking screen after submitting an exam
     {
+      // the home page shows one card per class and subject with board papers; a card opens School on those papers
+      await load('../index.html?test#home');
+      const nGroups = new Set(W().__aaTest.BOARD_PAPERS.map(x => x.cls + '|' + x.subj)).size;
+      ok(g, 'the home page shows the board practice papers, one card per subject, and fits the width', !$('#boardHome').hidden && $$('#boardHome [data-boardgo]').length === nGroups && nGroups > 0 && fits(), `${$$('#boardHome [data-boardgo]').length} cards for ${nGroups} subjects; ${wide()}`);
+      const card = $('#boardHome [data-boardgo]');
+      if (card) {
+        const [c, s] = card.dataset.boardgo.split('|');
+        card.click(); await until(() => !$('#setup').hidden && !$('#boardBox').hidden);
+        ok(g, 'a home card opens School on that subject, with its board papers showing', !$('#setup').hidden && $('#klass').value === c && $('#subject').value === s && !$('#boardBox').hidden && $$('#boardBox [data-board]').length >= 2, `${$('#klass').value} ${$('#subject').value}`);
+      }
       await load('../index.html?test#school');
       const GB = W().__aaTest;
       GB.BOARD_PAPERS.push({ id: 'test-board', cls: 'X', subj: 'Mathematics', name: 'Test board paper', date: 'Practice paper T', shift: '', pat: '4 questions · 3 hours · 8 marks', path: 'tests/board-sample/', min: 180 });

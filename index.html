@@ -230,6 +230,12 @@ button.small{padding:6px 12px;font-size:.85rem}
 .wpts legend{font-weight:700;font-size:.9rem;padding:0;margin-bottom:4px}
 .smpart{display:flex;flex-direction:column;gap:2px;padding:8px 10px;border:1px solid var(--line);border-radius:8px}
 .smsum{font-weight:700;margin:4px 0 0}
+.board.hl{outline:3px solid var(--ink);outline-offset:2px}
+#boardHome{margin:4px 0 8px}
+.bgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.btile{display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left;min-height:44px;padding:10px 12px;border:1px solid var(--ink);border-radius:var(--r);background:var(--ink-soft);color:var(--fg);font:inherit;cursor:pointer}
+.btile b{color:var(--ink)}.btile span{font-size:.82rem;color:var(--muted)}
+.btile:hover{background:var(--paper)}.btile:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
 details.custom{border:1px solid var(--line);border-radius:var(--r);padding:0 14px}
 details.custom>summary{cursor:pointer;font-weight:700;padding:12px 0;color:var(--ink)}
 details.custom[open]{padding-bottom:14px}
@@ -384,7 +390,7 @@ sup,sub{font-size:.7em}
       <a class="track school" href="#school">
         <p class="eyebrow">School exams</p>
         <h3>CBSE Classes 1–12</h3>
-        <p>Every subject from Maths, English and Hindi to Physics, Accountancy and History. Chapter tests, full papers and instant marking.</p>
+        <p>Every subject from Maths, English and Hindi to Physics, Accountancy and History. Chapter tests, full papers and instant marking, and CBSE board 2027 practice papers.</p>
         <span class="go">Start practising →</span>
       </a>
       <a class="track exams" href="#exams">
@@ -394,6 +400,7 @@ sup,sub{font-size:.7em}
         <span class="go">Practise past papers →</span>
       </a>
     </div>
+    <section id="boardHome" aria-labelledby="boardHomeHead" hidden></section>
     <section id="weekly" aria-labelledby="weeklyHead" hidden></section>
     <p class="moreexams">More exams are on the way: CUET, CAT, SSC, Bank and UPSC. <a href="#exams">Tell us which one you need first</a>.</p>
     <h3 class="whyhead">Popular practice</h3>
@@ -462,6 +469,7 @@ sup,sub{font-size:.7em}
           <div><label for="klass">Class</label><select id="klass"></select></div>
           <div><label for="subject">Subject</label><select id="subject"></select></div>
         </div>
+        <div id="boardBox" class="board" hidden></div>
         <fieldset>
           <legend>Chapters</legend>
           <div class="chips" id="topics"></div>
@@ -481,7 +489,6 @@ sup,sub{font-size:.7em}
         </div>
         <div class="daily"><div><b>Today's challenge</b><span class="hint" id="dailyHint">10 questions across all chapters, the same for every student today. New questions tomorrow.</span></div><button type="button" class="small primary" id="dailyBtn">Take today's challenge</button></div>
         <div id="quickMsg" class="msg err" role="alert" hidden></div>
-        <div id="boardBox" class="board" hidden></div>
         <details id="custom" class="custom">
           <summary>Customise the paper</summary>
           <div class="stack">
@@ -1996,7 +2003,7 @@ function show(id){
   if(id==='setup'){renderHistory();ensureBank(S.subject).catch(()=>{});}
   if(id==='exams')renderExams();
   if(id==='jee')renderJee();
-  if(id==='home'){renderWeekly();renderGreet();}
+  if(id==='home'){renderBoardHome();renderWeekly();renderGreet();}
   // the top menu marks the area you are in; test, results and print belong to School
   const area=id==='home'||id==='exams'?id:(id==='jee'||(P&&P.exam&&P.exam.list!=='board'&&['test','results','printView'].indexOf(id)>=0))?'exams':'setup';
   document.querySelectorAll('.topnav a').forEach(a=>{if(a.dataset.nav===area)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
@@ -2139,6 +2146,16 @@ function renderWeekly(){
     <div class="examgrid">${weeklyPapers(w).map(({list,p})=>{const done=h.find(r=>r.exam&&r.pid===p.id&&r.d>=+a);
       return `<article class="examcard"><div class="head"><h4>${esc(EXAM_PAGES[list].crumb)}</h4>${done?`<span class="soon ready">Done: ${done.got} / ${done.tot}</span>`:''}</div><p class="body">${esc([p.name,p.date,p.shift].filter(Boolean).join(' · '))}</p><p class="pat">${esc(p.pat)}</p><div class="btns"><button type="button" class="${done?'':'primary '}small" data-weekly="${list}/${p.id}">${done?'Take it again':`Start ${durLabel(p.min)} exam`}</button></div></article>`;}).join('')}</div>`;
   $('#weekly').hidden=false;}
+// home page: the CBSE board practice papers, one card per class and subject; a card opens School on that subject's papers
+function renderBoardHome(){const box=$('#boardHome'),gs=[];
+  BOARD_PAPERS.forEach(x=>{let g=gs.find(y=>y.cls===x.cls&&y.subj===x.subj);if(!g)gs.push(g={cls:x.cls,subj:x.subj,ps:[]});g.ps.push(x);});
+  box.hidden=!gs.length;if(!gs.length)return;
+  box.innerHTML=`<h3 class="whyhead" id="boardHomeHead">CBSE board exam 2027: practice papers <span class="soon ready">New</span></h3><p class="hint" style="margin:0 0 10px">Full 3-hour papers in the pattern of CBSE’s 2026–27 sample papers, with model answers and marking points. Written by us, not official CBSE papers.</p>
+    <div class="bgrid">${gs.map(g=>`<button type="button" class="btile" data-boardgo="${g.cls}|${esc(g.subj)}"><b>Class ${clsNum(g.cls)} ${esc(g.subj==='Mathematics'?'Maths':g.subj)}</b><span>${g.ps.length} paper${g.ps.length>1?'s':''} · ${esc(g.ps[0].pat.split(' · ').pop())}</span></button>`).join('')}</div>`;}
+$('#boardHome').addEventListener('click',e=>{const b=e.target.closest('[data-boardgo]');if(!b)return;const [c,s]=b.dataset.boardgo.split('|');
+  track(`board-home/class-${slug(c)}/${slug(s)}`,`Home: board papers, Class ${clsNum(c)} ${s}`);
+  Object.assign(S,{klass:c,subject:s,topics:'ALL'});writeForm();readForm();goSchool();
+  setTimeout(()=>{const bx=$('#boardBox');bx.classList.add('hl');setTimeout(()=>bx.classList.remove('hl'),2500);bx.scrollIntoView({block:'start',behavior:'smooth'});},400);});
 // festival greeting on the home screen: shown from..to (local dates, inclusive) until the student closes it
 const GREETS=[{id:'diwali-2026',from:'2026-11-07',to:'2026-11-10',html:'<span><b>\u{1FA94} Happy Diwali!</b> May the festival of lights bring you and your family joy, good health and success in your exams. Enjoy the celebrations, and come back refreshed.</span>'}];
 const isoDay=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
