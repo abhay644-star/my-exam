@@ -351,7 +351,7 @@ sup,sub{font-size:.7em}
   <section id="homeView">
     <h2 class="sr">What are you preparing for?</h2>
     <!-- the counts: tools/build_school_index.py writes them here for crawlers, and the page recounts them when it loads -->
-    <p class="stats"><span><b id="qCount"><!--QCOUNT:start-->9,400+<!--QCOUNT:end--></b> school questions</span><span>new Maths questions every paper</span><span><b id="pCount"><!--PCOUNT:start-->22<!--PCOUNT:end--></b> JEE and NEET previous year papers</span><span>free, no sign-up</span></p>
+    <p class="stats"><span><b id="qCount"><!--QCOUNT:start-->9,400+<!--QCOUNT:end--></b> school questions</span><span>new Maths questions every paper</span><span><b id="pCount"><!--PCOUNT:start-->23<!--PCOUNT:end--></b> JEE and NEET previous year papers</span><span>free, no sign-up</span></p>
     <div class="tracks">
       <a class="track school" href="#school">
         <p class="eyebrow">School exams</p>
@@ -374,7 +374,7 @@ sup,sub{font-size:.7em}
       <li><a href="/cbse/class-12/physics/"><b>Class 12 Physics</b><span>Chapter tests for boards and entrance</span></a></li>
       <li><a href="/cbse/class-12/chemistry/"><b>Class 12 Chemistry</b><span>Chapter tests with instant marking</span></a></li>
       <li><a href="/jee-main/"><b>JEE Main</b><span>Official 2026 papers with the NTA key</span></a></li>
-      <li><a href="/neet/"><b>NEET (UG)</b><span>Official paper with the answer key</span></a></li>
+      <li><a href="/neet/"><b>NEET (UG)</b><span>2026 and 2025 papers with the NTA key</span></a></li>
     </ul>
     <h3 class="whyhead">How it works</h3>
     <ol class="steps">
@@ -1916,10 +1916,11 @@ const EXAM_PAGES={
       {id:'2026-04-08-s2',name:'JEE Main 2026',date:'8 April 2026',shift:'Shift 2',head:'8 April 2026',sub:'Shift 2 · official NTA paper',pat:'75 questions · 3 hours · 300 marks · +4 / −1',path:'jee/2026-04-08-s2/',min:180}],
     later:[]},
   'neet':{crumb:'NEET (UG)',title:'NEET (UG): previous year papers',
-    lede:'The latest NEET (UG) paper with the final answer key published by the National Testing Agency (NTA). Take it as a timed exam, or practise question by question with explanations.',
-    source:'Questions: NEET (UG) 2026 re-examination, Test Booklet Code 50. Answers: NTA final answer key.',patTitle:'NEET (UG) 2026',
-    patNote:'180 compulsory multiple-choice questions, each with four options and one correct answer. Correct answer <b>+4</b>, wrong answer <b>−1</b>, not answered <b>0</b>. The 2026 exam held on 3 May was cancelled by NTA and re-held on 21 June 2026; this is the re-examination paper.',
-    papers:[{id:'2026-reexam-50',name:'NEET (UG) 2026',date:'21 June 2026 (re-exam)',shift:'Code 50',head:'21 June 2026',sub:'Re-examination · booklet code 50',pat:'180 questions · 3 h 15 min · 720 marks · +4 / −1',path:'neet/2026-reexam-50/',min:195}],
+    lede:'NEET (UG) papers with the final answer keys published by the National Testing Agency (NTA). Take a paper as a timed exam, or practise question by question with explanations.',
+    source:'Questions: NEET (UG) 2026 re-examination (Test Booklet Code 50) and NEET (UG) 2025 (Code 45). Answers: NTA final answer keys.',patTitle:'NEET (UG)',
+    patNote:'180 compulsory multiple-choice questions, each with four options and one correct answer. Correct answer <b>+4</b>, wrong answer <b>−1</b>, not answered <b>0</b>. The 2025 paper was 3 hours; the 2026 re-examination was 3 hours 15 minutes. The 2026 exam held on 3 May was cancelled by NTA and re-held on 21 June 2026.',
+    papers:[{id:'2026-reexam-50',name:'NEET (UG) 2026',date:'21 June 2026 (re-exam)',shift:'Code 50',head:'21 June 2026',sub:'Re-examination · booklet code 50',pat:'180 questions · 3 h 15 min · 720 marks · +4 / −1',path:'neet/2026-reexam-50/',min:195},
+      {id:'2025-45',name:'NEET (UG) 2025',date:'4 May 2025',shift:'Code 45',head:'4 May 2025',sub:'Booklet code 45',pat:'180 questions · 3 hours · 720 marks · +4 / −1',path:'neet/2025-45/',min:180}],
     later:[]},
   'jee-advanced':{crumb:'JEE Advanced',title:'JEE Advanced: previous year papers',
     lede:'Official question papers with the final answer keys published by the organising IIT. Both papers are compulsory and last 3 hours each. Take a paper as a timed exam, or practise question by question with worked solutions.',
