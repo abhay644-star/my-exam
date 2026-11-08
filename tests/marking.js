@@ -397,6 +397,30 @@
       }
     }
   }
+  // exam chapter pages: /<exam>/<subject>/ lists the chapters as EXAM_CH does; each chapter page has every question on it and
+  // a button that opens that chapter in the app
+  async function examChapterPages(A) {
+    const html = async u => { const r = await fetch(u); if (!r.ok) throw new Error(u + ' ' + r.status); return new DOMParser().parseFromString(await r.text(), 'text/html'); };
+    for (const [list, subs] of Object.entries(A.EXAM_CH)) {
+      const crumb = A.EXAM_PAGES[list].crumb, examDoc = await html(`../${list}/`);
+      for (const [s, chs] of Object.entries(subs)) {
+        const hub = `/${list}/${s.toLowerCase().replace(/[^a-z0-9]+/g, '-')}/`, g = 'Exam chapter pages: ' + hub;
+        ok(g, `/${list}/ links to the ${crumb} ${s} chapter list`, !!examDoc.querySelector(`.links a[href="${hub}"]`));
+        let hubDoc; try { hubDoc = await html('..' + hub); } catch (e) { ok(g, 'the chapter list page exists (run tools/build_pages.py)', false, String(e)); continue; }
+        const links = [...hubDoc.querySelectorAll('.chapters a')];
+        eq(g, 'it lists every chapter, most-tested first', links.map(a => a.querySelector('b').textContent), chs.map(c => c[0]));
+        const bad = [];
+        for (const [k, a] of links.entries()) {
+          const c = chs[k], doc = await html('..' + a.getAttribute('href')).catch(() => null);
+          if (!doc) { bad.push(a.getAttribute('href') + ': missing'); continue; }
+          const n = doc.querySelectorAll('.samples .sq').length, btn = doc.querySelector('a.btn'), q = btn ? new URL(btn.getAttribute('href'), location.href) : null;
+          if (n !== c[2]) bad.push(`${a.getAttribute('href')}: ${n} questions, expected ${c[2]}`);
+          if (!q || q.hash !== '#' + list || q.searchParams.get('cs') !== s || q.searchParams.get('cc') !== c[0] || q.searchParams.get('cl') !== c[1]) bad.push(`${a.getAttribute('href')}: button ${btn && btn.getAttribute('href')}`);
+        }
+        eq(g, 'every chapter page has all its questions and opens that chapter in the app', bad, []);
+      }
+    }
+  }
 
   // ---------- run ----------
   function render() {
@@ -413,7 +437,7 @@
     let A = null;
     for (let i = 0; i < 100 && !A; i++) { await new Promise(r => setTimeout(r, 100)); A = frame.contentWindow && frame.contentWindow.__aaTest; }
     if (!A) { ok('Setup', 'the site loads with ?test', false, 'window.__aaTest not found'); return render(); }
-    for (const t of [parsing, checking, rules, labels, papers, banks, generators, customPapers, schoolPages, chapterPages, paperPages]) {
+    for (const t of [parsing, checking, rules, labels, papers, banks, generators, customPapers, schoolPages, chapterPages, paperPages, examChapterPages]) {
       try { await t(A, frame.contentWindow); } catch (e) { ok('Setup', t.name + ' ran without an error', false, e && e.stack || String(e)); }
     }
     render();

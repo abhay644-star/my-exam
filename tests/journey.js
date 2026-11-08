@@ -24,6 +24,8 @@
       if (out.length >= 4) break; }
     return `scrollWidth ${D().documentElement.scrollWidth}, width ${cw}: ` + out.join('; '); };
   async function load(url) { frame.src = 'about:blank'; await sleep(50); frame.src = url; await until(() => W().__aaTest && D().readyState === 'complete', 15000); await sleep(300); }
+  // a link the app tidies out of the address bar (and ?test with it, so there is no __aaTest): wait for what it shows instead
+  async function loadLink(url, shown) { frame.src = 'about:blank'; await sleep(50); frame.src = url; await until(() => D().readyState === 'complete' && shown(), 15000); await sleep(300); }
   function answer(i, wrong) {  // answers question i: first option (a wrong one if asked), or a typed value
     const q = $('#q' + i), r = q.querySelector('input[type=radio]');
     if (r) { const pick = wrong ? $$(`#q${i} input[type=radio]`).find(x => +x.value !== W().__aaTest.paper.qs[i].parts[0].ans) : r; pick.checked = true; fire(pick, 'change'); return; }
@@ -317,9 +319,15 @@
     const chLink = (decodeURIComponent(($('#sharePanel a.btnlink') || { href: '' }).href).match(/https:\/\/my-exam\.in\/\?\S+/) || ['https://my-exam.in/'])[0], chQ = new URL(chLink).searchParams;
     ok(g, 'the score message links to the same chapter', chQ.get('go') === 'neet/chapter' && chQ.get('cs') === 'Chemistry' && chQ.get('cc') === chem[0][0], chLink);
     ok(g, 'chapter results fit the width', fits(), wide());
-    await load('../index.html?test&' + chQ.toString());
-    await until(() => !$('#invite').hidden && $('#chPick .chbtn.hl'));
+    await loadLink('../index.html?test&' + chQ.toString(), () => !$('#invite').hidden && $('#chPick .chbtn.hl'));
     ok(g, 'the shared chapter link opens the NEET screen with that chapter marked', !$('#jeeView').hidden && /The chapter, NEET \(UG\) Chemistry · /.test($('#invite').textContent) && !!$('#chPick .chbtn.hl') && $('#chPick .chbtn.hl').textContent.startsWith(chem[0][0]), $('#invite').textContent.slice(0, 200));
+    // an exam chapter page (/neet/chemistry/<chapter>/) fits a phone, and its button opens the app with that chapter marked
+    frame.src = '../neet/chemistry/'; await until(() => D().querySelector('.chapters a') && D().readyState === 'complete', 10000);
+    const chPage = D().querySelector('.chapters a').getAttribute('href');
+    frame.src = '..' + chPage; await until(() => D().querySelector('a.btn') && D().readyState === 'complete', 10000); await sleep(1500);
+    ok(g, 'an exam chapter page fits the width, with its maths typeset', fits() && !D().querySelectorAll('.katex-error').length, wide());
+    await loadLink('../index.html?test&' + D().querySelector('a.btn').getAttribute('href').replace(/^\/\?/, ''), () => $('#chPick .chbtn.hl'));
+    ok(g, 'its Practise button opens the NEET screen with that chapter marked', !$('#jeeView').hidden && !!$('#chPick .chbtn.hl') && $('#chPick .chbtn.hl').textContent.startsWith(chem[0][0]), chPage);
     await load('../index.html?test#home');
 
     // 9. at phone width, every official paper fits the screen with its maths typeset

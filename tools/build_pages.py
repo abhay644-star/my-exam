@@ -9,6 +9,8 @@ or changing an official paper (its paper.json and its entry in EXAM_PAGES in ind
   questions (answers hidden) and links that open the app with that class, subject or chapter chosen.
 - <exam>/<paper>/index.html (for example jee-main/2026-2-april-shift-1/): one page per official paper listed in
   EXAM_PAGES, with the pattern, subject-wise marks, chapter-wise weightage, a few solved questions and the full answer key.
+- <exam>/<subject>/index.html (for example neet/chemistry/): the chapters tagged in that exam's papers, most-tested first;
+  <exam>/<subject>/<chapter>/index.html: every question on that chapter from all the exam's papers, with answers and solutions.
 - index.html: EXAM_CH, the chapters tagged in each exam's papers, for "Practise by chapter" (between the EXAM_CH markers).
 - sitemap.xml: the fixed pages plus every page above. A page's date changes only when its content changes.
 Chapters come from school-questions/*.json and, for Mathematics, from TOPICS in index.html, in the order the app
@@ -379,8 +381,8 @@ def answer(q, OL):
         return ' or '.join(f'({OL[j]})' for j in q['accept']) + ' (either is accepted)', '/'.join(map(str, q['accept']))
     return f'({OL[a]})', str(a)
 
-def solved(q, no, OL, fig):
-    """One question with its options, answer and worked solution (answer hidden until opened)."""
+def solved(q, no, OL, fig, label=None):
+    """One question with its options, answer and worked solution (answer hidden until opened); label: the line above it."""
     text = wrap_math(safe(q['text'])) + (f'<img class="qfig" src="{fig}{q["fig"]}" alt="Figure for question {no}" loading="lazy">' if q.get('fig') else '')
     opts = ''
     if q['type'] != 'num':
@@ -390,7 +392,8 @@ def solved(q, no, OL, fig):
     sol = f'<p>{wrap_math(safe(q["sol"]))}</p>' if q.get('sol') else ''
     if q.get('note') or q.get('keyNote'):
         sol += f'<p><i>Note: {wrap_math(safe(q.get("note") or q["keyNote"]))}</i></p>'
-    return (f'<li class="sq"><p class="sqt"><small>Question {no} · {esc(q["subject"])} · {esc(q["chapter"])}</small><br>{text}</p>{opts}'
+    label = label or f'Question {no} · {esc(q["subject"])} · {esc(q["chapter"])}'
+    return (f'<li class="sq"><p class="sqt"><small>{label}</small><br>{text}</p>{opts}'
             f'<details><summary>Show answer and solution</summary><p><b>Answer:</b> {wrap_math(safe(answer(q, OL)[0]))}</p>{sol}</details></li>')
 
 def dur_text(m):
@@ -419,7 +422,7 @@ def paper_page(e, p):
   </div>'''
 
     # chapter-wise weightage: chapters by number of questions, then in paper order; a chapter the app also offers links to its chapter test
-    weight = ''
+    weight = f'\n  <p class="links"><small>Every past question on a chapter:</small> ' + ''.join(f'<a href="{exam_subject_path(e, s)}">{esc(e["crumb"])} {esc(s)} chapter-wise</a>' for s in subjects) + '</p>'
     for s in subjects:
         sq = [q for q in qs if q['subject'] == s]
         cnt = Counter((q['chapter'], q.get('chCls')) for q in sq)
@@ -427,7 +430,8 @@ def paper_page(e, p):
         trs = ''
         for (ch, cls), c in sorted(cnt.items(), key=lambda kv: (-kv[1], first[kv[0]])):
             m = sum(marks(q) for q in sq if (q['chapter'], q.get('chCls')) == (ch, cls))
-            name = f'<a href="{esc(app_link(cls, s, ch))}">{esc(ch)}</a>' if cls in NUM and ch in chapters(s, cls) else esc(ch)
+            # every question on it from all this exam's papers (a question left untagged is outside the current NCERT books)
+            name = f'<a href="{esc(exam_chapter_path(e, s, ch, cls or ""))}">{esc(ch)}</a>' if ch else 'Not in a current NCERT chapter'
             trs += f'<tr><td>{name}</td><td>{f"Class {NUM[cls]}" if cls in NUM else ""}</td><td class="n">{c}</td><td class="n">{m}</td></tr>'
         practise = ''.join(f'<a href="/cbse/class-{NUM[c]}/{slug(s)}/">Class {NUM[c]} {esc(s)}</a>' for c in ('XI', 'XII') if s in offer[c])
         weight += f'''
@@ -488,11 +492,107 @@ def paper_page(e, p):
     crumbs = [('Home', '/'), (f"{e['crumb']} papers", f"/{e['list']}/"), (label, None)]
     return path, shell(path, title, desc, crumbs, body, math=True)
 
+# ---------- exam chapter pages: every past question on one chapter, and a chapter list per exam subject ----------
+# /neet/chemistry/ lists the chapters (most-tested first, as EXAM_CH); /neet/chemistry/<chapter>/ has every question on
+# that chapter from all the exam's papers, with answers and solutions, and opens the app's "Practise by chapter" on it
+# (a chapter name in both Class 11 and Class 12, such as Probability, gets the class in its address: probability-class-12)
+exam_subject_path = lambda e, s: f"/{e['list']}/{slug(s)}/"
+TWICE = {(e['list'], s, c[0]) for e in EXAMS for s, chs in EXAM_CH[e['list']].items() for c in chs if sum(o[0] == c[0] for o in chs) > 1}
+def exam_chapter_path(e, s, ch, cls):
+    return f"/{e['list']}/{slug(s)}/{slug(ch)}{f'-class-{NUM[cls]}' if (e['list'], s, ch) in TWICE else ''}/"
+for e in EXAMS:
+    for s, chs in EXAM_CH[e['list']].items():
+        paths = [exam_chapter_path(e, s, c[0], c[1]) for c in chs]
+        assert len(set(paths)) == len(paths), f"two {e['crumb']} {s} chapters have the same page address"
+        assert slug(s) not in {slug(paper_label(p)[len(e['crumb']):]) for p in e['papers']}, f'{s} clashes with a paper page address'
+
+def exam_app_link(e, s, ch, cls):
+    return '/?' + urlencode({'cs': s, 'cc': ch, 'cl': cls}, quote_via=quote) + '#' + e['list']
+
+def ch_name(e, s, ch, cls):
+    """A chapter's name as shown on the exam chapter pages, with its class when the name is in both classes."""
+    return f'{ch} (Class {NUM[cls]})' if (e['list'], s, ch) in TWICE else ch
+
+def plural(n, word):
+    return f'{n} {word}{"" if n == 1 else "s"}'
+
+def exam_chapter_page(e, s, c):
+    ch, cls, count, idx = c
+    path, crumb, dn, go = exam_chapter_path(e, s, ch, cls), e['crumb'], ch_name(e, s, ch, cls), exam_app_link(e, s, ch, cls)
+    items, rows = [], ''
+    for i in idx:
+        p = e['papers'][i]
+        data = json.loads((site / p['path'] / 'paper.json').read_text(encoding='utf-8'))
+        OL, fig, label = data.get('optLabels') or 'abcd', '/' + p['path'] + 'fig/', paper_label(p)
+        mine = [(n, q) for n, q in enumerate(data['questions']) if q['subject'] == s and q.get('chapter') == ch and (q.get('chCls') or '') == cls]
+        for n, q in mine:
+            no = n + 1 if data.get('renumber') else q['no']
+            items.append(solved(q, no, OL, fig, f'<a href="{paper_path(e, p)}">{esc(label)}</a> · Question {no}'))
+        rows += f'<tr><td><a href="{paper_path(e, p)}">{esc(label)}</a></td><td class="n">{len(mine)}</td><td class="n">{sum(q.get("full") or 4 for _, q in mine)}</td></tr>'
+    assert len(items) == count, f'{path}: {len(items)} questions, EXAM_CH says {count}'
+    years = sorted({re.search(r'\d{4}', e['papers'][i]['name']).group(0) for i in idx})
+    yrs = years[0] if len(years) == 1 else f'{years[0]}–{years[-1]}'
+    papers_txt = 'the paper' if len(idx) == 1 else 'both papers' if len(idx) == 2 else f'{len(idx)} papers'
+    ncert = f'NCERT Class {NUM[cls]} {s}' if cls in NUM else s
+    revise = ''
+    if cls in NUM and ch in chapters(s, cls):
+        href = chapter_path(cls, s, ch) if has_chapter_page(s, cls, ch) else app_link(cls, s, ch)
+        revise = f'\n  <h2>Revise the NCERT chapter</h2>\n  <p class="links"><a href="{esc(href)}">Class {NUM[cls]} {esc(s)}: {esc(ch)}</a> chapter test, with questions at every level.</p>\n'
+    others = ''.join(f'<a href="{exam_chapter_path(e, s, o[0], o[1])}">{esc(ch_name(e, s, o[0], o[1]))}</a>' for o in EXAM_CH[e['list']][s] if o is not c)
+    title = f'{crumb} {s}: {dn} – Previous Year Questions with Solutions | my-exam.in'
+    desc = (f'All {count} {crumb} {s} questions on {dn} from {papers_txt} ({yrs}), with the official answer keys and '
+            f'worked solutions. Practise them free as an online test.')
+    body = f'''  <h1>{esc(crumb)} {esc(s)}: {esc(dn)} previous year questions</h1>
+  <p class="lede">Every {esc(crumb)} question on {esc(ch)} ({esc(ncert)}) from {papers_txt} ({yrs}): {plural(count, 'question')}, marked with the final answer keys published by {BODY[e['list']]}, with worked solutions. Practise them online with instant marking, free and with no sign-up.</p>
+  <a class="btn" href="{esc(go)}">Practise {"this question" if count == 1 else f"all {count}"} online →</a>
+
+  <h2>Questions by paper</h2>
+  <div class="card tbl">
+    <table>
+      <thead><tr><th>Paper</th><th class="n">Questions</th><th class="n">Marks</th></tr></thead>
+      <tbody>{rows}</tbody>
+    </table>
+  </div>
+
+  <h2>Questions with answers and solutions</h2>
+  <p>Open each question to see its official answer and the worked solution.</p>
+  <ol class="samples">{"".join(items)}</ol>
+  <a class="btn" href="{esc(go)}">Practise {"it" if count == 1 else "them"} online →</a>
+{revise}
+  <h2>More {esc(crumb)} {esc(s)} chapters</h2>
+  <p class="links"><a href="{exam_subject_path(e, s)}">All {esc(s)} chapters</a>{others}</p>
+'''
+    crumbs = [('Home', '/'), (f'{crumb} papers', f"/{e['list']}/"), (f'{s} chapter-wise', exam_subject_path(e, s)), (dn, None)]
+    return path, shell(path, title, desc, crumbs, body, math=True)
+
+def exam_subject_page(e, s):
+    chs, crumb, path = EXAM_CH[e['list']][s], e['crumb'], exam_subject_path(e, s)
+    total, np = sum(c[2] for c in chs), len(e['papers'])
+    papers_txt = 'the paper' if np == 1 else 'both papers' if np == 2 else f'all {np} papers'
+    rows = ''.join(f'<li><a href="{exam_chapter_path(e, s, c[0], c[1])}"><b>{esc(c[0])}</b><small>{f"Class {NUM[c[1]]} · " if c[1] in NUM else ""}{plural(c[2], "question")}</small></a></li>' for c in chs)
+    title = f'{crumb} {s} Chapter-wise Previous Year Questions | my-exam.in'
+    desc = (f'{crumb} {s} previous year questions by chapter: {total} questions from {papers_txt} on {len(chs)} NCERT chapters, '
+            f'with the official answer keys and worked solutions. Free online practice.')
+    body = f'''  <h1>{esc(crumb)} {esc(s)}: chapter-wise previous year questions</h1>
+  <p class="lede">The {total} {esc(s)} questions from {papers_txt}, sorted by NCERT chapter, with the most-tested chapters first. Each chapter has every question with its official answer and worked solution, and an online test.</p>
+  <a class="btn" href="/?{urlencode({'cs': s}, quote_via=quote)}#{e['list']}">Practise by chapter online →</a>
+
+  <h2>Chapters</h2>
+  <ul class="chapters">{rows}</ul>
+
+  <h2>More</h2>
+  <p class="links"><a href="/{e['list']}/">All {esc(crumb)} papers</a>{"".join(f'<a href="{exam_subject_path(e, o)}">{esc(crumb)} {esc(o)} chapter-wise</a>' for o in EXAM_CH[e['list']] if o != s)}</p>
+'''
+    crumbs = [('Home', '/'), (f'{crumb} papers', f"/{e['list']}/"), (f'{s} chapter-wise', None)]
+    return path, shell(path, title, desc, crumbs, body)
+
 # ---------- write pages, remove stale ones, write the sitemap ----------
 school = [hub_page()] + [subject_page(c, s) for c in ROMAN for s in offer[c]]
 chapter_pages = [chapter_page(c, s, ch) for c in CH_CLASSES for s in offer[c] for ch in chapters(s, c) if has_chapter_page(s, c, ch)]
 papers = [paper_page(e, p) for e in EXAMS for p in e['papers']]
-pages = school + chapter_pages + papers
+exam_subjects = [exam_subject_page(e, s) for e in EXAMS for s in EXAM_CH[e['list']]]
+exam_chapter_pages = [exam_chapter_page(e, s, c) for e in EXAMS for s, chs in EXAM_CH[e['list']].items() for c in chs]
+pages = school + chapter_pages + papers + exam_subjects + exam_chapter_pages
 written, unchanged = [], 0
 for path, text in pages:
     f = site / path.strip('/') / 'index.html'
@@ -516,7 +616,7 @@ for d in (site / 'cbse').glob('class-*'):
         d.rmdir()
 # a paper page sits next to other folders (neet/ also holds the NEET paper files), so only folders this tool made are removed
 for e in EXAMS:
-    for d in sorted((site / e['list']).glob('*/')):
+    for d in sorted((site / e['list']).glob('*/*/')) + sorted((site / e['list']).glob('*/')):  # chapter pages, then papers and subjects
         f = d / 'index.html'
         if d not in keep and f.exists() and MARK in f.read_text(encoding='utf-8'):
             shutil.rmtree(d); removed.append('/' + d.relative_to(site).as_posix() + '/')
@@ -533,10 +633,11 @@ for u in urls:
 lines.append('</urlset>')
 smap.write_text('\n'.join(lines) + '\n', encoding='utf-8', newline='\n')
 
-print(f'{len(school)} school pages ({len(school) - 1} class and subject pages + /cbse/), {len(chapter_pages)} chapter pages, {len(papers)} paper pages: '
+print(f'{len(school)} school pages ({len(school) - 1} class and subject pages + /cbse/), {len(chapter_pages)} chapter pages, {len(papers)} paper pages, '
+      f'{len(exam_subjects)} exam subject pages, {len(exam_chapter_pages)} exam chapter pages: '
       f'{len(written)} written, {unchanged} unchanged, {len(removed)} removed')
 for p in written:
-    if not p.startswith('/cbse/'):
+    if not p.startswith('/cbse/') and p.count('/') < 4:  # (exam chapter pages are counted above, not listed)
         print('  written', p)
 for r in removed:
     print('  removed', r)
