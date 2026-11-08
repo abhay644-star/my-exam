@@ -364,9 +364,37 @@
       $('#submitBtn').click(); await sleep(100); $('#confirmYes').click(); await until(() => !$('#results').hidden && $('#sharePanel a'));
       const shareMsg = decodeURIComponent(($('#sharePanel a') || {}).getAttribute ? $('#sharePanel a').getAttribute('href') : '');
       ok(g, "the score message of this week's mock invites friends to the same weekly paper", /this week's free NEET \(UG\) mock/.test(shareMsg) && /Everyone takes the same paper this week/.test(shareMsg), shareMsg.slice(0, 200));
+      // the paper was left blank, so every chapter lost marks: the NEET page now lists the weak chapters
+      W().location.hash = '#neet'; await until(() => !$('#jeeView').hidden && !$('#weakBox').hidden);
+      const wb = $$('#weakBox [data-weak]');
+      ok(g, 'after a NEET paper, the NEET page shows "Your weak chapters" (up to 5), and fits the width', !$('#weakBox').hidden && wb.length >= 1 && wb.length <= 5 && fits(), `${wb.length} rows; ${wide()}`);
+      if (wb.length) {
+        wb[0].click(); await until(() => !$('#test').hidden && W().__aaTest.paper && W().__aaTest.paper.exam && W().__aaTest.paper.exam.chapter, 20000);
+        const cp = W().__aaTest.paper;
+        ok(g, 'Practise on a weak chapter opens that chapter\'s past-paper questions', cp && cp.exam && cp.exam.chapter && cp.qs.length > 0, cp && cp.exam && JSON.stringify(cp.exam.chapter));
+        $('#quitBtn').click(); await sleep(100); $('#confirmYes').click(); await sleep(200);
+      }
       W().localStorage.removeItem('aa-active'); W().localStorage.removeItem('aa-active-paper');
       await load('../index.html?test#home');
     }
+    // a mixed test: chapters ticked in two subjects (ticks kept when switching subject), 10 questions, timed like the exam
+    await load('../index.html?test#jee-main'); await until(() => !$('#jeeView').hidden && $('#mixBox'));
+    $('#mixBox').open = true; await sleep(50);
+    const tickMix = n => { const c = $$('#mixBox [data-mix]')[n]; c.checked = true; fire(c, 'change'); };
+    ok(g, 'the mixed-test buttons wait for a chapter to be chosen', $('#mixExam').disabled && /No chapters chosen/.test($('#mixSum').textContent), $('#mixSum').textContent);
+    const s0 = $('#chPick .chip.on[data-chsubj]').dataset.chsubj;
+    tickMix(0); tickMix(1);
+    const other = $$('#chPick [data-chsubj]').find(b => b.dataset.chsubj !== s0); other.click(); await sleep(100);
+    ok(g, 'switching subject keeps the mixed-test panel open and the ticks', $('#mixBox').open && /2 chapters chosen/.test($('#mixSum').textContent), $('#mixSum').textContent);
+    tickMix(0); $('#mixN').value = '10'; fire($('#mixN'), 'change');
+    ok(g, 'the summary counts the chapters, subjects and questions available', /3 chapters chosen \(.+, .+\)/.test($('#mixSum').textContent) && !$('#mixExam').disabled && fits(), $('#mixSum').textContent);
+    $('#mixExam').click(); await until(() => !$('#test').hidden && W().__aaTest.paper && W().__aaTest.paper.exam && W().__aaTest.paper.exam.mixed, 20000);
+    const mp = W().__aaTest.paper;
+    ok(g, 'Start timed test opens a 10-question exam from both subjects, timed at the exam\'s pace (25 min)', mp && mp.qs.length === 10 && mp.mode === 'exam' && mp.duration === 25 && mp.secs.length >= 1 && mp.qs.every(q => /^MX-/.test(q.sec)),
+      mp && `${mp.qs.length} questions, ${mp.mode}, ${mp.duration} min, sections ${mp.secs.map(s => s.name).join('/')}`);
+    $('#quitBtn').click(); await sleep(100); $('#confirmYes').click(); await sleep(200);
+    W().localStorage.removeItem('aa-active'); W().localStorage.removeItem('aa-active-paper');
+
     // a shared score link to a board practice paper opens School on that subject's papers, with the friend's score
     await loadLink('../index.html?go=board/12-physics-1&s=40/70#home', () => !$('#invite').hidden);
     ok(g, 'a shared board-paper score link opens School on that subject, with its papers and the score', !$('#setup').hidden && $('#klass').value === 'XII' && $('#subject').value === 'Physics' && !$('#boardBox').hidden && /40 \/ 70/.test($('#invite').textContent), `${$('#klass').value} ${$('#subject').value}: ${$('#invite').textContent.slice(0, 120)}`);

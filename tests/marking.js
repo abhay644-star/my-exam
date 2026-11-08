@@ -2,8 +2,10 @@
 (function () {
   'use strict';
   const results = [];
-  // the local test server now and then drops a burst of requests (hundreds of pages are read): a failed request is tried twice more
-  const fetch = async (u, o) => { for (let k = 0; ; k++) { try { return await window.fetch(u, o); } catch (e) { if (k >= 2) throw e; await new Promise(r => setTimeout(r, 300)); } } };
+  // the local test server now and then drops a burst of requests (hundreds of pages are read): a request that fails, or whose
+  // body breaks off, is tried up to 5 more times, waiting longer each time (the body is read here, so a break while reading it is retried too)
+  const fetch = async (u, o) => { for (let k = 0; ; k++) { try { const r = await window.fetch(u, o), b = await r.arrayBuffer(); return new Response(b, { status: r.status, statusText: r.statusText, headers: r.headers }); }
+    catch (e) { if (k >= 5) throw e; await new Promise(r => setTimeout(r, 500 * (k + 1))); } } };
   const show = v => JSON.stringify(v);
   function ok(group, name, cond, detail) { results.push({ group, name, pass: !!cond, detail: cond ? '' : (detail || '') }); }
   function eq(group, name, got, want) { ok(group, name, show(got) === show(want), `got ${show(got)}, expected ${show(want)}`); }
@@ -112,6 +114,26 @@
     eq(g, 'saved in My mistakes without the student\'s answer or marks', ['user', 'ok', 'got', 'ticks'].filter(k => k in saved.parts[0]), []);
     ok(g, '...and passes the backup restore check', A.dataOk(saved, 0));
   }
+  // ---------- "Your weak chapters" on an exam's page ----------
+  function weak(A) {
+    const g = 'Your weak chapters';
+    const h = [
+      { list: 'neet', label: '', chs: { 'XII|Physics|Current Electricity': [4, 16], 'XI|Physics|Units and Measurements': [8, 8], 'XII|Biology|Evolution': [-2, 8] } },
+      { list: 'neet', label: '', chs: { 'XII|Physics|Current Electricity': [0, 8] } },
+      { list: 'neet', label: 'Retry: questions to review', chs: { 'XII|Physics|Current Electricity': [0, 40] } },
+      { list: 'jee-main', label: '', chs: { 'XII|Physics|Current Electricity': [0, 40] } },
+      { list: 'neet', label: '', chs: { 'XII|Physics|No Such Chapter': [0, 40] } },
+      { list: 'neet', label: '', chs: null }];
+    const w = A.weakChapters('neet', h);
+    eq(g, 'counts this exam\'s attempts with chapter marks, not retries or other exams', w.n, 3);
+    eq(g, 'adds up each chapter over the attempts, most marks lost first; chapters at full marks or not in the exam\'s list are left out',
+      w.list.map(c => [c.name, c.g, c.t]), [['Current Electricity', 4, 24], ['Evolution', -2, 8]]);
+    eq(g, 'negative marks show as 0%, never below', w.list[1].pct, 0);
+    eq(g, 'each chapter points to its "Practise by chapter" entry', w.list.every(c => c.k >= 0), true);
+    eq(g, 'no attempts: nothing to show', A.weakChapters('neet', []).list, []);
+    const rec = A.cleanHistRec({ d: 1, subj: 'NEET', cls: 'x', pct: 50, nq: 1, exam: true, list: 'neet', chs: { 'XII|Physics|Nuclei': [1, 4], bad: 'x' } });
+    eq(g, 'a history record keeps its exam and chapter marks through a backup restore (bad entries dropped)', [rec.list, rec.chs], ['neet', { 'XII|Physics|Nuclei': [1, 4] }]);
+  }
   // every board practice paper offered: loads, adds up, and full marks are reachable
   async function boardPapers(A) {
     const ids = A.BOARD_PAPERS.map(m => m.id);
@@ -133,7 +155,9 @@
       qs.forEach((q, i) => q.parts.forEach((p, j) => { if (p.type === 'choice') ans[i + '-' + j] = String(p.ans); else if (p.type === 'self') { ans[i + '-' + j] = 'answer'; ans[i + '-' + j + 's'] = p.points.map((t, k) => k).join(','); } }));
       eq(g, 'every key and every marking point gives full marks', +A.markPaper(A.examQs(data, path + 'fig/'), ans).reduce((s, x) => s + x, 0).toFixed(2), data.maxMarks);
       const chs = A.topicsFor(m.subj, m.cls);
-      eq(g, 'every question has a school chapter, for "Chapters to revise"', qs.filter(q => !q.ch || q.ch.cls !== m.cls || chs.indexOf(q.ch.name) < 0).map(q => q.no), []);
+      // (a question with no school chapter, such as an English writing task, has none; one that has a chapter must name a real one)
+      eq(g, 'every chapter named is a school chapter, for "Chapters to revise"', qs.filter(q => q.ch && (q.ch.cls !== m.cls || chs.indexOf(q.ch.name) < 0)).map(q => q.no), []);
+      ok(g, 'most questions have a school chapter', qs.filter(q => q.ch).length >= qs.length / 2, `${qs.filter(q => q.ch).length} of ${qs.length}`);
       eq(g, 'every question, as saved in My mistakes, passes the backup restore check', A.withPaper({ exam: {} }, () => qs.filter(q => !A.dataOk(A.cleanQ(q), 0)).map(q => q.no)), []);
     }
   }
@@ -580,7 +604,7 @@
     let A = null;
     for (let i = 0; i < 100 && !A; i++) { await new Promise(r => setTimeout(r, 100)); A = frame.contentWindow && frame.contentWindow.__aaTest; }
     if (!A) { ok('Setup', 'the site loads with ?test', false, 'window.__aaTest not found'); return render(); }
-    for (const t of [parsing, checking, rules, written, labels, realExam, weekly, greetings, papers, boardPapers, banks, generators, customPapers, schoolPages, chapterPages, hindiChapterPages, paperPages, examChapterPages]) {
+    for (const t of [parsing, checking, rules, written, weak, labels, realExam, weekly, greetings, papers, boardPapers, banks, generators, customPapers, schoolPages, chapterPages, hindiChapterPages, paperPages, examChapterPages]) {
       try { await t(A, frame.contentWindow); } catch (e) { ok('Setup', t.name + ' ran without an error', false, e && e.stack || String(e)); }
     }
     render();
