@@ -136,6 +136,12 @@
     ok(g, 'next week has different papers', A.weeklyPapers(mon.w).every((x, i) => x.p !== A.weeklyPapers(sun.w)[i].p));
   }
 
+  function greetings(A, win) {
+    const g = 'Festival greetings', day = (y, m, d, h = 12) => new win.Date(y, m - 1, d, h), id = x => (A.greetFor(x) || {}).id || null;
+    ok(g, 'every greeting has a valid date range and text', A.GREETS.every(x => /^\d{4}-\d\d-\d\d$/.test(x.from) && /^\d{4}-\d\d-\d\d$/.test(x.to) && x.from <= x.to && x.id && x.html));
+    eq(g, 'Diwali 2026: shown from 7 to 10 Nov, not on 6 or 11 Nov', [day(2026, 11, 6, 23), day(2026, 11, 7, 0), day(2026, 11, 8), day(2026, 11, 10, 23), day(2026, 11, 11, 0)].map(id), [null, 'diwali-2026', 'diwali-2026', 'diwali-2026', null]);
+  }
+
   // ---------- the official papers ----------
   const PAPERS = [
     ['JEE Main 2026, 2 April Shift 1', '../jee/2026-04-02-s1/', 75, 300],
@@ -505,7 +511,7 @@
     let A = null;
     for (let i = 0; i < 100 && !A; i++) { await new Promise(r => setTimeout(r, 100)); A = frame.contentWindow && frame.contentWindow.__aaTest; }
     if (!A) { ok('Setup', 'the site loads with ?test', false, 'window.__aaTest not found'); return render(); }
-    for (const t of [parsing, checking, rules, labels, realExam, weekly, papers, banks, generators, customPapers, schoolPages, chapterPages, hindiChapterPages, paperPages, examChapterPages]) {
+    for (const t of [parsing, checking, rules, labels, realExam, weekly, greetings, papers, banks, generators, customPapers, schoolPages, chapterPages, hindiChapterPages, paperPages, examChapterPages]) {
       try { await t(A, frame.contentWindow); } catch (e) { ok('Setup', t.name + ' ran without an error', false, e && e.stack || String(e)); }
     }
     render();

@@ -365,6 +365,18 @@
       await load('../index.html?test#home');
     }
 
+    // 8c. festival greeting: a test greeting for every date, so the check does not depend on today's date
+    const GA = W().__aaTest;
+    GA.GREETS.unshift({ id: 'test', from: '2000-01-01', to: '2999-12-31', html: '<span><b>Happy festival!</b> A test greeting long enough to wrap onto several lines on a phone screen, to check that it and its Close button fit.</span>' });
+    W().localStorage.removeItem('aa-greet-test'); GA.renderGreet();
+    const gb = $('#greet'), gc = $('#greet [data-greetclose]');
+    ok(g, 'the festival greeting shows on the home page and fits the width', !gb.hidden && gc && fits() && gc.getBoundingClientRect().right <= W().innerWidth, wide());
+    ok(g, 'its Close button is a 44 px touch target', gc && gc.getBoundingClientRect().height >= 44, gc && String(gc.getBoundingClientRect().height));
+    if (gc) gc.click();
+    GA.renderGreet();
+    ok(g, 'once closed, the greeting stays closed', gb.hidden && W().localStorage.getItem('aa-greet-test') === 'closed');
+    W().localStorage.removeItem('aa-greet-test'); GA.GREETS.shift(); GA.renderGreet();
+
     // 9. at phone width, every official paper fits the screen with its maths typeset
     if (width < 500) {
       const bad = [];

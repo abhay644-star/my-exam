@@ -111,6 +111,9 @@ button:disabled{opacity:.45;cursor:not-allowed}
 .msg.info{background:var(--ink-soft);color:var(--fg)}
 .msg.ok{background:var(--green-soft);color:var(--green)}
 .invite{display:flex;gap:12px;align-items:center;justify-content:space-between;margin-bottom:14px}
+.greet{display:flex;gap:12px;align-items:center;justify-content:space-between;margin-bottom:14px;background:var(--amber-soft);color:var(--fg);font-size:.95rem}
+.greet b{color:var(--amber);font-family:var(--f-display);font-size:1.1rem}
+.greet button{flex:none;min-height:44px;border-color:var(--amber);color:var(--amber);background:transparent}
 .examcard.hl{outline:3px solid var(--red);outline-offset:2px}
 button.share{border-color:var(--green);color:var(--green)}
 .sharepanel{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:12px;border:1px solid var(--line);border-radius:var(--r);background:var(--bg)}
@@ -362,6 +365,7 @@ sup,sub{font-size:.7em}
   <!-- shown without JavaScript, so crawlers that do not run scripts read it; route() hides it for other screens -->
   <section id="homeView">
     <h2 class="sr">What are you preparing for?</h2>
+    <div id="greet" class="msg greet" role="status" hidden></div>
     <!-- the counts: tools/build_school_index.py writes them here for crawlers, and the page recounts them when it loads -->
     <p class="stats"><span><b id="qCount"><!--QCOUNT:start-->10,500+<!--QCOUNT:end--></b> school questions</span><span>new Maths questions every paper</span><span><b id="pCount"><!--PCOUNT:start-->23<!--PCOUNT:end--></b> JEE and NEET previous year papers</span><span>free, no sign-up</span></p>
     <div class="tracks">
@@ -1892,7 +1896,7 @@ function show(id){
   if(id==='setup'){renderHistory();ensureBank(S.subject).catch(()=>{});}
   if(id==='exams')renderExams();
   if(id==='jee')renderJee();
-  if(id==='home')renderWeekly();
+  if(id==='home'){renderWeekly();renderGreet();}
   // the top menu marks the area you are in; test, results and print belong to School
   const area=id==='home'||id==='exams'?id:(id==='jee'||(P&&P.exam&&['test','results','printView'].indexOf(id)>=0))?'exams':'setup';
   document.querySelectorAll('.topnav a').forEach(a=>{if(a.dataset.nav===area)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
@@ -2003,6 +2007,16 @@ function renderWeekly(){
     <div class="examgrid">${weeklyPapers(w).map(({list,p})=>{const done=h.find(r=>r.exam&&r.pid===p.id&&r.d>=+a);
       return `<article class="examcard"><div class="head"><h4>${esc(EXAM_PAGES[list].crumb)}</h4>${done?`<span class="soon ready">Done: ${done.got} / ${done.tot}</span>`:''}</div><p class="body">${esc([p.name,p.date,p.shift].filter(Boolean).join(' · '))}</p><p class="pat">${esc(p.pat)}</p><div class="btns"><button type="button" class="${done?'':'primary '}small" data-weekly="${list}/${p.id}">${done?'Take it again':`Start ${durLabel(p.min)} exam`}</button></div></article>`;}).join('')}</div>`;
   $('#weekly').hidden=false;}
+// festival greeting on the home screen: shown from..to (local dates, inclusive) until the student closes it
+const GREETS=[{id:'diwali-2026',from:'2026-11-07',to:'2026-11-10',html:'<span><b>\u{1FA94} Happy Diwali!</b> May the festival of lights bring you and your family joy, good health and success in your exams. Enjoy the celebrations, and come back refreshed.</span>'}];
+const isoDay=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+function greetFor(now=new Date()){const t=isoDay(now);return GREETS.find(g=>g.from<=t&&t<=g.to)||null;}
+function renderGreet(){const g=greetFor(),box=$('#greet');let closed=false;
+  try{closed=!!g&&localStorage.getItem('aa-greet-'+g.id)==='closed';}catch(e){}
+  if(!g||closed){box.hidden=true;return;}
+  box.innerHTML=g.html+'<button type="button" class="small" data-greetclose aria-label="Close the greeting">Close</button>';box.hidden=false;}
+$('#greet').addEventListener('click',e=>{if(!e.target.closest('[data-greetclose]'))return;const g=greetFor();
+  try{if(g)localStorage.setItem('aa-greet-'+g.id,'closed');}catch(err){}$('#greet').hidden=true;});
 // opens the exam's page (where loading messages show, with the paper marked) and starts the timed paper there
 $('#weekly').addEventListener('click',e=>{const b=e.target.closest('[data-weekly]');if(!b)return;const [list,id]=b.dataset.weekly.split('/');
   track(`weekly/${list}/${id}`,`Started this week's mock: ${EXAM_PAGES[list].crumb} ${id}`);
@@ -2367,7 +2381,7 @@ function homeCounts(){const n=Object.values(BANK_INDEX).reduce((s,b)=>s+Object.v
   if(n)$('#qCount').textContent=(Math.floor(n/100)*100).toLocaleString('en-IN')+'+';if(np)$('#pCount').textContent=np;return{n,np};}
 homeCounts();
 // tests/marking.html opens this page with ?test and reaches the marking code through window.__aaTest
-if(new URLSearchParams(location.search).has('test'))window.__aaTest={checkPart,parseNum,partMarks,answerText,examQs,ensureBank,saveAllBanks,topicsFor,bankCounts,BANK_INDEX,SUBJECTS,T,cleanQ,EXAM_PAGES,durLabel,makeMCQ,seeded,dataOk,renderHistory,homeCounts,dailySeed,EXAM_CH,startChapter,REAL_DIST,realLine,weekInfo,weeklyPapers,get paper(){return P;},
+if(new URLSearchParams(location.search).has('test'))window.__aaTest={checkPart,parseNum,partMarks,answerText,examQs,ensureBank,saveAllBanks,topicsFor,bankCounts,BANK_INDEX,SUBJECTS,T,cleanQ,EXAM_PAGES,durLabel,makeMCQ,seeded,dataOk,renderHistory,homeCounts,dailySeed,EXAM_CH,startChapter,REAL_DIST,realLine,weekInfo,weeklyPapers,GREETS,greetFor,renderGreet,get paper(){return P;},
   // marks qs against ans ({'<question index>-<part index>': answer}) and returns each question's mark
   markPaper(qs,ans,exam){const P0=P,A0=ANS;P={qs,exam};ANS=ans;try{qs.forEach((q,i)=>markQ(i));return qs.map(q=>q.got);}finally{P=P0;ANS=A0;}},
   withPaper(p,fn){const P0=P;P=p;try{return fn();}finally{P=P0;}},
