@@ -2,6 +2,8 @@
 (function () {
   'use strict';
   const results = [];
+  // the local test server now and then drops a burst of requests (hundreds of pages are read): a failed request is tried twice more
+  const fetch = async (u, o) => { for (let k = 0; ; k++) { try { return await window.fetch(u, o); } catch (e) { if (k >= 2) throw e; await new Promise(r => setTimeout(r, 300)); } } };
   const show = v => JSON.stringify(v);
   function ok(group, name, cond, detail) { results.push({ group, name, pass: !!cond, detail: cond ? '' : (detail || '') }); }
   function eq(group, name, got, want) { ok(group, name, show(got) === show(want), `got ${show(got)}, expected ${show(want)}`); }

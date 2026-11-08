@@ -361,9 +361,16 @@
       wn.click(); await until(() => !$('#test').hidden && W().__aaTest.paper && W().__aaTest.paper.exam, 20000);
       const wp = W().__aaTest.paper;
       ok(g, "Start on this week's NEET mock opens that paper as a timed exam", wp && wp.exam && wp.exam.id === wid && wp.mode === 'exam' && W().location.hash === '#neet', `${wp && wp.exam && wp.exam.id}, ${wp && wp.mode}, ${W().location.hash}`);
+      $('#submitBtn').click(); await sleep(100); $('#confirmYes').click(); await until(() => !$('#results').hidden && $('#sharePanel a'));
+      const shareMsg = decodeURIComponent(($('#sharePanel a') || {}).getAttribute ? $('#sharePanel a').getAttribute('href') : '');
+      ok(g, "the score message of this week's mock invites friends to the same weekly paper", /this week's free NEET \(UG\) mock/.test(shareMsg) && /Everyone takes the same paper this week/.test(shareMsg), shareMsg.slice(0, 200));
       W().localStorage.removeItem('aa-active'); W().localStorage.removeItem('aa-active-paper');
       await load('../index.html?test#home');
     }
+    // a shared score link to a board practice paper opens School on that subject's papers, with the friend's score
+    await loadLink('../index.html?go=board/12-physics-1&s=40/70#home', () => !$('#invite').hidden);
+    ok(g, 'a shared board-paper score link opens School on that subject, with its papers and the score', !$('#setup').hidden && $('#klass').value === 'XII' && $('#subject').value === 'Physics' && !$('#boardBox').hidden && /40 \/ 70/.test($('#invite').textContent), `${$('#klass').value} ${$('#subject').value}: ${$('#invite').textContent.slice(0, 120)}`);
+    await load('../index.html?test#home');
 
     // 8c. festival greeting: a test greeting for every date, so the check does not depend on today's date
     const GA = W().__aaTest;

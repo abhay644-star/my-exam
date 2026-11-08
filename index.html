@@ -232,7 +232,8 @@ button.small{padding:6px 12px;font-size:.85rem}
 .smsum{font-weight:700;margin:4px 0 0}
 .board.hl{outline:3px solid var(--ink);outline-offset:2px}
 #boardHome{margin:4px 0 8px}
-.bgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+@media (min-width:700px){.bgrid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 .btile{display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left;min-height:44px;padding:10px 12px;border:1px solid var(--ink);border-radius:var(--r);background:var(--ink-soft);color:var(--fg);font:inherit;cursor:pointer}
 .btile b{color:var(--ink)}.btile span{font-size:.82rem;color:var(--muted)}
 .btile:hover{background:var(--paper)}.btile:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
@@ -396,7 +397,7 @@ sup,sub{font-size:.7em}
       <a class="track exams" href="#exams">
         <p class="eyebrow">Competitive exams</p>
         <h3>JEE Main · JEE Advanced · NEET (UG)</h3>
-        <p>Previous year papers with the official answer keys and exam-style marking, as full timed papers or chapter by chapter.</p>
+        <p>Previous-year papers with official answer keys and exam-style marking. Practise full timed papers or chapter by chapter.</p>
         <span class="go">Practise past papers →</span>
       </a>
     </div>
@@ -1899,6 +1900,7 @@ function finish(auto){
   const chal=P.challenge,chLine=!chal?'':chal.daily?`<p class="msg info" style="margin:0">${esc(chal.name)} (code <b>${esc(chal.code)}</b>): every student taking Class ${clsNum(P.klass)} ${esc(P.subject)} today had these questions. Compare with your friends: <b>Share my score</b> below. A new challenge comes tomorrow.</p>`
     :`<p class="msg info" style="margin:0">Class challenge <b>${esc(chal.code)}</b>${chal.name?` · ${esc(chal.name)}`:''}. Send your score to whoever set it: <b>Share my score</b> below.</p>`;
   const shareTxt=chal?`Challenge ${chal.code}${chal.name?` (${chal.name})`:''}: I scored ${g}/${tot} (${pct}%) in ${mm} min ${ss} s on Class ${clsNum(P.klass)} ${P.subject}, ${P.qs.length} questions. Take the same challenge free: ${shareLink(g,tot)}`
+    :P.weekly?`I scored ${g}/${tot} (${pct}%) in this week's free ${EXAM_PAGES[P.exam.list].crumb} mock (${P.exam.title}) on All in All Exam Practice. Everyone takes the same paper this week: can you beat my score? ${shareLink(g,tot)}`
     :`I scored ${g}/${tot} (${pct}%) in ${P.mistakes?'a revision paper':P.exam?P.exam.title:`a Class ${clsNum(P.klass)} ${P.subject} ${P.topicsList&&P.topicsList.length===1?`test on ${P.topicsList[0]}`:'practice paper'}`} on All in All Exam Practice. Can you beat my score? ${P.exam||(!P.mistakes&&P.seed!=null&&!P.label)?'Take the same paper':'Try one'} free: ${shareLink(g,tot)}`;
   const mkLine=P.mistakes?`<p class="msg ok" style="margin:0">${mk.removed?`${mk.removed} answered right a second time and removed from My mistakes. `:''}${mk.later?`${mk.later} answered right will come back on ${dayName(Date.now()+3*DAY)} for one more check. `:''}${mk.total?`${mk.total} question${mk.total>1?'s':''} left to revise.`:'Your My mistakes list is now empty. Well done!'}</p>`
     :mk.added?`<p class="msg info" style="margin:0">${mk.added} question${mk.added>1?'s':''} you got wrong ${mk.added>1?'were':'was'} saved to <b>My mistakes</b> on this device, to revise later.</p>`:'';
@@ -1972,7 +1974,7 @@ function retry(onlyWrong){
   const exam0=P.exam&&P.exam.secLimit&&onlyWrong?Object.assign({},P.exam,{secLimit:null}):P.exam;
   const om=P.qs.reduce((a,q)=>a+q.marks,0),tm=qs.reduce((a,q)=>a+q.marks,0);
   const dur=onlyWrong?Math.max(5,Math.ceil(P.duration*tm/(om||1)/5)*5):P.duration;
-  P=Object.assign({},P,{qs,exam:exam0,notes:[],duration:dur,challenge:null,selfDone:false,marking:false,doneAt:null,autoSub:false,label:blank?'Retry: questions left blank':onlyWrong?'Retry: questions to review':'Second attempt',startAt:Date.now()});
+  P=Object.assign({},P,{qs,exam:exam0,notes:[],duration:dur,challenge:null,weekly:false,selfDone:false,marking:false,doneAt:null,autoSub:false,label:blank?'Retry: questions left blank':onlyWrong?'Retry: questions to review':'Second attempt',startAt:Date.now()});
   P.secs=P.secs.filter(s=>secQs(s).length).map((s,i)=>Object.assign({},s,{letter:s.key?'':String.fromCharCode(65+i)}));
   P.endAt=P.startAt+dur*60000;ANS={};FLAG={};CHK={};
   const kind=blank?'blank only':onlyWrong?'wrong only':'whole paper';
@@ -2142,7 +2144,7 @@ function weekInfo(now=new Date()){const d=new Date(now.getFullYear(),now.getMont
 const weeklyPapers=w=>['jee-main','jee-advanced','neet'].map(list=>{const ps=EXAM_PAGES[list].papers;return{list,p:ps[w%ps.length]};});
 function renderWeekly(){
   const {w,a,b}=weekInfo(),f=x=>x.toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short'}),h=getHist();
-  $('#weekly').innerHTML=`<h3 class="whyhead" id="weeklyHead">This week's free mocks</h3><p class="hint" style="margin:0 0 10px">${f(a)} to ${f(b)}: the same official paper for everyone this week, so you can compare scores with friends. New papers every Monday.</p>
+  $('#weekly').innerHTML=`<h3 class="whyhead" id="weeklyHead">This week's free mocks</h3><p class="hint" style="margin:0 0 10px">${f(a)} to ${f(b)}: everyone takes the same paper this week, so you can compare scores with friends. A new paper every Monday.</p>
     <div class="examgrid">${weeklyPapers(w).map(({list,p})=>{const done=h.find(r=>r.exam&&r.pid===p.id&&r.d>=+a);
       return `<article class="examcard"><div class="head"><h4>${esc(EXAM_PAGES[list].crumb)}</h4>${done?`<span class="soon ready">Done: ${done.got} / ${done.tot}</span>`:''}</div><p class="body">${esc([p.name,p.date,p.shift].filter(Boolean).join(' · '))}</p><p class="pat">${esc(p.pat)}</p><div class="btns"><button type="button" class="${done?'':'primary '}small" data-weekly="${list}/${p.id}">${done?'Take it again':`Start ${durLabel(p.min)} exam`}</button></div></article>`;}).join('')}</div>`;
   $('#weekly').hidden=false;}
@@ -2169,7 +2171,9 @@ $('#greet').addEventListener('click',e=>{if(!e.target.closest('[data-greetclose]
 // opens the exam's page (where loading messages show, with the paper marked) and starts the timed paper there
 $('#weekly').addEventListener('click',e=>{const b=e.target.closest('[data-weekly]');if(!b)return;const [list,id]=b.dataset.weekly.split('/');
   track(`weekly/${list}/${id}`,`Started this week's mock: ${EXAM_PAGES[list].crumb} ${id}`);
-  inviteHl=id;window.addEventListener('hashchange',()=>startJee(id,'exam'),{once:true});location.hash='#'+list;});
+  inviteHl=id;weeklyId=id;window.addEventListener('hashchange',()=>startJee(id,'exam'),{once:true});location.hash='#'+list;});
+// the paper just started from "This week's free mocks", so its score message invites friends to the same weekly paper
+let weeklyId=null;
 async function startJee(id,mode){
   let meta=null,list='jee-main';Object.keys(EXAM_PAGES).forEach(k=>{const m=EXAM_PAGES[k].papers.find(x=>x.id===id);if(m){meta=m;list=k;}});
   // CBSE board practice papers open from the School screen (list 'board'), with their messages there
@@ -2192,7 +2196,7 @@ async function startJee(id,mode){
     const title=[meta.name,meta.date,meta.shift].filter(Boolean).join(' · ');
     P={qs,secs,notes:[],created:Date.now(),mode,duration:data.duration||180,subject:data.exam||'JEE Main',klass:'',board:data.board||'NTA',country:'India',label:data.label||'Official paper',topicsLabel:'',startAt:Date.now(),
        exam:{id,list,name:meta.name,date:meta.date,shift:meta.shift,title,short:[meta.date,meta.shift].filter(Boolean).join(' · '),instr:data.instr||null,optLabels:data.optLabels||null,secLimit:data.secLimit||null,subjects:subs.join(', ').replace(/, ([^,]*)$/,' and $1')}};
-    P.endAt=P.startAt+P.duration*60000;ANS={};FLAG={};CHK={};
+    P.endAt=P.startAt+P.duration*60000;ANS={};FLAG={};CHK={};if(weeklyId===id)P.weekly=true;weeklyId=null;
     msg.hidden=true;track(`start/${mode}/${paperTag()}`,`Started ${mode}: ${paperName()}`);
     begin();
   }catch(e){console.error('Paper '+id+' could not be opened:',e);msg.className='msg err';msg.textContent='Sorry, this paper could not be opened because of a problem on our side. Please tell us, using "Tell us" below.';}
@@ -2384,6 +2388,11 @@ function openInvite(){const q=new URLSearchParams(location.search),go=q.get('go'
         :invitePaper!=null?`${beat} <button type="button" class="primary small" id="inviteStart">Take the same paper</button> <span class="hint" style="display:inline;margin:0">Same ${how}.</span>`
         :`${beat} Pick <b>Quick quiz</b>, <b>Chapter test</b> or <b>Full mock paper</b> for a fresh Class ${clsNum(c)} ${esc(sub)} paper${ts.length?` on ${esc(ts.join(', '))}`:''}.`;
       history.replaceState(null,'',location.pathname+'#school');}}
+  // a board practice paper (go=board/<id>): School opens on its class and subject, with its papers shown
+  else if(go.indexOf('board/')===0){const bp=BOARD_PAPERS.find(x=>x.id===go.slice(6));
+    if(bp){Object.assign(S,{klass:bp.cls,subject:bp.subj,topics:'ALL'});writeForm();readForm();
+      html=`${beat} The paper, <b>${esc(bp.name)} · ${esc(bp.date)}</b>, is below under “Board exam 2027”.`;history.replaceState(null,'',location.pathname+'#school');
+      setTimeout(()=>{const bx=$('#boardBox');if(!bx.hidden)bx.scrollIntoView({block:'start',behavior:'smooth'});},600);}}
   else{const [list,id]=go.split('/'),pg=EXAM_PAGES[list],pp=pg&&pg.papers.find(x=>x.id===id);
     if(pg&&id==='chapter'){const cs=q.get('cs'),cc=q.get('cc'),k=EXAM_CH[list]&&EXAM_CH[list][cs]?chFind(EXAM_CH[list][cs],cc,q.get('cl')):-1;
       if(k>=0){html=`${beat} The chapter, <b>${esc(pg.crumb)} ${esc(cs)} · ${esc(cc)}</b>, is marked below under Practise by chapter.`;chSubj=cs;chHl=k;history.replaceState(null,'',location.pathname+'#'+list);}}
