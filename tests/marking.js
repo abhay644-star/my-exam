@@ -122,6 +122,20 @@
     eq(g, 'a JEE Main paper is not compared', txt(200, { exam: { list: 'jee-main', id: '2026-04-02-s1' } }), '');
   }
 
+  // ---------- "This week's free mocks" ----------
+  function weekly(A, win) {
+    const g = "This week's free mocks", day = (y, m, d, h = 12) => new win.Date(y, m - 1, d, h), ymd = x => `${x.getFullYear()}-${x.getMonth() + 1}-${x.getDate()}`;
+    const sun = A.weekInfo(day(2026, 11, 8, 23)), mon = A.weekInfo(day(2026, 11, 9, 0)), wed = A.weekInfo(day(2026, 11, 11));
+    eq(g, 'Sunday 8 Nov 2026 is in the week Mon 2 to Sun 8 Nov', [ymd(sun.a), ymd(sun.b), sun.a.getDay(), sun.b.getDay()], ['2026-11-2', '2026-11-8', 1, 0]);
+    ok(g, 'the week changes on Monday and stays the same until Sunday', mon.w === sun.w + 1 && wed.w === mon.w && ymd(mon.a) === '2026-11-9');
+    eq(g, 'a week across the clock change (Mar 2026 in Europe) still starts on Monday', A.weekInfo(day(2026, 3, 30)).a.getDay(), 1);
+    for (const w of [0, 1, sun.w, mon.w]) {
+      const ps = A.weeklyPapers(w);
+      ok(g, `week ${w}: one official paper for each of JEE Main, JEE Advanced and NEET`, ps.map(x => x.list).join() === 'jee-main,jee-advanced,neet' && ps.every(x => x.p && A.EXAM_PAGES[x.list].papers.includes(x.p)));
+    }
+    ok(g, 'next week has different papers', A.weeklyPapers(mon.w).every((x, i) => x.p !== A.weeklyPapers(sun.w)[i].p));
+  }
+
   // ---------- the official papers ----------
   const PAPERS = [
     ['JEE Main 2026, 2 April Shift 1', '../jee/2026-04-02-s1/', 75, 300],
@@ -465,7 +479,7 @@
     let A = null;
     for (let i = 0; i < 100 && !A; i++) { await new Promise(r => setTimeout(r, 100)); A = frame.contentWindow && frame.contentWindow.__aaTest; }
     if (!A) { ok('Setup', 'the site loads with ?test', false, 'window.__aaTest not found'); return render(); }
-    for (const t of [parsing, checking, rules, labels, realExam, papers, banks, generators, customPapers, schoolPages, chapterPages, paperPages, examChapterPages]) {
+    for (const t of [parsing, checking, rules, labels, realExam, weekly, papers, banks, generators, customPapers, schoolPages, chapterPages, paperPages, examChapterPages]) {
       try { await t(A, frame.contentWindow); } catch (e) { ok('Setup', t.name + ' ran without an error', false, e && e.stack || String(e)); }
     }
     render();

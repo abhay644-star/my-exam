@@ -351,6 +351,20 @@
     ok(g, 'answered right a second time, it leaves My mistakes', !rec() && /1 answered right a second time and removed from My mistakes/.test(v2.res), v2.res.slice(0, 200));
     await load('../index.html?test#home');
 
+    // 8b. this week's free mocks: one paper per exam on the home page; Start opens the exam's page and starts that timed paper
+    const wk = $$('#weekly [data-weekly]');
+    ok(g, "the home page shows this week's three free mocks", !$('#weekly').hidden && wk.length === 3, `${wk.length} buttons`);
+    ok(g, "this week's mocks fit the width", fits(), wide());
+    const wn = wk.find(b => /^neet\//.test(b.dataset.weekly));
+    if (wn) {
+      const wid = wn.dataset.weekly.split('/')[1]; W().confirm = () => true;
+      wn.click(); await until(() => !$('#test').hidden && W().__aaTest.paper && W().__aaTest.paper.exam, 20000);
+      const wp = W().__aaTest.paper;
+      ok(g, "Start on this week's NEET mock opens that paper as a timed exam", wp && wp.exam && wp.exam.id === wid && wp.mode === 'exam' && W().location.hash === '#neet', `${wp && wp.exam && wp.exam.id}, ${wp && wp.mode}, ${W().location.hash}`);
+      W().localStorage.removeItem('aa-active'); W().localStorage.removeItem('aa-active-paper');
+      await load('../index.html?test#home');
+    }
+
     // 9. at phone width, every official paper fits the screen with its maths typeset
     if (width < 500) {
       const bad = [];

@@ -60,7 +60,7 @@ p{margin:0}
 .top{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:flex-end;justify-content:space-between;margin-bottom:20px}
 .logo{display:block;width:min(100%,300px);height:auto;margin-block:4px 6px}
 .logo text{font-family:var(--f-display);font-weight:800}
-@media (max-width:600px){body.compact .top{margin-bottom:12px;gap:4px}body.compact .top .eyebrow,body.compact .top .lede{display:none}body.compact .logo{width:min(100%,230px);margin-block:0}}
+@media (max-width:600px){body.compact .top{margin-bottom:12px;gap:4px}body.compact .top .eyebrow,body.compact .top .lede,body.compact .top .nosign{display:none}body.compact .logo{width:min(100%,230px);margin-block:0}}
 .lg-ink{fill:var(--ink)} .lg-red{fill:var(--red)} .lg-muted{fill:var(--muted)} .lg-wood{fill:#f3d9a6} .lg-lead{fill:#1b2236}
 .lg-bar{stroke:var(--bg);stroke-width:8;stroke-linecap:round}
 .grid2{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:20px;align-items:start}
@@ -133,6 +133,9 @@ button.share{border-color:var(--green);color:var(--green)}
 .stats{display:flex;flex-wrap:wrap;gap:4px 0;margin:0 0 14px;color:var(--muted);font-size:.95rem}
 .stats span:not(:last-child)::after{content:"·";margin:0 10px;color:var(--muted)}
 .stats b{color:var(--ink)}
+.nosign{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 0}
+.nosign span{background:var(--green-soft);color:var(--green);font-weight:700;font-size:.85rem;padding:4px 10px;border-radius:999px}
+.nosign span::before{content:"\2713\00a0"}
 .moreexams{margin:12px 0 0;color:var(--muted);font-size:.95rem}.moreexams a{color:var(--ink);font-weight:700}
 .tracks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
 @media (max-width:760px){.tracks{grid-template-columns:minmax(0,1fr)}}
@@ -344,6 +347,7 @@ sup,sub{font-size:.7em}
         <text class="lg-ink" x="179" y="116" font-size="17" letter-spacing="3.5">EXAM PRACTICE</text>
       </svg></a><span class="sr"> – free CBSE practice tests and JEE and NEET (UG) previous year papers</span></h1>
       <p class="lede">Free CBSE practice tests for Classes 1–12 and JEE Main, JEE Advanced and NEET (UG) previous year papers, marked instantly with full solutions.</p>
+      <p class="nosign"><span>Free</span><span>No sign-up or OTP</span><span>Start in one tap</span></p>
     </div>
     <nav class="topnav" aria-label="Main">
       <a href="#home" data-nav="home">Home</a><a href="#school" data-nav="setup">School</a><a href="#exams" data-nav="exams">Competitive Exams</a>
@@ -374,6 +378,7 @@ sup,sub{font-size:.7em}
         <span class="go">See the exams →</span>
       </a>
     </div>
+    <section id="weekly" aria-labelledby="weeklyHead" hidden></section>
     <p class="moreexams">More exams are on the way: CUET, CAT, SSC, Bank and UPSC. <a href="#exams">Tell us which one you need first</a>.</p>
     <h3 class="whyhead">Popular practice</h3>
     <ul class="popular">
@@ -1132,41 +1137,6 @@ T.push(
 );
 
 
-/* ---------- CBSE model paper (fixed) ---------- */
-const ch=(o,a)=>[{type:'choice',options:o,ans:a}];
-const SAMPLE=[
- {kind:'mcq',level:'E',topic:'Integers',text:'Which of these is the smallest?',parts:ch(['−5','−2','0','3'],0),sol:'−5 is furthest to the left on the number line.'},
- {kind:'mcq',level:'E',topic:'Fractions and Decimals',text:'0.6 as a fraction in its lowest terms is',parts:ch(['6/100','3/5','6/5','2/3'],1),sol:'6/10 = 3/5'},
- {kind:'mcq',level:'M',topic:'Exponents and Powers',text:'The value of (−3)<sup>3</sup> is',parts:ch(['9','−9','27','−27'],3),sol:'(−3) × (−3) × (−3) = −27'},
- {kind:'mcq',level:'M',topic:'Simple Equations',text:'If 5x = 35, then x + 3 is',parts:ch(['7','10','38','32'],1),sol:'x = 7, so x + 3 = 10.'},
- {kind:'mcq',level:'M',topic:'Data Handling',text:'The median of 3, 9, 5, 11, 7 is',parts:ch(['5','7','9','11'],1),sol:'In order: 3, 5, 7, 9, 11. The middle value is 7.'},
- {kind:'mcq',level:'M',topic:'Comparing Quantities',text:'20% of 450 is',parts:ch(['90','45','9','900'],0),sol:'20/100 × 450 = 90'},
- {kind:'mcq',level:'C',topic:'Triangles',text:'Which set of lengths <strong>cannot</strong> be the sides of a triangle?',parts:ch(['3, 4, 5','5, 6, 7','2, 3, 6','4, 4, 7'],2),sol:'2 + 3 = 5, which is less than 6.'},
- {kind:'mcq',level:'C',topic:'Triangles',text:'An exterior angle of a triangle is 110° and one of the interior opposite angles is 45°. The other interior opposite angle is',parts:ch(['55°','65°','70°','25°'],1),sol:'110° − 45° = 65°'},
- {kind:'mcq',level:'C',topic:'Perimeter and Area',text:'A triangle has an area of 36 cm² and a base of 12 cm. Its height is',parts:ch(['3 cm','6 cm','12 cm','18 cm'],1),sol:'½ × 12 × h = 36, so h = 6 cm.'},
- {kind:'mcq',level:'X',topic:'Algebraic Expressions',text:'If a = −2 and b = 3, the value of a²b − ab² is',parts:ch(['−30','6','30','−6'],2),sol:'(4)(3) − (−2)(9) = 12 + 18 = 30'},
- {kind:'w',level:'E',topic:'Integers',text:'Evaluate: (−15) + 8 − (−7).',parts:[{type:'num',ans:0,fmt:FM.int}],sol:'(−15) + 8 + 7 = 0'},
- {kind:'w',level:'E',topic:'Fractions and Decimals',text:'Write 3/8 as a decimal.',parts:[{type:'num',ans:0.375,fmt:FM.num}],sol:'3 ÷ 8 = 0.375'},
- {kind:'w',level:'E',topic:'Data Handling',text:'Find the mode of the data: 4, 7, 2, 7, 9, 4, 7, 3.',parts:[{type:'num',ans:7,fmt:FM.int}],sol:'7 occurs 3 times.'},
- {kind:'w',level:'E',topic:'Lines and Angles',text:'An angle measures 65°. Find its complement.',parts:[{type:'num',ans:25,fmt:FM.deg}],sol:'90° − 65° = 25°'},
- {kind:'w',level:'M',topic:'Simple Equations',text:'Solve: 3x − 7 = 2x + 5.',parts:[{type:'num',ans:12,fmt:FM.int}],sol:'3x − 2x = 5 + 7, so x = 12.'},
- {kind:'w',level:'M',topic:'Fractions and Decimals',text:'Find the product: 2⅓ × 1⅘. Give your answer as a mixed fraction.',parts:[{type:'num',ans:21/5,fmt:FM.mixed}],sol:'7/3 × 9/5 = 63/15 = 21/5 = 4 1/5'},
- {kind:'w',level:'M',topic:'Data Handling',text:'The mean of 5 numbers is 18. When one number is removed, the mean of the rest is 16. Find the number removed.',parts:[{type:'num',ans:26,fmt:FM.int}],sol:'5 × 18 = 90; 4 × 16 = 64; 90 − 64 = 26'},
- {kind:'w',level:'M',topic:'Exponents and Powers',text:'Simplify (2<sup>5</sup> × 2<sup>3</sup>) ÷ 2<sup>4</sup> and give its value.',parts:[{type:'num',ans:16,fmt:FM.int,disp:'2<sup>4</sup> = 16'}],sol:'2<sup>8</sup> ÷ 2<sup>4</sup> = 2<sup>4</sup> = 16'},
- {kind:'w',level:'M',topic:'Triangles',text:'Two angles of a triangle are 48° and 67°.',parts:[{q:'(a) Find the third angle.',type:'num',ans:65,fmt:FM.deg,w:1},{q:'(b) What type of triangle is it by its angles?',type:'select',ans:'Acute-angled',options:['Acute-angled','Right-angled','Obtuse-angled'],w:1}],sol:'180° − 115° = 65°; all angles are less than 90°, so it is acute-angled.'},
- {kind:'w',level:'M',topic:'Comparing Quantities',text:'Convert into percentages.',parts:[{q:'(a) 0.35',type:'num',ans:35,fmt:FM.pct,w:1},{q:'(b) 3/20',type:'num',ans:15,fmt:FM.pct,w:1}],sol:'0.35 × 100 = 35%; 3/20 × 100 = 15%'},
- {kind:'w',level:'M',topic:'Perimeter and Area',text:'A rectangle is 12.5 cm long and 8 cm wide.',parts:[{q:'(a) Find its area.',type:'num',ans:100,fmt:FM.unit('cm²'),w:1},{q:'(b) Find its perimeter.',type:'num',ans:41,fmt:FM.unit('cm'),w:1}],sol:'Area = 12.5 × 8 = 100 cm²; perimeter = 2(12.5 + 8) = 41 cm.'},
- {kind:'w',level:'M',topic:'Algebraic Expressions',text:'Subtract 3a² − 4ab + 5 from 7a² + 2ab − 3.',parts:[{type:'expr',ans:'4a² + 6ab − 8',disp:'4a² + 6ab − 8'}],sol:'(7a² + 2ab − 3) − (3a² − 4ab + 5) = 4a² + 6ab − 8'},
- {kind:'w',level:'C',topic:'Comparing Quantities',text:'A shopkeeper buys a fan for ₹1,600 and sells it at a profit of 15%.',parts:[{q:'(a) Find the selling price (₹).',type:'num',ans:1840,fmt:FM.money,w:1},{q:'(b) If he had sold it for ₹1,520 instead, what would his loss percent be?',type:'num',ans:5,fmt:FM.pct,w:2}],sol:'SP = 1,600 + 240 = ₹1,840. Loss = ₹80; 80 ÷ 1,600 × 100 = 5%.'},
- {kind:'w',level:'C',topic:'Comparing Quantities',text:'Find the simple interest on ₹12,000 at 8% per annum for 2½ years. Also find the amount.',parts:[{q:'(a) Simple interest (₹)',type:'num',ans:2400,fmt:FM.money,w:2},{q:'(b) Amount (₹)',type:'num',ans:14400,fmt:FM.money,w:1}],sol:'SI = 12,000 × 8 × 2.5 ÷ 100 = ₹2,400; amount = ₹14,400.'},
- {kind:'w',level:'C',topic:'Triangles',text:'In a right-angled triangle, the hypotenuse is 26 cm and one of the other sides is 10 cm.',parts:[{q:'(a) Find the third side.',type:'num',ans:24,fmt:FM.unit('cm'),w:2},{q:'(b) Find the perimeter of the triangle.',type:'num',ans:60,fmt:FM.unit('cm'),w:1}],sol:'√(676 − 100) = √576 = 24 cm; perimeter = 26 + 10 + 24 = 60 cm.'},
- {kind:'w',level:'C',topic:'Lines and Angles',text:'Two complementary angles are in the ratio 2 : 3.',parts:[{q:'(a) Find the smaller angle.',type:'num',ans:36,fmt:FM.deg,w:1},{q:'(b) Find the larger angle.',type:'num',ans:54,fmt:FM.deg,w:1},{q:'(c) Find the supplement of the larger angle.',type:'num',ans:126,fmt:FM.deg,w:1}],sol:'2x + 3x = 90°, so x = 18°: the angles are 36° and 54°; 180° − 54° = 126°.'},
- {kind:'w',level:'C',topic:'Perimeter and Area',text:'The circumference of a circle is 88 cm. (Use π = 22/7.)',parts:[{q:'(a) Find its radius.',type:'num',ans:14,fmt:FM.unit('cm'),w:1},{q:'(b) Find its area.',type:'num',ans:616,fmt:FM.unit('cm²'),w:2}],sol:'2 × 22/7 × r = 88, so r = 14 cm; area = 22/7 × 14 × 14 = 616 cm².'},
- {kind:'w',level:'C',topic:'Rational Numbers',text:'Consider the rational numbers −3/4,&nbsp; 5/(−6),&nbsp; 2/3,&nbsp; −1/2.',parts:[{q:'(a) Write them in ascending order, separated by commas.',type:'list',ans:[-5/6,-3/4,-1/2,2/3],disp:'−5/6, −3/4, −1/2, 2/3',w:2},{q:'(b) Find the sum of the greatest and the smallest.',type:'num',ans:-1/6,fmt:FM.frac,w:1}],sol:'−5/6 < −3/4 < −1/2 < 2/3; 2/3 + (−5/6) = 4/6 − 5/6 = −1/6.'},
- {kind:'w',level:'X',topic:'Perimeter and Area',text:'A rectangular garden measures 40 m by 25 m. A path 2.5 m wide runs all round it on the outside. (Use π = 22/7.)',parts:[{q:'(a) Find the area of the path (m²).',type:'num',ans:350,fmt:FM.unit('m²'),w:2},{q:'(b) Find the cost of paving the path at ₹45 per m².',type:'num',ans:15750,fmt:FM.money,w:1},{q:'(c) A circular pond of radius 7 m is dug inside the garden. Find the area of the garden left for grass (m²).',type:'num',ans:846,fmt:FM.unit('m²'),w:3}],sol:'Outer 45 × 30 = 1,350 m²; path = 1,350 − 1,000 = 350 m²; cost = 350 × 45 = ₹15,750; pond = 154 m², grass = 1,000 − 154 = 846 m².'},
- {kind:'w',level:'X',topic:'Simple Equations',text:"Ravi's age is 4 years more than twice his sister's age. In 5 years' time, the sum of their ages will be 50 years.",parts:[{q:"(a) Find his sister's present age.",type:'num',ans:12,fmt:FM.unit('years'),w:2},{q:"(b) Find Ravi's present age.",type:'num',ans:28,fmt:FM.unit('years'),w:2},{q:"(c) How many years ago was Ravi's age three times his sister's age?",type:'num',ans:4,fmt:FM.unit('years'),w:2}],sol:'(x + 5) + (2x + 9) = 50, so 3x = 36 and x = 12; Ravi = 28; 28 − y = 3(12 − y), so y = 4.'}
-];
-
 /* ---------- other subjects: fixed question banks ---------- */
 // the banks live in school-questions/<subject>.json and load only when a paper needs them. BANK_INDEX (written by
 // tools/build_school_index.py: run it after editing a bank) gives each subject's file and its chapters per class with
@@ -1337,13 +1307,12 @@ function pickFrom(kind,level,n,topics,seen,notes){
     if(out.length<n){const k=out.length;draw(T.filter(okKind),n);if(out.length>k)notes.add(`Some questions come from other Class ${clsNum(S.klass)} chapters, because the chosen chapters do not have enough questions.`);}}
   return out;
 }
-function buildPaper(useSample){
+function buildPaper(){
   const p=plan(),notes=new Set();let qs=[];
-  if(useSample){qs=SAMPLE.map(q=>JSON.parse(JSON.stringify(q,(k,v)=>k==='fmt'?undefined:v)));qs.forEach((q,i)=>q.parts.forEach((pt,j)=>{pt.fmt=SAMPLE[i].parts[j].fmt;}));}
-  else{const seen=new Set();LEVELS.forEach(l=>{qs=qs.concat(pickFrom('mcq',l,p.mcq[l],S.topics,seen,notes));});LEVELS.forEach(l=>{qs=qs.concat(pickFrom('w',l,p.w[l],S.topics,seen,notes));});}
+  const seen=new Set();LEVELS.forEach(l=>{qs=qs.concat(pickFrom('mcq',l,p.mcq[l],S.topics,seen,notes));});LEVELS.forEach(l=>{qs=qs.concat(pickFrom('w',l,p.w[l],S.topics,seen,notes));});
   if(qs.length<p.nm+p.nw)notes.add(`This paper has ${qs.length} questions instead of ${p.nm+p.nw}, because the question bank for these settings has no more suitable questions.`);
   qs.forEach((q,i)=>{q.no=i+1;q.marks=q.kind==='mcq'?S.marks.MCQ:S.marks[q.level];partMarks(q,q.marks);q.parts.forEach(pt=>{pt.ansText=answerText(pt);});});
-  return{qs,secs:sections(p),notes:[...notes],sample:!!useSample,created:Date.now()};
+  return{qs,secs:sections(p),notes:[...notes],created:Date.now()};
 }
 
 /* ---------- test ---------- */
@@ -1379,21 +1348,20 @@ function seeded(a){return()=>{a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t
 // the subject's question bank is loaded first (usually already there: it starts loading when the subject is chosen)
 let starting=false;
 // done (optional) runs once the paper is built from S, or once starting has failed
-function startTest(useSample,seed,ch,cap,done){
-  if(useSample)return startTest0(true,seed);
+function startTest(seed,ch,cap,done){
   if(starting)return;starting=true;const qm=$('#quickMsg');
-  ensureBank(S.subject).then(()=>{starting=false;startTest0(false,seed,ch,cap);if(done)done();},()=>{starting=false;qm.textContent='The questions could not be loaded. Check your internet connection and try again.';qm.hidden=false;if(done)done();});
+  ensureBank(S.subject).then(()=>{starting=false;startTest0(seed,ch,cap);if(done)done();},()=>{starting=false;qm.textContent='The questions could not be loaded. Check your internet connection and try again.';qm.hidden=false;if(done)done();});
 }
 // a new paper replaces an unfinished one (begin() saves over it), so ask first
 const okToReplace=()=>{const a=loadActive();return !a||confirm(`You have an unfinished paper: ${paperName(a.P)}. Start a new paper instead? The unfinished one will be lost.`);};
-function startTest0(useSample,seed,ch,cap){
+function startTest0(seed,ch,cap){
   if(!okToReplace())return;
   const sd=seed!=null?seed>>>0:Math.floor(Math.random()*4294967296),R0=Math.random;let p;
-  bankCap=cap!=null?cap:null;Math.random=seeded(sd);try{p=buildPaper(useSample);}finally{Math.random=R0;bankCap=null;}
+  bankCap=cap!=null?cap:null;Math.random=seeded(sd);try{p=buildPaper();}finally{Math.random=R0;bankCap=null;}
   p.seed=sd;p.cap=cap!=null?cap:bankLen(S.subject);p.cfg={nq:S.nq,nmcq:S.nmcq,usemcq:!!S.usemcq,mix:Object.assign({},S.mix),marks:Object.assign({},S.marks),duration:S.duration};
-  P=Object.assign(p,{mode:S.mode,duration:S.duration,subject:S.subject,klass:S.klass,board:$('#board').value,country:$('#country').value,label:useSample?'CBSE model paper':'',topicsLabel:S.topics==='ALL'?'':S.topics.join(', '),topicsList:S.topics==='ALL'?null:S.topics.slice(),challenge:ch||null,startAt:Date.now()});
+  P=Object.assign(p,{mode:S.mode,duration:S.duration,subject:S.subject,klass:S.klass,board:$('#board').value,country:$('#country').value,label:'',topicsLabel:S.topics==='ALL'?'':S.topics.join(', '),topicsList:S.topics==='ALL'?null:S.topics.slice(),challenge:ch||null,startAt:Date.now()});
   P.endAt=P.startAt+P.duration*60000;ANS={};FLAG={};CHK={};
-  track(useSample?'start/sample-paper':`start/${P.mode}/${paperTag()}`,useSample?'Started: CBSE sample paper':`Started ${P.mode}: Class ${clsNum(P.klass)} ${P.subject}`);
+  track(`start/${P.mode}/${paperTag()}`,`Started ${P.mode}: Class ${clsNum(P.klass)} ${P.subject}`);
   begin();
 }
 // a preset on chapters with fewer questions than it asks for uses all of them, with the time cut to match (shown on the button)
@@ -1412,7 +1380,7 @@ function startPreset(k,done){
   applyPreset(k);
   const v=validate(),qm=$('#quickMsg');
   if(v.errs.length){qm.innerHTML=v.errs.map(esc).join('<br>');qm.hidden=false;if(done)done();return;}
-  qm.hidden=true;startTest(false,undefined,undefined,undefined,done);
+  qm.hidden=true;startTest(undefined,undefined,undefined,done);
 }
 // "Today's challenge": a quick quiz on every chapter whose paper code comes from the date, class and subject, so every student
 // taking it today gets the same questions (it runs as a class challenge, so the code goes into the results and the score message);
@@ -1423,16 +1391,12 @@ function startDaily(){readForm();const keep=JSON.parse(JSON.stringify(S)),qm=$('
   const v=validate();if(v.errs.length){S=keep;writeForm();readForm();qm.innerHTML=v.errs.map(esc).join('<br>');qm.hidden=false;return;}
   qm.hidden=true;const sd=dailySeed(S.klass,S.subject,dayKey()),ch={code:chCode(sd),name:`Today's challenge, ${new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short'})}`,daily:true};
   track(`daily/class-${slug(S.klass)}/${slug(S.subject)}`,`Started today's challenge: Class ${clsNum(S.klass)} ${S.subject}`);
-  startTest(false,sd,ch,undefined,()=>{S=keep;writeForm();readForm();});}
+  startTest(sd,ch,undefined,()=>{S=keep;writeForm();readForm();});}
 // a Practise button starts a one-chapter practice quiz, then puts back the settings the student had chosen, so the next
 // "Full mock paper" is still timed and covers every chapter
 function practiseChapter(subject,klass,topic){const keep=JSON.parse(JSON.stringify(S));
   Object.assign(S,{subject,klass,topics:[topic],mode:'practice'});writeForm();readForm();show('setup');
   startPreset('quick',()=>{S=keep;writeForm();try{localStorage.setItem('mpp-settings',JSON.stringify(S));}catch(e){}});}
-function startSample(){
-  Object.assign(S,{subject:'Mathematics',klass:'VII',duration:DEF.duration,nq:DEF.nq,usemcq:true,nmcq:DEF.nmcq,mix:Object.assign({},DEF.mix),marks:Object.assign({},DEF.marks),topics:'ALL'});
-  writeForm();readForm();startTest(true);
-}
 function begin(){
   $('#invite').hidden=true;warned={};onlyFlag=false;onlyBlank=null;const exam=P.mode==='exam';
   const total=P.qs.reduce((a,q)=>a+q.marks,0),check=P.duration>=45?3:2,avail=P.duration-check;
@@ -1713,7 +1677,7 @@ function shareLink(g,tot){let u=new URL('https://my-exam.in/');
   if(P.exam&&P.exam.chapter){u.searchParams.set('go',P.exam.list+'/chapter');u.searchParams.set('cs',P.exam.chapter.subj);u.searchParams.set('cc',P.exam.chapter.name);if(P.exam.chapter.cls)u.searchParams.set('cl',P.exam.chapter.cls);}
   else if(P.exam)u.searchParams.set('go',P.exam.list+'/'+P.exam.id);
   else if(!P.mistakes){u=schoolLink(P.klass,P.subject,P.topicsList);
-    // the paper code goes on fresh papers only (not the sample, a retry or a revision paper)
+    // the paper code goes on fresh papers only (not a retry or a revision paper)
     if(P.seed!=null&&P.cfg&&!P.label){paperParams(u,P.seed,P.cfg,P.mode,P.cap);if(P.challenge)chParams(u,P.challenge);}}
   u.searchParams.set('s',`${+g}/${tot}`);return u.toString();}
 function copyText(txt){const ta=document.createElement('textarea');ta.value=txt;ta.setAttribute('readonly','');ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');}catch(e){}ta.remove();}
@@ -1735,7 +1699,7 @@ function makeChallenge(){readForm();const k=$('#chSize').value,keep=JSON.parse(J
   $('#chCopy').addEventListener('click',()=>{copyText(txt);$('#chMsg').textContent='Copied. Paste it into your class group or any chat.';track('challenge/send/copy','Copied a challenge');});
   if($('#chMore'))$('#chMore').addEventListener('click',()=>{navigator.share({text:txt}).then(()=>track('challenge/send/share','Shared a challenge'),()=>{});});
   // the setter can take it too: the settings are put back as they were when the link was made
-  $('#chTake').addEventListener('click',()=>{S=JSON.parse(JSON.stringify(snap));writeForm();readForm();track('start/challenge','Started a class challenge');startTest(false,sd,ch,cap);});}
+  $('#chTake').addEventListener('click',()=>{S=JSON.parse(JSON.stringify(snap));writeForm();readForm();track('start/challenge','Started a class challenge');startTest(sd,ch,cap);});}
 // a square score card (PNG) for WhatsApp / Instagram; colours are fixed light ones so it looks the same in dark mode
 function scoreCard(g,tot,pct,band){const c=document.createElement('canvas');c.width=c.height=1080;const x=c.getContext('2d');
   const LIGHT={'var(--green-soft)':'#e2f3ea','var(--green)':'#1f7a4d','var(--amber-soft)':'#fdf0dc','var(--amber)':'#a35b00','var(--ink-soft)':'#e4eafb','var(--ink)':'#2446a8'};
@@ -1928,6 +1892,7 @@ function show(id){
   if(id==='setup'){renderHistory();ensureBank(S.subject).catch(()=>{});}
   if(id==='exams')renderExams();
   if(id==='jee')renderJee();
+  if(id==='home')renderWeekly();
   // the top menu marks the area you are in; test, results and print belong to School
   const area=id==='home'||id==='exams'?id:(id==='jee'||(P&&P.exam&&['test','results','printView'].indexOf(id)>=0))?'exams':'setup';
   document.querySelectorAll('.topnav a').forEach(a=>{if(a.dataset.nav===area)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
@@ -2026,6 +1991,22 @@ function renderJee(){
   if(inviteHl){const b=document.querySelector('#jeeList [data-jee="'+inviteHl+'"]'),card=b&&b.closest('.examcard');inviteHl=null;if(card){card.classList.add('hl');setTimeout(()=>card.scrollIntoView({block:'center',behavior:'smooth'}),400);}}
   renderChPick(pid);
 }
+// "This week's free mocks": one official paper per exam, the same for everyone from Monday to Sunday, chosen from the week
+// number (no server needed); a paper already taken this week shows its score
+const WEEK0=new Date(2024,0,1); // a Monday
+function weekInfo(now=new Date()){const d=new Date(now.getFullYear(),now.getMonth(),now.getDate()),w=Math.floor(Math.round((d-WEEK0)/864e5)/7);
+  return{w,a:new Date(2024,0,1+w*7),b:new Date(2024,0,7+w*7)};}
+const weeklyPapers=w=>['jee-main','jee-advanced','neet'].map(list=>{const ps=EXAM_PAGES[list].papers;return{list,p:ps[w%ps.length]};});
+function renderWeekly(){
+  const {w,a,b}=weekInfo(),f=x=>x.toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short'}),h=getHist();
+  $('#weekly').innerHTML=`<h3 class="whyhead" id="weeklyHead">This week's free mocks</h3><p class="hint" style="margin:0 0 10px">${f(a)} to ${f(b)}: the same official paper for everyone this week, so you can compare scores with friends. New papers every Monday.</p>
+    <div class="examgrid">${weeklyPapers(w).map(({list,p})=>{const done=h.find(r=>r.exam&&r.pid===p.id&&r.d>=+a);
+      return `<article class="examcard"><div class="head"><h4>${esc(EXAM_PAGES[list].crumb)}</h4>${done?`<span class="soon ready">Done: ${done.got} / ${done.tot}</span>`:''}</div><p class="body">${esc([p.name,p.date,p.shift].filter(Boolean).join(' · '))}</p><p class="pat">${esc(p.pat)}</p><div class="btns"><button type="button" class="${done?'':'primary '}small" data-weekly="${list}/${p.id}">${done?'Take it again':`Start ${durLabel(p.min)} exam`}</button></div></article>`;}).join('')}</div>`;
+  $('#weekly').hidden=false;}
+// opens the exam's page (where loading messages show, with the paper marked) and starts the timed paper there
+$('#weekly').addEventListener('click',e=>{const b=e.target.closest('[data-weekly]');if(!b)return;const [list,id]=b.dataset.weekly.split('/');
+  track(`weekly/${list}/${id}`,`Started this week's mock: ${EXAM_PAGES[list].crumb} ${id}`);
+  inviteHl=id;window.addEventListener('hashchange',()=>startJee(id,'exam'),{once:true});location.hash='#'+list;});
 async function startJee(id,mode){
   let meta=null,list='jee-main';Object.keys(EXAM_PAGES).forEach(k=>{const m=EXAM_PAGES[k].papers.find(x=>x.id===id);if(m){meta=m;list=k;}});
   const msg=$('#jeeMsg');if(!meta||!okToReplace())return;
@@ -2242,7 +2223,7 @@ function openInvite(){const q=new URLSearchParams(location.search),go=q.get('go'
   const b=$('#invite');b.innerHTML=`<span>${html}</span><button type="button" class="small" id="inviteClose" aria-label="Close">✕</button>`;b.hidden=false;
   $('#inviteClose').addEventListener('click',()=>{b.hidden=true;});
   if($('#inviteStart'))$('#inviteStart').addEventListener('click',()=>{const v=validate(),qm=$('#quickMsg');if(v.errs.length){qm.innerHTML=v.errs.map(esc).join('<br>');qm.hidden=false;return;}const sd=invitePaper,ch=inviteCh,cap=inviteCap;invitePaper=null;inviteCh=null;inviteCap=null;
-    if(ch)track('start/challenge','Started a class challenge');else track('start/shared-paper','Started a shared school paper');startTest(false,sd,ch,cap);});// counted as soon as GoatCounter has loaded (its script loads after this one); gives up after 30 s
+    if(ch)track('start/challenge','Started a class challenge');else track('start/shared-paper','Started a shared school paper');startTest(sd,ch,cap);});// counted as soon as GoatCounter has loaded (its script loads after this one); gives up after 30 s
   let tries=0;const send=()=>{if(window.goatcounter&&window.goatcounter.count)track(inviteCh?'invite/challenge':'invite/'+slug(go),inviteCh?'Opened a class challenge':'Opened a shared score link');else if(++tries<60)setTimeout(send,500);};send();}
 // a link from an exam page to one paper (/?paper=2026-p1#jee-advanced): open that exam's papers with the paper highlighted
 function openPaperLink(){const q=new URLSearchParams(location.search),id=q.get('paper'),pg=EXAM_PAGES[location.hash.slice(1)];if(!id||q.get('go'))return;
@@ -2386,7 +2367,7 @@ function homeCounts(){const n=Object.values(BANK_INDEX).reduce((s,b)=>s+Object.v
   if(n)$('#qCount').textContent=(Math.floor(n/100)*100).toLocaleString('en-IN')+'+';if(np)$('#pCount').textContent=np;return{n,np};}
 homeCounts();
 // tests/marking.html opens this page with ?test and reaches the marking code through window.__aaTest
-if(new URLSearchParams(location.search).has('test'))window.__aaTest={checkPart,parseNum,partMarks,answerText,examQs,ensureBank,saveAllBanks,topicsFor,bankCounts,BANK_INDEX,SUBJECTS,T,cleanQ,EXAM_PAGES,durLabel,makeMCQ,seeded,dataOk,renderHistory,homeCounts,dailySeed,EXAM_CH,startChapter,REAL_DIST,realLine,get paper(){return P;},
+if(new URLSearchParams(location.search).has('test'))window.__aaTest={checkPart,parseNum,partMarks,answerText,examQs,ensureBank,saveAllBanks,topicsFor,bankCounts,BANK_INDEX,SUBJECTS,T,cleanQ,EXAM_PAGES,durLabel,makeMCQ,seeded,dataOk,renderHistory,homeCounts,dailySeed,EXAM_CH,startChapter,REAL_DIST,realLine,weekInfo,weeklyPapers,get paper(){return P;},
   // marks qs against ans ({'<question index>-<part index>': answer}) and returns each question's mark
   markPaper(qs,ans,exam){const P0=P,A0=ANS;P={qs,exam};ANS=ans;try{qs.forEach((q,i)=>markQ(i));return qs.map(q=>q.got);}finally{P=P0;ANS=A0;}},
   withPaper(p,fn){const P0=P;P=p;try{return fn();}finally{P=P0;}},
