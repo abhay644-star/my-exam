@@ -286,9 +286,41 @@
     await until(() => $$('#sheet .katex').length > 20, 15000);
     ok(g, 'JEE Main paper opens with 75 questions and its maths typeset', $$('#sheet .q').length === 75 && $$('#sheet .katex').length > 20 && !$$('#sheet .katex-error').length, `${$$('#sheet .q').length} questions, ${$$('#sheet .katex').length} formulas, ${$$('#sheet .katex-error').length} errors`);
     ok(g, 'official paper fits the width', fits(), wide());
+    ok(g, 'an official paper shows only its own instructions (not the school ones)', visible('#sheet ol.instr').length === 1 && /National Testing Agency/.test(visible('#sheet ol.instr')[0].textContent), visible('#sheet ol.instr').map(o => o.textContent.slice(0, 60)).join(' | '));
     $('#submitBtn').click(); await sleep(100); $('#confirmYes').click();
     await until(() => !$('#results').hidden);
     ok(g, 'an all-blank official paper scores 0 out of 300', /\b0\s*\/\s*300\b/.test($('#results').textContent.replace(/\s+/g, ' ')));
+
+    // 8b. practise by chapter: every NEET question on one chapter, from all the papers, each named with its paper
+    W().location.hash = '#neet'; await until(() => $('#chPick [data-chsubj="Biology"]'));
+    const chips = $$('#chPick [data-chsubj]').map(b => b.textContent);
+    ok(g, 'the NEET screen offers Practise by chapter for Physics, Chemistry and Biology', !$('#chPick').hidden && chips.join() === Object.keys(W().__aaTest.EXAM_CH.neet).join() && chips.length === 3, chips.join());
+    $('#chPick [data-chsubj="Chemistry"]').click(); await sleep(100);
+    const chem = W().__aaTest.EXAM_CH.neet.Chemistry, btns = $$('#chPick .chbtn');
+    ok(g, 'choosing Chemistry lists its chapters, most-tested first', $('#chPick [data-chsubj="Chemistry"]').getAttribute('aria-pressed') === 'true' && btns.length === chem.length && btns[0].textContent.startsWith(chem[0][0]) && chem.every((c, i) => !i || chem[i - 1][2] >= c[2]), `${btns.length} of ${chem.length}: ${btns[0] && btns[0].textContent}`);
+    ok(g, 'the chapter list fits the width', fits(), wide());
+    btns[0].click(); await until(() => !$('#test').hidden && $$('#sheet .q').length, 20000);
+    await sleep(1500);  // maths typeset and fitted
+    const tags = $$('#sheet .qtopic').map(t => t.textContent);
+    ok(g, `the chapter (${chem[0][0]}) opens with all its ${chem[0][2]} questions, each named with its paper`, tags.length === chem[0][2] && tags.every(t => /^Chemistry · NEET \(UG\) 20\d\d · .+ · Q\.\d+$/.test(t)) && new Set(tags.map(t => t.split(' · ')[1])).size === chem[0][3].length, `${tags.length} questions; ${tags[0]}`);
+    ok(g, 'NEET options keep their (1)–(4) labels in chapter practice', /^\(1\)/.test($('#q0 .opt b').textContent) && !!$('#q0 [data-check]'), $('#q0 .opt b') && $('#q0 .opt b').textContent);
+    ok(g, 'chapter practice fits the width, with no maths errors', fits() && !$$('#sheet .katex-error').length, wide());
+    ok(g, 'chapter practice shows only its own instructions', visible('#sheet ol.instr').length === 1 && /Each question shows the paper it came from/.test(visible('#sheet ol.instr')[0].textContent), visible('#sheet ol.instr').map(o => o.textContent.slice(0, 60)).join(' | '));
+    answer(0, true); $('#q0 [data-check]').click(); await sleep(200);
+    ok(g, 'chapter practice: "Check answer" marks a wrong answer and shows the explanation', !$('#fb0').hidden && /Explanation|Working/.test($('#fb0').textContent) && W().__aaTest.paper.qs[0].got < 0, $('#fb0').textContent.slice(0, 120));
+    $('#submitBtn').click(); await sleep(100); $('#confirmYes').click(); await until(() => !$('#results').hidden && $('#results .score'));
+    const resTxt = $('#results').textContent.replace(/\s+/g, ' ');
+    ok(g, 'its results name the exam, subject and chapter, and each question\'s paper', resTxt.includes(`NEET (UG) · Chemistry · ${chem[0][0]}`) && /Chemistry · NEET \(UG\) 20\d\d · .+ · Q\.\d+ · MCQ/.test(resTxt), resTxt.slice(0, 300));
+    const mk = JSON.parse(W().localStorage.getItem('aa-mistakes') || '[]');
+    ok(g, 'a wrong answer goes to My mistakes under its own paper\'s name', mk.length && /^NEET \(UG\) 20\d\d · /.test(mk[0].src) && mk[0].q.ol === '1234', mk[0] && mk[0].src);
+    $('#shareBtn').click(); await sleep(150);
+    const chLink = (decodeURIComponent(($('#sharePanel a.btnlink') || { href: '' }).href).match(/https:\/\/my-exam\.in\/\?\S+/) || ['https://my-exam.in/'])[0], chQ = new URL(chLink).searchParams;
+    ok(g, 'the score message links to the same chapter', chQ.get('go') === 'neet/chapter' && chQ.get('cs') === 'Chemistry' && chQ.get('cc') === chem[0][0], chLink);
+    ok(g, 'chapter results fit the width', fits(), wide());
+    await load('../index.html?test&' + chQ.toString());
+    await until(() => !$('#invite').hidden && $('#chPick .chbtn.hl'));
+    ok(g, 'the shared chapter link opens the NEET screen with that chapter marked', !$('#jeeView').hidden && /The chapter, NEET \(UG\) Chemistry · /.test($('#invite').textContent) && !!$('#chPick .chbtn.hl') && $('#chPick .chbtn.hl').textContent.startsWith(chem[0][0]), $('#invite').textContent.slice(0, 200));
+    await load('../index.html?test#home');
 
     // 9. at phone width, every official paper fits the screen with its maths typeset
     if (width < 500) {

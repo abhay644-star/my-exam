@@ -9,6 +9,7 @@ or changing an official paper (its paper.json and its entry in EXAM_PAGES in ind
   questions (answers hidden) and links that open the app with that class, subject or chapter chosen.
 - <exam>/<paper>/index.html (for example jee-main/2026-2-april-shift-1/): one page per official paper listed in
   EXAM_PAGES, with the pattern, subject-wise marks, chapter-wise weightage, a few solved questions and the full answer key.
+- index.html: EXAM_CH, the chapters tagged in each exam's papers, for "Practise by chapter" (between the EXAM_CH markers).
 - sitemap.xml: the fixed pages plus every page above. A page's date changes only when its content changes.
 Chapters come from school-questions/*.json and, for Mathematics, from TOPICS in index.html, in the order the app
 shows them. Pages for a class, subject or paper the app no longer offers are removed.
@@ -94,6 +95,35 @@ for i, h in enumerate(heads):
 assert sum(len(e['papers']) for e in EXAMS) == len(re.findall(r"\{id:'", exam_block)), 'a paper in EXAM_PAGES was not read'
 BODY = {'jee-main': 'the National Testing Agency (NTA)', 'neet': 'the National Testing Agency (NTA)', 'jee-advanced': 'the organising IIT'}
 assert {e['list'] for e in EXAMS} <= set(BODY), 'a new exam in EXAM_PAGES needs its body in BODY'
+
+# "Practise by chapter" on each exam screen: EXAM_CH in index.html lists, per exam and subject, every chapter tagged in its
+# papers as [chapter, NCERT class, questions, [positions in that exam's papers list]], most-tested first, so the app can
+# show the chapters without downloading the papers and fetch only the papers that have the chapter
+def exam_chapters():
+    out = {}
+    for e in EXAMS:
+        subs, seen = {}, {}
+        for i, p in enumerate(e['papers']):
+            for q in json.loads((site / p['path'] / 'paper.json').read_text(encoding='utf-8'))['questions']:
+                if not q.get('chapter'):
+                    continue
+                k = (q['subject'], q['chapter'], q.get('chCls') or '')
+                c = subs.setdefault(q['subject'], {}).setdefault(k[1:], [k[1], k[2], 0, []])
+                c[2] += 1
+                if i not in c[3]:
+                    c[3].append(i)
+                seen.setdefault(k, len(seen))
+        out[e['list']] = {s: sorted(chs.values(), key=lambda c: (-c[2], seen[(s, c[0], c[1])])) for s, chs in subs.items()}
+    return out
+EXAM_CH = exam_chapters()
+exam_ch_js = 'const EXAM_CH=' + json.dumps(EXAM_CH, ensure_ascii=False, separators=(',', ':')) + ';'
+ch_pat = re.compile(r'(/\* EXAM_CH:start \*/).*?(/\* EXAM_CH:end \*/)', re.S)
+assert len(ch_pat.findall(page)) == 1, 'index.html: expected one EXAM_CH:start / EXAM_CH:end marker pair'
+new_page = ch_pat.sub(lambda m: m.group(1) + exam_ch_js + m.group(2), page)
+if new_page != page:
+    (site / 'index.html').write_text(new_page, encoding='utf-8', newline='\n')
+    page = new_page
+    print('index.html: EXAM_CH updated')
 
 # ---------- page parts ----------
 def app_link(cls, subj, chapter=None):

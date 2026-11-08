@@ -156,6 +156,19 @@
       eq(g, 'every question, as saved in My mistakes, passes the backup restore check',
         A.withPaper({ exam: { optLabels: data.optLabels || null } }, () => fresh().filter(q => !A.dataOk(A.cleanQ(q), 0)).map(q => q.no)), []);
     }
+    // "Practise by chapter" (EXAM_CH, written by build_pages.py) matches the papers: every tagged question is in exactly one
+    // chapter, with the right count and papers (run build_pages.py after changing a paper.json or the papers list)
+    for (const [list, ex] of Object.entries(A.EXAM_PAGES)) {
+      const g = 'Practise by chapter: ' + ex.crumb, want = {};
+      for (const [i, m] of ex.papers.entries()) {
+        const data = await (await fetch('../' + m.path + 'paper.json')).json();
+        data.questions.forEach(x => { if (!x.chapter) return; const k = [x.subject, x.chapter, x.chCls || ''].join('|'), w = want[k] = want[k] || [0, []]; w[0]++; if (w[1].indexOf(i) < 0) w[1].push(i); });
+      }
+      const got = {};
+      Object.entries(A.EXAM_CH[list] || {}).forEach(([s, chs]) => chs.forEach(c => { got[[s, c[0], c[1]].join('|')] = [c[2], c[3]]; }));
+      const diff = Object.keys(Object.assign({}, want, got)).filter(k => show(want[k]) !== show(got[k]));
+      eq(g, 'the chapter list matches the questions in the papers', diff.map(k => `${k}: ${show(got[k])} vs ${show(want[k])}`), []);
+    }
   }
 
   // ---------- the school question banks ----------
