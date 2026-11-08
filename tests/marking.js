@@ -161,6 +161,8 @@
     ['JEE Main 2026, 6 April Shift 2', '../jee/2026-04-06-s2/', 75, 300],
     ['JEE Main 2026, 8 April Shift 2', '../jee/2026-04-08-s2/', 75, 300],
     ...['21', '22', '23', '24', '28'].flatMap(d => [1, 2].map(s => [`JEE Main 2026, ${+d} January Shift ${s}`, `../jee/2026-01-${d}-s${s}/`, 75, 300])),
+    ...['02', '03', '04', '07'].flatMap(d => [1, 2].map(s => [`JEE Main 2025, ${+d} April Shift ${s}`, `../jee/2025-04-${d}-s${s}/`, 75, 300])),
+    ['JEE Main 2025, 8 April Shift 2', '../jee/2025-04-08-s2/', 75, 300],
     ...['22', '23', '24', '28', '29'].flatMap(d => [1, 2].map(s => [`JEE Main 2025, ${+d} January Shift ${s}`, `../jee/2025-01-${d}-s${s}/`, 75, 300])),
     ['JEE Advanced 2025 Paper 1', '../jee-adv/2025-p1/', 48, 180],
     ['JEE Advanced 2025 Paper 2', '../jee-adv/2025-p2/', 48, 180],

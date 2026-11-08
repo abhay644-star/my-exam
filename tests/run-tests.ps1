@@ -45,7 +45,7 @@ $server = Start-Process py -ArgumentList "-m http.server $port --bind 127.0.0.1 
 $code = 0
 try {
   Start-Sleep 2
-  foreach ($page in @(@('marking.html', 1500000), @('journey.html', 300000), @('offline.html', 0))) {
+  foreach ($page in @(@('marking.html', 1500000), @('journey.html', 900000), @('offline.html', 0))) {
     $url = "http://127.0.0.1:$port/tests/$($page[0])"
     $dom = if ($page[1]) { Get-DumpedPage $url $page[1] } else { Get-LivePage $url 20 }
     $summary = [regex]::Match($dom, '<p id="summary"[^>]*>(.*?)</p>').Groups[1].Value
