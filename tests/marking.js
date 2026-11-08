@@ -94,6 +94,34 @@
     eq(g, 'a JEE question shows as (b)', A.withPaper({}, () => A.answerText(saved2.parts[0])), '(b) q');
   }
 
+  // ---------- "Compared with the real exam" (real candidate counts, no guessed ranks) ----------
+  function realExam(A) {
+    const g = 'Compared with the real exam';
+    for (const [k, d] of Object.entries(A.REAL_DIST)) {
+      const [list, id] = k.split('/');
+      ok(g, `${k} is an official paper`, (A.EXAM_PAGES[list] || { papers: [] }).papers.some(p => p.id === id));
+      ok(g, `${k}: marks go down and counts go up`, d.rows.every((r, i) => !i || (r.marks < d.rows[i - 1].marks && r.n > d.rows[i - 1].n)));
+    }
+    const neet = { list: 'neet', id: '2026-reexam-50' }, txt = (sc, p) => {
+      const div = document.createElement('div');
+      div.innerHTML = A.withPaper(Object.assign({ exam: neet, label: 'Official paper', mode: 'exam' }, p), () => A.realLine(sc));
+      return div.textContent.replace(/\s+/g, ' ');
+    };
+    ok(g, '715: in the top 19', /ranked in the top 19\./.test(txt(715)), txt(715));
+    ok(g, '700 (not above 700): between 20 and 138', /roughly between 20 and 138\./.test(txt(700)), txt(700));
+    ok(g, '690: between 20 and 138', /roughly between 20 and 138\./.test(txt(690)), txt(690));
+    ok(g, '689: between 139 and 1,492', /roughly between 139 and 1,492\./.test(txt(689)), txt(689));
+    ok(g, '612: between 1,493 and 10,160', /roughly between 1,493 and 10,160\./.test(txt(612)), txt(612));
+    ok(g, '500: between 10,161 and 90,780', /roughly between 10,161 and 90,780\./.test(txt(500)), txt(500));
+    ok(g, '499: below 90,780', /ranked below 90,780\./.test(txt(499)), txt(499));
+    ok(g, 'names the exam and the source', /NEET \(UG\) 2026 re-examination/.test(txt(612)) && /NTA result statistics/.test(txt(612)));
+    ok(g, 'Practice mode says the timed exam is fairer', /Practice mode/.test(txt(612, { mode: 'practice' })) && !/Practice mode/.test(txt(612)));
+    ok(g, 'a second attempt at the whole paper is compared', txt(612, { label: 'Second attempt' }) !== '');
+    eq(g, 'a retry of some questions is not compared', txt(300, { label: 'Retry: questions to review' }), '');
+    eq(g, 'a paper without real counts (NEET 2025) is not compared', txt(612, { exam: { list: 'neet', id: '2025-45' } }), '');
+    eq(g, 'a JEE Main paper is not compared', txt(200, { exam: { list: 'jee-main', id: '2026-04-02-s1' } }), '');
+  }
+
   // ---------- the official papers ----------
   const PAPERS = [
     ['JEE Main 2026, 2 April Shift 1', '../jee/2026-04-02-s1/', 75, 300],
@@ -437,7 +465,7 @@
     let A = null;
     for (let i = 0; i < 100 && !A; i++) { await new Promise(r => setTimeout(r, 100)); A = frame.contentWindow && frame.contentWindow.__aaTest; }
     if (!A) { ok('Setup', 'the site loads with ?test', false, 'window.__aaTest not found'); return render(); }
-    for (const t of [parsing, checking, rules, labels, papers, banks, generators, customPapers, schoolPages, chapterPages, paperPages, examChapterPages]) {
+    for (const t of [parsing, checking, rules, labels, realExam, papers, banks, generators, customPapers, schoolPages, chapterPages, paperPages, examChapterPages]) {
       try { await t(A, frame.contentWindow); } catch (e) { ok('Setup', t.name + ' ran without an error', false, e && e.stack || String(e)); }
     }
     render();
