@@ -415,15 +415,24 @@
     // 8b. a CBSE board practice paper (tests/board-sample): listed on School for its class and subject; a written answer is
     // marked by the student, after "Check answer" in practice and on one marking screen after submitting an exam
     {
-      // the home page shows one card per class and subject with board papers; a card opens School on those papers
+      // the home page shows one card per class (subjects and papers counted); a card opens the board papers page on that class,
+      // which lists every subject's papers with Exam and Practise buttons
       await load('../index.html?test#home');
-      const nGroups = new Set(W().__aaTest.BOARD_PAPERS.map(x => x.cls + '|' + x.subj)).size;
-      ok(g, 'the home page shows the board practice papers, one card per subject, and fits the width', !$('#boardHome').hidden && $$('#boardHome [data-boardgo]').length === nGroups && nGroups > 0 && fits(), `${$$('#boardHome [data-boardgo]').length} cards for ${nGroups} subjects; ${wide()}`);
-      const card = $('#boardHome [data-boardgo]');
+      const BP = W().__aaTest.BOARD_PAPERS, classes = [...new Set(BP.map(x => x.cls))];
+      ok(g, 'the home page shows one board-papers card per class, and fits the width', !$('#boardHome').hidden && $$('#boardHome [data-boardcls]').length === classes.length && classes.length > 0 && fits(), `${$$('#boardHome [data-boardcls]').length} cards for ${classes.length} classes; ${wide()}`);
+      const card = $$('#boardHome [data-boardcls]').pop();
       if (card) {
-        const [c, s] = card.dataset.boardgo.split('|');
-        card.click(); await until(() => !$('#setup').hidden && !$('#boardBox').hidden);
-        ok(g, 'a home card opens School on that subject, with its board papers showing', !$('#setup').hidden && $('#klass').value === c && $('#subject').value === s && !$('#boardBox').hidden && $$('#boardBox [data-board]').length >= 2, `${$('#klass').value} ${$('#subject').value}`);
+        const c = card.dataset.boardcls, nSub = new Set(BP.filter(x => x.cls === c).map(x => x.subj)).size, nPap = BP.filter(x => x.cls === c).length;
+        ok(g, 'each class card counts its subjects and papers', card.textContent.indexOf(`${nSub} subject`) >= 0 && card.textContent.indexOf(`${nPap} papers`) >= 0, card.textContent);
+        card.click(); await until(() => !$('#boardView').hidden && $$('#boardList [data-board]').length);
+        ok(g, 'a class card opens the board papers page on that class, every paper with Exam and Practise, and it fits the width',
+          !$('#boardView').hidden && $(`#boardCls .chip.on[data-bcls="${c}"]`) && $$('#boardList article').length === nSub && $$('#boardList [data-board][data-mode="exam"]').length === nPap && fits(), `${$$('#boardList article').length} subjects, ${$$('#boardList [data-board][data-mode="exam"]').length} papers; ${wide()}`);
+        const other = $$('#boardCls [data-bcls]').find(b => b.dataset.bcls !== c);
+        if (other) { other.click(); await sleep(100); ok(g, 'the class chips switch the list', $$('#boardList [data-board][data-mode="exam"]').length === BP.filter(x => x.cls === other.dataset.bcls).length); }
+        $('#boardList [data-board][data-mode="practice"]').click(); await until(() => !$('#test').hidden && W().__aaTest.paper && W().__aaTest.paper.exam, 20000);
+        ok(g, 'Practise on the board papers page opens that paper', W().__aaTest.paper.exam.list === 'board' && W().__aaTest.paper.mode === 'practice');
+        $('#quitBtn').click(); await sleep(100); $('#confirmYes').click(); await sleep(200);
+        W().localStorage.removeItem('aa-active'); W().localStorage.removeItem('aa-active-paper');
       }
       await load('../index.html?test#school');
       const GB = W().__aaTest;

@@ -232,9 +232,8 @@ button.small{padding:6px 12px;font-size:.85rem}
 .smsum{font-weight:700;margin:4px 0 0}
 .board.hl{outline:3px solid var(--ink);outline-offset:2px}
 #boardHome{margin:4px 0 8px}
-.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
-@media (min-width:700px){.bgrid{grid-template-columns:repeat(3,minmax(0,1fr))}}
-.btile{display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left;min-height:44px;padding:10px 12px;border:1px solid var(--ink);border-radius:var(--r);background:var(--ink-soft);color:var(--fg);font:inherit;cursor:pointer}
+.bgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px}
+.btile{text-decoration:none;display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left;min-height:44px;padding:10px 12px;border:1px solid var(--ink);border-radius:var(--r);background:var(--ink-soft);color:var(--fg);font:inherit;cursor:pointer}
 .btile b{color:var(--ink)}.btile span{font-size:.82rem;color:var(--muted)}
 .btile:hover{background:var(--paper)}.btile:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
 details.custom{border:1px solid var(--line);border-radius:var(--r);padding:0 14px}
@@ -454,6 +453,17 @@ sup,sub{font-size:.7em}
       <h3 id="chHead">Practise by chapter</h3>
       <div id="chPick" class="card stack"></div>
       <p class="hint" style="margin:0"><span id="examSource">Questions and answer keys: NTA.</span> Worked solutions: All in All Exam Practice.<span id="examMore"> More papers are being added.</span> Found a mistake? <button type="button" class="linkbtn" id="jeeReport">Tell us</button>.</p>
+    </div>
+  </section>
+
+  <!-- CBSE BOARD PRACTICE PAPERS: every subject's papers, by class -->
+  <section id="boardView" hidden>
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="#home">Home</a> › <a href="#school">School exams (CBSE)</a> › Board exam 2027</nav>
+    <div class="stack">
+      <div><h2>CBSE board exam 2027: practice papers</h2><p class="lede">Full 3-hour papers in the pattern of CBSE’s 2026–27 sample question papers: the same sections, marks and question types, with model answers and marking points. Written by us, not official CBSE papers. Multiple-choice questions are marked for you; you mark your written answers against the marking points.</p></div>
+      <div class="chips" role="group" aria-label="Class" id="boardCls"></div>
+      <div id="boardPageMsg" class="msg" role="status" hidden></div>
+      <div id="boardList" class="stack"></div>
     </div>
   </section>
 
@@ -1941,7 +1951,7 @@ function finish(auto){
   const rb=$('#retryBlank');if(rb)rb.addEventListener('click',()=>retry('blank'));
   const nx=$('#results [data-next]');if(nx)nx.addEventListener('click',()=>{track(`next-step/${paperTag()}/${slug(next.name)}`,`Next step: practise ${next.name}`);next.go();});
   $('#againBtn').addEventListener('click',()=>retry(false));
-  $('#newBtn').addEventListener('click',()=>{if(!P.exam||P.exam.list==='board')return goSchool();const h='#'+P.exam.list;if(location.hash===h)route();else location.hash=h;});
+  $('#newBtn').addEventListener('click',()=>{if(!P.exam)return goSchool();if(P.exam.list==='board'){if(location.hash==='#board')route();else location.hash='#board';return;}const h='#'+P.exam.list;if(location.hash===h)route();else location.hash=h;});
   $('#results').querySelectorAll('[data-practise]').forEach(b=>b.addEventListener('click',()=>{practiseChapter(P.subject,P.klass,tps[+b.dataset.practise].t);}));
   // from an exam paper to the school chapter test (the address changes to #school without reloading the page)
   $('#results').querySelectorAll('[data-chpractise]').forEach(b=>b.addEventListener('click',()=>{const ch=chs[+b.dataset.chpractise].ch;
@@ -2015,8 +2025,8 @@ function show(id){
   // leaving the test screen (top menu, Back) leaves the paper unfinished, as closing the page does: answers are saved, the clock
   // here stops and the paper waits under "You have an unfinished paper" (exam time still ends at the same moment)
   if(id!=='test'&&id!=='printView')clearInterval(timerId);
-  const SEC={home:'homeView',exams:'examsView',jee:'jeeView'}; // section ids differ from #home/#exams so the browser does not jump down to them
-  ['home','exams','jee','setup','test','results','printView'].forEach(x=>{$('#'+(SEC[x]||x)).hidden=x!==id;});
+  const SEC={home:'homeView',exams:'examsView',jee:'jeeView',board:'boardView'}; // section ids differ from #home/#exams so the browser does not jump down to them
+  ['home','exams','jee','board','setup','test','results','printView'].forEach(x=>{$('#'+(SEC[x]||x)).hidden=x!==id;});
   document.body.classList.toggle('printmode',id==='printView');
   document.body.classList.toggle('compact',id!=='home'&&id!=='printView');  // a smaller header on phones, away from the home page
   if(['test','results','printView'].indexOf(id)<0)renderResume();else $('#resumeBox').hidden=true;
@@ -2024,6 +2034,7 @@ function show(id){
   if(id==='setup'){renderHistory();ensureBank(S.subject).catch(()=>{});}
   if(id==='exams')renderExams();
   if(id==='jee')renderJee();
+  if(id==='board')renderBoardPage();
   if(id==='home'){renderBoardHome();renderWeekly();renderGreet();}
   // the top menu marks the area you are in; test, results and print belong to School
   const area=id==='home'||id==='exams'?id:(id==='jee'||(P&&P.exam&&P.exam.list!=='board'&&['test','results','printView'].indexOf(id)>=0))?'exams':'setup';
@@ -2031,7 +2042,7 @@ function show(id){
 }
 
 /* ---------- navigation: #home, #school and #exams are screens of this one page ---------- */
-const ROUTES={'':'home','#':'home','#home':'home','#school':'setup','#exams':'exams','#jee-main':'jee','#jee-advanced':'jee','#neet':'jee'};
+const ROUTES={'':'home','#':'home','#home':'home','#school':'setup','#exams':'exams','#jee-main':'jee','#jee-advanced':'jee','#neet':'jee','#board':'board'};
 function route(){const id=ROUTES[location.hash]||'home';show(id);window.scrollTo(0,0);if(id!=='setup')track('view/'+id,'Opened '+id);}
 function goSchool(){if(location.hash!=='#school')location.hash='#school';else{show('setup');window.scrollTo(0,0);}}
 
@@ -2167,16 +2178,27 @@ function renderWeekly(){
     <div class="examgrid">${weeklyPapers(w).map(({list,p})=>{const done=h.find(r=>r.exam&&r.pid===p.id&&r.d>=+a);
       return `<article class="examcard"><div class="head"><h4>${esc(EXAM_PAGES[list].crumb)}</h4>${done?`<span class="soon ready">Done: ${done.got} / ${done.tot}</span>`:''}</div><p class="body">${esc([p.name,p.date,p.shift].filter(Boolean).join(' · '))}</p><p class="pat">${esc(p.pat)}</p><div class="btns"><button type="button" class="${done?'':'primary '}small" data-weekly="${list}/${p.id}">${done?'Take it again':`Start ${durLabel(p.min)} exam`}</button></div></article>`;}).join('')}</div>`;
   $('#weekly').hidden=false;}
-// home page: the CBSE board practice papers, one card per class and subject; a card opens School on that subject's papers
-function renderBoardHome(){const box=$('#boardHome'),gs=[];
-  BOARD_PAPERS.forEach(x=>{let g=gs.find(y=>y.cls===x.cls&&y.subj===x.subj);if(!g)gs.push(g={cls:x.cls,subj:x.subj,ps:[]});g.ps.push(x);});
-  box.hidden=!gs.length;if(!gs.length)return;
-  box.innerHTML=`<h3 class="whyhead" id="boardHomeHead">CBSE board exam 2027: practice papers <span class="soon ready">New</span></h3><p class="hint" style="margin:0 0 10px">Full 3-hour papers in the pattern of CBSE’s 2026–27 sample papers, with model answers and marking points. Written by us, not official CBSE papers.</p>
-    <div class="bgrid">${gs.map(g=>`<button type="button" class="btile" data-boardgo="${g.cls}|${esc(g.subj)}"><b>Class ${clsNum(g.cls)} ${esc(g.subj==='Mathematics'?'Maths':g.subj)}</b><span>${g.ps.length} paper${g.ps.length>1?'s':''} · ${esc(g.ps[0].pat.split(' · ').pop())}</span></button>`).join('')}</div>`;}
-$('#boardHome').addEventListener('click',e=>{const b=e.target.closest('[data-boardgo]');if(!b)return;const [c,s]=b.dataset.boardgo.split('|');
-  track(`board-home/class-${slug(c)}/${slug(s)}`,`Home: board papers, Class ${clsNum(c)} ${s}`);
-  Object.assign(S,{klass:c,subject:s,topics:'ALL'});writeForm();readForm();goSchool();
-  setTimeout(()=>{const bx=$('#boardBox');bx.classList.add('hl');setTimeout(()=>bx.classList.remove('hl'),2500);bx.scrollIntoView({block:'start',behavior:'smooth'});},400);});
+// CBSE board practice papers grouped by class, then subject (in BOARD_PAPERS order)
+function boardGroups(){const cs=[];BOARD_PAPERS.forEach(x=>{let c=cs.find(y=>y.cls===x.cls);if(!c)cs.push(c={cls:x.cls,subs:[]});
+  let s=c.subs.find(y=>y.subj===x.subj);if(!s)c.subs.push(s={subj:x.subj,name:x.name.replace(/^CBSE Class \d+ /,''),ps:[]});s.ps.push(x);});
+  return cs.sort((a,b)=>ROMAN.indexOf(a.cls)-ROMAN.indexOf(b.cls));}
+// home page: one card per class (subjects and papers counted); a card opens the board papers page on that class
+function renderBoardHome(){const box=$('#boardHome'),cs=boardGroups(),n=BOARD_PAPERS.length,ns=cs.reduce((a,c)=>a+c.subs.length,0);
+  box.hidden=!cs.length;if(!cs.length)return;
+  box.innerHTML=`<h3 class="whyhead" id="boardHomeHead">CBSE board exam 2027: practice papers <span class="soon ready">New</span></h3><p class="hint" style="margin:0 0 10px">${n} full 3-hour papers across ${ns} subjects, in the pattern of CBSE’s 2026–27 sample papers, with model answers and marking points. Written by us, not official CBSE papers.</p>
+    <div class="bgrid">${cs.map(c=>{const np=c.subs.reduce((a,s)=>a+s.ps.length,0);return `<a class="btile" href="#board" data-boardcls="${c.cls}"><b>Class ${clsNum(c.cls)} board practice</b><span>${c.subs.length} subject${c.subs.length>1?'s':''} · ${np} papers · Explore Class ${clsNum(c.cls)} →</span></a>`;}).join('')}</div>`;}
+let boardCls=null;
+$('#boardHome').addEventListener('click',e=>{const b=e.target.closest('[data-boardcls]');if(!b)return;boardCls=b.dataset.boardcls;
+  track(`board-home/class-${slug(boardCls)}`,`Home: board papers, Class ${clsNum(boardCls)}`);});
+// the board papers page (#board): a class chosen with the chips, each subject's papers with Exam and Practise buttons
+function renderBoardPage(){const cs=boardGroups();if(!cs.length)return;if(!cs.some(c=>c.cls===boardCls))boardCls=cs[0].cls;
+  $('#boardCls').innerHTML=cs.map(c=>`<button type="button" class="chip${c.cls===boardCls?' on':''}" data-bcls="${c.cls}" aria-pressed="${c.cls===boardCls}">Class ${clsNum(c.cls)}</button>`).join('');
+  const c=cs.find(x=>x.cls===boardCls);$('#boardPageMsg').hidden=true;
+  $('#boardList').innerHTML=c.subs.map(s=>`<article class="card stack" style="gap:8px"><h3 style="margin:0">${esc(s.name)}</h3>
+    <div class="bpapers">${s.ps.map(x=>`<div class="bp"><b>${esc(x.date)}</b><span class="hint">${esc(x.pat)}</span><div class="btns"><button type="button" class="small primary" data-board="${x.id}" data-mode="exam">Start ${x.min%60?x.min+'-minute':x.min/60+'-hour'} exam</button><button type="button" class="small" data-board="${x.id}" data-mode="practice">Practise</button></div></div>`).join('')}</div></article>`).join('');}
+$('#boardView').addEventListener('click',e=>{const k=e.target.closest('[data-bcls]'),b=e.target.closest('[data-board]');
+  if(k){boardCls=k.dataset.bcls;renderBoardPage();const on=$('#boardCls [data-bcls="'+boardCls+'"]');if(on)on.focus();}
+  else if(b)startJee(b.dataset.board,b.dataset.mode);});
 // festival greeting on the home screen: shown from..to (local dates, inclusive) until the student closes it
 const GREETS=[{id:'diwali-2026',from:'2026-11-07',to:'2026-11-10',html:'<span><b>\u{1FA94} Happy Diwali!</b> May the festival of lights bring you and your family joy, good health and success in your exams. Enjoy the celebrations, and come back refreshed.</span>'}];
 const isoDay=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
@@ -2197,7 +2219,7 @@ async function startJee(id,mode){
   let meta=null,list='jee-main';Object.keys(EXAM_PAGES).forEach(k=>{const m=EXAM_PAGES[k].papers.find(x=>x.id===id);if(m){meta=m;list=k;}});
   // CBSE board practice papers open from the School screen (list 'board'), with their messages there
   const bm=BOARD_PAPERS.find(x=>x.id===id);if(bm){meta=bm;list='board';}
-  const msg=list==='board'?$('#boardMsg'):$('#jeeMsg');if(!meta||!msg||!okToReplace())return;
+  const msg=list==='board'?(!$('#boardView').hidden?$('#boardPageMsg'):$('#boardMsg')):$('#jeeMsg');if(!meta||!msg||!okToReplace())return;
   msg.className='msg info';msg.textContent='Loading the paper…';msg.hidden=false;
   // no connection, a missing file and a damaged file each get their own message; the cause is logged to the console
   let data;
