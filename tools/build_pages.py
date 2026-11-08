@@ -67,11 +67,50 @@ def chapters(subj, cls):
 offer = {cls: [s for s in SUBJECTS if chapters(s, cls)] for cls in ROMAN}
 
 # chapter pages: these classes and subjects only, and only chapters with enough questions to show (bank chapters with
-# at least CH_MIN questions; Mathematics chapters with samples in tools/maths-samples.json, made by make-maths-samples.ps1)
-# (Hindi chapter names are in Devanagari and would give empty page addresses, so Hindi has no chapter pages yet)
-CH_SCOPE = {'IX': ['Science', 'Mathematics'], 'X': ['Science', 'Social Science', 'English', 'Mathematics'],
-            'XI': ['Physics', 'Chemistry', 'Biology', 'Mathematics'], 'XII': ['Physics', 'Chemistry', 'Biology', 'Mathematics']}
-CH_CLASSES, CH_MIN = list(CH_SCOPE), 15
+# at least CH_MIN questions, or CH_MIN_HINDI for Hindi; Mathematics chapters with samples in tools/maths-samples.json,
+# made by make-maths-samples.ps1)
+CH_SCOPE = {'I': ['Hindi'], 'II': ['Hindi'], 'III': ['Hindi'], 'IV': ['Hindi'], 'V': ['Hindi'], 'VI': ['Hindi'], 'VII': ['Hindi'],
+            'VIII': ['Hindi'], 'IX': ['Science', 'Mathematics', 'Hindi'], 'X': ['Science', 'Social Science', 'English', 'Mathematics', 'Hindi'],
+            'XI': ['Physics', 'Chemistry', 'Biology', 'Mathematics', 'Hindi'], 'XII': ['Physics', 'Chemistry', 'Biology', 'Mathematics', 'Hindi']}
+CH_CLASSES, CH_MIN, CH_MIN_HINDI = list(CH_SCOPE), 15, 10
+
+# Hindi chapter names are in Devanagari; their page addresses use a plain Latin spelling of the name, without accents
+# (नए मेहमान -> nae-mehaman, लाख की चूड़ियाँ -> lakh-ki-churiyan). A consonant keeps its "a" except at the end of a word,
+# unless it ends a joined consonant (वाक्य -> vakya).
+DEVA_CONS = dict(zip('कखगघङचछजझञटठडढणतथदधनपफबभमयरलवशषसहळ',
+                     'k kh g gh n ch chh j jh n t th d dh n t th d dh n p ph b bh m y r l v sh sh s h l'.split()))
+DEVA_NUKTA = {'ड': 'r', 'ढ': 'rh', 'ज': 'z', 'फ': 'f', 'क': 'q', 'ख': 'kh', 'ग': 'g'}
+DEVA_VOWELS = dict(zip('अआइईउऊऋएऐओऔ', 'a a i i u u ri e ai o au'.split()))
+DEVA_SIGNS = dict(zip('ािीुूृेैोौॅॉ', 'a i i u u ri e ai o au e o'.split()))
+def deva_latin(s):
+    out, i = [], 0
+    while i < len(s):
+        c = s[i]
+        if c in DEVA_CONS:
+            sound = DEVA_CONS[c]
+            if s[i + 1:i + 2] == '़':
+                sound, i = DEVA_NUKTA.get(c, sound), i + 1
+            nxt = s[i + 1:i + 2]
+            if nxt in DEVA_SIGNS:
+                sound, i = sound + DEVA_SIGNS[nxt], i + 1
+            elif nxt == '्':
+                i += 1
+            elif (nxt and (nxt in DEVA_CONS or nxt in DEVA_VOWELS or nxt in 'ंँः')) or s[i - 1:i] == '्':
+                sound += 'a'  # the inherent vowel: kept inside a word, and after a joined consonant at the end (वाक्य -> vakya)
+            out.append(sound)
+        elif c in DEVA_VOWELS:
+            out.append(DEVA_VOWELS[c])
+        elif c in 'ंँ':
+            out.append('n')
+        elif c == 'ः':
+            out.append('h')
+        elif c not in '़्।':
+            out.append(c)
+        i += 1
+    return ''.join(out)
+is_deva = lambda s: any('ऀ' <= ch <= 'ॿ' for ch in s)
+ch_slug = lambda ch: slug(deva_latin(ch)) if is_deva(ch) else slug(ch)
+hi = lambda s: f'<span lang="hi">{esc(s)}</span>' if is_deva(s) else esc(s)  # a Hindi name inside an English page
 msamples_file = site / 'tools' / 'maths-samples.json'
 MSAMPLES = json.loads(msamples_file.read_text(encoding='utf-8')) if msamples_file.exists() else {}
 def bank_count(subj, cls, ch):
@@ -81,8 +120,12 @@ def has_chapter_page(subj, cls, ch):
         return False
     if subj == 'Mathematics':
         return bool(MSAMPLES.get(cls, {}).get(ch))
-    return bank_count(subj, cls, ch) >= CH_MIN
-chapter_path = lambda cls, subj, ch: f'/cbse/class-{NUM[cls]}/{slug(subj)}/{slug(ch)}/'
+    return bank_count(subj, cls, ch) >= (CH_MIN_HINDI if subj == 'Hindi' else CH_MIN)
+chapter_path = lambda cls, subj, ch: f'/cbse/class-{NUM[cls]}/{slug(subj)}/{ch_slug(ch)}/'
+for _c in ROMAN:
+    for _s in CH_SCOPE.get(_c, []):
+        _p = [chapter_path(_c, _s, ch) for ch in chapters(_s, _c)]
+        assert len(set(_p)) == len(_p) and all(not p.endswith('//') for p in _p), f'two Class {_c} {_s} chapter pages have the same address'
 
 # official papers: EXAM_PAGES in index.html, one entry per paper on a single line
 exam_block = re.search(r'const EXAM_PAGES=\{(.*?)\n\};', page, re.S).group(1)
@@ -241,7 +284,7 @@ def subject_page(cls, subj):
             f'marked instantly with {"worked solutions" if maths else "explanations"}. No sign-up.')
     # a chapter with its own page links there (questions and answers, then its test); the others open the app directly
     rows = ''.join(
-        f'<li><a href="{esc(chapter_path(cls, subj, c) if has_chapter_page(subj, cls, c) else app_link(cls, subj, c))}"><b>{esc(c)}</b>'
+        f'<li><a href="{esc(chapter_path(cls, subj, c) if has_chapter_page(subj, cls, c) else app_link(cls, subj, c))}"><b>{hi(c)}</b>'
         f'{"" if maths and c not in counts else f"<small>{counts.get(c, 0)} questions</small>"}</a></li>' for c in chs)
     sq = samples(subj, cls)
     sq_html = (f'\n  <h2>Sample questions</h2>\n  <p>A few questions from the Class {n} {esc(subj)} bank. Every test picks a fresh mix.</p>\n'
@@ -290,8 +333,9 @@ def chapter_samples(subj, cls, ch, n=8):
         opts = [correct] + [fx(o) for o in q['o'][:3]]
         random.Random(f'{subj}|{i}').shuffle(opts)
         li = ''.join(f'<li>{o}</li>' for o in opts)
-        items.append(f'<li class="sq"><p class="sqt">{q["q"]}</p><ol type="a">{li}</ol>'
-                     f'<details><summary>Show answer</summary><p><b>Answer:</b> {correct}</p><p>{q["e"]}</p></details></li>')
+        lang = ' lang="hi"' if subj == 'Hindi' else ''
+        items.append(f'<li class="sq"><p class="sqt"{lang}>{q["q"]}</p><ol type="a"{lang}>{li}</ol>'
+                     f'<details><summary>Show answer</summary><p><b>Answer:</b> <span{lang}>{correct}</span></p><p{lang}>{q["e"]}</p></details></li>')
     return items
 
 def maths_samples(cls, ch):
@@ -310,20 +354,21 @@ def maths_samples(cls, ch):
 def chapter_page(cls, subj, ch):
     n, path, maths = NUM[cls], chapter_path(cls, subj, ch), subj == 'Mathematics'
     count = bank_count(subj, cls, ch)
-    sq = maths_samples(cls, ch) if maths else chapter_samples(subj, cls, ch)
+    # a small chapter shows fewer samples, so the page does not give away most of its test
+    sq = maths_samples(cls, ch) if maths else chapter_samples(subj, cls, ch, 8 if count >= CH_MIN else 5)
     size = 'New questions are made for every test, so you can practise it again and again.' if maths else f'This chapter has {count} questions; every test picks a fresh mix.'
     title = f'Class {n} {subj}: {ch} MCQ Test | my-exam.in'
     desc = (f'Free online test for CBSE Class {n} {subj}, chapter {ch}: practice questions with answers and '
             f'{"worked solutions" if maths else "explanations"}, marked instantly. No sign-up.')
-    others = ''.join(f'<a href="{chapter_path(cls, subj, c)}">{esc(c)}</a>' for c in chapters(subj, cls) if c != ch and has_chapter_page(subj, cls, c))
-    body = f'''  <h1>Class {n} {esc(subj)}: {esc(ch)}</h1>
-  <p class="lede">Practise the {"NCERT " if syllabus(subj, cls) == "the NCERT syllabus" else ""}chapter {esc(ch)} (CBSE Class {n} {esc(subj)}) with an online test that is marked instantly, with {"worked solutions" if maths else "explanations"}. {size} Free, no sign-up.</p>
-  <a class="btn" href="{esc(app_link(cls, subj, ch))}">Start a {esc(ch)} test →</a>
+    others = ''.join(f'<a href="{chapter_path(cls, subj, c)}">{hi(c)}</a>' for c in chapters(subj, cls) if c != ch and has_chapter_page(subj, cls, c))
+    body = f'''  <h1>Class {n} {esc(subj)}: {hi(ch)}</h1>
+  <p class="lede">Practise the {"NCERT " if syllabus(subj, cls) == "the NCERT syllabus" else ""}chapter {hi(ch)} (CBSE Class {n} {esc(subj)}) with an online test that is marked instantly, with {"worked solutions" if maths else "explanations"}. {size} Free, no sign-up.</p>
+  <a class="btn" href="{esc(app_link(cls, subj, ch))}">Start a {hi(ch)} test →</a>
 
   <h2>Practice questions with answers</h2>
   <p>A few questions from this chapter. Open each one to see the answer.</p>
   <ol class="samples">{"".join(sq)}</ol>
-  <a class="btn" href="{esc(app_link(cls, subj, ch))}">Take the full {esc(ch)} test →</a>
+  <a class="btn" href="{esc(app_link(cls, subj, ch))}">Take the full {hi(ch)} test →</a>
 
   <h2>More Class {n} {esc(subj)} chapters</h2>
   <p class="links"><a href="/cbse/class-{n}/{slug(subj)}/">All Class {n} {esc(subj)} chapters</a>{others}</p>

@@ -411,6 +411,32 @@
     eq(g, 'every chapter page has sample questions and a start button for that chapter', badStart, []);
     ok(g, 'number of chapter pages checked: ' + n, n > 0);
   }
+  // Hindi chapter pages: their addresses are a Latin spelling of the Devanagari name, made by build_pages.py, so the pages
+  // are found from the links on each Hindi subject page; every chapter with at least 10 questions has one
+  async function hindiChapterPages(A) {
+    const g = 'Hindi chapter pages', bad = [];
+    let n = 0;
+    for (const [i, c] of ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'].entries()) {
+      const url = `../cbse/class-${i + 1}/hindi/`, doc = new DOMParser().parseFromString(await (await fetch(url)).text(), 'text/html');
+      const links = [...doc.querySelectorAll('.chapters a')].filter(a => /^\/cbse\//.test(a.getAttribute('href')));
+      const counts = A.bankCounts('Hindi', c), want = A.topicsFor('Hindi', c).filter(t => (counts[t] || 0) >= 10);
+      const got = links.map(a => a.querySelector('b').textContent);
+      if (want.join('|') !== got.join('|')) bad.push(`Class ${i + 1}: links to ${got.length} of ${want.length} chapters`);
+      for (const a of links) {
+        n++;
+        const href = a.getAttribute('href'), r = await fetch('..' + href);
+        if (!/^\/cbse\/class-\d+\/hindi\/[a-z0-9]+(-[a-z0-9]+)*\/$/.test(href) || !r.ok) { bad.push(href + ': bad address or missing'); continue; }
+        const page = new DOMParser().parseFromString(await r.text(), 'text/html'), btn = page.querySelector('a.btn');
+        const q = btn && new URL(btn.getAttribute('href'), location.href).searchParams, ch = a.querySelector('b').textContent;
+        const samples = page.querySelectorAll('.samples .sq').length;
+        if (!q || q.get('class') !== c || q.get('subject') !== 'Hindi' || q.get('chapter') !== ch) bad.push(href + ': start button');
+        if (!samples || samples > ((counts[ch] || 0) >= 15 ? 8 : 5)) bad.push(`${href}: ${samples} sample questions`);
+        if (!page.querySelector('h1 [lang="hi"]')) bad.push(href + ': chapter name not marked as Hindi');
+      }
+    }
+    eq(g, 'every Hindi chapter with 10 or more questions has a page, linked from its subject page, with a few samples and a start button', bad, []);
+    ok(g, 'number of Hindi chapter pages checked: ' + n, n >= 100);
+  }
 
   // ---------- the official paper pages (jee-main/…, jee-advanced/…, neet/…, built by tools/build_pages.py) ----------
   // the key each answer-key entry carries: option numbers, a number or lo~hi range, or "dropped"
@@ -479,7 +505,7 @@
     let A = null;
     for (let i = 0; i < 100 && !A; i++) { await new Promise(r => setTimeout(r, 100)); A = frame.contentWindow && frame.contentWindow.__aaTest; }
     if (!A) { ok('Setup', 'the site loads with ?test', false, 'window.__aaTest not found'); return render(); }
-    for (const t of [parsing, checking, rules, labels, realExam, weekly, papers, banks, generators, customPapers, schoolPages, chapterPages, paperPages, examChapterPages]) {
+    for (const t of [parsing, checking, rules, labels, realExam, weekly, papers, banks, generators, customPapers, schoolPages, chapterPages, hindiChapterPages, paperPages, examChapterPages]) {
       try { await t(A, frame.contentWindow); } catch (e) { ok('Setup', t.name + ' ran without an error', false, e && e.stack || String(e)); }
     }
     render();
