@@ -4,8 +4,9 @@ Run from the site folder after adding a paper's figures:  py tools/optimise_figu
 (needs Pillow:  py -m pip install pillow)
 
 Each figure is re-compressed at the highest PNG level; an image with 256 colours or fewer is also tried as an exact palette
-image. The smaller file is kept only if it decodes to exactly the same pixels as the original; otherwise the original
-stays. Running it again on figures already done changes nothing.
+image. The smaller file is kept only if it decodes to exactly the same pixels as the original and saves at least 10% (and 2 KB);
+otherwise the original stays. (Re-encoding a figure that is already done can still find small gains each time, so the
+10% keeps figures already done from being rewritten on every run.)
 """
 import io
 from pathlib import Path
@@ -34,7 +35,7 @@ for p in sorted(q for d in ('jee', 'jee-adv', 'neet') for q in (site / d).rglob(
     ref = pixels(im)
     best = raw
     for data in candidates(im):
-        if len(data) < len(best):
+        if len(data) < len(best) and len(data) <= 0.9 * len(raw) and len(raw) - len(data) >= 2048:
             new = Image.open(io.BytesIO(data)); new.load()
             if new.size == ref.size and ImageChops.difference(pixels(new), ref).getbbox() is None:
                 best = data

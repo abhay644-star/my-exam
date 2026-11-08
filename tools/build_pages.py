@@ -152,8 +152,9 @@ def exam_chapters():
             for q in json.loads((site / p['path'] / 'paper.json').read_text(encoding='utf-8'))['questions']:
                 if not q.get('chapter'):
                     continue
-                k = (q['subject'], q['chapter'], q.get('chCls') or '')
-                c = subs.setdefault(q['subject'], {}).setdefault(k[1:], [k[1], k[2], 0, []])
+                s = q.get('chSubj') or q['subject']  # NEET 2024 Botany and Zoology questions are Biology chapters
+                k = (s, q['chapter'], q.get('chCls') or '')
+                c = subs.setdefault(s, {}).setdefault(k[1:], [k[1], k[2], 0, []])
                 c[2] += 1
                 if i not in c[3]:
                     c[3].append(i)
@@ -452,12 +453,19 @@ def paper_page(e, p):
     label, path = paper_label(p), paper_path(e, p)
     subjects = list(dict.fromkeys(q['subject'] for q in qs))
     marks = lambda q: q.get('full') or 4
-    total = sum(marks(q) for q in qs)
+    # an "attempt any N" section (secLimit, NEET 2024 Section B) counts only N questions towards the maximum, as in the app
+    lim, seen, in_max = data.get('secLimit') or {}, {}, set()
+    for i, q in enumerate(qs):
+        k = (q['subject'], str(q.get('section')))
+        seen[k] = seen.get(k, 0) + 1
+        if not lim.get(k[1]) or seen[k] <= lim[k[1]]:
+            in_max.add(i)
+    total = sum(marks(q) for i, q in enumerate(qs) if i in in_max)
     dur = dur_text(p['min'])
     # the paper's own marking scheme when it has one (it can differ from year to year), else the exam's usual pattern
     marking = ' '.join(data['instr'][1:]) if data.get('instr') else e['note']
 
-    rows = ''.join(f'<tr><td>{esc(s)}</td><td class="n">{sum(q["subject"] == s for q in qs)}</td><td class="n">{sum(marks(q) for q in qs if q["subject"] == s)}</td></tr>' for s in subjects)
+    rows = ''.join(f'<tr><td>{esc(s)}</td><td class="n">{sum(q["subject"] == s for q in qs)}</td><td class="n">{sum(marks(q) for i, q in enumerate(qs) if q["subject"] == s and i in in_max)}</td></tr>' for s in subjects)
     glance = f'''  <div class="card tbl">
     <table>
       <thead><tr><th>Subject</th><th class="n">Questions</th><th class="n">Marks</th></tr></thead>
@@ -467,18 +475,20 @@ def paper_page(e, p):
   </div>'''
 
     # chapter-wise weightage: chapters by number of questions, then in paper order; a chapter the app also offers links to its chapter test
-    weight = f'\n  <p class="links"><small>Every past question on a chapter:</small> ' + ''.join(f'<a href="{exam_subject_path(e, s)}">{esc(e["crumb"])} {esc(s)} chapter-wise</a>' for s in subjects) + '</p>'
+    ch_subjects = list(dict.fromkeys(q.get('chSubj') or q['subject'] for q in qs))
+    weight = f'\n  <p class="links"><small>Every past question on a chapter:</small> ' + ''.join(f'<a href="{exam_subject_path(e, s)}">{esc(e["crumb"])} {esc(s)} chapter-wise</a>' for s in ch_subjects) + '</p>'
     for s in subjects:
         sq = [q for q in qs if q['subject'] == s]
+        cs = sq[0].get('chSubj') or s  # the subject its chapters belong to (Botany and Zoology: Biology)
         cnt = Counter((q['chapter'], q.get('chCls')) for q in sq)
         first = {k: i for i, k in reversed(list(enumerate((q['chapter'], q.get('chCls')) for q in sq)))}
         trs = ''
         for (ch, cls), c in sorted(cnt.items(), key=lambda kv: (-kv[1], first[kv[0]])):
             m = sum(marks(q) for q in sq if (q['chapter'], q.get('chCls')) == (ch, cls))
             # every question on it from all this exam's papers (a question left untagged is outside the current NCERT books)
-            name = f'<a href="{esc(exam_chapter_path(e, s, ch, cls or ""))}">{esc(ch)}</a>' if ch else 'Not in a current NCERT chapter'
+            name = f'<a href="{esc(exam_chapter_path(e, cs, ch, cls or ""))}">{esc(ch)}</a>' if ch else 'Not in a current NCERT chapter'
             trs += f'<tr><td>{name}</td><td>{f"Class {NUM[cls]}" if cls in NUM else ""}</td><td class="n">{c}</td><td class="n">{m}</td></tr>'
-        practise = ''.join(f'<a href="/cbse/class-{NUM[c]}/{slug(s)}/">Class {NUM[c]} {esc(s)}</a>' for c in ('XI', 'XII') if s in offer[c])
+        practise = ''.join(f'<a href="/cbse/class-{NUM[c]}/{slug(cs)}/">Class {NUM[c]} {esc(cs)}</a>' for c in ('XI', 'XII') if cs in offer[c])
         weight += f'''
   <h3>{esc(s)}</h3>
   <div class="card tbl">
@@ -569,7 +579,7 @@ def exam_chapter_page(e, s, c):
         p = e['papers'][i]
         data = json.loads((site / p['path'] / 'paper.json').read_text(encoding='utf-8'))
         OL, fig, label = data.get('optLabels') or 'abcd', '/' + p['path'] + 'fig/', paper_label(p)
-        mine = [(n, q) for n, q in enumerate(data['questions']) if q['subject'] == s and q.get('chapter') == ch and (q.get('chCls') or '') == cls]
+        mine = [(n, q) for n, q in enumerate(data['questions']) if (q.get('chSubj') or q['subject']) == s and q.get('chapter') == ch and (q.get('chCls') or '') == cls]
         for n, q in mine:
             no = n + 1 if data.get('renumber') else q['no']
             items.append(solved(q, no, OL, fig, f'<a href="{paper_path(e, p)}">{esc(label)}</a> · Question {no}'))

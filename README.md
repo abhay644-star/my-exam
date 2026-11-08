@@ -29,6 +29,8 @@ Live site: https://my-exam.in
 
 It also writes `EXAM_CH` in `index.html`: the chapters tagged in each exam's papers, used by **Practise by chapter** on each exam screen (every question on one chapter from all that exam's papers). The tests check that it matches the papers, so run the tool after any change to a `paper.json`.
 
+A paper with "attempt any N" sections sets `"secLimit"` in its `paper.json`, for example NEET 2024: `{"B": 10}`. As in the exam, only the first N questions answered in each such section (per subject) are marked, and the maximum marks count N questions. A question's `chSubj` files its chapter under another subject: NEET 2024's Botany and Zoology questions are Biology chapters.
+
 After adding a paper's figures, run `py tools/optimise_figures.py` (needs Pillow: `py -m pip install pillow`). It re-compresses every paper figure and keeps a smaller file only if it has exactly the same pixels, so it never changes how a figure looks.
 
 After adding an official paper (its `paper.json` and its entry in `EXAM_PAGES` in `index.html`), run the tool and add a link to the new paper page under the papers list on its exam page (`jee-main/index.html`, `jee-advanced/index.html` or `neet/index.html`). The tests check that the link exists.

@@ -147,6 +147,7 @@
     ['JEE Main 2026, 2 April Shift 1', '../jee/2026-04-02-s1/', 75, 300],
     ['NEET (UG) 2026 re-exam, code 50', '../neet/2026-reexam-50/', 180, 720],
     ['NEET (UG) 2025, code 45', '../neet/2025-45/', 180, 720],
+    ['NEET (UG) 2024, code T1', '../neet/2024-T1/', 200, 720],
     ['JEE Advanced 2026 Paper 1', '../jee-adv/2026-p1/', 48, 180],
     ['JEE Advanced 2026 Paper 2', '../jee-adv/2026-p2/', 54, 180],
     ['JEE Main 2026, 2 April Shift 2', '../jee/2026-04-02-s2/', 75, 300],
@@ -188,7 +189,9 @@
       eq(g, 'the start button shows the paper\'s real length', meta && meta.min, data.duration || 180);
       const qs = A.examQs(data, path + 'fig/');
       eq(g, 'number of questions', qs.length, n);
-      eq(g, 'maximum marks', qs.reduce((s, q) => s + q.marks, 0), total);
+      // ex: the paper's "attempt any N" sections (NEET 2024 Section B), marked as in the exam
+      const ex = { secLimit: data.secLimit || null };
+      eq(g, 'maximum marks', A.maxMarks(qs, ex), total);
       const badKey = qs.filter(q => q.parts.some(p => (p.type === 'choice' && !(p.ans >= 0 && p.ans < p.options.length))
         || (p.type === 'multi' && !(p.ans.length && p.ans.every(j => j >= 0 && j < p.options.length)))
         || (p.type === 'num' && !(isFinite(p.ans) && (p.lo == null || p.lo <= p.hi))))).map(q => q.no);
@@ -196,11 +199,15 @@
       const sum = got => +got.reduce((s, x) => s + x, 0).toFixed(2);
       const all = f => { const a = {}; qs.forEach((q, i) => { a[i + '-0'] = f(q.parts[0]); }); return a; };
       const fresh = () => A.examQs(data, path + 'fig/');
-      const full = A.markPaper(fresh(), all(keyOf));
+      const qsK = fresh(), full = A.markPaper(qsK, all(keyOf), ex);
       eq(g, 'answering every question with its key gives full marks', sum(full), total);
-      eq(g, '...and no question loses marks', fresh().map((q, i) => q.marks - full[i] > 1e-9 ? q.no : null).filter(x => x != null), []);
-      eq(g, 'leaving every question blank scores only the dropped questions', sum(A.markPaper(fresh(), all(() => ''))), sum(qs.map(q => q.dropped ? q.marks : 0)));
-      eq(g, 'answering every question wrongly scores the negative marks', sum(A.markPaper(fresh(), all(wrongOf))), sum(qs.map(q => q.dropped ? q.marks : -q.neg)));
+      eq(g, '...and no counted question loses marks', qsK.map((q, i) => !q.uncounted && q.marks - full[i] > 1e-9 ? q.no : null).filter(x => x != null), []);
+      const qsB = fresh();
+      eq(g, 'leaving every question blank scores only the dropped questions', sum(A.markPaper(qsB, all(() => ''), ex)), sum(qsB.map(q => q.dropped && q.inMax !== false ? q.marks : 0)));
+      const qsW = fresh();
+      eq(g, 'answering every question wrongly scores the negative marks of the counted questions', sum(A.markPaper(qsW, all(wrongOf), ex)), sum(qsW.map(q => q.inMax === false ? 0 : q.dropped ? q.marks : -q.neg)));
+      if (data.secLimit) eq(g, 'only the first N answered questions of each "attempt any N" section count', qsW.filter(q => q.uncounted).length,
+        qs.filter(q => data.secLimit[String(q.sec).split('-').pop()]).length - Object.entries(qs.reduce((m, q) => { const n = data.secLimit[String(q.sec).split('-').pop()]; if (n) m[q.sec] = n; return m; }, {})).reduce((s, [, n]) => s + n, 0));
       eq(g, 'every question, as saved in My mistakes, passes the backup restore check',
         A.withPaper({ exam: { optLabels: data.optLabels || null } }, () => fresh().filter(q => !A.dataOk(A.cleanQ(q), 0)).map(q => q.no)), []);
     }
@@ -210,7 +217,7 @@
       const g = 'Practise by chapter: ' + ex.crumb, want = {};
       for (const [i, m] of ex.papers.entries()) {
         const data = await (await fetch('../' + m.path + 'paper.json')).json();
-        data.questions.forEach(x => { if (!x.chapter) return; const k = [x.subject, x.chapter, x.chCls || ''].join('|'), w = want[k] = want[k] || [0, []]; w[0]++; if (w[1].indexOf(i) < 0) w[1].push(i); });
+        data.questions.forEach(x => { if (!x.chapter) return; const k = [x.chSubj || x.subject, x.chapter, x.chCls || ''].join('|'), w = want[k] = want[k] || [0, []]; w[0]++; if (w[1].indexOf(i) < 0) w[1].push(i); });
       }
       const got = {};
       Object.entries(A.EXAM_CH[list] || {}).forEach(([s, chs]) => chs.forEach(c => { got[[s, c[0], c[1]].join('|')] = [c[2], c[3]]; }));
