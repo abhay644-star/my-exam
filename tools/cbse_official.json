@@ -243,5 +243,106 @@
     "qp": "https://www.cbse.gov.in/cbsenew/question-paper/2024/XII/ENGLISH_CORE.zip"
    }
   ]
+ },
+ "X|Hindi": {
+  "sqp": "https://cbseacademic.nic.in/web_material/SQP/ClassX_2026_27/HindiCourseA-SQP.pdf",
+  "sqpMs": "https://cbseacademic.nic.in/web_material/SQP/ClassX_2026_27/HindiCourseA-MS.pdf",
+  "papers": [
+   {
+    "year": "2026",
+    "qp": "https://www.cbse.gov.in/cbsenew/question-paper/2026/X/Hindi_Course_A_UPD.zip",
+    "ms": "https://www.cbse.gov.in/cbsenew/marking-scheme/2026/X/002_HINDI_COURSE_A.zip"
+   },
+   {
+    "year": "2025",
+    "qp": "https://www.cbse.gov.in/cbsenew/question-paper/2025/X/002_Hindi_Course_A.zip"
+   },
+   {
+    "year": "2024",
+    "qp": "https://www.cbse.gov.in/cbsenew/question-paper/2024/X/HINDI_A.zip",
+    "ms": "https://www.cbse.gov.in/cbsenew/Marking-Scheme/2024/X/HINDI_A.zip"
+   }
+  ]
+ },
+ "XII|Political Science": {
+  "sqp": "https://cbseacademic.nic.in/web_material/SQP/ClassXII_2026_27/PolSci-SQP.pdf",
+  "sqpMs": "https://cbseacademic.nic.in/web_material/SQP/ClassXII_2026_27/PolSci-MS.pdf",
+  "papers": [
+   {
+    "year": "2026",
+    "qp": "https://www.cbse.gov.in/cbsenew/question-paper/2026/XII/Political_Science.zip",
+    "ms": "https://www.cbse.gov.in/cbsenew/marking-scheme/2026/XII/Political_Science.zip"
+   },
+   {
+    "year": "2025",
+    "qp": "https://www.cbse.gov.in/cbsenew/question-paper/2025/XII/POLITICAL_SCIENCE.zip",
+    "ms": "https://www.cbse.gov.in/cbsenew/Marking-Scheme/2025/XII/Political_Science.zip"
+   },
+   {
+    "year": "2024",
+    "qp": "https://www.cbse.gov.in/cbsenew/question-paper/2024/XII/POLITICAL_SCIENCE.zip"
+   }
+  ]
+ },
+ "XII|History": {
+  "sqp": "https://cbseacademic.nic.in/web_material/SQP/ClassXII_2026_27/History-SQP.pdf",
+  "sqpMs": "https://cbseacademic.nic.in/web_material/SQP/ClassXII_2026_27/History-MS.pdf",
+  "papers": [
+   {
+    "year": "2026",
+    "qp": "https://www.cbse.gov.in/cbsenew/question-paper/2026/XII/History.zip",
+    "ms": "https://www.cbse.gov.in/cbsenew/marking-scheme/2026/XII/HISTORY.zip"
+   },
+   {
+    "year": "2025",
+    "qp": "https://www.cbse.gov.in/cbsenew/question-paper/2025/XII/HISTORY.zip",
+    "ms": "https://www.cbse.gov.in/cbsenew/Marking-Scheme/2025/XII/History.zip"
+   },
+   {
+    "year": "2024",
+    "qp": "https://www.cbse.gov.in/cbsenew/question-paper/2024/XII/HISTORY.zip",
+    "ms": "https://www.cbse.gov.in/cbsenew/Marking-Scheme/2024/XII/History.zip"
+   }
+  ]
+ },
+ "XII|Geography": {
+  "sqp": "https://cbseacademic.nic.in/web_material/SQP/ClassXII_2026_27/Geography-SQP.pdf",
+  "sqpMs": "https://cbseacademic.nic.in/web_material/SQP/ClassXII_2026_27/Geography-MS.pdf",
+  "papers": [
+   {
+    "year": "2026",
+    "qp": "https://www.cbse.gov.in/cbsenew/question-paper/2026/XII/Geography.zip",
+    "ms": "https://www.cbse.gov.in/cbsenew/marking-scheme/2026/XII/Geography.zip"
+   },
+   {
+    "year": "2025",
+    "qp": "https://www.cbse.gov.in/cbsenew/question-paper/2025/XII/GEOGRAPHY.zip",
+    "ms": "https://www.cbse.gov.in/cbsenew/Marking-Scheme/2025/XII/Geography.zip"
+   },
+   {
+    "year": "2024",
+    "qp": "https://www.cbse.gov.in/cbsenew/question-paper/2024/XII/GEOGRAPHY.zip",
+    "ms": "https://www.cbse.gov.in/cbsenew/Marking-Scheme/2024/XII/Geography.zip"
+   }
+  ]
+ },
+ "XII|Computer Science": {
+  "sqp": "https://cbseacademic.nic.in/web_material/SQP/ClassXII_2026_27/ComputerScience-SQP.pdf",
+  "sqpMs": "https://cbseacademic.nic.in/web_material/SQP/ClassXII_2026_27/ComputerScience-MS.pdf",
+  "papers": [
+   {
+    "year": "2026",
+    "qp": "https://www.cbse.gov.in/cbsenew/question-paper/2026/XII/Computer_Science.zip",
+    "ms": "https://www.cbse.gov.in/cbsenew/marking-scheme/2026/XII/Computer_Science.zip"
+   },
+   {
+    "year": "2025"
+   },
+   {
+    "year": "2024",
+    "qp": "https://www.cbse.gov.in/cbsenew/question-paper/2024/XII/Computer_Science.zip",
+    "ms": "https://www.cbse.gov.in/cbsenew/Marking-Scheme/2024/XII/Computer_Science.zip"
+   }
+  ]
  }
 }

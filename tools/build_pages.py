@@ -419,7 +419,7 @@ def paper_path(e, p):
     return f"/{e['list']}/{slug(paper_label(p)[len(e['crumb']):])}/"
 
 # the same rules as examQs in index.html: a "less than" sign is not a tag; a one-line $$…$$ formula becomes a wrapping one
-safe = lambda s: re.sub(r'<(?!/?(br|table|tr|td|th)\b)', '&lt;', '' if s is None else str(s))
+safe = lambda s: re.sub(r'<(?!/?(br|table|tr|td|th|pre)\b)', '&lt;', '' if s is None else str(s))
 wrap_math = lambda s: re.sub(r'\$\$([\s\S]+?)\$\$', lambda m: m.group(0) if re.search(r'\\begin\{', m.group(1)) else f'<div class="dm">$\\displaystyle {m.group(1)}$</div>', s)
 num = lambda x: str(int(x)) if float(x) == int(x) else str(x)
 
