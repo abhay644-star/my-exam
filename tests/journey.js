@@ -42,7 +42,7 @@
     const dead = [];
     for (const h of pop) { const r = await fetch('..' + h + 'index.html').catch(() => null); if (!r || !r.ok) dead.push(h); }
     ok(g, 'home page has popular practice links that all open', pop.length >= 5 && !dead.length, `${pop.length} links; missing ${dead.join(', ')}`);
-    ok(g, 'home page has the three how-it-works steps', D().querySelectorAll('#homeView .steps li').length === 3);
+    ok(g, 'home page links teachers to the teachers\' page', !!D().querySelector('#homeView a[href="teachers/"]'));
     // the teachers' page: linked from the home page, and its "Set a class test" link opens School with the challenge panel open
     const tr = await fetch('../teachers/index.html').catch(() => null), tdoc = tr && tr.ok ? new DOMParser().parseFromString(await tr.text(), 'text/html') : null;
     ok(g, 'home page links to the teachers\' page, which links to the challenge panel', !!$('#homeView a[href="teachers/"]') && !!tdoc && !!tdoc.querySelector('a.btn[href="/?challenge#school"]'));
@@ -443,6 +443,19 @@
           !$('#boardView').hidden && $(`#boardCls .chip.on[data-bcls="${c}"]`) && $$('#boardList article').length === nSub && $$('#boardList [data-board][data-mode="exam"]').length === nPap && fits(), `${$$('#boardList article').length} subjects, ${$$('#boardList [data-board][data-mode="exam"]').length} papers; ${wide()}`);
         const other = $$('#boardCls [data-bcls]').find(b => b.dataset.bcls !== c);
         if (other) { other.click(); await sleep(100); ok(g, 'the class chips switch the list', $$('#boardList [data-board][data-mode="exam"]').length === BP.filter(x => x.cls === other.dataset.bcls).length); }
+        // Print opens the paper in the print view (answer key on request), and Back returns to the board papers
+        const pid = $('#boardList [data-board][data-mode="print"]').dataset.board;
+        $('#boardList [data-board][data-mode="print"]').click(); await until(() => !$('#printView').hidden && $$('#printPaper .pq').length, 20000);
+        const nq = W().__aaTest.paper.qs.length;
+        $('#withKey').checked = true; fire($('#withKey'), 'change');
+        ok(g, 'Print on a board paper opens its print view with every question, the answer key on request and a way back', W().__aaTest.paper.exam.id === pid && $$('#printPaper .pq').length === nq && $('#printPaper').classList.contains('withkey') && $$('#printPaper .pkey li').length === nq && /board papers/.test($('#printBack').textContent),
+          `${$$('#printPaper .pq').length} of ${nq} questions; key ${$$('#printPaper .pkey li').length}; back "${$('#printBack').textContent}"`);
+        $('#withKey').checked = false; fire($('#withKey'), 'change');
+        $('#printBack').click(); await until(() => !$('#boardView').hidden);
+        ok(g, '...Back returns to the board papers, with no paper left unfinished', !$('#boardView').hidden && !W().localStorage.getItem('aa-active-paper'));
+        // Save for offline use: every paper of the class is fetched and the class remembered
+        $('#boardOffline').click(); await until(() => /saved on this device/.test($('#boardPageMsg').textContent) || /could not/.test($('#boardPageMsg').textContent), 30000);
+        ok(g, 'Save for offline use saves every paper of the class and says so', /saved on this device/.test($('#boardPageMsg').textContent) && !!JSON.parse(W().localStorage.getItem('aa-board-offline') || '{}')[$('#boardCls .chip.on').dataset.bcls], $('#boardPageMsg').textContent);
         $('#boardList [data-board][data-mode="practice"]').click(); await until(() => !$('#test').hidden && W().__aaTest.paper && W().__aaTest.paper.exam, 20000);
         ok(g, 'Practise on the board papers page opens that paper', W().__aaTest.paper.exam.list === 'board' && W().__aaTest.paper.mode === 'practice');
         $('#quitBtn').click(); await sleep(100);
@@ -467,9 +480,12 @@
         labs.length === 3 && labs.every(l => l.getBoundingClientRect().width > body * 0.9) && boxes.every((b, i) => b.getBoundingClientRect().top >= labs[i].getBoundingClientRect().bottom - 1 && b.getBoundingClientRect().width > body * 0.9),
         labs.map(l => Math.round(l.getBoundingClientRect().width)).join('/') + ' of ' + Math.round(body));
       if (ta) {
-        ta.value = 'a = 3, d = 4\na10 = 3 + 9 x 4 = 39'; fire(ta, 'input');
+        // an internal choice: the OR question is shown, and choosing it marks against its own points
+        ok(g, 'a question with an internal choice shows the OR question and a choice of which to answer', /OR/.test(($('#q2 .orq') || {}).textContent || '') && $$('#q2 [data-or]').length === 2 && $('#q2 [data-or][value="0"]').checked);
+        const orR = $('#q2 [data-or][value="1"]'); orR.checked = true; fire(orR, 'change');
+        ta.value = 'S = 10 x 11 / 2 = 55'; fire(ta, 'input');
         $('#q2 [data-check]').click(); await until(() => $$('#fb2 [data-sm]').length);
-        ok(g, 'Check answer on a written question locks the answer and shows the model answer with a tick box per marking point', ta.disabled && $$('#fb2 [data-sm]').length === 2 && !!$('#fb2 .wmodel'), `${ta.disabled} ${$$('#fb2 [data-sm]').length}`);
+        ok(g, 'Check answer on a written question locks the answer and shows the chosen question\'s model answer with a tick box per marking point', ta.disabled && $$('#fb2 [data-sm]').length === 3 && /55/.test($('#fb2 .wmodel').textContent) && /the OR question/.test($('#fb2').textContent), `${ta.disabled} ${$$('#fb2 [data-sm]').length}`);
         const c0 = $('#fb2 [data-sm]'); c0.checked = true; fire(c0, 'change');
         ok(g, 'ticking a point updates the marks', /Your marks: 1 \/ 2/.test($('#fb2 [data-smsum]').textContent), $('#fb2 [data-smsum]').textContent);
         $('#fb2 [data-smsave]').click(); await sleep(150);

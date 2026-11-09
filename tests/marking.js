@@ -107,6 +107,15 @@
     eq(g, 'written: a tick that is not a marking point is ignored', mark({ '1-0': 'a', '1-0s': '0,5,x' })[1], 1);
     eq(g, 'case-based: half marks add up across the parts', mark({ '2-0': 'a', '2-0s': '0', '2-1': 'b', '2-1s': '1', '2-2': 'c', '2-2s': '1' })[2], 2.5);
     eq(g, 'case-based: only the parts answered score', mark({ '2-2': 'c', '2-2s': '0,1', '2-0s': '0' })[2], 2);
+    // an internal choice (OR): the student's choice decides which marking points count
+    const OR = { questions: [{ no: 1, subject: 'Mathematics', section: 'B', type: 'written', full: 2, neg: 0, text: 'x', model: 'first', points: [{ t: 'a', m: 2 }],
+      or: { text: 'y', model: 'other', points: [{ t: 'b', m: 1 }, { t: 'c', m: 1 }] } }] };
+    const orq = () => A.examQs(OR, 'fig/');
+    eq(g, 'OR: the alternative is kept with its own model answer and points', [orq()[0].parts[0].alt.model, orq()[0].parts[0].alt.points.length], ['other', 2]);
+    eq(g, 'OR: answering the first question marks against its points', A.markPaper(orq(), { '0-0': 'ans', '0-0s': '0' })[0], 2);
+    eq(g, 'OR: answering the OR question marks against the OR points', A.markPaper(orq(), { '0-0': 'ans', '0-0c': '1', '0-0s': '1' })[0], 1);
+    eq(g, 'OR: a tick beyond the chosen question\'s points is ignored', A.markPaper(orq(), { '0-0': 'ans', '0-0s': '0,1' })[0], 2);
+    ok(g, 'OR: the answer key shows both model answers', /first[\s\S]*OR[\s\S]*other/.test(A.answerText(orq()[0].parts[0])));
     const q = qs()[1];
     A.markPaper([q], { '0-0': 'a', '0-0s': '0' });
     ok(g, 'the answer key shows the model answer and the marking points', /^model answer/.test(A.answerText(q.parts[0])) && /Marking points: formula \(1 mark\); answer \(1 mark\)/.test(A.answerText(q.parts[0])), A.answerText(q.parts[0]));
@@ -163,6 +172,7 @@
       eq(g, 'no negative marks', qs.filter(q => q.neg).map(q => q.no), []);
       eq(g, 'the parts of each question add up to its marks', qs.filter(q => Math.abs(q.parts.reduce((s, p) => s + p.marks, 0) - q.marks) > 1e-9).map(q => q.no), []);
       eq(g, 'the marking points of each written answer add up to its marks', qs.filter(q => q.parts.some(p => p.type === 'self' && Math.abs(p.points.reduce((s, t) => s + t.m, 0) - p.marks) > 1e-9)).map(q => q.no), []);
+      eq(g, '...and so do those of each OR choice', qs.filter(q => q.parts.some(p => p.alt && Math.abs(p.alt.points.reduce((s, t) => s + t.m, 0) - p.marks) > 1e-9)).map(q => q.no), []);
       eq(g, 'every MCQ key points to a real option', qs.filter(q => q.parts[0].type === 'choice' && !(q.parts[0].ans >= 0 && q.parts[0].ans < q.parts[0].options.length)).map(q => q.no), []);
       const ans = {};
       qs.forEach((q, i) => q.parts.forEach((p, j) => { if (p.type === 'choice') ans[i + '-' + j] = String(p.ans); else if (p.type === 'self') { ans[i + '-' + j] = 'answer'; ans[i + '-' + j + 's'] = p.points.map((t, k) => k).join(','); } }));
@@ -195,6 +205,10 @@
       if (!/not an official CBSE paper/.test(doc.querySelector('.lede').textContent)) bad.push(m.id + ': no "not official" line');
     }
     eq(g, 'every paper has its page, with every question, a "not official" line and a button opening it in the app', bad, []);
+    // each board subject's page links to CBSE's own sample paper (links only, nothing copied)
+    const subjPages = [...new Set(A.BOARD_PAPERS.map(m => `/cbse/class-${m.cls === 'X' ? 10 : 12}/${slug(m.subj)}/`))], noOff = [];
+    for (const p of subjPages) { const d = await html('..' + p).catch(() => null); if (!d || !d.querySelector('a[href^="https://cbseacademic.nic.in/"]') || !/Official CBSE papers/.test(d.body.textContent)) noOff.push(p); }
+    eq(g, 'every board subject page has an "Official CBSE papers" section linking to CBSE\'s sample paper', noOff, []);
   }
 
   // ---------- option labels kept in My mistakes ----------

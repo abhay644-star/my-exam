@@ -1,0 +1,247 @@
+{
+ "X|Mathematics": {
+  "sqp": "https://cbseacademic.nic.in/web_material/SQP/ClassX_2026_27/MathsStandard-SQP.pdf",
+  "sqpMs": "https://cbseacademic.nic.in/web_material/SQP/ClassX_2026_27/MathsStandard-MS.pdf",
+  "papers": [
+   {
+    "year": "2026",
+    "qp": "https://www.cbse.gov.in/cbsenew/question-paper/2026/X/Mathematics_Standard.zip",
+    "ms": "https://www.cbse.gov.in/cbsenew/marking-scheme/2026/X/041_MATHEMATICS_STANDARD.zip"
+   },
+   {
+    "year": "2025",
+    "qp": "https://www.cbse.gov.in/cbsenew/question-paper/2025/X/041_Mathematics_Standard.zip"
+   },
+   {
+    "year": "2024",
+    "qp": "https://www.cbse.gov.in/cbsenew/question-paper/2024/X/MATHEMATICS_STANDARD.zip",
+    "ms": "https://www.cbse.gov.in/cbsenew/Marking-Scheme/2024/X/Mathematics_Standard.zip"
+   }
+  ]
+ },
+ "X|Science": {
+  "sqp": "https://cbseacademic.nic.in/web_material/SQP/ClassX_2026_27/Science-SQP.pdf",
+  "sqpMs": "https://cbseacademic.nic.in/web_material/SQP/ClassX_2026_27/Science-MS.pdf",
+  "papers": [
+   {
+    "year": "2026",
+    "qp": "https://www.cbse.gov.in/cbsenew/question-paper/2026/X/Science.zip",
+    "ms": "https://www.cbse.gov.in/cbsenew/marking-scheme/2026/X/086_SCIENCE.zip"
+   },
+   {
+    "year": "2025",
+    "qp": "https://www.cbse.gov.in/cbsenew/question-paper/2025/X/086_Science.zip",
+    "ms": "https://www.cbse.gov.in/cbsenew/Marking-Scheme/2025/X/Science.zip"
+   },
+   {
+    "year": "2024",
+    "qp": "https://www.cbse.gov.in/cbsenew/question-paper/2024/X/SCIENCE.zip",
+    "ms": "https://www.cbse.gov.in/cbsenew/Marking-Scheme/2024/X/Science.zip"
+   }
+  ]
+ },
+ "X|Social Science": {
+  "sqp": "https://cbseacademic.nic.in/web_material/SQP/ClassX_2026_27/SocialScience-SQP.pdf",
+  "sqpMs": "https://cbseacademic.nic.in/web_material/SQP/ClassX_2026_27/SocialScience-MS.pdf",
+  "papers": [
+   {
+    "year": "2026",
+    "qp": "https://www.cbse.gov.in/cbsenew/question-paper/2026/X/Social_Science.zip",
+    "ms": "https://www.cbse.gov.in/cbsenew/marking-scheme/2026/X/087_SOCIAL_SCIENCE.zip"
+   },
+   {
+    "year": "2025",
+    "qp": "https://www.cbse.gov.in/cbsenew/question-paper/2025/X/087_Social_Science.zip",
+    "ms": "https://www.cbse.gov.in/cbsenew/Marking-Scheme/2025/X/Social%20Science.zip"
+   },
+   {
+    "year": "2024",
+    "qp": "https://www.cbse.gov.in/cbsenew/question-paper/2024/X/SOCIAL_SCIENCE.zip",
+    "ms": "https://www.cbse.gov.in/cbsenew/Marking-Scheme/2024/X/Social_Science.zip"
+   }
+  ]
+ },
+ "X|English": {
+  "sqp": "https://cbseacademic.nic.in/web_material/SQP/ClassX_2026_27/EnglishL-SQP.pdf",
+  "sqpMs": "https://cbseacademic.nic.in/web_material/SQP/ClassX_2026_27/EnglishL-MS.pdf",
+  "papers": [
+   {
+    "year": "2026",
+    "qp": "https://www.cbse.gov.in/cbsenew/question-paper/2026/X/English_Language_Literature.zip",
+    "ms": "https://www.cbse.gov.in/cbsenew/marking-scheme/2026/X/184_ENGLISH_LANGUAGE_AND_LITERATURE.zip"
+   },
+   {
+    "year": "2025",
+    "qp": "https://www.cbse.gov.in/cbsenew/question-paper/2025/X/184_English_Language_and_Literature.zip"
+   },
+   {
+    "year": "2024",
+    "ms": "https://www.cbse.gov.in/cbsenew/Marking-Scheme/2024/X/English_Language_Lit.zip"
+   }
+  ]
+ },
+ "XII|Physics": {
+  "sqp": "https://cbseacademic.nic.in/web_material/SQP/ClassXII_2026_27/Physics-SQP.pdf",
+  "sqpMs": "https://cbseacademic.nic.in/web_material/SQP/ClassXII_2026_27/Physics-MS.pdf",
+  "papers": [
+   {
+    "year": "2026",
+    "qp": "https://www.cbse.gov.in/cbsenew/question-paper/2026/XII/Physics.zip",
+    "ms": "https://www.cbse.gov.in/cbsenew/marking-scheme/2026/XII/Physics_UPD_U.zip"
+   },
+   {
+    "year": "2025",
+    "qp": "https://www.cbse.gov.in/cbsenew/question-paper/2025/XII/PHYSICS.zip",
+    "ms": "https://www.cbse.gov.in/cbsenew/Marking-Scheme/2025/XII/Physics.zip"
+   },
+   {
+    "year": "2024",
+    "qp": "https://www.cbse.gov.in/cbsenew/question-paper/2024/XII/PHYSICS.zip",
+    "ms": "https://www.cbse.gov.in/cbsenew/Marking-Scheme/2024/XII/Physics.zip"
+   }
+  ]
+ },
+ "XII|Chemistry": {
+  "sqp": "https://cbseacademic.nic.in/web_material/SQP/ClassXII_2026_27/Chemistry-SQP.pdf",
+  "sqpMs": "https://cbseacademic.nic.in/web_material/SQP/ClassXII_2026_27/Chemistry-MS.pdf",
+  "papers": [
+   {
+    "year": "2026",
+    "qp": "https://www.cbse.gov.in/cbsenew/question-paper/2026/XII/Chemistry.zip",
+    "ms": "https://www.cbse.gov.in/cbsenew/marking-scheme/2026/XII/Chemistry.zip"
+   },
+   {
+    "year": "2025",
+    "qp": "https://www.cbse.gov.in/cbsenew/question-paper/2025/XII/CHEMISTRY.zip",
+    "ms": "https://www.cbse.gov.in/cbsenew/Marking-Scheme/2025/XII/Chemistry.zip"
+   },
+   {
+    "year": "2024",
+    "qp": "https://www.cbse.gov.in/cbsenew/question-paper/2024/XII/CHEMISTRY.zip",
+    "ms": "https://www.cbse.gov.in/cbsenew/Marking-Scheme/2024/XII/Chemistry.zip"
+   }
+  ]
+ },
+ "XII|Mathematics": {
+  "sqp": "https://cbseacademic.nic.in/web_material/SQP/ClassXII_2026_27/Maths-SQP.pdf",
+  "sqpMs": "https://cbseacademic.nic.in/web_material/SQP/ClassXII_2026_27/Maths-MS.pdf",
+  "papers": [
+   {
+    "year": "2026",
+    "qp": "https://www.cbse.gov.in/cbsenew/question-paper/2026/XII/Mathematics.zip",
+    "ms": "https://www.cbse.gov.in/cbsenew/marking-scheme/2026/XII/Mathematics.zip"
+   },
+   {
+    "year": "2025",
+    "qp": "https://www.cbse.gov.in/cbsenew/question-paper/2025/XII/MATHEMATICS.zip"
+   },
+   {
+    "year": "2024",
+    "qp": "https://www.cbse.gov.in/cbsenew/question-paper/2024/XII/MATHEMATICS.zip",
+    "ms": "https://www.cbse.gov.in/cbsenew/Marking-Scheme/2024/XII/Mathematics.zip"
+   }
+  ]
+ },
+ "XII|Biology": {
+  "sqp": "https://cbseacademic.nic.in/web_material/SQP/ClassXII_2026_27/Biology-SQP.pdf",
+  "sqpMs": "https://cbseacademic.nic.in/web_material/SQP/ClassXII_2026_27/Biology-MS.pdf",
+  "papers": [
+   {
+    "year": "2026",
+    "qp": "https://www.cbse.gov.in/cbsenew/question-paper/2026/XII/Biology.zip",
+    "ms": "https://www.cbse.gov.in/cbsenew/marking-scheme/2026/XII/Biology.zip"
+   },
+   {
+    "year": "2025",
+    "qp": "https://www.cbse.gov.in/cbsenew/question-paper/2025/XII/BIOLOGY.zip",
+    "ms": "https://www.cbse.gov.in/cbsenew/Marking-Scheme/2025/XII/Biology.zip"
+   },
+   {
+    "year": "2024",
+    "qp": "https://www.cbse.gov.in/cbsenew/question-paper/2024/XII/BIOLOGY.zip",
+    "ms": "https://www.cbse.gov.in/cbsenew/Marking-Scheme/2024/XII/BIOLOGY.zip"
+   }
+  ]
+ },
+ "XII|Accountancy": {
+  "sqp": "https://cbseacademic.nic.in/web_material/SQP/ClassXII_2026_27/Accountancy-SQP.pdf",
+  "sqpMs": "https://cbseacademic.nic.in/web_material/SQP/ClassXII_2026_27/Accountancy-MS.pdf",
+  "papers": [
+   {
+    "year": "2026",
+    "qp": "https://www.cbse.gov.in/cbsenew/question-paper/2026/XII/Accountancy.zip",
+    "ms": "https://www.cbse.gov.in/cbsenew/marking-scheme/2026/XII/Accountancy.zip"
+   },
+   {
+    "year": "2025",
+    "qp": "https://www.cbse.gov.in/cbsenew/question-paper/2025/XII/ACCOUNTANCY.zip",
+    "ms": "https://www.cbse.gov.in/cbsenew/Marking-Scheme/2025/XII/Accountancy_055.zip"
+   },
+   {
+    "year": "2024",
+    "qp": "https://www.cbse.gov.in/cbsenew/question-paper/2024/XII/ACCOUNTANCY.zip",
+    "ms": "https://www.cbse.gov.in/cbsenew/Marking-Scheme/2024/XII/Accountancy.zip"
+   }
+  ]
+ },
+ "XII|Business Studies": {
+  "sqp": "https://cbseacademic.nic.in/web_material/SQP/ClassXII_2026_27/BusinessStudies-SQP.pdf",
+  "sqpMs": "https://cbseacademic.nic.in/web_material/SQP/ClassXII_2026_27/BusinessStudies-MS.pdf",
+  "papers": [
+   {
+    "year": "2026",
+    "qp": "https://www.cbse.gov.in/cbsenew/question-paper/2026/XII/Business_Studies.zip",
+    "ms": "https://www.cbse.gov.in/cbsenew/marking-scheme/2026/XII/Business_Studies.zip"
+   },
+   {
+    "year": "2025",
+    "qp": "https://www.cbse.gov.in/cbsenew/question-paper/2025/XII/BUSINESS_STUDIES.zip",
+    "ms": "https://www.cbse.gov.in/cbsenew/Marking-Scheme/2025/XII/Business_Studies.zip"
+   },
+   {
+    "year": "2024",
+    "qp": "https://www.cbse.gov.in/cbsenew/question-paper/2024/XII/BUSINESS_STUDIES.zip"
+   }
+  ]
+ },
+ "XII|Economics": {
+  "sqp": "https://cbseacademic.nic.in/web_material/SQP/ClassXII_2026_27/Economics-SQP.pdf",
+  "sqpMs": "https://cbseacademic.nic.in/web_material/SQP/ClassXII_2026_27/Economics-MS.pdf",
+  "papers": [
+   {
+    "year": "2026",
+    "qp": "https://www.cbse.gov.in/cbsenew/question-paper/2026/XII/Economics.zip",
+    "ms": "https://www.cbse.gov.in/cbsenew/marking-scheme/2026/XII/Economics.zip"
+   },
+   {
+    "year": "2025",
+    "qp": "https://www.cbse.gov.in/cbsenew/question-paper/2025/XII/ECONOMICS.zip",
+    "ms": "https://www.cbse.gov.in/cbsenew/Marking-Scheme/2025/XII/Economics.zip"
+   },
+   {
+    "year": "2024",
+    "qp": "https://www.cbse.gov.in/cbsenew/question-paper/2024/XII/ECONOMICS.zip",
+    "ms": "https://www.cbse.gov.in/cbsenew/Marking-Scheme/2024/XII/Economics.zip"
+   }
+  ]
+ },
+ "XII|English": {
+  "sqp": "https://cbseacademic.nic.in/web_material/SQP/ClassXII_2026_27/EnglishCore-SQP.pdf",
+  "sqpMs": "https://cbseacademic.nic.in/web_material/SQP/ClassXII_2026_27/EnglishCore-MS.pdf",
+  "papers": [
+   {
+    "year": "2026",
+    "qp": "https://www.cbse.gov.in/cbsenew/question-paper/2026/XII/ENGLISH_CORE.zip",
+    "ms": "https://www.cbse.gov.in/cbsenew/marking-scheme/2026/XII/English_Core.zip"
+   },
+   {
+    "year": "2025",
+    "qp": "https://www.cbse.gov.in/cbsenew/question-paper/2025/XII/ENGLISH_CORE.zip"
+   },
+   {
+    "year": "2024",
+    "qp": "https://www.cbse.gov.in/cbsenew/question-paper/2024/XII/ENGLISH_CORE.zip"
+   }
+  ]
+ }
+}

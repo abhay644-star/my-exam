@@ -314,7 +314,7 @@ def subject_page(cls, subj):
   <h2>Chapters</h2>
   <p>Questions on {len(chs)} chapters of {syllabus(subj, cls)}; {size}. Choose a chapter to practise just that chapter.</p>
   <ul class="chapters">{rows}</ul>
-{board_html}{sq_html}
+{board_html}{official_html(cls, subj)}{sq_html}
   <h2>How it works</h2>
   <ol>
     <li>Choose <b>Quick quiz</b> (10 questions), <b>Chapter test</b> (20) or <b>Full mock paper</b> (30), or set your own number of questions, time and difficulty.</li>
@@ -657,6 +657,54 @@ def exam_subject_page(e, s):
     crumbs = [('Home', '/'), (f'{crumb} papers', f"/{e['list']}/"), (f'{s} chapter-wise', None)]
     return path, shell(path, title, desc, crumbs, body)
 
+# ---------- CBSE's own papers (links only): tools/cbse_official.json, made and checked by hand from CBSE's pages ----------
+# per "class|subject": the 2026-27 sample question paper and its marking scheme (cbseacademic.nic.in) and the 2024-2026 board
+# question papers and marking schemes (cbse.gov.in zips). Nothing of CBSE's is copied to the site; the links open CBSE's files
+OFFICIAL = json.loads((site / 'tools' / 'cbse_official.json').read_text(encoding='utf-8')) if (site / 'tools' / 'cbse_official.json').exists() else {}
+CBSE_QP, CBSE_MS = 'https://www.cbse.gov.in/cbsenew/question-paper.html', 'https://www.cbse.gov.in/cbsenew/marking-scheme.html'
+def pattern_table(cls, subj):
+    """The 2026-27 paper pattern, from our own practice papers (the latest one, which has the internal choices): per section the
+    number of questions and marks, and how many questions have an internal choice."""
+    ps = BOARD.get((cls, subj), [])
+    if not ps:
+        return ''
+    data = json.loads((site / ps[-1]['path'] / 'paper.json').read_text(encoding='utf-8'))
+    qs, names = data['questions'], data.get('secNames') or {}
+    secs = list(dict.fromkeys(str(q['section']) for q in qs))
+    ors = lambda sq: sum(1 for q in sq if q.get('or') or any(p.get('or') for p in q.get('parts') or []))
+    rows = ''.join(f'<tr><td>Section {s}{f" · {esc(names[s])}" if names.get(s) else ""}</td><td class="n">{sum(str(q["section"]) == s for q in qs)}</td>'
+                   f'<td class="n">{half(sum(q["full"] for q in qs if str(q["section"]) == s))}</td><td class="n">{ors([q for q in qs if str(q["section"]) == s]) or "–"}</td></tr>' for s in secs)
+    return f'''  <div class="card tbl">
+    <table>
+      <thead><tr><th>Section</th><th class="n">Questions</th><th class="n">Marks</th><th class="n">With a choice</th></tr></thead>
+      <tbody>{rows}<tr class="total"><td>Total</td><td class="n">{len(qs)}</td><td class="n">{data['maxMarks']}</td><td class="n">{ors(qs)}</td></tr></tbody>
+    </table>
+    <p style="margin:10px 0 0"><small>Time: {dur_text(int(data['duration']))}. Our summary of the pattern of CBSE’s 2026–27 sample question paper; “with a choice” counts the questions or parts that have an internal (OR) choice.</small></p>
+  </div>'''
+def official_line(x):
+    """On a practice paper's page: CBSE's own sample paper for the subject, and where the past papers are."""
+    o = OFFICIAL.get(f"{x['cls']}|{x['subj']}") or {}
+    if not o.get('sqp'):
+        return ''
+    ms = f' and <a href="{esc(o["sqpMs"])}" rel="noopener">its marking scheme</a>' if o.get('sqpMs') else ''
+    return (f'  <p><small>Also see CBSE’s own <a href="{esc(o["sqp"])}" rel="noopener">sample question paper 2026–27</a>{ms}, and the past board papers '
+            f'on the <a href="/cbse/class-{NUM[x["cls"]]}/{slug(x["subj"])}/">Class {NUM[x["cls"]]} {esc(x["subj"])} page</a>.</small></p>\n')
+def official_html(cls, subj):
+    o = OFFICIAL.get(f'{cls}|{subj}')
+    if not o:
+        return ''
+    a = lambda u, t: f'<a href="{esc(u)}" rel="noopener">{t}</a>'
+    sqp = [a(o[k], t) for k, t in (('sqp', 'Sample question paper 2026–27'), ('sqpMs', 'Its marking scheme')) if o.get(k)]
+    years = ''.join(f'<li><b>Board exam {e["year"]}:</b> ' + ' · '.join(a(e[k], t) for k, t in (('qp', 'question papers (ZIP)'), ('ms', 'marking schemes (ZIP)')) if e.get(k)) + '</li>'
+                    for e in o['papers'] if e.get('qp') or e.get('ms'))
+    return f'''
+  <h2>Official CBSE papers</h2>
+  <p>CBSE publishes these itself, and the links open CBSE’s own files on cbseacademic.nic.in and cbse.gov.in. The 2026–27 sample question paper is CBSE’s official model for the 2027 board exam; each year’s ZIP holds all the sets of that year’s paper.</p>
+  <ul>{f'<li><b>Sample paper:</b> {" · ".join(sqp)}</li>' if sqp else ''}{years}</ul>
+  <p class="links">{a(CBSE_QP, 'All CBSE question papers')}{a(CBSE_MS, 'All CBSE marking schemes')}</p>
+{pattern_table(cls, subj)}
+'''
+
 # ---------- CBSE board practice papers: one page per paper (every question, answers and marking scheme) and a hub ----------
 # our own papers in the pattern of CBSE's sample question paper (BOARD_PAPERS in index.html; paper.json in board/<id>/)
 BOARD_HUB = '/cbse/board-exam-2027/'
@@ -676,10 +724,14 @@ def board_q(q, fig):
         opts = '<ol type="a">' + ''.join(f'<li>{wrap_math(safe(o))}</li>' for o in q['options']) + '</ol>'
         ans = f'<p><b>Answer:</b> ({"abcd"[q["answer"]]}) {wrap_math(safe(q["options"][q["answer"]]))}</p>' + (f'<p>{wrap_math(safe(q["sol"]))}</p>' if q.get('sol') else '')
         return f'<li class="sq"><p class="sqt"><small>{label}</small><br>{text}</p>{opts}<details><summary>Show answer</summary>{ans}</details></li>'
-    parts = q.get('parts') or [{'q': '', 'marks': q['full'], 'model': q['model'], 'points': q['points']}]
-    asked = ''.join(f'<p>{wrap_math(safe(p["q"]))} <small>[{half(p["marks"])}]</small></p>' for p in parts if p.get('q'))
-    ans = ''.join((f'<p><b>{wrap_math(safe(p["q"]))}</b></p>' if p.get('q') else '') + f'<p><b>Model answer:</b> {wrap_math(safe(p["model"]))}</p>'
-                  + '<p><b>Marking scheme:</b></p><ul>' + ''.join(f'<li>{wrap_math(safe(t["t"]))} <small>({marks_txt(t["m"])})</small></li>' for t in p['points']) + '</ul>' for p in parts)
+    parts = q.get('parts') or [{'q': '', 'marks': q['full'], 'model': q['model'], 'points': q['points'], 'or': q.get('or')}]
+    # an internal choice: the OR question (o['q'] for a sub-part, o['text'] for a whole question), with its own answer and scheme
+    or_q = lambda o: wrap_math(safe(o.get('q') or o.get('text'))) + (f'<img class="qfig" src="{fig}{o["fig"]}" alt="Figure for the OR question" loading="lazy">' if o.get('fig') else '')
+    asked = ''.join((f'<p>{wrap_math(safe(p["q"]))} <small>[{half(p["marks"])}]</small></p>' if p.get('q') else '')
+                    + (f'<p><b>OR</b> {or_q(p["or"])}</p>' if p.get('or') else '') for p in parts)
+    scheme = lambda a: f'<p><b>Model answer:</b> {wrap_math(safe(a["model"]))}</p><p><b>Marking scheme:</b></p><ul>' + ''.join(f'<li>{wrap_math(safe(t["t"]))} <small>({marks_txt(t["m"])})</small></li>' for t in a['points']) + '</ul>'
+    ans = ''.join((f'<p><b>{wrap_math(safe(p["q"]))}</b></p>' if p.get('q') else '') + scheme(p)
+                  + (f'<p><b>OR</b> (the other choice)</p>' + scheme(p['or']) if p.get('or') else '') for p in parts)
     return f'<li class="sq"><p class="sqt"><small>{label}</small><br>{text}</p>{asked}<details><summary>Show model answer and marking scheme</summary>{ans}</details></li>'
 def board_page(x, siblings):
     data = json.loads((site / x['path'] / 'paper.json').read_text(encoding='utf-8'))
@@ -732,7 +784,7 @@ def board_page(x, siblings):
 
   <h2>More practice</h2>
   <p class="links">{others}<a href="/cbse/class-{n}/{slug(x['subj'])}/">Class {n} {esc(x['subj'])} chapter tests</a><a href="{BOARD_HUB}">All board practice papers</a></p>
-'''
+{official_line(x)}'''
     crumbs = [('Home', '/'), ('CBSE', '/cbse/'), ('Board exam 2027', BOARD_HUB), (f'Class {n} {subj_short} {pname}', None)]
     return path, shell(path, title, desc, crumbs, body, math=True)
 def board_hub():

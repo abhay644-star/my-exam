@@ -76,16 +76,13 @@ label,.lbl{display:block;font-weight:700;font-size:.9rem;margin-bottom:5px}
 .whys li:nth-child(even){border-left-color:var(--red)}
 .whys b{font-family:var(--f-display);font-size:1.02rem}
 .whys span{font-size:.88rem;color:var(--muted)}
-.popular{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(max(150px,calc((100% - 20px) / 3)),1fr));gap:10px}
-.popular a{display:flex;flex-direction:column;gap:2px;height:100%;box-sizing:border-box;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px;color:var(--fg);text-decoration:none}
+/* popular practice: one compact row of links on a computer (two or three per row on a phone) */
+.popular{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+@media (min-width:900px){.popular{grid-template-columns:repeat(6,minmax(0,1fr))}}
+.popular a{display:flex;flex-direction:column;justify-content:center;min-height:44px;height:100%;box-sizing:border-box;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:8px 12px;color:var(--fg);text-decoration:none}
 .popular a:hover,.popular a:focus-visible{border-color:var(--ink)}
 .popular b{font-family:var(--f-display);font-size:1.02rem;color:var(--ink)}
 .popular span{font-size:.85rem;color:var(--muted)}
-.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:10px;counter-reset:st}
-.steps li{counter-increment:st;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px 12px 52px;position:relative;display:flex;flex-direction:column;gap:2px}
-.steps li::before{content:counter(st);position:absolute;left:14px;top:12px;width:26px;height:26px;border-radius:50%;background:var(--ink);color:var(--paper);font-weight:700;display:grid;place-items:center;font-size:.9rem}
-.steps b{font-family:var(--f-display);font-size:1.02rem}
-.steps span{font-size:.88rem;color:var(--muted)}
 select,input[type=number],input[type=text],input[type=email],textarea{width:100%;font:inherit;color:var(--fg);background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:9px 11px}
 select:focus-visible,input:focus-visible,button:focus-visible,.chip:focus-within{outline:3px solid var(--ink);outline-offset:2px}
 fieldset{border:1px solid var(--line);border-radius:var(--r);padding:12px 14px 14px;margin:0;min-width:0}
@@ -326,7 +323,9 @@ a.btnlink:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
 .part{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,15rem);gap:6px 12px;align-items:center}
 @media (max-width:560px){.part{grid-template-columns:minmax(0,1fr)}}
 .part .pq{min-width:0;display:block;padding:0} /* (not the print view's three-column .pq grid) */
-.part.wpart{grid-template-columns:minmax(0,1fr)} /* a written answer: the question above a full-width answer box */
+.part.wpart{grid-template-columns:minmax(0,1fr)}
+.orq{border-left:3px solid var(--amber);padding:2px 0 2px 10px}.ortag{color:var(--amber);margin-right:4px}
+.orpick{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px} /* a written answer: the question above a full-width answer box */
 .opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
 .opt{display:flex;gap:8px;align-items:center;border:1px solid var(--line);border-radius:8px;padding:8px 10px;cursor:pointer}
 .opt input{accent-color:var(--ink)}
@@ -415,19 +414,13 @@ sup,sub{font-size:.7em}
     <p class="moreexams">More exams are on the way: CUET, CAT, SSC, Bank and UPSC. <a href="#exams">Tell us which one you need first</a>.</p>
     <h3 class="whyhead">Popular practice</h3>
     <ul class="popular">
-      <li><a href="/cbse/class-10/mathematics/"><b>Class 10 Maths</b><span>Chapter tests and full papers</span></a></li>
-      <li><a href="/cbse/class-10/science/"><b>Class 10 Science</b><span>Physics, Chemistry and Biology chapters</span></a></li>
-      <li><a href="/cbse/class-12/physics/"><b>Class 12 Physics</b><span>Chapter tests for boards and entrance</span></a></li>
-      <li><a href="/cbse/class-12/chemistry/"><b>Class 12 Chemistry</b><span>Chapter tests with instant marking</span></a></li>
-      <li><a href="/jee-main/"><b>JEE Main</b><span>2025 and 2026 papers with the NTA key</span></a></li>
-      <li><a href="/neet/"><b>NEET (UG)</b><span>2022 to 2026 papers with the NTA key</span></a></li>
+      <li><a href="/cbse/class-10/mathematics/"><b>Class 10 Maths</b></a></li>
+      <li><a href="/cbse/class-10/science/"><b>Class 10 Science</b></a></li>
+      <li><a href="/cbse/class-12/physics/"><b>Class 12 Physics</b></a></li>
+      <li><a href="/cbse/class-12/chemistry/"><b>Class 12 Chemistry</b></a></li>
+      <li><a href="/jee-main/"><b>JEE Main papers</b></a></li>
+      <li><a href="/neet/"><b>NEET (UG) papers</b></a></li>
     </ul>
-    <h3 class="whyhead">How it works</h3>
-    <ol class="steps">
-      <li><b>Choose</b><span>Pick your class and subject, or an entrance exam.</span></li>
-      <li><b>Set your paper</b><span>Use a ready preset, or choose the chapters, length and difficulty.</span></li>
-      <li><b>Take the test</b><span>Get your score, the solutions and a suggested next step straight away.</span></li>
-    </ol>
     <p class="hint" style="margin:8px 0 0">Teachers: set the same test for your whole class with one link. <a href="teachers/">See how</a>.</p>
     <h3 class="whyhead">Why practise here</h3>
     <ul class="whys">
@@ -765,10 +758,12 @@ function lev(a,b){if(Math.abs(a.length-b.length)>2)return 9;const m=[];for(let i
 // one slip allowed per long word (5+ letters); short words, numbers and word counts must match exactly
 function near(u,n){const a=u.split(' '),b=n.split(' ');if(a.length!==b.length||u===n)return false;let slips=0;
   for(let i=0;i<a.length;i++){if(a[i]===b[i])continue;if(/\d/.test(b[i])||b[i].length<5||lev(a[i],b[i])>1)return false;slips++;}return slips>0&&slips<=2;}
+// a written answer with an internal choice: the alternative the student answered (c = '1': the OR question)
+const selfUse=(p,c)=>p.alt&&String(c)==='1'?p.alt:p;
 // marks as a board marking scheme writes them: ½ mark, 1 mark, 1½ marks
 const fmtM=m=>(m===0.5?'½':String(m).replace(/\.5$/,'½'))+(m>1?' marks':' mark');
 const ptsHtml=p=>`<span class="hint" style="display:inline;margin:0">Marking points: ${p.points.map(t=>`${t.t} (${fmtM(t.m)})`).join('; ')}</span>`;
-function answerText(p){if(p.type==='self')return p.model+(p.points&&p.points.length?'<br>'+ptsHtml(p):'');if(p.ansText!=null)return p.ansText;if(p.disp)return p.disp;if(p.type==='text')return p.alts[0];if(p.unit)return neg(p.ans)+' '+p.unit;if(p.type==='choice')return '('+optL(p)[p.ans]+') '+p.options[p.ans];if(p.type==='select')return p.ans;return p.fmt(p.ans);}
+function answerText(p){if(p.type==='self')return p.model+(p.points&&p.points.length?'<br>'+ptsHtml(p):'')+(p.alt?`<br><b>OR</b> (the other choice): ${p.alt.model}<br>${ptsHtml(p.alt)}`:'');if(p.ansText!=null)return p.ansText;if(p.disp)return p.disp;if(p.type==='text')return p.alts[0];if(p.unit)return neg(p.ans)+' '+p.unit;if(p.type==='choice')return '('+optL(p)[p.ans]+') '+p.options[p.ans];if(p.type==='select')return p.ans;return p.fmt(p.ans);}
 function distractors(p){
   const v=p.ans,out=[],seen=new Set([p.fmt(v)]);
   const add=x=>{if(x==null||!isFinite(x))return;const s=p.fmt(x);if(!seen.has(s)){seen.add(s);out.push(s);}};
@@ -1234,28 +1229,38 @@ const BOARDS={India:['CBSE']};
 const BOARD_PAPERS=[
   {id:'10-maths-1',cls:'X',subj:'Mathematics',name:'CBSE Class 10 Mathematics (Standard)',date:'Practice paper 1',shift:'',pat:'38 questions · 3 hours · 80 marks',path:'board/10-maths-1/',min:180},
   {id:'10-maths-2',cls:'X',subj:'Mathematics',name:'CBSE Class 10 Mathematics (Standard)',date:'Practice paper 2',shift:'',pat:'38 questions · 3 hours · 80 marks',path:'board/10-maths-2/',min:180},
+  {id:'10-maths-3',cls:'X',subj:'Mathematics',name:'CBSE Class 10 Mathematics (Standard)',date:'Practice paper 3',shift:'',pat:'38 questions · 3 hours · 80 marks',path:'board/10-maths-3/',min:180},
   {id:'10-science-1',cls:'X',subj:'Science',name:'CBSE Class 10 Science',date:'Practice paper 1',shift:'',pat:'39 questions · 3 hours · 80 marks',path:'board/10-science-1/',min:180},
   {id:'10-science-2',cls:'X',subj:'Science',name:'CBSE Class 10 Science',date:'Practice paper 2',shift:'',pat:'39 questions · 3 hours · 80 marks',path:'board/10-science-2/',min:180},
   {id:'10-social-science-1',cls:'X',subj:'Social Science',name:'CBSE Class 10 Social Science',date:'Practice paper 1',shift:'',pat:'38 questions · 3 hours · 80 marks',path:'board/10-social-science-1/',min:180},
   {id:'10-social-science-2',cls:'X',subj:'Social Science',name:'CBSE Class 10 Social Science',date:'Practice paper 2',shift:'',pat:'38 questions · 3 hours · 80 marks',path:'board/10-social-science-2/',min:180},
+  {id:'10-social-science-3',cls:'X',subj:'Social Science',name:'CBSE Class 10 Social Science',date:'Practice paper 3',shift:'',pat:'38 questions · 3 hours · 80 marks',path:'board/10-social-science-3/',min:180},
   {id:'10-english-1',cls:'X',subj:'English',name:'CBSE Class 10 English Language and Literature',date:'Practice paper 1',shift:'',pat:'24 questions · 3 hours · 80 marks',path:'board/10-english-1/',min:180},
   {id:'10-english-2',cls:'X',subj:'English',name:'CBSE Class 10 English Language and Literature',date:'Practice paper 2',shift:'',pat:'24 questions · 3 hours · 80 marks',path:'board/10-english-2/',min:180},
+  {id:'10-english-3',cls:'X',subj:'English',name:'CBSE Class 10 English Language and Literature',date:'Practice paper 3',shift:'',pat:'24 questions · 3 hours · 80 marks',path:'board/10-english-3/',min:180},
   {id:'12-maths-1',cls:'XII',subj:'Mathematics',name:'CBSE Class 12 Mathematics',date:'Practice paper 1',shift:'',pat:'38 questions · 3 hours · 80 marks',path:'board/12-maths-1/',min:180},
   {id:'12-maths-2',cls:'XII',subj:'Mathematics',name:'CBSE Class 12 Mathematics',date:'Practice paper 2',shift:'',pat:'38 questions · 3 hours · 80 marks',path:'board/12-maths-2/',min:180},
+  {id:'12-maths-3',cls:'XII',subj:'Mathematics',name:'CBSE Class 12 Mathematics',date:'Practice paper 3',shift:'',pat:'38 questions · 3 hours · 80 marks',path:'board/12-maths-3/',min:180},
   {id:'12-physics-1',cls:'XII',subj:'Physics',name:'CBSE Class 12 Physics',date:'Practice paper 1',shift:'',pat:'33 questions · 3 hours · 70 marks',path:'board/12-physics-1/',min:180},
   {id:'12-physics-2',cls:'XII',subj:'Physics',name:'CBSE Class 12 Physics',date:'Practice paper 2',shift:'',pat:'33 questions · 3 hours · 70 marks',path:'board/12-physics-2/',min:180},
+  {id:'12-physics-3',cls:'XII',subj:'Physics',name:'CBSE Class 12 Physics',date:'Practice paper 3',shift:'',pat:'33 questions · 3 hours · 70 marks',path:'board/12-physics-3/',min:180},
   {id:'12-chemistry-1',cls:'XII',subj:'Chemistry',name:'CBSE Class 12 Chemistry',date:'Practice paper 1',shift:'',pat:'33 questions · 3 hours · 70 marks',path:'board/12-chemistry-1/',min:180},
   {id:'12-chemistry-2',cls:'XII',subj:'Chemistry',name:'CBSE Class 12 Chemistry',date:'Practice paper 2',shift:'',pat:'33 questions · 3 hours · 70 marks',path:'board/12-chemistry-2/',min:180},
+  {id:'12-chemistry-3',cls:'XII',subj:'Chemistry',name:'CBSE Class 12 Chemistry',date:'Practice paper 3',shift:'',pat:'33 questions · 3 hours · 70 marks',path:'board/12-chemistry-3/',min:180},
   {id:'12-biology-1',cls:'XII',subj:'Biology',name:'CBSE Class 12 Biology',date:'Practice paper 1',shift:'',pat:'33 questions · 3 hours · 70 marks',path:'board/12-biology-1/',min:180},
   {id:'12-biology-2',cls:'XII',subj:'Biology',name:'CBSE Class 12 Biology',date:'Practice paper 2',shift:'',pat:'33 questions · 3 hours · 70 marks',path:'board/12-biology-2/',min:180},
   {id:'12-business-studies-1',cls:'XII',subj:'Business Studies',name:'CBSE Class 12 Business Studies',date:'Practice paper 1',shift:'',pat:'34 questions · 3 hours · 80 marks',path:'board/12-business-studies-1/',min:180},
   {id:'12-business-studies-2',cls:'XII',subj:'Business Studies',name:'CBSE Class 12 Business Studies',date:'Practice paper 2',shift:'',pat:'34 questions · 3 hours · 80 marks',path:'board/12-business-studies-2/',min:180},
+  {id:'12-business-studies-3',cls:'XII',subj:'Business Studies',name:'CBSE Class 12 Business Studies',date:'Practice paper 3',shift:'',pat:'34 questions · 3 hours · 80 marks',path:'board/12-business-studies-3/',min:180},
   {id:'12-economics-1',cls:'XII',subj:'Economics',name:'CBSE Class 12 Economics',date:'Practice paper 1',shift:'',pat:'34 questions · 3 hours · 80 marks',path:'board/12-economics-1/',min:180},
   {id:'12-economics-2',cls:'XII',subj:'Economics',name:'CBSE Class 12 Economics',date:'Practice paper 2',shift:'',pat:'34 questions · 3 hours · 80 marks',path:'board/12-economics-2/',min:180},
+  {id:'12-economics-3',cls:'XII',subj:'Economics',name:'CBSE Class 12 Economics',date:'Practice paper 3',shift:'',pat:'34 questions · 3 hours · 80 marks',path:'board/12-economics-3/',min:180},
   {id:'12-accountancy-1',cls:'XII',subj:'Accountancy',name:'CBSE Class 12 Accountancy',date:'Practice paper 1',shift:'',pat:'34 questions · 3 hours · 80 marks',path:'board/12-accountancy-1/',min:180},
   {id:'12-accountancy-2',cls:'XII',subj:'Accountancy',name:'CBSE Class 12 Accountancy',date:'Practice paper 2',shift:'',pat:'34 questions · 3 hours · 80 marks',path:'board/12-accountancy-2/',min:180},
+  {id:'12-accountancy-3',cls:'XII',subj:'Accountancy',name:'CBSE Class 12 Accountancy',date:'Practice paper 3',shift:'',pat:'34 questions · 3 hours · 80 marks',path:'board/12-accountancy-3/',min:180},
   {id:'12-english-1',cls:'XII',subj:'English',name:'CBSE Class 12 English Core',date:'Practice paper 1',shift:'',pat:'18 questions · 3 hours · 80 marks',path:'board/12-english-1/',min:180},
   {id:'12-english-2',cls:'XII',subj:'English',name:'CBSE Class 12 English Core',date:'Practice paper 2',shift:'',pat:'18 questions · 3 hours · 80 marks',path:'board/12-english-2/',min:180},
+  {id:'12-english-3',cls:'XII',subj:'English',name:'CBSE Class 12 English Core',date:'Practice paper 3',shift:'',pat:'18 questions · 3 hours · 80 marks',path:'board/12-english-3/',min:180},
 ];
 const TOPICS={
   I:['Numbers up to 100','Addition','Subtraction','Shapes','Patterns','Time','Money'],
@@ -1525,7 +1530,11 @@ function qHtml(q){
     else if(p.type==='self')field=`<textarea id="${id}" data-k="${qi}-${j}" rows="${Math.min(10,Math.max(3,Math.round(p.marks*2)))}" spellcheck="true" placeholder="Write your answer. Afterwards you mark it yourself against the model answer and marking points."></textarea>`;
     // full keyboard on every phone, so students can type −, / and ^ (the iPhone decimal pad has none of them)
     else field=`<input type="text" id="${id}" data-k="${qi}-${j}" autocomplete="off" autocapitalize="off" spellcheck="false" inputmode="text" placeholder="${p.type==='expr'?'e.g. 4a^2 + 6ab - 8':p.type==='list'?'e.g. -5/6, -3/4, 2/3':p.sci?'e.g. 3.84 x 10^5':/[√π]/.test(p.disp||p.ansText||'')?'e.g. 3√2 or π/3':'Answer'}">`;
-    return `<div class="part${p.type==='self'?' wpart':''}"><label class="pq" for="${id}" style="font-weight:400;margin:0">${lab}${q.parts.length>1?` <span class="qm">[${p.marks}]</span>`:''}</label>${field}</div>`;}).join('');
+    // an internal choice: the OR question, then which one the student is answering (before the answer box; for a whole
+    // question with a choice, before "Your answer")
+    const orBlk=p.type==='self'&&p.alt?`<div class="orq"><b class="ortag">OR</b> ${p.alt.q}</div><div class="orpick" role="radiogroup" aria-label="Which question you are answering"><span class="hint" style="margin:0">I am answering:</span> ${['the first question','the OR question'].map((t,v)=>`<label class="chip"><input type="radio" name="or${qi}_${j}" value="${v}" data-or="${qi}-${j}"> ${t}</label>`).join('')}</div>`:'';
+    const labHtml=`<label class="pq" for="${id}" style="font-weight:400;margin:0">${lab}${q.parts.length>1?` <span class="qm">[${p.marks}]</span>`:''}</label>`;
+    return `<div class="part${p.type==='self'?' wpart':''}">${p.q?labHtml+orBlk:orBlk+labHtml}${field}</div>`;}).join('');
   const tools=`<div class="qtools">${P.mode==='practice'?`<button type="button" class="small primary" data-check="${qi}">Check answer</button>`:''}<button type="button" class="small flag" data-flag="${qi}" aria-pressed="false">Flag for review</button></div><div class="fb" id="fb${qi}" tabindex="-1" role="group" aria-label="Question ${qi+1} result" hidden></div>`;
   return `<div class="q" id="q${qi}"><span class="qn">${q.no}</span><div class="qbody"><span class="qtopic"><span class="lvl l-${q.real||q.level}"></span>${q.topic}${q.tag?' · '+q.tag:''}</span><div>${q.text}</div>${inner}${tools}</div><span class="qm">[${q.marks}]</span></div>`;
 }
@@ -1538,6 +1547,9 @@ function wire(){
     el.addEventListener(ev,()=>{if(el.type==='radio'){ANS[k]=el.value;el.closest('.opts').querySelectorAll('.opt').forEach(o=>o.classList.toggle('on',o.contains(el)&&el.checked));}
       else if(el.type==='checkbox'){const box=el.closest('.opts');ANS[k]=[...box.querySelectorAll('input:checked')].map(x=>x.value).join(',');el.closest('.opt').classList.toggle('on',el.checked);}
       else ANS[k]=el.value;updateCount();saveSoon();});});
+  // internal choices: which question the student is answering (ANS[i-jc]; the first question until they choose)
+  sh.querySelectorAll('[data-or]').forEach(r=>{const k=r.dataset.or+'c';r.checked=String(ANS[k]||'0')===r.value;
+    r.addEventListener('change',()=>{if(r.checked){ANS[k]=r.value;saveSoon();}});});
   sh.querySelectorAll('[data-flag]').forEach(b=>{const i=+b.dataset.flag;setFlag(b,!!FLAG[i]);b.addEventListener('click',()=>{FLAG[i]=!FLAG[i];setFlag(b,FLAG[i]);updateCount();save();});});
   sh.querySelectorAll('[data-check]').forEach(b=>b.addEventListener('click',()=>checkQ(+b.dataset.check)));
   Object.keys(CHK).forEach(i=>showFeedback(+i));
@@ -1547,8 +1559,9 @@ function partsReview(q){return q.parts.map(p=>{let ua=p.user;if(p.type==='choice
   if(p.type==='multi'&&!blankV(ua))ua=String(ua).split(',').filter(x=>x!=='').map(x=>'('+optL(q)[+x]+')').join(', ');
   const lab=q.parts.length>1?(p.q?p.q.split(' ')[0]+' ':''):'';
   // a written answer: the student's answer, the model answer and the marking points, ticked as the student marked them
-  if(p.type==='self'){const sc=+(p.got||0).toFixed(2),bl=blankV(p.user);
-    return `<div class="pr ${p.ok?'right':sc>0?'part':'wrong'}"><span><span class="tick">${p.ok?'✓ Full marks':sc>0?'◐ Part marks':bl?'✗ Not answered':'✗ No marks'}</span> ${lab}<span class="hint" style="margin:0;display:inline">(${sc} / ${p.marks}${bl?'':', marked by you'})</span></span>${bl?'':`<span>Your answer:</span><div class="wans">${esc(p.user)}</div>`}<span>Model answer:</span><div class="wmodel">${p.model}</div><ul class="wpts">${p.points.map((t,k)=>`<li>${bl?'':(p.ticks||[]).indexOf(k)>=0?'✓ ':'✗ '}${t.t} <span class="hint" style="display:inline;margin:0">(${fmtM(t.m)})</span></li>`).join('')}</ul></div>`;}
+  // (an internal choice: the question the student answered, with its model answer and points)
+  if(p.type==='self'){const sc=+(p.got||0).toFixed(2),bl=blankV(p.user),u=p.alt&&p.used?p.alt:p;
+    return `<div class="pr ${p.ok?'right':sc>0?'part':'wrong'}"><span><span class="tick">${p.ok?'✓ Full marks':sc>0?'◐ Part marks':bl?'✗ Not answered':'✗ No marks'}</span> ${lab}<span class="hint" style="margin:0;display:inline">(${sc} / ${p.marks}${bl?'':', marked by you'})</span></span>${p.alt&&!bl?`<span class="hint" style="margin:0">You answered ${u===p?'the first question':'the OR question'}.</span>`:''}${bl?'':`<span>Your answer:</span><div class="wans">${esc(p.user)}</div>`}<span>Model answer:</span><div class="wmodel">${u.model}</div><ul class="wpts">${u.points.map((t,k)=>`<li>${bl?'':(p.ticks||[]).indexOf(k)>=0?'✓ ':'✗ '}${t.t} <span class="hint" style="display:inline;margin:0">(${fmtM(t.m)})</span></li>`).join('')}</ul></div>`;}
   // single-part questions show the question's own score (it can be partial or negative); multi-part ones show each part
   const sc=q.parts.length===1&&q.got!=null?q.got:(p.ok?p.marks:0),scTxt=sc<0?'−'+(-sc):String(sc),partial=!p.ok&&sc>0;
   return `<div class="pr ${p.ok?'right':partial?'part':'wrong'}"><span><span class="tick">${p.ok?'✓ Correct':partial?'◐ Partly correct':'✗ '+(blankV(ua)?'Not answered':'Incorrect')}</span> ${lab}<span class="hint" style="margin:0;display:inline">(${scTxt} / ${p.marks})</span></span>${p.ok?'':`<span>Your answer: <b>${blankV(ua)?'—':esc(ua)}</b></span>`}${q.dropped?'<span><b>Dropped by the exam body: full marks to everyone.</b> See the note below.</span>':`<span>Correct answer: <b>${answerText(p)}</b></span>`}</div>`;}).join('');}  // a dropped question may have no correct option at all
@@ -1566,8 +1579,10 @@ function maxMarks(qs,exam){const lim=exam&&exam.secLimit,seen={};let t=0;
   qs.forEach(q=>{const k=String(q.sec||''),n=lim&&lim[k.split('-').pop()];if(!n){t+=q.marks;return;}seen[k]=(seen[k]||0)+1;if(seen[k]<=n)t+=q.marks;});return t;}
 function markQ(i){const q=P.qs[i];q.got=0;q.parts.forEach((p,j)=>{p.user=ANS[i+'-'+j];
     // a written answer scores the marks of the points the student ticked (ANS[i-js]: their positions); a blank answer scores 0
-    if(p.type==='self'){p.ticks=blankV(p.user)?[]:String(ANS[i+'-'+j+'s']||'').split(',').filter(x=>x!==''&&p.points[+x]).map(Number);
-      p.got=Math.min(p.marks,+p.ticks.reduce((a,k)=>a+p.points[k].m,0).toFixed(2));p.ok=p.got>=p.marks;q.got+=p.got;return;}
+    // (an internal choice: ANS[i-jc] = '1' when the student answered the OR question; p.used records it for the review)
+    if(p.type==='self'){const u=selfUse(p,ANS[i+'-'+j+'c']);p.used=u===p?0:1;
+      p.ticks=blankV(p.user)?[]:String(ANS[i+'-'+j+'s']||'').split(',').filter(x=>x!==''&&u.points[+x]).map(Number);
+      p.got=Math.min(p.marks,+p.ticks.reduce((a,k)=>a+u.points[k].m,0).toFixed(2));p.ok=p.got>=p.marks;q.got+=p.got;return;}
     p.ok=checkPart(p,p.user);if(p.ok)q.got+=p.marks;});
   // exam papers: a wrong attempt costs q.neg marks; a question dropped by the exam body gives full marks to everyone
   const p0=q.parts[0],answered=q.parts.some((p,j)=>!blankV(ANS[i+'-'+j]));
@@ -1591,16 +1606,18 @@ function checkQ(i){
 const needsMark=i=>!CHK[i]&&P.qs[i].parts.some((p,j)=>p.type==='self'&&!blankV(ANS[i+'-'+j]));
 // the marking form for question i: for each written answer, the student's answer, the model answer and a tick box per marking point
 function selfMarkHtml(i){const q=P.qs[i];
-  return q.parts.map((p,j)=>{if(p.type!=='self')return '';const k=i+'-'+j,lab=q.parts.length>1&&p.q?`<p style="margin:0"><b>${p.q}</b> <span class="qm">[${p.marks}]</span></p>`:'';
+  // (an internal choice: the model answer and points of the question the student chose to answer)
+  return q.parts.map((p,j)=>{if(p.type!=='self')return '';const k=i+'-'+j,u=selfUse(p,ANS[k+'c']),lab=q.parts.length>1&&p.q?`<p style="margin:0"><b>${p.q}</b> <span class="qm">[${p.marks}]</span></p>`:'',
+      orTag=p.alt?`<span class="hint" style="margin:0">You answered ${u===p?'the first question':'the OR question'}${u===p?'':`: ${u.q}`}</span>`:'';
     if(blankV(ANS[k]))return `<div class="smpart">${lab}<span><b>Not answered:</b> 0 marks.</span><span>Model answer:</span><div class="wmodel">${p.model}</div></div>`;
     const on=String(ANS[k+'s']||'').split(',');
-    return `<div class="smpart">${lab}<span>Your answer:</span><div class="wans">${esc(ANS[k])}</div><span>Model answer:</span><div class="wmodel">${p.model}</div>
-      <fieldset class="wpts"><legend>Tick each marking point your answer has</legend>${p.points.map((t,n)=>`<label class="opt${on.indexOf(String(n))>=0?' on':''}"><input type="checkbox" data-sm="${k}" value="${n}"${on.indexOf(String(n))>=0?' checked':''}> <span class="ot">${t.t} <span class="hint" style="display:inline;margin:0">(${fmtM(t.m)})</span></span></label>`).join('')}</fieldset>
-      <p class="hint smsum" data-smsum="${k}">${smSum(p,ANS[k+'s'])}</p></div>`;}).join('');}
-const smSum=(p,v)=>{const got=Math.min(p.marks,String(v||'').split(',').filter(x=>x!==''&&p.points[+x]).reduce((a,x)=>a+p.points[+x].m,0));return `Your marks: ${+got.toFixed(2)} / ${p.marks}`;};
+    return `<div class="smpart">${lab}${orTag}<span>Your answer:</span><div class="wans">${esc(ANS[k])}</div><span>Model answer:</span><div class="wmodel">${u.model}</div>
+      <fieldset class="wpts"><legend>Tick each marking point your answer has</legend>${u.points.map((t,n)=>`<label class="opt${on.indexOf(String(n))>=0?' on':''}"><input type="checkbox" data-sm="${k}" value="${n}"${on.indexOf(String(n))>=0?' checked':''}> <span class="ot">${t.t} <span class="hint" style="display:inline;margin:0">(${fmtM(t.m)})</span></span></label>`).join('')}</fieldset>
+      <p class="hint smsum" data-smsum="${k}">${smSum(u.points,p.marks,ANS[k+'s'])}</p></div>`;}).join('');}
+const smSum=(pts,marks,v)=>{const got=Math.min(marks,String(v||'').split(',').filter(x=>x!==''&&pts[+x]).reduce((a,x)=>a+pts[+x].m,0));return `Your marks: ${+got.toFixed(2)} / ${marks}`;};
 function wireSelf(root){root.querySelectorAll('[data-sm]').forEach(cb=>cb.addEventListener('change',()=>{const k=cb.dataset.sm,[i,j]=k.split('-').map(Number);
   ANS[k+'s']=[...root.querySelectorAll(`[data-sm="${k}"]:checked`)].map(x=>x.value).join(',');cb.closest('.opt').classList.toggle('on',cb.checked);
-  const s=root.querySelector(`[data-smsum="${k}"]`);if(s)s.textContent=smSum(P.qs[i].parts[j],ANS[k+'s']);saveSoon();}));}
+  const p=P.qs[i].parts[j],s=root.querySelector(`[data-smsum="${k}"]`);if(s)s.textContent=smSum(selfUse(p,ANS[k+'c']).points,p.marks,ANS[k+'s']);saveSoon();}));}
 function showFeedback(i){showFeedback0(i);if(needMath())renderMath($('#fb'+i));}
 function showFeedback0(i){
   const q=P.qs[i],el=$('#q'+i);if(!el)return;
@@ -1684,7 +1701,7 @@ const MISTAKES='aa-mistakes';
 function getMistakes(){try{const a=JSON.parse(localStorage.getItem(MISTAKES)||'[]');return Array.isArray(a)?a:[];}catch(e){return [];}}
 function setMistakes(a){try{localStorage.setItem(MISTAKES,JSON.stringify(a.slice(0,150)));}catch(e){}}
 function cleanQ(q){const c=JSON.parse(JSON.stringify(q)),ol=optL(q);delete c.got;delete c.mk;if(ol!=='abcd')c.ol=ol;
-  c.parts.forEach((p,j)=>{delete p.user;delete p.ok;delete p.got;delete p.ticks;if(ol!=='abcd')p.ol=ol;
+  c.parts.forEach((p,j)=>{delete p.user;delete p.ok;delete p.got;delete p.ticks;delete p.used;if(ol!=='abcd')p.ol=ol;
     if(p.type==='choice'){if(p.accept)p.ansText=p.accept.map(k=>`(${ol[k]}) ${p.options[k]}`).join(' or ')+' (the final key accepts either)';else delete p.ansText;}
     else if(p.ansText==null){try{p.ansText=answerText(q.parts[j]);}catch(e){}}});
   return c;}
@@ -2054,7 +2071,7 @@ const gotWrong=q=>q.got<q.marks&&!leftBlank(q)&&inMax(q);
 // retry(true): the questions answered wrongly; retry('blank'): the questions left blank; retry(false): the whole paper
 function retry(onlyWrong){
   const blank=onlyWrong==='blank',src=blank?P.qs.filter(leftBlank):onlyWrong?P.qs.filter(gotWrong):P.qs;
-  const qs=JSON.parse(JSON.stringify(src));qs.forEach((q,i)=>{q.no=i+1;delete q.got;delete q.inMax;delete q.uncounted;q.parts.forEach(p=>{delete p.user;delete p.ok;delete p.got;delete p.ticks;});});
+  const qs=JSON.parse(JSON.stringify(src));qs.forEach((q,i)=>{q.no=i+1;delete q.got;delete q.inMax;delete q.uncounted;q.parts.forEach(p=>{delete p.user;delete p.ok;delete p.got;delete p.ticks;delete p.used;});});
   // a retry of only some questions marks every one of them (the "attempt any N" rule is for the whole paper)
   const exam0=P.exam&&P.exam.secLimit&&onlyWrong?Object.assign({},P.exam,{secLimit:null}):P.exam;
   const om=P.qs.reduce((a,q)=>a+q.marks,0),tm=qs.reduce((a,q)=>a+q.marks,0);
@@ -2252,11 +2269,29 @@ function renderBoardPage(){const cs=boardGroups();if(!cs.length)return;if(!cs.so
   $('#boardCls').innerHTML=cs.map(c=>`<button type="button" class="chip${c.cls===boardCls?' on':''}" data-bcls="${c.cls}" aria-pressed="${c.cls===boardCls}">Class ${clsNum(c.cls)}</button>`).join('');
   const c=cs.find(x=>x.cls===boardCls);$('#boardPageMsg').hidden=true;
   $('#boardList').innerHTML=c.subs.map(s=>`<article class="card stack" style="gap:8px"><h3 style="margin:0">${esc(s.name)}</h3>
-    <div class="bpapers">${s.ps.map(x=>`<div class="bp${x.id===boardHl?' hl':''}"><b>${esc(x.date)}</b><span class="hint">${esc(x.pat)}</span><div class="btns"><button type="button" class="small primary" data-board="${x.id}" data-mode="exam">Start ${x.min%60?x.min+'-minute':x.min/60+'-hour'} exam</button><button type="button" class="small" data-board="${x.id}" data-mode="practice">Practise</button></div></div>`).join('')}</div></article>`).join('');
+    <div class="bpapers">${s.ps.map(x=>`<div class="bp${x.id===boardHl?' hl':''}"><b>${esc(x.date)}</b><span class="hint">${esc(x.pat)}</span><div class="btns"><button type="button" class="small primary" data-board="${x.id}" data-mode="exam">Start ${x.min%60?x.min+'-minute':x.min/60+'-hour'} exam</button><button type="button" class="small" data-board="${x.id}" data-mode="practice">Practise</button><button type="button" class="small" data-board="${x.id}" data-mode="print">Print</button></div></div>`).join('')}</div></article>`).join('')
+    +`<div class="card stack" style="gap:6px"><b>Use these papers offline</b><span class="hint" style="margin:0">Save every Class ${clsNum(boardCls)} paper on this device, so you can take them without the internet.</span><div class="btns"><button type="button" class="small" id="boardOffline">${offlineSaved(boardCls)?'Saved for offline use ✓ · Save again':`Save Class ${clsNum(boardCls)} papers for offline use`}</button></div></div>`;
   if(boardHl){const h=$('#boardList .bp.hl');boardHl=null;if(h)setTimeout(()=>h.scrollIntoView({block:'center',behavior:'smooth'}),400);}}
 $('#boardView').addEventListener('click',e=>{const k=e.target.closest('[data-bcls]'),b=e.target.closest('[data-board]');
   if(k){boardCls=k.dataset.bcls;renderBoardPage();const on=$('#boardCls [data-bcls="'+boardCls+'"]');if(on)on.focus();}
-  else if(b)startJee(b.dataset.board,b.dataset.mode);});
+  else if(b)startJee(b.dataset.board,b.dataset.mode);
+  else if(e.target.closest('#boardOffline'))saveBoardOffline(boardCls);});
+// "Save for offline use": every paper of a class (paper.json and its figures) and the maths typesetting are fetched once, so
+// the service worker keeps copies; the class and date are remembered on this device
+const offlineSaved=cls=>{try{return (JSON.parse(localStorage.getItem('aa-board-offline')||'{}')||{})[cls]||0;}catch(e){return 0;}};
+async function saveBoardOffline(cls){const ps=BOARD_PAPERS.filter(x=>x.cls===cls),msg=$('#boardPageMsg'),btn=$('#boardOffline');btn.disabled=true;
+  msg.className='msg info';msg.hidden=false;let done=0;
+  try{await ensureMath();
+    for(const x of ps){msg.textContent=`Saving paper ${done+1} of ${ps.length}…`;
+      const d=await fetch(x.path+'paper.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw new Error('http '+r.status);return r.json();});
+      const figs=new Set();d.questions.forEach(q=>{[q.fig,q.or&&q.or.fig].concat(q.optionFigs||[]).forEach(f=>{if(f)figs.add(f);});});
+      await Promise.all([...figs].map(f=>fetch(x.path+'fig/'+f).catch(()=>{})));done++;}
+    try{const o=JSON.parse(localStorage.getItem('aa-board-offline')||'{}')||{};o[cls]=Date.now();localStorage.setItem('aa-board-offline',JSON.stringify(o));}catch(e){}
+    track(`board-offline/class-${slug(cls)}`,`Saved Class ${clsNum(cls)} board papers offline`);
+    msg.className='msg ok';msg.textContent=`All ${ps.length} Class ${clsNum(cls)} papers are saved on this device. Open my-exam.in (or the installed app) without the internet and choose Board exam 2027.`;
+    btn.textContent='Saved for offline use ✓ · Save again';}
+  catch(e){msg.className='msg err';msg.textContent=`${done} of ${ps.length} papers saved; the rest could not be downloaded. Check your internet connection and try again.`;}
+  btn.disabled=false;}
 // festival greeting on the home screen: shown from..to (local dates, inclusive) until the student closes it
 const GREETS=[{id:'diwali-2026',from:'2026-11-07',to:'2026-11-10',html:'<span><b>\u{1FA94} Happy Diwali!</b> May the festival of lights bring you and your family joy, good health and success in your exams. Enjoy the celebrations, and come back refreshed.</span>'}];
 const isoDay=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
@@ -2277,7 +2312,8 @@ async function startJee(id,mode){
   let meta=null,list='jee-main';Object.keys(EXAM_PAGES).forEach(k=>{const m=EXAM_PAGES[k].papers.find(x=>x.id===id);if(m){meta=m;list=k;}});
   // CBSE board practice papers open from the School screen (list 'board'), with their messages there
   const bm=BOARD_PAPERS.find(x=>x.id===id);if(bm){meta=bm;list='board';}
-  const msg=list==='board'?(!$('#boardView').hidden?$('#boardPageMsg'):$('#boardMsg')):$('#jeeMsg');if(!meta||!msg||!okToReplace())return;
+  // mode 'print' (board papers page): the paper opens in the print view only, so an unfinished paper is kept as it is
+  const msg=list==='board'?(!$('#boardView').hidden?$('#boardPageMsg'):$('#boardMsg')):$('#jeeMsg');if(!meta||!msg||(mode!=='print'&&!okToReplace()))return;
   msg.className='msg info';msg.textContent='Loading the paper…';msg.hidden=false;
   // no connection, a missing file and a damaged file each get their own message; the cause is logged to the console
   let data;
@@ -2293,9 +2329,11 @@ async function startJee(id,mode){
     const secName=(sec)=>data.secNames?data.secNames[sec]:(sec==='A'?'multiple choice':'numerical');
     subs.forEach(s=>secOrder.forEach(sec=>{if(qs.some(q=>q.sec===s+'-'+sec))secs.push({key:s+'-'+sec,letter:'',name:secOrder.length===1?s:`${s} · Section ${sec} (${secName(sec)})`,kind:qs.find(q=>q.sec===s+'-'+sec).kind});}));
     const title=[meta.name,meta.date,meta.shift].filter(Boolean).join(' · ');
-    P={qs,secs,notes:[],created:Date.now(),mode,duration:data.duration||180,subject:data.exam||'JEE Main',klass:'',board:data.board||'NTA',country:'India',label:data.label||'Official paper',topicsLabel:'',startAt:Date.now(),
+    if(mode==='print')printKeep={P,ANS,FLAG,CHK};
+    P={qs,secs,notes:[],created:Date.now(),mode:mode==='print'?'exam':mode,duration:data.duration||180,subject:data.exam||'JEE Main',klass:'',board:data.board||'NTA',country:'India',label:data.label||'Official paper',topicsLabel:'',startAt:Date.now(),
        exam:{id,list,name:meta.name,date:meta.date,shift:meta.shift,title,short:[meta.date,meta.shift].filter(Boolean).join(' · '),instr:data.instr||null,optLabels:data.optLabels||null,secLimit:data.secLimit||null,subjects:subs.join(', ').replace(/, ([^,]*)$/,' and $1')}};
     P.endAt=P.startAt+P.duration*60000;ANS={};FLAG={};CHK={};if(weeklyId===id)P.weekly=true;weeklyId=null;
+    if(mode==='print'){msg.hidden=true;showPrint('board');return;}
     msg.hidden=true;track(`start/${mode}/${paperTag()}`,`Started ${mode}: ${paperName()}`);
     begin();
   }catch(e){console.error('Paper '+id+' could not be opened:',e);msg.className='msg err';msg.textContent='Sorry, this paper could not be opened because of a problem on our side. Please tell us, using "Tell us" below.';}
@@ -2313,7 +2351,11 @@ function examQs(data,fig){const OL=data.optLabels||'abcd';
       let parts;
       // written (board practice papers): one answer box, or one per sub-part (x.parts: case-based questions), each with its
       // model answer and marking points; w = the part's marks, so partMarks keeps them
-      if(x.type==='written')parts=(x.parts||[{q:'',marks:x.full,model:x.model,points:x.points}]).map(y=>({type:'self',q:wrapMath(safe(y.q)),w:+y.marks,model:wrapMath(safe(y.model)),points:y.points.map(t=>({t:wrapMath(safe(t.t)),m:+t.m}))}));
+      // an internal choice ("OR", official board papers): y.or, the other question the student may answer instead (same
+      // marks), kept as alt; the student's choice decides which model answer and marking points apply
+      const pts=a=>a.map(t=>({t:wrapMath(safe(t.t)),m:+t.m}));
+      const alt=y=>y?{q:wrapMath(safe(y.q||y.text))+(y.fig?`<img class="qfig" src="${fig+y.fig}" alt="Figure for the OR question" loading="lazy">`:''),model:wrapMath(safe(y.model)),points:pts(y.points)}:null;
+      if(x.type==='written')parts=(x.parts||[{q:'',marks:x.full,model:x.model,points:x.points,or:x.or}]).map(y=>({type:'self',q:wrapMath(safe(y.q)),w:+y.marks,model:wrapMath(safe(y.model)),points:pts(y.points),alt:alt(y.or)}));
       else if(x.type==='multi'){const o=opts(),letters=a=>a.map(j=>`(${OL[j]})`).join(', ');parts=[{type:'multi',ans:x.answer.slice(),alts:x.alts||null,options:o,ansText:x.answer.map(j=>`(${OL[j]}) ${o[j]}`).join('<br>')+(x.alts?`<br>The final key also accepts: ${x.alts.map(letters).join(' or ')}`:'')}];}
       else if(x.type==='num'){const a=x.answer,rng=r=>+r.lo===+r.hi?String(r.lo):`${r.lo} to ${r.hi}`;
         // x.accept on a numerical question: further ranges the final key accepts (e.g. "-29.95 to -29.8 or 29.8 to 29.95")
@@ -2509,7 +2551,7 @@ function printPaperHtml(){
   const lines=q=>({E:1,M:2,C:3,X:2}[q.level]||2);
   const qP=q=>{let inner;
     if(q.parts[0].type==='choice'||q.parts[0].type==='multi')inner=`<ol class="popts">${q.parts[0].options.map((o,j)=>`<li>(${optL(q)[j]}) ${o}</li>`).join('')}</ol>`;
-    else inner=q.parts.map(p=>`<div class="ppart">${p.q?p.q+(q.parts.length>1?` <span class="qm">[${p.marks}]</span>`:''):''}${p.type==='select'?`<div class="hint" style="margin:2px 0 0">(${p.options.map(esc).join(' / ')})</div>`:''}${'<div class="aline"></div>'.repeat(p.type==='self'?Math.max(2,Math.round(p.marks*2)):q.parts.length>1?1:lines(q))}</div>`).join('');
+    else inner=q.parts.map(p=>`<div class="ppart">${p.q?p.q+(q.parts.length>1?` <span class="qm">[${p.marks}]</span>`:''):''}${p.alt?`<div class="orq"><b class="ortag">OR</b> ${p.alt.q}</div>`:''}${p.type==='select'?`<div class="hint" style="margin:2px 0 0">(${p.options.map(esc).join(' / ')})</div>`:''}${'<div class="aline"></div>'.repeat(p.type==='self'?Math.max(2,Math.round(p.marks*2)):q.parts.length>1?1:lines(q))}</div>`).join('');
     return `<div class="pq"><span class="pn">${q.no}.</span><div class="qbody"><div>${q.text}</div>${inner}</div><span class="qm">[${q.marks}]</span></div>`;};
   const key=`<section class="pkey"><h2>Answer key</h2><p class="hint" style="margin:4px 0 0">${esc(paperName())} · ${total} marks</p><ol>${P.qs.map(q=>`<li value="${q.no}"><b>${q.dropped?'Dropped: full marks to everyone':q.parts.map(p=>(q.parts.length>1&&p.q?p.q.split(' ')[0]+' ':'')+answerText(p)).join('; ')}</b><div class="sol">${q.sol}</div></li>`).join('')}</ol></section>`;
   return `<header class="phead"><p class="brand">All in All Exam Practice · my-exam.in</p><h2>${esc(paperName())}</h2>${P.topicsLabel?`<p class="hint" style="margin:2px 0 0">Chapters: ${esc(P.topicsLabel)}</p>`:''}<div class="meta"><span>Time: ${P.duration} minutes</span><span>Maximum marks: ${total}</span></div></header>
@@ -2519,13 +2561,13 @@ function printPaperHtml(){
    ${key}`;
 }
 // the print view can be opened from the start page (Print mode), during a paper, or from the results
-let printFrom='setup';
+let printFrom='setup',printKeep=null; // printKeep: the student's own paper, kept while a board paper is open in the print view
 function showPrint(from){
   printFrom=from||'setup';
   track(`print/${printFrom}/${paperTag()}`,`Print view (${printFrom}): ${paperName()}`);
   if(printFrom==='test')$('#withKey').checked=false; // no answer key while the paper is still being answered
   $('#withKeyWrap').hidden=printFrom==='test';
-  $('#printBack').textContent=printFrom==='test'?'Back to the paper':'Back to results';
+  $('#printBack').textContent=printFrom==='test'?'Back to the paper':printFrom==='board'?'Back to the board papers':'Back to results';
   $('#printPaper').innerHTML=printPaperHtml();
   if(needMath())ensureMath().then(()=>renderMath($('#printPaper')));
   $('#printPaper').classList.toggle('withkey',$('#withKey').checked);
@@ -2618,7 +2660,10 @@ $('#usemcq').addEventListener('change',readForm);
 ['#mode_practice','#mode_exam'].forEach(s=>$(s).addEventListener('change',readForm));
 $('#withKey').addEventListener('change',e=>{$('#printPaper').classList.toggle('withkey',e.target.checked);});
 $('#printGo').addEventListener('click',()=>{window.print();});
-$('#printBack').addEventListener('click',()=>{show(printFrom);window.scrollTo(0,0);});
+// back from a paper printed from the board papers page: the student's own paper (if any) comes back, then that page
+$('#printBack').addEventListener('click',()=>{if(printFrom==='board'){if(printKeep){({P,ANS,FLAG,CHK}=printKeep);printKeep=null;}
+    if(location.hash==='#board')route();else location.hash='#board';return;}
+  show(printFrom);window.scrollTo(0,0);});
 $('#printNowBtn').addEventListener('click',()=>showPrint('test'));
 $('#flagBtn').addEventListener('click',()=>toggleFlagView(!onlyFlag));
 $('#confirmFlag').addEventListener('click',()=>{$('#confirm').hidden=true;toggleFlagView(true);});
