@@ -435,11 +435,15 @@
       // which lists every subject's papers with Exam and Practise buttons
       await load('../index.html?test#home');
       const BP = W().__aaTest.BOARD_PAPERS, classes = [...new Set(BP.map(x => x.cls))];
-      ok(g, 'the home page shows one board-papers card per class, and fits the width', !$('#boardHome').hidden && $$('#boardHome [data-boardcls]').length === classes.length && classes.length > 0 && fits(), `${$$('#boardHome [data-boardcls]').length} cards for ${classes.length} classes; ${wide()}`);
-      const card = $$('#boardHome [data-boardcls]').pop();
+      ok(g, 'the home page shows one board-papers card per class, and fits the width', !$('#boardHome').hidden && $$('#boardHome .btile').length === classes.length && classes.length > 0 && fits(), `${$$('#boardHome .btile').length} cards for ${classes.length} classes; ${wide()}`);
+      const tile = $$('#boardHome .btile').pop(), card = tile && tile.querySelector('[data-boardcls]:not([data-boardpast])');
       if (card) {
         const c = card.dataset.boardcls, nSub = new Set(BP.filter(x => x.cls === c).map(x => x.subj)).size, nPap = BP.filter(x => x.cls === c).length;
-        ok(g, 'each class card counts its subjects and practice papers, and mentions CBSE\'s past papers', card.textContent.indexOf(`${nSub} subject`) >= 0 && card.textContent.indexOf(`${nPap} practice papers`) >= 0 && /Past papers 2024–2026/.test(card.textContent), card.textContent);
+        ok(g, 'each class card links to its practice papers (counted) and, separately, to CBSE\'s past papers', tile.textContent.indexOf(`${nSub} subject`) >= 0 && tile.textContent.indexOf(`${nPap} practice papers`) >= 0 && !!tile.querySelector('[data-boardpast]') && /Past papers 2024–2026/.test(tile.querySelector('[data-boardpast]').textContent), tile.textContent);
+        // the past papers link: the board papers page on that class, with CBSE's papers shown under every subject
+        tile.querySelector('[data-boardpast]').click(); await until(() => !$('#boardView').hidden && $$('#boardList .offpapers').length);
+        ok(g, 'the past papers link opens the board papers page with CBSE\'s past papers shown under every subject', $(`#boardCls .chip.on[data-bcls="${c}"]`) && $$('#boardList .offpapers').length === nSub && $$('#boardList .offpapers').every(d => d.offsetParent !== null && d.querySelector('a[href^="https://www.cbse.gov.in/"]')));
+        W().location.hash = '#home'; await until(() => !$('#homeView').hidden);
         card.click(); await until(() => !$('#boardView').hidden && $$('#boardList [data-board]').length);
         ok(g, 'a class card opens the board papers page on that class, every paper with Exam and Practise, and it fits the width',
           !$('#boardView').hidden && $(`#boardCls .chip.on[data-bcls="${c}"]`) && $$('#boardList article').length === nSub && $$('#boardList [data-board][data-mode="exam"]').length === nPap && fits(), `${$$('#boardList article').length} subjects, ${$$('#boardList [data-board][data-mode="exam"]').length} papers; ${wide()}`);

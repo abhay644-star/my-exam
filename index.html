@@ -228,7 +228,7 @@ button.small{padding:6px 12px;font-size:.85rem}
 .smpart{display:flex;flex-direction:column;gap:2px;padding:8px 10px;border:1px solid var(--line);border-radius:8px}
 .smsum{font-weight:700;margin:4px 0 0}
 .board.hl,.bp.hl{outline:3px solid var(--ink);outline-offset:2px}
-.offpapers{border-top:1px solid var(--line);padding-top:8px}.offpapers summary{cursor:pointer;font-weight:700;color:var(--ink)}
+.offpapers{border-top:1px solid var(--line);padding-top:8px}.offhead{margin:0;font-weight:700;color:var(--ink)}
 .offpapers ul{margin:6px 0 0;padding-left:1.2em}.offpapers li{margin:2px 0}
 /* My progress: a strip on the home page, and the page's number tiles and score chart */
 .progstrip{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 14px;padding:10px 14px;border:1px solid var(--line);border-radius:var(--r);background:var(--paper);color:var(--fg);text-decoration:none;margin:4px 0 8px}
@@ -242,6 +242,7 @@ button.small{padding:6px 12px;font-size:.85rem}
 .pchart i{flex:1;min-width:4px;max-width:28px;border-radius:3px 3px 0 0}
 #boardHome{margin:4px 0 8px}
 .bgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px}
+.btile a{font-size:.9rem;font-weight:700;text-decoration:none;color:var(--ink);padding:3px 0}.btile a:hover{text-decoration:underline}
 .btile{text-decoration:none;display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left;min-height:44px;padding:10px 12px;border:1px solid var(--ink);border-radius:var(--r);background:var(--ink-soft);color:var(--fg);font:inherit;cursor:pointer}
 .btile b{color:var(--ink)}.btile span{font-size:.82rem;color:var(--muted)}
 .btile:hover{background:var(--paper)}.btile:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
@@ -2270,16 +2271,17 @@ function renderBoardHome(){const box=$('#boardHome'),cs=boardGroups(),n=BOARD_PA
   box.hidden=!cs.length;if(!cs.length)return;
   const past=c=>c.subs.some(s=>CBSE_OFFICIAL[c.cls+'|'+s.subj]);
   box.innerHTML=`<h3 class="whyhead" id="boardHomeHead">CBSE board exams: practice and past papers <span class="soon ready">New</span></h3><p class="hint" style="margin:0 0 10px">${n} full 3-hour practice papers for 2027 in the new pattern (written by us, with model answers and marking points), plus CBSE’s own past papers and sample paper.</p>
-    <div class="bgrid">${cs.map(c=>{const np=c.subs.reduce((a,s)=>a+s.ps.length,0);return `<a class="btile" href="#board" data-boardcls="${c.cls}"><b>Class ${clsNum(c.cls)} board exam</b><span>${np} practice papers for 2027 · ${c.subs.length} subject${c.subs.length>1?'s':''}</span>${past(c)?'<span>Past papers 2024–2026 (CBSE)</span>':''}<span>Explore Class ${clsNum(c.cls)} →</span></a>`;}).join('')}</div>`;}
-let boardCls=null,boardHl=null;
-$('#boardHome').addEventListener('click',e=>{const b=e.target.closest('[data-boardcls]');if(!b)return;boardCls=b.dataset.boardcls;
-  track(`board-home/class-${slug(boardCls)}`,`Home: board papers, Class ${clsNum(boardCls)}`);});
+    <div class="bgrid">${cs.map(c=>{const np=c.subs.reduce((a,s)=>a+s.ps.length,0);return `<div class="btile"><b>Class ${clsNum(c.cls)} board exam</b><a href="#board" data-boardcls="${c.cls}">${np} practice papers for 2027 (${c.subs.length} subject${c.subs.length>1?'s':''}) →</a>${past(c)?`<a href="#board" data-boardcls="${c.cls}" data-boardpast="1">Past papers 2024–2026 and sample paper (CBSE) →</a>`:''}</div>`;}).join('')}</div>`;}
+let boardCls=null,boardHl=null,boardPast=false;
+// (data-boardpast: the past papers link: the board papers page opens with every subject's CBSE papers shown)
+$('#boardHome').addEventListener('click',e=>{const b=e.target.closest('[data-boardcls]');if(!b)return;boardCls=b.dataset.boardcls;boardPast=!!b.dataset.boardpast;
+  track(`board-home/class-${slug(boardCls)}${boardPast?'/past':''}`,`Home: board ${boardPast?'past papers':'practice papers'}, Class ${clsNum(boardCls)}`);});
 // a subject's papers from CBSE itself: the sample paper and the past board papers, as links to CBSE's own files
 function officialBlock(cls,subj){const o=CBSE_OFFICIAL[cls+'|'+subj];if(!o)return '';
   const a=(u,t)=>`<a href="${esc(u)}" rel="noopener" target="_blank">${t}</a>`;
   const rows=[o.sqp||o.sqpMs?`<li><b>Sample paper 2026–27:</b> ${[o.sqp&&a(o.sqp,'question paper'),o.sqpMs&&a(o.sqpMs,'marking scheme')].filter(Boolean).join(' · ')}</li>`:'']
     .concat((o.papers||[]).filter(e=>e.qp||e.ms).map(e=>`<li><b>Board exam ${esc(e.year)}:</b> ${[e.qp&&a(e.qp,'question papers'),e.ms&&a(e.ms,'marking schemes')].filter(Boolean).join(' · ')}</li>`)).join('');
-  return `<details class="offpapers"><summary>From CBSE: past papers and sample paper</summary><ul>${rows}</ul><p class="hint" style="margin:4px 0 0">These open CBSE’s own files (PDF, or ZIP with all sets of that year). Find anything missing on <a href="https://www.cbse.gov.in/cbsenew/question-paper.html" rel="noopener" target="_blank">CBSE’s question papers page</a>.</p></details>`;}
+  return `<div class="offpapers"><p class="offhead">Past papers from CBSE</p><ul>${rows}</ul><p class="hint" style="margin:4px 0 0">These open CBSE’s own files (PDF, or ZIP with all sets of that year). Find anything missing on <a href="https://www.cbse.gov.in/cbsenew/question-paper.html" rel="noopener" target="_blank">CBSE’s question papers page</a>.</p></div>`;}
 // the board papers page (#board): a class chosen with the chips, each subject's papers with Exam and Practise buttons
 function renderBoardPage(){const cs=boardGroups();if(!cs.length)return;if(!cs.some(c=>c.cls===boardCls))boardCls=cs[0].cls;
   $('#boardCls').innerHTML=cs.map(c=>`<button type="button" class="chip${c.cls===boardCls?' on':''}" data-bcls="${c.cls}" aria-pressed="${c.cls===boardCls}">Class ${clsNum(c.cls)}</button>`).join('');
@@ -2288,7 +2290,8 @@ function renderBoardPage(){const cs=boardGroups();if(!cs.length)return;if(!cs.so
     <p class="hint" style="margin:0"><b>Practice papers for 2027</b> (ours, in the 2026–27 pattern)</p>
     <div class="bpapers">${s.ps.map(x=>`<div class="bp${x.id===boardHl?' hl':''}"><b>${esc(x.date)}</b><span class="hint">${esc(x.pat)}</span><div class="btns"><button type="button" class="small primary" data-board="${x.id}" data-mode="exam">Start ${x.min%60?x.min+'-minute':x.min/60+'-hour'} exam</button><button type="button" class="small" data-board="${x.id}" data-mode="practice">Practise</button><button type="button" class="small" data-board="${x.id}" data-mode="print">Print</button></div></div>`).join('')}</div>${officialBlock(c.cls,s.subj)}</article>`).join('')
     +`<div class="card stack" style="gap:6px"><b>Use these papers offline</b><span class="hint" style="margin:0">Save every Class ${clsNum(boardCls)} paper on this device, so you can take them without the internet.</span><div class="btns"><button type="button" class="small" id="boardOffline">${offlineSaved(boardCls)?'Saved for offline use ✓ · Save again':`Save Class ${clsNum(boardCls)} papers for offline use`}</button></div></div>`;
-  if(boardHl){const h=$('#boardList .bp.hl');boardHl=null;if(h)setTimeout(()=>h.scrollIntoView({block:'center',behavior:'smooth'}),400);}}
+  if(boardHl){const h=$('#boardList .bp.hl');boardHl=null;if(h)setTimeout(()=>h.scrollIntoView({block:'center',behavior:'smooth'}),400);}
+  else if(boardPast){boardPast=false;const d=$('#boardList .offpapers');if(d)setTimeout(()=>d.scrollIntoView({block:'start',behavior:'smooth'}),400);}}
 $('#boardView').addEventListener('click',e=>{const k=e.target.closest('[data-bcls]'),b=e.target.closest('[data-board]');
   if(k){boardCls=k.dataset.bcls;renderBoardPage();const on=$('#boardCls [data-bcls="'+boardCls+'"]');if(on)on.focus();}
   else if(b)startJee(b.dataset.board,b.dataset.mode);
