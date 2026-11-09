@@ -317,7 +317,8 @@ a.btnlink:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
 .qtopic{font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.07em}
 .part{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,15rem);gap:6px 12px;align-items:center}
 @media (max-width:560px){.part{grid-template-columns:minmax(0,1fr)}}
-.part .pq{min-width:0}
+.part .pq{min-width:0;display:block;padding:0} /* (not the print view's three-column .pq grid) */
+.part.wpart{grid-template-columns:minmax(0,1fr)} /* a written answer: the question above a full-width answer box */
 .opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
 .opt{display:flex;gap:8px;align-items:center;border:1px solid var(--line);border-radius:8px;padding:8px 10px;cursor:pointer}
 .opt input{accent-color:var(--ink)}
@@ -1509,7 +1510,7 @@ function qHtml(q){
     else if(p.type==='self')field=`<textarea id="${id}" data-k="${qi}-${j}" rows="${Math.min(10,Math.max(3,Math.round(p.marks*2)))}" spellcheck="true" placeholder="Write your answer. Afterwards you mark it yourself against the model answer and marking points."></textarea>`;
     // full keyboard on every phone, so students can type −, / and ^ (the iPhone decimal pad has none of them)
     else field=`<input type="text" id="${id}" data-k="${qi}-${j}" autocomplete="off" autocapitalize="off" spellcheck="false" inputmode="text" placeholder="${p.type==='expr'?'e.g. 4a^2 + 6ab - 8':p.type==='list'?'e.g. -5/6, -3/4, 2/3':p.sci?'e.g. 3.84 x 10^5':/[√π]/.test(p.disp||p.ansText||'')?'e.g. 3√2 or π/3':'Answer'}">`;
-    return `<div class="part"><label class="pq" for="${id}" style="font-weight:400;margin:0">${lab}${q.parts.length>1?` <span class="qm">[${p.marks}]</span>`:''}</label>${field}</div>`;}).join('');
+    return `<div class="part${p.type==='self'?' wpart':''}"><label class="pq" for="${id}" style="font-weight:400;margin:0">${lab}${q.parts.length>1?` <span class="qm">[${p.marks}]</span>`:''}</label>${field}</div>`;}).join('');
   const tools=`<div class="qtools">${P.mode==='practice'?`<button type="button" class="small primary" data-check="${qi}">Check answer</button>`:''}<button type="button" class="small flag" data-flag="${qi}" aria-pressed="false">Flag for review</button></div><div class="fb" id="fb${qi}" tabindex="-1" role="group" aria-label="Question ${qi+1} result" hidden></div>`;
   return `<div class="q" id="q${qi}"><span class="qn">${q.no}</span><div class="qbody"><span class="qtopic"><span class="lvl l-${q.real||q.level}"></span>${q.topic}${q.tag?' · '+q.tag:''}</span><div>${q.text}</div>${inner}${tools}</div><span class="qm">[${q.marks}]</span></div>`;
 }
@@ -1638,7 +1639,7 @@ function askSubmit(){
   if(nf)$('#confirmText').textContent+=` You flagged ${nf} question${nf>1?'s':''} for review.`;
   $('#confirmBlank').hidden=!nb;$('#confirmBlank').textContent=`Review blank (${nb})`;$('#confirmYes').dataset.mode='submit';openConfirm();
 }
-function askQuit(){$('#confirmTitle').textContent='Quit this paper?';$('#confirmText').textContent=`Your answers will be discarded and you will return to ${P.exam?`the ${EXAM_PAGES[P.exam.list].crumb} papers`:'the start page'}.`;$('#confirmYes').textContent='Quit without marking';$('#confirmYes').dataset.mode='quit';$('#confirmBlank').hidden=true;$('#confirmFlag').hidden=true;openConfirm();}
+function askQuit(){$('#confirmTitle').textContent='Quit this paper?';$('#confirmText').textContent=`Your answers will be discarded and you will return to ${!P.exam?'the start page':P.exam.list==='board'?'the board practice papers':`the ${EXAM_PAGES[P.exam.list].crumb} papers`}.`;$('#confirmYes').textContent='Quit without marking';$('#confirmYes').dataset.mode='quit';$('#confirmBlank').hidden=true;$('#confirmFlag').hidden=true;openConfirm();}
 // the submit and quit box: focus moves to its title so a screen reader reads it out; "Keep working" or Escape closes it
 // and puts focus back on the button that opened it
 let confirmFrom=null;

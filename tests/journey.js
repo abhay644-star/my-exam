@@ -435,7 +435,10 @@
         if (other) { other.click(); await sleep(100); ok(g, 'the class chips switch the list', $$('#boardList [data-board][data-mode="exam"]').length === BP.filter(x => x.cls === other.dataset.bcls).length); }
         $('#boardList [data-board][data-mode="practice"]').click(); await until(() => !$('#test').hidden && W().__aaTest.paper && W().__aaTest.paper.exam, 20000);
         ok(g, 'Practise on the board papers page opens that paper', W().__aaTest.paper.exam.list === 'board' && W().__aaTest.paper.mode === 'practice');
-        $('#quitBtn').click(); await sleep(100); $('#confirmYes').click(); await sleep(200);
+        $('#quitBtn').click(); await sleep(100);
+        ok(g, 'Quit on a board paper asks to quit (back to the board practice papers)', !$('#confirm').hidden && /board practice papers/.test($('#confirmText').textContent) && $('#confirmYes').dataset.mode === 'quit', $('#confirmText').textContent);
+        $('#confirmYes').click(); await until(() => !$('#boardView').hidden);
+        ok(g, '...and Quit returns to the board practice papers page', !$('#boardView').hidden && !W().localStorage.getItem('aa-active-paper'));
         W().localStorage.removeItem('aa-active'); W().localStorage.removeItem('aa-active-paper');
       }
       await load('../index.html?test#school');
@@ -448,6 +451,11 @@
       await until(() => !$('#test').hidden && $$('#sheet .q').length === 4, 15000);
       const ta = $('#q2 textarea');
       ok(g, 'a written question has an answer box', !!ta);
+      // a case-based question's parts: each part's question runs the full width with its answer box below it
+      const body = $('#q3 .qbody').getBoundingClientRect().width, labs = $$('#q3 .part .pq'), boxes = $$('#q3 .part textarea');
+      ok(g, 'each part of a case-based question uses the full width, with its answer box below the question',
+        labs.length === 3 && labs.every(l => l.getBoundingClientRect().width > body * 0.9) && boxes.every((b, i) => b.getBoundingClientRect().top >= labs[i].getBoundingClientRect().bottom - 1 && b.getBoundingClientRect().width > body * 0.9),
+        labs.map(l => Math.round(l.getBoundingClientRect().width)).join('/') + ' of ' + Math.round(body));
       if (ta) {
         ta.value = 'a = 3, d = 4\na10 = 3 + 9 x 4 = 39'; fire(ta, 'input');
         $('#q2 [data-check]').click(); await until(() => $$('#fb2 [data-sm]').length);
