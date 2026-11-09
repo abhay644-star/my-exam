@@ -476,8 +476,12 @@
       GB.BOARD_PAPERS.push({ id: 'test-board', cls: 'X', subj: 'Mathematics', name: 'Test board paper', date: 'Practice paper T', shift: '', pat: '4 questions · 3 hours · 8 marks', path: 'tests/board-sample/', min: 180 });
       const pickSchool = () => { $('#klass').value = 'X'; fire($('#klass'), 'change'); $('#subject').value = 'Mathematics'; fire($('#subject'), 'change'); };
       pickSchool();
-      ok(g, 'board practice papers show on School for Class 10 Mathematics, and fit the width', !$('#boardBox').hidden && !!$('#boardBox [data-board="test-board"][data-mode="exam"]') && fits(), wide());
-      $('#boardBox [data-board="test-board"][data-mode="practice"]').click();
+      // School shows a one-line pointer to the subject's board papers; Open goes to the board papers page at that subject
+      ok(g, 'School shows a one-line pointer to Class 10 Mathematics board papers, and fits the width', !$('#boardBox').hidden && /practice papers? for Class 10 Mathematics/.test($('#boardBox').textContent) && !!$('#boardBox [data-boardopen]') && fits(), $('#boardBox').textContent + ' ' + wide());
+      const openBoard = async () => { $('#boardBox [data-boardopen]').click(); await until(() => !$('#boardView').hidden && $('#boardList [data-board="test-board"]')); };
+      await openBoard();
+      ok(g, '...Open shows the board papers page on Class 10, at Mathematics', !$('#boardView').hidden && $('#boardCls .chip.on[data-bcls="X"]') && !!$('#boardList [data-bsubj="Mathematics"] [data-board="test-board"]'));
+      $('#boardList [data-board="test-board"][data-mode="practice"]').click();
       await until(() => !$('#test').hidden && $$('#sheet .q').length === 4, 15000);
       const ta = $('#q2 textarea');
       ok(g, 'a written question has an answer box', !!ta);
@@ -500,7 +504,8 @@
       }
       $('#quitBtn').click(); await sleep(100); $('#confirmYes').click(); await sleep(200);
       W().location.hash = '#school'; await until(() => !$('#setup').hidden); pickSchool();
-      $('#boardBox [data-board="test-board"][data-mode="exam"]').click();
+      await openBoard();
+      $('#boardList [data-board="test-board"][data-mode="exam"]').click();
       await until(() => !$('#test').hidden && $$('#sheet .q').length === 4, 15000);
       const type = (sel, v) => { const t = $(sel); t.value = v; fire(t, 'input'); };
       const r1 = $('#q0 input[value="1"]'); r1.checked = true; fire(r1, 'change');
