@@ -377,6 +377,16 @@
       W().localStorage.removeItem('aa-active'); W().localStorage.removeItem('aa-active-paper');
       await load('../index.html?test#home');
     }
+    // My progress: the home strip links to it once papers are finished; the page shows the numbers, the score chart and the
+    // last papers, and fits the width
+    await load('../index.html?test#home');
+    const nHist = JSON.parse(W().localStorage.getItem('aa-history') || '[]').length;
+    ok(g, 'after finishing papers, the home page shows the My progress strip', nHist > 0 && !$('#progressHome').hidden && new RegExp(`${nHist} papers? finished`).test($('#progressHome').textContent), `${nHist} papers; ${$('#progressHome').textContent}`);
+    $('#progressHome').click(); await until(() => !$('#progressView').hidden && $('#progress .ptiles'));
+    ok(g, 'My progress shows the numbers, a bar per recent paper (up to 20) and the last papers, and fits the width',
+      $$('#progress .ptile').length === 4 && $$('#progress .pchart i').length === Math.min(20, nHist) && $$('#progress table tbody tr').length >= Math.min(10, nHist) && fits(),
+      `${$$('#progress .ptile').length} tiles, ${$$('#progress .pchart i').length} bars; ${wide()}`);
+
     // a mixed test: chapters ticked in two subjects (ticks kept when switching subject), 10 questions, timed like the exam
     await load('../index.html?test#jee-main'); await until(() => !$('#jeeView').hidden && $('#mixBox'));
     $('#mixBox').open = true; await sleep(50);

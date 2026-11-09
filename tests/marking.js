@@ -134,6 +134,19 @@
     const rec = A.cleanHistRec({ d: 1, subj: 'NEET', cls: 'x', pct: 50, nq: 1, exam: true, list: 'neet', chs: { 'XII|Physics|Nuclei': [1, 4], bad: 'x' } });
     eq(g, 'a history record keeps its exam and chapter marks through a backup restore (bad entries dropped)', [rec.list, rec.chs], ['neet', { 'XII|Physics|Nuclei': [1, 4] }]);
   }
+  // ---------- My progress: school chapters to revise, and board papers taken ----------
+  function progress(A) {
+    const g = 'My progress';
+    const h = [
+      { exam: false, subj: 'Science', cls: 'X', label: '', top: { 'Electricity': [2, 10], 'Life Processes': [9, 10] } },
+      { exam: false, subj: 'Science', cls: 'X', label: '', top: { 'Electricity': [1, 5] } },
+      { exam: false, subj: 'Science', cls: 'X', label: 'Retry: questions to review', top: { 'Electricity': [0, 50] } },
+      { exam: false, subj: 'Science', cls: 'X', label: '', top: { 'Not A Chapter': [0, 10] } },
+      { exam: true, pid: '10-maths-1', pct: 40, label: '' }, { exam: true, pid: '10-maths-1', pct: 65, label: '' },
+      { exam: true, pid: '10-maths-1', pct: 90, label: 'Second attempt' }, { exam: true, pid: '2026-04-02-s1', pct: 70, label: '' }];
+    eq(g, 'school chapters added up over full papers (not retries), weak ones only, real chapters only', A.weakSchool(h).map(c => [c.name, c.g, c.t, c.pct]), [['Electricity', 3, 15, 20]]);
+    eq(g, 'board papers: best score of the full attempts, and how many', A.boardDone(h), { '10-maths-1': { best: 65, n: 2 } });
+  }
   // every board practice paper offered: loads, adds up, and full marks are reachable
   async function boardPapers(A) {
     const ids = A.BOARD_PAPERS.map(m => m.id);
@@ -626,7 +639,7 @@
     let A = null;
     for (let i = 0; i < 100 && !A; i++) { await new Promise(r => setTimeout(r, 100)); A = frame.contentWindow && frame.contentWindow.__aaTest; }
     if (!A) { ok('Setup', 'the site loads with ?test', false, 'window.__aaTest not found'); return render(); }
-    for (const t of [parsing, checking, rules, written, weak, labels, realExam, weekly, greetings, papers, boardPapers, boardPaperPages, banks, generators, customPapers, schoolPages, chapterPages, hindiChapterPages, paperPages, examChapterPages]) {
+    for (const t of [parsing, checking, rules, written, weak, progress, labels, realExam, weekly, greetings, papers, boardPapers, boardPaperPages, banks, generators, customPapers, schoolPages, chapterPages, hindiChapterPages, paperPages, examChapterPages]) {
       try { await t(A, frame.contentWindow); } catch (e) { ok('Setup', t.name + ' ran without an error', false, e && e.stack || String(e)); }
     }
     render();

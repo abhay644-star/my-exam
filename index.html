@@ -231,6 +231,14 @@ button.small{padding:6px 12px;font-size:.85rem}
 .smpart{display:flex;flex-direction:column;gap:2px;padding:8px 10px;border:1px solid var(--line);border-radius:8px}
 .smsum{font-weight:700;margin:4px 0 0}
 .board.hl,.bp.hl{outline:3px solid var(--ink);outline-offset:2px}
+/* My progress: a strip on the home page, and the page's number tiles and score chart */
+.progstrip{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 14px;padding:10px 14px;border:1px solid var(--line);border-radius:var(--r);background:var(--paper);color:var(--fg);text-decoration:none;margin:4px 0 8px}
+.progstrip b{color:var(--ink)}.progstrip:hover{border-color:var(--ink)}.progstrip:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.ptiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px}
+.ptile{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:10px 14px}
+.ptile b{display:block;font-size:1.6rem;color:var(--ink);line-height:1.2}.ptile span{font-size:.85rem;color:var(--muted)}
+.pchart{display:flex;align-items:flex-end;gap:3px;height:120px;padding:8px 0 0;border-bottom:1px solid var(--line)}
+.pchart i{flex:1;min-width:4px;max-width:28px;border-radius:3px 3px 0 0}
 #boardHome{margin:4px 0 8px}
 .bgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px}
 .btile{text-decoration:none;display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left;min-height:44px;padding:10px 12px;border:1px solid var(--ink);border-radius:var(--r);background:var(--ink-soft);color:var(--fg);font:inherit;cursor:pointer}
@@ -401,6 +409,7 @@ sup,sub{font-size:.7em}
         <span class="go">Practise past papers →</span>
       </a>
     </div>
+    <a id="progressHome" class="progstrip" href="#progress" hidden></a>
     <section id="boardHome" aria-labelledby="boardHomeHead" hidden></section>
     <section id="weekly" aria-labelledby="weeklyHead" hidden></section>
     <p class="moreexams">More exams are on the way: CUET, CAT, SSC, Bank and UPSC. <a href="#exams">Tell us which one you need first</a>.</p>
@@ -455,6 +464,12 @@ sup,sub{font-size:.7em}
       <div id="chPick" class="card stack"></div>
       <p class="hint" style="margin:0"><span id="examSource">Questions and answer keys: NTA.</span> Worked solutions: All in All Exam Practice.<span id="examMore"> More papers are being added.</span> Found a mistake? <button type="button" class="linkbtn" id="jeeReport">Tell us</button>.</p>
     </div>
+  </section>
+
+  <!-- MY PROGRESS: everything this device has recorded -->
+  <section id="progressView" hidden>
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="#home">Home</a> › My progress</nav>
+    <div class="stack" id="progress"></div>
   </section>
 
   <!-- CBSE BOARD PRACTICE PAPERS: every subject's papers, by class -->
@@ -1772,9 +1787,47 @@ function renderHistory(){
   const rows=a.slice(0,10).map(h=>{const pct=Math.max(0,Math.min(100,Math.round(+h.pct)||0));
     return `<li class="hrow"><div><b>${esc(h.subj)}${h.cls?' · '+(h.exam?esc(h.cls):'Class '+esc(clsNum(h.cls))):''}</b><span class="hint">${new Date(+h.d||0).toLocaleDateString('en-IN',{day:'numeric',month:'short'})} · ${h.mode==='practice'?'Practice':'Exam'} · ${Math.max(0,Math.round(+h.nq)||0)} Q${h.label?' · '+esc(h.label):''}</span></div><div class="hbar" aria-hidden="true"><i style="width:${pct}%;background:${bandOf(pct)[2]}"></i></div><b class="hpct">${pct}%</b></li>`;}).join('');
   const st=streak(),stLine=st.n?`Practice streak: <b>${st.n} day${st.n>1?'s':''}</b>${st.today?'':'. Finish a paper today to keep it going.'}`:'Finish a paper today to start a practice streak.';
-  el.innerHTML=`<div><p class="eyebrow">Your progress</p><h2>Last ${Math.min(10,a.length)} paper${a.length>1?'s':''}</h2><p class="pb" style="margin:4px 0 0">${stLine}</p></div>${mistakesBox()}<ul class="hist">${rows}</ul><p class="hint" style="margin:0">Saved on this device only. Save a backup to keep it safe, or to move it to another phone or computer.</p>${backupRow(true)}<div class="btns"><button type="button" class="small" id="clearHist">Clear history</button></div>`;
+  el.innerHTML=`<div><p class="eyebrow">Your progress</p><h2>Last ${Math.min(10,a.length)} paper${a.length>1?'s':''}</h2><p class="pb" style="margin:4px 0 0">${stLine}</p><p style="margin:4px 0 0"><a href="#progress">See all my progress →</a></p></div>${mistakesBox()}<ul class="hist">${rows}</ul><p class="hint" style="margin:0">Saved on this device only. Save a backup to keep it safe, or to move it to another phone or computer.</p>${backupRow(true)}<div class="btns"><button type="button" class="small" id="clearHist">Clear history</button></div>`;
   wireMistakes();wireBackup();$('#clearHist').addEventListener('click',e=>{const b=e.currentTarget;if(b.dataset.sure){try{localStorage.removeItem(HIST);localStorage.removeItem(DAYS);}catch(err){}renderHistory();}else{b.dataset.sure='1';b.textContent='Tap again to clear';}});
 }
+/* ---------- My progress (#progress): everything this device has recorded, in one place ---------- */
+// school chapters added up over the school papers kept (each record's chapter marks, top): under 75%, most marks lost first
+function weakSchool(hist=getHist()){const agg={};
+  hist.filter(h=>!h.exam&&h.top&&!h.label).forEach(h=>Object.entries(h.top).forEach(([t,v])=>{const k=h.subj+'|'+h.cls+'|'+t,a=agg[k]=agg[k]||{g:0,t:0};a.g+=v[0];a.t+=v[1];}));
+  return Object.entries(agg).map(([k,a])=>{const [subj,cls,name]=k.split('|');return{subj,cls,name,g:+a.g.toFixed(1),t:+a.t.toFixed(1),lost:a.t-a.g,pct:a.t?Math.round(Math.max(0,a.g)/a.t*100):0};})
+    .filter(c=>c.lost>0&&c.pct<75&&topicsFor(c.subj,c.cls).indexOf(c.name)>=0).sort((a,b)=>b.lost-a.lost||a.pct-b.pct).slice(0,6);}
+// each board practice paper: the best score of the full attempts kept (retries left out), and how many
+function boardDone(hist=getHist()){const r={};hist.filter(h=>h.exam&&!h.label).forEach(h=>{if(!BOARD_PAPERS.some(x=>x.id===h.pid))return;const b=r[h.pid]=r[h.pid]||{best:0,n:0};b.n++;b.best=Math.max(b.best,h.pct);});return r;}
+// the home page strip: papers, streak and mistakes due, linking to My progress (only once there is something to show)
+function renderProgressStrip(){const a=getHist(),el=$('#progressHome'),st=streak(),due=dueMistakes(getMistakes(),Date.now()).length;el.hidden=!a.length;if(!a.length)return;
+  el.innerHTML=`<span><b>My progress:</b> ${a.length} paper${a.length>1?'s':''} finished${st.n?` · ${st.n}-day streak`:''}${due?` · ${due} mistake${due>1?'s':''} to revise today`:''}</span><span class="hint" style="margin:0">See everything →</span>`;}
+function renderProgress(){const a=getHist(),box=$('#progress'),st=streak(),days=getDays().length,mk=getMistakes(),due=dueMistakes(mk,Date.now()).length;
+  track('view/progress','Opened My progress');
+  if(!a.length){box.innerHTML=`<div><h2>My progress</h2><p class="lede">Your scores, streak, weak chapters and board papers appear here after you finish a paper. They are saved on this device only.</p></div><div class="btns"><a class="btnlink-ink" href="#school">Start a school paper</a><a class="btnlink-ink" href="#board">Board practice papers</a><a class="btnlink-ink" href="#exams">JEE and NEET papers</a></div>`;return;}
+  const last=a.slice(0,20).reverse(),avg=Math.round(a.slice(0,10).reduce((s,h)=>s+(+h.pct||0),0)/Math.min(10,a.length));
+  const fmtD=d=>new Date(+d||0).toLocaleDateString('en-IN',{day:'numeric',month:'short'});
+  const chart=`<div class="pchart" role="img" aria-label="Scores of your last ${last.length} papers, oldest first: ${last.map(h=>Math.round(+h.pct||0)+'%').join(', ')}">${last.map(h=>{const p=Math.max(2,Math.min(100,Math.round(+h.pct)||0));return `<i style="height:${p}%;background:${bandOf(p)[2]}" title="${esc(fmtD(h.d))}: ${esc(h.subj)} ${Math.round(+h.pct||0)}%"></i>`;}).join('')}</div>
+    <p class="hint" style="margin:4px 0 0">Your last ${last.length} paper${last.length>1?'s':''}, oldest on the left. Average of the last ${Math.min(10,a.length)}: ${avg}%.</p>`;
+  const rows=a.slice(0,10).map(h=>`<tr><td>${esc(h.subj)}${h.cls?' · '+(h.exam?esc(h.cls):'Class '+esc(clsNum(h.cls))):''}<br><span class="hint" style="display:inline;margin:0">${fmtD(h.d)} · ${h.mode==='practice'?'Practice':'Exam'}${h.label?' · '+esc(h.label):''}</span></td><td class="n">${+(+h.got).toFixed(1)} / ${+h.tot}<br><span class="hint" style="display:inline;margin:0">${Math.round(+h.pct||0)}%</span></td></tr>`).join('');
+  const ws=weakSchool(a),wsRows=ws.map((c,k)=>`<tr><td>${esc(c.name)}<br><span class="hint" style="display:inline;margin:0">Class ${clsNum(c.cls)} ${esc(c.subj)}</span></td><td class="n">${c.pct}%</td><td class="n"><button type="button" class="small" data-pschool="${k}">Practise</button></td></tr>`).join('');
+  const we=Object.keys(EXAM_PAGES).map(pid=>({pid,w:weakChapters(pid,a)})).filter(x=>x.w.list.length);
+  const weRows=we.flatMap(x=>x.w.list.slice(0,3).map(c=>`<tr><td>${esc(c.name)}<br><span class="hint" style="display:inline;margin:0">${esc(EXAM_PAGES[x.pid].crumb)} ${esc(c.subj)}</span></td><td class="n">${c.pct}%</td><td class="n"><button type="button" class="small" data-pexam="${x.pid}|${esc(c.subj)}|${c.k}">Practise</button></td></tr>`)).join('');
+  const bd=boardDone(a),taken=Object.keys(bd).length;
+  const boardRows=boardGroups().flatMap(c=>c.subs.map(s=>`<tr><td>Class ${clsNum(c.cls)} ${esc(s.name)}</td><td>${s.ps.map(x=>{const r=bd[x.id];return `${esc(x.date.replace('Practice paper','Paper'))}: ${r?`<b>${Math.round(r.best)}%</b>${r.n>1?` <span class="hint" style="display:inline;margin:0">(${r.n} attempts)</span>`:''}`:'<span class="hint" style="display:inline;margin:0">not taken</span>'}`;}).join('<br>')}</td></tr>`)).join('');
+  box.innerHTML=`<div><h2>My progress</h2><p class="hint" style="margin:4px 0 0">Saved on this device only (your last ${a.length} papers). Save a backup to keep it safe or move it to another phone or computer.</p></div>
+    <div class="ptiles"><div class="ptile"><b>${a.length}</b><span>papers finished</span></div><div class="ptile"><b>${st.n}</b><span>day streak${st.n&&!st.today?' (finish a paper today to keep it)':''}</span></div><div class="ptile"><b>${days}</b><span>days practised</span></div><div class="ptile"><b>${due}</b><span>mistakes to revise today (${mk.length} in all)</span></div></div>
+    <div class="card stack"><h3 style="margin:0">Scores over time</h3>${chart}<div class="tblwrap"><table><thead><tr><th>Paper</th><th class="n">Score</th></tr></thead><tbody>${rows}</tbody></table></div></div>
+    ${ws.length?`<div class="card stack"><h3 style="margin:0">School chapters to revise</h3><p class="hint" style="margin:0">From your school papers: the chapters where you lost the most marks.</p><div class="tblwrap"><table><thead><tr><th>Chapter</th><th class="n">Score</th><th class="n"><span class="sr">Action</span></th></tr></thead><tbody>${wsRows}</tbody></table></div></div>`:''}
+    ${we.length?`<div class="card stack"><h3 style="margin:0">JEE and NEET chapters to revise</h3><p class="hint" style="margin:0">From your exam papers and chapter practice. Practise opens every past-paper question on that chapter.</p><div class="tblwrap"><table><thead><tr><th>Chapter</th><th class="n">Score</th><th class="n"><span class="sr">Action</span></th></tr></thead><tbody>${weRows}</tbody></table></div></div>`:''}
+    ${BOARD_PAPERS.length?`<div class="card stack"><h3 style="margin:0">Board exam 2027 practice papers</h3><p class="hint" style="margin:0">${taken} of ${BOARD_PAPERS.length} papers taken. Best score of each full attempt.</p><div class="tblwrap"><table><thead><tr><th>Subject</th><th>Papers</th></tr></thead><tbody>${boardRows}</tbody></table></div><div class="btns"><a class="btnlink-ink" href="#board">Open the board practice papers</a></div></div>`:''}
+    <div class="btns">${mk.length?`<button type="button" class="primary" id="progMistakes">${due?`Revise ${Math.min(20,due)} mistakes due now`:`Practise my mistakes (${Math.min(20,mk.length)})`}</button>`:''}<button type="button" id="progBackup">Save a backup</button></div>
+    <p class="hint" id="progMsg" role="status" style="margin:0" hidden></p>`;
+  const pm=$('#progMistakes');if(pm)pm.addEventListener('click',startMistakes);
+  $('#progBackup').addEventListener('click',()=>{backupFile();const m=$('#progMsg');m.textContent='The backup file is in your downloads. To use it on another phone or computer, open School there and choose "Restore a backup".';m.hidden=false;});
+  box.querySelectorAll('[data-pschool]').forEach(b=>b.addEventListener('click',()=>{const c=ws[+b.dataset.pschool];history.replaceState(null,'','#school');practiseChapter(c.subj,c.cls,c.name);}));
+  box.querySelectorAll('[data-pexam]').forEach(b=>b.addEventListener('click',()=>{const [pid,subj,k]=b.dataset.pexam.split('|');
+    track(`weak-chapter/${pid}/${slug(subj)}`,`Weak chapter practice (My progress): ${EXAM_PAGES[pid].crumb} ${subj}`);
+    window.addEventListener('hashchange',()=>startChapter(pid,subj,+k),{once:true});location.hash='#'+pid;}));}
 // share links open the same exam paper, or the same class / subject / chapters for a fresh school paper, with the friend's score
 // WhatsApp: on Android open the regular WhatsApp app even when WhatsApp Business is the phone's default for wa.me links,
 // falling back to wa.me if it is not installed; elsewhere wa.me (the app, or WhatsApp Web on a computer)
@@ -2028,8 +2081,8 @@ function show(id){
   // leaving the test screen (top menu, Back) leaves the paper unfinished, as closing the page does: answers are saved, the clock
   // here stops and the paper waits under "You have an unfinished paper" (exam time still ends at the same moment)
   if(id!=='test'&&id!=='printView')clearInterval(timerId);
-  const SEC={home:'homeView',exams:'examsView',jee:'jeeView',board:'boardView'}; // section ids differ from #home/#exams so the browser does not jump down to them
-  ['home','exams','jee','board','setup','test','results','printView'].forEach(x=>{$('#'+(SEC[x]||x)).hidden=x!==id;});
+  const SEC={home:'homeView',exams:'examsView',jee:'jeeView',board:'boardView',progress:'progressView'}; // section ids differ from #home/#exams so the browser does not jump down to them
+  ['home','exams','jee','board','progress','setup','test','results','printView'].forEach(x=>{$('#'+(SEC[x]||x)).hidden=x!==id;});
   document.body.classList.toggle('printmode',id==='printView');
   document.body.classList.toggle('compact',id!=='home'&&id!=='printView');  // a smaller header on phones, away from the home page
   if(['test','results','printView'].indexOf(id)<0)renderResume();else $('#resumeBox').hidden=true;
@@ -2038,14 +2091,15 @@ function show(id){
   if(id==='exams')renderExams();
   if(id==='jee')renderJee();
   if(id==='board')renderBoardPage();
-  if(id==='home'){renderBoardHome();renderWeekly();renderGreet();}
+  if(id==='progress')renderProgress();
+  if(id==='home'){renderProgressStrip();renderBoardHome();renderWeekly();renderGreet();}
   // the top menu marks the area you are in; test, results and print belong to School
-  const area=id==='home'||id==='exams'?id:(id==='jee'||(P&&P.exam&&P.exam.list!=='board'&&['test','results','printView'].indexOf(id)>=0))?'exams':'setup';
+  const area=id==='home'||id==='exams'?id:id==='progress'?'home':(id==='jee'||(P&&P.exam&&P.exam.list!=='board'&&['test','results','printView'].indexOf(id)>=0))?'exams':'setup';
   document.querySelectorAll('.topnav a').forEach(a=>{if(a.dataset.nav===area)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
 }
 
 /* ---------- navigation: #home, #school and #exams are screens of this one page ---------- */
-const ROUTES={'':'home','#':'home','#home':'home','#school':'setup','#exams':'exams','#jee-main':'jee','#jee-advanced':'jee','#neet':'jee','#board':'board'};
+const ROUTES={'':'home','#':'home','#home':'home','#school':'setup','#exams':'exams','#jee-main':'jee','#jee-advanced':'jee','#neet':'jee','#board':'board','#progress':'progress'};
 function route(){const id=ROUTES[location.hash]||'home';show(id);window.scrollTo(0,0);if(id!=='setup')track('view/'+id,'Opened '+id);}
 function goSchool(){if(location.hash!=='#school')location.hash='#school';else{show('setup');window.scrollTo(0,0);}}
 
@@ -2665,7 +2719,7 @@ function homeCounts(){const n=Object.values(BANK_INDEX).reduce((s,b)=>s+Object.v
   if(n)$('#qCount').textContent=(Math.floor(n/100)*100).toLocaleString('en-IN')+'+';if(np)$('#pCount').textContent=np;return{n,np};}
 homeCounts();
 // tests/marking.html opens this page with ?test and reaches the marking code through window.__aaTest
-if(new URLSearchParams(location.search).has('test'))window.__aaTest={checkPart,parseNum,partMarks,answerText,examQs,ensureBank,saveAllBanks,topicsFor,bankCounts,BANK_INDEX,SUBJECTS,T,cleanQ,EXAM_PAGES,durLabel,makeMCQ,seeded,dataOk,renderHistory,homeCounts,dailySeed,EXAM_CH,startChapter,REAL_DIST,realLine,weekInfo,weeklyPapers,GREETS,greetFor,renderGreet,BOARD_PAPERS,weakChapters,cleanHistRec,get paper(){return P;},
+if(new URLSearchParams(location.search).has('test'))window.__aaTest={checkPart,parseNum,partMarks,answerText,examQs,ensureBank,saveAllBanks,topicsFor,bankCounts,BANK_INDEX,SUBJECTS,T,cleanQ,EXAM_PAGES,durLabel,makeMCQ,seeded,dataOk,renderHistory,homeCounts,dailySeed,EXAM_CH,startChapter,REAL_DIST,realLine,weekInfo,weeklyPapers,GREETS,greetFor,renderGreet,BOARD_PAPERS,weakChapters,cleanHistRec,weakSchool,boardDone,get paper(){return P;},
   // marks qs against ans ({'<question index>-<part index>': answer}) and returns each question's mark
   markPaper(qs,ans,exam){const P0=P,A0=ANS;P={qs,exam};ANS=ans;try{qs.forEach((q,i)=>markQ(i));applySecLimit();return qs.map(q=>q.got);}finally{P=P0;ANS=A0;}},maxMarks,
   withPaper(p,fn){const P0=P;P=p;try{return fn();}finally{P=P0;}},
