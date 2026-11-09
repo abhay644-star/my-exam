@@ -517,6 +517,23 @@
         $('#quitBtn').click(); await sleep(100); $('#confirmYes').click(); await sleep(200);
       }
       ok(g, 'every official paper fits a phone screen, with no maths errors', !bad.length, bad.join(' || '));
+      // every board practice paper: opened from the board papers page, it fits a phone screen with its maths typeset, every
+      // part of a question uses the full width with its answer box below, and Quit returns to the board papers page
+      const badB = [];
+      for (const p of W().__aaTest.BOARD_PAPERS) {
+        W().location.hash = '#board'; await until(() => !$('#boardView').hidden && $(`#boardCls [data-bcls="${p.cls}"]`));
+        $(`#boardCls [data-bcls="${p.cls}"]`).click(); await until(() => $(`#boardList [data-board="${p.id}"][data-mode="exam"]`));
+        $(`#boardList [data-board="${p.id}"][data-mode="exam"]`).click();
+        await until(() => !$('#test').hidden && $$('#sheet .q').length, 20000); await sleep(1500);
+        const narrow = $$('#sheet .part.wpart').filter(pt => { const w = pt.closest('.qbody').getBoundingClientRect().width, l = pt.querySelector('.pq'), t = pt.querySelector('textarea');
+          return l.getBoundingClientRect().width < w * 0.9 || t.getBoundingClientRect().width < w * 0.9 || t.getBoundingClientRect().top < l.getBoundingClientRect().bottom - 1; }).length;
+        if (!fits() || $$('#sheet .katex-error').length || narrow) badB.push(`${p.id}: ${fits() ? '' : 'too wide (' + wide() + ') '}${$$('#sheet .katex-error').length} maths errors, ${narrow} squeezed parts`);
+        $('#quitBtn').click(); await sleep(100);
+        if (!/board practice papers/.test($('#confirmText').textContent)) badB.push(`${p.id}: Quit says "${$('#confirmText').textContent}"`);
+        $('#confirmYes').click(); await until(() => !$('#boardView').hidden);
+        if ($('#boardView').hidden) badB.push(`${p.id}: Quit did not return to the board papers`);
+      }
+      ok(g, `every board practice paper (${W().__aaTest.BOARD_PAPERS.length}) fits a phone screen with no maths errors, full-width parts, and Quit works`, !badB.length, badB.join(' || '));
     }
   }
 
