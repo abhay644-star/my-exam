@@ -4,6 +4,8 @@
   const ok = (group, name, pass, detail) => results.push({ group, name, pass: !!pass, detail: pass ? '' : (detail || '') });
   const sleep = ms => new Promise(r => setTimeout(r, ms));
   const W = () => frame.contentWindow, D = () => frame.contentDocument, $ = s => D().querySelector(s), $$ = s => [...D().querySelectorAll(s)];
+  // (the tests run on headless Edge's virtual clock, which can run ahead of real file loading: steps that load many paper
+  // files wait up to 120 s of that clock)
   const until = async (f, ms = 8000) => { const t = Date.now(); while (Date.now() - t < ms) { try { if (f()) return true; } catch (e) {} await sleep(100); } return false; };
   const fire = (el, ev) => el.dispatchEvent(new (W().Event)(ev, { bubbles: true }));
   const visible = sel => $$(sel).filter(e => !e.hidden && e.offsetParent !== null);
@@ -284,7 +286,7 @@
     // 8. an official paper: questions, maths and marking
     W().location.hash = '#jee-main'; await until(() => $('#jeeList [data-mode="exam"]'));
     $('#jeeList [data-mode="exam"]').click();
-    await until(() => !$('#test').hidden && $$('#sheet .q').length, 20000);
+    await until(() => !$('#test').hidden && $$('#sheet .q').length, 120000);
     await until(() => $$('#sheet .katex').length > 20, 15000);
     ok(g, 'JEE Main paper opens with 75 questions and its maths typeset', $$('#sheet .q').length === 75 && $$('#sheet .katex').length > 20 && !$$('#sheet .katex-error').length, `${$$('#sheet .q').length} questions, ${$$('#sheet .katex').length} formulas, ${$$('#sheet .katex-error').length} errors`);
     ok(g, 'official paper fits the width', fits(), wide());
@@ -301,7 +303,7 @@
     const chem = W().__aaTest.EXAM_CH.neet.Chemistry, btns = $$('#chPick .chbtn');
     ok(g, 'choosing Chemistry lists its chapters, most-tested first', $('#chPick [data-chsubj="Chemistry"]').getAttribute('aria-pressed') === 'true' && btns.length === chem.length && btns[0].textContent.startsWith(chem[0][0]) && chem.every((c, i) => !i || chem[i - 1][2] >= c[2]), `${btns.length} of ${chem.length}: ${btns[0] && btns[0].textContent}`);
     ok(g, 'the chapter list fits the width', fits(), wide());
-    btns[0].click(); await until(() => !$('#test').hidden && $$('#sheet .q').length, 20000);
+    btns[0].click(); await until(() => !$('#test').hidden && $$('#sheet .q').length, 120000);
     await sleep(1500);  // maths typeset and fitted
     const tags = $$('#sheet .qtopic').map(t => t.textContent);
     ok(g, `the chapter (${chem[0][0]}) opens with all its ${chem[0][2]} questions, each named with its paper`, tags.length === chem[0][2] && tags.every(t => /^Chemistry · NEET \(UG\) 20\d\d · .+ · Q\.\d+$/.test(t)) && new Set(tags.map(t => t.split(' · ')[1])).size === chem[0][3].length, `${tags.length} questions; ${tags[0]}`);
@@ -358,7 +360,7 @@
     const wn = wk.find(b => /^neet\//.test(b.dataset.weekly));
     if (wn) {
       const wid = wn.dataset.weekly.split('/')[1]; W().confirm = () => true;
-      wn.click(); await until(() => !$('#test').hidden && W().__aaTest.paper && W().__aaTest.paper.exam, 20000);
+      wn.click(); await until(() => !$('#test').hidden && W().__aaTest.paper && W().__aaTest.paper.exam, 120000);
       const wp = W().__aaTest.paper;
       ok(g, "Start on this week's NEET mock opens that paper as a timed exam", wp && wp.exam && wp.exam.id === wid && wp.mode === 'exam' && W().location.hash === '#neet', `${wp && wp.exam && wp.exam.id}, ${wp && wp.mode}, ${W().location.hash}`);
       $('#submitBtn').click(); await sleep(100); $('#confirmYes').click(); await until(() => !$('#results').hidden && $('#sharePanel a'));
@@ -369,7 +371,7 @@
       const wb = $$('#weakBox [data-weak]');
       ok(g, 'after a NEET paper, the NEET page shows "Your weak chapters" (up to 5), and fits the width', !$('#weakBox').hidden && wb.length >= 1 && wb.length <= 5 && fits(), `${wb.length} rows; ${wide()}`);
       if (wb.length) {
-        wb[0].click(); await until(() => !$('#test').hidden && W().__aaTest.paper && W().__aaTest.paper.exam && W().__aaTest.paper.exam.chapter, 20000);
+        wb[0].click(); await until(() => !$('#test').hidden && W().__aaTest.paper && W().__aaTest.paper.exam && W().__aaTest.paper.exam.chapter, 120000);
         const cp = W().__aaTest.paper;
         ok(g, 'Practise on a weak chapter opens that chapter\'s past-paper questions', cp && cp.exam && cp.exam.chapter && cp.qs.length > 0, cp && cp.exam && JSON.stringify(cp.exam.chapter));
         $('#quitBtn').click(); await sleep(100); $('#confirmYes').click(); await sleep(200);
@@ -398,7 +400,7 @@
     ok(g, 'switching subject keeps the mixed-test panel open and the ticks', $('#mixBox').open && /2 chapters chosen/.test($('#mixSum').textContent), $('#mixSum').textContent);
     tickMix(0); $('#mixN').value = '10'; fire($('#mixN'), 'change');
     ok(g, 'the summary counts the chapters, subjects and questions available', /3 chapters chosen \(.+, .+\)/.test($('#mixSum').textContent) && !$('#mixExam').disabled && fits(), $('#mixSum').textContent);
-    $('#mixExam').click(); await until(() => !$('#test').hidden && W().__aaTest.paper && W().__aaTest.paper.exam && W().__aaTest.paper.exam.mixed, 20000);
+    $('#mixExam').click(); await until(() => !$('#test').hidden && W().__aaTest.paper && W().__aaTest.paper.exam && W().__aaTest.paper.exam.mixed, 120000);
     const mp = W().__aaTest.paper;
     ok(g, 'Start timed test opens a 10-question exam from both subjects, timed at the exam\'s pace (25 min)', mp && mp.qs.length === 10 && mp.mode === 'exam' && mp.duration === 25 && mp.secs.length >= 1 && mp.qs.every(q => /^MX-/.test(q.sec)),
       mp && `${mp.qs.length} questions, ${mp.mode}, ${mp.duration} min, sections ${mp.secs.map(s => s.name).join('/')}`);
@@ -437,15 +439,16 @@
       const card = $$('#boardHome [data-boardcls]').pop();
       if (card) {
         const c = card.dataset.boardcls, nSub = new Set(BP.filter(x => x.cls === c).map(x => x.subj)).size, nPap = BP.filter(x => x.cls === c).length;
-        ok(g, 'each class card counts its subjects and papers', card.textContent.indexOf(`${nSub} subject`) >= 0 && card.textContent.indexOf(`${nPap} papers`) >= 0, card.textContent);
+        ok(g, 'each class card counts its subjects and practice papers, and mentions CBSE\'s past papers', card.textContent.indexOf(`${nSub} subject`) >= 0 && card.textContent.indexOf(`${nPap} practice papers`) >= 0 && /Past papers 2024–2026/.test(card.textContent), card.textContent);
         card.click(); await until(() => !$('#boardView').hidden && $$('#boardList [data-board]').length);
         ok(g, 'a class card opens the board papers page on that class, every paper with Exam and Practise, and it fits the width',
           !$('#boardView').hidden && $(`#boardCls .chip.on[data-bcls="${c}"]`) && $$('#boardList article').length === nSub && $$('#boardList [data-board][data-mode="exam"]').length === nPap && fits(), `${$$('#boardList article').length} subjects, ${$$('#boardList [data-board][data-mode="exam"]').length} papers; ${wide()}`);
+        ok(g, 'each subject on the board papers page also lists CBSE\'s own past papers and sample paper (links to CBSE)', $$('#boardList article').every(ar => ar.querySelector('.offpapers a[href^="https://www.cbse.gov.in/"]') && ar.querySelector('.offpapers a[href^="https://cbseacademic.nic.in/"]')), String($$('#boardList .offpapers').length));
         const other = $$('#boardCls [data-bcls]').find(b => b.dataset.bcls !== c);
         if (other) { other.click(); await sleep(100); ok(g, 'the class chips switch the list', $$('#boardList [data-board][data-mode="exam"]').length === BP.filter(x => x.cls === other.dataset.bcls).length); }
         // Print opens the paper in the print view (answer key on request), and Back returns to the board papers
         const pid = $('#boardList [data-board][data-mode="print"]').dataset.board;
-        $('#boardList [data-board][data-mode="print"]').click(); await until(() => !$('#printView').hidden && $$('#printPaper .pq').length, 20000);
+        $('#boardList [data-board][data-mode="print"]').click(); await until(() => !$('#printView').hidden && $$('#printPaper .pq').length, 120000);
         const nq = W().__aaTest.paper.qs.length;
         $('#withKey').checked = true; fire($('#withKey'), 'change');
         ok(g, 'Print on a board paper opens its print view with every question, the answer key on request and a way back', W().__aaTest.paper.exam.id === pid && $$('#printPaper .pq').length === nq && $('#printPaper').classList.contains('withkey') && $$('#printPaper .pkey li').length === nq && /board papers/.test($('#printBack').textContent),
@@ -456,7 +459,7 @@
         // Save for offline use: every paper of the class is fetched and the class remembered
         $('#boardOffline').click(); await until(() => /saved on this device/.test($('#boardPageMsg').textContent) || /could not/.test($('#boardPageMsg').textContent), 30000);
         ok(g, 'Save for offline use saves every paper of the class and says so', /saved on this device/.test($('#boardPageMsg').textContent) && !!JSON.parse(W().localStorage.getItem('aa-board-offline') || '{}')[$('#boardCls .chip.on').dataset.bcls], $('#boardPageMsg').textContent);
-        $('#boardList [data-board][data-mode="practice"]').click(); await until(() => !$('#test').hidden && W().__aaTest.paper && W().__aaTest.paper.exam, 20000);
+        $('#boardList [data-board][data-mode="practice"]').click(); await until(() => !$('#test').hidden && W().__aaTest.paper && W().__aaTest.paper.exam, 120000);
         ok(g, 'Practise on the board papers page opens that paper', W().__aaTest.paper.exam.list === 'board' && W().__aaTest.paper.mode === 'practice');
         $('#quitBtn').click(); await sleep(100);
         ok(g, 'Quit on a board paper asks to quit (back to the board practice papers)', !$('#confirm').hidden && /board practice papers/.test($('#confirmText').textContent) && $('#confirmYes').dataset.mode === 'quit', $('#confirmText').textContent);
@@ -522,7 +525,7 @@
       for (const [list, pg] of Object.entries(W().__aaTest.EXAM_PAGES)) for (const p of pg.papers) {
         W().location.hash = '#' + list; await until(() => $(`#jeeList [data-jee="${p.id}"][data-mode="exam"]`));
         $(`#jeeList [data-jee="${p.id}"][data-mode="exam"]`).click();
-        await until(() => !$('#test').hidden && $$('#sheet .q').length, 20000);
+        await until(() => !$('#test').hidden && $$('#sheet .q').length, 120000);
         await until(() => $$('#sheet .katex').length > 5, 15000); await sleep(1500);  // fonts load, then formulas are fitted
         if (!fits() || $$('#sheet .katex-error').length) {
           // which questions make the page too wide: hide each in turn
@@ -550,7 +553,7 @@
         W().location.hash = '#board'; await until(() => !$('#boardView').hidden && $(`#boardCls [data-bcls="${p.cls}"]`));
         $(`#boardCls [data-bcls="${p.cls}"]`).click(); await until(() => $(`#boardList [data-board="${p.id}"][data-mode="exam"]`));
         $(`#boardList [data-board="${p.id}"][data-mode="exam"]`).click();
-        await until(() => !$('#test').hidden && $$('#sheet .q').length, 20000); await sleep(1500);
+        await until(() => !$('#test').hidden && $$('#sheet .q').length, 120000); await sleep(1500);
         const narrow = $$('#sheet .part.wpart').filter(pt => { const w = pt.closest('.qbody').getBoundingClientRect().width, l = pt.querySelector('.pq'), t = pt.querySelector('textarea');
           return l.getBoundingClientRect().width < w * 0.9 || t.getBoundingClientRect().width < w * 0.9 || t.getBoundingClientRect().top < l.getBoundingClientRect().bottom - 1; }).length;
         if (!fits() || $$('#sheet .katex-error').length || narrow) badB.push(`${p.id}: ${fits() ? '' : 'too wide (' + wide() + ') '}${$$('#sheet .katex-error').length} maths errors, ${narrow} squeezed parts`);

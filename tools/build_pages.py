@@ -662,6 +662,15 @@ def exam_subject_page(e, s):
 # question papers and marking schemes (cbse.gov.in zips). Nothing of CBSE's is copied to the site; the links open CBSE's files
 OFFICIAL = json.loads((site / 'tools' / 'cbse_official.json').read_text(encoding='utf-8')) if (site / 'tools' / 'cbse_official.json').exists() else {}
 CBSE_QP, CBSE_MS = 'https://www.cbse.gov.in/cbsenew/question-paper.html', 'https://www.cbse.gov.in/cbsenew/marking-scheme.html'
+# the same links in the app (CBSE_OFFICIAL in index.html, between its markers), for the board papers page
+off_js = 'const CBSE_OFFICIAL=' + json.dumps(OFFICIAL, ensure_ascii=False, separators=(',', ':')) + ';'
+off_pat = re.compile(r'(/\* CBSE_OFFICIAL:start \*/).*?(/\* CBSE_OFFICIAL:end \*/)', re.S)
+assert len(off_pat.findall(page)) == 1, 'index.html: expected one CBSE_OFFICIAL:start / CBSE_OFFICIAL:end marker pair'
+new_page = off_pat.sub(lambda m: m.group(1) + off_js + m.group(2), page)
+if new_page != page:
+    (site / 'index.html').write_text(new_page, encoding='utf-8', newline='\n')
+    page = new_page
+    print('index.html: CBSE_OFFICIAL updated')
 def pattern_table(cls, subj):
     """The 2026-27 paper pattern, from our own practice papers (the latest one, which has the internal choices): per section the
     number of questions and marks, and how many questions have an internal choice."""
@@ -698,7 +707,7 @@ def official_html(cls, subj):
     years = ''.join(f'<li><b>Board exam {e["year"]}:</b> ' + ' · '.join(a(e[k], t) for k, t in (('qp', 'question papers (ZIP)'), ('ms', 'marking schemes (ZIP)')) if e.get(k)) + '</li>'
                     for e in o['papers'] if e.get('qp') or e.get('ms'))
     return f'''
-  <h2>Official CBSE papers</h2>
+  <h2 id="official">Official CBSE papers</h2>
   <p>CBSE publishes these itself, and the links open CBSE’s own files on cbseacademic.nic.in and cbse.gov.in. The 2026–27 sample question paper is CBSE’s official model for the 2027 board exam; each year’s ZIP holds all the sets of that year’s paper.</p>
   <ul>{f'<li><b>Sample paper:</b> {" · ".join(sqp)}</li>' if sqp else ''}{years}</ul>
   <p class="links">{a(CBSE_QP, 'All CBSE question papers')}{a(CBSE_MS, 'All CBSE marking schemes')}</p>
@@ -794,7 +803,8 @@ def board_hub():
         if not subs:
             continue
         lis = ''.join(f'<li><b>{esc(ps[0]["name"].replace("CBSE ", ""))}</b><small>{esc(ps[0]["pat"])}</small><span class="links">'
-                      + ''.join(f'<a href="{board_path(x)}">{esc(x["date"])}</a>' for x in ps) + '</span></li>' for s, ps in subs)
+                      + ''.join(f'<a href="{board_path(x)}">{esc(x["date"])}</a>' for x in ps)
+                      + (f'<a href="/cbse/class-{NUM[c]}/{slug(s)}/#official">Past CBSE papers</a>' if OFFICIAL.get(f'{c}|{s}') else '') + '</span></li>' for s, ps in subs)
         blocks += f'\n  <h2>Class {NUM[c]}</h2>\n  <ul class="bplist">{lis}</ul>'
     n = sum(len(v) for v in BOARD.values())
     body = f'''  <h1>CBSE board exam 2027: practice papers in the sample paper pattern</h1>

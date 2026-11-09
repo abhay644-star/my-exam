@@ -627,8 +627,9 @@
         eq(g, 'it lists every chapter, most-tested first', links.map(a => a.querySelector('b').textContent), chs.map(c => c[0]));
         const bad = [];
         for (const [k, a] of links.entries()) {
-          const c = chs[k], doc = await html('..' + a.getAttribute('href')).catch(() => null);
-          if (!doc) { bad.push(a.getAttribute('href') + ': missing'); continue; }
+          let why = '';
+          const c = chs[k], doc = await html('..' + a.getAttribute('href')).catch(e => { why = String(e && e.message || e); return null; });
+          if (!doc) { bad.push(a.getAttribute('href') + ': missing (' + why + ')'); continue; }
           const n = doc.querySelectorAll('.samples .sq').length, btn = doc.querySelector('a.btn'), q = btn ? new URL(btn.getAttribute('href'), location.href) : null;
           if (n !== c[2]) bad.push(`${a.getAttribute('href')}: ${n} questions, expected ${c[2]}`);
           if (!q || q.hash !== '#' + list || q.searchParams.get('cs') !== s || q.searchParams.get('cc') !== c[0] || q.searchParams.get('cl') !== c[1]) bad.push(`${a.getAttribute('href')}: button ${btn && btn.getAttribute('href')}`);
