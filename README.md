@@ -27,6 +27,8 @@ Live site: https://my-exam.in
 - One page per official paper, such as `jee-main/2026-2-april-shift-1/`: the pattern, subject-wise marks, chapter-wise weightage, a few solved questions and the full answer key.
 - Chapter-wise past questions for each exam: `neet/chemistry/` lists the chapters tagged in the NEET papers, most-tested first, and `neet/chemistry/<chapter>/` has every question on that chapter from all the papers, with answers, solutions and a button that opens it in the app. A chapter name in both Class 11 and Class 12 (Probability, Relations and Functions) gets the class in its address, such as `probability-class-12/`. Link each new exam subject page from the exam's own page (the tests check it).
 
+It also sets the copyright year in every footer to the current year: in the pages it makes, and in the hand-written pages listed in `HAND` in the tool (add any new hand-written page there). Run it once each January so the year moves on.
+
 It also writes `EXAM_CH` in `index.html`: the chapters tagged in each exam's papers, used by **Practise by chapter** on each exam screen (every question on one chapter from all that exam's papers). The tests check that it matches the papers, so run the tool after any change to a `paper.json`.
 
 A paper with "attempt any N" sections sets `"secLimit"` in its `paper.json`, for example NEET 2024: `{"B": 10}`. As in the exam, only the first N questions answered in each such section (per subject) are marked, and the maximum marks count N questions. A question's `chSubj` files its chapter under another subject: NEET 2024's Botany and Zoology questions are Biology chapters.
