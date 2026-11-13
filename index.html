@@ -403,7 +403,7 @@ sup,sub{font-size:.7em}
     <h2 class="sr">What are you preparing for?</h2>
     <div id="greet" class="msg greet" role="status" hidden></div>
     <!-- the counts: tools/build_school_index.py writes them here for crawlers, and the page recounts them when it loads -->
-    <p class="stats"><span><b id="qCount"><!--QCOUNT:start-->11,600+<!--QCOUNT:end--></b> school questions</span><span>new Maths questions every paper</span><span><b id="pCount"><!--PCOUNT:start-->55<!--PCOUNT:end--></b> JEE and NEET previous year papers</span><span>free, no sign-up</span></p>
+    <p class="stats"><span><b id="qCount"><!--QCOUNT:start-->11,600+<!--QCOUNT:end--></b> school questions</span><span><b id="pCount"><!--PCOUNT:start-->55<!--PCOUNT:end--></b> JEE and NEET (UG) previous year papers</span><span>a fresh paper every attempt</span></p>
     <div class="tracks">
       <a class="track school" href="#school">
         <p class="eyebrow">School exams</p>
@@ -419,8 +419,8 @@ sup,sub{font-size:.7em}
       </a>
     </div>
     <a id="progressHome" class="progstrip" href="#progress" hidden></a>
-    <section id="boardHome" aria-labelledby="boardHomeHead" hidden></section>
     <section id="weekly" aria-labelledby="weeklyHead" hidden></section>
+    <section id="boardHome" aria-labelledby="boardHomeHead" hidden></section>
     <p class="moreexams">Want CUET, CAT, SSC, Bank or UPSC practice? <a href="#exams">Tell us what you'd like next →</a></p>
     <h3 class="whyhead">Popular practice</h3>
     <ul class="popular">
@@ -572,7 +572,7 @@ sup,sub{font-size:.7em}
         <div><p class="lbl">Suggested time per section</p><div class="tblwrap"><table><tbody id="timeBody"></tbody></table></div></div>
         <div id="planNote" class="msg info">Answers are marked automatically. Written answers accept forms like 4 1/5, 21/5, 0.375, −1/6, 2^4 or 3.84 × 10^5; units such as cm, °, % and ₹ are optional.</div>
       </aside>
-      <section class="card stack" id="history" aria-label="Your progress"></section>
+      <section class="card stack" id="history" aria-label="My progress"></section>
       </div>
     </div>
   </section>
@@ -1815,11 +1815,11 @@ function wireBackup(){const s=$('#backupSave'),f=$('#backupFile'),say=t=>{const 
       .catch(()=>say('That file is not a my-exam.in progress backup, or it could not be read.'));});}
 function renderHistory(){
   const a=getHist(),el=$('#history');
-  if(!a.length){el.innerHTML='<div><p class="eyebrow">Your progress</p><h2>No papers yet</h2></div>'+mistakesBox()+'<p class="hint" style="margin:0">Your scores appear here after you finish a paper, so you can see how you improve. They are saved on this device only. Moving from another device? Restore your backup file.</p>'+backupRow(getMistakes().length>0);wireMistakes();wireBackup();return;}
+  if(!a.length){el.innerHTML='<div><p class="eyebrow">My progress</p><h2>No papers yet</h2></div>'+mistakesBox()+'<p class="hint" style="margin:0">Your scores appear here after you finish a paper, so you can see how you improve. They are saved on this device only. Moving from another device? Restore your backup file.</p>'+backupRow(getMistakes().length>0);wireMistakes();wireBackup();return;}
   const rows=a.slice(0,10).map(h=>{const pct=Math.max(0,Math.min(100,Math.round(+h.pct)||0));
     return `<li class="hrow"><div><b>${esc(h.subj)}${h.cls?' · '+(h.exam?esc(h.cls):'Class '+esc(clsNum(h.cls))):''}</b><span class="hint">${new Date(+h.d||0).toLocaleDateString('en-IN',{day:'numeric',month:'short'})} · ${h.mode==='practice'?'Practice':'Exam'} · ${Math.max(0,Math.round(+h.nq)||0)} Q${h.label?' · '+esc(h.label):''}</span></div><div class="hbar" aria-hidden="true"><i style="width:${pct}%;background:${bandOf(pct)[2]}"></i></div><b class="hpct">${pct}%</b></li>`;}).join('');
   const st=streak(),stLine=st.n?`Practice streak: <b>${st.n} day${st.n>1?'s':''}</b>${st.today?'':'. Finish a paper today to keep it going.'}`:'Finish a paper today to start a practice streak.';
-  el.innerHTML=`<div><p class="eyebrow">Your progress</p><h2>Last ${Math.min(10,a.length)} paper${a.length>1?'s':''}</h2><p class="pb" style="margin:4px 0 0">${stLine}</p><p style="margin:4px 0 0"><a href="#progress">See all my progress →</a></p></div>${mistakesBox()}<ul class="hist">${rows}</ul><p class="hint" style="margin:0">Saved on this device only. Save a backup to keep it safe, or to move it to another phone or computer.</p>${backupRow(true)}<div class="btns"><button type="button" class="small" id="clearHist">Clear history</button></div>`;
+  el.innerHTML=`<div><p class="eyebrow">My progress</p><h2>Last ${Math.min(10,a.length)} paper${a.length>1?'s':''}</h2><p class="pb" style="margin:4px 0 0">${stLine}</p><p style="margin:4px 0 0"><a href="#progress">See all my progress →</a></p></div>${mistakesBox()}<ul class="hist">${rows}</ul><p class="hint" style="margin:0">Saved on this device only. Save a backup to keep it safe, or to move it to another phone or computer.</p>${backupRow(true)}<div class="btns"><button type="button" class="small" id="clearHist">Clear history</button></div>`;
   wireMistakes();wireBackup();$('#clearHist').addEventListener('click',e=>{const b=e.currentTarget;if(b.dataset.sure){try{localStorage.removeItem(HIST);localStorage.removeItem(DAYS);}catch(err){}renderHistory();}else{b.dataset.sure='1';b.textContent='Tap again to clear';}});
 }
 /* ---------- My progress (#progress): everything this device has recorded, in one place ---------- */
